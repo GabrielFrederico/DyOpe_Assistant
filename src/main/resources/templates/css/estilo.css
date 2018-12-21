@@ -1,0 +1,21 @@
+.lista {
+    max-width: 24rem;
+}
+
+.menudrop {
+    position: absolute;
+    display: none;
+    will-change: transform;
+    top: 0%;
+    left: 0%;
+    transform: translate3d(5px, 56px, 0px);
+}
+
+.menu:hover .menudrop{
+    display: block;
+}
+
+.fundo{
+    background-image: url("../imagens/operacoes.jpg");
+    background-size: cover;
+}
