@@ -10,7 +10,7 @@ public interface OperacaoRepository extends CrudRepository<Operacao, Serializabl
 
 	Operacao findById(long id);
 	
-	Operacao findByTipo(long idTipoOpe);
+	Operacao findByIdTipoOpe(long idTipoOpe);
 	
 	Operacao findByDescricao(String descricao);
 }

@@ -7,7 +7,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import org.apache.tomcat.jni.Time;
 
 
 @Entity
@@ -19,9 +18,9 @@ public class Operacao {
 	
 	private String descricao;
 	
-	private Time tempoLimite;
+	private Date dataInicio;
 	
-	private Time tempoNesc;
+	private int tempoNesc;
 	
 	private Date prazo;
 	
@@ -51,19 +50,20 @@ public class Operacao {
 		this.descricao = descricao;
 	}
 
-	public Time getTempoLimite() {
-		return tempoLimite;
+
+	public Date getDataInicio() {
+		return dataInicio;
 	}
 
-	public void setTempoLimite(Time tempoLimite) {
-		this.tempoLimite = tempoLimite;
+	public void setDataInicio(Date dataInicio) {
+		this.dataInicio = dataInicio;
 	}
 
-	public Time getTempoNesc() {
+	public int getTempoNesc() {
 		return tempoNesc;
 	}
 
-	public void setTempoNesc(Time tempoNesc) {
+	public void setTempoNesc(int tempoNesc) {
 		this.tempoNesc = tempoNesc;
 	}
 
