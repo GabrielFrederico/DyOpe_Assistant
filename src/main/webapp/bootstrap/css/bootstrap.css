@@ -6075,6 +6075,10 @@ button.close {
 .bg-primary {
   background-color: #007bff !important;
 }
+.bg-lightblue{
+  background-color:#8fecff !important;
+  background-color: #f8f9fa !important;
+}
 
 a.bg-primary:hover, a.bg-primary:focus,
 button.bg-primary:hover,
@@ -6133,7 +6137,8 @@ button.bg-danger:focus {
 }
 
 .bg-light {
-  background-color: #f8f9fa !important;
+
+  background-color: #dae4ef !important;
 }
 
 a.bg-light:hover, a.bg-light:focus,

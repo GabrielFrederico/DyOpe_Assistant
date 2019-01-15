@@ -10527,7 +10527,7 @@
 		 *    $(document).ready( function () {
 		 *      $('#example').dataTable( {
 		 *        "serverSide": true,
-		 *        "ajax": "xhr.php"
+		 *        "ajax": "xhr.html"
 		 *      } );
 		 *    } );
 		 */
@@ -11156,7 +11156,7 @@
 		 *    $(document).ready( function() {
 		 *      $('#example').dataTable( {
 		 *        "serverSide": true,
-		 *        "ajax": "scripts/server_processing.php",
+		 *        "ajax": "scripts/server_processing.html",
 		 *        "deferLoading": 57
 		 *      } );
 		 *    } );
@@ -11166,7 +11166,7 @@
 		 *    $(document).ready( function() {
 		 *      $('#example').dataTable( {
 		 *        "serverSide": true,
-		 *        "ajax": "scripts/server_processing.php",
+		 *        "ajax": "scripts/server_processing.html",
 		 *        "deferLoading": [ 57, 100 ],
 		 *        "search": {
 		 *          "search": "my_filter"

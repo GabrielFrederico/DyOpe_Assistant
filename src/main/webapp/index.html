@@ -1,3 +1,6 @@
+<?php
+
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -9,6 +12,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
+
     <title>DyOpe Assistant</title>
 
     <!-- Bootstrap core CSS-->
@@ -19,44 +23,30 @@
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin.css" rel="stylesheet">
+    <link href="css/estilo.css" rel="stylesheet">
+    <link rel="shortcut icon" type="image/x-icon" href="imagens/iconeOpe.png"/>
 
 </head>
 
-<body class="bg-secondary">
+<body class="bg-light">
 
 <div class="container">
+
+    <h1 class="titulo">DyOpe Assistant</h1>
     <div class="card card-login mx-auto mt-5">
-        <div class="card-header bg-info">Login</div>
+        <div class="card-header bg-info text-light">Escolha um login:</div>
         <div class="card-body">
-            <form method="post" action="valida_login.php">
-                <div class="form-group">
-                    <div class="form-label-group">
-                        <input type="email" id="inputEmail" name="Email" class="form-control" placeholder="Email"
-                               required="required" autofocus="autofocus">
-                        <label for="inputEmail">Email</label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="form-label-group">
-                        <input type="password" name="Password" id="inputPassword" class="form-control"
-                               placeholder="Senha" required="required">
-                        <label for="inputPassword">Senha</label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="remember-me">
-                            Lembrar da senha
-                        </label>
-                    </div>
-                </div>
-                <input class="btn btn-primary btn-block" type="submit" value="Login">
-            </form>
-            <div class="text-center">
-                <a class="d-block small mt-3" href="cadastro.php">Registre uma conta</a>
-                <a class="d-block small" href="forgot-password.php">Esqueceu a senha?</a>
+            <div class="form-group">
+                <form method="post" action="login_gerente.html">
+                    <input class="btn btn-primary btn-block" href="" type="submit" value="Login do Gerente">
+                </form>
             </div>
+            <div class="form-group">
+                <form action="login_funcionario.html">
+                    <input class="btn btn-success btn-block" type="submit" value="Login do Setor">
+                </form>
+            </div>
+
         </div>
     </div>
 </div>

@@ -14,8 +14,29 @@
 .menu:hover .menudrop{
     display: block;
 }
+h1{
+    color: #203eff;
+}
 
-.fundo{
-    background-image: url("../imagens/operacoes.jpg");
+.fundo {
+    background-color: #f0f1ff;
     background-size: cover;
+    background-repeat: no-repeat;
+
+}
+.loginInvalido{
+    color: red;
+    text-align: center;
+    top:1%;
+
+}
+.titulo{
+    color: blue;
+    padding: 3.3%;
+    text-align: center;
+}
+
+
+.bg-lightblue{
+    background-color:#8fecff !important;
 }

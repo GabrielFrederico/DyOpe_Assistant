@@ -1,56 +1,16 @@
--- phpMyAdmin SQL Dump
--- version 4.7.0
--- https://www.phpmyadmin.net/
---
--- Host: 127.0.0.1
--- Generation Time: 16-Out-2018 às 20:11
--- Versão do servidor: 5.7.17
--- PHP Version: 7.1.3
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Database: `projetotcc_oort`
---
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `bairros`
---
 
 CREATE TABLE `bairros` (
   `IDBAIRRO` int(11) NOT NULL,
   `NOME_BAI` varchar(80) NOT NULL,
   `STATUS_SYS` char(1) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `cidades`
---
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `cidades` (
   `IDCIDADE` int(11) NOT NULL,
   `NOME_CID` varchar(80) NOT NULL,
   `STATUS_SYS` char(1) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `enderecos`
---
 
 CREATE TABLE `enderecos` (
   `IDENDERECO` int(11) NOT NULL,
@@ -59,7 +19,7 @@ CREATE TABLE `enderecos` (
   `IDTIPO_LOG` int(11) NOT NULL,
   `CEP_END` varchar(8) NOT NULL,
   `NOME_LOG_END` varchar(70) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -78,7 +38,7 @@ CREATE TABLE `funcionarios` (
   `FONE_FUN` varchar(9) DEFAULT NULL,
   `IDOPERACAO` int(11) DEFAULT NULL,
   `IDENDERECO` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -97,7 +57,7 @@ CREATE TABLE `gerentes` (
   `IDENDERECO` int(11) NOT NULL,
   `IDUSUARIO` int(11) NOT NULL,
   `STATUS_SYS` char(1) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -117,7 +77,7 @@ CREATE TABLE `operacoes` (
   `LOTE_PRODUCAO` int(11) NOT NULL,
   `STATUS_SYS` char(1) NOT NULL,
   `IDGERENTE` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -130,7 +90,7 @@ CREATE TABLE `tipos_logradouros` (
   `NOME_LOG` varchar(100) NOT NULL,
   `TIPO_LOG` varchar(35) NOT NULL,
   `STATUS_SYS` char(1) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -143,15 +103,18 @@ CREATE TABLE `usuarios` (
   `NOME_USU` varchar(60) NOT NULL,
   `SENHA_USU` varchar(60) NOT NULL,
   `STATUS_SYS` char(1) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Indexes for dumped tables
---
+alter table `funcionarios`
+add `IDUSUARIO` int not null;
+ create table `tipos_ope` (
+   `IDTIPO_OPE` INT NOT NULL PRIMARY KEY UNIQUE,
+   `TIPO_OPE` VARCHAR(20) NOT NULL
+  )ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  
+  ALTER TABLE `tipos_ope`
+    add `STATUS_SYS` char(1) not null;
 
---
--- Indexes for table `bairros`
---
 ALTER TABLE `bairros`
   ADD PRIMARY KEY (`IDBAIRRO`);
 
@@ -167,51 +130,39 @@ ALTER TABLE `cidades`
 ALTER TABLE `enderecos`
   ADD PRIMARY KEY (`IDENDERECO`);
 
---
--- Indexes for table `funcionarios`
---
+
 ALTER TABLE `funcionarios`
   ADD PRIMARY KEY (`IDFUNCIONARIO`),
   ADD UNIQUE KEY `CPF_FUN` (`CPF_FUN`),
   ADD UNIQUE KEY `RG_FUNC` (`RG_FUNC`),
   ADD UNIQUE KEY `EMAIL_FUN` (`EMAIL_FUN`);
 
---
--- Indexes for table `gerentes`
---
+
 ALTER TABLE `gerentes`
   ADD PRIMARY KEY (`IDGERENTE`),
   ADD UNIQUE KEY `EMAIL_GER` (`EMAIL_GER`),
   ADD UNIQUE KEY `CPF_GER` (`CPF_GER`),
   ADD UNIQUE KEY `RG_GER` (`RG_GER`);
 
---
--- Indexes for table `operacoes`
---
+
 ALTER TABLE `operacoes`
   ADD PRIMARY KEY (`IDOPERACAO`);
 
---
--- Indexes for table `tipos_logradouros`
---
+
 ALTER TABLE `tipos_logradouros`
   ADD PRIMARY KEY (`IDTIPO_LOG`);
 
---
--- Indexes for table `usuarios`
---
+
 ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`IDUSUARIO`),
   ADD UNIQUE KEY `NOME_USU` (`NOME_USU`),
   ADD UNIQUE KEY `SENHA_USU` (`SENHA_USU`);
+  
+ 
 
---
--- AUTO_INCREMENT for dumped tables
---
+ALTER TABLE `operacoes`
+add `IDTIPO_OPE`int not null;
 
---
--- AUTO_INCREMENT for table `gerentes`
---
 ALTER TABLE `gerentes`
   MODIFY `IDGERENTE` int(11) NOT NULL AUTO_INCREMENT;COMMIT;
 

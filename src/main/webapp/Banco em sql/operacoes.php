@@ -33,7 +33,7 @@
 <nav class="navbar navbar-expand navbar-dark bg-dark sticky-top ">
 
 
-    <a class="navbar-brand mr-1" href="../logado.php">Página Inicial</a>
+    <a class="navbar-brand mr-1" href="../gerente_index.html">Página Inicial</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -44,19 +44,19 @@
                 <a class="nav-link" href="#"></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="../operacao_risco.php">Risco</a>
+                <a class="nav-link" href="../operacao_risco.html">Risco</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="../operacao_corte.php">Corte</a>
+                <a class="nav-link" href="../operacao_corte.html">Corte</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="../operacao_costura.php">Costura</a>
+                <a class="nav-link" href="../operacao_costura.html">Costura</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="../operacao_beneficiamento.php">Beneficios</a>
+                <a class="nav-link" href="../operacao_beneficiamento.html">Beneficios</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="../operacao_acabamento.php">Acabamento</a>
+                <a class="nav-link" href="../operacao_acabamento.html">Acabamento</a>
             </li>
         </ul>
     </div>
@@ -123,7 +123,7 @@
 
                                     <div class="dropdown-menu align-content-center" aria-labelledby="userDropdown">
 
-                                        <form method="post" class="" action="cadastrar_operacoes.php">
+                                        <form method="post" class="" action="cadastrar_operacoes.html">
                                             <div class="form-group">
                                                 <div class="form-group">
                                                     <div class="form-label-group">
@@ -194,7 +194,7 @@
 
                         </div>
                         <div class="card-footer bg-transparent border-warning">
-                            <a href="../cadastro_operacoes.php" class="btn btn-outline-warning">Cadastrar operação</a>
+                            <a href="../cadastro_operacoes.html" class="btn btn-outline-warning">Cadastrar</a>
                         </div>
                     </div>
                 </div>
@@ -255,7 +255,7 @@
             </div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-                <a class="btn btn-primary" href="../login.php">Sair</a>
+                <a class="btn btn-primary" href="../login_gerente.html">Sair</a>
             </div>
         </div>
     </div>
