@@ -1,14 +1,11 @@
 package com.projeto.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.projeto.models.Gerente;
 import com.projeto.repository.GerenteRepository;
+import org.springframework.web.servlet.ModelAndView;
 
 @RestController
 @RequestMapping("gerentes")
@@ -17,12 +14,21 @@ public class GerenteRest {
 	@Autowired
 	GerenteRepository gerenteRepository;
 	
-	@RequestMapping(method = RequestMethod.POST)
+	@RequestMapping(method = RequestMethod.POST, value="/cadastrarGerente")
 	public Gerente save(@RequestBody Gerente gerente) {
 		gerenteRepository.save(gerente);
 		return gerente;
 	}
-	
+	@ResponseBody
+	@RequestMapping(method = RequestMethod.GET, value ="/cadastro")
+	public ModelAndView cadastro(){
+        ModelAndView model = new ModelAndView();
+
+        model.setViewName("cadastro");
+		return model;
+	}
+
+
 	@RequestMapping(method = RequestMethod.GET)
 	   public Iterable<Gerente> listAll(){
 		   return gerenteRepository.findAll();
