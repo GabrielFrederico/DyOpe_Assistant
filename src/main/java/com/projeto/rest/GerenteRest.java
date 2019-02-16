@@ -1,6 +1,7 @@
 package com.projeto.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import com.projeto.models.Gerente;
@@ -8,7 +9,7 @@ import com.projeto.repository.GerenteRepository;
 import org.springframework.web.servlet.ModelAndView;
 
 @RestController
-@RequestMapping("gerentes")
+
 public class GerenteRest {
 	
 	@Autowired
@@ -20,14 +21,17 @@ public class GerenteRest {
 		return gerente;
 	}
 	@ResponseBody
-	@RequestMapping(method = RequestMethod.GET, value ="/cadastro")
-	public ModelAndView cadastro(){
-        ModelAndView model = new ModelAndView();
-
-        model.setViewName("cadastro");
-		return model;
+	@RequestMapping(value ={"/cadastroGerente"}, method = RequestMethod.GET)
+	public String cadastroGerente(Model model){
+		model.addAttribute("gerente", new Gerente());
+		return "cadastro_gerente";
 	}
 
+	@RequestMapping(value ={"/", "/loginGerente"}, method = RequestMethod.GET)
+		public String loginGerente(Model model){
+		model.addAttribute("login_gerente");
+			return "loginGerente";
+	}
 
 	@RequestMapping(method = RequestMethod.GET)
 	   public Iterable<Gerente> listAll(){
