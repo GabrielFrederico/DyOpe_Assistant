@@ -9,6 +9,7 @@ import com.projeto.repository.GerenteRepository;
 import org.springframework.web.servlet.ModelAndView;
 
 @RestController
+@RequestMapping("gerentes")
 
 public class GerenteRest {
 	
@@ -21,13 +22,13 @@ public class GerenteRest {
 		return gerente;
 	}
 	@ResponseBody
-	@RequestMapping(value ={"/cadastroGerente"}, method = RequestMethod.GET)
+	@RequestMapping(value ="/cadastroGerente", method = RequestMethod.GET)
 	public String cadastroGerente(Model model){
 		model.addAttribute("gerente", new Gerente());
 		return "cadastro_gerente";
 	}
 
-	@RequestMapping(value ={"/", "/loginGerente"}, method = RequestMethod.GET)
+	@RequestMapping(value ="/loginGerente", method = RequestMethod.GET)
 		public String loginGerente(Model model){
 		model.addAttribute("login_gerente");
 			return "loginGerente";
