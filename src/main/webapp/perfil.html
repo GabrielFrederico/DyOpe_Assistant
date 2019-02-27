@@ -45,13 +45,15 @@
     <!-- Navbar -->
     <ul class="navbar-nav ml-auto ml-md-0">
         <li class="nav-item dropdown no-arrow mx-1 show">
-            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown"
+               aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-bell fa-fw"></i>
                 <!-- Counter - Alerts -->
                 <span class="badge badge-danger badge-counter">1+</span>
             </a>
             <!-- Dropdown - Alerts -->
-            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in " aria-labelledby="alertsDropdown">
+            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in "
+                 aria-labelledby="alertsDropdown">
                 <h6 class="dropdown-header">
                     Alertas
                 </h6>
@@ -163,7 +165,10 @@
             </div>
 
             <input class="btn btn-success" type="submit" value="Salvar">
-            <a href="forgot-password.html" target="_blank"><input class="btn btn-success" type="button" value="Redefinir senha"></a>
+            <a href="forgot-password.html" target="_blank"><input class="btn btn-success" type="button"
+                                                                  value="Redefinir senha"></a>
+            <a class="btn btn-info" href="#" data-toggle="modal" data-target=".redefinir-senha">Redefinir senha</a>
+
 
             <!-- /.container-fluid -->
 
@@ -203,6 +208,68 @@
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
                     <a class="btn btn-primary" href="login_gerente.html">Sair</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Modal Redefinir Senha: -->
+
+    <div class="modal fade redefinir-senha" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myLargeModalLabel">Redefinir senha:</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="card-body">
+                        <form method="post" action="perfil.html">
+                            <div class="form-group">
+
+                                <div class="form-group">
+
+                                    <div class="col-md-6">
+                                        <div class="form-label-group">
+                                            <input type="password" id="senha_atual" class="form-control"
+                                                   placeholder="Senha atual:"
+                                                   required="required">
+                                            <label for="senha_atual">Senha atual:</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-label-group">
+                                            <input type="password" id="senha_nova" class="form-control"
+                                                   placeholder="Nova senha:"
+                                                   required="required">
+                                            <label for="senha_nova">Nova senha:</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-label-group">
+                                            <input type="password" id="senha_confirmar" class="form-control"
+                                                   placeholder="Confirmar senha:"
+                                                   required="required">
+                                            <label for="senha_confirmar">Confirmar senha:</label>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="modal-footer col-md-12">
+                                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                                <input class="btn btn-primary" type="submit" value="Cadastrar">
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
