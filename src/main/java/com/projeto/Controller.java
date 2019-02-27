@@ -13,6 +13,12 @@ public class Controller {
 	        return "index";
 	    }
 
+	@RequestMapping("/cadastroGerente")
+	public String cadastro() {
+
+		return "cadastro_gerente";
+	}
+
 
 
 
