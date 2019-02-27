@@ -48,4 +48,7 @@ h1 {
         justify-content: center;
         padding-bottom: 5%;
     }
+    .container {
+        margin-left: 15%;
+    }
 }
