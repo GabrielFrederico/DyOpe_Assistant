@@ -11,10 +11,11 @@
     transform: translate3d(5px, 56px, 0px);
 }
 
-.menu:hover .menudrop{
+.menu:hover .menudrop {
     display: block;
 }
-h1{
+
+h1 {
     color: #203eff;
 }
 
@@ -24,19 +25,32 @@ h1{
     background-repeat: no-repeat;
 
 }
-.loginInvalido{
+
+.loginInvalido {
     color: red;
     text-align: center;
-    top:1%;
-
+    top: 1%;
 }
-.titulo{
+
+.titulo {
     color: blue;
     padding: 3.3%;
     text-align: center;
 }
 
+.bg-lightblue {
+    background-color: #8fecff !important;
+}
 
-.bg-lightblue{
-    background-color:#8fecff !important;
+@media screen and (max-width: 900px) {
+    #img-perfil {
+        display: flex;
+        justify-content: center;
+        padding-bottom: 5%;
+    }
+
+    div.container {
+        display: flex;
+        justify-content: center;
+    }
 }
