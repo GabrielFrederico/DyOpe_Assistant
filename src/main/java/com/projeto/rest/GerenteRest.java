@@ -17,7 +17,7 @@ public class GerenteRest {
 	GerenteRepository gerenteRepository;
 	
 	@RequestMapping(method = RequestMethod.POST, value="/cadastrarGerente")
-	public Gerente save(@RequestBody Gerente gerente) {
+	public Gerente save(Gerente gerente) {
 		gerenteRepository.save(gerente);
 		return gerente;
 	}
