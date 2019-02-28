@@ -22,7 +22,7 @@ public class GerenteRest {
 		return gerente;
 	}
 	@ResponseBody
-	@RequestMapping(value ="/cadastroGerente", method = RequestMethod.GET)
+	@RequestMapping(value ="../../../cadastroGerente", method = RequestMethod.GET)
 	public String cadastroGerente(Model model){
 		model.addAttribute("gerente", new Gerente());
 		return "cadastro_gerente";

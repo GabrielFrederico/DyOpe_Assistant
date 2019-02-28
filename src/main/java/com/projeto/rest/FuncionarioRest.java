@@ -16,11 +16,12 @@ public class FuncionarioRest {
 	@Autowired
 	FuncionarioRepository funcionarioRepoository;
 	
-	@RequestMapping(method = RequestMethod.POST)
-	public Funcionario save(@RequestBody Funcionario funcionario) {
+	@RequestMapping(method = RequestMethod.POST, value="/cadastrarFuncionario")
+	public Funcionario save(Funcionario funcionario) {
 		funcionarioRepoository.save(funcionario);
 		return funcionario;
 	}
+
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public Iterable<Funcionario> listAll(){
