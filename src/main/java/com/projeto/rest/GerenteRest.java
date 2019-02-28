@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.*;
 
 import com.projeto.models.Gerente;
 import com.projeto.repository.GerenteRepository;
-import org.springframework.web.servlet.ModelAndView;
 
 @RestController
 @RequestMapping("gerentes")
