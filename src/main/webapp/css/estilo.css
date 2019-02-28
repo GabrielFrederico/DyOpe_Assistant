@@ -42,7 +42,7 @@ h1 {
     background-color: #8fecff !important;
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 920px) {
     #img-perfil {
         display: flex;
         justify-content: center;
