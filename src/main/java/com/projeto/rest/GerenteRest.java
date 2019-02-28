@@ -20,6 +20,7 @@ public class GerenteRest {
 		gerenteRepository.save(gerente);
 		return gerente;
 	}
+	
 	@ResponseBody
 	@RequestMapping(value ="../../../cadastroGerente", method = RequestMethod.GET)
 	public String cadastroGerente(Model model){
