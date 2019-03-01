@@ -25,7 +25,6 @@ public class GerenteRest {
     public ModelAndView save(Gerente gerente, ModelAndView model) {
         gerenteRepository.save(gerente);
         model.setViewName("login_gerente");
-        model.setView(loginGerente());
         return model;
     }
 
