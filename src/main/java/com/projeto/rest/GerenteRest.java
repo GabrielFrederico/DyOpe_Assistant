@@ -6,8 +6,11 @@ import org.springframework.web.bind.annotation.*;
 
 import com.projeto.models.Gerente;
 import com.projeto.repository.GerenteRepository;
+import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.swing.text.html.HTML;
+import java.io.IOException;
 
 @RestController
 @RequestMapping("gerentes")
@@ -21,8 +24,15 @@ public class GerenteRest {
     public Gerente save(Gerente gerente) {
         gerenteRepository.save(gerente);
         return gerente;
-
     }
+    @RequestMapping(value="cadastrarGerente", method= RequestMethod.GET)
+    public ModelAndView cadastro(Model model) {
+
+        model.addAttribute("gerenteModel", new Gerente());
+
+        return new ModelAndView("login_gerente");
+    }
+
 
     @ResponseBody
     @RequestMapping(value = "../../../cadastroGerente", method = RequestMethod.GET)
@@ -41,7 +51,7 @@ public class GerenteRest {
 
         return "login";
     }
-    @RequestMapping(value = "/loginGerente", method = RequestMethod.GET)
+    @RequestMapping(value = "../../../loginGerente", method = RequestMethod.GET)
     public Model loginGerente(Model model) {
         model.addAttribute("login_gerente");
         return model;
