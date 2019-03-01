@@ -26,6 +26,15 @@ h1 {
 
 }
 
+div.menu_teste {
+    justify-content: center;
+    display: grid;
+}
+
+div.menu_teste span {
+    margin-bottom: 3%;
+}
+
 .loginInvalido {
     color: red;
     text-align: center;
@@ -42,6 +51,48 @@ h1 {
 
 .bg-lightblue {
     background-color: #8fecff !important;
+}
+
+@media screen and (max-width: 570px) {
+    .tam {
+        font-size: 140%;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .tam {
+        font-size: 120%;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .tam {
+        font-size: 110%;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .tam {
+        font-size: 100%;
+    }
+}
+
+@media screen and (max-width: 370px) {
+    .tam {
+        font-size: 90%;
+    }
+}
+
+@media screen and (max-width: 350px) {
+    .tam {
+        font-size: 80%;
+    }
+}
+
+@media screen and (max-width: 300px) {
+    .tam {
+        font-size: 75%;
+    }
 }
 
 @media screen and (max-width: 920px) {
