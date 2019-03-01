@@ -18,7 +18,10 @@
 h1 {
     color: #203eff;
 }
+.pos{
 
+    right: -3.9rem;
+}
 .fundo {
     background-color: #f0f1ff;
     background-size: cover;

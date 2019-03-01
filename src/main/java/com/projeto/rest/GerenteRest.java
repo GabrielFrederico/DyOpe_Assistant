@@ -20,17 +20,13 @@ public class GerenteRest {
     @Autowired
     GerenteRepository gerenteRepository;
 
+
     @RequestMapping(method = RequestMethod.POST, value = "/cadastrarGerente")
-    public Gerente save(Gerente gerente) {
+    public ModelAndView save(Gerente gerente, ModelAndView model) {
         gerenteRepository.save(gerente);
-        return gerente;
-    }
-    @RequestMapping(value="cadastrarGerente", method= RequestMethod.GET)
-    public ModelAndView cadastro(Model model) {
-
-        model.addAttribute("gerenteModel", new Gerente());
-
-        return new ModelAndView("login_gerente");
+        model.setViewName("login_gerente");
+        model.setView(loginGerente());
+        return model;
     }
 
 
@@ -49,8 +45,9 @@ public class GerenteRest {
         if (logout != null)
             model.addAttribute("message", "You have been logged out successfully.");
 
-        return "login";
+        return "./../../login";
     }
+
     @RequestMapping(value = "../../../loginGerente", method = RequestMethod.GET)
     public Model loginGerente(Model model) {
         model.addAttribute("login_gerente");
