@@ -18,7 +18,19 @@ public class Controller {
 	        return "index";
 	    }
 
-	@RequestMapping("gerentes/cadastroGerente")
+	@RequestMapping("/loginGerente")
+	public String loginGerente() {
+
+		return "login_gerente";
+	}
+
+	@RequestMapping("/gerenteIndex")
+	public String indexGerente() {
+
+		return "gerente_index";
+	}
+
+	@RequestMapping("cadastroGerente")
 	public String cadastro() {
 
 		return "cadastro_gerente";

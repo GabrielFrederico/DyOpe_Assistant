@@ -8,9 +8,6 @@ import com.projeto.models.Gerente;
 import com.projeto.repository.GerenteRepository;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletResponse;
-import javax.swing.text.html.HTML;
-import java.io.IOException;
 
 @RestController
 @RequestMapping("gerentes")
@@ -24,8 +21,7 @@ public class GerenteRest {
     @RequestMapping(method = RequestMethod.POST, value = "/cadastrarGerente")
     public ModelAndView save(Gerente gerente, ModelAndView model) {
         gerenteRepository.save(gerente);
-        model.setViewName("login_gerente");
-        return model;
+        return new ModelAndView("redirect:/loginGerente");
     }
 
 
@@ -36,22 +32,19 @@ public class GerenteRest {
         return "cadastro_gerente";
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String login(Model model, String error, String logout) {
+    @RequestMapping(value = "/loginGerente", method = RequestMethod.GET)
+    public ModelAndView login(ModelAndView model, Model model1, Gerente gerente, String error, String logout) {
+        gerenteRepository.findById(gerente.getId());
+
         if (error != null)
-            model.addAttribute("error", "Your username and password is invalid.");
+            model1.addAttribute("error", "Your username and password is invalid.");
 
         if (logout != null)
-            model.addAttribute("message", "You have been logged out successfully.");
+            model1.addAttribute("message", "You have been logged out successfully.");
 
-        return "./../../login";
+        return new ModelAndView("redirect:/gerenteIndex");
     }
 
-    @RequestMapping(value = "../../../loginGerente", method = RequestMethod.GET)
-    public Model loginGerente(Model model) {
-        model.addAttribute("login_gerente");
-        return model;
-    }
 
 
     @RequestMapping(method = RequestMethod.GET)
