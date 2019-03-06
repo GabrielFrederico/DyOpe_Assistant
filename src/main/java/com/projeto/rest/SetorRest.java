@@ -11,17 +11,15 @@ import org.springframework.web.servlet.ModelAndView;
 
 @RestController
 @RequestMapping("setores")
-@Service
-
 public class SetorRest {
 
     @Autowired
     SetorRepository setorRepository;
 
     @RequestMapping(method = RequestMethod.POST, value = "/cadastrarSetor")
-        public ModelAndView save(Setor setor, ModelAndView model) {
-            setorRepository.save(setor);
-            return new ModelAndView("redirect:/controle");
+    public ModelAndView save(Setor setor, ModelAndView model) {
+        setorRepository.save(setor);
+        return new ModelAndView("redirect:/controle");
     }
 
     @RequestMapping(method = RequestMethod.GET)
@@ -35,9 +33,9 @@ public class SetorRest {
         return setor;
     }
 
-    @RequestMapping(method = RequestMethod.GET, path = "/getByNome/{nome_setor}")
-    public Setor getSetorByNome(@PathVariable("nome_setor") String nome_setor) {
-        Setor setor = setorRepository.findByNome_setor(nome_setor);
+    @RequestMapping(method = RequestMethod.GET, path = "/getByNome/{nomeSetor}")
+    public Setor getSetorByNome(@PathVariable("nomeSetor") String nomeSetor) {
+        Setor setor = setorRepository.findByNomeSetor(nomeSetor);
         return setor;
     }
 

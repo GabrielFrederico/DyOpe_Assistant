@@ -20,15 +20,15 @@ public class TipoOperacaoRest {
         return tipoOperacaoRepository.findAll();
     }
 
-    @RequestMapping(method = RequestMethod.GET, path = "/{id}")
-    public TipoOperacao getTipoOperacaoById(@PathVariable("id") long id) {
-        TipoOperacao tipoOperacao = tipoOperacaoRepository.findById(id);
+    @RequestMapping(method = RequestMethod.GET, path = "/{idTipoOpe}")
+    public TipoOperacao getTipoOperacaoById(@PathVariable("idTipoOpe") long idTipoOpe) {
+        TipoOperacao tipoOperacao = tipoOperacaoRepository.findByidTipoOpe(idTipoOpe);
         return tipoOperacao;
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/getByNome/{tipoOpe}")
     public TipoOperacao getTipoOperacaoByNome(@PathVariable("tipoOpe") String tipoOpe) {
-        TipoOperacao tipoOperacao = tipoOperacaoRepository.findByNome(tipoOpe);
+        TipoOperacao tipoOperacao = tipoOperacaoRepository.findBytipoOpe(tipoOpe);
         return tipoOperacao;
     }
 

@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 public interface TipoOperacaoRepository extends CrudRepository<TipoOperacao, Serializable> {
 
-    TipoOperacao findById(long idTipoOpe);
+    TipoOperacao findByidTipoOpe(long idTipoOpe);
 
-    TipoOperacao findByNome(String tipoOpe);
+    TipoOperacao findBytipoOpe(String tipoOpe);
 }

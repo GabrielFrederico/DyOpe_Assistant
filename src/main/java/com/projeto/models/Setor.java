@@ -12,7 +12,7 @@ public class Setor {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    private String nome_setor;
+    private String nomeSetor;
     private String operacao;
 
     public long getId() {
@@ -23,17 +23,17 @@ public class Setor {
         this.id = id;
     }
 
-    public Setor(String nome_setor, String operacao) {
-        this.nome_setor = nome_setor;
+    public Setor(String nomeSetor, String operacao) {
+        this.nomeSetor = nomeSetor;
         this.operacao = operacao;
     }
 
-    public String getNome_setor() {
-        return nome_setor;
+    public String getNomeSetor() {
+        return nomeSetor;
     }
 
-    public void setNome_setor(String nome_setor) {
-        this.nome_setor = nome_setor;
+    public void setNomeSetor(String nomeSetor) {
+        this.nomeSetor = nomeSetor;
     }
 
     public String getOperacao() {

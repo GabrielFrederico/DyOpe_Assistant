@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @SpringBootApplication
-
 public class ProjetoApplication  extends SpringBootServletInitializer{
 
 	public static void main(String[] args) {
