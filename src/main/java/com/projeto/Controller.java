@@ -36,6 +36,12 @@ public class Controller {
 		return "gerente_index";
 	}
 
+	@RequestMapping("/gerentePerfil")
+	public String gerentePerfil() {
+
+		return "perfil";
+	}
+
 	@RequestMapping("/operacaoRisco")
 	public String operacaoRisco() {
 
