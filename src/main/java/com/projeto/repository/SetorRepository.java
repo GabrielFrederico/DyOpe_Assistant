@@ -9,5 +9,5 @@ public interface SetorRepository extends CrudRepository<Setor, Serializable> {
 
     Setor findById(long id);
 
-    Setor findByNome_setor(String nome);
+    Setor findByNome_setor(String nome_setor);
 }

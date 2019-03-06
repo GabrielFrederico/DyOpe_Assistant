@@ -12,7 +12,6 @@ public class Setor {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private String nome_setor;
     private String operacao;
 
@@ -22,6 +21,11 @@ public class Setor {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public Setor(String nome_setor, String operacao) {
+        this.nome_setor = nome_setor;
+        this.operacao = operacao;
     }
 
     public String getNome_setor() {
