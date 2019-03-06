@@ -43,9 +43,11 @@ div.menu_teste span {
     text-align: center;
     top: 1%;
 }
-.tam{
+
+.tam {
     font-size: 160%;
 }
+
 .titulo {
     color: blue;
     padding: 3.3%;
@@ -104,6 +106,7 @@ div.menu_teste span {
         justify-content: center;
         padding-bottom: 5%;
     }
+
     .container {
         margin-left: 15%;
     }
