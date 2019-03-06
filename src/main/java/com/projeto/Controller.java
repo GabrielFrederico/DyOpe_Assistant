@@ -36,6 +36,12 @@ public class Controller {
 		return "gerente_index";
 	}
 
+	@RequestMapping("/operacaoRisco")
+	public String operacaoRisco() {
+
+		return "operacao_risco";
+	}
+
 	@RequestMapping("/funcionarioIndex")
 	public String indeFuncionario() {
 
