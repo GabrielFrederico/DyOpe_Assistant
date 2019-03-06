@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import com.projeto.repository.OperacaoRepository;
+import org.springframework.web.servlet.ModelAndView;
 
 @RestController
 @RequestMapping("operacoes")
@@ -14,11 +15,10 @@ public class OperacaoRest {
 	OperacaoRepository operacaoRepository;
 
 	@RequestMapping(method = RequestMethod.POST, value="/cadastrarOperacao")
-	public Operacao save(Operacao operacao) {
+	public ModelAndView save(Operacao operacao) {
 		operacaoRepository.save(operacao);
-		return operacao;
+		return new ModelAndView("redirect:/operacaoRisco");
 	}
-
 	@RequestMapping(method = RequestMethod.GET)
 	public  Iterable<Operacao> listAll(){
 		return operacaoRepository.findAll();

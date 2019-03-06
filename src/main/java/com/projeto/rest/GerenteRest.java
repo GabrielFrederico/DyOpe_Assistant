@@ -24,13 +24,6 @@ public class GerenteRest {
         return new ModelAndView("redirect:/loginGerente");
     }
 
-    @ResponseBody
-    @RequestMapping(value = "../../../cadastroGerente", method = RequestMethod.GET)
-    public String cadastroGerente(Model model) {
-        model.addAttribute("gerente", new Gerente());
-        return "cadastro_gerente";
-    }
-
     @RequestMapping(value = "/loginGerente", method = RequestMethod.GET)
     public ModelAndView login(ModelAndView model, Model model1, Gerente gerente, String error, String logout) {
         gerenteRepository.findById(gerente.getId());
