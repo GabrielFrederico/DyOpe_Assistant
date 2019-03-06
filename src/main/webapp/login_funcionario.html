@@ -1,7 +1,3 @@
-<?php
-require_once 'db.class.html';
-?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -34,7 +30,7 @@ require_once 'db.class.html';
     <div class="card card-login mx-auto mt-5">
         <div class="card-header bg-info text-light" >Login</div>
         <div class="card-body">
-            <form method="post" action="valida_login.html">
+            <form method="get" action="funcionarios/loginFuncionario">
                 <div class="form-group">
                     <div class="form-label-group">
                         <input type="email" id="inputEmail" name="Email" class="form-control" placeholder="Email"

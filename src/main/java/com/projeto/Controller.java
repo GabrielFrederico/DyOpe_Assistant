@@ -24,10 +24,22 @@ public class Controller {
 		return "login_gerente";
 	}
 
+	@RequestMapping("/loginFuncionario")
+	public String loginFuncionario() {
+
+		return "login_funcionario";
+	}
+
 	@RequestMapping("/gerenteIndex")
 	public String indexGerente() {
 
 		return "gerente_index";
+	}
+
+	@RequestMapping("/funcionarioIndex")
+	public String indeFuncionario() {
+
+		return "funcionario_index";
 	}
 
 	@RequestMapping("cadastroGerente")

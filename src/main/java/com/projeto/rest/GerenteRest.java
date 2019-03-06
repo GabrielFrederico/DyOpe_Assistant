@@ -24,7 +24,6 @@ public class GerenteRest {
         return new ModelAndView("redirect:/loginGerente");
     }
 
-
     @ResponseBody
     @RequestMapping(value = "../../../cadastroGerente", method = RequestMethod.GET)
     public String cadastroGerente(Model model) {
@@ -36,15 +35,8 @@ public class GerenteRest {
     public ModelAndView login(ModelAndView model, Model model1, Gerente gerente, String error, String logout) {
         gerenteRepository.findById(gerente.getId());
 
-        if (error != null)
-            model1.addAttribute("error", "Your username and password is invalid.");
-
-        if (logout != null)
-            model1.addAttribute("message", "You have been logged out successfully.");
-
         return new ModelAndView("redirect:/gerenteIndex");
     }
-
 
 
     @RequestMapping(method = RequestMethod.GET)
