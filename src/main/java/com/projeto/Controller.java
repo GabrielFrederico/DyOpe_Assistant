@@ -48,11 +48,12 @@ public class Controller {
 		return "operacao_risco";
 	}
 
-	@RequestMapping("/controle")
-	public String controle() {
+	@RequestMapping("/controleFuncionarios")
+	public String controleFunc() {
 
-		return "controle";
+		return "controle_funcionarios";
 	}
+
 
 	@RequestMapping("/funcionarioIndex")
 	public String indeFuncionario() {

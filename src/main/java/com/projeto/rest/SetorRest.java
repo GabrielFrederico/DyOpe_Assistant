@@ -19,7 +19,7 @@ public class SetorRest {
     @RequestMapping(method = RequestMethod.POST, value = "/cadastrarSetor")
     public ModelAndView save(Setor setor, ModelAndView model) {
         setorRepository.save(setor);
-        return new ModelAndView("redirect:/controle");
+        return new ModelAndView("redirect:/controleFuncionarios");
     }
 
     @RequestMapping(method = RequestMethod.GET)

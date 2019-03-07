@@ -43,12 +43,10 @@ public class GerenteRest {
         return gerente;
     }
 
-    @RequestMapping(method = RequestMethod.GET, path = "/{id}")
-    public ModelAndView perfil(@PathVariable("id") long id) {
-        Gerente gerente = gerenteRepository.findById(id);
+    @RequestMapping(method = RequestMethod.GET, path = "/perfil")
+    public ModelAndView perfil() {
 
         return new ModelAndView("redirect:/gerentePerfil");
-
     }
 
 
