@@ -44,11 +44,11 @@ public class GerenteRest {
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/perfil")
-    public ModelAndView perfil() {
+    public ModelAndView perfil(ModelAndView model) {
 
-        return new ModelAndView("redirect:/gerentePerfil");
+        model.setViewName("redirect:/gerentePerfil");
+        return model;
     }
-
 
     @RequestMapping(method = RequestMethod.GET, path = "/getByNome/{nome}")
     public Gerente getGerenteByNome(@PathVariable("nome") String nome) {

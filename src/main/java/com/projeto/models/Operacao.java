@@ -2,10 +2,7 @@ package com.projeto.models;
 
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 
 @Entity
@@ -17,11 +14,11 @@ public class Operacao {
 	
 	private String descricao;
 	
-	private Date dataInicio;
+	private java.sql.Date dataInicio;
 	
 	private int tempoNesc;
 	
-	private Date prazo;
+	private java.sql.Date prazo;
 	
 	private float custosOpe;
 	
@@ -30,7 +27,7 @@ public class Operacao {
 	private int numFuncionariosOpe;
 	
 	private int qtdPecasOpe;
-	
+
 	private long idTipoOpe;
 	
 	public long getId() {
@@ -54,7 +51,7 @@ public class Operacao {
 		return dataInicio;
 	}
 
-	public void setDataInicio(Date dataInicio) {
+	public void setDataInicio(java.sql.Date dataInicio) {
 		this.dataInicio = dataInicio;
 	}
 
@@ -70,7 +67,7 @@ public class Operacao {
 		return prazo;
 	}
 
-	public void setPrazo(Date prazo) {
+	public void setPrazo(java.sql.Date prazo) {
 		this.prazo = prazo;
 	}
 
