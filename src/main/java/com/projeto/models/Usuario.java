@@ -13,6 +13,15 @@ public class Usuario {
     private long id;
     private String nomeUsuario;
     private String senha;
+    private char statusSYS;
+
+    public char getStatusSYS() {
+        return statusSYS;
+    }
+
+    public void setStatusSYS(char statusSYS) {
+        this.statusSYS = statusSYS;
+    }
 
     public long getId() {
         return id;

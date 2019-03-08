@@ -14,7 +14,26 @@ public class Funcionario{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long idusuario;
 	private String nome;
-	
+
+	private long idsetor;
+	private char statusSYS;
+
+	public char getStatusSYS() {
+		return statusSYS;
+	}
+
+	public void setStatusSYS(char statusSYS) {
+		this.statusSYS = statusSYS;
+	}
+
+	public long getIdsetor() {
+		return idsetor;
+	}
+
+	public void setIdsetor(long idsetor) {
+		this.idsetor = idsetor;
+	}
+
 	private String rg;
 	
 	private String cpf;

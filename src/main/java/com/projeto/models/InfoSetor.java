@@ -14,7 +14,7 @@ public class InfoSetor {
     private long idInfosetor;
 
     private String setor, operacao;
-    private char status_sys;
+    private char statusSYS;
     private int qtdPecasOpe;
     private Time tempoNesc;
 
@@ -42,12 +42,12 @@ public class InfoSetor {
         this.operacao = operacao;
     }
 
-    public char getStatus_sys() {
-        return status_sys;
+    public char getStatusSYS() {
+        return statusSYS;
     }
 
-    public void setStatus_sys(char status_sys) {
-        this.status_sys = status_sys;
+    public void setStatusSYS(char statusSYS) {
+        this.statusSYS = statusSYS;
     }
 
     public int getQtdPecasOpe() {

@@ -15,20 +15,19 @@ public class Gerente {
 	private String nome;
 	
 	private String rg;
-	
+	private char statusSYS;
+
+	public char getStatusSYS() {
+		return statusSYS;
+	}
+
+	public void setStatusSYS(char statusSYS) {
+		this.statusSYS = statusSYS;
+	}
+
 	private String cpf;
 	
 	private String email;
-
-	private String senha;
-
-	public String getSenha() {
-		return senha;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
 
 	public String getSenhaConfirm() {
 		return senhaConfirm;

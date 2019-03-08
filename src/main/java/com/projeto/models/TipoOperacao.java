@@ -13,6 +13,15 @@ public class TipoOperacao {
     private long idTipoOpe;
 
     private String tipoOpe;
+    private char statusSYS;
+
+    public char getStatusSYS() {
+        return statusSYS;
+    }
+
+    public void setStatusSYS(char statusSYS) {
+        this.statusSYS = statusSYS;
+    }
 
     public long getIdTipoOpe() {
         return idTipoOpe;

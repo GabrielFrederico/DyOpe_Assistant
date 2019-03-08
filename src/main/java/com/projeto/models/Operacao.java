@@ -27,7 +27,7 @@ public class Operacao {
 	private int numFuncionariosOpe;
 	
 	private int qtdPecasOpe;
-
+	private char statusSYS;
 	private long idTipoOpe;
 	
 	public long getId() {
@@ -36,6 +36,14 @@ public class Operacao {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	public char getStatusSYS() {
+		return statusSYS;
+	}
+
+	public void setStatusSYS(char statusSYS) {
+		this.statusSYS = statusSYS;
 	}
 
 	public String getDescricao() {

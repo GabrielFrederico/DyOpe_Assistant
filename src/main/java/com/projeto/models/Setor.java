@@ -13,6 +13,15 @@ public class Setor {
     private long id;
     private String nomeSetor;
     private String operacao;
+    private char statusSYS;
+
+    public char getStatusSYS() {
+        return statusSYS;
+    }
+
+    public void setStatusSYS(char statusSYS) {
+        this.statusSYS = statusSYS;
+    }
 
     public long getId() {
         return id;

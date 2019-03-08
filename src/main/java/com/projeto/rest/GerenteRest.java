@@ -1,5 +1,7 @@
 package com.projeto.rest;
 
+import com.projeto.models.Usuario;
+import com.projeto.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +21,7 @@ public class GerenteRest {
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/cadastrarGerente")
-    public ModelAndView save(Gerente gerente, ModelAndView model) {
+    public ModelAndView save(Gerente gerente) {
         gerenteRepository.save(gerente);
         return new ModelAndView("redirect:/loginGerente");
     }
@@ -27,6 +29,7 @@ public class GerenteRest {
     @RequestMapping(value = "/loginGerente", method = RequestMethod.GET)
     public ModelAndView login(ModelAndView model, Model model1, Gerente gerente, String error, String logout) {
         gerenteRepository.findById(gerente.getId());
+
 
         return new ModelAndView("redirect:/gerenteIndex");
     }
