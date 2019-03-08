@@ -230,14 +230,14 @@
                 </div>
                 <div class="modal-body">
                     <div class="card-body">
-                        <form method="post" action="perfil.html">
+                        <form method="put" action="gerentes/redefinirSenhaPerfil">
                             <div class="form-group">
 
                                 <div class="form-group">
 
                                     <div class="col-md-auto">
                                         <div class="form-label-group">
-                                            <input type="password" id="senha_atual" class="form-control"
+                                            <input type="password" id="senha_atual"  class="form-control"
                                                    placeholder="Senha atual:"
                                                    required="required">
                                             <label for="senha_atual">Senha atual:</label>
@@ -249,7 +249,7 @@
 
                                     <div class="col-md-auto">
                                         <div class="form-label-group">
-                                            <input type="password" id="senha_nova" class="form-control"
+                                            <input type="password" id="senha_nova" name="senha" class="form-control"
                                                    placeholder="Nova senha:"
                                                    required="required">
                                             <label for="senha_nova">Nova senha:</label>

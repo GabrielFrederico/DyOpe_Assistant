@@ -46,11 +46,12 @@ public class GerenteRest {
         return gerente;
     }
 
-    @RequestMapping(method = RequestMethod.GET, path = "/perfil")
-    public ModelAndView perfil(ModelAndView model) {
-
-        model.setViewName("redirect:/gerentePerfil");
-        return model;
+    @RequestMapping(method = RequestMethod.GET, path = "/perfil/{nome}")
+    public ModelAndView perfil(@PathVariable("nome") String nome) {
+        Gerente perfilGerente = gerenteRepository.findByNome(nome);
+        ModelAndView modelAndView = new ModelAndView("redirect:/gerentePerfil");
+        modelAndView.addObject("gerente", perfilGerente);
+        return modelAndView;
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/getByNome/{nome}")
@@ -61,6 +62,12 @@ public class GerenteRest {
 
     @RequestMapping(method = RequestMethod.PUT)
     public Gerente update(@RequestBody Gerente gerente) {
+        gerenteRepository.save(gerente);
+        return gerente;
+    }
+
+    @RequestMapping(method = RequestMethod.PUT, value = "/redefinirSenhaPerfil")
+    public Gerente redefinirSenhaPerfil(Gerente gerente) {
         gerenteRepository.save(gerente);
         return gerente;
     }

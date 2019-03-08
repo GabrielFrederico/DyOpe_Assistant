@@ -13,7 +13,16 @@ public class Gerente {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long idusuario;
 	private String nome;
-	
+	private String senha;
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
 	private String rg;
 	private char statusSYS;
 
