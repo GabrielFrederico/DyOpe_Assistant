@@ -11,19 +11,19 @@ public class InfoSetor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id_infosetor;
+    private long idInfosetor;
 
     private String setor, operacao;
     private char status_sys;
     private int qtdPecasOpe;
     private Time tempoNesc;
 
-    public long getId_infosetor() {
-        return id_infosetor;
+    public long getIdInfosetor() {
+        return idInfosetor;
     }
 
-    public void setId_infosetor(long id_infosetor) {
-        this.id_infosetor = id_infosetor;
+    public void setIdInfosetor(long idInfosetor) {
+        this.idInfosetor = idInfosetor;
     }
 
     public String getSetor() {

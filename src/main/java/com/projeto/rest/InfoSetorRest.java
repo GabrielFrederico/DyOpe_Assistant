@@ -13,7 +13,6 @@ public class InfoSetorRest {
     @Autowired
     InfoSetorRepository infoSetorRepository;
 
-
     @RequestMapping(method = RequestMethod.POST, value = "/cadastrarInfoSetor")
     public ModelAndView save(InfoSetor infoSetor) {
         infoSetorRepository.save(infoSetor);
@@ -25,20 +24,21 @@ public class InfoSetorRest {
         return infoSetorRepository.findAll();
     }
 
-    @RequestMapping(method = RequestMethod.GET, path = "/{id_infosetor}")
-    public InfoSetor getInfoSetorById(@PathVariable("id_infosetor") long id_infosetor) {
-        InfoSetor infoSetor = infoSetorRepository.findById_infosetor(id_infosetor);
+    @RequestMapping(method = RequestMethod.GET, path = "/{idInfosetor}")
+    public InfoSetor getInfoSetorById(@PathVariable("idInfosetor") long idInfosetor) {
+        InfoSetor infoSetor = infoSetorRepository.findByIdInfosetor(idInfosetor);
         return infoSetor;
     }
+
     @RequestMapping(method = RequestMethod.PUT)
     public InfoSetor update(@RequestBody InfoSetor infoSetor) {
         infoSetorRepository.save(infoSetor);
         return infoSetor;
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, path = "/{id_infosetor}")
-    public InfoSetor deleteInfoSetorById(@PathVariable("id_infosetor") long id_infosetor) {
-        InfoSetor infoSetor = infoSetorRepository.findById_infosetor(id_infosetor);
+    @RequestMapping(method = RequestMethod.DELETE, path = "/{idInfosetor}")
+    public InfoSetor deleteInfoSetorById(@PathVariable("idInfosetor") long idInfosetor) {
+        InfoSetor infoSetor = infoSetorRepository.findByIdInfosetor(idInfosetor);
         infoSetorRepository.delete(infoSetor);
         return infoSetor;
     }

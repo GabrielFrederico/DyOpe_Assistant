@@ -5,7 +5,8 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.io.Serializable;
 
-public interface InfoSetorRepository  extends CrudRepository<InfoSetor, Serializable> {
+public interface InfoSetorRepository extends  CrudRepository<InfoSetor, Serializable>{
 
-    InfoSetor findById_infosetor(long id_infosetor);
+    InfoSetor findByIdInfosetor(long idInfosetor);
+
 }
