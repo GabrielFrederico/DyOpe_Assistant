@@ -3,6 +3,7 @@ package com.projeto.rest;
 import com.projeto.models.Usuario;
 import com.projeto.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,10 +11,14 @@ import com.projeto.models.Gerente;
 import com.projeto.repository.GerenteRepository;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 
 @RestController
 @RequestMapping("gerentes")
-
 public class GerenteRest {
 
     @Autowired
@@ -26,10 +31,19 @@ public class GerenteRest {
         return new ModelAndView("redirect:/loginGerente");
     }
 
+    @RequestMapping(method = RequestMethod.GET, path = "/perfila/{id}")
+    public ModelAndView teste(@PathVariable("id") long id, Map<String, Object> item){
+        Gerente gerente = gerenteRepository.findById(id);
+        item.put("nome", gerente.getNome());
+        item.put("cpf", gerente.getCpf());
+        ModelAndView modelAndView = new ModelAndView("redirect:/gerentePerfil");
+        modelAndView.addObject("nomeGerente", gerente);
+        return modelAndView;
+    }
+
     @RequestMapping(value = "/loginGerente", method = RequestMethod.GET)
     public ModelAndView login(ModelAndView model, Model model1, Gerente gerente, String error, String logout) {
         gerenteRepository.findById(gerente.getId());
-
 
         return new ModelAndView("redirect:/gerenteIndex");
     }
@@ -53,6 +67,8 @@ public class GerenteRest {
         modelAndView.addObject("gerente", perfilGerente);
         return modelAndView;
     }
+
+
 
     @RequestMapping(method = RequestMethod.GET, path = "/getByNome/{nome}")
     public Gerente getGerenteByNome(@PathVariable("nome") String nome) {

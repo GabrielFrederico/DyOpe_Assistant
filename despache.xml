@@ -1,0 +1,4 @@
+<servlet-mapping>
+		<servlet>dispatcher</servlet>
+		<url-pattern>*.do</url-pattern>
+	</servlet-mapping>
