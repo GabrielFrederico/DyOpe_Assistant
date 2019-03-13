@@ -1,24 +1,25 @@
 package com.projeto.rest;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.projeto.models.Usuario;
 import com.projeto.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import com.projeto.models.Gerente;
 import com.projeto.repository.GerenteRepository;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
-@RestController
-@RequestMapping("gerentes")
+@Controller
 public class GerenteRest {
 
     @Autowired
@@ -36,7 +37,7 @@ public class GerenteRest {
         Gerente gerente = gerenteRepository.findById(id);
         item.put("nome", gerente.getNome());
         item.put("cpf", gerente.getCpf());
-        ModelAndView modelAndView = new ModelAndView("redirect:/gerentePerfil");
+        ModelAndView modelAndView = new ModelAndView("perfil");
         modelAndView.addObject("nomeGerente", gerente);
         return modelAndView;
     }
@@ -61,11 +62,11 @@ public class GerenteRest {
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/perfil/{nome}")
-    public ModelAndView perfil(@PathVariable("nome") String nome) {
+    public ModelAndView perfil(@PathVariable("nome") String nome, ModelMap item) {
         Gerente perfilGerente = gerenteRepository.findByNome(nome);
-        ModelAndView modelAndView = new ModelAndView("redirect:/gerentePerfil");
-        modelAndView.addObject("gerente", perfilGerente);
-        return modelAndView;
+        item.put("nome", perfilGerente.getNome());
+        item.put("cpf", perfilGerente.getCpf());
+        return new ModelAndView("perfil", "dadosGer", item);
     }
 
 

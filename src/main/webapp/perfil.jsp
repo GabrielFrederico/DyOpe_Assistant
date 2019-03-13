@@ -136,11 +136,12 @@
         </div>
 
         <div class="container " style="float: left; max-width: 70%; padding-left: 5%">
-            <form:form modelAttribute="nomeGerente">
+            <form:form  modelAttribute="dadosGer">
+
                 <div class="form-group">
                     <div class="form-group">
                         <div class="form-label-group">
-                            <input value="" type="text" name="nome" id="nomeCompleto" class="form-control"
+                            <input type="text" name="nome" id="nomeCompleto" class="form-control"
                                    autofocus="autofocus"
                                    placeholder="Nome Completo" required="required">
                             <label for="nomeCompleto">Nome Completo</label>
