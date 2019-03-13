@@ -1,35 +1,35 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="input" uri="http://www.springframework.org/tags/form" %>
-<%@page import="com.projeto.models.Gerente"%>
-<%@page import="com.projeto.rest.GerenteRest"%>
+<%@page import="com.projeto.models.Gerente" %>
+<%@page import="com.projeto.rest.GerenteRest" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+         pageEncoding="ISO-8859-1" %>
 <!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
 
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<meta name="description" content="">
-	<meta name="author" content="">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-	<title>Perfil</title>
+    <title>Perfil</title>
 
-	<!-- Bootstrap core CSS-->
-	<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap core CSS-->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-	<!-- Custom fonts for this template-->
-	<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 
-	<!-- Page level plugin CSS-->
-	<link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+    <!-- Page level plugin CSS-->
+    <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
 
-	<!-- Custom styles for this template-->
-	<link href="css/sb-admin.css" rel="stylesheet">
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin.css" rel="stylesheet">
 
-	<link rel="stylesheet" href="css/estilo.css">
+    <link rel="stylesheet" href="css/estilo.css">
 
 </head>
 
@@ -38,257 +38,256 @@
 <nav class="navbar navbar-expand bg-lightblue static-top">
 
 
-	<a class="navbar-brand mr-1" href="gerente_index.html">DyOpe Assistant</a>
+    <a class="navbar-brand mr-1" href="gerente_index.html">DyOpe Assistant</a>
 
-	<button class="btn btn-link btn-sm  order-1 order-sm-0" id="sidebarToggle" href="#">
-		<i class="fas fa-bars"></i>
-	</button>
+    <button class="btn btn-link btn-sm  order-1 order-sm-0" id="sidebarToggle" href="#">
+        <i class="fas fa-bars"></i>
+    </button>
 
-	<form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+    <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
 
-	</form>
+    </form>
 
-	<!-- Navbar -->
-	<ul class="navbar-nav  ml-auto ml-md-0">
-		<li class="nav-item dropdown no-arrow mx-1 show">
-			<a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown"
-			   aria-haspopup="true" aria-expanded="false">
-				<i class="fas fa-bell fa-fw"></i>
-				<!-- Counter - Alerts -->
-				<span class="badge badge-danger badge-counter">1+</span>
-			</a>
-			<!-- Dropdown - Alerts -->
-			<div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in pos"
-				 aria-labelledby="alertsDropdown">
-				<h6 class="dropdown-header">
-					Alertas
-				</h6>
-				<a class="dropdown-item d-flex align-items-center" href="operacao_risco.html">
-					<div class="mr-3">
-						<div class="icon-circle bg-success">
-							<i class="fas fa- text-danger"></i>
-						</div>
-					</div>
-					<div>
-						<div class="small text-gray-500">Dezembro 7, 2019</div>
-						<span>Operação de Risco foi concluida!</span>
+    <!-- Navbar -->
+    <ul class="navbar-nav  ml-auto ml-md-0">
+        <li class="nav-item dropdown no-arrow mx-1 show">
+            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown"
+               aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-bell fa-fw"></i>
+                <!-- Counter - Alerts -->
+                <span class="badge badge-danger badge-counter">1+</span>
+            </a>
+            <!-- Dropdown - Alerts -->
+            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in pos"
+                 aria-labelledby="alertsDropdown">
+                <h6 class="dropdown-header">
+                    Alertas
+                </h6>
+                <a class="dropdown-item d-flex align-items-center" href="operacao_risco.html">
+                    <div class="mr-3">
+                        <div class="icon-circle bg-success">
+                            <i class="fas fa- text-danger"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="small text-gray-500">Dezembro 7, 2019</div>
+                        <span>Operação de Risco foi concluida!</span>
+                    </div>
+                </a>
 
-
-					</div>
-				</a>
-
-				<a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
-			</div>
-		</li>
-		<li class="nav-item dropdown no-arrow">
-			<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
-			   aria-haspopup="true" aria-expanded="false">
-				<i class="fas fa-user-circle fa-fw"></i>
-			</a>
-			<div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-				<a class="dropdown-item" href="#">Configurações</a>
-				<a class="dropdown-item" href="perfil.html">Perfil</a>
-				<div class="dropdown-divider"></div>
-				<a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Sair</a>
-			</div>
-		</li>
-	</ul>
+                <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+            </div>
+        </li>
+        <li class="nav-item dropdown no-arrow">
+            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
+               aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-user-circle fa-fw"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                <a class="dropdown-item" href="#">Configurações</a>
+                <a class="dropdown-item" href="perfil.html">Perfil</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Sair</a>
+            </div>
+        </li>
+    </ul>
 
 </nav>
 <div id="wrapper">
 
-	<!-- Sidebar -->
-	<ul class="sidebar toggled bg-primary navbar-nav">
+    <!-- Sidebar -->
+    <ul class="sidebar toggled bg-primary navbar-nav">
 
-		<li class="nav-item dropdown">
-			<a class="nav-link dropdown-toggle text-light" href="#" id="pagesDropdown" role="button"
-			   data-toggle="dropdown"
-			   aria-haspopup="false" aria-expanded="false">
-				<span>Operações</span>
-			</a>
-			<div class="dropdown-menu" aria-labelledby="pagesDropdown" x-placement="bottom-start">
-				<h6 class="dropdown-header">Tipos de Operações</h6>
-				<a class="dropdown-item" href="operacao_risco.html">Risco</a>
-				<a class="dropdown-item" href="operacao_corte.html">Corte</a>
-				<a class="dropdown-item" href="operacao_costura.html">Costura</a>
-				<a class="dropdown-item" href="operacao_beneficiamento.html">Beneficiamento</a>
-				<a class="dropdown-item" href="operacao_acabamento.html">Acabamento</a>
-			</div>
-		</li>
-		<li class="nav-item text-light">
-			<a class="nav-link text-light" href="controle_funcionarios.html">
-				<span>Controle</span>
-			</a>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-light" href="#" id="pagesDropdown" role="button"
+               data-toggle="dropdown"
+               aria-haspopup="false" aria-expanded="false">
+                <span>Operações</span>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="pagesDropdown" x-placement="bottom-start">
+                <h6 class="dropdown-header">Tipos de Operações</h6>
+                <a class="dropdown-item" href="operacao_risco.html">Risco</a>
+                <a class="dropdown-item" href="operacao_corte.html">Corte</a>
+                <a class="dropdown-item" href="operacao_costura.html">Costura</a>
+                <a class="dropdown-item" href="operacao_beneficiamento.html">Beneficiamento</a>
+                <a class="dropdown-item" href="operacao_acabamento.html">Acabamento</a>
+            </div>
+        </li>
+        <li class="nav-item text-light">
+            <a class="nav-link text-light" href="controle_funcionarios.html">
+                <span>Controle</span>
+            </a>
 
-		</li>
+        </li>
 
-	</ul>
+    </ul>
 
-	<div id="content-wrapper" class="fundo">
+    <div id="content-wrapper" class="fundo">
 
-		<div class="container-fluid">
+        <div class="container-fluid">
 
-			<!-- Page Content -->
-			<h1>Perfil</h1>
-			<hr>
-		</div>
+            <!-- Page Content -->
+            <h1>Perfil</h1>
+            <hr>
+        </div>
 
-		<div alt="Imagem de perfil" class="img-rounded .img-responsive" id="img-perfil">
-			<img src="imagens/imgperfil.jpg" style="height: 200px; width: 200px; float: left; padding-left: 1%;">
-		</div>
+        <div alt="Imagem de perfil" class="img-rounded .img-responsive" id="img-perfil">
+            <img src="imagens/imgperfil.jpg" style="height: 200px; width: 200px; float: left; padding-left: 1%;">
+        </div>
 
-		<div class="container " style="float: left; max-width: 70%; padding-left: 5%">
-			<form:form modelAttribute="nomeGerente" >
-				<div class="form-group">
-					<div class="form-group">
-						<div class="form-label-group">
-							<input value="" type="text" name="nome"    id="nomeCompleto" class="form-control" autofocus="autofocus"
-								   placeholder="Nome Completo" required="required">
-							<label for="nomeCompleto">Nome Completo</label>
-						</div>
-					</div>
-					<div class="form-row">
-						<div class="col-md-6">
-							<div class="form-label-group">
-								<input type="text" name="cpf"  id="cpf" class="form-control" placeholder="CPF"
-									   required="required" >
-								<label for="cpf">CPF</label>
-							</div>
+        <div class="container " style="float: left; max-width: 70%; padding-left: 5%">
+            <form:form modelAttribute="nomeGerente">
+                <div class="form-group">
+                    <div class="form-group">
+                        <div class="form-label-group">
+                            <input value="" type="text" name="nome" id="nomeCompleto" class="form-control"
+                                   autofocus="autofocus"
+                                   placeholder="Nome Completo" required="required">
+                            <label for="nomeCompleto">Nome Completo</label>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-6">
+                            <div class="form-label-group">
+                                <input type="text" name="cpf" id="cpf" class="form-control" placeholder="CPF"
+                                       required="required">
+                                <label for="cpf">CPF</label>
+                            </div>
 
-						</div>
-						<div class="col-md-6">
-							<div class="form-label-group">
-								<input type="text" name="rg" id="rg" class="form-control" placeholder="RG"
-									   required="required">
-								<label for="rg">RG</label>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="form-label-group">
-						<input type="email" name="emailGer" id="inputEmail" class="form-control"
-							   placeholder="Endereço de e-mail"
-							   required="required">
-						<label for="inputEmail">Endereço de e-mail</label>
-					</div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-label-group">
+                                <input type="text" name="rg" id="rg" class="form-control" placeholder="RG"
+                                       required="required">
+                                <label for="rg">RG</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-label-group">
+                        <input type="email" name="emailGer" id="inputEmail" class="form-control"
+                               placeholder="Endereço de e-mail"
+                               required="required">
+                        <label for="inputEmail">Endereço de e-mail</label>
+                    </div>
 
-				</div>
+                </div>
 
-				<input class="btn btn-success" type="submit" value="Salvar">
-				<a class="btn btn-info" href="#" data-toggle="modal" data-target=".redefinir-senha">Redefinir senha</a>
+                <input class="btn btn-success" type="submit" value="Salvar">
+                <a class="btn btn-info" href="#" data-toggle="modal" data-target=".redefinir-senha">Redefinir senha</a>
 
 
-				<!-- /.container-fluid -->
+                <!-- /.container-fluid -->
 
-				<!-- Sticky Footer -->
-				<footer class="sticky-footer">
-					<div class="container my-auto ">
-						<div class="copyright text-center my-auto ">
-							<span>Copyright © DyOpe Assistant 2018</span>
-						</div>
-					</div>
-				</footer>
-			</form:form>
-		</div>
-		<!-- /.content-wrapper -->
+                <!-- Sticky Footer -->
+                <footer class="sticky-footer">
+                    <div class="container my-auto ">
+                        <div class="copyright text-center my-auto ">
+                            <span>Copyright © DyOpe Assistant 2018</span>
+                        </div>
+                    </div>
+                </footer>
+            </form:form>
+        </div>
+        <!-- /.content-wrapper -->
 
-	</div>
-	<!-- /#wrapper -->
+    </div>
+    <!-- /#wrapper -->
 
-	<!-- Scroll to Top Button-->
-	<a class="scroll-to-top rounded" href="#page-top">
-		<i class="fas fa-angle-up"></i>
-	</a>
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
 
-	<!-- Logout Modal-->
-	<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-		 aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Pronto para sair?</h5>
-					<button class="close" type="button" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">×</span>
-					</button>
-				</div>
-				<div class="modal-body">Selecione "Sair" abaixo se você estiver pronto para encerrar sua sessão atual.
-				</div>
-				<div class="modal-footer">
-					<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-					<a class="btn btn-primary" href="login_gerente.html">Sair</a>
-				</div>
-			</div>
-		</div>
-	</div>
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Pronto para sair?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Selecione "Sair" abaixo se você estiver pronto para encerrar sua sessão atual.
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                    <a class="btn btn-primary" href="login_gerente.html">Sair</a>
+                </div>
+            </div>
+        </div>
+    </div>
 
-	<!--Modal Redefinir Senha: -->
+    <!--Modal Redefinir Senha: -->
 
-	<div class="modal fade redefinir-senha" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-		 aria-hidden="true">
-		<div class="modal-dialog modal-body">
+    <div class="modal fade redefinir-senha" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-body">
 
-			<div class="modal-content">
-				<div class="modal-header">
-					<h4 class="modal-title" id="myLargeModalLabel">Redefinir senha:</h4>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">×</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<div class="card-body">
-						<form method="put" action="gerentes/redefinirSenhaPerfil">
-							<div class="form-group">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myLargeModalLabel">Redefinir senha:</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="card-body">
+                        <form method="put" action="gerentes/redefinirSenhaPerfil">
+                            <div class="form-group">
 
-								<div class="form-group">
+                                <div class="form-group">
 
-									<div class="col-md-auto">
-										<div class="form-label-group">
-											<input type="password" id="senha_atual"  class="form-control"
-												   placeholder="Senha atual:"
-												   required="required">
-											<label for="senha_atual">Senha atual:</label>
-										</div>
-									</div>
-								</div>
+                                    <div class="col-md-auto">
+                                        <div class="form-label-group">
+                                            <input type="password" id="senha_atual" class="form-control"
+                                                   placeholder="Senha atual:"
+                                                   required="required">
+                                            <label for="senha_atual">Senha atual:</label>
+                                        </div>
+                                    </div>
+                                </div>
 
-								<div class="form-group">
+                                <div class="form-group">
 
-									<div class="col-md-auto">
-										<div class="form-label-group">
-											<input type="password" id="senha_nova" name="senha" class="form-control"
-												   placeholder="Nova senha:"
-												   required="required">
-											<label for="senha_nova">Nova senha:</label>
-										</div>
-									</div>
-								</div>
+                                    <div class="col-md-auto">
+                                        <div class="form-label-group">
+                                            <input type="password" id="senha_nova" name="senha" class="form-control"
+                                                   placeholder="Nova senha:"
+                                                   required="required">
+                                            <label for="senha_nova">Nova senha:</label>
+                                        </div>
+                                    </div>
+                                </div>
 
-								<div class="form-group">
+                                <div class="form-group">
 
-									<div class="col-md-auto">
-										<div class="form-label-group">
-											<input type="password" id="senha_confirmar" class="form-control"
-												   placeholder="Confirmar senha:"
-												   required="required">
-											<label for="senha_confirmar">Confirmar senha:</label>
-										</div>
-									</div>
+                                    <div class="col-md-auto">
+                                        <div class="form-label-group">
+                                            <input type="password" id="senha_confirmar" class="form-control"
+                                                   placeholder="Confirmar senha:"
+                                                   required="required">
+                                            <label for="senha_confirmar">Confirmar senha:</label>
+                                        </div>
+                                    </div>
 
-								</div>
+                                </div>
 
-							</div>
+                            </div>
 
-							<div class="modal-footer col-md-12">
-								<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-								<input class="btn btn-primary" type="submit" value="Cadastrar">
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+                            <div class="modal-footer col-md-12">
+                                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                                <input class="btn btn-primary" type="submit" value="Cadastrar">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- Bootstrap core JavaScript-->
