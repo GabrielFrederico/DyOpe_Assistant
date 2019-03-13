@@ -1,4 +1,4 @@
-package com.projeto.rest;
+package com.projeto.controller;
 
 import com.projeto.models.InfoSetor;
 import com.projeto.repository.InfoSetorRepository;
@@ -8,7 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @RestController
 @RequestMapping("infoSetor")
-public class InfoSetorRest {
+public class InfoSetorController {
 
     @Autowired
     InfoSetorRepository infoSetorRepository;

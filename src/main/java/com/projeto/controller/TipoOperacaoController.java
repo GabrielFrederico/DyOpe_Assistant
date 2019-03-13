@@ -1,4 +1,4 @@
-package com.projeto.rest;
+package com.projeto.controller;
 
 import com.projeto.models.TipoOperacao;
 import com.projeto.repository.TipoOperacaoRepository;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("tipoOpe")
-public class TipoOperacaoRest {
+public class TipoOperacaoController {
 
     @Autowired
     TipoOperacaoRepository tipoOperacaoRepository;

@@ -1,4 +1,4 @@
-package com.projeto.rest;
+package com.projeto.controller;
 
 import com.projeto.models.Operacao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @RestController
 @RequestMapping("operacoes")
-public class OperacaoRest {
+public class OperacaoController {
 
 	@Autowired
 	OperacaoRepository operacaoRepository;

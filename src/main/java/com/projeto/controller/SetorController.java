@@ -1,17 +1,15 @@
-package com.projeto.rest;
+package com.projeto.controller;
 
 
 import com.projeto.models.Setor;
 import com.projeto.repository.SetorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @RestController
 @RequestMapping("setores")
-public class SetorRest {
+public class SetorController {
 
     @Autowired
     SetorRepository setorRepository;

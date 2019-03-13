@@ -1,7 +1,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="input" uri="http://www.springframework.org/tags/form" %>
 <%@page import="com.projeto.models.Gerente" %>
-<%@page import="com.projeto.rest.GerenteRest" %>
+<%@page import="com.projeto.controller.GerenteController" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1" %>
 <!DOCTYPE html>

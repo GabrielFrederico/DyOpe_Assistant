@@ -1,13 +1,7 @@
-package com.projeto.rest;
+package com.projeto.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.projeto.models.Usuario;
-import com.projeto.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -20,15 +14,20 @@ import java.util.*;
 
 
 @Controller
-public class GerenteRest {
+@RequestMapping("gerentes")
+public class GerenteController {
 
     @Autowired
     GerenteRepository gerenteRepository;
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/cadastrarGerente")
-    public ModelAndView save(Gerente gerente) {
+    public ModelAndView save(Gerente gerente, ModelMap model) {
         gerenteRepository.save(gerente);
+
+        model.addAttribute("nome", gerente.getNome());
+        model.addAttribute("id", gerente.getId());
+
         return new ModelAndView("redirect:/loginGerente");
     }
 
@@ -66,7 +65,12 @@ public class GerenteRest {
         Gerente perfilGerente = gerenteRepository.findByNome(nome);
         item.put("nome", perfilGerente.getNome());
         item.put("cpf", perfilGerente.getCpf());
-        return new ModelAndView("perfil", "dadosGer", item);
+        return new ModelAndView("redirect:/perfilGerente", "dadosGer", item);
+    }
+    @RequestMapping("/perfilGerente")
+    public String ok() {
+
+        return "perfil";
     }
 
 

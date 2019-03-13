@@ -1,4 +1,4 @@
-package com.projeto.rest;
+package com.projeto.controller;
 
 import com.projeto.models.Usuario;
 import com.projeto.repository.UsuarioRepository;
@@ -8,7 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @RestController
 @RequestMapping("usuarios")
-public class UsuarioRest {
+public class UsuarioController {
 
     @Autowired
     UsuarioRepository usuarioRepository;
