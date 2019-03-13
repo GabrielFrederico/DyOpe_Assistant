@@ -9,6 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import com.projeto.models.Gerente;
@@ -19,7 +20,6 @@ import java.util.*;
 
 
 @Controller
-@RequestMapping("gerentes")
 public class GerenteRest {
 
     @Autowired
@@ -37,7 +37,7 @@ public class GerenteRest {
         Gerente gerente = gerenteRepository.findById(id);
         item.put("nome", gerente.getNome());
         item.put("cpf", gerente.getCpf());
-        ModelAndView modelAndView = new ModelAndView("redirect:/gerentePerfil");
+        ModelAndView modelAndView = new ModelAndView("perfil");
         modelAndView.addObject("nomeGerente", gerente);
         return modelAndView;
     }
@@ -62,9 +62,11 @@ public class GerenteRest {
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/perfil/{nome}")
-    public ModelAndView perfil(@PathVariable("nome") String nome) {
+    public ModelAndView perfil(@PathVariable("nome") String nome, ModelMap item) {
         Gerente perfilGerente = gerenteRepository.findByNome(nome);
-        return new ModelAndView("redirect:/gerentePerfil", "dadosGer", perfilGerente);
+        item.put("nome", perfilGerente.getNome());
+        item.put("cpf", perfilGerente.getCpf());
+        return new ModelAndView("perfil", "dadosGer", item);
     }
 
 
