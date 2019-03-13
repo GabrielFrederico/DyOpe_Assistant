@@ -16,7 +16,7 @@ public class InfoSetor {
     private String setor, operacao;
     private char statusSYS;
     private int qtdPecasOpe;
-    private Time tempoNece;
+    private Time tempoNecessario;
 
     public long getIdInfosetor() {
         return idInfosetor;
@@ -58,11 +58,11 @@ public class InfoSetor {
         this.qtdPecasOpe = qtdPecasOpe;
     }
 
-    public Time getTempoNesc() {
-        return tempoNece;
+    public Time getTempoNecessario() {
+        return tempoNecessario;
     }
 
-    public void setTempoNesc(Time tempoNesc) {
-        this.tempoNece = tempoNesc;
+    public void setTempoNecessario(Time tempoNecessario) {
+        this.tempoNecessario = tempoNecessario;
     }
 }
