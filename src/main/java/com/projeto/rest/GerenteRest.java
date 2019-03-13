@@ -3,6 +3,7 @@ package com.projeto.rest;
 import com.projeto.models.Usuario;
 import com.projeto.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -17,21 +18,20 @@ import java.util.List;
 import java.util.Map;
 
 
-@RestController
-@RequestMapping("gerentes")
+@Controller
 public class GerenteRest {
 
     @Autowired
     GerenteRepository gerenteRepository;
 
 
-    @RequestMapping(method = RequestMethod.POST, value = "/cadastrarGerente")
+    @RequestMapping(method = RequestMethod.POST, value = "gerentes/cadastrarGerente")
     public ModelAndView save(Gerente gerente) {
         gerenteRepository.save(gerente);
         return new ModelAndView("redirect:/loginGerente");
     }
 
-    @RequestMapping(method = RequestMethod.GET, path = "/perfila/{id}")
+    @RequestMapping(method = RequestMethod.GET, path = "gerentes/perfila/{id}")
     public ModelAndView teste(@PathVariable("id") long id, Map<String, Object> item){
         Gerente gerente = gerenteRepository.findById(id);
         item.put("nome", gerente.getNome());
