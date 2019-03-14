@@ -1,3 +1,4 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1" %>
 <!DOCTYPE html>
@@ -32,7 +33,8 @@
     <div class="card card-register mx-auto mt-5">
         <div class="card-header bg-info text-light">Cadastro</div>
         <div class="card-body">
-            <form method="post" action="gerentes/cadastrarGerente">
+            <form:form method="post" action="/cadastrarGerente"  modelAttribute="gerente">
+
                 <div class="form-group">
                     <div class="form-row">
                         <div class="col-md-6">
@@ -100,7 +102,7 @@
                     </div>
                 </div>
                 <input class="btn btn-info btn-block" type="submit" value="Cadastrar">
-            </form>
+            </form:form>
             <div class="text-center">
                 <a class="d-block small mt-3" href="index.jsp">Página de login</a>
                 <a class="d-block small" href="forgot-password.jsp">Esqueceu a senha?</a>

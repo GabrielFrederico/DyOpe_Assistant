@@ -138,62 +138,67 @@
         </div>
 
         <div class="container " style="float: left; max-width: 70%; padding-left: 5%">
-
-            <div class="form-group">
+            <form:form method="post"  action="/redefinirPerfilGerente">
                 <div class="form-group">
-                    <div class="form-label-group">
-                        <input value="${nomeGerente}" type="text" name="nome" id="nomeCompleto" class="form-control"
-                               autofocus="autofocus"
-                               placeholder="Nome Completo" required="required">
-                        <label for="nomeCompleto">Nome Completo</label>
+                    <div class="form-group">
+                        <div class="form-label-group">
+                            <input value="${nomeGerente}" type="text" name="nome" id="nomeCompleto" class="form-control"
+                                   autofocus="autofocus"
+                                   placeholder="Nome Completo" required="required">
+                            <label for="nomeCompleto">Nome Completo</label>
+                        </div>
                     </div>
-                </div>
-                <div class="form-row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <div class="form-label-group">
-                                <input value="${cpfGerente}" type="text" name="cpf" id="cpf" class="form-control" placeholder="CPF"
-                                       required="required">
-                                <label for="cpf">CPF</label>
+                    <div class="form-row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="form-label-group">
+                                    <input value="${cpfGerente}" type="text" name="cpf" id="cpf" class="form-control"
+                                           placeholder="CPF"
+                                           required="required">
+                                    <label for="cpf">CPF</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="form-label-group">
+                                    <input value="${rgGerente}" type="text" name="rg" id="rg" class="form-control"
+                                           placeholder="RG"
+                                           required="required">
+                                    <label for="rg">RG</label>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <div class="form-label-group">
-                                <input value="${rgGerente}" type="text" name="rg" id="rg" class="form-control" placeholder="RG"
-                                       required="required">
-                                <label for="rg">RG</label>
+                    <div class="form-group">
+                        <div class="form-label-group">
+                            <input type="email" value="${emailGerente}" name="emailGer" id="inputEmail"
+                                   class="form-control"
+                                   placeholder="Endereço de e-mail"
+                                   required="required">
+                            <label for="inputEmail">Endereço de e-mail</label>
+                        </div>
+
+                    </div>
+
+                    <input class="btn btn-success" type="submit" value="Salvar">
+                    <a class="btn btn-info" href="#" data-toggle="modal" data-target=".redefinir-senha">Redefinir
+                        senha</a>
+
+
+                    <!-- /.container-fluid -->
+
+                    <!-- Sticky Footer -->
+                    <footer class="sticky-footer">
+                        <div class="container my-auto ">
+                            <div class="copyright text-center my-auto ">
+                                <span>Copyright © DyOpe Assistant 2018</span>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="form-label-group">
-                        <input type="email" value="${emailGerente}" name="emailGer" id="inputEmail" class="form-control"
-                               placeholder="Endereço de e-mail"
-                               required="required">
-                        <label for="inputEmail">Endereço de e-mail</label>
-                    </div>
+                    </footer>
 
                 </div>
-
-                <input class="btn btn-success" type="submit" value="Salvar">
-                <a class="btn btn-info" href="#" data-toggle="modal" data-target=".redefinir-senha">Redefinir senha</a>
-
-
-                <!-- /.container-fluid -->
-
-                <!-- Sticky Footer -->
-                <footer class="sticky-footer">
-                    <div class="container my-auto ">
-                        <div class="copyright text-center my-auto ">
-                            <span>Copyright © DyOpe Assistant 2018</span>
-                        </div>
-                    </div>
-                </footer>
-
-            </div>
+            </form:form>
             <!-- /.content-wrapper -->
 
         </div>
@@ -241,7 +246,7 @@
                     </div>
                     <div class="modal-body">
                         <div class="card-body">
-                            <form method="put" action="gerentes/redefinirSenhaPerfil">
+                            <form method="put" action="redefinirSenhaPerfilGerente">
                                 <div class="form-group">
 
                                     <div class="form-group">

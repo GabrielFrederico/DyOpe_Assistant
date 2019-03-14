@@ -86,7 +86,7 @@
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                 <a class="dropdown-item" href="#">Configurações</a>
-                <a class="dropdown-item" href="perfil_gerente.jsp">Perfil</a>
+                <a class="dropdown-item" href="perfilGerente.1">Perfil</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Sair</a>
             </div>
