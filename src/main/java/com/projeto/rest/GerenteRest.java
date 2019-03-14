@@ -1,6 +1,7 @@
 package com.projeto.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,8 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.Map;
 
 
-@RestController
-@RequestMapping("gerentes")
+@Controller
 public class GerenteRest {
 
     @Autowired
@@ -25,15 +25,34 @@ public class GerenteRest {
         return new ModelAndView("redirect:/loginGerente");
     }
 
-    @RequestMapping(method = RequestMethod.GET, path = "/perfila/{id}")
-    public ModelAndView teste(@PathVariable("id") long id, Map<String, Object> item){
+    @ResponseBody
+    @RequestMapping(method = RequestMethod.GET, value = "/perfilGerente.{id}")
+    public ModelAndView teste(@PathVariable("id") long id) {
         Gerente gerente = gerenteRepository.findById(id);
-        item.put("nome", gerente.getNome());
-        item.put("cpf", gerente.getCpf());
-        ModelAndView modelAndView = new ModelAndView("redirect:/gerentePerfil");
-        modelAndView.addObject("nomeGerente", gerente);
+        ModelAndView model = new ModelAndView("perfil", "gerente", gerente);
+        model.addObject("nomeGerente", gerente.getNome());
+        model.addObject("cpfGerente", gerente.getCpf());
+        model.addObject("rgGerente", gerente.getRg());
+        model.addObject("emailGerente", gerente.getEmail());
+
+        return model;
+    }
+
+    @RequestMapping(method = RequestMethod.GET, path = "/perfil/{nome}")
+    public ModelAndView perfil(@PathVariable("nome") String nome) {
+        Gerente perfilGerente = gerenteRepository.findByNome(nome);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("nomeGerente", perfilGerente.getNome());
+        modelAndView.setViewName("redirect:/gerentePerfil");
         return modelAndView;
     }
+
+    @RequestMapping("/hello")
+    public String hello(Model model, @RequestParam(value = "name", required = false, defaultValue = "World") String name) {
+        model.addAttribute("name", name);
+        return "hello";
+    }
+
 
     @RequestMapping(value = "/loginGerente", method = RequestMethod.GET)
     public ModelAndView login(ModelAndView model, Model model1, Gerente gerente, String error, String logout) {
@@ -53,15 +72,6 @@ public class GerenteRest {
         Gerente gerente = gerenteRepository.findById(id);
         return gerente;
     }
-
-    @RequestMapping(method = RequestMethod.GET, path = "/perfil/{nome}")
-    public ModelAndView perfil(@PathVariable("nome") String nome) {
-        Gerente perfilGerente = gerenteRepository.findByNome(nome);
-        ModelAndView modelAndView = new ModelAndView("redirect:/gerentePerfil");
-        modelAndView.addObject("gerente", perfilGerente);
-        return modelAndView;
-    }
-
 
 
     @RequestMapping(method = RequestMethod.GET, path = "/getByNome/{nome}")

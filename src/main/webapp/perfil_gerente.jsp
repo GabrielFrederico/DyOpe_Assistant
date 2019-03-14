@@ -138,11 +138,11 @@
         </div>
 
         <div class="container " style="float: left; max-width: 70%; padding-left: 5%">
-            <form:form modelAttribute="nomeGerente">
+
             <div class="form-group">
                 <div class="form-group">
                     <div class="form-label-group">
-                        <input value="" type="text" name="nome" id="nomeCompleto" class="form-control"
+                        <input value="${nomeGerente}" type="text" name="nome" id="nomeCompleto" class="form-control"
                                autofocus="autofocus"
                                placeholder="Nome Completo" required="required">
                         <label for="nomeCompleto">Nome Completo</label>
@@ -152,7 +152,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <div class="form-label-group">
-                                <input type="text" name="cpf" id="cpf" class="form-control" placeholder="CPF"
+                                <input value="${cpfGerente}" type="text" name="cpf" id="cpf" class="form-control" placeholder="CPF"
                                        required="required">
                                 <label for="cpf">CPF</label>
                             </div>
@@ -161,7 +161,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <div class="form-label-group">
-                                <input type="text" name="rg" id="rg" class="form-control" placeholder="RG"
+                                <input value="${rgGerente}" type="text" name="rg" id="rg" class="form-control" placeholder="RG"
                                        required="required">
                                 <label for="rg">RG</label>
                             </div>
@@ -170,7 +170,7 @@
                 </div>
                 <div class="form-group">
                     <div class="form-label-group">
-                        <input type="email" name="emailGer" id="inputEmail" class="form-control"
+                        <input type="email" value="${emailGerente}" name="emailGer" id="inputEmail" class="form-control"
                                placeholder="Endereço de e-mail"
                                required="required">
                         <label for="inputEmail">Endereço de e-mail</label>
@@ -192,7 +192,7 @@
                         </div>
                     </div>
                 </footer>
-                </form:form>
+
             </div>
             <!-- /.content-wrapper -->
 
@@ -305,7 +305,7 @@
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin.min.js"></script>
-
+</div>
 </body>
 
 </html>
