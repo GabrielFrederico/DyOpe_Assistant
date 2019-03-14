@@ -57,7 +57,7 @@
                 <h6 class="dropdown-header">
                     Alertas
                 </h6>
-                <a class="dropdown-item d-flex align-items-center" href="operacao_risco.html">
+                <a class="dropdown-item d-flex align-items-center" href="#">
                     <div class="mr-3">
                         <div class="icon-circle bg-success">
                             <i class="fas fa- text-danger"></i>
@@ -111,7 +111,7 @@
         </div>
 
         <div class="container " style="float: left; max-width: 70%; padding-left: 5%">
-            <form>
+            <form method="post" action="infoSetor/cadastrarInfoSetor">
                 <div class="form-group">
                     <div class="form-row">
                         <div class="col-md-6">
@@ -136,7 +136,7 @@
                     <div class="form-row">
                         <div class="col-md-6">
                             <div class="form-label-group">
-                                <input type="text" name="qtdPecasOpe" id="qtdPecasOpe" class="form-control"
+                                <input type="number" name="qtdPecasOpe" id="qtdPecasOpe" class="form-control"
                                        placeholder="Quantidade de peças da operação:"
                                        required="required">
                                 <label for="qtdPecasOpe">Quantidade de peças da operação:</label>
@@ -144,10 +144,10 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-label-group">
-                                <input type="text" name="tempoNecessario" id="tempoNecessario" class="form-control"
+                                <input type="time" name="tempoNecessario" id="tempoNecessari" class="form-control"
                                        placeholder="Tempo necessário:"
                                        required="required">
-                                <label for="tempoNecessario">Tempo necessário:</label>
+                                <label for="tempoNecessari">Tempo necessário:</label>
                             </div>
                         </div>
                     </div>
@@ -213,7 +213,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="card-body">
-                        <form method="put" action="infoSetor/cadastrarInfoSetor">
+                        <form method="post" action="infoSetor/cadastrarInfoSetor">
                             <div class="form-group">
 
                                 <div class="form-group">
