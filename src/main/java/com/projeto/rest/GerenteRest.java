@@ -39,9 +39,9 @@ public class GerenteRest {
     }
     @RequestMapping(method = RequestMethod.PUT, value = "/redefinirPerfilGerente")
     public ModelAndView redefinirPerfilGerente(Gerente gerente) {
-        ModelAndView model = new ModelAndView("perfil_gerente", "gerente", gerente);
+        ModelAndView model1 = new ModelAndView("perfil_gerente", "gerente", gerente);
         gerenteRepository.save(gerente);
-        return model;
+        return model1;
     }
     @RequestMapping(method = RequestMethod.GET, path = "/perfil/{nome}")
     public ModelAndView perfil(@PathVariable("nome") String nome) {
