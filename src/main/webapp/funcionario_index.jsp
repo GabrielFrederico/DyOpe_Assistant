@@ -1,6 +1,5 @@
-<?php
-
-?>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+         pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -35,7 +34,7 @@
 <nav class="navbar navbar-expand bg-lightblue static-top">
 
 
-    <a class="navbar-brand mr-1" href="funcionario_index.html">DyOpe Assistant</a>
+    <a class="navbar-brand mr-1" href="funcionario_index.jsp">DyOpe Assistant</a>
 
     <button class="btn btn-link btn-sm  order-1 order-sm-0" id="sidebarToggle" href="#">
         <i class="fas fa-bars"></i>
@@ -68,7 +67,7 @@
                     </div>
                     <div>
                         <div class="small text-gray-500">Dezembro 7, 2019</div>
-                        <span>OperaÃ§Ã£o de costura foi concluida!</span>
+                        <span>Operação de costura foi concluida!</span>
                     </div>
                 </a>
 
@@ -81,7 +80,7 @@
                 <i class="fas fa-user-circle fa-fw"></i>
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="#">ConfiguraÃ§Ãµes</a>
+                <a class="dropdown-item" href="#">Configurações</a>
                 <a class="dropdown-item" href="perfil_funcionario.html">Perfil</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Sair</a>
@@ -97,7 +96,7 @@
 
         <li class="nav-item text-light">
             <a class="nav-link text-light" href="informacoes_setor.html">
-                <span>Enviar informaÃ§Ãµes</span>
+                <span>Enviar informações</span>
             </a>
 
         </li>
@@ -114,7 +113,7 @@
 
             <div class="menu_index">
                 <span class="badge badge-info tam"> Bem-vindo Juan!</span>
-                <span class="badge badge-info tam"> Envie informaÃ§Ãµes ao gerente</span>
+                <span class="badge badge-info tam"> Envie informações ao gerente</span>
             </div>
 
         </div>
@@ -124,7 +123,7 @@
         <footer class="sticky-footer">
             <div class="container my-auto ">
                 <div class="copyright text-center my-auto ">
-                    <span>Copyright Â© DyOpe Assistant 2018</span>
+                    <span>Copyright © DyOpe Assistant 2018</span>
                 </div>
             </div>
         </footer>
@@ -148,10 +147,10 @@
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Pronto para sair?</h5>
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">Ã—</span>
+                    <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <div class="modal-body">Selecione "Sair" abaixo se vocÃª estiver pronto para encerrar sua sessÃ£o atual.</div>
+            <div class="modal-body">Selecione "Sair" abaixo se você estiver pronto para encerrar sua sessão atual.</div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
                 <a class="btn btn-primary" href="index.html">Sair</a>

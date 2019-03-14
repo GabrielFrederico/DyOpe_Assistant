@@ -61,7 +61,6 @@ public class Controller {
 		return "controle_funcionarios";
 	}
 
-
 	@RequestMapping("/funcionarioIndex")
 	public String indeFuncionario() {
 
