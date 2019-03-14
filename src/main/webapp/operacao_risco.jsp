@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+         pageEncoding="ISO-8859-1" %>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -9,7 +11,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>OperaÃ§Ãµes</title>
+    <title>Operações</title>
 
     <!-- Bootstrap core CSS-->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -34,7 +36,6 @@
 
 
     <a class="navbar-brand mr-1" href="gerente_index.jsp">DyOpe Assistant</a>
-
     <button class="btn btn-link btn-sm order-1 order-sm-0" id="sidebarToggle" href="#">
         <i class="fas fa-bars"></i>
     </button>
@@ -46,13 +47,15 @@
     <!-- Navbar -->
     <ul class="navbar-nav ml-auto ml-md-0">
         <li class="nav-item dropdown no-arrow mx-1 show">
-            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown"
+               aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-bell fa-fw"></i>
                 <!-- Counter - Alerts -->
                 <span class="badge badge-danger badge-counter">1+</span>
             </a>
             <!-- Dropdown - Alerts -->
-            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in " aria-labelledby="alertsDropdown">
+            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in "
+                 aria-labelledby="alertsDropdown">
                 <h6 class="dropdown-header">
                     Alertas
                 </h6>
@@ -64,7 +67,7 @@
                     </div>
                     <div>
                         <div class="small text-gray-500">Dezembro 7, 2019</div>
-                        <span>OperaÃ§Ã£o de costura foi concluida!</span>
+                        <span>Operação de costura foi concluida!</span>
                     </div>
                 </a>
 
@@ -77,8 +80,8 @@
                 <i class="fas fa-user-circle fa-fw"></i>
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="#">ConfiguraÃ§Ãµes</a>
-                <a class="dropdown-item" href="perfil_gerente.html">Perfil</a>
+                <a class="dropdown-item" href="#">Configurações</a>
+                <a class="dropdown-item" href="perfil_gerente.jsp">Perfil</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Sair</a>
             </div>
@@ -93,17 +96,18 @@
     <ul class="sidebar bg-primary navbar-nav">
 
         <li class="nav-item dropdown ">
-            <a class="nav-link dropdown-toggle text-light" href="#" id="pagesDropdown" role="button" data-toggle="dropdown"
+            <a class="nav-link dropdown-toggle text-light" href="#" id="pagesDropdown" role="button"
+               data-toggle="dropdown"
                aria-haspopup="true" aria-expanded="false">
-                <span>OperaÃ§Ãµes</span>
+                <span>Operações</span>
             </a>
             <div class="dropdown-menu" aria-labelledby="pagesDropdown" x-placement="bottom-start">
-                <h6 class="dropdown-header">Tipos de OperaÃ§Ãµes</h6>
-                <a class="dropdown-item" href="operacao_risco.html">Risco</a>
-                <a class="dropdown-item" href="operacao_corte.html">Corte</a>
-                <a class="dropdown-item" href="operacao_costura.html">Costura</a>
-                <a class="dropdown-item" href="operacao_beneficiamento.html">Beneficiamento</a>
-                <a class="dropdown-item" href="operacao_acabamento.html">Acabamento</a>
+                <h6 class="dropdown-header">Tipos de Operações</h6>
+                <a class="dropdown-item" href="operacao_risco.jsp">Risco</a>
+                <a class="dropdown-item" href="operacao_corte.jsp">Corte</a>
+                <a class="dropdown-item" href="operacao_costura.jsp">Costura</a>
+                <a class="dropdown-item" href="operacao_beneficiamento.jsp">Beneficiamento</a>
+                <a class="dropdown-item" href="operacao_acabamento.jsp">Acabamento</a>
 
             </div>
         </li>
@@ -114,17 +118,19 @@
 
         <div class="container-fluid">
 
+
             <!-- Page Content -->
 
-            <h1>OperaÃ§Ã£o Acabamento</h1>
+            <h1>Operação Risco</h1>
             <hr>
 
             <div class="row">
                 <div class="col-sm-4">
                     <div class="card border-info mb-3 lista">
-                        <div class="card-header border-info">OperaÃ§Ãµes a fazer</div>
+                        <div class="card-header border-info">Operações a fazer</div>
                         <div class="card-body text-secondary">
-                            <a class="btn btn-outline-info list-group-item list-group-item-action ">
+                            <a class="btn btn-outline-info list-group-item list-group-item-action " href="#"
+                               data-toggle="modal" data-target=".informations">
                                 Costura
                             </a>
                             <a class="btn btn-outline-info list-group-item list-group-item-action ">
@@ -132,8 +138,7 @@
                             </a>
                         </div>
                         <div class="card-footer bg-transparent border-info">
-                            <a href="#" data-toggle="modal"
-                               data-target=".cadastro-operacoes" class="btn btn-info">Cadastrar</a>
+                            <a class="btn btn-info" href="#" data-toggle="modal" data-target=".cadastro-operacoes">Cadastrar</a>
                         </div>
                     </div>
                 </div>
@@ -141,7 +146,7 @@
 
                 <div class="col-sm-4">
                     <div class="card border-warning mb-3 lista">
-                        <div class="card-header border-warning">OperaÃ§Ãµes em andamento</div>
+                        <div class="card-header border-warning">Operações em andamento</div>
                         <div class="card-body text-warning">
                             <a class="btn btn-outline-warning list-group-item list-group-item-action ">
                                 Acabamento
@@ -157,7 +162,7 @@
 
                 <div class="col-sm-4">
                     <div class="card border-success mb-3 lista">
-                        <div class="card-header border-success">OperaÃ§Ãµes concluÃ­das</div>
+                        <div class="card-header border-success">Operações concluídas</div>
                         <div class="card-body text-success">
                             <a class="btn btn-outline-success list-group-item list-group-item-action ">
                                 Risco
@@ -179,7 +184,7 @@
         <footer class="sticky-footer">
             <div class="container my-auto">
                 <div class="copyright text-center my-auto">
-                    <span>Copyright Â© DyOpe Assistant 2018</span>
+                    <span>Copyright © DyOpe Assistant 2018</span>
                 </div>
             </div>
         </footer>
@@ -203,40 +208,40 @@
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Pronto para sair?</h5>
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">Ã—</span>
+                    <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <div class="modal-body">Selecione "Sair" abaixo se vocÃª estiver pronto para encerrar sua sessÃ£o
+            <div class="modal-body">Selecione "Sair" abaixo se você estiver pronto para encerrar sua sessão
                 atual.
             </div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-                <a class="btn btn-primary" href="index.html">Sair</a>
+                <a class="btn btn-primary" href="index.jsp">Sair</a>
             </div>
         </div>
     </div>
 </div>
 
-<!--Modal Cadastro: -->
+<!--Modal Informações: -->
 
-<div class="modal fade cadastro-operacoes" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+<div class="modal fade informations" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
      aria-hidden="true">
     <div class="modal-dialog modal-lg">
 
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myLargeModalLabel">Cadastro de OperaÃ§Ãµes:</h4>
+                <h4 class="modal-title" id="myLargeModalLabel">Informações da Operações:</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">Ã—</span>
+                    <span aria-hidden="true">×</span>
                 </button>
             </div>
             <div class="modal-body">
                 <div class="card-body">
-                    <form method="post" action="operacao_acabamento.html">
+                    <form method="post" action="operacao_risco.jsp">
                         <div class="form-group">
                             <div class="form-group">
 
-                                <label for="DescricaoOpe">DescriÃ§Ã£o da operaÃ§Ã£o:</label>
+                                <label for="DescricaoOpe">Descrição da operação:</label>
                                 <textarea required="required" class="form-control" rows="2"
                                           id="DescricaoOpe"></textarea>
                             </div>
@@ -261,24 +266,142 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <div class="form-row">
+                                    <div class="col-md-6">
+                                        <div class="form-label-group">
+                                            <input type="text" id="custosOpe" class="form-control fa-credit-card"
+                                                   placeholder="Custos"
+                                                   required="required">
+                                            <label for="custosOpe">Custos:</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-label-group">
+                                            <input type="number" id="LoteProd" class="form-control"
+                                                   placeholder="Lote de Produção"
+                                                   required="required">
+                                            <label for="LoteProd">Lote de Produção:</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-row">
+                                    <div class="col-md-6">
+                                        <div class="form-label-group">
+                                            <input type="number" id="FuncNesc" class="form-control"
+                                                   placeholder="Funcionários necessários:"
+                                                   required="required">
+                                            <label for="FuncNesc">Funcionários necessários:</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-label-group">
+                                            <input type="number" id="QtdPecasFunc" class="form-control"
+                                                   placeholder="Quantidade de peças por funcionário:"
+                                                   required="required">
+                                            <label for="QtdPecasFunc">Quantidade de peças por funcionário:</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-row">
+                                    <div class="col-md-6">
+                                        <div class="form-label-group">
+                                            <input type="number" id="TempoPeca" class="form-control"
+                                                   placeholder="Tempo necessário por peça:"
+                                                   required="required">
+                                            <label for="TempoPeca">Tempo necessário por peça:</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+
+                        </div>
+                        <div class="modal-footer col-md-12">
+
+                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Sair</button>
+                            <input class="btn btn-info" type="button" value="Editar">
+                            <input class="btn btn-success" type="submit" value="Salvar">
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--Modal Cadastro: -->
+
+<div class="modal fade cadastro-operacoes" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myLargeModalLabel">Cadastro de Operações:</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card-body">
+                    <form method="post" action="operacoes/cadastrarOperacao">
+                        <div class="form-group">
+                            <div class="form-group">
+
+                                <label for="DescricaoOp">Descrição da operação:</label>
+                                <textarea required="required" name="descricao" class="form-control" rows="2"
+                                          id="DescricaoOp"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-row">
+                                    <div class="col-md-6">
+                                        <div class="form-label-group">
+                                            <input type="date" id="datainici" name="dataInicio" class="form-control"
+                                                   placeholder="Data Inicio:"
+                                                   required="required">
+                                            <label for="datainici">Data Inicio:</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-label-group">
+                                            <input type="date" id="datalimit" name="prazo" class="form-control"
+                                                   placeholder="Data limite:"
+                                                   required="required">
+                                            <label for="datalimit">Data limite:</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
                             <div class="form-row">
                                 <div class="col-md-6">
                                     <div class="form-label-group">
-                                        <input type="text" id="custosOpe" class="form-control fa-credit-card"
+                                        <input type="text" id="custosOp" name="custosOpe"
+                                               class="form-control fa-credit-card"
                                                placeholder="Custos"
                                                required="required">
-                                        <label for="custosOpe">Custos:</label>
+                                        <label for="custosOp">Custos:</label>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-label-group">
-                                        <input type="number" id="LoteProd" class="form-control"
-                                               placeholder="Lote de ProduÃ§Ã£o"
+                                        <input type="number" id="LotePro" name="loteProducao" class="form-control"
+                                               placeholder="Lote de Produção"
                                                required="required">
-                                        <label for="LoteProd">Lote de ProduÃ§Ã£o:</label>
+                                        <label for="LotePro">Lote de Produção:</label>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
 
@@ -292,6 +415,7 @@
         </div>
     </div>
 </div>
+
 
 <!-- Bootstrap core JavaScript-->
 <script src="vendor/jquery/jquery.min.js"></script>

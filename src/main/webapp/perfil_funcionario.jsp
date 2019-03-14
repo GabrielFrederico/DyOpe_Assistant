@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+         pageEncoding="ISO-8859-1" %>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -57,7 +59,7 @@
                 <h6 class="dropdown-header">
                     Alertas
                 </h6>
-                <a class="dropdown-item d-flex align-items-center" href="operacao_risco.html">
+                <a class="dropdown-item d-flex align-items-center" href="operacao_risco.jsp">
                     <div class="mr-3">
                         <div class="icon-circle bg-success">
                             <i class="fas fa- text-danger"></i>
@@ -65,7 +67,7 @@
                     </div>
                     <div>
                         <div class="small text-gray-500">Dezembro 7, 2019</div>
-                        <span>OperaÃ§Ã£o de Risco foi concluida!</span>
+                        <span>Operação de Risco foi concluida!</span>
                     </div>
                 </a>
 
@@ -78,8 +80,8 @@
                 <i class="fas fa-user-circle fa-fw"></i>
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="#">ConfiguraÃ§Ãµes</a>
-                <a class="dropdown-item" href="perfil_funcionario.html">Perfil</a>
+                <a class="dropdown-item" href="#">Configurações</a>
+                <a class="dropdown-item" href="perfil_funcionario.jsp">Perfil</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Sair</a>
             </div>
@@ -94,7 +96,7 @@
 
         <li class="nav-item text-light">
             <a class="nav-link text-light" href="#">
-                <span>Enviar informaÃ§Ãµes</span>
+                <span>Enviar informações</span>
             </a>
 
         </li>
@@ -119,7 +121,8 @@
                 <div class="form-group">
                     <div class="form-group">
                         <div class="form-label-group">
-                            <input type="text" name="funcionario" id="nomeCompleto" class="form-control" autofocus="autofocus"
+                            <input type="text" name="funcionario" id="nomeCompleto" class="form-control"
+                                   autofocus="autofocus"
                                    placeholder="Nome Completo" required="required">
                             <label for="nomeCompleto">Nome Completo</label>
                         </div>
@@ -143,31 +146,32 @@
                                 </div>
                             </div>
                         </div>
-                </div>
-                <div class="form-group">
-                    <div class="form-label-group">
-                        <input type="email" name="emailGer" id="inputEmail" class="form-control"
-                               placeholder="EndereÃ§o de e-mail"
-                               required="required">
-                        <label for="inputEmail">EndereÃ§o de e-mail</label>
                     </div>
-
-                </div>
-
-                <input class="btn btn-success" type="submit" value="Salvar">
-                <a class="btn btn-info" href="#" data-toggle="modal" data-target=".redefinir-senha">Redefinir senha</a>
-
-
-                <!-- /.container-fluid -->
-
-                <!-- Sticky Footer -->
-                <footer class="sticky-footer">
-                    <div class="container my-auto ">
-                        <div class="copyright text-center my-auto ">
-                            <span>Copyright Â© DyOpe Assistant 2018</span>
+                    <div class="form-group">
+                        <div class="form-label-group">
+                            <input type="email" name="emailGer" id="inputEmail" class="form-control"
+                                   placeholder="Endereço de e-mail"
+                                   required="required">
+                            <label for="inputEmail">Endereço de e-mail</label>
                         </div>
+
                     </div>
-                </footer>
+
+                    <input class="btn btn-success" type="submit" value="Salvar">
+                    <a class="btn btn-info" href="#" data-toggle="modal" data-target=".redefinir-senha">Redefinir
+                        senha</a>
+
+
+                    <!-- /.container-fluid -->
+
+                    <!-- Sticky Footer -->
+                    <footer class="sticky-footer">
+                        <div class="container my-auto ">
+                            <div class="copyright text-center my-auto ">
+                                <span>Copyright © DyOpe Assistant 2018</span>
+                            </div>
+                        </div>
+                    </footer>
             </form>
         </div>
         <!-- /.content-wrapper -->
@@ -188,14 +192,14 @@
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Pronto para sair?</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">Ã—</span>
+                        <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body">Selecione "Sair" abaixo se vocÃª estiver pronto para encerrar sua sessÃ£o atual.
+                <div class="modal-body">Selecione "Sair" abaixo se você estiver pronto para encerrar sua sessão atual.
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-                    <a class="btn btn-primary" href="index.html">Sair</a>
+                    <a class="btn btn-primary" href="index.jsp">Sair</a>
                 </div>
             </div>
         </div>
@@ -211,7 +215,7 @@
                 <div class="modal-header">
                     <h4 class="modal-title" id="myLargeModalLabel">Redefinir senha:</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">Ã—</span>
+                        <span aria-hidden="true">×</span>
                     </button>
                 </div>
                 <div class="modal-body">
@@ -223,7 +227,7 @@
 
                                     <div class="col-md-auto">
                                         <div class="form-label-group">
-                                            <input type="password" id="senha_atual"  class="form-control"
+                                            <input type="password" id="senha_atual" class="form-control"
                                                    placeholder="Senha atual:"
                                                    required="required">
                                             <label for="senha_atual">Senha atual:</label>
@@ -260,7 +264,7 @@
 
                             <div class="modal-footer col-md-12">
                                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-                                <input class="btn btn-primary" type="submit" value="Cadastrar">
+                                <input class="btn btn-primary" type="submit" value="Confirmar">
                             </div>
                         </form>
                     </div>

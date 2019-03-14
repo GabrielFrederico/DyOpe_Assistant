@@ -1,9 +1,5 @@
-<?php
-require_once "login.html";
-require_once 'conexao.html';
-
-?>
-
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+         pageEncoding="ISO-8859-1" %>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -30,23 +26,23 @@ require_once 'conexao.html';
 
 </head>
 
-<body class="bg-secondary">
+<body class="bg-lightblue">
 
 <div class="container">
     <div class="card card-login mx-auto mt-5">
-        <div class="card-header bg-info">Login</div>
+        <div class="card-header bg-info text-light">Login</div>
         <div class="card-body">
-            <form method="post" action="valida_login.html">
+            <form method="get" action="gerentes/loginGerente">
                 <div class="form-group">
                     <div class="form-label-group">
-                        <input type="email" id="inputEmail" name="Email" class="form-control" placeholder="Email"
+                        <input type="email" id="inputEmail" name="email" class="form-control" placeholder="Email"
                                required="required" autofocus="autofocus">
                         <label for="inputEmail">Email</label>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="form-label-group">
-                        <input type="password" name="Password" id="inputPassword" class="form-control"
+                        <input type="password" name="senha" id="inputPassword" class="form-control"
                                placeholder="Senha" required="required">
                         <label for="inputPassword"> Senha</label>
                     </div>
@@ -62,8 +58,8 @@ require_once 'conexao.html';
                 <input class="btn btn-info btn-block" type="submit" value="Login">
             </form>
             <div class="text-center">
-                <a class="d-block small mt-3" href="cadastro_gerente.html">Registre uma conta</a>
-                <a class="d-block small" href="forgot-password.html">Esqueceu a senha?</a>
+                <a class="d-block small mt-3" href="cadastro_gerente.jsp">Registre uma conta</a>
+                <a class="d-block small" href="forgot-password.jsp">Esqueceu a senha?</a>
             </div>
         </div>
     </div>

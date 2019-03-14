@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+         pageEncoding="ISO-8859-1" %>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -9,7 +11,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>InformaÃ§Ãµes do Setor</title>
+    <title>Informações do Setor</title>
 
     <!-- Bootstrap core CSS-->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -65,7 +67,7 @@
                     </div>
                     <div>
                         <div class="small text-gray-500">Dezembro 7, 2019</div>
-                        <span>OperaÃ§Ã£o de Risco foi concluida!</span>
+                        <span>Operação de Risco foi concluida!</span>
                     </div>
                 </a>
 
@@ -78,8 +80,8 @@
                 <i class="fas fa-user-circle fa-fw"></i>
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="#">ConfiguraÃ§Ãµes</a>
-                <a class="dropdown-item" href="perfil_funcionario.html">Perfil</a>
+                <a class="dropdown-item" href="#">Configurações</a>
+                <a class="dropdown-item" href="perfil_funcionario.jsp">Perfil</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Sair</a>
             </div>
@@ -94,7 +96,7 @@
 
         <li class="nav-item text-light">
             <a class="nav-link text-light" href="#">
-                <span>Enviar informaÃ§Ãµes</span>
+                <span>Enviar informações</span>
             </a>
 
         </li>
@@ -106,7 +108,7 @@
         <div class="container-fluid">
 
             <!-- Page Content -->
-            <h1>InformaÃ§Ãµes do Setor</h1>
+            <h1>Informações do Setor</h1>
             <hr>
         </div>
 
@@ -126,8 +128,8 @@
                             <div class="form-label-group">
                                 <input type="text" name="operacao" id="operacao" class="form-control"
                                        autofocus="autofocus"
-                                       placeholder="OperaÃ§Ã£o:" required="required">
-                                <label for="operacao">OperaÃ§Ã£o:</label>
+                                       placeholder="Operação:" required="required">
+                                <label for="operacao">Operação:</label>
                             </div>
                         </div>
                     </div>
@@ -137,17 +139,17 @@
                         <div class="col-md-6">
                             <div class="form-label-group">
                                 <input type="number" name="qtdPecasOpe" id="qtdPecasOpe" class="form-control"
-                                       placeholder="Quantidade de peÃ§as da operaÃ§Ã£o:"
+                                       placeholder="Quantidade de peças da operação:"
                                        required="required">
-                                <label for="qtdPecasOpe">Quantidade de peÃ§as da operaÃ§Ã£o:</label>
+                                <label for="qtdPecasOpe">Quantidade de peças da operação:</label>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-label-group">
                                 <input type="time" name="tempoNecessario" id="tempoNecessari" class="form-control"
-                                       placeholder="Tempo necessÃ¡rio:"
+                                       placeholder="Tempo necessário:"
                                        required="required">
-                                <label for="tempoNecessari">Tempo necessÃ¡rio:</label>
+                                <label for="tempoNecessari">Tempo necessário:</label>
                             </div>
                         </div>
                     </div>
@@ -161,7 +163,7 @@
                 <footer class="sticky-footer">
                     <div class="container my-auto ">
                         <div class="copyright text-center my-auto ">
-                            <span>Copyright Â© DyOpe Assistant 2018</span>
+                            <span>Copyright © DyOpe Assistant 2018</span>
                         </div>
                     </div>
                 </footer>
@@ -185,14 +187,14 @@
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Pronto para sair?</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">Ã—</span>
+                        <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body">Selecione "Sair" abaixo se vocÃª estiver pronto para encerrar sua sessÃ£o atual.
+                <div class="modal-body">Selecione "Sair" abaixo se você estiver pronto para encerrar sua sessão atual.
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-                    <a class="btn btn-primary" href="index.html">Sair</a>
+                    <a class="btn btn-primary" href="index.jsp">Sair</a>
                 </div>
             </div>
         </div>
@@ -208,7 +210,7 @@
                 <div class="modal-header">
                     <h4 class="modal-title" id="myLargeModalLabel">Redefinir senha:</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">Ã—</span>
+                        <span aria-hidden="true">×</span>
                     </button>
                 </div>
                 <div class="modal-body">

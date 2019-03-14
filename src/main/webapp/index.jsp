@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+         pageEncoding="ISO-8859-1" %>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -34,12 +36,12 @@
         <div class="card-header bg-info text-light">Escolha um login:</div>
         <div class="card-body">
             <div class="form-group">
-                <form method="post" action="login_gerente.html">
+                <form method="post" action="login_gerente.jsp">
                     <input class="btn btn-primary btn-block" href="" type="submit" value="Login do Gerente">
                 </form>
             </div>
             <div class="form-group">
-                <form action="login_funcionario.html">
+                <form action="login_funcionario.jsp">
                     <input class="btn btn-success btn-block" type="submit" value="Login do Setor">
                 </form>
             </div>

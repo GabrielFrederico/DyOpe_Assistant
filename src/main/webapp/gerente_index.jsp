@@ -86,7 +86,7 @@
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                 <a class="dropdown-item" href="#">Configurações</a>
-                <a class="dropdown-item" href="perfil_gerente.html">Perfil</a>
+                <a class="dropdown-item" href="perfil_gerente.jsp">Perfil</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Sair</a>
             </div>
@@ -107,15 +107,15 @@
             </a>
             <div class="dropdown-menu" aria-labelledby="pagesDropdown" x-placement="bottom-start">
                 <h6 class="dropdown-header">Tipos de Operações</h6>
-                <a class="dropdown-item" href="operacao_risco.html">Risco</a>
-                <a class="dropdown-item" href="operacao_corte.html">Corte</a>
-                <a class="dropdown-item" href="operacao_costura.html">Costura</a>
-                <a class="dropdown-item" href="operacao_beneficiamento.html">Beneficiamento</a>
-                <a class="dropdown-item" href="operacao_acabamento.html">Acabamento</a>
+                <a class="dropdown-item" href="operacao_risco.jsp">Risco</a>
+                <a class="dropdown-item" href="operacao_corte.jsp">Corte</a>
+                <a class="dropdown-item" href="operacao_costura.jsp">Costura</a>
+                <a class="dropdown-item" href="operacao_beneficiamento.jsp">Beneficiamento</a>
+                <a class="dropdown-item" href="operacao_acabamento.jsp">Acabamento</a>
             </div>
         </li>
         <li class="nav-item text-light">
-            <a class="nav-link text-light" href="controle_funcionarios.html">
+            <a class="nav-link text-light" href="controle_funcionarios.jsp">
                 <span>Controle</span>
             </a>
 
@@ -175,7 +175,7 @@
             <div class="modal-body">Selecione "Sair" abaixo se você estiver pronto para encerrar sua sessão atual.</div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-                <a class="btn btn-primary" href="index.html">Sair</a>
+                <a class="btn btn-primary" href="index.jsp">Sair</a>
             </div>
         </div>
     </div>

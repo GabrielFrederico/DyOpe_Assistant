@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+         pageEncoding="ISO-8859-1" %>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -57,7 +59,7 @@
                 <h6 class="dropdown-header">
                     Alertas
                 </h6>
-                <a class="dropdown-item d-flex align-items-center" href="operacao_risco.html">
+                <a class="dropdown-item d-flex align-items-center" href="operacao_risco.jsp">
                     <div class="mr-3">
                         <div class="icon-circle bg-success">
                             <i class="fas fa- text-danger"></i>
@@ -65,7 +67,7 @@
                     </div>
                     <div>
                         <div class="small text-gray-500">Dezembro 7, 2019</div>
-                        <span>OperaÃ§Ã£o de Risco foi concluida!</span>
+                        <span>Operação de Risco foi concluida!</span>
 
 
                     </div>
@@ -80,8 +82,8 @@
                 <i class="fas fa-user-circle fa-fw"></i>
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="#">ConfiguraÃ§Ãµes</a>
-                <a class="dropdown-item" href="perfil_gerente.html">Perfil</a>
+                <a class="dropdown-item" href="#">Configurações</a>
+                <a class="dropdown-item" href="perfil_gerente.jsp">Perfil</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Sair</a>
             </div>
@@ -101,11 +103,11 @@
                 <span>Setores</span>
             </a>
             <div class="dropdown-menu" aria-labelledby="pagesDropdown" x-placement="bottom-start">
-                <a class="dropdown-item" href="controle_funcionarios.html">Risco</a>
-                <a class="dropdown-item" href="controle_funcionarios.html">Corte</a>
-                <a class="dropdown-item" href="controle_funcionarios.html">Costura</a>
-                <a class="dropdown-item" href="controle_funcionarios.html">Beneficiamento</a>
-                <a class="dropdown-item" href="controle_funcionarios.html">Acabamento</a>
+                <a class="dropdown-item" href="controle_funcionarios.jsp">Risco</a>
+                <a class="dropdown-item" href="controle_funcionarios.jsp">Corte</a>
+                <a class="dropdown-item" href="controle_funcionarios.jsp">Costura</a>
+                <a class="dropdown-item" href="controle_funcionarios.jsp">Beneficiamento</a>
+                <a class="dropdown-item" href="controle_funcionarios.jsp">Acabamento</a>
             </div>
         </li>
 
@@ -122,26 +124,27 @@
 
         <div class="container " style="float: left; max-width: 70%; padding-left: 5%">
             <form method="post" action="setores/cadastrarSetor">
-            <div class="form-group">
                 <div class="form-group">
-                    <div class="form-label-group">
-                        <input type="text" name="nomeSetor" id="nomeCompleto" class="form-control" autofocus="autofocus"
-                               placeholder="Nome Completo" required="required">
-                        <label for="nomeCompleto">Nome do setor:</label>
+                    <div class="form-group">
+                        <div class="form-label-group">
+                            <input type="text" name="nomeSetor" id="nomeCompleto" class="form-control"
+                                   autofocus="autofocus"
+                                   placeholder="Nome Completo" required="required">
+                            <label for="nomeCompleto">Nome do setor:</label>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <div class="form-label-group">
-                    <input type="text" name="operacao" id="operacao" class="form-control"
-                           placeholder="OperaÃ§Ã£o"
-                           required="required">
-                    <label for="operacao">OperaÃ§Ã£o:</label>
+                <div class="form-group">
+                    <div class="form-label-group">
+                        <input type="text" name="operacao" id="operacao" class="form-control"
+                               placeholder="Operação"
+                               required="required">
+                        <label for="operacao">Operação:</label>
+                    </div>
                 </div>
-            </div>
 
-            <a class="btn btn-info" href="controle_funcionarios.html">Voltar</a>
-            <input class="btn btn-success" type="submit" value="Cadastrar">
+                <a class="btn btn-info" href="controle_funcionarios.jsp">Voltar</a>
+                <input class="btn btn-success" type="submit" value="Cadastrar">
 
             </form>
 
@@ -151,7 +154,7 @@
             <footer class="sticky-footer">
                 <div class="container my-auto ">
                     <div class="copyright text-center my-auto ">
-                        <span>Copyright Â© DyOpe Assistant 2018</span>
+                        <span>Copyright © DyOpe Assistant 2018</span>
                     </div>
                 </div>
             </footer>
@@ -175,19 +178,18 @@
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Pronto para sair?</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">Ã—</span>
+                        <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body">Selecione "Sair" abaixo se vocÃª estiver pronto para encerrar sua sessÃ£o atual.
+                <div class="modal-body">Selecione "Sair" abaixo se você estiver pronto para encerrar sua sessão atual.
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-                    <a class="btn btn-primary" href="index.html">Sair</a>
+                    <a class="btn btn-primary" href="index.jsp">Sair</a>
                 </div>
             </div>
         </div>
     </div>
-
 
 
     <!-- Bootstrap core JavaScript-->

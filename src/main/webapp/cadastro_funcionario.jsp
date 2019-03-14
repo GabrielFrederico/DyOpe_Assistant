@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+         pageEncoding="ISO-8859-1" %>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -30,28 +32,28 @@
     <div class="card card-register mx-auto mt-5">
         <div class="card-header bg-info text-light">Cadastro</div>
         <div class="card-body">
-            <form method="post" action="gerentes/cadastrarGerente">
+            <form method="post" action="funcionarios/cadastrarFuncionario">
                 <div class="form-group">
-                    <div class="form-row">
-                        <div class="col-md-6">
-                            <div class="form-label-group">
-                                <input type="text" name="nome" id="nomeCompleto" class="form-control"
-                                       autofocus="autofocus"
-                                       placeholder="Nome Completo" required="required">
-                                <label for="nomeCompleto">Nome Completo</label>
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <div class="form-label-group">
+                                    <input type="text" name="nome" id="nomeCompleto" class="form-control"
+                                           autofocus="autofocus"
+                                           placeholder="Nome Completo" required="required">
+                                    <label for="nomeCompleto">Nome Completo</label>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-label-group">
-                                <input type="text" name="nomeUsuario" id="nomeUser" class="form-control"
-                                       autofocus="autofocus"
-                                       placeholder="Nome Completo" required="required">
-                                <label for="nomeUser">Nome de usuario</label>
+                            <div class="col-md-6">
+                                <div class="form-label-group">
+                                    <input type="text" name="nomeUsuario" id="nomeUser" class="form-control"
+                                           autofocus="autofocus"
+                                           placeholder="Nome Completo" required="required">
+                                    <label for="nomeUser">Nome de usuario</label>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="form-group">
                     <div class="form-row">
                         <div class="col-md-6">
                             <div class="form-label-group">
@@ -69,13 +71,12 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="form-group">
                     <div class="form-label-group">
                         <input type="email" name="email" id="inputEmail" class="form-control"
-                               placeholder="EndereÃ§o de e-mail"
+                               placeholder="Endereço de e-mail"
                                required="required">
-                        <label for="inputEmail">EndereÃ§o de e-mail</label>
+                        <label for="inputEmail">Endereço de e-mail</label>
                     </div>
                 </div>
                 <div class="form-group">
@@ -100,8 +101,8 @@
                 <input class="btn btn-info btn-block" type="submit" value="Cadastrar">
             </form>
             <div class="text-center">
-                <a class="d-block small mt-3" href="index.html">PÃ¡gina de login</a>
-                <a class="d-block small" href="forgot-password.html">Esqueceu a senha?</a>
+                <a class="d-block small mt-3" href="index.jsp">Página de login</a>
+                <a class="d-block small" href="forgot-password.jsp">Esqueceu a senha?</a>
             </div>
         </div>
     </div>
@@ -117,3 +118,4 @@
 </body>
 
 </html>
+

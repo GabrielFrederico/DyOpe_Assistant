@@ -63,7 +63,7 @@
                 <h6 class="dropdown-header">
                     Alertas
                 </h6>
-                <a class="dropdown-item d-flex align-items-center" href="operacao_risco.html">
+                <a class="dropdown-item d-flex align-items-center" href="operacao_risco.jsp">
                     <div class="mr-3">
                         <div class="icon-circle bg-success">
                             <i class="fas fa- text-danger"></i>
@@ -108,15 +108,15 @@
             </a>
             <div class="dropdown-menu" aria-labelledby="pagesDropdown" x-placement="bottom-start">
                 <h6 class="dropdown-header">Tipos de Operações</h6>
-                <a class="dropdown-item" href="operacao_risco.html">Risco</a>
-                <a class="dropdown-item" href="operacao_corte.html">Corte</a>
-                <a class="dropdown-item" href="operacao_costura.html">Costura</a>
-                <a class="dropdown-item" href="operacao_beneficiamento.html">Beneficiamento</a>
-                <a class="dropdown-item" href="operacao_acabamento.html">Acabamento</a>
+                <a class="dropdown-item" href="operacao_risco.jsp">Risco</a>
+                <a class="dropdown-item" href="operacao_corte.jsp">Corte</a>
+                <a class="dropdown-item" href="operacao_costura.jsp">Costura</a>
+                <a class="dropdown-item" href="operacao_beneficiamento.jsp">Beneficiamento</a>
+                <a class="dropdown-item" href="operacao_acabamento.jsp">Acabamento</a>
             </div>
         </li>
         <li class="nav-item text-light">
-            <a class="nav-link text-light" href="controle_funcionarios.html">
+            <a class="nav-link text-light" href="controle_funcionarios.jsp">
                 <span>Controle</span>
             </a>
 
@@ -220,7 +220,7 @@
                     </div>
                     <div class="modal-footer">
                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-                        <a class="btn btn-primary" href="login_gerente.html">Sair</a>
+                        <a class="btn btn-primary" href="login_gerente.jsp">Sair</a>
                     </div>
                 </div>
             </div>

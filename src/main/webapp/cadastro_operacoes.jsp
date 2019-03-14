@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+         pageEncoding="ISO-8859-1" %>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -9,7 +11,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>OperaÃ§Ãµes</title>
+    <title>Operações</title>
 
     <!-- Bootstrap core CSS-->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -18,7 +20,8 @@
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 
     <!-- Custom styles for this template-->
-    <link href="css/sb-admin.css" rel="stylesheet"> <link href="css/estilo.css" rel="stylesheet">
+    <link href="css/sb-admin.css" rel="stylesheet">
+    <link href="css/estilo.css" rel="stylesheet">
 
 </head>
 
@@ -26,13 +29,13 @@
 
 <div class="container">
     <div class="card card-register mx-auto mt-5">
-        <div class="card-header bg-info text-light">Cadastro de operaÃ§Ã£o</div>
+        <div class="card-header bg-info text-light">Cadastro de operação</div>
         <div class="card-body">
             <form method="post" action="operacoes/cadastrarOperacao">
                 <div class="form-group">
                     <div class="form-group">
 
-                        <label for="DescricaoOpe">DescriÃ§Ã£o da operaÃ§Ã£o:</label>
+                        <label for="DescricaoOpe">Descrição da operação:</label>
                         <textarea required="required" class="form-control" rows="2" id="DescricaoOpe"></textarea>
                     </div>
                     <div class="form-group">
@@ -71,9 +74,9 @@
                         <div class="col-md-6">
                             <div class="form-label-group">
                                 <input type="number" id="LoteProd" class="form-control"
-                                       placeholder="Lote de ProduÃ§Ã£o"
+                                       placeholder="Lote de Produção"
                                        required="required">
-                                <label for="LoteProd">Lote de ProduÃ§Ã£o:</label>
+                                <label for="LoteProd">Lote de Produção:</label>
                             </div>
                         </div>
                     </div>

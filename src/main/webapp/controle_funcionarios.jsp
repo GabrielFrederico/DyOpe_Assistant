@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-         pageEncoding="ISO-8859-1"%>
+         pageEncoding="ISO-8859-1" %>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -11,7 +11,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>DyOpe Assistant</title>
+    <title>Controle</title>
 
     <!-- Bootstrap core CSS-->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -33,16 +33,14 @@
 
 <nav class="navbar navbar-expand bg-lightblue static-top">
 
+    <a class="navbar-brand mr-1" href="gerente_index.jsp">DyOpe Assistant</a>
 
-    <a class="navbar-brand mr-1" href="funcionario_index.jsp">DyOpe Assistant</a>
-
-    <button class="btn btn-link btn-sm  order-1 order-sm-0" id="sidebarToggle" href="#">
+    <button class="btn btn-link btn-sm order-1 order-sm-0" id="sidebarToggle" href="#">
         <i class="fas fa-bars"></i>
     </button>
 
-    <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
-
-    </form>
+    <!-- Navbar Search -->
+    <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0"></form>
 
     <!-- Navbar -->
     <ul class="navbar-nav ml-auto ml-md-0">
@@ -81,7 +79,7 @@
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                 <a class="dropdown-item" href="#">Configurações</a>
-                <a class="dropdown-item" href="perfil_funcionario.jsp">Perfil</a>
+                <a class="dropdown-item" href="perfil_gerente.jsp">Perfil</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Sair</a>
             </div>
@@ -89,18 +87,31 @@
     </ul>
 
 </nav>
+
 <div id="wrapper">
 
     <!-- Sidebar -->
     <ul class="sidebar bg-primary navbar-nav">
-
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-light" href="#" id="pagesDropdown" role="button"
+               data-toggle="dropdown"
+               aria-haspopup="false" aria-expanded="false">
+                <span>Setores</span>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="pagesDropdown" x-placement="bottom-start">
+                <a class="dropdown-item" href="controle_funcionarios.jsp">Risco</a>
+                <a class="dropdown-item" href="controle_funcionarios.jsp">Corte</a>
+                <a class="dropdown-item" href="controle_funcionarios.jsp">Costura</a>
+                <a class="dropdown-item" href="controle_funcionarios.jsp">Beneficiamento</a>
+                <a class="dropdown-item" href="controle_funcionarios.jsp">Acabamento</a>
+            </div>
+        </li>
         <li class="nav-item text-light">
-            <a class="nav-link text-light" href="informacoes_setor.jsp">
-                <span>Enviar informações</span>
+            <a class="nav-link text-light" href="cadastro_setor.jsp">
+                <span>Cadastrar setor</span>
             </a>
 
         </li>
-
     </ul>
 
     <div id="content-wrapper" class="fundo">
@@ -108,21 +119,57 @@
         <div class="container-fluid">
 
             <!-- Page Content -->
-            <h1>Home</h1>
+
+            <h1>Informações dos funcionários:</h1>
             <hr>
 
-            <div class="menu_index">
-                <span class="badge badge-info tam"> Bem-vindo Juan!</span>
-                <span class="badge badge-info tam"> Envie informações ao gerente</span>
+
+            <div class="card border-info mb-3">
+                <div class="card-header border-info">Setor de Costura</div>
+                <table class="table table table-bordered dataTable">
+                    <thead>
+
+                    <th>Funcionário</th>
+                    <th>Operação</th>
+                    <th>Quantidade de peças</th>
+                    <th></th>
+                    <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>John</td>
+                        <td>Costura</td>
+                        <td>122</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Mary</td>
+                        <td>Costura</td>
+                        <td>122</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>July</td>
+                        <td>Costura</td>
+                        <td>1222</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
+
 
         </div>
         <!-- /.container-fluid -->
 
         <!-- Sticky Footer -->
         <footer class="sticky-footer">
-            <div class="container my-auto ">
-                <div class="copyright text-center my-auto ">
+            <div class="container my-auto">
+                <div class="copyright text-center my-auto">
                     <span>Copyright © DyOpe Assistant 2018</span>
                 </div>
             </div>
@@ -150,7 +197,8 @@
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <div class="modal-body">Selecione "Sair" abaixo se você estiver pronto para encerrar sua sessão atual.</div>
+            <div class="modal-body">Selecione "Sair" abaixo se você estiver pronto para encerrar sua sessão atual.
+            </div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
                 <a class="btn btn-primary" href="index.jsp">Sair</a>

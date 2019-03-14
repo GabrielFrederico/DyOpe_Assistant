@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+         pageEncoding="ISO-8859-1" %>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -9,7 +11,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Login</title>
+    <title>Redefinir senha</title>
 
     <!-- Bootstrap core CSS-->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -28,36 +30,24 @@
 
 <div class="container">
     <div class="card card-login mx-auto mt-5">
-        <div class="card-header bg-info text-light" >Login</div>
+        <div class="card-header bg-info text-light">Redefinir Senha</div>
         <div class="card-body">
-            <form method="get" action="funcionarios/loginFuncionario">
+            <div class="text-center mb-4">
+                <h4>Esqueceu sua senha?</h4>
+                <p>Digite seu endereço de e-mail e nós lhe enviaremos instruções sobre como redefinir sua senha.</p>
+            </div>
+            <form>
                 <div class="form-group">
                     <div class="form-label-group">
-                        <input type="email" id="inputEmail" name="Email" class="form-control" placeholder="Email"
+                        <input type="email" id="inputEmail" class="form-control" placeholder="Insira seu e-mail"
                                required="required" autofocus="autofocus">
-                        <label for="inputEmail">Email</label>
+                        <label for="inputEmail">Insira seu e-mail</label>
                     </div>
                 </div>
-                <div class="form-group">
-                    <div class="form-label-group">
-                        <input type="password" name="Password" id="inputPassword" class="form-control"
-                               placeholder="Senha" required="required">
-                        <label for="inputPassword"> Senha</label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="remember-me">
-                            Lembrar da senha
-                        </label>
-                    </div>
-                </div>
-                <input class="btn btn-info btn-block" type="submit" value="Login">
+                <input class="btn btn-primary btn-block" type="submit" value="Redefinir Senha">
             </form>
             <div class="text-center">
-                <a class="d-block small mt-3" href="cadastro_funcionario.html">Registre uma conta</a>
-                <a class="d-block small" href="forgot-password.html">Esqueceu a senha?</a>
+                <a class="d-block small" href="index.jsp"> Página de Login</a>
             </div>
         </div>
     </div>
