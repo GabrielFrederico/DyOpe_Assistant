@@ -1,4 +1,4 @@
-package com.projeto.controller;
+package com.projeto.rest;
 
 
 import com.projeto.models.Setor;

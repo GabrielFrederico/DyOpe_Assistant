@@ -1,12 +1,15 @@
-<?php
-
-?>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="input" uri="http://www.springframework.org/tags/form" %>
+<%@page import="com.projeto.models.Gerente"%>
+<%@page import="com.projeto.rest.GerenteRest"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+         pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
 
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -35,7 +38,7 @@
 <nav class="navbar navbar-expand bg-lightblue static-top">
 
 
-    <a class="navbar-brand mr-1" href="gerente_index.html">DyOpe Assistant</a>
+    <a class="navbar-brand mr-1" href="gerente_index.jsp">DyOpe Assistant</a>
 
     <button class="btn btn-link btn-sm  order-1 order-sm-0" id="sidebarToggle" href="#">
         <i class="fas fa-bars"></i>
@@ -69,7 +72,7 @@
                     </div>
                     <div>
                         <div class="small text-gray-500">Dezembro 7, 2019</div>
-                        <span>OperaÃ§Ã£o de costura foi concluida!</span>
+                        <span>Operação de costura foi concluida!</span>
                     </div>
                 </a>
 
@@ -82,7 +85,7 @@
                 <i class="fas fa-user-circle fa-fw"></i>
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="#">ConfiguraÃ§Ãµes</a>
+                <a class="dropdown-item" href="#">Configurações</a>
                 <a class="dropdown-item" href="perfil_gerente.html">Perfil</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Sair</a>
@@ -100,10 +103,10 @@
             <a class="nav-link dropdown-toggle text-light" href="#" id="pagesDropdown" role="button"
                data-toggle="dropdown"
                aria-haspopup="false" aria-expanded="false">
-                <span>OperaÃ§Ãµes</span>
+                <span>Operações</span>
             </a>
             <div class="dropdown-menu" aria-labelledby="pagesDropdown" x-placement="bottom-start">
-                <h6 class="dropdown-header">Tipos de OperaÃ§Ãµes</h6>
+                <h6 class="dropdown-header">Tipos de Operações</h6>
                 <a class="dropdown-item" href="operacao_risco.html">Risco</a>
                 <a class="dropdown-item" href="operacao_corte.html">Corte</a>
                 <a class="dropdown-item" href="operacao_costura.html">Costura</a>
@@ -130,9 +133,9 @@
 
             <div class="menu_index">
                 <span class="badge badge-info tam"> Bem-vindo Juan!</span>
-                <span class="badge badge-info tam"> Cadastre OperaÃ§Ãµes</span>
-                <span class="badge badge-info tam"> ReceberÃ¡ informaÃ§Ãµes Ãºteis</span>
-                <span class="badge badge-info tam"> Controle o andamento da produÃ§Ã£o</span>
+                <span class="badge badge-info tam"> Cadastre Operações</span>
+                <span class="badge badge-info tam"> Receberá informações úteis</span>
+                <span class="badge badge-info tam"> Controle o andamento da produção</span>
             </div>
 
         </div>
@@ -142,7 +145,7 @@
         <footer class="sticky-footer">
             <div class="container my-auto ">
                 <div class="copyright text-center my-auto ">
-                    <span>Copyright Â© DyOpe Assistant 2018</span>
+                    <span>Copyright © DyOpe Assistant 2018</span>
                 </div>
             </div>
         </footer>
@@ -166,10 +169,10 @@
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Pronto para sair?</h5>
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">Ã—</span>
+                    <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <div class="modal-body">Selecione "Sair" abaixo se vocÃª estiver pronto para encerrar sua sessÃ£o atual.</div>
+            <div class="modal-body">Selecione "Sair" abaixo se você estiver pronto para encerrar sua sessão atual.</div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
                 <a class="btn btn-primary" href="index.html">Sair</a>

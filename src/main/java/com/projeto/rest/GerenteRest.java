@@ -1,33 +1,27 @@
-package com.projeto.controller;
+package com.projeto.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import com.projeto.models.Gerente;
 import com.projeto.repository.GerenteRepository;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.*;
+import java.util.Map;
 
 
-@Controller
+@RestController
 @RequestMapping("gerentes")
-public class GerenteController {
+public class GerenteRest {
 
     @Autowired
     GerenteRepository gerenteRepository;
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/cadastrarGerente")
-    public ModelAndView save(Gerente gerente, ModelMap model) {
+    public ModelAndView save(Gerente gerente) {
         gerenteRepository.save(gerente);
-
-        model.addAttribute("nome", gerente.getNome());
-        model.addAttribute("id", gerente.getId());
-
         return new ModelAndView("redirect:/loginGerente");
     }
 
@@ -36,7 +30,7 @@ public class GerenteController {
         Gerente gerente = gerenteRepository.findById(id);
         item.put("nome", gerente.getNome());
         item.put("cpf", gerente.getCpf());
-        ModelAndView modelAndView = new ModelAndView("perfil");
+        ModelAndView modelAndView = new ModelAndView("redirect:/gerentePerfil");
         modelAndView.addObject("nomeGerente", gerente);
         return modelAndView;
     }
@@ -61,16 +55,11 @@ public class GerenteController {
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/perfil/{nome}")
-    public ModelAndView perfil(@PathVariable("nome") String nome, ModelMap item) {
+    public ModelAndView perfil(@PathVariable("nome") String nome) {
         Gerente perfilGerente = gerenteRepository.findByNome(nome);
-        item.put("nome", perfilGerente.getNome());
-        item.put("cpf", perfilGerente.getCpf());
-        return new ModelAndView("redirect:/perfilGerente", "dadosGer", item);
-    }
-    @RequestMapping("/perfilGerente")
-    public String ok() {
-
-        return "perfil";
+        ModelAndView modelAndView = new ModelAndView("redirect:/gerentePerfil");
+        modelAndView.addObject("gerente", perfilGerente);
+        return modelAndView;
     }
 
 
