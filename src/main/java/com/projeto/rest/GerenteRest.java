@@ -20,14 +20,14 @@ public class GerenteRest {
     GerenteRepository gerenteRepository;
 
 
-    @RequestMapping(method = RequestMethod.POST, value = "/cadastrarGerente")
+    @RequestMapping(method = RequestMethod.POST, value = "/cadastrargerente")
     public ModelAndView save(Gerente gerente) {
         gerenteRepository.save(gerente);
         return new ModelAndView("redirect:/loginGerente", "gerente", gerente);
     }
 
 
-    @RequestMapping(method = RequestMethod.GET, value = "/perfilGerente.{id}")
+    @RequestMapping(method = RequestMethod.GET, value = "/perfilgerente.{id}")
     public ModelAndView teste(@PathVariable("id") long id) {
         Gerente gerente = gerenteRepository.findById(id);
         ModelAndView model = new ModelAndView("redirect:/gerentePerfil", "gerente", gerente);
@@ -39,7 +39,7 @@ public class GerenteRest {
         return model;
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/redefinirPerfilGerente")
+    @RequestMapping(method = RequestMethod.PUT, value = "/redefinirperfilgerente")
     public ModelAndView redefinirPerfilGerente(Gerente gerente) {
         ModelAndView model1 = new ModelAndView("perfil_gerente", "gerente", gerente);
         gerenteRepository.save(gerente);
@@ -62,7 +62,7 @@ public class GerenteRest {
     }
 
 
-    @RequestMapping(value = "/loginGerente", method = RequestMethod.GET)
+    @RequestMapping(value = "/logingerente", method = RequestMethod.GET)
     public ModelAndView login(ModelAndView model, Model model1, Gerente gerente, String error, String logout) {
         gerenteRepository.findById(gerente.getId());
 
@@ -95,7 +95,7 @@ public class GerenteRest {
     }
 
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/redefinirSenhaPerfilGerente")
+    @RequestMapping(method = RequestMethod.PUT, value = "/redefinirsenhaperfilgerente")
     public Gerente redefinirSenhaPerfilGerente(Gerente gerente) {
         gerenteRepository.save(gerente);
         return gerente;

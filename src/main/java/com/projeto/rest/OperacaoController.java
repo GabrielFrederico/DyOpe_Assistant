@@ -14,7 +14,7 @@ public class OperacaoController {
 	@Autowired
 	OperacaoRepository operacaoRepository;
 
-	@RequestMapping(method = RequestMethod.POST, value="/cadastrarOperacao")
+	@RequestMapping(method = RequestMethod.POST, value="/cadastraroperacao")
 	public ModelAndView save(Operacao operacao) {
 		operacaoRepository.save(operacao);
 		return new ModelAndView("redirect:/operacaoRisco");

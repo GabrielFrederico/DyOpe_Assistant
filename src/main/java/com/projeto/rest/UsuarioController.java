@@ -13,7 +13,7 @@ public class UsuarioController {
     @Autowired
     UsuarioRepository usuarioRepository;
 
-    @RequestMapping(method = RequestMethod.POST, value = "/cadastrarUsuario")
+    @RequestMapping(method = RequestMethod.POST, value = "/cadastrarusuario")
     public ModelAndView save(Usuario usuario) {
         usuarioRepository.save(usuario);
         return new ModelAndView("redirect:/gerenteIndex");
@@ -30,7 +30,7 @@ public class UsuarioController {
         return usuario;
     }
 
-    @RequestMapping(method = RequestMethod.GET, path = "/getByNome/{nomeUsuario}")
+    @RequestMapping(method = RequestMethod.GET, path = "/getByNome/{nomeusuario}")
     public Usuario getUsuarioByNome(@PathVariable("nomeUsuario") String nomeUsuario) {
         Usuario usuario = usuarioRepository.findByNomeUsuario(nomeUsuario);
         return usuario;

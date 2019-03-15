@@ -20,13 +20,13 @@ public class TipoOperacaoController {
         return tipoOperacaoRepository.findAll();
     }
 
-    @RequestMapping(method = RequestMethod.GET, path = "/{idTipoOpe}")
+    @RequestMapping(method = RequestMethod.GET, path = "/{idtipoope}")
     public TipoOperacao getTipoOperacaoById(@PathVariable("idTipoOpe") long idTipoOpe) {
         TipoOperacao tipoOperacao = tipoOperacaoRepository.findByidTipoOpe(idTipoOpe);
         return tipoOperacao;
     }
 
-    @RequestMapping(method = RequestMethod.GET, path = "/getByNome/{tipoOpe}")
+    @RequestMapping(method = RequestMethod.GET, path = "/getByNome/{tipoope}")
     public TipoOperacao getTipoOperacaoByNome(@PathVariable("tipoOpe") String tipoOpe) {
         TipoOperacao tipoOperacao = tipoOperacaoRepository.findBytipoOpe(tipoOpe);
         return tipoOperacao;

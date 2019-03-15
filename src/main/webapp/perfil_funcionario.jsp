@@ -220,7 +220,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="card-body">
-                        <form method="put" action="funcionarios/redefinirSenhaPerfil">
+                        <form method="put" action="funcionarios/redefinirsenhaperfil">
                             <div class="form-group">
 
                                 <div class="form-group">

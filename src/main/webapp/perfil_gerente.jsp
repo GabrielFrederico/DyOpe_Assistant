@@ -138,7 +138,7 @@
         </div>
 
         <div class="container " style="float: left; max-width: 70%; padding-left: 5%">
-            <form:form method="put"  action="/redefinirPerfilGerente">
+            <form:form method="put"  action="/redefinirperfilgerente">
                 <div class="form-group">
                     <div class="form-group">
                         <div class="form-label-group">
@@ -246,7 +246,7 @@
                     </div>
                     <div class="modal-body">
                         <div class="card-body">
-                            <form method="put" action="redefinirSenhaPerfilGerente">
+                            <form method="put" action="redefinirsenhaperfilgerente">
                                 <div class="form-group">
 
                                     <div class="form-group">

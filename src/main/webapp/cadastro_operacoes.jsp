@@ -31,7 +31,7 @@
     <div class="card card-register mx-auto mt-5">
         <div class="card-header bg-info text-light">Cadastro de operação</div>
         <div class="card-body">
-            <form method="post" action="operacoes/cadastrarOperacao">
+            <form method="post" action="operacoes/cadastraroperacao">
                 <div class="form-group">
                     <div class="form-group">
 

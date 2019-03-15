@@ -14,7 +14,7 @@ public class InfoSetorController {
     @Autowired
     InfoSetorRepository infoSetorRepository;
 
-    @RequestMapping(method = RequestMethod.POST, value = "/cadastrarInfoSetor")
+    @RequestMapping(method = RequestMethod.POST, value = "/cadastrarinfosetor")
     public ModelAndView save(InfoSetor infoSetor) {
         infoSetorRepository.save(infoSetor);
         return new ModelAndView("redirect:/funcionarioIndex");
@@ -26,7 +26,7 @@ public class InfoSetorController {
         return infoSetorRepository.findAll();
     }
 
-    @RequestMapping(method = RequestMethod.GET, path = "/{idInfosetor}")
+    @RequestMapping(method = RequestMethod.GET, path = "/{idinfosetor}")
     public InfoSetor getInfoSetorById(@PathVariable("idInfosetor") long idInfosetor) {
         InfoSetor infoSetor = infoSetorRepository.findByIdInfosetor(idInfosetor);
         return infoSetor;
@@ -38,7 +38,7 @@ public class InfoSetorController {
         return infoSetor;
     }
     @ResponseBody
-    @RequestMapping(method = RequestMethod.DELETE, path = "/{idInfosetor}")
+    @RequestMapping(method = RequestMethod.DELETE, path = "/{idinfosetor}")
     public InfoSetor deleteInfoSetorById(@PathVariable("idInfosetor") long idInfosetor) {
         InfoSetor infoSetor = infoSetorRepository.findByIdInfosetor(idInfosetor);
         infoSetorRepository.delete(infoSetor);

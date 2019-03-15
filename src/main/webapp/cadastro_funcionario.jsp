@@ -32,7 +32,7 @@
     <div class="card card-register mx-auto mt-5">
         <div class="card-header bg-info text-light">Cadastro</div>
         <div class="card-body">
-            <form method="post" action="funcionarios/cadastrarFuncionario">
+            <form method="post" action="funcionarios/cadastrarfuncionario">
                 <div class="form-group">
                     <div class="form-group">
                         <div class="form-row">

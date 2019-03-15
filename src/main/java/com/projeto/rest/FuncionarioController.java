@@ -18,13 +18,13 @@ public class FuncionarioController {
     @Autowired
     FuncionarioRepository funcionarioRepoository;
 
-    @RequestMapping(method = RequestMethod.POST, value = "/cadastrarFuncionario")
+    @RequestMapping(method = RequestMethod.POST, value = "/cadastrarfuncionario")
     public ModelAndView save(Funcionario funcionario) {
         funcionarioRepoository.save(funcionario);
         return new ModelAndView("redirect:/loginFuncionario");
     }
 
-    @RequestMapping(value = "/loginFuncionario", method = RequestMethod.GET)
+    @RequestMapping(value = "/loginfuncionario", method = RequestMethod.GET)
     public ModelAndView login(ModelAndView model, Model model1, Funcionario funcionario, String error, String logout) {
 
         funcionarioRepoository.findById(funcionario.getId());

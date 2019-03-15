@@ -123,7 +123,7 @@
         </div>
 
         <div class="container " style="float: left; max-width: 70%; padding-left: 5%">
-            <form method="post" action="setores/cadastrarSetor">
+            <form method="post" action="setores/cadastrarsetor">
                 <div class="form-group">
                     <div class="form-group">
                         <div class="form-label-group">

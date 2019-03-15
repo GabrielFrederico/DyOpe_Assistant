@@ -113,7 +113,7 @@
         </div>
 
         <div class="container " style="float: left; max-width: 70%; padding-left: 5%">
-            <form method="post" action="infoSetor/cadastrarInfoSetor">
+            <form method="post" action="infoSetor/cadastrarinfosetor">
                 <div class="form-group">
                     <div class="form-row">
                         <div class="col-md-6">
@@ -215,7 +215,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="card-body">
-                        <form method="post" action="infoSetor/cadastrarInfoSetor">
+                        <form method="post" action="infoSetor/cadastrarinfosetor">
                             <div class="form-group">
 
                                 <div class="form-group">

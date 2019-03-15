@@ -14,7 +14,7 @@ public class SetorController {
     @Autowired
     SetorRepository setorRepository;
 
-    @RequestMapping(method = RequestMethod.POST, value = "/cadastrarSetor")
+    @RequestMapping(method = RequestMethod.POST, value = "/cadastrarsetor")
     public ModelAndView save(Setor setor, ModelAndView model) {
         setorRepository.save(setor);
         return new ModelAndView("redirect:/controleFuncionarios");
@@ -31,7 +31,7 @@ public class SetorController {
         return setor;
     }
 
-    @RequestMapping(method = RequestMethod.GET, path = "/getByNome/{nomeSetor}")
+    @RequestMapping(method = RequestMethod.GET, path = "/getByNome/{nomesetor}")
     public Setor getSetorByNome(@PathVariable("nomeSetor") String nomeSetor) {
         Setor setor = setorRepository.findByNomeSetor(nomeSetor);
         return setor;
