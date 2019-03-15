@@ -138,7 +138,7 @@
         </div>
 
         <div class="container " style="float: left; max-width: 70%; padding-left: 5%">
-            <form:form method="post"  action="/redefinirPerfilGerente">
+            <form:form method="put"  action="/redefinirPerfilGerente">
                 <div class="form-group">
                     <div class="form-group">
                         <div class="form-label-group">

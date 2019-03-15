@@ -40,7 +40,7 @@ public class Controller {
 	@RequestMapping("/gerentePerfil")
 	public String gerentePerfil() {
 
-		return "perfil";
+		return "perfil_gerente";
 	}
 
 

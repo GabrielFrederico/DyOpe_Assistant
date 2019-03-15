@@ -13,6 +13,7 @@ import java.util.Map;
 
 
 @Controller
+@RequestMapping("gerentes")
 public class GerenteRest {
 
     @Autowired
@@ -26,10 +27,10 @@ public class GerenteRest {
     }
 
     @ResponseBody
-    @RequestMapping(method = RequestMethod.GET, value = "/perfilGerente.{id}")
+        @RequestMapping(method = RequestMethod.GET, value = "/perfilGerente.{id}")
     public ModelAndView teste(@PathVariable("id") long id) {
         Gerente gerente = gerenteRepository.findById(id);
-        ModelAndView model = new ModelAndView("perfil_gerente", "gerente", gerente);
+        ModelAndView model = new ModelAndView("redirect:/gerentePerfil", "gerente", gerente);
         model.addObject("nomeGerente", gerente.getNome());
         model.addObject("cpfGerente", gerente.getCpf());
         model.addObject("rgGerente", gerente.getRg());
