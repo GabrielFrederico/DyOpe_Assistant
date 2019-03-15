@@ -13,6 +13,7 @@ import java.util.Map;
 
 
 @Controller
+@RequestMapping("gerentes")
 public class GerenteRest {
 
     @Autowired
