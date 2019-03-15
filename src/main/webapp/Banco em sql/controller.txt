@@ -19,56 +19,56 @@ public class Controller {
 	        return "index";
 	    }
 
-	@RequestMapping("/logingerente")
+	@RequestMapping("/loginGerente")
 	public String loginGerente() {
 
 		return "login_gerente";
 	}
 
-	@RequestMapping("/loginfuncionario")
+	@RequestMapping("/loginFuncionario")
 	public String loginFuncionario() {
 
 		return "login_funcionario";
 	}
 
-	@RequestMapping("/gerenteindex")
+	@RequestMapping("/gerenteIndex")
 	public String indexGerente() {
 
 		return "gerente_index";
 	}
 
-	@RequestMapping("/gerenteperfil")
+	@RequestMapping("/gerentePerfil")
 	public String gerentePerfil() {
 
 		return "perfil_gerente";
 	}
 
 
-	@RequestMapping("/operacaorisco")
+	@RequestMapping("/operacaoRisco")
 	public String operacaoRisco() {
 
 		return "operacao_risco";
 	}
 
-	@RequestMapping("/controlefuncionarios")
+	@RequestMapping("/controleFuncionarios")
 	public String controleFunc() {
 
 		return "controle_funcionarios";
 	}
 
-	@RequestMapping("/funcionarioindex")
+	@RequestMapping("/funcionarioIndex")
 	public String indeFuncionario() {
 
 		return "funcionario_index";
 	}
 
-	@RequestMapping("cadastrogerente")
+	@RequestMapping("cadastroGerente")
 	public String cadastro() {
 
 		return "cadastro_gerente";
 	}
 
-	@RequestMapping(value="gerentes/cadastrargerente", method= RequestMethod.GET)
+	@RequestMapping(value="gerentes/cadastrarGerente", method= RequestMethod.GET)
 	public ModelAndView cadastro(Model model) {
 
 			model.addAttribute("gerenteModel", new Gerente());

@@ -12,7 +12,6 @@ import com.projeto.repository.FuncionarioRepository;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("funcionarios")
 public class FuncionarioController {
 
     @Autowired
@@ -35,11 +34,11 @@ public class FuncionarioController {
         if (logout != null)
             model1.addAttribute("message", "You have been logged out successfully.");
 
-        return new ModelAndView("redirect:/funcionarioIndex");
+        return new ModelAndView("funcionario_index");
     }
 
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET, value = "funcionarios")
     public Iterable<Funcionario> listAll() {
         return funcionarioRepoository.findAll();
     }

@@ -13,24 +13,28 @@ import java.util.Map;
 
 
 @Controller
-@RequestMapping("gerentes")
 public class GerenteRest {
 
     @Autowired
     GerenteRepository gerenteRepository;
 
+    @RequestMapping("/")
+    String index(){
+        return "index";
+
+}
 
     @RequestMapping(method = RequestMethod.POST, value = "/cadastrargerente")
     public ModelAndView save(Gerente gerente) {
         gerenteRepository.save(gerente);
-        return new ModelAndView("redirect:/loginGerente", "gerente", gerente);
+        return new ModelAndView("redirect:/logingerente", "gerente", gerente);
     }
 
 
-    @RequestMapping(method = RequestMethod.GET, value = "/perfilgerente.{id}")
+    @RequestMapping(method = RequestMethod.GET, value = "/perfilGerente.{id}")
     public ModelAndView teste(@PathVariable("id") long id) {
         Gerente gerente = gerenteRepository.findById(id);
-        ModelAndView model = new ModelAndView("redirect:/gerentePerfil", "gerente", gerente);
+        ModelAndView model = new ModelAndView("perfil_gerente", "gerente", gerente);
         model.addObject("nomeGerente", gerente.getNome());
         model.addObject("cpfGerente", gerente.getCpf());
         model.addObject("rgGerente", gerente.getRg());
@@ -39,7 +43,7 @@ public class GerenteRest {
         return model;
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/redefinirperfilgerente")
+    @RequestMapping(method = RequestMethod.PUT, value = "/redefinirPerfilGerente")
     public ModelAndView redefinirPerfilGerente(Gerente gerente) {
         ModelAndView model1 = new ModelAndView("perfil_gerente", "gerente", gerente);
         gerenteRepository.save(gerente);
@@ -62,40 +66,40 @@ public class GerenteRest {
     }
 
 
-    @RequestMapping(value = "/logingerente", method = RequestMethod.GET)
+    @RequestMapping(value = "/loginGerente", method = RequestMethod.GET)
     public ModelAndView login(ModelAndView model, Model model1, Gerente gerente, String error, String logout) {
         gerenteRepository.findById(gerente.getId());
 
-        return new ModelAndView("redirect:/gerenteIndex");
+        return new ModelAndView("gerente_index");
     }
 
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET, value = "gerentes")
     public Iterable<Gerente> listAll() {
         return gerenteRepository.findAll();
     }
 
-    @RequestMapping(method = RequestMethod.GET, path = "/{id}")
+    @RequestMapping(method = RequestMethod.GET, path = "gerente.{id}")
     public Gerente getGerenteById(@PathVariable("id") long id) {
         Gerente gerente = gerenteRepository.findById(id);
         return gerente;
     }
 
 
-    @RequestMapping(method = RequestMethod.GET, path = "/getByNome/{nome}")
+    @RequestMapping(method = RequestMethod.GET, path = "gerente/getByNome/{nome}")
     public Gerente getGerenteByNome(@PathVariable("nome") String nome) {
         Gerente gerente = gerenteRepository.findByNome(nome);
         return gerente;
     }
 
-    @RequestMapping(method = RequestMethod.PUT)
+    @RequestMapping(method = RequestMethod.PUT, value = "gerente")
     public Gerente update(@RequestBody Gerente gerente) {
         gerenteRepository.save(gerente);
         return gerente;
     }
 
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/redefinirsenhaperfilgerente")
+    @RequestMapping(method = RequestMethod.PUT, value = "/redefinirSenhaPerfilGerente")
     public Gerente redefinirSenhaPerfilGerente(Gerente gerente) {
         gerenteRepository.save(gerente);
         return gerente;

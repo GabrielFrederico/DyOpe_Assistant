@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("infoSetor")
 public class InfoSetorController {
 
     @Autowired
@@ -17,11 +16,11 @@ public class InfoSetorController {
     @RequestMapping(method = RequestMethod.POST, value = "/cadastrarinfosetor")
     public ModelAndView save(InfoSetor infoSetor) {
         infoSetorRepository.save(infoSetor);
-        return new ModelAndView("redirect:/funcionarioIndex");
+        return new ModelAndView("funcionario_index");
     }
 
     @ResponseBody
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET, value = "infosetores")
     public Iterable<InfoSetor> listAll() {
         return infoSetorRepository.findAll();
     }
@@ -32,7 +31,7 @@ public class InfoSetorController {
         return infoSetor;
     }
 
-    @RequestMapping(method = RequestMethod.PUT)
+    @RequestMapping(method = RequestMethod.PUT, value = "infosetor")
     public InfoSetor update(@RequestBody InfoSetor infoSetor) {
         infoSetorRepository.save(infoSetor);
         return infoSetor;

@@ -113,7 +113,7 @@
         </div>
 
         <div class="container " style="float: left; max-width: 70%; padding-left: 5%">
-            <form method="post" action="infoSetor/cadastrarinfosetor">
+            <form method="post" action="/cadastrarinfosetor">
                 <div class="form-group">
                     <div class="form-row">
                         <div class="col-md-6">

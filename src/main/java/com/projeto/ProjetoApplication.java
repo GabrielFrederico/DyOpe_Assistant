@@ -9,19 +9,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @SpringBootApplication
-public class ProjetoApplication  extends SpringBootServletInitializer{
+public class ProjetoApplication extends SpringBootServletInitializer {
 
-	public static void main(String[] args) {
-		SpringApplication.run(ProjetoApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(ProjetoApplication.class, args);
+    }
 
-	@Override
+    @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
         return application.sources(ProjetoApplication.class);
     }
-
-	@RequestMapping("/")
-	String index(){
-		return "index";
-	}
 }
+
+
