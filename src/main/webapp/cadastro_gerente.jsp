@@ -33,7 +33,7 @@
     <div class="card card-register mx-auto mt-5">
         <div class="card-header bg-info text-light">Cadastro</div>
         <div class="card-body">
-            <form:form method="post" action="/cadastrarGerente"  modelAttribute="gerente">
+            <form:form method="post" action="/gerentes/cadastrarGerente"  modelAttribute="gerente">
 
                 <div class="form-group">
                     <div class="form-row">
