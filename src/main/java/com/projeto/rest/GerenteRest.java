@@ -23,7 +23,7 @@ public class GerenteRest {
     @RequestMapping(method = RequestMethod.POST, value = "/cadastrarGerente")
     public ModelAndView save(Gerente gerente) {
         gerenteRepository.save(gerente);
-        return new ModelAndView("login_gerente", "gerente", gerente);
+        return new ModelAndView("redirect:/loginGerente", "gerente", gerente);
     }
 
 
