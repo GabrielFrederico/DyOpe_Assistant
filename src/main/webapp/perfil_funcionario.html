@@ -1,5 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-         pageEncoding="ISO-8859-1" %>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -11,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Informações do Setor</title>
+    <title>Perfil</title>
 
     <!-- Bootstrap core CSS-->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -34,7 +32,7 @@
 <nav class="navbar navbar-expand bg-lightblue static-top">
 
 
-    <a class="navbar-brand mr-1" href="funcionario_index.jsp">DyOpe Assistant</a>
+    <a class="navbar-brand mr-1" href="funcionario_index.html">DyOpe Assistant</a>
 
     <button class="btn btn-link btn-sm  order-1 order-sm-0" id="sidebarToggle" href="#">
         <i class="fas fa-bars"></i>
@@ -59,7 +57,7 @@
                 <h6 class="dropdown-header">
                     Alertas
                 </h6>
-                <a class="dropdown-item d-flex align-items-center" href="#">
+                <a class="dropdown-item d-flex align-items-center" href="operacao_risco.html">
                     <div class="mr-3">
                         <div class="icon-circle bg-success">
                             <i class="fas fa- text-danger"></i>
@@ -67,7 +65,7 @@
                     </div>
                     <div>
                         <div class="small text-gray-500">Dezembro 7, 2019</div>
-                        <span>Operação de Risco foi concluida!</span>
+                        <span>OperaÃ§Ã£o de Risco foi concluida!</span>
                     </div>
                 </a>
 
@@ -80,8 +78,8 @@
                 <i class="fas fa-user-circle fa-fw"></i>
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="#">Configurações</a>
-                <a class="dropdown-item" href="perfil_funcionario.jsp">Perfil</a>
+                <a class="dropdown-item" href="#">ConfiguraÃ§Ãµes</a>
+                <a class="dropdown-item" href="perfil_funcionario.html">Perfil</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Sair</a>
             </div>
@@ -96,7 +94,7 @@
 
         <li class="nav-item text-light">
             <a class="nav-link text-light" href="#">
-                <span>Enviar informações</span>
+                <span>Enviar informaÃ§Ãµes</span>
             </a>
 
         </li>
@@ -108,65 +106,70 @@
         <div class="container-fluid">
 
             <!-- Page Content -->
-            <h1>Informações do Setor</h1>
+            <h1>Perfil</h1>
             <hr>
         </div>
 
+        <div alt="Imagem de perfil" class="img-rounded .img-responsive" id="img-perfil">
+            <img src="imagens/imgperfil.jpg" style="height: 200px; width: 200px; float: left; padding-left: 1%;">
+        </div>
+
         <div class="container " style="float: left; max-width: 70%; padding-left: 5%">
-            <form method="post" action="/cadastrarinfosetor">
+            <form>
                 <div class="form-group">
+                    <div class="form-group">
+                        <div class="form-label-group">
+                            <input type="text" name="funcionario" id="nomeCompleto" class="form-control"
+                                   autofocus="autofocus"
+                                   placeholder="Nome Completo" required="required">
+                            <label for="nomeCompleto">Nome Completo</label>
+                        </div>
+                    </div>
                     <div class="form-row">
                         <div class="col-md-6">
-                            <div class="form-label-group">
-                                <input type="text" name="setor" id="setor" class="form-control"
-                                       autofocus="autofocus"
-                                       placeholder="Setor:" required="required">
-                                <label for="setor">Setor:</label>
+                            <div class="form-group">
+                                <div class="form-label-group">
+                                    <input type="text" name="cpf" id="cpf" class="form-control" placeholder="CPF"
+                                           required="required">
+                                    <label for="cpf">CPF</label>
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="form-label-group">
-                                <input type="text" name="operacao" id="operacao" class="form-control"
-                                       autofocus="autofocus"
-                                       placeholder="Operação:" required="required">
-                                <label for="operacao">Operação:</label>
+                            <div class="form-group">
+                                <div class="form-label-group">
+                                    <input type="text" name="rg" id="rg" class="form-control" placeholder="RG"
+                                           required="required">
+                                    <label for="rg">RG</label>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <div class="form-row">
-                        <div class="col-md-6">
-                            <div class="form-label-group">
-                                <input type="number" name="qtdPecasOpe" id="qtdPecasOpe" class="form-control"
-                                       placeholder="Quantidade de peças da operação:"
-                                       required="required">
-                                <label for="qtdPecasOpe">Quantidade de peças da operação:</label>
+                    <div class="form-group">
+                        <div class="form-label-group">
+                            <input type="email" name="emailGer" id="inputEmail" class="form-control"
+                                   placeholder="EndereÃ§o de e-mail"
+                                   required="required">
+                            <label for="inputEmail">EndereÃ§o de e-mail</label>
+                        </div>
+
+                    </div>
+
+                    <input class="btn btn-success" type="submit" value="Salvar">
+                    <a class="btn btn-info" href="#" data-toggle="modal" data-target=".redefinir-senha">Redefinir
+                        senha</a>
+
+
+                    <!-- /.container-fluid -->
+
+                    <!-- Sticky Footer -->
+                    <footer class="sticky-footer">
+                        <div class="container my-auto ">
+                            <div class="copyright text-center my-auto ">
+                                <span>Copyright Â© DyOpe Assistant 2018</span>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-label-group">
-                                <input type="time" name="tempoNecessario" id="tempoNecessari" class="form-control"
-                                       placeholder="Tempo necessário:"
-                                       required="required">
-                                <label for="tempoNecessari">Tempo necessário:</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <input class="btn btn-success" type="submit" value="Enviar">
-
-                <!-- /.container-fluid -->
-
-                <!-- Sticky Footer -->
-                <footer class="sticky-footer">
-                    <div class="container my-auto ">
-                        <div class="copyright text-center my-auto ">
-                            <span>Copyright © DyOpe Assistant 2018</span>
-                        </div>
-                    </div>
-                </footer>
+                    </footer>
             </form>
         </div>
         <!-- /.content-wrapper -->
@@ -187,14 +190,14 @@
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Pronto para sair?</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
+                        <span aria-hidden="true">Ã—</span>
                     </button>
                 </div>
-                <div class="modal-body">Selecione "Sair" abaixo se você estiver pronto para encerrar sua sessão atual.
+                <div class="modal-body">Selecione "Sair" abaixo se vocÃª estiver pronto para encerrar sua sessÃ£o atual.
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-                    <a class="btn btn-primary" href="index.jsp">Sair</a>
+                    <a class="btn btn-primary" href="index.html">Sair</a>
                 </div>
             </div>
         </div>
@@ -210,12 +213,12 @@
                 <div class="modal-header">
                     <h4 class="modal-title" id="myLargeModalLabel">Redefinir senha:</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
+                        <span aria-hidden="true">Ã—</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <div class="card-body">
-                        <form method="post" action="infoSetor/cadastrarinfosetor">
+                        <form method="put" action="funcionarios/redefinirsenhaperfil">
                             <div class="form-group">
 
                                 <div class="form-group">
@@ -259,7 +262,7 @@
 
                             <div class="modal-footer col-md-12">
                                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-                                <input class="btn btn-primary" type="submit" value="Cadastrar">
+                                <input class="btn btn-primary" type="submit" value="Confirmar">
                             </div>
                         </form>
                     </div>
