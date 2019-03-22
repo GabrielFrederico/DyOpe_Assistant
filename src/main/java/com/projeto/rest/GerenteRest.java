@@ -9,9 +9,6 @@ import com.projeto.models.Gerente;
 import com.projeto.repository.GerenteRepository;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.Map;
-
-
 @Controller
 public class GerenteRest {
 
