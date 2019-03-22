@@ -32,7 +32,7 @@
     <div class="card card-login mx-auto mt-5">
         <div class="card-header bg-info text-light">Login</div>
         <div class="card-body">
-            <form method="get" action="/loginGerente">
+            <form method="get" action="/gerentelogado">
                 <div class="form-group">
                     <div class="form-label-group">
                         <input type="email" id="inputEmail" name="email" class="form-control" placeholder="Email"

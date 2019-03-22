@@ -19,10 +19,10 @@ public class GerenteRest {
     GerenteRepository gerenteRepository;
 
     @RequestMapping("/")
-    String index(){
+    String index() {
         return "index";
 
-}
+    }
 
     @RequestMapping(method = RequestMethod.POST, value = "/cadastrargerente")
     public ModelAndView save(Gerente gerente) {
@@ -45,9 +45,9 @@ public class GerenteRest {
 
     @RequestMapping(method = RequestMethod.PUT, value = "/redefinirPerfilGerente")
     public ModelAndView redefinirPerfilGerente(Gerente gerente) {
-        ModelAndView model1 = new ModelAndView("perfil_gerente", "gerente", gerente);
+        ModelAndView model12 = new ModelAndView("perfil_gerente", "gerente", gerente);
         gerenteRepository.save(gerente);
-        return model1;
+        return model12;
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/perfil/{nome}")
@@ -66,11 +66,13 @@ public class GerenteRest {
     }
 
 
-    @RequestMapping(value = "/loginGerente", method = RequestMethod.GET)
-    public ModelAndView login(ModelAndView model, Model model1, Gerente gerente, String error, String logout) {
+    @RequestMapping(value = "/gerentelogado", method = RequestMethod.GET)
+    public ModelAndView login(Model model1, Gerente gerente, String error, String logout) {
         gerenteRepository.findById(gerente.getId());
+        ModelAndView model = new ModelAndView("gerente_index", "gerente", gerente);
+        model.addObject("nomeGerente", gerente.getNome());
 
-        return new ModelAndView("gerente_index");
+        return model;
     }
 
 

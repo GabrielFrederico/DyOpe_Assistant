@@ -26,8 +26,8 @@ public class InfoSetorController {
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/{idinfosetor}")
-    public InfoSetor getInfoSetorById(@PathVariable("idInfosetor") long idInfosetor) {
-        InfoSetor infoSetor = infoSetorRepository.findByIdInfosetor(idInfosetor);
+    public InfoSetor getInfoSetorById(@PathVariable("idinfosetor") long idinfosetor) {
+        InfoSetor infoSetor = infoSetorRepository.findByIdInfosetor(idinfosetor);
         return infoSetor;
     }
 

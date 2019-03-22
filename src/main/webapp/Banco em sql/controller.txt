@@ -19,7 +19,7 @@ public class Controller {
 	        return "index";
 	    }
 
-	@RequestMapping("/loginGerente")
+	@RequestMapping("/gerentelogado")
 	public String loginGerente() {
 
 		return "login_gerente";
