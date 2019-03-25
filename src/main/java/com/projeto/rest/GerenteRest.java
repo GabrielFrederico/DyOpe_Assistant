@@ -1,7 +1,6 @@
 package com.projeto.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,7 +8,7 @@ import com.projeto.models.Gerente;
 import com.projeto.repository.GerenteRepository;
 import org.springframework.web.servlet.ModelAndView;
 
-@Controller
+@RestController
 public class GerenteRest {
 
     @Autowired

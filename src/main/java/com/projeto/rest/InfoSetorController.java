@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-@Controller
+@RestController
 public class InfoSetorController {
 
     @Autowired
@@ -19,7 +19,7 @@ public class InfoSetorController {
         return new ModelAndView("funcionario_index");
     }
 
-    @ResponseBody
+
     @RequestMapping(method = RequestMethod.GET, value = "infosetores")
     public Iterable<InfoSetor> listAll() {
         return infoSetorRepository.findAll();
@@ -36,7 +36,7 @@ public class InfoSetorController {
         infoSetorRepository.save(infoSetor);
         return infoSetor;
     }
-    @ResponseBody
+
     @RequestMapping(method = RequestMethod.DELETE, path = "/{idinfosetor}")
     public InfoSetor deleteInfoSetorById(@PathVariable("idInfosetor") long idInfosetor) {
         InfoSetor infoSetor = infoSetorRepository.findByIdInfosetor(idInfosetor);
