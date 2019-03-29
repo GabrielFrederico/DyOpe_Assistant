@@ -10,7 +10,7 @@ import {AppRoutingModule, routingComponent, routingComponent2} from './app-routi
     declarations: [
         AppComponent,
        routingComponent,
-      routingComponent2
+      routingComponent2,
     ],
     imports: [
         AppRoutingModule,

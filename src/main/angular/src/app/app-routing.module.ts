@@ -6,6 +6,7 @@ import {GerenteIndexComponent} from './gerente-index/gerente-index.component';
 import {EsqueceuSenhaComponent} from './esqueceu-senha/esqueceu-senha.component';
 import {CadastroGerenteComponent} from './cadastro-gerente/cadastro-gerente.component';
 import {LoginFuncionarioComponent} from './login-funcionario/login-funcionario.component';
+import {PerfilGerenteComponent} from './perfil-gerente/perfil-gerente.component';
 
 
 const routes: Routes = [
@@ -14,7 +15,8 @@ const routes: Routes = [
     {path: '', component: IndexComponent},
     {path: 'gerenteindex', component: GerenteIndexComponent},
     {path: 'esqueceusenha', component: EsqueceuSenhaComponent},
-    {path: 'cadastrogerente', component: CadastroGerenteComponent}
+    {path: 'cadastrogerente', component: CadastroGerenteComponent},
+    {path: 'perfilgerente', component: PerfilGerenteComponent},
 ];
 
 @NgModule({
@@ -25,4 +27,4 @@ export class AppRoutingModule {
 }
 export const routingComponent = [LoginGerenteComponent, LoginFuncionarioComponent, IndexComponent, GerenteIndexComponent];
 
-export const routingComponent2 = [EsqueceuSenhaComponent, CadastroGerenteComponent];
+export const routingComponent2 = [EsqueceuSenhaComponent, CadastroGerenteComponent, PerfilGerenteComponent];
