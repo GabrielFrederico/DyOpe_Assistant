@@ -3,15 +3,14 @@ import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
 import {RouterModule, Routes} from '@angular/router';
-import {AppRoutingModule, routingComponent} from './app-routing.module';
-import { GerenteIndexComponent } from './gerente-index/gerente-index.component';
-
+import {AppRoutingModule, routingComponent, routingComponent2} from './app-routing.module';
 
 @NgModule({
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
     declarations: [
         AppComponent,
-       routingComponent
+       routingComponent,
+      routingComponent2
     ],
     imports: [
         AppRoutingModule,
