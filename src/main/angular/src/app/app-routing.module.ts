@@ -5,7 +5,7 @@ import {IndexComponent} from './index-app/index.component';
 import {GerenteIndexComponent} from './gerente-index/gerente-index.component';
 import {EsqueceuSenhaComponent} from './esqueceu-senha/esqueceu-senha.component';
 import {CadastroGerenteComponent} from './cadastro-gerente/cadastro-gerente.component';
-import {LoginFuncionarioComponent} from "./login-funcionario/login-funcionario.component";
+import {LoginFuncionarioComponent} from './login-funcionario/login-funcionario.component';
 
 
 const routes: Routes = [
@@ -23,6 +23,6 @@ const routes: Routes = [
 })
 export class AppRoutingModule {
 }
-export const routingComponent = [LoginGerenteComponent, LoginFuncionarioComponent, CadastroGerenteComponent, EsqueceuSenhaComponent, IndexComponent, GerenteIndexComponent];
+export const routingComponent = [LoginGerenteComponent, LoginFuncionarioComponent, IndexComponent, GerenteIndexComponent];
 
 export const routingComponent2 = [EsqueceuSenhaComponent, CadastroGerenteComponent];
