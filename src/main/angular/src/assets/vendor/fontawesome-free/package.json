@@ -76,6 +76,6 @@
     "type": "git",
     "url": "git+https://github.com/FortAwesome/Font-Awesome.git"
   },
-  "style": "css/fontawesome.css",
+  "style": "assets/css/fontawesome.css",
   "version": "5.3.1"
 }
