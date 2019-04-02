@@ -8,8 +8,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
+  <base href="/src">
 
-  <title>Redefinir senha</title>
+  <title>Login</title>
 
   <!-- Bootstrap core CSS-->
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -24,28 +25,40 @@
 
 </head>
 
-<body class="bg-lightblue">
+<body class="bg-light">
 
 <div class="container">
   <div class="card card-login mx-auto mt-5">
-    <div class="card-header bg-info text-light">Redefinir Senha</div>
+    <div class="card-header bg-info text-light">Login</div>
     <div class="card-body">
-      <div class="text-center mb-4">
-        <h4>Esqueceu sua senha?</h4>
-        <p>Digite seu endere�o de e-mail e n�s lhe enviaremos instru��es sobre como redefinir sua senha.</p>
-      </div>
-      <form>
+      <form method="get" action="/loginfuncionario">
         <div class="form-group">
           <div class="form-label-group">
-            <input type="email" id="inputEmail" class="form-control" placeholder="Insira seu e-mail"
+            <input type="email" id="inputEmail" name="Email" class="form-control" placeholder="Email"
                    required="required" autofocus="autofocus">
-            <label for="inputEmail">Insira seu e-mail</label>
+            <label for="inputEmail">Email</label>
           </div>
         </div>
-        <input class="btn btn-primary btn-block" type="submit" value="Redefinir Senha">
+        <div class="form-group">
+          <div class="form-label-group">
+            <input type="password" name="Password" id="inputPassword" class="form-control"
+                   placeholder="Senha" required="required">
+            <label for="inputPassword"> Senha</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" value="remember-me">
+              Lembrar da senha
+            </label>
+          </div>
+        </div>
+        <input class="btn btn-info btn-block" type="submit" value="Login">
       </form>
       <div class="text-center">
-        <a class="d-block small" href="index.html"> P�gina de Login</a>
+        <a class="d-block small mt-3" href="cadastro_funcionario.html">Registre uma conta</a>
+        <a class="d-block small" href="forgot-password.html">Esqueceu a senha?</a>
       </div>
     </div>
   </div>
