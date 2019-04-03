@@ -30,12 +30,20 @@
 
 <body id="page-top">
 
-    <app-nav-bar></app-nav-bar>
+<app-nav-bar></app-nav-bar>
 
 <div id="wrapper">
 
     <!-- Sidebar -->
-    <app-sidebar></app-sidebar>
+    <ul [ngbCollapse]="isCollapsed" class="sidebar bg-primary navbar-nav">
+        <app-sidebar></app-sidebar>
+        <li class="nav-item text-light">
+            <a class="nav-link text-light" routerLink="/controlefuncionarios">
+                <span>Controle</span>
+            </a>
+
+        </li>
+    </ul>
 
     <div id="content-wrapper" class="fundo">
 
@@ -89,7 +97,7 @@
             <div class="modal-body">Selecione "Sair" abaixo se você estiver pronto para encerrar sua sessão atual.</div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-                <a class="btn btn-primary" href="index.html">Sair</a>
+                <a class="btn btn-primary" routerLink="/">Sair</a>
             </div>
         </div>
     </div>

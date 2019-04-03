@@ -1,7 +1,6 @@
-<ul [ngbCollapse]="isCollapsed" class="sidebar bg-primary navbar-nav">
 
         <li ngbDropdown class="nav-item dropdown">
-            <a ngbDropdownToggle class="nav-link dropdown-toggle text-light"  id="pagesDropdown" role="button"
+            <a ngbDropdownToggle class="nav-link dropdown-toggle text-light"  id="pagesDropdown"  href="javascript:void(0)" role="button"
                data-toggle="dropdown"
                aria-haspopup="false" aria-expanded="false">
                 <span>Operações</span>
@@ -9,17 +8,10 @@
             <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="pagesDropdown" x-placement="bottom-start">
                 <h6 class="dropdown-header">Tipos de Operações</h6>
                 <a class="dropdown-item" routerLink="/operacaorisco">Risco</a>
-                <a class="dropdown-item" href="operacao_corte.html">Corte</a>
-                <a class="dropdown-item" href="operacao_costura.html">Costura</a>
-                <a class="dropdown-item" href="operacao_beneficiamento.html">Beneficiamento</a>
-                <a class="dropdown-item" href="operacao_acabamento.html">Acabamento</a>
+                <a class="dropdown-item" routerLink="/operacaocorte">Corte</a>
+                <a class="dropdown-item" routerLink="/operacaocostura">Costura</a>
+                <a class="dropdown-item" routerLink="/operacaobeneficiamento">Beneficiamento</a>
+                <a class="dropdown-item" routerLink="/operacaoacabamento">Acabamento</a>
             </div>
         </li>
-        <li class="nav-item text-light">
-            <a class="nav-link text-light" href="controle_funcionarios.html">
-                <span>Controle</span>
-            </a>
 
-        </li>
-
-    </ul>
