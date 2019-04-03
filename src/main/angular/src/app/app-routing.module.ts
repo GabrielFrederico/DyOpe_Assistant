@@ -7,7 +7,7 @@ import {EsqueceuSenhaComponent} from './esqueceu-senha/esqueceu-senha.component'
 import {CadastroGerenteComponent} from './cadastro-gerente/cadastro-gerente.component';
 import {LoginFuncionarioComponent} from './login-funcionario/login-funcionario.component';
 import {PerfilGerenteComponent} from './perfil-gerente/perfil-gerente.component';
-import {OperacaoRiscoComponent} from "./operacao-risco/operacao-risco.component";
+import {OperacaoRiscoComponent} from './operacao-risco/operacao-risco.component';
 
 
 const routes: Routes = [
