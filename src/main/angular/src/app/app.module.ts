@@ -7,6 +7,7 @@ import {AppRoutingModule, routingComponent, routingComponent2} from './app-routi
 import { OperacaoRiscoComponent } from './operacao-risco/operacao-risco.component';
 import {SidebarComponent} from './sidebar/sidebar.component';
 import {NavBarComponent} from './nav-bar/nav-bar.component';
+import {NgbCollapseModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -19,7 +20,9 @@ import {NavBarComponent} from './nav-bar/nav-bar.component';
     ],
     imports: [
         AppRoutingModule,
-        BrowserModule
+        BrowserModule,
+        NgbCollapseModule,
+        NgbModule
     ],
     exports: [RouterModule],
     providers: [],
