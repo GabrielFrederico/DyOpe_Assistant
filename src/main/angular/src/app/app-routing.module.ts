@@ -30,7 +30,6 @@ const routes: Routes = [
   {path: 'esqueceusenha', component: EsqueceuSenhaComponent},
   {path: 'cadastrogerente', component: CadastroGerenteComponent},
   {path: 'perfilgerente', component: PerfilGerenteComponent},
-
   {path: 'cadastrofuncionario', component: CadastroFuncionarioComponent},
   {path: 'cadastrosetor', component: CadastroSetorComponent},
   {path: 'controlefuncionarios', component: ControleFuncionariosComponent},
