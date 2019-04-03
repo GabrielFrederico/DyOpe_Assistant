@@ -7,6 +7,17 @@ import {EsqueceuSenhaComponent} from './esqueceu-senha/esqueceu-senha.component'
 import {CadastroGerenteComponent} from './cadastro-gerente/cadastro-gerente.component';
 import {LoginFuncionarioComponent} from './login-funcionario/login-funcionario.component';
 import {PerfilGerenteComponent} from './perfil-gerente/perfil-gerente.component';
+import {ErroComponent} from './erro/erro.component';
+import {CadastroFuncionarioComponent} from './cadastro-funcionario/cadastro-funcionario.component';
+import {CadastroSetorComponent} from './cadastro-setor/cadastro-setor.component';
+import {ControleFuncionariosComponent} from './controle-funcionarios/controle-funcionarios.component';
+import {FuncionarioIndexComponent} from './funcionario-index/funcionario-index.component';
+import {InformacoesSetorComponent} from './informacoes-setor/informacoes-setor.component';
+import {PerfilFuncionarioComponent} from './perfil-funcionario/perfil-funcionario.component';
+import {OperacaoAcabamentoComponent} from './operacao-acabamento/operacao-acabamento.component';
+import {OperacaoBeneficiamentoComponent} from './operacao-beneficiamento/operacao-beneficiamento.component';
+import {OperacaoCorteComponent} from './operacao-corte/operacao-corte.component';
+import {OperacaoCosturaComponent} from './operacao-costura/operacao-costura.component';
 import {OperacaoRiscoComponent} from './operacao-risco/operacao-risco.component';
 
 
@@ -18,7 +29,6 @@ const routes: Routes = [
     {path: 'esqueceusenha', component: EsqueceuSenhaComponent},
     {path: 'cadastrogerente', component: CadastroGerenteComponent},
     {path: 'perfilgerente', component: PerfilGerenteComponent},
-    {path: 'operacaorisco', component: OperacaoRiscoComponent}
 ];
 
 @NgModule({
@@ -29,4 +39,12 @@ export class AppRoutingModule {
 }
 export const routingComponent = [LoginGerenteComponent, LoginFuncionarioComponent, IndexComponent, GerenteIndexComponent];
 
-export const routingComponent2 = [EsqueceuSenhaComponent, CadastroGerenteComponent, OperacaoRiscoComponent, PerfilGerenteComponent];
+export const routingComponent2 = [ErroComponent, EsqueceuSenhaComponent, CadastroGerenteComponent, PerfilGerenteComponent];
+
+export const routingComponent3 = [CadastroFuncionarioComponent, CadastroSetorComponent, ControleFuncionariosComponent];
+
+export const routingComponent4 = [FuncionarioIndexComponent, InformacoesSetorComponent, PerfilFuncionarioComponent];
+
+export const routingComponent5 = [OperacaoAcabamentoComponent, OperacaoBeneficiamentoComponent, OperacaoCorteComponent];
+
+export const routingComponent6 = [OperacaoCosturaComponent, OperacaoRiscoComponent];
