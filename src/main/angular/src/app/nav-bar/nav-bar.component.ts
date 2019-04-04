@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-gerente-index',
-  templateUrl: './gerente-index.component.html'
+  selector: 'app-nav-bar',
+  templateUrl: './nav-bar.component.html'
 })
-export class GerenteIndexComponent implements OnInit {
+export class NavBarComponent implements OnInit {
   public isCollapsed = false;
   constructor() { }
 

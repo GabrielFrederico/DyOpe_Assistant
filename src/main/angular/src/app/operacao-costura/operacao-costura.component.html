@@ -9,6 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
   <base href="/src">
+
   <title>Operações</title>
 
   <!-- Bootstrap core CSS-->
@@ -33,7 +34,7 @@
 <nav class="navbar navbar-expand bg-lightblue static-top">
 
 
-  <a class="navbar-brand mr-1" routerLink="/gerenteindex">DyOpe Assistant</a>
+  <a class="navbar-brand mr-1" href="gerente_index">DyOpe Assistant</a>
   <button class="btn btn-link btn-sm order-1 order-sm-0" id="sidebarToggle" href="#">
     <i class="fas fa-bars"></i>
   </button>
@@ -101,7 +102,7 @@
       </a>
       <div class="dropdown-menu" aria-labelledby="pagesDropdown" x-placement="bottom-start">
         <h6 class="dropdown-header">Tipos de Operações</h6>
-        <a class="dropdown-item" routerLink="/operacaorisco">Risco</a>
+        <a class="dropdown-item" routerLink="operacaorisco">Risco</a>
         <a class="dropdown-item" routerLink="operacaocorte">Corte</a>
         <a class="dropdown-item" routerLink="operacaocostura">Costura</a>
         <a class="dropdown-item" routerLink="operacaobeneficiamento">Beneficiamento</a>
@@ -114,12 +115,11 @@
 
   <div id="content-wrapper" class="fundo">
 
-    <div class="container-fluid">
-
+    <div class="container-fluid ">
 
       <!-- Page Content -->
 
-      <h1>Operação Risco</h1>
+      <h1>Operação Costura</h1>
       <hr>
 
       <div class="row">
@@ -127,8 +127,7 @@
           <div class="card border-info mb-3 lista">
             <div class="card-header border-info">Operações a fazer</div>
             <div class="card-body text-secondary">
-              <a class="btn btn-outline-info list-group-item list-group-item-action " href="#"
-                 data-toggle="modal" data-target=".informations">
+              <a class="btn btn-outline-info list-group-item list-group-item-action ">
                 Costura
               </a>
               <a class="btn btn-outline-info list-group-item list-group-item-action ">
@@ -136,7 +135,8 @@
               </a>
             </div>
             <div class="card-footer bg-transparent border-info">
-              <a class="btn btn-info" href="#" data-toggle="modal" data-target=".cadastro-operacoes">Cadastrar</a>
+              <a href="#" data-toggle="modal"
+                 data-target=".cadastro-operacoes" class="btn btn-info">Cadastrar </a>
             </div>
           </div>
         </div>
@@ -152,8 +152,8 @@
 
             </div>
             <div class="card-footer bg-transparent border-warning">
-              <a class="btn btn-outline-warning" href="#" data-toggle="modal"
-                 data-target=".cadastro-operacoes">Cadastrar </a>
+              <a href="#" data-toggle="modal"
+                 data-target=".cadastro-operacoes" class="btn btn-outline-warning">Cadastrar </a>
             </div>
           </div>
         </div>
@@ -220,22 +220,22 @@
   </div>
 </div>
 
-<!--Modal Informações: -->
+<!--Modal Cadastro: -->
 
-<div class="modal fade informations" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+<div class="modal fade cadastro-operacoes" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
      aria-hidden="true">
   <div class="modal-dialog modal-lg">
 
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="myLargeModalLabel">Informações da Operações:</h4>
+        <h4 class="modal-title" id="myLargeModalLabel">Cadastro de Operações:</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">×</span>
         </button>
       </div>
       <div class="modal-body">
         <div class="card-body">
-          <form method="post" action="operacao_risco">
+          <form method="post" action="operacao_costura">
             <div class="form-group">
               <div class="form-group">
 
@@ -264,142 +264,24 @@
                   </div>
                 </div>
               </div>
-              <div class="form-group">
-                <div class="form-row">
-                  <div class="col-md-6">
-                    <div class="form-label-group">
-                      <input type="text" id="custosOpe" class="form-control fa-credit-card"
-                             placeholder="Custos"
-                             required="required">
-                      <label for="custosOpe">Custos:</label>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-label-group">
-                      <input type="number" id="LoteProd" class="form-control"
-                             placeholder="Lote de Produção"
-                             required="required">
-                      <label for="LoteProd">Lote de Produção:</label>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="form-group">
-                <div class="form-row">
-                  <div class="col-md-6">
-                    <div class="form-label-group">
-                      <input type="number" id="FuncNesc" class="form-control"
-                             placeholder="Funcionários necessários:"
-                             required="required">
-                      <label for="FuncNesc">Funcionários necessários:</label>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-label-group">
-                      <input type="number" id="QtdPecasFunc" class="form-control"
-                             placeholder="Quantidade de peças por funcionário:"
-                             required="required">
-                      <label for="QtdPecasFunc">Quantidade de peças por funcionário:</label>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="form-group">
-                <div class="form-row">
-                  <div class="col-md-6">
-                    <div class="form-label-group">
-                      <input type="number" id="TempoPeca" class="form-control"
-                             placeholder="Tempo necessário por peça:"
-                             required="required">
-                      <label for="TempoPeca">Tempo necessário por peça:</label>
-                    </div>
-                  </div>
-                </div>
-
-
-              </div>
-
-
-            </div>
-            <div class="modal-footer col-md-12">
-
-              <button class="btn btn-secondary" type="button" data-dismiss="modal">Sair</button>
-              <input class="btn btn-info" type="button" value="Editar">
-              <input class="btn btn-success" type="submit" value="Salvar">
-
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<!--Modal Cadastro: -->
-
-<div class="modal fade cadastro-operacoes" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-     aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title" id="myLargeModalLabel">Cadastro de Operações:</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">×</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="card-body">
-          <form method="post" action="operacoes/cadastrarOperacao">
-            <div class="form-group">
-              <div class="form-group">
-
-                <label for="DescricaoOp">Descrição da operação:</label>
-                <textarea required="required" name="descricao" class="form-control" rows="2"
-                          id="DescricaoOp"></textarea>
-              </div>
-              <div class="form-group">
-                <div class="form-row">
-                  <div class="col-md-6">
-                    <div class="form-label-group">
-                      <input type="date" id="datainici" name="dataInicio" class="form-control"
-                             placeholder="Data Inicio:"
-                             required="required">
-                      <label for="datainici">Data Inicio:</label>
-                    </div>
-                  </div>
-
-                  <div class="col-md-6">
-                    <div class="form-label-group">
-                      <input type="date" id="datalimit" name="prazo" class="form-control"
-                             placeholder="Data limite:"
-                             required="required">
-                      <label for="datalimit">Data limite:</label>
-                    </div>
-                  </div>
-                </div>
-              </div>
 
               <div class="form-row">
                 <div class="col-md-6">
                   <div class="form-label-group">
-                    <input type="text" id="custosOp" name="custosOpe"
-                           class="form-control fa-credit-card"
+                    <input type="text" id="custosOpe" class="form-control fa-credit-card"
                            placeholder="Custos"
                            required="required">
-                    <label for="custosOp">Custos:</label>
+                    <label for="custosOpe">Custos:</label>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-label-group">
-                    <input type="number" id="LotePro" name="loteProducao" class="form-control"
+                    <input type="number" id="LoteProd" class="form-control"
                            placeholder="Lote de Produção"
                            required="required">
-                    <label for="LotePro">Lote de Produção:</label>
+                    <label for="LoteProd">Lote de Produção:</label>
                   </div>
                 </div>
-
               </div>
             </div>
 
@@ -413,7 +295,6 @@
     </div>
   </div>
 </div>
-
 
 <!-- Bootstrap core JavaScript-->
 <script src="assets/vendor/jquery/jquery.min.js"></script>
