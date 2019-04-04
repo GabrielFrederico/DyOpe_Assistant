@@ -1,78 +1,47 @@
 package com.projeto.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 import com.projeto.models.Gerente;
 import com.projeto.repository.GerenteRepository;
-import org.springframework.web.servlet.ModelAndView;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
+@RequestMapping("gerentes")
 public class GerenteRest {
 
     @Autowired
     GerenteRepository gerenteRepository;
 
-    @RequestMapping("/")
-    String index() {
-        return "index";
-
-    }
 
     @RequestMapping(method = RequestMethod.POST, value = "/cadastrargerente")
-    public ModelAndView save(Gerente gerente) {
+    public Gerente save(Gerente gerente) {
         gerenteRepository.save(gerente);
-        return new ModelAndView("login_gerente", "gerente", gerente);
+        return gerente;
     }
 
 
     @RequestMapping(method = RequestMethod.GET, value = "/perfilGerente.{id}")
-    public ModelAndView teste(@PathVariable("id") long id) {
+    public Gerente teste(@PathVariable("id") long id) {
         Gerente gerente = gerenteRepository.findById(id);
-        ModelAndView model = new ModelAndView("perfil_gerente", "gerente", gerente);
-        model.addObject("nomeGerente", gerente.getNome());
-        model.addObject("cpfGerente", gerente.getCpf());
-        model.addObject("rgGerente", gerente.getRg());
-        model.addObject("emailGerente", gerente.getEmail());
-
-        return model;
+        return gerente;
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/redefinirPerfilGerente")
-    public ModelAndView redefinirPerfilGerente(Gerente gerente) {
-        ModelAndView model12 = new ModelAndView("perfil_gerente", "gerente", gerente);
+    public Gerente redefinirPerfilGerente(Gerente gerente) {
         gerenteRepository.save(gerente);
-        return model12;
+        return gerente;
     }
-
-    @RequestMapping(method = RequestMethod.GET, path = "/perfil/{nome}")
-    public ModelAndView perfil(@PathVariable("nome") String nome) {
-        Gerente perfilGerente3 = gerenteRepository.findByNome(nome);
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("nomeGerente", perfilGerente3.getNome());
-        modelAndView.setViewName("redirect:/gerentePerfil");
-        return modelAndView;
-    }
-
-    @RequestMapping("/hello")
-    public String hello(Model model, @RequestParam(value = "name", required = false, defaultValue = "World") String name) {
-        model.addAttribute("name", name);
-        return "hello";
-    }
-
 
     @RequestMapping(value = "/gerentelogado", method = RequestMethod.GET)
-    public ModelAndView login(Model model1, Gerente gerente, String error, String logout) {
+    public Gerente login(Gerente gerente, String error, String logout) {
         gerenteRepository.findById(gerente.getId());
-        ModelAndView model = new ModelAndView("gerente_index", "gerente", gerente);
-        model.addObject("nomeGerente", gerente.getNome());
 
-        return model;
+        return gerente;
     }
 
 
-    @RequestMapping(method = RequestMethod.GET, value = "gerentes")
+    @RequestMapping(method = RequestMethod.GET)
     public Iterable<Gerente> listAll() {
         return gerenteRepository.findAll();
     }

@@ -31,13 +31,13 @@
   <div class="card card-register mx-auto mt-5">
     <div class="card-header bg-info text-light">Cadastro</div>
     <div class="card-body">
-      <form method="post" action="/cadastrargerente">
+      <form >
 
         <div class="form-group">
           <div class="form-row">
             <div class="col-md-6">
               <div class="form-label-group">
-                <input type="text" name="nome" id="nomeCompleto" class="form-control"
+                <input type="text" [(ngModel)]="gerente.nome" name="nome" id="nomeCompleto" class="form-control"
                        autofocus="autofocus"
                        placeholder="Nome Completo" required="required">
                 <label for="nomeCompleto">Nome Completo</label>
@@ -99,7 +99,7 @@
             </div>
           </div>
         </div>
-        <input class="btn btn-info btn-block" type="submit" value="Cadastrar">
+        <input class="btn btn-info btn-block" type="submit" (click)="cadastrarGerente()" routerLink="/logingerente" value="Cadastrar">
       </form>
       <div class="text-center">
         <a class="d-block small mt-3" routerLink="/logingerente">Página de login</a>

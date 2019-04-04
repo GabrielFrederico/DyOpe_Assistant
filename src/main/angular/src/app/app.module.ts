@@ -9,6 +9,12 @@ import {SidebarComponent} from './sidebar/sidebar.component';
 import {NavBarComponent} from './nav-bar/nav-bar.component';
 import {NgbCollapseModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {AngularFontAwesomeModule} from 'angular-font-awesome';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NavComponent } from './nav/nav.component';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule } from '@angular/material';
+import { GerenteComponent } from './gerente/gerente.component';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -21,14 +27,24 @@ import {AngularFontAwesomeModule} from 'angular-font-awesome';
         routingComponent5,
         routingComponent6,
         SidebarComponent,
-        NavBarComponent
+        NavBarComponent,
+        NavComponent,
+        GerenteComponent
     ],
     imports: [
         AppRoutingModule,
         BrowserModule,
         NgbCollapseModule,
         NgbModule,
-      AngularFontAwesomeModule
+      AngularFontAwesomeModule,
+      BrowserAnimationsModule,
+      LayoutModule,
+      MatToolbarModule,
+      MatButtonModule,
+      MatSidenavModule,
+      MatIconModule,
+      MatListModule,
+      HttpClientModule
     ],
     exports: [RouterModule],
     providers: [],
