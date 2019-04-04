@@ -16,7 +16,7 @@
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- Custom fonts for this template-->
-  <link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+ 
 
   <!-- Page level plugin CSS-->
   <link href="assets/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
@@ -32,7 +32,7 @@
 
 <nav class="navbar navbar-expand bg-lightblue static-top">
 
-  <a class="navbar-brand mr-1" href="gerente_index">DyOpe Assistant</a>
+  <a class="navbar-brand mr-1" routerLink="/gerenteindex">DyOpe Assistant</a>
 
   <button class="btn btn-link btn-sm order-1 order-sm-0" id="sidebarToggle" href="#">
     <i class="fas fa-bars"></i>
@@ -91,20 +91,21 @@
 
   <!-- Sidebar -->
   <ul class="sidebar bg-primary navbar-nav">
-    <li class="nav-item dropdown">
-      <a class="nav-link dropdown-toggle text-light" href="#" id="pagesDropdown" role="button"
+    <li ngbDropdown class="nav-item dropdown">
+      <a ngbDropdownToggle class="nav-link dropdown-toggle text-light" href="javascript:void(0)" id="pagesDropdown" role="button"
          data-toggle="dropdown"
          aria-haspopup="false" aria-expanded="false">
         <span>Setores</span>
       </a>
-      <div class="dropdown-menu" aria-labelledby="pagesDropdown" x-placement="bottom-start">
-        <a class="dropdown-item" routerLink="/controlefuncionarios">Risco</a>
-        <a class="dropdown-item" routerLink="/controlefuncionarios">Corte</a>
-        <a class="dropdown-item" routerLink="/controlefuncionarios">Costura</a>
-        <a class="dropdown-item" routerLink="/controlefuncionarios">Beneficiamento</a>
-        <a class="dropdown-item" routerLink="/controlefuncionarios">Acabamento</a>
+      <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="pagesDropdown" x-placement="bottom-start">
+        <a class="dropdown-item" routerLink="/funcionarioindex">Risco</a>
+        <a class="dropdown-item" routerLink="/funcionarioindex">Corte</a>
+        <a class="dropdown-item" routerLink="/funcionarioindex">Costura</a>
+        <a class="dropdown-item"  routerLink="/funcionarioindex">Beneficiamento</a>
+        <a class="dropdown-item" routerLink="/funcionarioindex">Acabamento</a>
       </div>
     </li>
+
     <li class="nav-item text-light">
       <a class="nav-link text-light" routerLink="/cadastrosetor">
         <span>Cadastrar setor</span>

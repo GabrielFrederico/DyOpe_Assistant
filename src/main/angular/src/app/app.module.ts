@@ -8,6 +8,7 @@ import {routingComponent3, routingComponent4, routingComponent5, routingComponen
 import {SidebarComponent} from './sidebar/sidebar.component';
 import {NavBarComponent} from './nav-bar/nav-bar.component';
 import {NgbCollapseModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {AngularFontAwesomeModule} from 'angular-font-awesome';
 
 @NgModule({
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -26,7 +27,8 @@ import {NgbCollapseModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
         AppRoutingModule,
         BrowserModule,
         NgbCollapseModule,
-        NgbModule
+        NgbModule,
+      AngularFontAwesomeModule
     ],
     exports: [RouterModule],
     providers: [],

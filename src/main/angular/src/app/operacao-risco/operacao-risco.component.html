@@ -15,7 +15,7 @@
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- Custom fonts for this template-->
-  <link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+
 
   <!-- Page level plugin CSS-->
   <link href="assets/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
@@ -92,23 +92,7 @@
 
   <!-- Sidebar -->
   <ul class="sidebar bg-primary navbar-nav">
-
-    <li class="nav-item dropdown ">
-      <a class="nav-link dropdown-toggle text-light" href="#" id="pagesDropdown" role="button"
-         data-toggle="dropdown"
-         aria-haspopup="true" aria-expanded="false">
-        <span>Operações</span>
-      </a>
-      <div class="dropdown-menu" aria-labelledby="pagesDropdown" x-placement="bottom-start">
-        <h6 class="dropdown-header">Tipos de Operações</h6>
-        <a class="dropdown-item" routerLink="/operacaorisco">Risco</a>
-        <a class="dropdown-item" routerLink="operacaocorte">Corte</a>
-        <a class="dropdown-item" routerLink="operacaocostura">Costura</a>
-        <a class="dropdown-item" routerLink="operacaobeneficiamento">Beneficiamento</a>
-        <a class="dropdown-item" routerLink="operacaoacabamento">Acabamento</a>
-
-      </div>
-    </li>
+    <app-sidebar></app-sidebar>
   </ul>
 
 

@@ -58,6 +58,9 @@
 import 'zone.js/dist/zone';  // Included with Angular CLI.
 
 
+/** IE10 and IE11 requires the following for the Reflect API. */
+// import 'core-js/es6/reflect';
+
 /***************************************************************************************************
  * APPLICATION IMPORTS
  */
