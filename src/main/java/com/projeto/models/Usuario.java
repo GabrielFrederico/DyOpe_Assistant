@@ -6,7 +6,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Usuario {
+public abstract class Usuario {
+    public Usuario(String nomeUsuario, String senha) {
+        this.nomeUsuario = nomeUsuario;
+        this.senha = senha;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

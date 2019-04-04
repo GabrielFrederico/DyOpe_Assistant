@@ -4,8 +4,18 @@ import javax.persistence.*;
 
 
 @Entity
-public class Gerente {
-    
+public class Gerente extends Usuario {
+
+	public Gerente(String nomeUsuario, String senha, String nome, String rg, String senhaConfirm, char statusSYS, String cpf, String email) {
+		super(nomeUsuario, senha);
+		this.nome = nome;
+		this.rg = rg;
+		this.senhaConfirm = senhaConfirm;
+		this.statusSYS = statusSYS;
+		this.cpf = cpf;
+		this.email = email;
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
@@ -13,22 +23,10 @@ public class Gerente {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long idusuario;
 	private String nome;
-	private String senha;
-
-	public String getSenha() {
-		return senha;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
-
 	private String rg;
+	@Transient
+	private String senhaConfirm;
 	private char statusSYS;
-
-	public char getStatusSYS() {
-		return statusSYS;
-	}
 
 	public void setStatusSYS(char statusSYS) {
 		this.statusSYS = statusSYS;
@@ -46,9 +44,6 @@ public class Gerente {
 		this.senhaConfirm = senhaConfirm;
 	}
 
-	@Transient
-	private String senhaConfirm;
-	
 	public long getId() {
 		return id;
 	}
