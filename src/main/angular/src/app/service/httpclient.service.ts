@@ -3,7 +3,15 @@ import {HttpClient} from '@angular/common/http';
 
 export class Gerente {
  constructor(
-   public nome: string
+   public nome: string,
+   public nomeUsuario: string,
+   public cpf: string,
+   public rg: string,
+   public email: string,
+   public senhaConfirm: string,
+   public senha: string,
+
+
  ) {}
 }
 

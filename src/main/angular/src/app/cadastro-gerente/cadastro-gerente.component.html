@@ -42,10 +42,10 @@
                        placeholder="Nome Completo" required="required">
                 <label for="nomeCompleto">Nome Completo</label>
               </div>
-            </div>
-            <div class="col-md-6">
+
               <div class="form-label-group">
-                <input type="text" name="nomeUsuario" id="nomeUser" class="form-control"
+                <input type="text" [(ngModel)]="gerente.nomeUsuario" name="nomeUsuario" id="nomeUser"
+                       class="form-control"
                        autofocus="autofocus"
                        placeholder="Nome Completo" required="required">
                 <label for="nomeUser">Nome de usuario</label>
@@ -57,14 +57,14 @@
           <div class="form-row">
             <div class="col-md-6">
               <div class="form-label-group">
-                <input type="text" name="cpf" id="cpf" class="form-control" placeholder="CPF"
+                <input type="text" [(ngModel)]="gerente.cpf" name="cpf" id="cpf" class="form-control" placeholder="CPF"
                        required="required">
                 <label for="cpf">CPF</label>
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-label-group">
-                <input type="text" name="rg" id="rg" class="form-control" placeholder="RG"
+                <input type="text" [(ngModel)]="gerente.rg" name="rg" id="rg" class="form-control" placeholder="RG"
                        required="required">
                 <label for="rg">RG</label>
               </div>
@@ -74,7 +74,7 @@
 
         <div class="form-group">
           <div class="form-label-group">
-            <input type="email" name="email" id="inputEmail" class="form-control"
+            <input type="email" [(ngModel)]="gerente.email" name="email" id="inputEmail" class="form-control"
                    placeholder="Endereço de e-mail"
                    required="required">
             <label for="inputEmail">Endereço de e-mail</label>
@@ -84,7 +84,7 @@
           <div class="form-row">
             <div class="col-md-6">
               <div class="form-label-group">
-                <input type="password" name="senha" id="inputPassword" class="form-control"
+                <input type="password"  [(ngModel)]="gerente.senha" name="senha" id="inputPassword" class="form-control"
                        placeholder="Senha"
                        required="required">
                 <label for="inputPassword">Senha</label>
@@ -92,7 +92,7 @@
             </div>
             <div class="col-md-6">
               <div class="form-label-group">
-                <input type="password" name="senhaConfirm" id="confirmPassword" class="form-control"
+                <input type="password" [(ngModel)]="gerente.senhaConfirm" name="senhaConfirm" id="confirmPassword" class="form-control"
                        placeholder="Confirmar senha" required="required">
                 <label for="confirmPassword">Confirmar senha</label>
               </div>
