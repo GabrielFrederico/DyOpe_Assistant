@@ -1,21 +1,32 @@
 package com.projeto.models;
 
-import org.springframework.data.annotation.PersistenceConstructor;
-import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 
 @Entity
-public class Gerente extends Usuario {
+public class Gerente {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long idusuario;
+	private String nomeUsuario;
+	private String senha;
 	private String nome;
 	private String rg;
 	private String cpf;
+
+	public Gerente() {
+	}
+
+	public Gerente(String nomeUsuario, String senha, String nome, String rg, String cpf, String email, String senhaConfirm) {
+		this.nomeUsuario = nomeUsuario;
+		this.senha = senha;
+		this.nome = nome;
+		this.rg = rg;
+		this.cpf = cpf;
+		this.email = email;
+		this.senhaConfirm = senhaConfirm;
+	}
 
 	private String email;
 	@Transient
@@ -37,13 +48,6 @@ public class Gerente extends Usuario {
 		this.id = id;
 	}
 
-	public long getIdusuario() {
-		return idusuario;
-	}
-
-	public void setIdusuario(long idusuario) {
-		this.idusuario = idusuario;
-	}
 
 	public String getNome() {
 		return nome;
