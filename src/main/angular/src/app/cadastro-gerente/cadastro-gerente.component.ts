@@ -7,7 +7,7 @@ import {Gerente, HttpClientService} from '../service/httpclient.service';
 })
 export class CadastroGerenteComponent implements OnInit {
 
-  gerente: Gerente = new Gerente('');
+  gerente: Gerente = new Gerente('','','','','','','');
 
   constructor(
     private httpClientService: HttpClientService

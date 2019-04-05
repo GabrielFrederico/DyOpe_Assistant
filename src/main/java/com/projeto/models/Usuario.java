@@ -1,5 +1,7 @@
 package com.projeto.models;
 
+import org.springframework.data.annotation.PersistenceConstructor;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -7,17 +9,16 @@ import javax.persistence.Id;
 
 @Entity
 public abstract class Usuario {
-    public Usuario(String nomeUsuario, String senha) {
-        this.nomeUsuario = nomeUsuario;
-        this.senha = senha;
-    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String nomeUsuario;
     private String senha;
-    private boolean statusSYS;
+    private boolean statusSYS = true;
+
+
+
 
     public boolean getStatusSYS() {
         return statusSYS;
