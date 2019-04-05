@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Gerente, HttpClientService} from '../service/httpclient.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-cadastro-gerente',
@@ -10,7 +11,8 @@ export class CadastroGerenteComponent implements OnInit {
   gerente: Gerente = new Gerente();
   submitted = false;
 
-  constructor(private http: HttpClientService) { }
+  constructor(private http: HttpClientService,
+              private router: Router) { }
 
   ngOnInit() {
   }
@@ -21,11 +23,11 @@ export class CadastroGerenteComponent implements OnInit {
   }
 
   save() {
-    this.http.createGerente(
+    this.http.addGerente(
       this.gerente)
       .subscribe(value => console.log(value), error => console.log(error));
-    this.gerente = new Gerente();
-    alert(this.gerente.nome);
+    this.router.navigate(['/logingerente']);
+    alert('Cadastrado com sucesso!');
   }
 
   onSubmit() {
@@ -34,10 +36,4 @@ export class CadastroGerenteComponent implements OnInit {
   }
 
 
-  cadastrarGerente(): void {
-    this.http.createGerente(this.gerente)
-      .subscribe(value  => {
-        alert(this.gerente.nome);
-      });
-  }
 }

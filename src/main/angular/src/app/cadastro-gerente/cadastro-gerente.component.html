@@ -31,7 +31,7 @@
   <div class="card card-register mx-auto mt-5">
     <div class="card-header bg-info text-light">Cadastro</div>
     <div class="card-body">
-      <form (ngSubmit)="onSubmit()">
+      <form method="post" (ngSubmit)="onSubmit()">
 
         <div class="form-group">
           <div class="form-row">
@@ -42,7 +42,8 @@
                        placeholder="Nome Completo" required="required">
                 <label for="nomeCompleto">Nome Completo</label>
               </div>
-
+            </div>
+            <div class="col-md-6">
               <div class="form-label-group">
                 <input type="text" [(ngModel)]="gerente.nomeUsuario" name="nomeUsuario" id="nomeUser"
                        class="form-control"
@@ -84,7 +85,7 @@
           <div class="form-row">
             <div class="col-md-6">
               <div class="form-label-group">
-                <input type="password"  [(ngModel)]="gerente.senha" name="senha" id="inputPassword" class="form-control"
+                <input type="password" [(ngModel)]="gerente.senha" name="senha" id="inputPassword" class="form-control"
                        placeholder="Senha"
                        required="required">
                 <label for="inputPassword">Senha</label>
@@ -92,14 +93,15 @@
             </div>
             <div class="col-md-6">
               <div class="form-label-group">
-                <input type="password" [(ngModel)]="gerente.senhaConfirm" name="senhaConfirm" id="confirmPassword" class="form-control"
+                <input type="password" [(ngModel)]="gerente.senhaConfirm" name="senhaConfirm" id="confirmPassword"
+                       class="form-control"
                        placeholder="Confirmar senha" required="required">
                 <label for="confirmPassword">Confirmar senha</label>
               </div>
             </div>
           </div>
         </div>
-        <input class="btn btn-info btn-block" type="submit"  (click)="save()" value="Cadastrar">
+        <input class="btn btn-info btn-block" type="submit" value="Cadastrar">
       </form>
       <div class="text-center">
         <a class="d-block small mt-3" routerLink="/logingerente">Página de login</a>

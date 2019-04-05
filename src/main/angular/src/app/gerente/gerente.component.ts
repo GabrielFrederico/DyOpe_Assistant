@@ -15,7 +15,7 @@ export class GerenteComponent implements OnInit {
 
   ngOnInit() {
     this.httpClientService.getGerentes().subscribe(
-      response => this.handleSuccesfulResponse(response),
+      response => {this.gerentes = response; }
     );
   }
 

@@ -15,9 +15,9 @@ public class SetorController {
     SetorRepository setorRepository;
 
     @RequestMapping(method = RequestMethod.POST, value = "/cadastrarsetor")
-    public ModelAndView save(Setor setor, ModelAndView model) {
+    public Setor save(@RequestBody Setor setor, ModelAndView model) {
         setorRepository.save(setor);
-        return new ModelAndView("redirect:/controleFuncionarios");
+        return setor;
     }
 
     @RequestMapping(method = RequestMethod.GET)

@@ -4,41 +4,21 @@ package com.projeto.models;
 import javax.persistence.*;
 
 @Entity
-public class Gerente {
+public class Gerente extends  Usuario{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	private String nomeUsuario;
-	private String senha;
+
 	private String nome;
 	private String rg;
 	private String cpf;
 
-	public Gerente() {
-	}
 
-	public Gerente(String nomeUsuario, String senha, String nome, String rg, String cpf, String email, String senhaConfirm) {
-		this.nomeUsuario = nomeUsuario;
-		this.senha = senha;
-		this.nome = nome;
-		this.rg = rg;
-		this.cpf = cpf;
-		this.email = email;
-		this.senhaConfirm = senhaConfirm;
-	}
 
 	private String email;
-	@Transient
-	private String senhaConfirm;
 
-	public String getSenhaConfirm() {
-		return senhaConfirm;
-	}
 
-	public void setSenhaConfirm(String senhaConfirm) {
-		this.senhaConfirm = senhaConfirm;
-	}
 
 	public long getId() {
 		return id;

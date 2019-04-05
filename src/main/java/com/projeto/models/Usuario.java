@@ -2,22 +2,26 @@ package com.projeto.models;
 
 import org.springframework.data.annotation.PersistenceConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
-public class Usuario {
+public abstract class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String nomeUsuario;
     private String senha;
+    private String senhaConfirm;
     private boolean statusSYS = true;
 
+    public String getSenhaConfirm() {
+        return senhaConfirm;
+    }
 
+    public void setSenhaConfirm(String senhaConfirm) {
+        this.senhaConfirm = senhaConfirm;
+    }
 
 
     public boolean getStatusSYS() {

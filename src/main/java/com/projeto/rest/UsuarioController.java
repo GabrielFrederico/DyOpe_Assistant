@@ -14,9 +14,9 @@ public class UsuarioController {
     UsuarioRepository usuarioRepository;
 
     @RequestMapping(method = RequestMethod.POST, value = "/cadastrarusuario")
-    public ModelAndView save(Usuario usuario) {
+    public Usuario save(@RequestBody Usuario usuario) {
         usuarioRepository.save(usuario);
-        return new ModelAndView("redirect:/gerenteIndex");
+        return usuario;
     }
 
     @RequestMapping(method = RequestMethod.GET)

@@ -2,6 +2,7 @@ package com.projeto.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,9 +18,9 @@ public class FuncionarioController {
     FuncionarioRepository funcionarioRepoository;
 
     @RequestMapping(method = RequestMethod.POST, value = "/cadastrarfuncionario")
-    public ModelAndView save(Funcionario funcionario) {
+    public Funcionario save(@RequestBody Funcionario funcionario) {
         funcionarioRepoository.save(funcionario);
-        return new ModelAndView("redirect:/loginFuncionario");
+        return funcionario;
     }
 
     @RequestMapping(value = "/loginfuncionario", method = RequestMethod.GET)

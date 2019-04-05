@@ -15,9 +15,9 @@ public class OperacaoController {
 	OperacaoRepository operacaoRepository;
 
 	@RequestMapping(method = RequestMethod.POST, value="/cadastraroperacao")
-	public ModelAndView save(Operacao operacao) {
+	public Operacao save(@RequestBody Operacao operacao) {
 		operacaoRepository.save(operacao);
-		return new ModelAndView("redirect:/operacaoRisco");
+		return operacao;
 	}
 	@RequestMapping(method = RequestMethod.GET)
 	public  Iterable<Operacao> listAll(){

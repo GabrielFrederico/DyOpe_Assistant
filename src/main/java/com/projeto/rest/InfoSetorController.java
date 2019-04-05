@@ -14,9 +14,9 @@ public class InfoSetorController {
     InfoSetorRepository infoSetorRepository;
 
     @RequestMapping(method = RequestMethod.POST, value = "/cadastrarinfosetor")
-    public ModelAndView save(InfoSetor infoSetor) {
+    public InfoSetor save(@RequestBody InfoSetor infoSetor) {
         infoSetorRepository.save(infoSetor);
-        return new ModelAndView("funcionario_index");
+        return infoSetor;
     }
 
 
