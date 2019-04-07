@@ -94,7 +94,7 @@
   <ul class="sidebar toggled bg-primary navbar-nav">
 
     <li class="nav-item text-light">
-      <a class="nav-link text-light" href="#">
+      <a class="nav-link text-light" href="javascript:void(0)">
         <span>Enviar informações</span>
       </a>
 
@@ -112,7 +112,7 @@
     </div>
 
     <div class="container " style="float: left; max-width: 70%; padding-left: 5%">
-      <form method="post" action="/cadastrarinfosetor">
+      <form [noValidate]="$any(false)" >
         <div class="form-group">
           <div class="form-row">
             <div class="col-md-6">

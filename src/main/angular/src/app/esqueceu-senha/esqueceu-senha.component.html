@@ -35,7 +35,7 @@
         <h4>Esqueceu sua senha?</h4>
         <p>Digite seu endereço de e-mail e nós lhe enviaremos instruções sobre como redefinir sua senha.</p>
       </div>
-      <form>
+      <form [noValidate]="$any(false)" >
         <div class="form-group">
           <div class="form-label-group">
             <input type="email" id="inputEmail" class="form-control" placeholder="Insira seu e-mail"

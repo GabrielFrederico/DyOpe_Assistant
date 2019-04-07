@@ -12,7 +12,14 @@ import {AngularFontAwesomeModule} from 'angular-font-awesome';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavComponent } from './nav/nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule } from '@angular/material';
+import {
+  MatToolbarModule,
+  MatButtonModule,
+  MatSidenavModule,
+  MatIconModule,
+  MatListModule,
+  MatMenuModule
+} from '@angular/material';
 import { GerenteComponent } from './gerente/gerente.component';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
@@ -30,7 +37,7 @@ import {FormsModule} from '@angular/forms';
         SidebarComponent,
         NavBarComponent,
         NavComponent,
-        GerenteComponent
+        GerenteComponent,
     ],
   imports: [
     AppRoutingModule,
@@ -46,7 +53,8 @@ import {FormsModule} from '@angular/forms';
     MatIconModule,
     MatListModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    MatMenuModule
   ],
     exports: [RouterModule],
     providers: [],
