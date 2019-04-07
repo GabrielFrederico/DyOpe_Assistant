@@ -20,6 +20,7 @@ import {OperacaoCorteComponent} from './operacao-corte/operacao-corte.component'
 import {OperacaoCosturaComponent} from './operacao-costura/operacao-costura.component';
 import {OperacaoRiscoComponent} from './operacao-risco/operacao-risco.component';
 import {GerenteComponent} from './gerente/gerente.component';
+import {NavComponent} from './nav/nav.component';
 
 
 const routes: Routes = [
@@ -42,7 +43,8 @@ const routes: Routes = [
   {path: 'operacaocorte', component: OperacaoCorteComponent},
   {path: 'operacaocostura', component: OperacaoCosturaComponent},
   {path: 'operacaorisco', component: OperacaoRiscoComponent},
-  {path: 'gerente', component: GerenteComponent}
+  {path: 'gerente', component: GerenteComponent},
+  {path: 'testebarra', component: NavComponent}
 
 ];
 
@@ -63,4 +65,4 @@ export const routingComponent4 = [FuncionarioIndexComponent, InformacoesSetorCom
 
 export const routingComponent5 = [OperacaoAcabamentoComponent, OperacaoBeneficiamentoComponent, OperacaoCorteComponent];
 
-export const routingComponent6 = [OperacaoCosturaComponent, OperacaoRiscoComponent, GerenteComponent];
+export const routingComponent6 = [OperacaoCosturaComponent, OperacaoRiscoComponent, GerenteComponent, NavComponent];

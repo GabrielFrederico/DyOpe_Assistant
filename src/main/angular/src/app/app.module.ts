@@ -18,7 +18,7 @@ import {
   MatSidenavModule,
   MatIconModule,
   MatListModule,
-  MatMenuModule
+  MatMenuModule, MatButtonToggleModule
 } from '@angular/material';
 import { GerenteComponent } from './gerente/gerente.component';
 import {HttpClientModule} from '@angular/common/http';
@@ -54,7 +54,8 @@ import {FormsModule} from '@angular/forms';
     MatListModule,
     HttpClientModule,
     FormsModule,
-    MatMenuModule
+    MatMenuModule,
+    MatButtonToggleModule
   ],
     exports: [RouterModule],
     providers: [],
