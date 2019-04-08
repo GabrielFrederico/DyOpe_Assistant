@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Gerente, HttpClientService} from '../service/httpclient.service';
+import {Gerente, GerenteService} from '../service/gerente.service';
 import {Router} from '@angular/router';
 
 @Component({
@@ -11,13 +11,13 @@ export class CadastroGerenteComponent implements OnInit {
   gerente: Gerente = new Gerente();
   submitted = false;
 
-  constructor(private http: HttpClientService,
+  constructor(private http: GerenteService,
               private router: Router) { }
 
   ngOnInit() {
   }
 
-  newEmployee(): void {
+  newGerente(): void {
     this.submitted = false;
     this.gerente = new Gerente();
   }

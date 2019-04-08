@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Gerente, HttpClientService} from '../service/httpclient.service';
+import {Gerente, GerenteService} from '../service/gerente.service';
 
 @Component({
   selector: 'app-gerente',
@@ -10,7 +10,7 @@ export class GerenteComponent implements OnInit {
   gerentes: Gerente[];
 
   constructor(
-    private httpClientService: HttpClientService
+    private httpClientService: GerenteService
   ) { }
 
   ngOnInit() {

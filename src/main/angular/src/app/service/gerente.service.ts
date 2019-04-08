@@ -16,7 +16,7 @@ export class Gerente {
 @Injectable({
   providedIn: 'root'
 })
-export class HttpClientService {
+export class GerenteService {
 constructor(private httpClient: HttpClient) {
   }
 
@@ -28,8 +28,6 @@ constructor(private httpClient: HttpClient) {
   addGerente(gerente: Gerente): Observable<Gerente> {
     return this.httpClient.post<Gerente>(`${this.baseUrl}`, gerente);
   }
-
-
 
   createGerente(gerente: Gerente): Observable<Gerente> {
     return this.httpClient.post<Gerente>(`http://localhost:8080/gerentes/cadastrargerente`, gerente);
