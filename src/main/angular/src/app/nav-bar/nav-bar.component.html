@@ -44,16 +44,16 @@
         <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
       </div>
     </li>
-    <li class="nav-item dropdown no-arrow">
-      <a class="nav-link dropdown-toggle nav-link active" href="javascript:void(0)" id="userDropdown" role="button"
+    <li ngbDropdown class="nav-item dropdown no-arrow">
+      <a  ngbDropdownToggle class="nav-link dropdown-toggle nav-link active" href="javascript:void(0)" id="userDropdown" role="button"
          data-toggle="dropdown"
          aria-haspopup="true" aria-expanded="false">
         <i class="fas fa-user-circle fa-fw"></i>
       </a>
-      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+      <div ngbDropdownMenu class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
         <a class="dropdown-item" routerLink="/perfilgerente">Perfil</a>
         <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Sair</a>
+        <a class="dropdown-item" href="javascript:void(0)" (click)="openLogout(content)" data-toggle="modal" data-target="#logoutModal">Sair</a>
       </div>
     </li>
   </ul>
@@ -61,3 +61,20 @@
 </nav>
 
 
+<!-- Logout Modal-->
+<ng-template #content let-modal class="modal fade modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Pronto para sair?</h5>
+      <button class="close" (click)="modal.close()" type="button" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body">Selecione "Sair" abaixo se você estiver pronto para encerrar sua sessão atual.</div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" type="button" (click)="modal.close()" data-dismiss="modal">Cancelar</button>
+      <a class="btn btn-primary"  (click)="modal.close()" routerLink="/">Sair</a>
+    </div>
+  </div>
+
+</ng-template>

@@ -1,7 +1,5 @@
 package com.projeto.models;
 
-import org.springframework.data.annotation.PersistenceConstructor;
-
 import javax.persistence.*;
 
 @Entity
