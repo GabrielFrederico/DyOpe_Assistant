@@ -4,7 +4,12 @@
   "scripts": {
     "ng": "ng",
     "ng generate @angular/material:material-nav --name=nav": "ng generate @angular/material:material-nav --name=nav",
+    "ng generate component navigation-bar --module=": "ng generate component navigation-bar --module=",
+    "ng generate component core/components/nav --module=": "ng generate component core/components/nav --module=",
+
     "ng add @angular/material": "ng add @angular/material",
+    "npm install --save @ng-bootstrap/ng-bootstrap": "npm install --save @ng-bootstrap/ng-bootstrap",
+    "npm install -g npm": "npm install -g npm",
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
