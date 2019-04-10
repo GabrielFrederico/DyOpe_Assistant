@@ -17,7 +17,6 @@ export class CadastroGerenteComponent implements OnInit {
   ngOnInit() {
   }
 
-
   save() {
     this.http.cadastrarGerente(
       this.gerente)
