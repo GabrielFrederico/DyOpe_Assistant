@@ -6,26 +6,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Funcionario{
+public class Funcionario extends Usuario{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long idusuario;
 	private String nome;
 
 	private long idsetor;
-	private char statusSYS;
-
-	public char getStatusSYS() {
-		return statusSYS;
-	}
-
-	public void setStatusSYS(char statusSYS) {
-		this.statusSYS = statusSYS;
-	}
-
+	
+	
 	public long getIdsetor() {
 		return idsetor;
 	}
@@ -48,13 +38,6 @@ public class Funcionario{
 		this.id = id;
 	}
 
-	public long getIdusuario() {
-		return idusuario;
-	}
-
-	public void setIdusuario(long idusuario) {
-		this.idusuario = idusuario;
-	}
 
 	public String getNome() {
 		return nome;
