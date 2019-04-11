@@ -3,7 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 
 export class Setor {
- public  nomesetor: string;
+ public  nomeSetor: string;
  public operacao: string;
 }
 @Injectable({
