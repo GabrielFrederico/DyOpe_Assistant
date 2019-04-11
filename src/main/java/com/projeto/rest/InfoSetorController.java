@@ -1,13 +1,16 @@
 package com.projeto.rest;
 
 import com.projeto.models.InfoSetor;
+
 import com.projeto.repository.InfoSetorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
+
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
+@RequestMapping("infosetor")
 public class InfoSetorController {
 
     @Autowired

@@ -2,6 +2,7 @@ package com.projeto.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -11,7 +12,9 @@ import com.projeto.models.Funcionario;
 import com.projeto.repository.FuncionarioRepository;
 import org.springframework.web.servlet.ModelAndView;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
+@RequestMapping("funcionarios")
 public class FuncionarioController {
 
     @Autowired
@@ -38,7 +41,7 @@ public class FuncionarioController {
     }
 
 
-    @RequestMapping(method = RequestMethod.GET, value = "funcionarios")
+    @RequestMapping(method = RequestMethod.GET)
     public Iterable<Funcionario> listAll() {
         return funcionarioRepoository.findAll();
     }

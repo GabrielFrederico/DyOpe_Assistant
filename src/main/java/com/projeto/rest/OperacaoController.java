@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import com.projeto.repository.OperacaoRepository;
 import org.springframework.web.servlet.ModelAndView;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("operacoes")
 public class OperacaoController {

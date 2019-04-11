@@ -1,10 +1,9 @@
 package com.projeto.models;
 
-
 import javax.persistence.*;
 
 @Entity
-public class Gerente extends  Usuario{
+public class Gerente extends Usuario {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -14,11 +13,7 @@ public class Gerente extends  Usuario{
 	private String rg;
 	private String cpf;
 
-
-
 	private String email;
-
-
 
 	public long getId() {
 		return id;
@@ -27,7 +22,6 @@ public class Gerente extends  Usuario{
 	public void setId(long id) {
 		this.id = id;
 	}
-
 
 	public String getNome() {
 		return nome;
@@ -60,12 +54,5 @@ public class Gerente extends  Usuario{
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
-	
-  
-	
-	
-  
-
 
 }

@@ -6,28 +6,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Funcionario extends Usuario{
+public class Funcionario extends Usuario {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	
+
 	private String nome;
 
-	private long idsetor;
-	
-	
-	public long getIdsetor() {
-		return idsetor;
-	}
-
-	public void setIdsetor(long idsetor) {
-		this.idsetor = idsetor;
-	}
-
 	private String rg;
-	
+
 	private String cpf;
-	
+
 	private String email;
 
 	public long getId() {
@@ -37,7 +26,6 @@ public class Funcionario extends Usuario{
 	public void setId(long id) {
 		this.id = id;
 	}
-
 
 	public String getNome() {
 		return nome;
