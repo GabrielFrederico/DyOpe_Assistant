@@ -24,7 +24,7 @@ public class SetorController {
     @RequestMapping(method = RequestMethod.GET)
     public Iterable<Setor> listAll() {
         return setorRepository.findAll();
-    }
+    } 
 
     @RequestMapping(method = RequestMethod.GET, path = "/{id}")
     public Setor getSetorById(@PathVariable("id") long id) {
