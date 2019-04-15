@@ -12,7 +12,7 @@ public class GerenteRest {
 
     @Autowired
     GerenteRepository gerenteRepository;
-
+ 
 
     @RequestMapping(method = RequestMethod.POST, value = "/cadastrargerente")
     public Gerente save(@RequestBody Gerente gerente) {
@@ -20,7 +20,7 @@ public class GerenteRest {
         return gerente;
     }
 
-
+    
     @RequestMapping(method = RequestMethod.GET, value = "/perfilGerente.{id}")
     public Gerente teste(@PathVariable("id") long id) {
         Gerente gerente = gerenteRepository.findById(id);
@@ -45,6 +45,7 @@ public class GerenteRest {
     public Iterable<Gerente> listAll() {
         return gerenteRepository.findAll();
     }
+    
 
     @RequestMapping(method = RequestMethod.GET, path = "gerente.{id}")
     public Gerente getGerenteById(@PathVariable("id") long id) {

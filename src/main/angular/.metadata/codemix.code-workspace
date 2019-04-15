@@ -1,0 +1,25 @@
+{
+"folders": [
+    {
+        "path": ".plugins\\com.genuitec.eclipse.code.core\\com.genuitec.eclipse.code.core.tmp-project"
+    }
+],
+  "settings": {
+    "javascript.referencesCodeLens.enabled": true,
+    "editor.suggest.filterGraceful": false,
+    "typescript.implementationsCodeLens.enabled": true,
+    "editor.quickSuggestionsDelay": 200,
+    "typescript.referencesCodeLens.enabled": true,
+    "editor.detectIndentation": false,
+    "auto-close-tag.SublimeText3Mode": true,
+    "htmlhint.options": {
+        "attr-value-double-quotes": true,
+        "attr-no-duplication": true,
+        "tag-pair": true,
+        "spec-char-escape": true,
+        "id-unique": false,
+        "src-not-empty": true,
+        "title-require": true
+    }
+}
+}
