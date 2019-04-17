@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {cadastroGerenteInfo} from "../service/gerente.service";
+import {cadastroGerenteInfo, loginGerenteInfo} from "../service/gerente.service";
 import {Observable} from 'rxjs';
 
 const httpOptions = {
@@ -19,8 +19,17 @@ export class JwtResponse {
 })
 export class AuthService {
 
+  private loginUrl = 'http://localhost:8080/gerentes/logar';
+  private signupUrl = 'http://localhost:8080/gerentes/cadastrar';
+
   constructor(private http: HttpClient) {
+  }
 
+  attemptAuth(credentials: loginGerenteInfo): Observable<JwtResponse> {
+    return this.http.post<JwtResponse>(this.loginUrl, credentials, httpOptions);
+  }
 
+  signUp(info: cadastroGerenteInfo): Observable<string> {
+    return this.http.post<string>(this.signupUrl, info, httpOptions);
   }
 }
