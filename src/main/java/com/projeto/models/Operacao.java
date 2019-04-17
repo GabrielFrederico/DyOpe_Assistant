@@ -28,8 +28,19 @@ public class Operacao {
 	
 	private int qtdPecasOpe;
 	private char statusSYS;
-	private long idTipoOpe;
-	
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "idTipoOpe", referencedColumnName = "idTipoOpe")
+    private TipoOperacao tipoope;
+
+    public TipoOperacao getTipoope() {
+        return tipoope;
+    }
+
+    public void setTipoope(TipoOperacao tipoope) {
+        this.tipoope = tipoope;
+    }
+
 	public long getId() {
 		return id;
 	}
@@ -111,13 +122,7 @@ public class Operacao {
 		this.qtdPecasOpe = qtdPecasOpe;
 	}
 
-	public long getIdTipoOpe() {
-		return idTipoOpe;
-	}
 
-	public void setIdTipoOpe(long idTipoOpe) {
-		this.idTipoOpe = idTipoOpe;
-	}
 
 	public long getIdGerente() {
 		return idGerente;

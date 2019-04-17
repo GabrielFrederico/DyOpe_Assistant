@@ -13,6 +13,36 @@ export class Gerente {
 
 }
 
+export class loginGerenteInfo {
+  nomeUsuario: string;
+  senha: string;
+
+  constructor(nomeUsuario: string, senha: string) {
+    this.nomeUsuario = nomeUsuario;
+    this.senha = senha;
+  }
+}
+
+export class cadastroGerenteInfo {
+  public nome: string;
+  public nomeUsuario: string;
+  public cpf: string;
+  public rg: string;
+  public email: string;
+  public senhaConfirm: string;
+  public senha: string;
+  role: string;
+
+  constructor(nome: string, nomeUsuario: string, cpf: string, rg: string, email: string, senha: string, senhaConfirm: string) {
+    this.nome = nome;
+    this.nomeUsuario = nomeUsuario;
+    this.email = email;
+    this.senha = senha;
+    this.role = 'gerente';
+    this.senhaConfirm = senhaConfirm;
+  }
+}
+
 @Injectable({
   providedIn: 'root'
 })

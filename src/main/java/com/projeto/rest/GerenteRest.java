@@ -1,8 +1,6 @@
 package com.projeto.rest;
 
-import java.util.Enumeration;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.validation.Valid;
@@ -18,7 +16,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

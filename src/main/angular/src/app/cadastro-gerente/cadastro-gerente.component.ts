@@ -8,8 +8,8 @@ import {Router} from '@angular/router';
 })
 export class CadastroGerenteComponent implements OnInit {
 
-  gerente: Gerente = new Gerente();
 
+  gerente: Gerente = new Gerente();
   constructor(private http: GerenteService,
               private router: Router) {
   }

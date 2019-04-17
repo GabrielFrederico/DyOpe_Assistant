@@ -1,16 +1,24 @@
 package com.projeto.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class TipoOperacao {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+
     private long idTipoOpe;
+    @OneToOne(mappedBy = "tipoope")
+    private Operacao operacao;
+
+    public Operacao getOperacao() {
+        return operacao;
+    }
+
+    public void setOperacao(Operacao operacao) {
+        this.operacao = operacao;
+    }
 
     private String tipoOpe;
     private char statusSYS;
