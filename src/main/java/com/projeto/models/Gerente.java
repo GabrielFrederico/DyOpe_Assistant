@@ -1,9 +1,20 @@
 package com.projeto.models;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
+@Table(name = "gerentes", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {
+            "email"
+        })
+})
 public class Gerente extends Usuario {
+
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

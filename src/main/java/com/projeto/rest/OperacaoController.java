@@ -1,11 +1,15 @@
 package com.projeto.rest;
 
-import com.projeto.models.Operacao;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
+import com.projeto.models.Operacao;
 import com.projeto.repository.OperacaoRepository;
-import org.springframework.web.servlet.ModelAndView;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -23,7 +27,7 @@ public class OperacaoController {
 	@RequestMapping(method = RequestMethod.GET)
 	public  Iterable<Operacao> listAll(){
 		return operacaoRepository.findAll();
-	}
+	}	
 
 	@RequestMapping(method = RequestMethod.GET, path = "/getByNome/{descricao}")
 	public Operacao getOperacaoByNome(@PathVariable("descricao") String descricao) {

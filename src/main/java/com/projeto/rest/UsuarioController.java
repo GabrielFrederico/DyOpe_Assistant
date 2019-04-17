@@ -1,10 +1,16 @@
 package com.projeto.rest;
 
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.projeto.models.Usuario;
 import com.projeto.repository.UsuarioRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 @RestController
 @RequestMapping("usuarios")
@@ -31,8 +37,8 @@ public class UsuarioController {
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/getByNome/{nomeusuario}")
-    public Usuario getUsuarioByNome(@PathVariable("nomeUsuario") String nomeUsuario) {
-        Usuario usuario = usuarioRepository.findByNomeUsuario(nomeUsuario);
+    public Optional<Usuario> getUsuarioByNome(@PathVariable("nomeUsuario") String nomeUsuario) {
+        Optional<Usuario> usuario = usuarioRepository.findByNomeUsuario(nomeUsuario);
         return usuario;
     }
 
