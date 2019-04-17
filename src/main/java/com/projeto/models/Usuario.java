@@ -1,8 +1,26 @@
 package com.projeto.models;
 
-import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
+@Table(name = "usuarios", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {
+            "nomeUsuario"
+        })
+})
+
 public abstract class Usuario {
 
     @Id
@@ -11,9 +29,25 @@ public abstract class Usuario {
     private String nomeUsuario;
     private String senha;
     private String senhaConfirm;
+    
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "user_roles", 
+      joinColumns = @JoinColumn(name = "user_id"), 
+      inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<>();
+    
     private boolean statusSYS = true;
 
-    public String getSenhaConfirm() {
+    
+    public Set<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
+	}
+
+	public String getSenhaConfirm() {
         return senhaConfirm;
     }
 
