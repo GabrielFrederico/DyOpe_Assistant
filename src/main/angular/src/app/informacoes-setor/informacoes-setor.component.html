@@ -112,12 +112,12 @@
     </div>
 
     <div class="container " style="float: left; max-width: 70%; padding-left: 5%">
-      <form [noValidate]="$any(false)" >
+      <form (ngSubmit)="save()" [noValidate]="$any(false)" >
         <div class="form-group">
           <div class="form-row">
             <div class="col-md-6">
               <div class="form-label-group">
-                <input type="text" name="setor" id="setor" class="form-control"
+                <input type="text" [(ngModel)]="infosetor.setor" name="setor" id="setor" class="form-control"
                        autofocus="autofocus"
                        placeholder="Setor:" required="required">
                 <label for="setor">Setor:</label>
@@ -125,7 +125,7 @@
             </div>
             <div class="col-md-6">
               <div class="form-label-group">
-                <input type="text" name="operacao" id="operacao" class="form-control"
+                <input type="text" [(ngModel)]="infosetor.operacao" name="operacao" id="operacao" class="form-control"
                        autofocus="autofocus"
                        placeholder="Operação:" required="required">
                 <label for="operacao">Operação:</label>
@@ -137,7 +137,7 @@
           <div class="form-row">
             <div class="col-md-6">
               <div class="form-label-group">
-                <input type="number" name="qtdPecasOpe" id="qtdPecasOpe" class="form-control"
+                <input type="number" [(ngModel)]="infosetor.qtdPecasOpe" name="qtdPecasOpe" id="qtdPecasOpe" class="form-control"
                        placeholder="Quantidade de peças da operação:"
                        required="required">
                 <label for="qtdPecasOpe">Quantidade de peças da operação:</label>
@@ -145,7 +145,7 @@
             </div>
             <div class="col-md-6">
               <div class="form-label-group">
-                <input type="time" name="tempoNecessario" id="tempoNecessari" class="form-control"
+                <input type="time" [(ngModel)]="infosetor.tempoNecessario" name="tempoNecessario" id="tempoNecessari" class="form-control"
                        placeholder="Tempo necessário:"
                        required="required">
                 <label for="tempoNecessari">Tempo necessário:</label>
