@@ -25,5 +25,4 @@ export class CadastroGerenteComponent implements OnInit {
     alert('Cadastrado com sucesso!');
   }
 
-
 }
