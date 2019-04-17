@@ -3,63 +3,73 @@
 
 <head>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <base href="/src">
-    <title>Login</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <base href="/src">
+  <title>Login</title>
 
-    <!-- Bootstrap core CSS-->
-    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap core CSS-->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Custom fonts for this template-->
+  <!-- Custom fonts for this template-->
 
 
-    <!-- Custom styles for this template-->
-    <link href="assets/css/sb-admin.css" rel="stylesheet">
-    <link href="assets/css/estilo.css" rel="stylesheet">
-    <link rel="shortcut icon" type="image/x-icon" href="assets/imagens/iconeOpe.png"/>
+  <!-- Custom styles for this template-->
+  <link href="assets/css/sb-admin.css" rel="stylesheet">
+  <link href="assets/css/estilo.css" rel="stylesheet">
+  <link rel="shortcut icon" type="image/x-icon" href="assets/imagens/iconeOpe.png"/>
 
 </head>
 <body class="bg-light">
 
 <div class="container">
-    <div class="card card-login mx-auto mt-5">
-        <div class="card-header bg-info text-light">Login</div>
-        <div class="card-body">
-            <form [noValidate]="$any(false)" >
-                <div class="form-group">
-                    <div class="form-label-group">
-                        <input type="email" id="inputEmail" name="email" class="form-control" placeholder="Email"
-                               required="required" autofocus="autofocus">
-                        <label for="inputEmail">Email</label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="form-label-group">
-                        <input type="password" name="senha" id="inputPassword" class="form-control"
-                               placeholder="Senha" required="required">
-                        <label for="inputPassword"> Senha</label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="remember-me">
-                            Lembrar da senha
-                        </label>
-                    </div>
-                </div>
-                <input class="btn btn-info btn-block" type="submit" value="Login">
-            </form>
-            <div class="text-center">
-                <a class="d-block small mt-3" routerLink="/cadastrogerente">Registre uma conta</a>
-                <a class="d-block small" routerLink="/esqueceusenha">Esqueceu a senha?</a>
-            </div>
+  <div class="card card-login mx-auto mt-5">
+    <div class="card-header bg-info text-light">Login</div>
+    <div class="card-body">
+      <form [noValidate]="$any(false)" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm">
+        <div class="form-group">
+          <div class="form-label-group">
+            <input type="text" id="inputEmail" name="nomeUsuario" [(ngModel)]="form.nomeUsuario" class="form-control"
+                   placeholder="Email"
+                   required="required" autofocus="autofocus">
+            <label for="inputEmail">Email</label>
+          </div>
+          <div *ngIf="f.submitted && nomeUsuario.invalid">
+            <div *ngIf="nomeUsuario.errors.required">Username is required</div>
+          </div>
         </div>
+        <div class="form-group">
+          <div class="form-label-group">
+            <input type="password" name="senha" id="inputPassword" [(ngModel)]="form.senha" class="form-control"
+                   placeholder="Senha" required="required">
+            <label for="inputPassword"> Senha</label>
+          </div>
+          <div *ngIf="f.submitted && isLoginFailed" class="alert alert-danger">
+            Login failed: {{errorMessage}}
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" value="remember-me">
+              Lembrar da senha
+            </label>
+          </div>
+        </div>
+        <input class="btn btn-info btn-block" type="submit" value="Login">
+        <div *ngIf="f.submitted && isLoginFailed" class="alert alert-danger">
+          Login inválido:  {{errorMessage}}
+        </div>
+      </form>
+      <div class="text-center">
+        <a class="d-block small mt-3" routerLink="/cadastrogerente">Registre uma conta</a>
+        <a class="d-block small" routerLink="/esqueceusenha">Esqueceu a senha?</a>
+      </div>
     </div>
+  </div>
 </div>
 
 <!-- Bootstrap core JavaScript-->

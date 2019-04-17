@@ -1,17 +1,30 @@
 import { Component, OnInit } from '@angular/core';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {TokenStorageService} from "../auth/token-storage.service";
 
 @Component({
   selector: 'app-gerente-index',
   templateUrl: './gerente-index.component.html'
 })
 export class GerenteIndexComponent implements OnInit {
+  info: any;
   public isCollapsed = false;
   closeResult: string;
   ngOnInit() {
+    this.info = {
+      token: this.token.getToken(),
+      username: this.token.getUsername(),
+      authorities: this.token.getAuthorities()
+    };
   }
-  constructor(private modalService: NgbModal) {}
 
+  constructor(private modalService: NgbModal, private token: TokenStorageService) {
+  }
+
+  logout() {
+    this.token.logOut();
+    window.location.reload();
+  }
 
   openLogout(content) {
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
