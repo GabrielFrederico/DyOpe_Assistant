@@ -122,6 +122,9 @@ public class GerenteRest {
 
     @RequestMapping(method = RequestMethod.POST, path = "/cadastrar")
     public ResponseEntity<?> registerUser(@Valid @RequestBody CadastroForm signUpRequest) {
+
+
+
         if (gerenteRepository.existsByNomeUsuario(signUpRequest.getNomeUsuario())) {
             return new ResponseEntity<>(new ResponseMessage("Fail -> Username is already taken!"),
                     HttpStatus.BAD_REQUEST);

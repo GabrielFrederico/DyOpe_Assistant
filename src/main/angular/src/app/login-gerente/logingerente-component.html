@@ -32,23 +32,23 @@
       <form [noValidate]="$any(false)" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm">
         <div class="form-group">
           <div class="form-label-group">
-            <input type="text" id="inputEmail" name="nomeUsuario" [(ngModel)]="form.nomeUsuario" class="form-control"
+            <input type="text" id="inputEmail" name="nomeUsuario" [(ngModel)]="form.nomeUsuario" #nomeUsuario="ngModel" class="form-control"
                    placeholder="Email"
                    required="required" autofocus="autofocus">
             <label for="inputEmail">Email</label>
           </div>
           <div *ngIf="f.submitted && nomeUsuario.invalid">
-            <div *ngIf="nomeUsuario.errors.required">Username is required</div>
+            <div *ngIf="nomeUsuario.errors.required">Nome de usuário inválido</div>
           </div>
         </div>
         <div class="form-group">
           <div class="form-label-group">
-            <input type="password" name="senha" id="inputPassword" [(ngModel)]="form.senha" class="form-control"
+            <input type="password" name="senha" id="inputPassword" [(ngModel)]="form.senha" #senha="ngModel" class="form-control"
                    placeholder="Senha" required="required">
             <label for="inputPassword"> Senha</label>
           </div>
-          <div *ngIf="f.submitted && isLoginFailed" class="alert alert-danger">
-            Login failed: {{errorMessage}}
+         <div *ngIf="f.submitted && senha.invalid">
+            <div *ngIf="senha.errors.required">Senha inválida</div>
           </div>
         </div>
         <div class="form-group">
@@ -61,7 +61,7 @@
         </div>
         <input class="btn btn-info btn-block" type="submit" value="Login">
         <div *ngIf="f.submitted && isLoginFailed" class="alert alert-danger">
-          Login inválido:  {{errorMessage}}
+          Login inválido!
         </div>
       </form>
       <div class="text-center">

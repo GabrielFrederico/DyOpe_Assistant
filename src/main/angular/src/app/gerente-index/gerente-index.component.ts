@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {TokenStorageService} from "../auth/token-storage.service";
+import {loginGerenteInfo} from "../service/gerente.service";
+
 
 @Component({
   selector: 'app-gerente-index',
@@ -8,8 +10,10 @@ import {TokenStorageService} from "../auth/token-storage.service";
 })
 export class GerenteIndexComponent implements OnInit {
   info: any;
+  form: any = {};
   public isCollapsed = false;
   closeResult: string;
+
   ngOnInit() {
     this.info = {
       token: this.token.getToken(),
@@ -20,6 +24,8 @@ export class GerenteIndexComponent implements OnInit {
 
   constructor(private modalService: NgbModal, private token: TokenStorageService) {
   }
+
+
 
   logout() {
     this.token.logOut();

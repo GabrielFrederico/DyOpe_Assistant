@@ -27,9 +27,9 @@ export class TokenStorageService {
     return sessionStorage.getItem(TOKEN_KEY);
   }
 
-  public saveUsername(username: string) {
+  public saveUsername(nomeUsuario: string) {
     window.sessionStorage.removeItem(USERNAME_KEY);
-    window.sessionStorage.setItem(USERNAME_KEY, username);
+    window.sessionStorage.setItem(USERNAME_KEY, nomeUsuario);
   }
 
   public getUsername(): string {

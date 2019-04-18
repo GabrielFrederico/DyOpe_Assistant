@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {TokenStorageService} from "../auth/token-storage.service";
 import {AuthService} from "../auth/auth.service";
@@ -9,7 +9,7 @@ import {loginGerenteInfo} from "../service/gerente.service";
   templateUrl: './logingerente-component.html',
 
 })
-export class LoginGerenteComponent {
+export class LoginGerenteComponent implements OnInit{
   title = 'Login Gerente';
 
   form: any = {};
@@ -45,7 +45,7 @@ export class LoginGerenteComponent {
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         this.roles = this.tokenStorage.getAuthorities();
-        this.router.navigate(['/logingerente'])
+        this.router.navigate(['/gerenteindex'])
       },
       error => {
         console.log(error);
