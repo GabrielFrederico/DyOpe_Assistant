@@ -3,6 +3,7 @@ import {Router} from "@angular/router";
 import {TokenStorageService} from "../auth/token-storage.service";
 import {AuthService} from "../auth/auth.service";
 import {loginGerenteInfo} from "../service/gerente.service";
+import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,7 @@ import {loginGerenteInfo} from "../service/gerente.service";
 })
 export class LoginGerenteComponent implements OnInit{
   title = 'Login Gerente';
-
+  closeResult: string;
   form: any = {};
   isLoggedIn = false;
   isLoginFailed = false;
@@ -19,7 +20,7 @@ export class LoginGerenteComponent implements OnInit{
   roles: string[] = [];
   private loginInfo: loginGerenteInfo;
 
-  constructor(private authService: AuthService, private tokenStorage: TokenStorageService, private router: Router) {
+  constructor(private modalService: NgbModal, private authService: AuthService, private tokenStorage: TokenStorageService, private router: Router) {
   }
 
   ngOnInit() {
@@ -28,6 +29,7 @@ export class LoginGerenteComponent implements OnInit{
       this.roles = this.tokenStorage.getAuthorities();
     }
   }
+
 
   onSubmit() {
     console.log(this.form);

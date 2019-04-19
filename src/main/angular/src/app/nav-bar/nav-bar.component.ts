@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {TokenStorageService} from "../auth/token-storage.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-nav-bar',
@@ -18,23 +19,23 @@ export class NavBarComponent implements OnInit {
     };
   }
 
-  constructor(private modalService: NgbModal, private token: TokenStorageService) {
+  constructor(private modalService: NgbModal, private token: TokenStorageService, private router: Router) {
   }
 
   logout() {
     this.token.logOut();
-    window.location.reload();
+    this.router.navigate(['/']);
   }
 
   openLogout(content) {
     this.modalService.open(content, { size: 'lg', ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      this.closeResult = `Dismissed ${NavBarComponent.getDismissReason(reason)}`;
     });
   }
 
-  private getDismissReason(reason: any): string {
+  private static getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';
     } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {

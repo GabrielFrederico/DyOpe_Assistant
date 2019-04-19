@@ -32,23 +32,25 @@
       <form [noValidate]="$any(false)" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm">
         <div class="form-group">
           <div class="form-label-group">
-            <input type="text" id="inputEmail" name="nomeUsuario" [(ngModel)]="form.nomeUsuario" #nomeUsuario="ngModel" class="form-control"
+            <input type="text" id="inputEmail" name="nomeUsuario" [(ngModel)]="form.nomeUsuario" #nomeUsuario="ngModel"
+                   class="form-control"
                    placeholder="Email"
                    required="required" autofocus="autofocus">
-            <label for="inputEmail">Email</label>
+            <label for="inputEmail">Usuario</label>
           </div>
           <div *ngIf="f.submitted && nomeUsuario.invalid">
-            <div *ngIf="nomeUsuario.errors.required">Nome de usuário inválido</div>
+            <div *ngIf="nomeUsuario.errors.required">Preencha o campo</div>
           </div>
         </div>
         <div class="form-group">
           <div class="form-label-group">
-            <input type="password" name="senha" id="inputPassword" [(ngModel)]="form.senha" #senha="ngModel" class="form-control"
+            <input type="password" name="senha" id="inputPassword" [(ngModel)]="form.senha" minlength="6"
+                   #senha="ngModel" class="form-control"
                    placeholder="Senha" required="required">
             <label for="inputPassword"> Senha</label>
           </div>
-         <div *ngIf="f.submitted && senha.invalid">
-            <div *ngIf="senha.errors.required">Senha inválida</div>
+          <div *ngIf="f.submitted && senha.invalid">
+            <div *ngIf="senha.errors.minlength">Obrigátório senha de pelo menos 6 caracteres</div>
           </div>
         </div>
         <div class="form-group">

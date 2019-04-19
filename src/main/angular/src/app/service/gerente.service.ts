@@ -37,6 +37,8 @@ export class cadastroGerenteInfo {
     this.nome = nome;
     this.nomeUsuario = nomeUsuario;
     this.email = email;
+    this.rg = rg;
+    this.cpf = cpf;
     this.senha = senha;
     this.role = 'gerente';
     this.senhaConfirm = senhaConfirm;
