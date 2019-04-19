@@ -38,7 +38,7 @@ export class PerfilGerenteComponent implements OnInit {
       token: this.token.getToken(),
       username: this.token.getUsername(),
       authorities: this.token.getAuthorities(),
-      password: this.token.getPassword()
+      senha: this.token.getPassword()
     };
   }
 

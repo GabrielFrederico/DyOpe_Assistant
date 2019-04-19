@@ -40,6 +40,7 @@ export class CadastroGerenteComponent implements OnInit {
         this.isSignedUp = true;
         this.isSignUpFailed = false;
         this.router.navigate(['/logingerente']);
+        alert("cadastrado com sucesso");
       },
       error => {
         console.log(error);

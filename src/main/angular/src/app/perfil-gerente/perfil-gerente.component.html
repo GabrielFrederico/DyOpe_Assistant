@@ -28,7 +28,7 @@
 
 </head>
 
-<body *ngIf="info.token " id="page-top" class>
+<body *ngIf="info.token;" id="page-top" class>
 
 <app-nav-bar></app-nav-bar>
 <div id="wrapper">
@@ -60,14 +60,28 @@
     </div>
 
     <div class="container " style="float: left; max-width: 70%; padding-left: 5%">
-      <form method="put"  action="/redefinirperfilgerente">
+      <form method="put" action="/redefinirperfilgerente">
         <div class="form-group">
-          <div class="form-group">
-            <div class="form-label-group">
-              <input type="text" name="nome"  id="nomeCompleto" class="form-control"
-                     autofocus="autofocus"
-                     placeholder="Nome Completo" required="required">
-              <label for="nomeCompleto">Nome Completo</label>
+          <div class="form-row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <div class="form-label-group">
+                  <input type="text" name="nome" id="nomeCompleto" class="form-control"
+                         autofocus="autofocus"
+                         placeholder="Nome Completo" required="required">
+                  <label for="nomeCompleto">Nome Completo</label>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <div class="form-label-group">
+                  <input type="text" name="nome" id="nomeUsuario" class="form-control"
+                         autofocus="autofocus" value="{{info.username}}"
+                         placeholder="Nome Usuário" required="required">
+                  <label for="nomeUsuario">Nome de usuário</label>
+                </div>
+              </div>
             </div>
           </div>
           <div class="form-row">
