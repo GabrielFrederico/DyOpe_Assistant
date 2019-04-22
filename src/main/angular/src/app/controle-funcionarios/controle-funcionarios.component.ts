@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {TokenStorageService} from "../auth/token-storage.service";
 
 @Component({
   selector: 'app-controle-funcionarios',
@@ -6,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ControleFuncionariosComponent implements OnInit {
 
-  constructor() { }
-
+  public info: any;
   ngOnInit() {
+    this.info = {
+      token: this.token.getToken(),
+      username: this.token.getUsername(),
+      authorities: this.token.getAuthorities(),
+      senha: this.token.getPassword()
+    };
   }
+  constructor(private modalService: NgbModal, private token: TokenStorageService) {}
+
 
 }

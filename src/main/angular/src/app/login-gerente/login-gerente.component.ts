@@ -38,7 +38,7 @@ export class LoginGerenteComponent implements OnInit{
       this.form.nomeUsuario,
       this.form.senha);
 
-    this.authService.attemptAuth(this.loginInfo).subscribe(
+    this.authService.loginGerenteAutenticado(this.loginInfo).subscribe(
       data => {
         this.tokenStorage.saveToken(data.accessToken);
         this.tokenStorage.saveUsername(data.username);

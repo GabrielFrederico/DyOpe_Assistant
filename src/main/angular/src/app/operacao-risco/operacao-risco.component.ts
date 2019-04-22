@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {TokenStorageService} from "../auth/token-storage.service";
 
 @Component({
   selector: 'app-operacao-risco',
@@ -7,9 +8,16 @@ import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 })
 export class OperacaoRiscoComponent implements OnInit {
   closeResult: string;
+  public info: any;
   ngOnInit() {
+    this.info = {
+      token: this.token.getToken(),
+      username: this.token.getUsername(),
+      authorities: this.token.getAuthorities(),
+      senha: this.token.getPassword()
+    };
   }
-  constructor(private modalService: NgbModal) {}
+  constructor(private modalService: NgbModal, private token: TokenStorageService) {}
 
 
   openCadastro(cadastro) {
@@ -36,4 +44,6 @@ export class OperacaoRiscoComponent implements OnInit {
       return  `with: ${reason}`;
     }
   }
+
+
 }

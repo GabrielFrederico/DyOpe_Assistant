@@ -34,7 +34,7 @@ export class CadastroGerenteComponent implements OnInit {
       this.form.senhaConfirm,
       this.form.senha);
 
-    this.authService.signUp(this.gerenteInfo).subscribe(
+    this.authService.cadastrarGerenteAuth(this.gerenteInfo).subscribe(
       data => {
         console.log(data);
         this.isSignedUp = true;

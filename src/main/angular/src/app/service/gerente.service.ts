@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import {JwtResponse} from "../auth/auth.service";
 
 export class Gerente {
   public nome: string;
@@ -59,5 +60,6 @@ export class GerenteService {
   cadastrarGerente(gerente: Gerente): Observable<Gerente> {
     return this.httpClient.post<Gerente>('http://localhost:8080/gerentes/cadastrargerente', gerente);
   }
+
 
 }

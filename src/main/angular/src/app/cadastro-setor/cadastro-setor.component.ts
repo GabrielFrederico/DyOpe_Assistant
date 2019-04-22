@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CadastroSetorService, Setor} from '../service/cadastro-setor.service';
 import {Router} from '@angular/router';
+import {TokenStorageService} from "../auth/token-storage.service";
 
 @Component({
   selector: 'app-cadastro-setor',
@@ -8,11 +9,22 @@ import {Router} from '@angular/router';
 })
 export class CadastroSetorComponent implements OnInit {
   setor: Setor = new Setor();
-  constructor(private setorService: CadastroSetorService,
-              private router: Router) { }
 
+  public info: any;
   ngOnInit() {
+    this.info = {
+      token: this.token.getToken(),
+      username: this.token.getUsername(),
+      authorities: this.token.getAuthorities(),
+      senha: this.token.getPassword()
+    };
   }
+  constructor(private setorService: CadastroSetorService,
+              private router: Router, private token: TokenStorageService) {
+  }
+
+
+
   save() {
     this.setorService.cadastrarSetor(
       this.setor)

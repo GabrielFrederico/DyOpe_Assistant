@@ -8,7 +8,7 @@ import {cadastroGerenteInfo, Gerente, loginGerenteInfo} from "../service/gerente
   templateUrl: './perfil-gerente.component.html'
 })
 export class PerfilGerenteComponent implements OnInit {
-  info: any;
+  public info: any;
   form: any = {};
   public isCollapsed = false;
   closeResult: string;

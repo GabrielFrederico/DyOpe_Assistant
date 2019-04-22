@@ -25,11 +25,13 @@ export class AuthService {
   constructor(private http: HttpClient) {
   }
 
-  attemptAuth(credentials: loginGerenteInfo): Observable<JwtResponse> {
+  loginGerenteAutenticado(credentials: loginGerenteInfo): Observable<JwtResponse> {
     return this.http.post<JwtResponse>(this.loginUrl, credentials, httpOptions);
   }
 
-  signUp(info: cadastroGerenteInfo): Observable<string> {
+  cadastrarGerenteAuth(info: cadastroGerenteInfo): Observable<string> {
     return this.http.post<string>(this.signupUrl, info, httpOptions);
   }
+
+
 }
