@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {Router} from "@angular/router";
-import {TokenStorageService} from "../auth/token-storage.service";
-import {AuthService} from "../auth/auth.service";
-import {loginGerenteInfo} from "../service/gerente.service";
+import {Router} from '@angular/router';
+import {TokenStorageService} from '../auth/token-storage.service';
+import {AuthService} from '../auth/auth.service';
+import {loginGerenteInfo} from '../service/gerente.service';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -10,7 +10,7 @@ import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
   templateUrl: './logingerente-component.html',
 
 })
-export class LoginGerenteComponent implements OnInit{
+export class LoginGerenteComponent implements OnInit {
   title = 'Login Gerente';
   closeResult: string;
   form: any = {};
@@ -47,7 +47,7 @@ export class LoginGerenteComponent implements OnInit{
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         this.roles = this.tokenStorage.getAuthorities();
-        this.router.navigate(['/gerenteindex'])
+        this.router.navigate(['/gerenteindex']);
       },
       error => {
         console.log(error);
@@ -55,6 +55,10 @@ export class LoginGerenteComponent implements OnInit{
         this.isLoginFailed = true;
       }
     );
+
+
   }
+
+
 
 }

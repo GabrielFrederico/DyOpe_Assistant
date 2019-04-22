@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {CadastroSetorService, Setor} from '../service/cadastro-setor.service';
 import {Router} from '@angular/router';
-import {TokenStorageService} from "../auth/token-storage.service";
+import {TokenStorageService} from '../auth/token-storage.service';
 
 @Component({
   selector: 'app-cadastro-setor',
@@ -24,12 +24,14 @@ export class CadastroSetorComponent implements OnInit {
   }
 
 
-
   save() {
     this.setorService.cadastrarSetor(
       this.setor)
       .subscribe(value => console.log(value), error => console.log(error));
     alert('Cadastrado com sucesso!');
   }
-
+  naoAutenticado() {
+    this.router.navigate(['/logingerente']);
+    alert('Acesse Negado! Faça o Login!');
+  }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {TokenStorageService} from "../auth/token-storage.service";
+import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {TokenStorageService} from '../auth/token-storage.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-operacao-costura',
@@ -18,7 +19,7 @@ export class OperacaoCosturaComponent implements OnInit {
       senha: this.token.getPassword()
     };
   }
-  constructor(private modalService: NgbModal, private token: TokenStorageService) {}
+  constructor(private modalService: NgbModal, private token: TokenStorageService, private router: Router) {}
 
 
   openCadastro(cadastro) {
@@ -46,5 +47,9 @@ export class OperacaoCosturaComponent implements OnInit {
     }
   }
 
+  naoAutenticado() {
+    this.router.navigate(['/logingerente']);
+    alert('Acesse Negado! Faça o Login!');
+  }
 
 }

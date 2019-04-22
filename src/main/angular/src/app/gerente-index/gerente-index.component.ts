@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {TokenStorageService} from "../auth/token-storage.service";
-import {loginGerenteInfo} from "../service/gerente.service";
+import {TokenStorageService} from '../auth/token-storage.service';
+import {loginGerenteInfo} from '../service/gerente.service';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -37,7 +38,7 @@ export class GerenteIndexComponent implements OnInit {
     }
   }
 
-  constructor(private modalService: NgbModal, private token: TokenStorageService) {
+  constructor(private modalService: NgbModal, private token: TokenStorageService, private  router: Router) {
   }
 
 
@@ -63,5 +64,8 @@ export class GerenteIndexComponent implements OnInit {
       return `with: ${reason}`;
     }
   }
-
+  naoAutenticado() {
+    this.router.navigate(['/logingerente']);
+    alert('Acesse Negado! Faça o Login!');
+  }
 }

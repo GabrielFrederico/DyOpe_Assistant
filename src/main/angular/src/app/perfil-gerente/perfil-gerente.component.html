@@ -28,7 +28,7 @@
 
 </head>
 
-<body *ngIf="info.token; else loggedOut" id="page-top" class>
+<body *ngIf="info.token; else naoAutenticado()" id="page-top" class>
 
 <app-nav-bar></app-nav-bar>
 <div id="wrapper">

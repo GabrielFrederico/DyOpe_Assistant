@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {TokenStorageService} from "../auth/token-storage.service";
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {TokenStorageService} from '../auth/token-storage.service';
+import {Route, Router} from '@angular/router';
 
 @Component({
   selector: 'app-controle-funcionarios',
@@ -17,7 +18,10 @@ export class ControleFuncionariosComponent implements OnInit {
       senha: this.token.getPassword()
     };
   }
-  constructor(private modalService: NgbModal, private token: TokenStorageService) {}
+  constructor(private modalService: NgbModal, private token: TokenStorageService, private router: Router) {}
 
-
+  naoAutenticado() {
+    this.router.navigate(['/logingerente']);
+    alert('Acesse Negado! Faça o Login!');
+  }
 }
