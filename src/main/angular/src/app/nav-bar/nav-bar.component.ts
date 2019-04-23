@@ -11,16 +11,9 @@ import {GerenteIndexComponent} from "../gerente-index/gerente-index.component";
 })
 export class NavBarComponent implements OnInit {
   info: any;
+  public isCollapsed = false;
+  gerenteIndex: GerenteIndexComponent;
 
-  get isCollapsed(): boolean {
-    return this._isCollapsed;
-  }
-
-  set isCollapsed(value: boolean) {
-    this._isCollapsed = value;
-  }
-
-  private _isCollapsed = false;
   closeResult: string;
   ngOnInit() {
     this.info = {
@@ -28,6 +21,10 @@ export class NavBarComponent implements OnInit {
       username: this.token.getUsername(),
       authorities: this.token.getAuthorities()
     };
+
+    if(this.isCollapsed){
+      this.gerenteIndex.isCollapsed= true;
+    }
   }
 
   constructor(private modalService: NgbModal, private token: TokenStorageService, private router: Router) {

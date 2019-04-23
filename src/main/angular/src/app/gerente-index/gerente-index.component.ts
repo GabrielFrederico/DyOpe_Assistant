@@ -14,7 +14,7 @@ export class GerenteIndexComponent implements OnInit {
   info: any;
   form: any = {};
   public isCollapsed = false;
-  navbar: NavBarComponent;
+
   closeResult: string;
   private roles: string[];
   private authority: string;
