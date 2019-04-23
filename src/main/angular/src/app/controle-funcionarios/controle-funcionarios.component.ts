@@ -21,7 +21,10 @@ export class ControleFuncionariosComponent implements OnInit {
   constructor(private modalService: NgbModal, private token: TokenStorageService, private router: Router) {}
 
   naoAutenticado() {
-    this.router.navigate(['/logingerente']);
-    alert('Acesse Negado! Faça o Login!');
+    if (this.info.token) {
+    } else {
+      this.router.navigate(['/logingerente'])
+      alert('Acesse Negado! Faça o Login!');
+    }
   }
 }

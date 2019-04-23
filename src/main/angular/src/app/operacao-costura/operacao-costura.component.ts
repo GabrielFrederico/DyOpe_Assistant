@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {TokenStorageService} from '../auth/token-storage.service';
 import {Router} from '@angular/router';
@@ -11,6 +11,7 @@ export class OperacaoCosturaComponent implements OnInit {
 
   closeResult: string;
   public info: any;
+
   ngOnInit() {
     this.info = {
       token: this.token.getToken(),
@@ -19,18 +20,21 @@ export class OperacaoCosturaComponent implements OnInit {
       senha: this.token.getPassword()
     };
   }
-  constructor(private modalService: NgbModal, private token: TokenStorageService, private router: Router) {}
+
+  constructor(private modalService: NgbModal, private token: TokenStorageService, private router: Router) {
+  }
 
 
   openCadastro(cadastro) {
-    this.modalService.open(cadastro, { size: 'lg', ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+    this.modalService.open(cadastro, {size: 'lg', ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
   }
+
   openInformacoes(content) {
-    this.modalService.open(content, { size: 'lg', ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+    this.modalService.open(content, {size: 'lg', ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
@@ -43,13 +47,17 @@ export class OperacaoCosturaComponent implements OnInit {
     } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
       return 'by clicking on a backdrop';
     } else {
-      return  `with: ${reason}`;
+      return `with: ${reason}`;
     }
   }
 
   naoAutenticado() {
-    this.router.navigate(['/logingerente']);
-    alert('Acesse Negado! Faça o Login!');
+    if (this.info.token) {
+    } else {
+      this.router.navigate(['/logingerente'])
+      alert('Acesse Negado! Faça o Login!');
+    }
+
   }
 
 }

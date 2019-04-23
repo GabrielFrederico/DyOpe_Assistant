@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {TokenStorageService} from "../auth/token-storage.service";
 import {Router} from "@angular/router";
+import {SidebarComponent} from "../sidebar/sidebar.component";
+import {GerenteIndexComponent} from "../gerente-index/gerente-index.component";
 
 @Component({
   selector: 'app-nav-bar',
@@ -9,7 +11,16 @@ import {Router} from "@angular/router";
 })
 export class NavBarComponent implements OnInit {
   info: any;
-  public isCollapsed = false;
+
+  get isCollapsed(): boolean {
+    return this._isCollapsed;
+  }
+
+  set isCollapsed(value: boolean) {
+    this._isCollapsed = value;
+  }
+
+  private _isCollapsed = false;
   closeResult: string;
   ngOnInit() {
     this.info = {

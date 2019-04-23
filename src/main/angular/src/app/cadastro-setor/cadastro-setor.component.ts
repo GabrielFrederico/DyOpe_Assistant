@@ -31,7 +31,10 @@ export class CadastroSetorComponent implements OnInit {
     alert('Cadastrado com sucesso!');
   }
   naoAutenticado() {
-    this.router.navigate(['/logingerente']);
-    alert('Acesse Negado! Faça o Login!');
+    if (this.info.token) {
+    } else {
+      this.router.navigate(['/logingerente'])
+      alert('Acesse Negado! Faça o Login!');
+    }
   }
 }

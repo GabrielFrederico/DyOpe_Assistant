@@ -3,6 +3,7 @@ import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {TokenStorageService} from '../auth/token-storage.service';
 import {loginGerenteInfo} from '../service/gerente.service';
 import {Router} from '@angular/router';
+import {NavBarComponent} from "../nav-bar/nav-bar.component";
 
 
 @Component({
@@ -13,6 +14,7 @@ export class GerenteIndexComponent implements OnInit {
   info: any;
   form: any = {};
   public isCollapsed = false;
+  navbar: NavBarComponent;
   closeResult: string;
   private roles: string[];
   private authority: string;
@@ -36,6 +38,8 @@ export class GerenteIndexComponent implements OnInit {
         }
       });
     }
+
+
   }
 
   constructor(private modalService: NgbModal, private token: TokenStorageService, private  router: Router) {
@@ -64,8 +68,13 @@ export class GerenteIndexComponent implements OnInit {
       return `with: ${reason}`;
     }
   }
+
   naoAutenticado() {
-    this.router.navigate(['/logingerente']);
-    alert('Acesse Negado! Faça o Login!');
+    if (this.info.token) {
+    } else {
+      this.router.navigate(['/logingerente'])
+
+      alert('Acesse Negado! Faça o Login!');
+    }
   }
 }
