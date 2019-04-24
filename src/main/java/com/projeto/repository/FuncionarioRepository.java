@@ -1,6 +1,7 @@
 package com.projeto.repository;
 
 import java.io.Serializable;
+import java.util.Optional;
 
 import org.springframework.data.repository.CrudRepository;
 
@@ -15,5 +16,7 @@ public interface FuncionarioRepository extends CrudRepository<Funcionario, Seria
 	Boolean existsByEmail(String email);
 
 	Funcionario findByNome(String nome);
+
+    Optional<Funcionario> findByNomeUsuario(String nomeUsuario);
 
 }
