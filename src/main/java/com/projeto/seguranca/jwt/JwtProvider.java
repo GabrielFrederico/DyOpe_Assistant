@@ -2,6 +2,7 @@ package com.projeto.seguranca.jwt;
 
 import java.sql.Date;
 
+import com.projeto.seguranca.service.FuncionarioPrinciple;
 import org.hibernate.annotations.common.util.impl.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.*;
@@ -38,6 +39,18 @@ public class JwtProvider {
                     .setExpiration(new Date((new Date(jwtExpiration)).getTime() + jwtExpiration*1000))
                     .signWith(SignatureAlgorithm.HS512, jwtSecret)
                     .compact();
+    }
+
+    public String generateJwtTokenFuncionario(Authentication authentication) {
+
+        FuncionarioPrinciple funcionarioPrinciple = (FuncionarioPrinciple) authentication.getPrincipal();
+
+        return Jwts.builder()
+                .setSubject((funcionarioPrinciple.getUsername()))
+                .setIssuedAt(new Date(jwtExpiration))
+                .setExpiration(new Date((new Date(jwtExpiration)).getTime() + jwtExpiration * 1000))
+                .signWith(SignatureAlgorithm.HS512, jwtSecret)
+                .compact();
     }
     
     public boolean validateJwtToken(String authToken) {

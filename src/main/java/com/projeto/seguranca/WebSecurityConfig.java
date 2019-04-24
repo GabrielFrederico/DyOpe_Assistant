@@ -20,49 +20,50 @@ import com.projeto.seguranca.service.GerenteDetailsServiceImpl;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(
-    prePostEnabled = true
+        prePostEnabled = true
 )
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
-	
-	    @Autowired
-	    GerenteDetailsServiceImpl gerenteDetailsServiceImpl;
-	 
-	    @Autowired
-	    private JwtAuthEntryPoint unauthorizedHandler;
-	 
-	    @Bean
-	    public JwtAuthTokenFilter authenticationJwtTokenFilter() {
-	        return new JwtAuthTokenFilter();
-	    }
-	 
-	    @Override
-	    public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
-	        authenticationManagerBuilder
-	                .userDetailsService(gerenteDetailsServiceImpl)
-	                .passwordEncoder(passwordEncoder());
-	    }
-	 
-	    @Bean
-	    @Override
-	    public AuthenticationManager authenticationManagerBean() throws Exception {
-	        return super.authenticationManagerBean();
-	    }
-	 
-	    @Bean
-	    public org.springframework.security.crypto.password.PasswordEncoder passwordEncoder() {
-	        return new BCryptPasswordEncoder();
-	    }
-	    
-	    @Override
-	    protected void configure(HttpSecurity http) throws Exception {
-	        http.cors().and().csrf().disable().
-	                authorizeRequests()
-	                .antMatchers("/**").permitAll()
-	                .anyRequest().authenticated()
-	                .and()
-	                .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
-	                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-	        
-	        http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
-	    }
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Autowired
+    GerenteDetailsServiceImpl gerenteDetailsServiceImpl;
+
+    @Autowired
+    private JwtAuthEntryPoint unauthorizedHandler;
+
+    @Bean
+    public JwtAuthTokenFilter authenticationJwtTokenFilter() {
+        return new JwtAuthTokenFilter();
+    }
+
+    @Override
+    public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
+        authenticationManagerBuilder
+                .userDetailsService(gerenteDetailsServiceImpl)
+                .passwordEncoder(passwordEncoder());
+    }
+
+
+    @Bean
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
+
+    @Bean
+    public org.springframework.security.crypto.password.PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.cors().and().csrf().disable().
+                authorizeRequests()
+                .antMatchers("/**").permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
+        http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+    }
 }
