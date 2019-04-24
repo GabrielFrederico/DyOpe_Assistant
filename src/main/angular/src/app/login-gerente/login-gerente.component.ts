@@ -38,27 +38,30 @@ export class LoginGerenteComponent implements OnInit {
       this.form.nomeUsuario,
       this.form.senha);
 
-    this.authService.loginGerenteAutenticado(this.loginInfo).subscribe(
-      data => {
-        this.tokenStorage.saveToken(data.accessToken);
-        this.tokenStorage.saveUsername(data.username);
-        this.tokenStorage.saveAuthorities(data.authorities);
+    if (this.roles === ['gerente']) {
+      this.authService.loginGerenteAutenticado(this.loginInfo).subscribe(
+        data => {
+          this.tokenStorage.saveToken(data.accessToken);
+          this.tokenStorage.saveUsername(data.username);
+          this.tokenStorage.saveAuthorities(data.authorities);
 
-        this.isLoginFailed = false;
-        this.isLoggedIn = true;
-        this.roles = this.tokenStorage.getAuthorities();
-        this.router.navigate(['/gerenteindex']);
-      },
-      error => {
-        console.log(error);
-        this.errorMessage = error.error.message;
-        this.isLoginFailed = true;
-      }
-    );
+          this.isLoginFailed = false;
+          this.isLoggedIn = true;
+          this.roles = this.tokenStorage.getAuthorities();
+          this.router.navigate(['/gerenteindex']);
+        },
+        error => {
+          console.log(error);
+          this.errorMessage = error.error.message;
+          this.isLoginFailed = true;
+        }
+      );
+    } else {
+      this.isLoginFailed = true;
+    }
 
 
   }
-
 
 
 }
