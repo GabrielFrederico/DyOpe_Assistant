@@ -37,7 +37,7 @@ export class PerfilGerenteComponent implements OnInit {
     });
   }
   ngOnInit() {
-
+   this.datareload();
     this.info = {
       token: this.token.getToken(),
       username: this.token.getUsername(),
