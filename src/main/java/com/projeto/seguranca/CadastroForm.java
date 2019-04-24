@@ -1,7 +1,5 @@
 package com.projeto.seguranca;
 
-import java.util.Set;
-
 public class CadastroForm {
     private String nome;
     private String rg;
