@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {JwtResponse} from "../auth/auth.service";
 
 export class Gerente {
   public nome: string;
@@ -14,6 +13,7 @@ export class Gerente {
 
 }
 
+// tslint:disable-next-line:class-name
 export class loginGerenteInfo {
   nomeUsuario: string;
   senha: string;
@@ -24,6 +24,7 @@ export class loginGerenteInfo {
   }
 }
 
+// tslint:disable-next-line:class-name
 export class cadastroGerenteInfo {
   public nome: string;
   public nomeUsuario: string;
@@ -55,6 +56,10 @@ export class GerenteService {
 
   getGerentes() {
     return this.httpClient.get<Gerente[]>('http://localhost:8080/gerentes');
+  }
+
+  getinfoGerentes() {
+    return this.httpClient.get<cadastroGerenteInfo[]>('http://localhost:8080/gerentes');
   }
 
   cadastrarGerente(gerente: Gerente): Observable<Gerente> {

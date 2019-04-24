@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {TokenStorageService} from '../auth/token-storage.service';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {cadastroGerenteInfo, Gerente, loginGerenteInfo} from '../service/gerente.service';
+import {cadastroGerenteInfo, Gerente, GerenteService, loginGerenteInfo} from '../service/gerente.service';
 import {Router} from '@angular/router';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-perfil-gerente',
@@ -10,7 +11,9 @@ import {Router} from '@angular/router';
 })
 export class PerfilGerenteComponent implements OnInit {
 
-  constructor(private modalService: NgbModal, private token: TokenStorageService, private router: Router) { }
+  @Input() gerentes: Observable<cadastroGerenteInfo[]>;
+  // tslint:disable-next-line:max-line-length
+  constructor(private modalService: NgbModal, private token: TokenStorageService, private gerenteService: GerenteService, private router: Router) { }
   public info: any;
   form: any = {};
   public isCollapsed = false;
@@ -42,11 +45,13 @@ export class PerfilGerenteComponent implements OnInit {
       senha: this.token.getPassword()
     };
   }
-
+  datareload() {
+    this.gerentes = this.gerenteService.getinfoGerentes();
+  }
   naoAutenticado() {
     if (this.info.token) {
     } else {
-      this.router.navigate(['/logingerente'])
+      this.router.navigate(['/logingerente']);
       alert('Acesse Negado! Faça o Login!');
     }
   }

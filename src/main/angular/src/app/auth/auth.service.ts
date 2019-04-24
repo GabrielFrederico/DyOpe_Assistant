@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {cadastroGerenteInfo, loginGerenteInfo} from "../service/gerente.service";
+import {cadastroGerenteInfo, loginGerenteInfo} from '../service/gerente.service';
 import {Observable} from 'rxjs';
 
 const httpOptions = {
@@ -29,8 +29,8 @@ export class AuthService {
     return this.http.post<JwtResponse>(this.loginUrl, credentials, httpOptions);
   }
 
-  cadastrarGerenteAuth(info: cadastroGerenteInfo): Observable<string> {
-    return this.http.post<string>(this.signupUrl, info, httpOptions);
+  cadastrarGerenteAuth(info: cadastroGerenteInfo): Observable<cadastroGerenteInfo> {
+    return this.http.post<cadastroGerenteInfo>(this.signupUrl, info, httpOptions);
   }
 
 

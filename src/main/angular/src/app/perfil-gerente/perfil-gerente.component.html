@@ -31,7 +31,7 @@
 <body *ngIf="info.token; else naoAutenticado()" id="page-top" class>
 
 <app-nav-bar></app-nav-bar>
-<div id="wrapper">
+<div id="wrapper" >
 
   <!-- Sidebar -->
   <ul class="sidebar toggled bg-primary navbar-nav">
@@ -48,7 +48,7 @@
 
   <div id="content-wrapper" class="fundo">
 
-    <div class="container-fluid">
+    <div class="container-fluid" >
 
       <!-- Page Content -->
       <h1>Perfil</h1>
@@ -59,15 +59,15 @@
       <img src="assets/imagens/imgperfil.jpg" style="height: 200px; width: 200px; float: left; padding-left: 1%;">
     </div>
 
-    <div class="container " style="float: left; max-width: 70%; padding-left: 5%">
+    <div class="container " style="float: left; max-width: 70%; padding-left: 5%" >
       <form method="put" action="/redefinirperfilgerente">
         <div class="form-group">
           <div class="form-row">
             <div class="col-md-6">
               <div class="form-group">
-                <div class="form-label-group">
-                  <input type="text" name="nome" id="nomeCompleto" class="form-control"
-                         autofocus="autofocus"
+                <div class="form-label-group" *ngFor="let gerente of gerenteService.getinfoGerentes() | async">
+                  <input type="text" name="nome"  id="nomeCompleto" class="form-control"
+                         autofocus="autofocus" value="{{gerente.nome}}"
                          placeholder="Nome Completo" required="required">
                   <label for="nomeCompleto">Nome Completo</label>
                 </div>
