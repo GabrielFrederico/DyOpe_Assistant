@@ -12,8 +12,11 @@ import {Observable} from 'rxjs';
 export class PerfilGerenteComponent implements OnInit {
 
   @Input() gerentes: Observable<cadastroGerenteInfo[]>;
+
   // tslint:disable-next-line:max-line-length
-  constructor(private modalService: NgbModal, private token: TokenStorageService, private gerenteService: GerenteService, private router: Router) { }
+  constructor(private modalService: NgbModal, private token: TokenStorageService, private gerenteService: GerenteService, private router: Router) {
+  }
+
   public info: any;
   form: any = {};
   public isCollapsed = false;
@@ -25,32 +28,33 @@ export class PerfilGerenteComponent implements OnInit {
     } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
       return 'by clicking on a backdrop';
     } else {
-      return  `with: ${reason}`;
+      return `with: ${reason}`;
     }
   }
 
   openLogout(content) {
-    this.modalService.open(content, { size: 'sm', ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+    this.modalService.open(content, {size: 'sm', ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${PerfilGerenteComponent.getDismissReason(reason)}`;
     });
   }
+
   ngOnInit() {
-   this.datareload();
+    this.datareload();
     this.info = {
       token: this.token.getToken(),
       username: this.token.getUsername(),
-      authorities: this.token.getAuthorities(),
-      senha: this.token.getPassword()
+      authorities: this.token.getAuthorities()
     };
   }
+
   datareload() {
     this.gerentes = this.gerenteService.getinfoGerentes();
   }
+
   naoAutenticado() {
-    if (this.info.token) {
-    } else {
+    if (!this.info.token) {
       this.router.navigate(['/logingerente']);
       alert('Acesso Negado! Faça o Login!');
     }

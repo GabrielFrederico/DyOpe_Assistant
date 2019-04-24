@@ -23,8 +23,7 @@ export class GerenteIndexComponent implements OnInit {
     this.info = {
       token: this.token.getToken(),
       username: this.token.getUsername(),
-      authorities: this.token.getAuthorities(),
-      password: this.token.getPassword()
+      authorities: this.token.getAuthorities()
     };
     if (this.token.getToken()) {
       this.roles = this.token.getAuthorities();
@@ -74,7 +73,7 @@ export class GerenteIndexComponent implements OnInit {
     } else {
       this.router.navigate(['/logingerente'])
 
-      alert('Acesse Negado! Faça o Login!');
+      alert('Acesso Negado! Faça o Login!');
     }
   }
 }
