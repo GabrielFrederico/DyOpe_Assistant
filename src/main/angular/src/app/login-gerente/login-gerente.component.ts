@@ -4,6 +4,7 @@ import {TokenStorageService} from '../auth/token-storage.service';
 import {AuthService} from '../auth/auth.service';
 import {loginGerenteInfo} from '../service/gerente.service';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {not} from "rxjs/internal-compatibility";
 
 @Component({
   selector: 'app-login',
@@ -38,7 +39,7 @@ export class LoginGerenteComponent implements OnInit {
       this.form.nomeUsuario,
       this.form.senha);
 
-    if (this.roles === ['gerente']) {
+    if (this.roles !== ['admin'] &&  this.roles !== ['funcionario'] ) {
       this.authService.loginGerenteAutenticado(this.loginInfo).subscribe(
         data => {
           this.tokenStorage.saveToken(data.accessToken);

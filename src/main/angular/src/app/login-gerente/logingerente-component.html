@@ -62,7 +62,7 @@
           </div>
         </div>
         <input class="btn btn-info btn-block" type="submit" value="Login">
-        <div *ngIf="f.submitted && isLoginFailed" class="alert alert-danger">
+        <div  *ngIf="f.submitted && isLoginFailed" class="alert alert-dismissible alert-danger">
           Login inválido!
         </div>
       </form>
