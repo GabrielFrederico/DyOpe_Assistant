@@ -4,6 +4,7 @@ import java.sql.Date;
 
 import org.hibernate.annotations.common.util.impl.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 

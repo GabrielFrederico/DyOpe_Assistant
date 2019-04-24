@@ -1,7 +1,7 @@
 package com.projeto.models;
 
 import javax.persistence.*;
-import java.util.Set;
+
 
 @Entity
 @Table(name = "gerentes", uniqueConstraints = {
@@ -19,16 +19,6 @@ public class Gerente extends Usuario {
 	private String nome;
 	private String rg;
 	private String cpf;
-    private Set<Operacao> operacao;
-
-    @OneToMany(mappedBy = "gerente", cascade = CascadeType.ALL)
-    public Set<Operacao> getOperacao() {
-        return operacao;
-    }
-
-    public void setOperacao(Set<Operacao> operacao) {
-        this.operacao = operacao;
-    }
 
 	private String email;
 

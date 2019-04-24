@@ -52,7 +52,7 @@ export class PerfilGerenteComponent implements OnInit {
     if (this.info.token) {
     } else {
       this.router.navigate(['/logingerente']);
-      alert('Acesse Negado! Faça o Login!');
+      alert('Acesso Negado! Faça o Login!');
     }
   }
 }

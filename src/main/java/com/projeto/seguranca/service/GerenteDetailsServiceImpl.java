@@ -22,7 +22,7 @@ public class GerenteDetailsServiceImpl implements UserDetailsService {
 	 
 	    Gerente gerente = gerenteRepository.findByNomeUsuario(username).orElseThrow(
 	        () -> new UsernameNotFoundException("User Not Found with -> username or email : " + username));
-	 
-	    return GerentePrinciple.build(gerente);
+
+          return (UserDetails) GerentePrinciple.build(gerente);
 	  }
 }
