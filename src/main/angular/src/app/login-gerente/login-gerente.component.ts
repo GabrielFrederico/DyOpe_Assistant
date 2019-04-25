@@ -5,6 +5,7 @@ import {AuthService} from '../auth/auth.service';
 import {loginGerenteInfo} from '../service/gerente.service';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {not} from "rxjs/internal-compatibility";
+import {LoginInfo} from "../service/login-info";
 
 @Component({
   selector: 'app-login',
@@ -19,7 +20,7 @@ export class LoginGerenteComponent implements OnInit {
   isLoginFailed = false;
   errorMessage = '';
   roles: string[] = [];
-  private loginInfo: loginGerenteInfo;
+  private loginInfo: LoginInfo;
 
   constructor(private modalService: NgbModal, private authService: AuthService, private tokenStorage: TokenStorageService, private router: Router) {
   }
@@ -40,7 +41,7 @@ export class LoginGerenteComponent implements OnInit {
       this.form.senha);
 
     if (this.roles !== ['admin'] &&  this.roles !== ['funcionario'] ) {
-      this.authService.loginGerenteAutenticado(this.loginInfo).subscribe(
+      this.authService.loginAutenticado(this.loginInfo).subscribe(
         data => {
           this.tokenStorage.saveToken(data.accessToken);
           this.tokenStorage.saveUsername(data.username);

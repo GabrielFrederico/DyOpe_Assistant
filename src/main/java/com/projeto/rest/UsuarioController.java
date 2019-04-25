@@ -2,16 +2,26 @@ package com.projeto.rest;
 
 import java.util.Optional;
 
+import com.projeto.repository.RoleRepository;
+import com.projeto.seguranca.JwtResponse;
+import com.projeto.seguranca.LoginForm;
+import com.projeto.seguranca.jwt.JwtProvider;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.*;
 
 import com.projeto.models.Usuario;
 import com.projeto.repository.UsuarioRepository;
 
+import javax.validation.Valid;
+
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("usuarios")
 public class UsuarioController {
@@ -19,10 +29,36 @@ public class UsuarioController {
     @Autowired
     UsuarioRepository usuarioRepository;
 
+    @Autowired
+    AuthenticationManager authenticationManager;
+
+
+    @Autowired
+    RoleRepository roleRepository;
+
+    @Autowired
+    PasswordEncoder encoder;
+
+    @Autowired
+    JwtProvider jwtProvider;
     @RequestMapping(method = RequestMethod.POST, value = "/cadastrarusuario")
     public Usuario save(@RequestBody Usuario usuario) {
         usuarioRepository.save(usuario);
         return usuario;
+    }
+
+    @RequestMapping(method = RequestMethod.POST, path = "/logar")
+    public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginForm loginRequest) {
+
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(loginRequest.getNomeUsuario(), loginRequest.getSenha()));
+
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        String jwt = jwtProvider.generateJwtToken(authentication);
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+
+        return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getUsername(), userDetails.getAuthorities()));
     }
 
     @RequestMapping(method = RequestMethod.GET)

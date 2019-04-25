@@ -1,7 +1,9 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {cadastroGerenteInfo, loginGerenteInfo} from '../service/gerente.service';
+import {Gerente, loginGerenteInfo} from '../service/gerente.service';
 import {Observable} from 'rxjs';
+import {Funcionario} from "../service/funcionario.service";
+import {LoginInfo} from "../service/login-info";
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -19,19 +21,23 @@ export class JwtResponse {
 })
 export class AuthService {
 
-  private loginUrl = 'http://localhost:8080/gerentes/logar';
-  private signupUrl = 'http://localhost:8080/gerentes/cadastrar';
+  private loginUrl = 'http://localhost:8080/usuarios/logar';
+  private signupUrlGerente = 'http://localhost:8080/gerentes/cadastrar';
+  private signupUrlFuncionario = 'http://localhost:8080/funcionarios/cadastrar';
 
   constructor(private http: HttpClient) {
   }
 
-  loginGerenteAutenticado(credentials: loginGerenteInfo): Observable<JwtResponse> {
+  loginAutenticado(credentials: LoginInfo): Observable<JwtResponse> {
     return this.http.post<JwtResponse>(this.loginUrl, credentials, httpOptions);
   }
 
-  cadastrarGerenteAuth(info: cadastroGerenteInfo): Observable<cadastroGerenteInfo> {
-    return this.http.post<cadastroGerenteInfo>(this.signupUrl, info, httpOptions);
+  cadastrarGerenteAuth(info: Gerente): Observable<Gerente> {
+    return this.http.post<Gerente>(this.signupUrlGerente, info, httpOptions);
   }
 
+  cadastrarFuncionarioAuth(info: Funcionario): Observable<Funcionario>{
+    return this.http.post<Funcionario>(this.signupUrlFuncionario, info, httpOptions);
+  }
 
 }

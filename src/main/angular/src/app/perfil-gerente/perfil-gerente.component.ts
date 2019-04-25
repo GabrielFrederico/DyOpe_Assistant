@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {TokenStorageService} from '../auth/token-storage.service';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {cadastroGerenteInfo, Gerente, GerenteService, loginGerenteInfo} from '../service/gerente.service';
+import {Gerente, GerenteService, loginGerenteInfo} from '../service/gerente.service';
 import {Router} from '@angular/router';
 import {Observable} from 'rxjs';
 
@@ -11,7 +11,7 @@ import {Observable} from 'rxjs';
 })
 export class PerfilGerenteComponent implements OnInit {
 
-  @Input() gerentes: Observable<cadastroGerenteInfo[]>;
+  @Input() gerentes: Observable<Gerente[]>;
 
   // tslint:disable-next-line:max-line-length
   constructor(private modalService: NgbModal, private token: TokenStorageService, private gerenteService: GerenteService, private router: Router) {

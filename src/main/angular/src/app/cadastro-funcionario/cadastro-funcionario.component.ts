@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import {Funcionario} from '../service/funcionario.service';
-import {FuncionarioService} from '../service/funcionario.service';
+import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
+import {Funcionario, FuncionarioService} from "../service/funcionario.service";
+import {AuthService} from "../auth/auth.service";
 
 @Component({
   selector: 'app-cadastro-funcionario',
@@ -9,20 +9,47 @@ import {Router} from '@angular/router';
 })
 export class CadastroFuncionarioComponent implements OnInit {
 
-  funcionario: Funcionario = new Funcionario();
-
-  constructor(private http: FuncionarioService,
-              private router: Router) { }
-
   ngOnInit() {
   }
 
-  save() {
-    this.http.cadastrarFuncionario(
-      this.funcionario)
-      .subscribe(value => console.log(value), error => console.log(error));
-    this.router.navigate(['/loginfuncionario']);
-    alert('Cadastrado com sucesso!');
+  form: any = {};
+  public funcionarioInfo: Funcionario;
+  isSignedUp = false;
+  isSignUpFailed = false;
+  errorMessage = '';
+
+  constructor(private http: FuncionarioService,
+              private router: Router, private authService: AuthService) {
+  }
+
+  OnSubmit() {
+    console.log(this.form);
+
+    this.funcionarioInfo = new Funcionario(
+      this.form.nome,
+      this.form.nomeUsuario,
+      this.form.cpf,
+      this.form.rg,
+      this.form.email,
+      this.form.senhaConfirm,
+      this.form.senha);
+
+    this.authService.cadastrarFuncionarioAuth(this.funcionarioInfo).subscribe(
+      data => {
+        console.log(data);
+        this.isSignedUp = true;
+        this.isSignUpFailed = false;
+        this.router.navigate(['/loginfuncionario']);
+        alert("cadastrado com sucesso");
+      },
+      error => {
+        console.log(error);
+        this.errorMessage = error.error.message;
+        this.isSignUpFailed = true;
+      }
+    );
+
+
   }
 
 }

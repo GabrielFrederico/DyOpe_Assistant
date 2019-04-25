@@ -1,5 +1,6 @@
 package com.projeto.seguranca;
 
+import com.projeto.seguranca.jwt.JwtAuthTokenFilterFuncionario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,7 +15,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.projeto.seguranca.jwt.JwtAuthEntryPoint;
-import com.projeto.seguranca.jwt.JwtAuthTokenFilter;
 import com.projeto.seguranca.service.GerenteDetailsServiceImpl;
 
 @Configuration
@@ -22,23 +22,23 @@ import com.projeto.seguranca.service.GerenteDetailsServiceImpl;
 @EnableGlobalMethodSecurity(
         prePostEnabled = true
 )
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+public class WebSecurityConfigGerente extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    GerenteDetailsServiceImpl gerenteDetailsServiceImpl;
+    GerenteDetailsServiceImpl funcionarioDetailsServiceImpl;
 
     @Autowired
     private JwtAuthEntryPoint unauthorizedHandler;
 
     @Bean
-    public JwtAuthTokenFilter authenticationJwtTokenFilter() {
-        return new JwtAuthTokenFilter();
+    public JwtAuthTokenFilterFuncionario authenticationJwtTokenFilter() {
+        return new JwtAuthTokenFilterFuncionario();
     }
 
     @Override
     public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
         authenticationManagerBuilder
-                .userDetailsService(gerenteDetailsServiceImpl)
+                .userDetailsService(funcionarioDetailsServiceImpl)
                 .passwordEncoder(passwordEncoder());
     }
 

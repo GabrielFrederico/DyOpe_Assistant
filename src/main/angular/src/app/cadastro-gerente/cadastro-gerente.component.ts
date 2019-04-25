@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {cadastroGerenteInfo, Gerente, GerenteService} from '../service/gerente.service';
+import {Gerente, GerenteService} from '../service/gerente.service';
 import {Router} from '@angular/router';
 import {AuthService} from "../auth/auth.service";
 
@@ -9,12 +9,11 @@ import {AuthService} from "../auth/auth.service";
 })
 export class CadastroGerenteComponent implements OnInit {
   form: any = {};
-  public gerenteInfo: cadastroGerenteInfo;
+  public gerenteInfo: Gerente;
   isSignedUp = false;
   isSignUpFailed = false;
   errorMessage = '';
 
-  gerente: Gerente = new Gerente();
   constructor(private http: GerenteService,
               private router: Router, private authService: AuthService) {
   }
@@ -25,7 +24,7 @@ export class CadastroGerenteComponent implements OnInit {
   OnSubmit() {
     console.log(this.form);
 
-    this.gerenteInfo = new cadastroGerenteInfo(
+    this.gerenteInfo = new Gerente(
       this.form.nome,
       this.form.nomeUsuario,
       this.form.cpf,
@@ -50,12 +49,5 @@ export class CadastroGerenteComponent implements OnInit {
     );
 
 
-  }
-  save() {
-    this.http.cadastrarGerente(
-      this.gerente)
-      .subscribe(value => console.log(value), error => console.log(error));
-    this.router.navigate(['/logingerente']);
-    alert('Cadastrado com sucesso!');
   }
 }
