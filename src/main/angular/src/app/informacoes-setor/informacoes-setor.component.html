@@ -28,7 +28,7 @@
 
 </head>
 
-<body id="page-top" class>
+<body id="page-top" *ngIf="info.token; else naoAutenticado()">
 
 <nav class="navbar navbar-expand bg-lightblue static-top">
 

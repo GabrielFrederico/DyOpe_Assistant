@@ -31,13 +31,13 @@
   <div class="card card-register mx-auto mt-5">
     <div class="card-header bg-info text-light">Cadastro</div>
     <div class="card-body">
-      <form [noValidate]="$any(false)" (ngSubmit)="save()">
+      <form [noValidate]="$any(false)" (ngSubmit)="f.form.valid && OnSubmit()" #f="ngForm">
         <div class="form-group">
           <div class="form-group">
             <div class="form-row">
               <div class="col-md-6">
                 <div class="form-label-group">
-                  <input type="text" name="nome" [(ngModel)]="funcionario.nome" id="nomeCompleto" class="form-control"
+                  <input type="text" name="nome" [(ngModel)]="form.nome" id="nomeCompleto" class="form-control"
                          autofocus="autofocus"
                          placeholder="Nome Completo" required="required">
                   <label for="nomeCompleto">Nome Completo</label>
@@ -45,7 +45,8 @@
               </div>
               <div class="col-md-6">
                 <div class="form-label-group">
-                  <input type="text" name="nomeUsuario" [(ngModel)]="funcionario.nomeUsuario" id="nomeUser" class="form-control"
+                  <input type="text" name="nomeUsuario" [(ngModel)]="form.nomeUsuario" id="nomeUser"
+                         class="form-control"
                          autofocus="autofocus"
                          placeholder="Nome Completo" required="required">
                   <label for="nomeUser">Nome de usuario</label>
@@ -56,14 +57,14 @@
           <div class="form-row">
             <div class="col-md-6">
               <div class="form-label-group">
-                <input type="text" name="cpf" [(ngModel)]="funcionario.cpf" id="cpf" class="form-control" placeholder="CPF"
+                <input type="text" name="cpf" [(ngModel)]="form.cpf" id="cpf" class="form-control" placeholder="CPF"
                        required="required">
                 <label for="cpf">CPF</label>
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-label-group">
-                <input type="text" name="rg" id="rg" [(ngModel)]="funcionario.rg" class="form-control" placeholder="RG"
+                <input type="text" name="rg" id="rg" [(ngModel)]="form.rg" class="form-control" placeholder="RG"
                        required="required">
                 <label for="rg">RG</label>
               </div>
@@ -72,7 +73,7 @@
         </div>
         <div class="form-group">
           <div class="form-label-group">
-            <input type="email" name="email" [(ngModel)]="funcionario.email" id="inputEmail" class="form-control"
+            <input type="email" name="email" [(ngModel)]="form.email" id="inputEmail" class="form-control"
                    placeholder="Endereço de e-mail"
                    required="required">
             <label for="inputEmail">Endereço de e-mail</label>
@@ -82,7 +83,7 @@
           <div class="form-row">
             <div class="col-md-6">
               <div class="form-label-group">
-                <input type="password" name="senha" [(ngModel)]="funcionario.senha" id="inputPassword" class="form-control"
+                <input type="password" name="senha" [(ngModel)]="form.senha" id="inputPassword" class="form-control"
                        placeholder="Senha"
                        required="required">
                 <label for="inputPassword">Senha</label>
@@ -90,7 +91,8 @@
             </div>
             <div class="col-md-6">
               <div class="form-label-group">
-                <input type="password" name="senhaConfirm" [(ngModel)]="funcionario.senhaConfirm" id="confirmPassword" class="form-control"
+                <input type="password" name="senhaConfirm" [(ngModel)]="form.senhaConfirm" id="confirmPassword"
+                       class="form-control"
                        placeholder="Confirmar senha" required="required">
                 <label for="confirmPassword">Confirmar senha</label>
               </div>

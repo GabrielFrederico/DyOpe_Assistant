@@ -91,7 +91,7 @@ public class FuncionarioController {
 
         if(strRoles.equals("funcionario")) {
             Role funcionariorole =
-                    roleRepository.findByNome(RoleName.ROLE_GERENTE)
+                    roleRepository.findByNome(RoleName.ROLE_FUNCIONARIO)
                             .orElseThrow(() -> new RuntimeException("Fail! ->  Cause: Funcionario Role not find."));
             roles.add(funcionariorole);
 
