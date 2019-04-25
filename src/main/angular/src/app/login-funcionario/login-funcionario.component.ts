@@ -3,6 +3,7 @@ import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {AuthService} from "../auth/auth.service";
 import {TokenStorageService} from "../auth/token-storage.service";
 import {Router} from "@angular/router";
+import {loginFuncionarioInfo} from '../service/funcionario.service';
 import {LoginInfo} from "../service/login-info";
 
 @Component({
@@ -16,7 +17,7 @@ export class LoginFuncionarioComponent implements OnInit {
   isLoginFailed = false;
   errorMessage = '';
   roles: string[] = [];
-  private loginInfo: LoginInfo;
+  private loginInfo: loginFuncionarioInfo;
 
   constructor(private modalService: NgbModal, private authService: AuthService, private tokenStorage: TokenStorageService, private router: Router) {
   }
@@ -32,7 +33,7 @@ export class LoginFuncionarioComponent implements OnInit {
   onSubmit() {
     console.log(this.form);
 
-    this.loginInfo = new LoginInfo(
+    this.loginInfo = new loginFuncionarioInfo(
       this.form.nomeUsuario,
       this.form.senha);
 

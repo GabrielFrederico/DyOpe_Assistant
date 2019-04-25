@@ -2,6 +2,15 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 
+export class loginFuncionarioInfo {
+  nomeUsuario: string;
+  senha: string;
+
+  constructor(nomeUsuario: string, senha: string) {
+    this.nomeUsuario = nomeUsuario;
+    this.senha = senha;
+  }
+}
 
 
 export class Funcionario {

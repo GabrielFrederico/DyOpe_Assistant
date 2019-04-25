@@ -4,6 +4,7 @@ import com.projeto.seguranca.jwt.JwtAuthTokenFilterFuncionario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -22,6 +23,7 @@ import com.projeto.seguranca.service.GerenteDetailsServiceImpl;
 @EnableGlobalMethodSecurity(
         prePostEnabled = true
 )
+@Order(1)
 public class WebSecurityConfigGerente extends WebSecurityConfigurerAdapter {
 
     @Autowired

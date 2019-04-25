@@ -3,6 +3,7 @@ package com.projeto.seguranca;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -14,7 +15,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.projeto.seguranca.jwt.JwtAuthEntryPoint;
-import com.projeto.seguranca.jwt.JwtAuthTokenFilterGerente;
+import com.projeto.seguranca.jwt.JwtAuthTokenFilterFuncionario;
 import com.projeto.seguranca.service.FuncionarioDetailsServiceImpl;
 
 @Configuration
@@ -22,23 +23,24 @@ import com.projeto.seguranca.service.FuncionarioDetailsServiceImpl;
 @EnableGlobalMethodSecurity(
         prePostEnabled = true
 )
+@Order(2)
 public class WebSecurityConfigFuncionario extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    FuncionarioDetailsServiceImpl gerenteDetailsServiceImpl;
+    FuncionarioDetailsServiceImpl FuncionarioDetailsServiceImpl;
 
     @Autowired
     private JwtAuthEntryPoint unauthorizedHandler;
 
     @Bean
-    public JwtAuthTokenFilterGerente authenticationJwtTokenFilter() {
-        return new JwtAuthTokenFilterGerente();
+    public JwtAuthTokenFilterFuncionario authenticationJwtTokenFilter() {
+        return new JwtAuthTokenFilterFuncionario();
     }
 
     @Override
     public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
         authenticationManagerBuilder
-                .userDetailsService(gerenteDetailsServiceImpl)
+                .userDetailsService(FuncionarioDetailsServiceImpl)
                 .passwordEncoder(passwordEncoder());
     }
 
