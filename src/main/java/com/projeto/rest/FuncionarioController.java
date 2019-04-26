@@ -65,12 +65,28 @@ public class FuncionarioController {
 
 
         if (funcionarioRepository.existsByNomeUsuario(signUpRequest.getNomeUsuario())) {
-            return new ResponseEntity<>(new ResponseMessage("Fail -> Username is already taken!"),
+            return new ResponseEntity<>(new ResponseMessage("Erro -> Usuário já está em uso!"),
                     HttpStatus.BAD_REQUEST);
         }
 
         if (funcionarioRepository.existsByEmail(signUpRequest.getEmail())) {
             return new ResponseEntity<>(new ResponseMessage("Erro -> Email Já está em uso !"),
+                    HttpStatus.BAD_REQUEST);
+        }
+        if (funcionarioRepository.existsByNome(signUpRequest.getNome())) {
+            return new ResponseEntity<>(new ResponseMessage("Erro -> Nome Já está em uso !"),
+                    HttpStatus.BAD_REQUEST);
+        }
+        if (funcionarioRepository.existsByCpf((signUpRequest.getCpf()))) {
+            return new ResponseEntity<>(new ResponseMessage("Erro -> CPF Já está em uso !"),
+                    HttpStatus.BAD_REQUEST);
+        }
+        if (funcionarioRepository.existsByRg(signUpRequest.getRg())) {
+            return new ResponseEntity<>(new ResponseMessage("Erro -> RG Já está em uso !"),
+                    HttpStatus.BAD_REQUEST);
+        }
+        if (funcionarioRepository.existsBySenha(signUpRequest.getSenha())) {
+            return new ResponseEntity<>(new ResponseMessage("Erro -> Senha Já está em uso !"),
                     HttpStatus.BAD_REQUEST);
         }
 
@@ -109,6 +125,19 @@ public class FuncionarioController {
     }
 
 
+    @RequestMapping(method = RequestMethod.POST, path = "/logar")
+    public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginForm loginRequest) {
+
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(loginRequest.getNomeUsuario(), loginRequest.getSenha()));
+
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        String jwt = jwtProvider.generateJwtTokenFuncionario(authentication);
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+
+        return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getUsername(), userDetails.getAuthorities()));
+    }
 
     @RequestMapping(method = RequestMethod.GET)
     public Iterable<Funcionario> listAll() {

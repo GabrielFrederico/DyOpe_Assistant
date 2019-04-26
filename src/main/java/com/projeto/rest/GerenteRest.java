@@ -119,14 +119,26 @@ public class GerenteRest {
         return gerente;
     }
 
+    @RequestMapping(method = RequestMethod.POST, path = "/logar")
+    public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginForm loginRequest) {
 
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(loginRequest.getNomeUsuario(), loginRequest.getSenha()));
+
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        String jwt = jwtProvider.generateJwtToken(authentication);
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+
+        return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getUsername(), userDetails.getAuthorities()));
+    }
     @RequestMapping(method = RequestMethod.POST, path = "/cadastrar")
     public ResponseEntity<?> registerUser(@Valid @RequestBody CadastroForm signUpRequest) {
 
 
 
         if (gerenteRepository.existsByNomeUsuario(signUpRequest.getNomeUsuario())) {
-            return new ResponseEntity<>(new ResponseMessage("Fail -> Username is already taken!"),
+            return new ResponseEntity<>(new ResponseMessage("Erro -> Usuário já está em uso!"),
                     HttpStatus.BAD_REQUEST);
         }
 
@@ -134,6 +146,23 @@ public class GerenteRest {
             return new ResponseEntity<>(new ResponseMessage("Erro -> Email Já está em uso !"),
                     HttpStatus.BAD_REQUEST);
         }
+        if (gerenteRepository.existsByNome(signUpRequest.getNome())) {
+            return new ResponseEntity<>(new ResponseMessage("Erro -> Nome Já está em uso !"),
+                    HttpStatus.BAD_REQUEST);
+        }
+        if (gerenteRepository.existsByCpf((signUpRequest.getCpf()))) {
+            return new ResponseEntity<>(new ResponseMessage("Erro -> CPF Já está em uso !"),
+                    HttpStatus.BAD_REQUEST);
+        }
+        if (gerenteRepository.existsByRg(signUpRequest.getRg())) {
+            return new ResponseEntity<>(new ResponseMessage("Erro -> RG Já está em uso !"),
+                    HttpStatus.BAD_REQUEST);
+        }
+        if (gerenteRepository.existsBySenha(signUpRequest.getSenha())) {
+            return new ResponseEntity<>(new ResponseMessage("Erro -> Senha Já está em uso !"),
+                    HttpStatus.BAD_REQUEST);
+        }
+
 
         // Creating user's account
         Gerente user = new Gerente();

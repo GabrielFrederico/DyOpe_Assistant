@@ -38,7 +38,7 @@ export class LoginFuncionarioComponent implements OnInit {
       this.form.senha);
 
     if (this.roles !== ['admin'] && this.roles !== ['gerente']) {
-      this.authService.loginAutenticado(this.loginInfo).subscribe(
+      this.authService.loginFuncionarioAutenticado(this.loginInfo).subscribe(
         data => {
           this.tokenStorage.saveToken(data.accessToken);
           this.tokenStorage.saveUsername(data.username);

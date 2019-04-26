@@ -82,7 +82,7 @@
                    required="required">
             <label for="inputEmail">Endereço de e-mail</label>
             <div *ngIf="f.submitted && email.invalid">
-              <div *ngIf="email.errors.required">Email is required</div>
+              <div *ngIf="email.errors.required">Email é obrigatório</div>
               <div *ngIf="email.errors.email">Email inválido!</div>
             </div>
           </div>
@@ -108,7 +108,7 @@
                        class="form-control" minlength="6"
                        placeholder="Confirmar senha">
                 <label for="confirmPassword">Confirmar senha</label>
-                <div *ngIf="f.submitted && senha.invalid">
+                <div *ngIf="f.submitted && senhaConfirm.invalid">
                   <div *ngIf="senhaConfirm !== senha">Senhas não são iguais!</div>
                 </div>
               </div>
