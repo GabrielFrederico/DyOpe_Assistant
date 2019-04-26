@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, Directive, Input, NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
 import {RouterModule, Routes} from '@angular/router';
@@ -9,9 +9,9 @@ import {SidebarComponent} from './sidebar/sidebar.component';
 import {NavBarComponent} from './nav-bar/nav-bar.component';
 import {NgbCollapseModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {AngularFontAwesomeModule} from 'angular-font-awesome';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NavComponent } from './nav/nav.component';
-import { LayoutModule } from '@angular/cdk/layout';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {NavComponent} from './nav/nav.component';
+import {LayoutModule} from '@angular/cdk/layout';
 import {
   MatToolbarModule,
   MatButtonModule,
@@ -20,25 +20,47 @@ import {
   MatListModule,
   MatMenuModule, MatButtonToggleModule
 } from '@angular/material';
-import { GerenteComponent } from './gerente/gerente.component';
+import {GerenteComponent} from './gerente/gerente.component';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
+import {coerceBooleanProperty} from "@angular/cdk/coercion";
+
+@Directive({
+  selector: '[readonly],[readOnly]',
+  host: {
+    '[attr.readonly]': '_isReadonly ? "" : null'
+  }
+})
+class ReadonlyDirective {
+  _isReadonly = false;
+
+  @Input() set readonly (v) {
+    this._isReadonly = coerceBooleanProperty(v);
+  };
+
+  ngOnChanges(changes) {
+    console.log(changes);
+  }
+}
 
 @NgModule({
-    schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    declarations: [
-        AppComponent,
-       routingComponent,
-      routingComponent2,
-        routingComponent3,
-        routingComponent4,
-        routingComponent5,
-        routingComponent6,
-        SidebarComponent,
-        NavBarComponent,
-        NavComponent,
-        GerenteComponent,
-    ],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA
+  ],
+  declarations: [
+    AppComponent,
+    routingComponent,
+    routingComponent2,
+    routingComponent3,
+    routingComponent4,
+    routingComponent5,
+    routingComponent6,
+    SidebarComponent,
+    NavBarComponent,
+    NavComponent,
+    GerenteComponent,
+    ReadonlyDirective
+  ],
   imports: [
     AppRoutingModule,
     BrowserModule,
@@ -57,9 +79,9 @@ import {FormsModule} from '@angular/forms';
     MatMenuModule,
     MatButtonToggleModule
   ],
-    exports: [RouterModule],
-    providers: [],
-    bootstrap: [AppComponent]
+  exports: [RouterModule],
+  providers: [],
+  bootstrap: [AppComponent]
 })
 export class AppModule {
 }

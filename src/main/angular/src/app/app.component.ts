@@ -6,6 +6,7 @@ import {TokenStorageService} from "./auth/token-storage.service";
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
 export class AppComponent implements OnInit {
 
   private roles: string[];
@@ -13,7 +14,6 @@ export class AppComponent implements OnInit {
 
   constructor(private tokenStorage: TokenStorageService) {
   }
-
 
   ngOnInit() {
     if (this.tokenStorage.getToken()) {

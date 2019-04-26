@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {InfosetorService} from "../service/infosetor.service";
 import {Router} from "@angular/router";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
@@ -41,6 +41,7 @@ export class PerfilFuncionarioComponent implements OnInit {
   constructor(private http: InfosetorService,
               private router: Router, private modalService: NgbModal, private token: TokenStorageService) {
   }
+
   naoAutenticado() {
     if (this.info.token) {
     } else {
@@ -50,4 +51,9 @@ export class PerfilFuncionarioComponent implements OnInit {
     }
   }
 
+  isReadonly = true;
+
+  toggleReadonly() {
+    this.isReadonly = !this.isReadonly;
+  }
 }

@@ -120,7 +120,7 @@
         <div class="form-group">
           <div class="form-group">
             <div class="form-label-group">
-              <input type="text" name="funcionario" id="nomeCompleto" class="form-control"
+              <input [readonly]="isReadonly" type="text" name="funcionario" id="nomeCompleto" class="form-control"
                      autofocus="autofocus"
                      placeholder="Nome Completo" required="required">
               <label for="nomeCompleto">Nome Completo</label>
@@ -130,7 +130,7 @@
             <div class="col-md-6">
               <div class="form-group">
                 <div class="form-label-group">
-                  <input type="text" name="cpf" id="cpf" class="form-control" placeholder="CPF"
+                  <input [readonly]="isReadonly" type="text" name="cpf" id="cpf" class="form-control" placeholder="CPF"
                          required="required">
                   <label for="cpf">CPF</label>
                 </div>
@@ -139,7 +139,7 @@
             <div class="col-md-6">
               <div class="form-group">
                 <div class="form-label-group">
-                  <input type="text" name="rg" id="rg" class="form-control" placeholder="RG"
+                  <input [readonly]="isReadonly" type="text" name="rg" id="rg" class="form-control" placeholder="RG"
                          required="required">
                   <label for="rg">RG</label>
                 </div>
@@ -148,7 +148,7 @@
           </div>
           <div class="form-group">
             <div class="form-label-group">
-              <input type="email" name="emailGer" id="inputEmail" class="form-control"
+              <input [readonly]="isReadonly" type="email" name="emailGer" id="inputEmail" class="form-control"
                      placeholder="Endereço de e-mail"
                      required="required">
               <label for="inputEmail">Endereço de e-mail</label>
@@ -159,6 +159,7 @@
           <input class="btn btn-success" type="submit" value="Salvar">
           <a class="btn btn-info" href="#" data-toggle="modal" data-target=".redefinir-senha">Redefinir
             senha</a>
+          <input class="btn btn-info" type="button" (click)="toggleReadonly()" value="Editar">
 
 
           <!-- /.container-fluid -->

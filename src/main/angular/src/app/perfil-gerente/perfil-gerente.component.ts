@@ -59,4 +59,10 @@ export class PerfilGerenteComponent implements OnInit {
       alert('Acesso Negado! Faça o Login!');
     }
   }
+
+  isReadonly = true;
+
+  toggleReadonly() {
+    this.isReadonly = !this.isReadonly;
+  }
 }

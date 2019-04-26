@@ -61,4 +61,10 @@ export class OperacaoRiscoComponent implements OnInit {
     }
   }
 
+  isReadonly = true;
+
+  toggleReadonly() {
+    this.isReadonly = !this.isReadonly;
+
+  }
 }
