@@ -3,10 +3,7 @@ package com.projeto.rest;
 import com.projeto.models.Role;
 import com.projeto.models.RoleName;
 import com.projeto.repository.RoleRepository;
-import com.projeto.seguranca.CadastroForm;
-import com.projeto.seguranca.JwtResponse;
-import com.projeto.seguranca.LoginForm;
-import com.projeto.seguranca.ResponseMessage;
+import com.projeto.seguranca.*;
 import com.projeto.seguranca.jwt.JwtProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,7 +14,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,7 +22,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.projeto.models.Funcionario;
 import com.projeto.repository.FuncionarioRepository;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.util.HashSet;
@@ -60,7 +55,7 @@ public class FuncionarioController {
     }
 
     @RequestMapping(method = RequestMethod.POST, path = "/cadastrar")
-    public ResponseEntity<?> registerUser(@Valid @RequestBody CadastroForm signUpRequest) {
+    public ResponseEntity<?> registerUser(@Valid @RequestBody CadastroFormFuncionario signUpRequest) {
 
 
 

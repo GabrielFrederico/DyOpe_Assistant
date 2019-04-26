@@ -1,6 +1,6 @@
 package com.projeto.seguranca;
 
-public class CadastroForm {
+public class CadastroFormGerente {
     private String nome;
     private String rg;
     private String cpf;

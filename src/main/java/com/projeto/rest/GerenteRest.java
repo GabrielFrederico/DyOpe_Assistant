@@ -26,7 +26,7 @@ import com.projeto.models.Role;
 import com.projeto.models.RoleName;
 import com.projeto.repository.GerenteRepository;
 import com.projeto.repository.RoleRepository;
-import com.projeto.seguranca.CadastroForm;
+import com.projeto.seguranca.CadastroFormGerente;
 import com.projeto.seguranca.JwtResponse;
 import com.projeto.seguranca.LoginForm;
 import com.projeto.seguranca.ResponseMessage;
@@ -133,7 +133,7 @@ public class GerenteRest {
         return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getUsername(), userDetails.getAuthorities()));
     }
     @RequestMapping(method = RequestMethod.POST, path = "/cadastrar")
-    public ResponseEntity<?> registerUser(@Valid @RequestBody CadastroForm signUpRequest) {
+    public ResponseEntity<?> registerUser(@Valid @RequestBody CadastroFormGerente signUpRequest) {
 
 
 
