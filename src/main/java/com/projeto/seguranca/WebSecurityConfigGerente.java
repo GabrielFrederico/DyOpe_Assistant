@@ -1,6 +1,7 @@
 package com.projeto.seguranca;
 
 import com.projeto.seguranca.jwt.JwtAuthTokenFilterFuncionario;
+import com.projeto.seguranca.jwt.JwtAuthTokenFilterGerente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -33,8 +34,8 @@ public class WebSecurityConfigGerente extends WebSecurityConfigurerAdapter {
     private JwtAuthEntryPoint unauthorizedHandler;
 
     @Bean
-    public JwtAuthTokenFilterFuncionario authenticationJwtTokenFilter() {
-        return new JwtAuthTokenFilterFuncionario();
+    public JwtAuthTokenFilterGerente authenticationJwtTokenFilter() {
+        return new JwtAuthTokenFilterGerente();
     }
 
     @Override

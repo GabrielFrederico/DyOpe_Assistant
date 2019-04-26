@@ -24,7 +24,7 @@ public class JwtAuthTokenFilterFuncionario extends OncePerRequestFilter {
     @Autowired
     private FuncionarioDetailsServiceImpl funcionarioDetailsService;
 
-    private static final Logger logger = (Logger) org.slf4j.LoggerFactory.getLogger(JwtAuthTokenFilterGerente.class);
+    private static final Logger logger = (Logger) org.slf4j.LoggerFactory.getLogger(JwtAuthTokenFilterFuncionario.class);
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)

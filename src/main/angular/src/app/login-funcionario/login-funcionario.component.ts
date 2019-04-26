@@ -4,7 +4,6 @@ import {AuthService} from "../auth/auth.service";
 import {TokenStorageService} from "../auth/token-storage.service";
 import {Router} from "@angular/router";
 import {loginFuncionarioInfo} from '../service/funcionario.service';
-import {LoginInfo} from "../service/login-info";
 
 @Component({
   selector: 'app-login-funcionario',

@@ -2,8 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Gerente, loginGerenteInfo} from '../service/gerente.service';
 import {Observable} from 'rxjs';
-import {Funcionario} from "../service/funcionario.service";
-import {LoginInfo} from "../service/login-info";
+import {Funcionario, loginFuncionarioInfo} from "../service/funcionario.service";
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -29,11 +28,11 @@ export class AuthService {
   constructor(private http: HttpClient) {
   }
 
-  loginAutenticado(credentials: LoginInfo): Observable<JwtResponse> {
+  loginAutenticado(credentials: loginGerenteInfo): Observable<JwtResponse> {
     return this.http.post<JwtResponse>(this.loginUrl, credentials, httpOptions);
   }
 
-  loginFuncionarioAutenticado(credentials: LoginInfo): Observable<JwtResponse> {
+  loginFuncionarioAutenticado(credentials: loginFuncionarioInfo): Observable<JwtResponse> {
     return this.http.post<JwtResponse>(this.loginFuncionarioUrl, credentials, httpOptions);
   }
 

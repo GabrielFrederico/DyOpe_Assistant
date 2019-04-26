@@ -132,6 +132,7 @@ public class GerenteRest {
 
         return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getUsername(), userDetails.getAuthorities()));
     }
+
     @RequestMapping(method = RequestMethod.POST, path = "/cadastrar")
     public ResponseEntity<?> registerUser(@Valid @RequestBody CadastroFormGerente signUpRequest) {
 
