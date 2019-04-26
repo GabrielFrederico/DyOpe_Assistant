@@ -33,7 +33,7 @@ public class WebSecurityConfigFuncionario extends WebSecurityConfigurerAdapter {
     private JwtAuthEntryPoint unauthorizedHandler;
 
     @Bean
-    public JwtAuthTokenFilterFuncionario authenticationJwtTokenFilter() {
+    public JwtAuthTokenFilterFuncionario authenticationJwtTokenFilterfuncionario() {
         return new JwtAuthTokenFilterFuncionario();
     }
 
@@ -66,6 +66,6 @@ public class WebSecurityConfigFuncionario extends WebSecurityConfigurerAdapter {
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-        http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(authenticationJwtTokenFilterfuncionario(), UsernamePasswordAuthenticationFilter.class);
     }
 }

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.projeto.seguranca.service.FuncionarioDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,6 +18,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import ch.qos.logback.classic.Logger;
 
+@Order(1)
 public class JwtAuthTokenFilterFuncionario extends OncePerRequestFilter {
     @Autowired
     private JwtProvider tokenProvider;
@@ -32,7 +34,7 @@ public class JwtAuthTokenFilterFuncionario extends OncePerRequestFilter {
         try {
 
             String jwt = getJwt(request);
-            if (jwt != null && tokenProvider.validateJwtToken(jwt)) {
+            if (jwt != null && tokenProvider.validateJwtTokenFuncionario(jwt)) {
                 String username = tokenProvider.getUserNameFromJwtToken(jwt);
                 UserDetails funcionarioDetails = funcionarioDetailsService.loadUserByUsername(username);
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
