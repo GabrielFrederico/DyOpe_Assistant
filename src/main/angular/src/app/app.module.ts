@@ -24,6 +24,7 @@ import {GerenteComponent} from './gerente/gerente.component';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 import {coerceBooleanProperty} from "@angular/cdk/coercion";
+import {ShowHidePasswordModule} from "ngx-show-hide-password";
 
 @Directive({
   selector: '[readonly],[readOnly]',
@@ -77,7 +78,9 @@ class ReadonlyDirective {
     HttpClientModule,
     FormsModule,
     MatMenuModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    BrowserModule,
+    ShowHidePasswordModule
   ],
   exports: [RouterModule],
   providers: [],
