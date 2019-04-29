@@ -15,20 +15,20 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.projeto.seguranca.service.GerenteDetailsServiceImpl;
+import com.projeto.seguranca.service.UsuarioDetailsServiceImpl;
 
 import ch.qos.logback.classic.Logger;
 
 @Order(1)
-public class JwtAuthTokenFilterGerente extends OncePerRequestFilter {
+public class JwtAuthTokenFilter extends OncePerRequestFilter {
 	@Autowired
 	private JwtProvider tokenProvider;
 
 	@Autowired
-	private GerenteDetailsServiceImpl gerenteDetailsService;
+	private UsuarioDetailsServiceImpl gerenteDetailsService;
 
 
-	private static final Logger logger = (Logger) org.slf4j.LoggerFactory.getLogger(JwtAuthTokenFilterGerente.class);
+	private static final Logger logger = (Logger) org.slf4j.LoggerFactory.getLogger(JwtAuthTokenFilter.class);
 
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)

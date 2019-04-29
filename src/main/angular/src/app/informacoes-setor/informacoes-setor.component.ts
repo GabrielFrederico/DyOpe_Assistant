@@ -24,6 +24,7 @@ export class InformacoesSetorComponent implements OnInit {
       username: this.token.getUsername(),
       authorities: this.token.getAuthorities()
     };
+    this.naoAutenticado()
     if (this.token.getToken()) {
       this.roles = this.token.getAuthorities();
       this.roles.every(role => {
@@ -57,12 +58,15 @@ export class InformacoesSetorComponent implements OnInit {
     alert('Cadastrado com sucesso!');
   }
 
+  private validado: boolean;
   naoAutenticado() {
-    if (this.info.token) {
-    } else {
-      this.router.navigate(['/loginfuncionario'])
-
+    if (this.info.authorities.toString() !== 'ROLE_FUNCIONARIO') {
+      this.validado = false;
+      this.router.navigate(['/loginfuncionario']);
       alert('Acesso Negado! Faça o Login!');
+
+    } else {
+      this.validado = true;
     }
   }
 

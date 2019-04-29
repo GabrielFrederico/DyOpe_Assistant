@@ -1,6 +1,7 @@
 package com.projeto.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,10 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.projeto.models.InfoSetor;
 import com.projeto.repository.InfoSetorRepository;
 
-
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("infosetor")
+@PreAuthorize("hasRole('funcionario') or hasRole('admin')")
 public class InfoSetorController {
 
     @Autowired

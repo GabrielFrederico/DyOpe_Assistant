@@ -20,8 +20,8 @@ export class JwtResponse {
 })
 export class AuthService {
 
-  private loginUrl = 'http://localhost:8080/gerentes/logar';
-  private loginFuncionarioUrl = 'http://localhost:8080/funcionarios/logar';
+  private loginUrl = 'http://localhost:8080/usuarios/logar';
+  private loginFuncionarioUrl = 'http://localhost:8080/usuarios/logar';
   private signupUrlGerente = 'http://localhost:8080/gerentes/cadastrar';
   private signupUrlFuncionario = 'http://localhost:8080/funcionarios/cadastrar';
 

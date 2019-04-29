@@ -41,22 +41,29 @@ export class PerfilGerenteComponent implements OnInit {
   }
 
   ngOnInit() {
+
     this.datareload();
     this.info = {
       token: this.token.getToken(),
       username: this.token.getUsername(),
       authorities: this.token.getAuthorities()
     };
+    this.naoAutenticado();
   }
 
   datareload() {
     this.gerentes = this.gerenteService.getinfoGerentes();
   }
 
+  private validado: boolean;
   naoAutenticado() {
-    if (!this.info.token) {
+    if (this.info.authorities.toString() !== 'ROLE_GERENTE') {
+      this.validado = false;
       this.router.navigate(['/logingerente']);
       alert('Acesso Negado! Faça o Login!');
+
+    } else {
+      this.validado = true;
     }
   }
 

@@ -15,12 +15,6 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "usuarios", uniqueConstraints = {
-        @UniqueConstraint(columnNames = {
-            "nomeUsuario"
-        })
-})
-
 public abstract class Usuario {
 
     @Id
@@ -29,10 +23,19 @@ public abstract class Usuario {
     private String nomeUsuario;
     private String senha;
     private String senhaConfirm;
-    
+    private String email;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "user_roles", 
-      joinColumns = @JoinColumn(name = "user_id"), 
+    @JoinTable(name = "user_roles",
+      joinColumns = @JoinColumn(name = "user_id"),
       inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
     

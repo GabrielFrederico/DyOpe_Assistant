@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -60,45 +61,27 @@ public class GerenteRest {
     }
 
 
-    @RequestMapping(method = RequestMethod.GET, value = "/perfilGerente.{id}")
-    public Gerente teste(@PathVariable("id") long id) {
-        Gerente gerente = gerenteRepository.findById(id);
-        return gerente;
-    }
-
-    @RequestMapping(method = RequestMethod.PUT, value = "/redefinirPerfilGerente")
-    public Gerente redefinirPerfilGerente(Gerente gerente) {
-        gerenteRepository.save(gerente);
-        return gerente;
-    }
-
-
-    @RequestMapping(value = "/gerentelogado", method = RequestMethod.GET)
-    public Gerente login(Gerente gerente, String error, String logout) {
-        gerenteRepository.findById(gerente.getId());
-
-        return gerente;
-    }
-
-
     @RequestMapping(method = RequestMethod.GET)
     public Iterable<Gerente> listAll() {
         return gerenteRepository.findAll();
     }
 
+
+    @PreAuthorize("hasRole('gerente') or hasRole('admin')")
     @RequestMapping(method = RequestMethod.GET, path = "gerente.{id}")
     public Gerente getGerenteById(@PathVariable("id") long id) {
         Gerente gerente = gerenteRepository.findById(id);
         return gerente;
     }
 
-
+    @PreAuthorize("hasRole('gerente') or hasRole('admin')")
     @RequestMapping(method = RequestMethod.GET, path = "gerente/getByNome/{nome}")
     public Gerente getGerenteByNome(@PathVariable("nome") String nome) {
         Gerente gerente = gerenteRepository.findByNome(nome);
         return gerente;
     }
 
+    @PreAuthorize("hasRole('GERENTE') or hasRole('admin')")
     @RequestMapping(method = RequestMethod.PUT, value = "gerente")
     public Gerente update(@RequestBody Gerente gerente) {
         gerenteRepository.save(gerente);
@@ -106,12 +89,8 @@ public class GerenteRest {
     }
 
 
-    @RequestMapping(method = RequestMethod.POST, value = "/redefinirsenhaperfilgerente")
-    public Gerente redefinirSenhaPerfilGerente(Gerente gerente) {
-        gerenteRepository.save(gerente);
-        return gerente;
-    }
 
+    @PreAuthorize("hasRole('GERENTE') or hasRole('admin')")
     @RequestMapping(method = RequestMethod.DELETE, path = "/{id}")
     public Gerente deleteGerenteById(@PathVariable("id") long id) {
         Gerente gerente = gerenteRepository.findById(id);
@@ -172,7 +151,7 @@ public class GerenteRest {
         user.setEmail(signUpRequest.getEmail());
         user.setRg(signUpRequest.getRg());
         user.setNomeUsuario(signUpRequest.getNomeUsuario());
-        user.setSenhaConfirm(signUpRequest.getSenhaConfirm());
+        user.setSenhaConfirm(encoder.encode(signUpRequest.getSenhaConfirm()));
         user.setSenha(encoder.encode(signUpRequest.getSenha()));
 
 

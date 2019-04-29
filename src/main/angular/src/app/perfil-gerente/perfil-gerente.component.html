@@ -28,7 +28,7 @@
 
 </head>
 
-<body *ngIf="info.token; else naoAutenticado()" id="page-top" class>
+<body *ngIf="this.validado" id="page-top" class>
 
 <app-nav-bar></app-nav-bar>
 <div id="wrapper" >
@@ -51,7 +51,7 @@
     <div class="container-fluid" >
 
       <!-- Page Content -->
-      <h1>Perfil</h1>
+      <h1>Perfil </h1>
       <hr>
     </div>
 

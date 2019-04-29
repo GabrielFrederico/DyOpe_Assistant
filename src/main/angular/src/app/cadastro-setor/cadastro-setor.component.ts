@@ -18,6 +18,7 @@ export class CadastroSetorComponent implements OnInit {
       authorities: this.token.getAuthorities(),
       senha: this.token.getPassword()
     };
+    this.naoAutenticado()
   }
   constructor(private setorService: CadastroSetorService,
               private router: Router, private token: TokenStorageService) {
@@ -30,11 +31,15 @@ export class CadastroSetorComponent implements OnInit {
       .subscribe(value => console.log(value), error => console.log(error));
     alert('Cadastrado com sucesso!');
   }
+  private validado: boolean;
   naoAutenticado() {
-    if (this.info.token) {
+    if (this.info.authorities.toString() !== 'ROLE_GERENTE') {
+      this.validado = false;
+      this.router.navigate(['/logingerente']);
+      alert('Acesso Negado! Faça o Login!');
+
     } else {
-      this.router.navigate(['/logingerente'])
-      alert('Acesse Negado! Faça o Login!');
+      this.validado = true;
     }
   }
 }

@@ -1,11 +1,11 @@
 package com.projeto.seguranca;
 
-import com.projeto.seguranca.jwt.JwtAuthTokenFilterFuncionario;
-import com.projeto.seguranca.jwt.JwtAuthTokenFilterGerente;
+import com.projeto.seguranca.jwt.JwtAuthTokenFilter;
+import com.projeto.seguranca.service.UsuarioDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
+import org.springframework.context.annotation.Role;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -17,25 +17,25 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.projeto.seguranca.jwt.JwtAuthEntryPoint;
-import com.projeto.seguranca.service.GerenteDetailsServiceImpl;
 
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(
         prePostEnabled = true
 )
-@Order(1)
-public class WebSecurityConfigGerente extends WebSecurityConfigurerAdapter {
+
+
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    GerenteDetailsServiceImpl funcionarioDetailsServiceImpl;
+    UsuarioDetailsServiceImpl funcionarioDetailsServiceImpl;
 
     @Autowired
     private JwtAuthEntryPoint unauthorizedHandler;
 
     @Bean
-    public JwtAuthTokenFilterGerente authenticationJwtTokenFilter() {
-        return new JwtAuthTokenFilterGerente();
+    public JwtAuthTokenFilter authenticationJwtTokenFilter() {
+        return new JwtAuthTokenFilter();
     }
 
     @Override

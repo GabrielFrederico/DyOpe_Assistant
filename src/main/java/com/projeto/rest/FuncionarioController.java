@@ -8,17 +8,14 @@ import com.projeto.seguranca.jwt.JwtProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.projeto.models.Funcionario;
 import com.projeto.repository.FuncionarioRepository;
@@ -92,7 +89,7 @@ public class FuncionarioController {
         user.setEmail(signUpRequest.getEmail());
         user.setRg(signUpRequest.getRg());
         user.setNomeUsuario(signUpRequest.getNomeUsuario());
-        user.setSenhaConfirm(signUpRequest.getSenhaConfirm());
+        user.setSenhaConfirm(encoder.encode(signUpRequest.getSenhaConfirm()));
         user.setSenha(encoder.encode(signUpRequest.getSenha()));
 
 
@@ -134,8 +131,24 @@ public class FuncionarioController {
         return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getUsername(), userDetails.getAuthorities()));
     }
 
+    @PreAuthorize("hasRole('funcionario') or hasRole('admin')")
     @RequestMapping(method = RequestMethod.GET)
     public Iterable<Funcionario> listAll() {
         return funcionarioRepository.findAll();
+    }
+
+    @PreAuthorize("hasRole('funcionario') or hasRole('admin')")
+    @RequestMapping(method = RequestMethod.DELETE, path = "deletar/{id}")
+    public Funcionario deleteFuncionarioById(@PathVariable("id") long id) {
+        Funcionario funcionario = funcionarioRepository.findById(id);
+        funcionarioRepository.delete(funcionario);
+        return funcionario;
+    }
+
+    @PreAuthorize("hasRole('funcionario') or hasRole('admin')")
+    @RequestMapping(method = RequestMethod.PUT, value = "funcionario")
+    public Funcionario update(@RequestBody Funcionario funcionario) {
+        funcionarioRepository.save(funcionario);
+        return funcionario;
     }
 }

@@ -17,7 +17,7 @@ public class Funcionario extends Usuario {
 
 	private String cpf;
 
-	private String email;
+
 
 	public long getId() {
 		return id;
@@ -51,12 +51,5 @@ public class Funcionario extends Usuario {
 		this.cpf = cpf;
 	}
 
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
 
 }

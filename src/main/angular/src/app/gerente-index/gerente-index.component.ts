@@ -25,6 +25,7 @@ export class GerenteIndexComponent implements OnInit {
       username: this.token.getUsername(),
       authorities: this.token.getAuthorities()
     };
+    this.naoAutenticado()
     if (this.token.getToken()) {
       this.roles = this.token.getAuthorities();
       this.roles.every(role => {
@@ -68,12 +69,15 @@ export class GerenteIndexComponent implements OnInit {
     }
   }
 
+  private validado: boolean;
   naoAutenticado() {
-    if (this.info.token) {
-    } else {
-      this.router.navigate(['/logingerente'])
-
+    if (this.info.authorities.toString() !== 'ROLE_GERENTE') {
+      this.validado = false;
+      this.router.navigate(['/logingerente']);
       alert('Acesso Negado! Faça o Login!');
+
+    } else {
+      this.validado = true;
     }
   }
 }

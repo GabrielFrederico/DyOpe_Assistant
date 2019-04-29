@@ -1,22 +1,13 @@
 package com.projeto.seguranca.jwt;
 
-import java.sql.Date;
-
-import com.projeto.seguranca.service.FuncionarioPrinciple;
+import io.jsonwebtoken.*;
 import org.hibernate.annotations.common.util.impl.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.*;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
-import com.projeto.seguranca.service.GerentePrinciple;
-
-import io.jsonwebtoken.ExpiredJwtException;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.MalformedJwtException;
-import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.SignatureException;
-import io.jsonwebtoken.UnsupportedJwtException;
+import java.sql.Date;
 
 @Component
 public class JwtProvider {
@@ -31,7 +22,7 @@ public class JwtProvider {
 
     public String generateJwtToken(Authentication authentication) {
  
-       GerentePrinciple gerentePrincipal = (GerentePrinciple) authentication.getPrincipal();
+       UserDetails gerentePrincipal = (UserDetails) authentication.getPrincipal();
  
         return Jwts.builder()
                     .setSubject((gerentePrincipal.getUsername()))
@@ -43,7 +34,7 @@ public class JwtProvider {
 
     public String generateJwtTokenFuncionario(Authentication authentication) {
 
-        FuncionarioPrinciple funcionarioPrinciple = (FuncionarioPrinciple) authentication.getPrincipal();
+        UserDetails funcionarioPrinciple = (UserDetails) authentication.getPrincipal();
 
         return Jwts.builder()
                 .setSubject((funcionarioPrinciple.getUsername()))

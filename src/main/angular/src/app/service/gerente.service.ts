@@ -16,6 +16,7 @@ export class loginGerenteInfo {
 
 // tslint:disable-next-line:class-name
 export class Gerente {
+  public id:number;
   public nome: string;
   public nomeUsuario: string;
   public cpf: string;

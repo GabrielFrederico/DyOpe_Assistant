@@ -4,11 +4,6 @@ import javax.persistence.*;
 
 
 @Entity
-@Table(name = "gerentes", uniqueConstraints = {
-        @UniqueConstraint(columnNames = {
-            "email"
-        })
-})
 public class Gerente extends Usuario {
 
 
@@ -20,7 +15,7 @@ public class Gerente extends Usuario {
 	private String rg;
 	private String cpf;
 
-	private String email;
+
 
 	public long getId() {
 		return id;
@@ -54,12 +49,5 @@ public class Gerente extends Usuario {
 		this.cpf = cpf;
 	}
 
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
 
 }

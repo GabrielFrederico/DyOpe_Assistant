@@ -37,17 +37,23 @@ export class LoginFuncionarioComponent implements OnInit {
       this.form.senha);
 
     if (this.roles !== ['admin'] && this.roles !== ['gerente']) {
-      this.authService.loginFuncionarioAutenticado(this.loginInfo).subscribe(
+      this.authService.loginAutenticado(this.loginInfo).subscribe(
         data => {
           this.tokenStorage.saveToken(data.accessToken);
           this.tokenStorage.saveUsername(data.username);
           this.tokenStorage.saveAuthorities(data.authorities);
-
-          this.isLoginFailed = false;
-          this.isLoggedIn = true;
           this.roles = this.tokenStorage.getAuthorities();
-          this.router.navigate(['/funcionarioindex']);
-        },
+          if (this.roles.toString() == 'ROLE_FUNCIONARIO') {
+
+            this.isLoginFailed = false;
+            this.isLoggedIn = true;
+
+            this.router.navigate(['/funcionarioindex']);
+          } else {
+            this.tokenStorage.logOut();
+            this.isLoginFailed = true;
+          }
+    },
         error => {
           console.log(error);
           this.errorMessage = error.error.message;

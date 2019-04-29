@@ -17,14 +17,18 @@ export class ControleFuncionariosComponent implements OnInit {
       authorities: this.token.getAuthorities(),
       senha: this.token.getPassword()
     };
+    this.naoAutenticado()
   }
   constructor(private modalService: NgbModal, private token: TokenStorageService, private router: Router) {}
 
+  private validado: boolean;
   naoAutenticado() {
-    if (this.info.token) {
+    if (this.info.authorities.toString() !== 'ROLE_GERENTE') {
+      this.validado = false;
+      this.router.navigate(['/logingerente']);
+      alert('Acesso Negado! Faça o Login!');
+
     } else {
-      this.router.navigate(['/logingerente'])
-      alert('Acesse Negado! Faça o Login!');
+      this.validado = true;
     }
-  }
-}
+  }}

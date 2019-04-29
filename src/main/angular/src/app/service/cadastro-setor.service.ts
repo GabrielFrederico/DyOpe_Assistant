@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 
 export class Setor {
+  public id:number
  public  nomeSetor: string;
  public operacao: string;
 }

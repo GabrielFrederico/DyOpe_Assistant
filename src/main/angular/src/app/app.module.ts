@@ -25,6 +25,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 import {coerceBooleanProperty} from "@angular/cdk/coercion";
 import {ShowHidePasswordModule} from "ngx-show-hide-password";
+import {NavegacaoComponent} from "./navegacao/navegacao.component";
 
 @Directive({
   selector: '[readonly],[readOnly]',
@@ -60,6 +61,7 @@ class ReadonlyDirective {
     NavBarComponent,
     NavComponent,
     GerenteComponent,
+    NavegacaoComponent,
     ReadonlyDirective
   ],
   imports: [

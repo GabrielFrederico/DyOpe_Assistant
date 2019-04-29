@@ -8,6 +8,7 @@ import com.projeto.seguranca.LoginForm;
 import com.projeto.seguranca.jwt.JwtProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -47,7 +48,19 @@ public class UsuarioController {
         return usuario;
     }
 
+    @RequestMapping(method = RequestMethod.POST, path = "/logar")
+    public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginForm loginRequest) {
 
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(loginRequest.getNomeUsuario(), loginRequest.getSenha()));
+
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        String jwt = jwtProvider.generateJwtToken(authentication);
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+
+        return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getUsername(), userDetails.getAuthorities()));
+    }
 
     @RequestMapping(method = RequestMethod.GET)
     public Iterable<Usuario> listAll() {
@@ -59,19 +72,20 @@ public class UsuarioController {
         Usuario usuario = usuarioRepository.findById(id);
         return usuario;
     }
-
+    @PreAuthorize("hasRole('GERENTE') or hasRole('funcionario') or hasRole('admin')")
     @RequestMapping(method = RequestMethod.GET, path = "/getByNome/{nomeusuario}")
     public Optional<Usuario> getUsuarioByNome(@PathVariable("nomeUsuario") String nomeUsuario) {
         Optional<Usuario> usuario = usuarioRepository.findByNomeUsuario(nomeUsuario);
         return usuario;
     }
-
+    @PreAuthorize("hasRole('GERENTE') or hasRole('funcionario') or hasRole('admin')")
     @RequestMapping(method = RequestMethod.PUT)
     public Usuario update(@RequestBody Usuario usuario) {
         usuarioRepository.save(usuario);
         return usuario;
     }
 
+    @PreAuthorize("hasRole('admin')")
     @RequestMapping(method = RequestMethod.DELETE, path = "/{id}")
     public Usuario deleteUsuarioById(@PathVariable("id") long id) {
         Usuario usuario = usuarioRepository.findById(id);
