@@ -131,7 +131,7 @@ public class FuncionarioController {
         return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getUsername(), userDetails.getAuthorities()));
     }
 
-    @PreAuthorize("hasRole('funcionario') or hasRole('admin')")
+
     @RequestMapping(method = RequestMethod.GET)
     public Iterable<Funcionario> listAll() {
         return funcionarioRepository.findAll();

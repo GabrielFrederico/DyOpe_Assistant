@@ -43,15 +43,17 @@
           </div>
         </div>
         <div class="form-group">
-          <div class="form-label-group">
-            <show-hide-password size="lg" btnStyle="primary">
+
+            <show-hide-password btnStyle="primary">
+              <div class="form-label-group">
               <input type="password" name="senha" id="inputPassword" [(ngModel)]="form.senha" minlength="6"
-                     #senha="ngModel" class="form-control"
+                     #senha="ngModel" class="form-control"  placeholder="Senha"
                       required="required">
+              <label for="inputPassword">Senha</label>
+              </div>
             </show-hide-password>
 
-            <label for="inputPassword"> Senha</label>
-          </div>
+
           <div *ngIf="f.submitted && senha.invalid">
             <div *ngIf="senha.errors.minlength">Obrigatório senha de pelo menos 6 caracteres</div>
           </div>
