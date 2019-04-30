@@ -4,6 +4,7 @@ import {AuthService} from "../auth/auth.service";
 import {TokenStorageService} from "../auth/token-storage.service";
 import {Router} from "@angular/router";
 import {loginFuncionarioInfo} from '../service/funcionario.service';
+import {Alert} from "selenium-webdriver";
 
 @Component({
   selector: 'app-login-funcionario',
@@ -36,13 +37,14 @@ export class LoginFuncionarioComponent implements OnInit {
       this.form.nomeUsuario,
       this.form.senha);
 
-    if (this.roles !== ['admin'] && this.roles !== ['gerente']) {
+
       this.authService.loginAutenticado(this.loginInfo).subscribe(
         data => {
           this.tokenStorage.saveToken(data.accessToken);
           this.tokenStorage.saveUsername(data.username);
           this.tokenStorage.saveAuthorities(data.authorities);
           this.roles = this.tokenStorage.getAuthorities();
+
           if (this.roles.toString() == 'ROLE_FUNCIONARIO') {
 
             this.isLoginFailed = false;
@@ -60,10 +62,6 @@ export class LoginFuncionarioComponent implements OnInit {
           this.isLoginFailed = true;
         }
       );
-    } else {
-      this.isLoginFailed = true;
-    }
-
 
   }
 }
