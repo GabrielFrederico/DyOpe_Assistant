@@ -4,6 +4,9 @@ import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Gerente, GerenteService, loginGerenteInfo} from '../service/gerente.service';
 import {Router} from '@angular/router';
 import {Observable} from 'rxjs';
+import {forEach} from "@angular/router/src/utils/collection";
+import {map} from "rxjs/operators";
+import {subscribeToArray} from "rxjs/internal-compatibility";
 
 @Component({
   selector: 'app-perfil-gerente',

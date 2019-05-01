@@ -17,14 +17,13 @@ public class SetorController {
     @Autowired
     SetorRepository setorRepository;
 
-    @PreAuthorize("hasRole('GERENTE') or hasRole('admin')")
     @RequestMapping(method = RequestMethod.POST, value = "/cadastrarsetor")
     public Setor save(@RequestBody Setor setor, ModelAndView model) {
         setorRepository.save(setor);
         return setor;
     }
 
-    @PreAuthorize("hasRole('GERENTE') or hasRole('funcionario') or hasRole('admin')")
+
     @RequestMapping(method = RequestMethod.GET)
     public Iterable<Setor> listAll() {
         return setorRepository.findAll();

@@ -20,4 +20,5 @@ export class CadastroSetorService {
   cadastrarSetor(setor: Setor): Observable<Setor> {
     return this.httpClient.post<Setor>('http://localhost:8080/setores/cadastrarsetor', setor);
   }
+
 }

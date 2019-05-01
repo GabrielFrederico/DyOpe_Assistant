@@ -88,7 +88,7 @@
             <div class="col-md-6">
               <div class="form-label-group">
                 <input type="password" name="senha" [(ngModel)]="form.senha" #senha="ngModel" id="inputPassword" class="form-control"
-                       placeholder="Senha"
+                       placeholder="Senha"  minlength="6"
                        required="required">
                 <label for="inputPassword">Senha</label>
               </div>
@@ -103,7 +103,7 @@
                        placeholder="Confirmar senha" required="required">
                 <label for="confirmPassword">Confirmar senha</label>
                 <div *ngIf="f.submitted && senhaConfirm.invalid">
-                  <div *ngIf="senhaConfirm !== senha">Senhas não são iguais!</div>
+                  <div>Senhas não são iguais!</div>
                 </div>
               </div>
             </div>

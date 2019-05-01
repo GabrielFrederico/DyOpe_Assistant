@@ -36,12 +36,12 @@
   <!-- Sidebar -->
   <ul class="sidebar bg-primary navbar-nav">
 
-    <li ngbDropdown class="nav-item dropdown">
+    <li ngbDropdown class="nav-item dropdown" >
       <a ngbDropdownToggle class="nav-link dropdown-toggle text-light" href="javascript:void(0)" id="pagesDropdown" role="button">
         <span>Setores</span>
       </a>
-      <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="pagesDropdown" x-placement="bottom-start">
-        <a class="dropdown-item" >Risco</a>
+      <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="pagesDropdown" x-placement="bottom-start" >
+        <a href="javascript:void(0)" *ngFor="let setor of setores | async" class="dropdown-item" >{{setor.nomeSetor}}</a>
       </div>
     </li>
 

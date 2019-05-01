@@ -10,6 +10,7 @@ import {AuthService} from "../auth/auth.service";
 export class CadastroFuncionarioComponent implements OnInit {
 
   ngOnInit() {
+
   }
 
   form: any = {};
@@ -33,23 +34,23 @@ export class CadastroFuncionarioComponent implements OnInit {
       this.form.email,
       this.form.senhaConfirm,
       this.form.senha);
+  this.authService.cadastrarFuncionarioAuth(this.funcionarioInfo).subscribe(
+    data => {
+      console.log(data);
+      this.isSignedUp = true;
+      this.isSignUpFailed = false;
+      this.router.navigate(['/loginfuncionario']);
+      alert("cadastrado com sucesso");
+    },
+    error => {
+      console.log(error);
+      this.errorMessage = error.error.message;
+      this.isSignUpFailed = true;
+    }
+  );
+}
 
-    this.authService.cadastrarFuncionarioAuth(this.funcionarioInfo).subscribe(
-      data => {
-        console.log(data);
-        this.isSignedUp = true;
-        this.isSignUpFailed = false;
-        this.router.navigate(['/loginfuncionario']);
-        alert("cadastrado com sucesso");
-      },
-      error => {
-        console.log(error);
-        this.errorMessage = error.error.message;
-        this.isSignUpFailed = true;
-      }
-    );
 
 
-  }
 
 }

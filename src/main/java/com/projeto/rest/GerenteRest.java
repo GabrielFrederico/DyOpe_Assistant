@@ -60,7 +60,6 @@ public class GerenteRest {
         return gerente;
     }
 
-
     @RequestMapping(method = RequestMethod.GET)
     public Iterable<Gerente> listAll() {
         return gerenteRepository.findAll();
