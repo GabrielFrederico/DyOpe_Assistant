@@ -32,6 +32,7 @@ export class CadastroSetorComponent implements OnInit {
       this.setor)
       .subscribe(value => console.log(value), error => console.log(error));
     alert('Cadastrado com sucesso!');
+    window.location.reload();
   }
   private validado: boolean;
   naoAutenticado() {
