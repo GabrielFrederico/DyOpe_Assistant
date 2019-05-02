@@ -20,9 +20,10 @@
   <!-- Custom styles for this template-->
   <link href="assets/css/sb-admin.css" rel="stylesheet">
   <link href="assets/css/estilo.css" rel="stylesheet">
-  <link rel="shortcut icon" type="image/x-icon" href="assets/imagens/iconeOpe.png"/>
+  <!--  <link rel="shortcut icon" type="image/x-icon" href="assets/imagens/iconeOpe.png"/>-->
 
 </head>
+
 <body class="bg-light">
 
 <div class="container-fluid">
@@ -43,11 +44,11 @@
           </div>
         </div>
         <div class="form-group">
-          <show-hide-password btnStyle="primary" >
+          <show-hide-password btnStyle="primary">
             <div class="form-label-group" style="width: 85%">
               <input type="password" name="senha" id="inputPassword" [(ngModel)]="form.senha" minlength="6"
-                     #senha="ngModel" class="form-control" placeholder="Senha" required="required"
-                    >
+                     #senha="ngModel" class="form-control"
+                     placeholder="Senha" required="required">
               <label for="inputPassword">Senha</label>
             </div>
           </show-hide-password>
@@ -57,14 +58,6 @@
           <div *ngIf="senha.errors.required">Preencha o campo</div>
         </div>
 
-        <div class="form-group">
-          <div class="checkbox">
-            <label>
-              <input type="checkbox" value="remember-me">
-              Lembrar da senha
-            </label>
-          </div>
-        </div>
         <input class="btn btn-info btn-block" type="submit" value="Login">
         <div *ngIf="f.submitted && isLoginFailed" class="alert alert-dismissible alert-danger">
           Login inválido!
