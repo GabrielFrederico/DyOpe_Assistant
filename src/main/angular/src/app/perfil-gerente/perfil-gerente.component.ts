@@ -5,7 +5,7 @@ import {Gerente, GerenteService, loginGerenteInfo} from '../service/gerente.serv
 import {Router} from '@angular/router';
 import {Observable} from 'rxjs';
 import {forEach} from "@angular/router/src/utils/collection";
-import {map} from "rxjs/operators";
+import {first, map} from "rxjs/operators";
 import {subscribeToArray} from "rxjs/internal-compatibility";
 
 @Component({
@@ -15,6 +15,7 @@ import {subscribeToArray} from "rxjs/internal-compatibility";
 export class PerfilGerenteComponent implements OnInit {
 
   @Input() gerentes: Observable<Gerente[]>;
+  gerente: Gerente;
 
   // tslint:disable-next-line:max-line-length
   constructor(private modalService: NgbModal, private token: TokenStorageService, private gerenteService: GerenteService, private router: Router) {
@@ -57,7 +58,17 @@ export class PerfilGerenteComponent implements OnInit {
   datareload() {
     this.gerentes = this.gerenteService.getinfoGerentes();
   }
-
+onSubmit(){
+  this.gerenteService.atualizarGerenteId(this.gerente.id,this.gerente)
+    .pipe(first())
+    .subscribe(
+      data => {
+          alert('Dados atualizados.');
+      },
+      error => {
+        alert(error);
+      });
+}
   private validado: boolean;
   naoAutenticado() {
     if (this.info.authorities.toString() !== 'ROLE_GERENTE') {

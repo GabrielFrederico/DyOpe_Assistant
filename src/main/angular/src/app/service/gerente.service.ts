@@ -45,6 +45,13 @@ export class GerenteService {
   constructor(private httpClient: HttpClient) {
   }
 
+  getGerenteId(id: number): Observable<Gerente> {
+    return this.httpClient.get<Gerente>('http://localhost:8080/gerentes/atualizar/' + id);
+  }
+  atualizarGerenteId(id: number,gerente:Gerente): Observable<Gerente> {
+    return this.httpClient.put<Gerente>('http://localhost:8080/gerentes/atualizar/ '+ id, gerente);
+  }
+
   getGerentes() {
     return this.httpClient.get<Gerente[]>('http://localhost:8080/gerentes');
   }

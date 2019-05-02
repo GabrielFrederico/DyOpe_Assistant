@@ -3,6 +3,7 @@ package com.projeto.rest;
 import com.projeto.models.Role;
 import com.projeto.models.RoleName;
 import com.projeto.repository.RoleRepository;
+import com.projeto.repository.UsuarioRepository;
 import com.projeto.seguranca.*;
 import com.projeto.seguranca.jwt.JwtProvider;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,9 @@ public class FuncionarioController {
     FuncionarioRepository funcionarioRepository;
 
     @Autowired
+    UsuarioRepository usuarioRepository;
+
+    @Autowired
     AuthenticationManager authenticationManager;
 
 
@@ -56,7 +60,7 @@ public class FuncionarioController {
 
 
 
-        if (funcionarioRepository.existsByNomeUsuario(signUpRequest.getNomeUsuario())) {
+        if (usuarioRepository.existsByNomeUsuario(signUpRequest.getNomeUsuario())) {
             return new ResponseEntity<>(new ResponseMessage("Erro -> Usuário já está em uso!"),
                     HttpStatus.BAD_REQUEST);
         }

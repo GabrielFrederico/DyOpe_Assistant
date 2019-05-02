@@ -18,7 +18,7 @@ export class InfosetorService {
   constructor(private httpClient: HttpClient) { }
 
   getInfosetor() {
-    return this.httpClient.get<Infosetor[]>('http://localhost:8080/cadastrarinfosetor');
+    return this.httpClient.get<Infosetor[]>('http://localhost:8080/infosetores');
   }
 
   cadastrarInfosetor(infosetor: Infosetor): Observable<Infosetor> {

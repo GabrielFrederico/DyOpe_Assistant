@@ -66,7 +66,6 @@ public class GerenteRest {
     }
 
 
-    @PreAuthorize("hasRole('gerente') or hasRole('admin')")
     @RequestMapping(method = RequestMethod.GET, path = "gerente.{id}")
     public Gerente getGerenteById(@PathVariable("id") long id) {
         Gerente gerente = gerenteRepository.findById(id);

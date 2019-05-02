@@ -11,5 +11,11 @@ public interface UsuarioRepository extends CrudRepository<Usuario, Serializable>
 
     Usuario findById(long id);
 
-   Optional<Usuario> findByNomeUsuario(String nomeUsuario);
+    Boolean existsByEmail(String email);
+
+    Optional<Usuario> findByNomeUsuario(String nomeUsuario);
+
+    Boolean existsByNomeUsuario(String nomeUsuario);
+
+    Boolean existsBySenha(String senha);
 }
