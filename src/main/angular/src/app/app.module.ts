@@ -23,9 +23,9 @@ import {
 import {GerenteComponent} from './gerente/gerente.component';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
-import {coerceBooleanProperty} from "@angular/cdk/coercion";
-import {ShowHidePasswordModule} from "ngx-show-hide-password";
-import {NavegacaoComponent} from "./navegacao/navegacao.component";
+import {coerceBooleanProperty} from '@angular/cdk/coercion';
+import {ShowHidePasswordModule} from 'ngx-show-hide-password';
+import {NavegacaoComponent} from './navegacao/navegacao.component';
 
 @Directive({
   selector: '[readonly],[readOnly]',
@@ -36,9 +36,9 @@ import {NavegacaoComponent} from "./navegacao/navegacao.component";
 class ReadonlyDirective {
   _isReadonly = false;
 
-  @Input() set readonly (v) {
+  @Input() set readonly(v) {
     this._isReadonly = coerceBooleanProperty(v);
-  };
+  }
 
   ngOnChanges(changes) {
     console.log(changes);

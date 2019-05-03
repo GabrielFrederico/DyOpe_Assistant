@@ -40,7 +40,7 @@ export class CadastroFuncionarioComponent implements OnInit {
       this.isSignedUp = true;
       this.isSignUpFailed = false;
       this.router.navigate(['/loginfuncionario']);
-      alert("cadastrado com sucesso");
+      alert("Cadastrado com sucesso!");
     },
     error => {
       console.log(error);
