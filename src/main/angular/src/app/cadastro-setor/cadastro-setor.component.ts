@@ -8,10 +8,14 @@ import {Observable} from "rxjs";
   selector: 'app-cadastro-setor',
   templateUrl: './cadastro-setor.component.html'
 })
+
+
+
 export class CadastroSetorComponent implements OnInit {
   setor: Setor = new Setor();
   public setores: Observable<Setor[]>;
   public info: any;
+  public validado: boolean;
   ngOnInit() {
     this.info = {
       token: this.token.getToken(),
@@ -20,7 +24,7 @@ export class CadastroSetorComponent implements OnInit {
       senha: this.token.getPassword()
     };
     this.naoAutenticado();
-    this.dataReload()
+    this.dataReload();
   }
   constructor(private setorService: CadastroSetorService,
               private router: Router,private setorservice: CadastroSetorService, private token: TokenStorageService) {
@@ -32,9 +36,8 @@ export class CadastroSetorComponent implements OnInit {
       this.setor)
       .subscribe(value => console.log(value), error => console.log(error));
     alert('Cadastrado com sucesso!');
-    window.location.reload();
   }
-  private validado: boolean;
+
   naoAutenticado() {
     if (this.info.authorities.toString() !== 'ROLE_GERENTE') {
       this.validado = false;

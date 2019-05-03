@@ -2,7 +2,6 @@ package com.projeto.seguranca.service;
 
 import javax.transaction.Transactional;
 
-import org.springframework.core.annotation.Order;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

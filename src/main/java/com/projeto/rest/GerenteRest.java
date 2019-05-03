@@ -96,6 +96,7 @@ public class GerenteRest {
         return gerente;
     }
 
+    
     @RequestMapping(method = RequestMethod.POST, path = "/logar")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginForm loginRequest) {
 

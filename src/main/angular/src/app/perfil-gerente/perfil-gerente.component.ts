@@ -16,7 +16,7 @@ export class PerfilGerenteComponent implements OnInit {
 
   @Input() gerentes: Observable<Gerente[]>;
   gerente: Gerente;
-
+  public validado: boolean;
   // tslint:disable-next-line:max-line-length
   constructor(private modalService: NgbModal, private token: TokenStorageService, private gerenteService: GerenteService, private router: Router) {
   }
@@ -69,7 +69,7 @@ onSubmit(){
         alert(error);
       });
 }
-  private validado: boolean;
+
   naoAutenticado() {
     if (this.info.authorities.toString() !== 'ROLE_GERENTE') {
       this.validado = false;

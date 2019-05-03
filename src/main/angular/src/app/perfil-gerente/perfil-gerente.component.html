@@ -28,7 +28,7 @@
 
 </head>
 
-<body *ngIf="this.validado" id="page-top" class>
+<body *ngIf="validado" id="page-top" class>
 
 <app-nav-bar></app-nav-bar>
 <div id="wrapper" >
@@ -67,7 +67,7 @@
               <div class="form-group">
                 <div class="form-label-group" >
                   <input [readonly]="isReadonly" type="text" name="nome"  id="nomeCompleto" class="form-control"
-                         autofocus="autofocus" value="{{gerente.nome}}" [(ngModel)]="gerente.nome"
+                         autofocus="autofocus" value="{{gerente.nome}}"
                          placeholder="Nome Completo" required="required">
                   <label for="nomeCompleto">Nome Completo</label>
                 </div>
@@ -77,7 +77,7 @@
               <div class="form-group">
                 <div class="form-label-group">
                   <input [readonly]="isReadonly" type="text" name="nome" id="nomeUsuario" class="form-control"
-                         autofocus="autofocus" value="{{gerente.nomeUsuario}}" [(ngModel)]="gerente.nomeUsuario"
+                         autofocus="autofocus" value="{{gerente.nomeUsuario}}"
                          placeholder="Nome Usuário" required="required">
                   <label for="nomeUsuario">Nome de usuário</label>
                 </div>
@@ -89,7 +89,7 @@
               <div class="form-group">
                 <div class="form-label-group">
                   <input [readonly]="isReadonly" type="text" name="cpf" id="cpf" class="form-control"
-                         placeholder="CPF" value="{{gerente.cpf}}" [(ngModel)]="gerente.cpf"
+                         placeholder="CPF" value="{{gerente.cpf}}"
                          required="required">
                   <label for="cpf">CPF</label>
                 </div>
@@ -99,7 +99,7 @@
               <div class="form-group">
                 <div class="form-label-group">
                   <input [readonly]="isReadonly" type="text" name="rg" id="rg" class="form-control"
-                         placeholder="RG" value="{{gerente.rg}}"
+                         placeholder="RG" value="{{gerente.rg}}" onkeypress=($event)
                          required="required">
                   <label for="rg">RG</label>
                 </div>
