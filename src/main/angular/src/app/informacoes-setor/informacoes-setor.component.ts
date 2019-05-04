@@ -54,7 +54,7 @@ export class InformacoesSetorComponent implements OnInit {
     this.http.cadastrarInfosetor(
       this.infosetor)
       .subscribe(value => console.log(value), error => console.log(error));
-    this.router.navigate(['/controlefuncionarios']);
+    this.router.navigate(['/funcionarioindex']);
     alert('Cadastrado com sucesso!');
   }
 

@@ -15,7 +15,6 @@ import com.projeto.repository.InfoSetorRepository;
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("infosetor")
-@PreAuthorize("hasRole('funcionario') or hasRole('admin')")
 public class InfoSetorController {
 
     @Autowired
@@ -28,7 +27,7 @@ public class InfoSetorController {
     }
 
 
-    @RequestMapping(method = RequestMethod.GET, value = "infosetores")
+    @RequestMapping(method = RequestMethod.GET)
     public Iterable<InfoSetor> listAll() {
         return infoSetorRepository.findAll();
     }
