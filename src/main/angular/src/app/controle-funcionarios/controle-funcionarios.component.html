@@ -63,6 +63,31 @@
       <h1>Informações dos funcionários:</h1>
       <hr>
 
+      <div class="col-md-6 user-container">
+        <h2 style="margin: auto"> User Details</h2>
+        <table class="table table-striped">
+          <thead>
+          <tr>
+            <th class="hidden">Id</th>
+            <th>FirstName</th>
+            <th>LastName</th>
+            <th>UserName</th>
+            <th>Age</th>
+            <th>Salary</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let user of infosetor">
+            <td class="hidden"></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
 
       <div class="card border-info mb-3">
         <div class="card-header border-info">Setor de Costura</div>

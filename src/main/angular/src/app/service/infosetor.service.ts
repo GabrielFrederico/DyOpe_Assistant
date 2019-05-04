@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import {Funcionario} from "../service/funcionario.service";
 import {Observable} from 'rxjs';
 
 export class Infosetor {
