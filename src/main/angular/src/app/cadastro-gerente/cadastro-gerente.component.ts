@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Gerente, GerenteService} from '../service/gerente.service';
 import {Router} from '@angular/router';
-import {AuthService} from "../auth/auth.service";
+import {AuthService} from '../auth/auth.service';
 
 @Component({
   selector: 'app-cadastro-gerente',
@@ -39,7 +39,7 @@ export class CadastroGerenteComponent implements OnInit {
         this.isSignedUp = true;
         this.isSignUpFailed = false;
         this.router.navigate(['/logingerente']);
-        alert("Cadastrado com sucesso!");
+        alert('Cadastrado com sucesso!');
       },
       error => {
         console.log(error);

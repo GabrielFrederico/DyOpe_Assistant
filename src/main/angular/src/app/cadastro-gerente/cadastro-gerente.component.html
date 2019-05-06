@@ -108,7 +108,7 @@
                        class="form-control" minlength="6"
                        placeholder="Confirmar senha">
                 <label for="confirmPassword">Confirmar senha</label>
-                <div *ngIf="f.submitted && senhaConfirm.invalid || senhaConfirm !== senha">
+                <div *ngIf="f.submitted && senhaConfirm.invalid && senhaConfirm !== senha">
                   <div *ngIf="senhaConfirm !== senha">Senhas não são iguais!</div>
                 </div>
               </div>

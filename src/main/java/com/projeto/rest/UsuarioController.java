@@ -42,11 +42,7 @@ public class UsuarioController {
 
     @Autowired
     JwtProvider jwtProvider;
-    @RequestMapping(method = RequestMethod.POST, value = "/cadastrarusuario")
-    public Usuario save(@RequestBody Usuario usuario) {
-        usuarioRepository.save(usuario);
-        return usuario;
-    }
+  
 
     @RequestMapping(method = RequestMethod.POST, path = "/logar")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginForm loginRequest) {
@@ -68,25 +64,29 @@ public class UsuarioController {
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public Usuario getUsuarioById(@PathVariable("id") long id) {
         Usuario usuario = usuarioRepository.findById(id);
         return usuario;
     }
-    @PreAuthorize("hasRole('GERENTE') or hasRole('funcionario') or hasRole('admin')")
+    
     @RequestMapping(method = RequestMethod.GET, path = "/getByNome/{nomeusuario}")
+    @PreAuthorize("hasRole('ADMIN')")
     public Optional<Usuario> getUsuarioByNome(@PathVariable("nomeUsuario") String nomeUsuario) {
         Optional<Usuario> usuario = usuarioRepository.findByNomeUsuario(nomeUsuario);
         return usuario;
     }
-    @PreAuthorize("hasRole('GERENTE') or hasRole('funcionario') or hasRole('admin')")
+    
     @RequestMapping(method = RequestMethod.PUT)
+    @PreAuthorize("hasRole('ADMIN')")
     public Usuario update(@RequestBody Usuario usuario) {
         usuarioRepository.save(usuario);
         return usuario;
     }
 
-    @PreAuthorize("hasRole('admin')")
+    
     @RequestMapping(method = RequestMethod.DELETE, path = "/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public Usuario deleteUsuarioById(@PathVariable("id") long id) {
         Usuario usuario = usuarioRepository.findById(id);
         usuarioRepository.delete(usuario);

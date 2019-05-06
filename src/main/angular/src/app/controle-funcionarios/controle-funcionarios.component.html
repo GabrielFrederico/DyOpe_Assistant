@@ -31,18 +31,17 @@
 <body *ngIf="validado" id="page-top">
 
 <app-nav-bar></app-nav-bar>
-
 <div id="wrapper">
 
   <!-- Sidebar -->
   <ul class="sidebar bg-primary navbar-nav">
-    <li ngbDropdown class="nav-item dropdown" >
+    <li ngbDropdown class="nav-item dropdown">
       <a ngbDropdownToggle class="nav-link text-light" href="javascript:void(0)" id="pagesDropdown" role="button"
       >
         <span>Setores</span>
       </a>
-      <div  ngbDropdownMenu class="dropdown-menu" aria-labelledby="pagesDropdown" x-placement="bottom-start">
-        <a *ngFor="let setor of setores | async" class="dropdown-item">{{setor.nomeSetor}}</a>
+      <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="pagesDropdown" x-placement="bottom-start">
+        <a  href="javascript:void(0)" *ngFor="let setor of setores | async" class="dropdown-item">{{setor.nomeSetor}}</a>
       </div>
     </li>
 
@@ -87,43 +86,43 @@
         </table>
       </div>
 
-<!--      <div class="card border-info mb-3">-->
-<!--        <div class="card-header border-info">Setor de Costura</div>-->
-<!--        <table class="table table table-bordered dataTable">-->
-<!--          <thead>-->
-<!--          <tr>-->
-<!--            <th>Funcionário</th>-->
-<!--            <th>Operação</th>-->
-<!--            <th>Quantidade de peças</th>-->
-<!--            <th></th>-->
-<!--            <th></th>-->
-<!--          </tr>-->
-<!--          </thead>-->
-<!--          <tbody>-->
-<!--          <tr>-->
-<!--            <td>John</td>-->
-<!--            <td>Costura</td>-->
-<!--            <td>122</td>-->
-<!--            <td></td>-->
-<!--            <td></td>-->
-<!--          </tr>-->
-<!--          <tr>-->
-<!--            <td>Mary</td>-->
-<!--            <td>Costura</td>-->
-<!--            <td>122</td>-->
-<!--            <td></td>-->
-<!--            <td></td>-->
-<!--          </tr>-->
-<!--          <tr>-->
-<!--            <td>July</td>-->
-<!--            <td>Costura</td>-->
-<!--            <td>1222</td>-->
-<!--            <td></td>-->
-<!--            <td></td>-->
-<!--          </tr>-->
-<!--          </tbody>-->
-<!--        </table>-->
-<!--      </div>-->
+      <!--      <div class="card border-info mb-3">-->
+      <!--        <div class="card-header border-info">Setor de Costura</div>-->
+      <!--        <table class="table table table-bordered dataTable">-->
+      <!--          <thead>-->
+      <!--          <tr>-->
+      <!--            <th>Funcionário</th>-->
+      <!--            <th>Operação</th>-->
+      <!--            <th>Quantidade de peças</th>-->
+      <!--            <th></th>-->
+      <!--            <th></th>-->
+      <!--          </tr>-->
+      <!--          </thead>-->
+      <!--          <tbody>-->
+      <!--          <tr>-->
+      <!--            <td>John</td>-->
+      <!--            <td>Costura</td>-->
+      <!--            <td>122</td>-->
+      <!--            <td></td>-->
+      <!--            <td></td>-->
+      <!--          </tr>-->
+      <!--          <tr>-->
+      <!--            <td>Mary</td>-->
+      <!--            <td>Costura</td>-->
+      <!--            <td>122</td>-->
+      <!--            <td></td>-->
+      <!--            <td></td>-->
+      <!--          </tr>-->
+      <!--          <tr>-->
+      <!--            <td>July</td>-->
+      <!--            <td>Costura</td>-->
+      <!--            <td>1222</td>-->
+      <!--            <td></td>-->
+      <!--            <td></td>-->
+      <!--          </tr>-->
+      <!--          </tbody>-->
+      <!--        </table>-->
+      <!--      </div>-->
 
 
     </div>

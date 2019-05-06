@@ -129,7 +129,7 @@ public class FuncionarioController {
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        String jwt = jwtProvider.generateJwtTokenFuncionario(authentication);
+        String jwt = jwtProvider.generateJwtToken(authentication);
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 
         return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getUsername(), userDetails.getAuthorities()));
@@ -137,12 +137,14 @@ public class FuncionarioController {
 
 
     @RequestMapping(method = RequestMethod.GET)
+    @PreAuthorize("hasRole('FUNCIONARIO') or hasRole('ADMIN')")
     public Iterable<Funcionario> listAll() {
         return funcionarioRepository.findAll();
     }
 
-    @PreAuthorize("hasRole('funcionario') or hasRole('admin')")
+    
     @RequestMapping(method = RequestMethod.DELETE, path = "deletar/{id}")
+    @PreAuthorize("hasRole('FUNCIONARIO') or hasRole('ADMIN')")
     public Funcionario deleteFuncionarioById(@PathVariable("id") long id) {
         Funcionario funcionario = funcionarioRepository.findById(id);
         funcionarioRepository.delete(funcionario);
@@ -150,7 +152,8 @@ public class FuncionarioController {
     }
 
 
-    @RequestMapping(method = RequestMethod.PUT, value = "funcionario")
+    @RequestMapping(method = RequestMethod.PUT, value = "funcionario/{id}")
+    @PreAuthorize("hasRole('FUNCIONARIO') or hasRole('ADMIN')")
     public Funcionario updateFuncionarioById(@PathVariable("id") long id) {
         Funcionario funcionario = funcionarioRepository.findById(id);
         funcionarioRepository.save(funcionario);

@@ -61,25 +61,29 @@ public class GerenteRest {
     }
 
     @RequestMapping(method = RequestMethod.GET)
+    @PreAuthorize("hasRole('GERENTE')")
     public Iterable<Gerente> listAll() {
         return gerenteRepository.findAll();
     }
 
 
-    @RequestMapping(method = RequestMethod.GET, path = "gerente.{id}")
+    @RequestMapping(method = RequestMethod.GET, path = "gerente/{id}")
+    @PreAuthorize("hasRole('GERENTE')")
     public Gerente getGerenteById(@PathVariable("id") long id) {
         Gerente gerente = gerenteRepository.findById(id);
         return gerente;
     }
 
-    @PreAuthorize("hasRole('gerente') or hasRole('admin')")
-    @RequestMapping(method = RequestMethod.GET, path = "gerente/getByNome/{nome}")
+    
+    @RequestMapping(method = RequestMethod.GET, path = "getByNome/{nome}")
+    @PreAuthorize("hasRole('GERENTE')")
     public Gerente getGerenteByNome(@PathVariable("nome") String nome) {
         Gerente gerente = gerenteRepository.findByNome(nome);
         return gerente;
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "atualizar/{id}")
+    @PreAuthorize("hasRole('GERENTE')")
     public Gerente updateGerenteById(@PathVariable("id") long id) {
         Gerente gerente = gerenteRepository.findById(id);
         gerenteRepository.save(gerente);
@@ -88,8 +92,9 @@ public class GerenteRest {
 
 
 
-    @PreAuthorize("hasRole('GERENTE') or hasRole('admin')")
+   
     @RequestMapping(method = RequestMethod.DELETE, path = "/{id}")
+    @PreAuthorize("hasRole('GERENTE')")
     public Gerente deleteGerenteById(@PathVariable("id") long id) {
         Gerente gerente = gerenteRepository.findById(id);
         gerenteRepository.delete(gerente);

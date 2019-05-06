@@ -15,7 +15,7 @@ import com.projeto.repository.OperacaoRepository;
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("operacoes")
-@PreAuthorize("hasRole('GERENTE') or hasRole('admin')")
+@PreAuthorize("hasRole('GERENTE') or hasRole('ADMIN')")
 public class OperacaoController {
 
 	@Autowired

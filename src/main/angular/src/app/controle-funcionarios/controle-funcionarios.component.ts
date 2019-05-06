@@ -2,9 +2,9 @@ import { Component, OnInit, Inject} from '@angular/core';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {TokenStorageService} from '../auth/token-storage.service';
 import {Route, Router} from '@angular/router';
-import {Observable} from "rxjs";
-import {CadastroSetorService, Setor} from "../service/cadastro-setor.service";
-import {Infosetor, InfosetorService} from "../service/infosetor.service";
+import {Observable} from 'rxjs';
+import {CadastroSetorService, Setor} from '../service/cadastro-setor.service';
+import {Infosetor, InfosetorService} from '../service/infosetor.service';
 
 @Component({
   selector: 'app-controle-funcionarios',
@@ -43,7 +43,8 @@ export class ControleFuncionariosComponent implements OnInit {
       this.validado = true;
     }
   }
-    dataReload(){
+    dataReload() {
       this.infosetor = this.infosetorService.getInfosetor();
+      this.setores = this.setorservice.getSetor();
     }
 }

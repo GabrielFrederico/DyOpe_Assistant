@@ -21,25 +21,30 @@ import {
   MatMenuModule, MatButtonToggleModule
 } from '@angular/material';
 import {GerenteComponent} from './gerente/gerente.component';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 import {coerceBooleanProperty} from '@angular/cdk/coercion';
 import {ShowHidePasswordModule} from 'ngx-show-hide-password';
 import {NavegacaoComponent} from './navegacao/navegacao.component';
+import {AuthInterceptorService} from './auth/auth-interceptor.service';
 
 @Directive({
+  // tslint:disable-next-line:directive-selector
   selector: '[readonly],[readOnly]',
+  // tslint:disable-next-line:use-host-property-decorator
   host: {
     '[attr.readonly]': '_isReadonly ? "" : null'
   }
 })
 class ReadonlyDirective {
+  // tslint:disable-next-line:variable-name
   _isReadonly = false;
 
   @Input() set readonly(v) {
     this._isReadonly = coerceBooleanProperty(v);
   }
 
+  // tslint:disable-next-line:use-life-cycle-interface
   ngOnChanges(changes) {
     console.log(changes);
   }
@@ -85,7 +90,11 @@ class ReadonlyDirective {
     ShowHidePasswordModule
   ],
   exports: [RouterModule],
-  providers: [],
+  providers: [ {
+    provide: HTTP_INTERCEPTORS,
+  useClass: AuthInterceptorService,
+  multi: true
+  } ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
