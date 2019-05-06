@@ -16,7 +16,7 @@ export class loginGerenteInfo {
 
 // tslint:disable-next-line:class-name
 export class Gerente {
-  public id:number;
+  public id: number;
   public nome: string;
   public nomeUsuario: string;
   public cpf: string;
@@ -48,8 +48,9 @@ export class GerenteService {
   getGerenteId(id: number): Observable<Gerente> {
     return this.httpClient.get<Gerente>('http://localhost:8080/gerentes/atualizar/' + id);
   }
-  atualizarGerenteId(id: number,gerente:Gerente): Observable<Gerente> {
-    return this.httpClient.put<Gerente>('http://localhost:8080/gerentes/atualizar/ '+ id, gerente);
+  atualizarGerenteId(id: number): Observable<Gerente> {
+    return this.httpClient.put<Gerente>( 'http://localhost:8080/gerentes/atualizar/' + id, id);
+
   }
 
   getGerentes() {

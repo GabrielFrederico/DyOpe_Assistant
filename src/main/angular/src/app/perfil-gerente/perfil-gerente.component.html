@@ -1,34 +1,4 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-
-<head>
-
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
-  <base href="/src">
-
-  <title>Perfil</title>
-
-  <!-- Bootstrap core CSS-->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-  <!-- Custom fonts for this template-->
-
-
-  <!-- Page level plugin CSS-->
-  <link href="assets/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
-
-  <!-- Custom styles for this template-->
-  <link href="assets/css/sb-admin.css" rel="stylesheet">
-
-  <link rel="stylesheet" href="assets/css/estilo.css">
-
-</head>
-
-<body *ngIf="validado" id="page-top" class>
+<div *ngIf="validado" id="page-top" class>
 
 <app-nav-bar></app-nav-bar>
 <div id="wrapper" >
@@ -55,10 +25,7 @@
       <hr>
     </div>
 
-    <div alt="Imagem de perfil" class="img-rounded .img-responsive" id="img-perfil">
-      <img src="assets/imagens/imgperfil.jpg" style="height: 200px; width: 200px; float: left; padding-left: 1%;">
-    </div>
-
+    
     <div class="container " style="float: left; max-width: 70%; padding-left: 5%"  *ngFor="let gerente of gerentes| async">
       <form *ngIf="gerente.nomeUsuario === info.username;" (ngSubmit)="onSubmit()">
         <div class="form-group">
@@ -221,18 +188,8 @@
   <!-- Bootstrap core JavaScript-->
 
 </div>
-</body>
 <ng-template #loggedOut>
   Acesso negado! <br>
   Faça o <a routerLink="/logingerente">login.</a>
 </ng-template>
-
-<script src="assets/vendor/jquery/jquery.min.js"></script>
-<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-<!-- Core plugin JavaScript-->
-<script src="assets/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-<!-- Custom scripts for all pages-->
-<script src="assets/js/sb-admin.min.js"></script>
-</html>
+</div>

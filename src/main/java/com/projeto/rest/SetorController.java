@@ -25,12 +25,14 @@ public class SetorController {
 
 
     @RequestMapping(method = RequestMethod.GET)
+    @PreAuthorize("hasRole('GERENTE') or hasRole('admin')")
     public Iterable<Setor> listAll() {
         return setorRepository.findAll();
     }
 
-    @PreAuthorize("hasRole('GERENTE') or hasRole('admin')")
+    
     @RequestMapping(method = RequestMethod.GET, path = "/{id}")
+    @PreAuthorize("hasRole('GERENTE') or hasRole('admin')")
     public Setor getSetorById(@PathVariable("id") long id) {
         Setor setor = setorRepository.findById(id);
         return setor;
