@@ -3,10 +3,12 @@ import {TokenStorageService} from '../auth/token-storage.service';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Gerente, GerenteService, loginGerenteInfo} from '../service/gerente.service';
 import {Router} from '@angular/router';
-import {Observable} from 'rxjs';
+import {Observable, of} from 'rxjs';
 import {forEach} from '@angular/router/src/utils/collection';
 import {first, map} from 'rxjs/operators';
-import {subscribeToArray} from 'rxjs/internal-compatibility';
+import {async} from "@angular/core/testing";
+
+;
 
 @Component({
   selector: 'app-perfil-gerente',
@@ -18,7 +20,8 @@ export class PerfilGerenteComponent implements OnInit {
   }
 
   @Input() gerentes: Observable<Gerente[]>;
-  gerente: Gerente;
+  @Input() gerente: Gerente;
+  public gerenteLogado: boolean;
   public validado: boolean;
 
   public info: any;
@@ -48,29 +51,31 @@ export class PerfilGerenteComponent implements OnInit {
 
   ngOnInit() {
 
-    this.datareload();
     this.info = {
       token: this.token.getToken(),
       username: this.token.getUsername(),
       authorities: this.token.getAuthorities()
     };
     this.naoAutenticado();
+    this.datareload();
   }
 
   datareload() {
     this.gerentes = this.gerenteService.getinfoGerentes();
   }
-onSubmit() {
-  this.gerenteService.atualizarGerenteId(1)
-    .pipe(first())
-    .subscribe(
-      data => {
-          alert('Dados atualizados.');
-      },
-      error => {
-        alert(error);
-      });
-}
+
+
+  onSubmit(id: number) {
+    this.gerenteService.atualizarGerenteId(id)
+      .pipe()
+      .subscribe(
+        data => {
+           alert('Dados atualizados.'+ data.nome);
+        },
+        error => {
+          alert(error);
+        });
+  }
 
   naoAutenticado() {
     if (this.info.authorities.toString() !== 'ROLE_GERENTE') {
@@ -80,6 +85,7 @@ onSubmit() {
 
     } else {
       this.validado = true;
+
     }
   }
 
