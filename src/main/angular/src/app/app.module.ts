@@ -45,9 +45,7 @@ class ReadonlyDirective {
   }
 
   // tslint:disable-next-line:use-life-cycle-interface
-  ngOnChanges(changes) {
-    console.log(changes);
-  }
+  
 }
 
 @NgModule({
