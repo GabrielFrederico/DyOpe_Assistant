@@ -8,6 +8,7 @@ import {forEach} from '@angular/router/src/utils/collection';
 import {first, map} from 'rxjs/operators';
 import {async} from "@angular/core/testing";
 import {NgForm} from "@angular/forms";
+import {Alert} from "selenium-webdriver";
 
 ;
 
@@ -17,7 +18,8 @@ import {NgForm} from "@angular/forms";
 
 })
 export class PerfilGerenteComponent implements OnInit {
-  title:'Perfil Gerente';
+  title: 'Perfil Gerente';
+
   // tslint:disable-next-line:max-line-length
   constructor(private modalService: NgbModal, private token: TokenStorageService, private gerenteService: GerenteService, private router: Router) {
   }
@@ -26,7 +28,8 @@ export class PerfilGerenteComponent implements OnInit {
   @Input() gerente: Gerente;
   public gerenteLogado: boolean;
   public validado: boolean;
-
+  public updateFailed: boolean;
+public errorMessage = '';
   public info: any;
   form: any = {};
   public isCollapsed = false;
@@ -66,9 +69,9 @@ export class PerfilGerenteComponent implements OnInit {
   datareload() {
     this.gerentes = this.gerenteService.getinfoGerentes();
 
-    this.gerentes.forEach((ger)=>{
-      for (let gerent of ger){
-        if (gerent.nomeUsuario == this.info.username){
+    this.gerentes.forEach((ger) => {
+      for (let gerent of ger) {
+        if (gerent.nomeUsuario == this.info.username) {
           this.gerenteLogado = true;
           this.gerente = gerent;
         }
@@ -77,22 +80,24 @@ export class PerfilGerenteComponent implements OnInit {
   }
 
 
-  onSubmit(nome: HTMLInputElement,nomeUsuario: HTMLInputElement,cpf: HTMLInputElement,rg: HTMLInputElement,email: HTMLInputElement) {
+  onSubmit() {
 
-    this.gerente.nome = nome.value;
-    this.gerente.nomeUsuario = nomeUsuario.value;
-    this.gerente.rg = rg.value;
-    this.gerente.email = email.value;
-    this.gerente.cpf = cpf.value;
+
+    this.token.saveUsername(this.gerente.nomeUsuario);
+    this.info.username = this.gerente.nomeUsuario;
+    alert(this.info.username);
     this.gerenteService.atualizarGerente(this.gerente)
       .pipe(first())
       .subscribe(
         data => {
           alert('Dados atualizados!');
           this.isReadonly = true;
+
         },
         error => {
-          alert(error);
+          console.log(error);
+          this.errorMessage = error.error.message;
+          this.updateFailed = true;
         });
   }
 

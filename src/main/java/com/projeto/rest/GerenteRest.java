@@ -38,149 +38,132 @@ import com.projeto.seguranca.jwt.JwtProvider;
 @RequestMapping("gerentes")
 public class GerenteRest {
 
-    @Autowired
-    GerenteRepository gerenteRepository;
-    @Autowired
-    AuthenticationManager authenticationManager;
+	@Autowired
+	GerenteRepository gerenteRepository;
+	@Autowired
+	AuthenticationManager authenticationManager;
 
+	@Autowired
+	RoleRepository roleRepository;
 
-    @Autowired
-    RoleRepository roleRepository;
+	@Autowired
+	PasswordEncoder encoder;
 
-    @Autowired
-    PasswordEncoder encoder;
+	@Autowired
+	JwtProvider jwtProvider;
 
-    @Autowired
-    JwtProvider jwtProvider;
+	@RequestMapping(method = RequestMethod.POST, value = "/cadastrargerente")
+	public Gerente save(@RequestBody Gerente gerente) {
 
+		gerenteRepository.save(gerente);
+		return gerente;
+	}
 
-    @RequestMapping(method = RequestMethod.POST, value = "/cadastrargerente")
-    public Gerente save(@RequestBody Gerente gerente) {
-        gerenteRepository.save(gerente);
-        return gerente;
-    }
+	@RequestMapping(method = RequestMethod.GET)
+	@PreAuthorize("hasRole('GERENTE')")
+	public Iterable<Gerente> listAll() {
+		return gerenteRepository.findAll();
+	}
 
-    @RequestMapping(method = RequestMethod.GET)
-    @PreAuthorize("hasRole('GERENTE')")
-    public Iterable<Gerente> listAll() {
-        return gerenteRepository.findAll();
-    }
+	@RequestMapping(method = RequestMethod.GET, path = "gerente/{id}")
+	@PreAuthorize("hasRole('GERENTE')")
+	public Gerente getGerenteById(@PathVariable("id") long id) {
+		Gerente gerente = gerenteRepository.findById(id);
+		return gerente;
+	}
 
+	@RequestMapping(method = RequestMethod.GET, path = "getByNome/{nome}")
+	@PreAuthorize("hasRole('GERENTE')")
+	public Gerente getGerenteByNome(@PathVariable("nome") String nome) {
+		Gerente gerente = gerenteRepository.findByNome(nome);
+		return gerente;
+	}
 
-    @RequestMapping(method = RequestMethod.GET, path = "gerente/{id}")
-    @PreAuthorize("hasRole('GERENTE')")
-    public Gerente getGerenteById(@PathVariable("id") long id) {
-        Gerente gerente = gerenteRepository.findById(id);
-        return gerente;
-    }
+	@RequestMapping(method = RequestMethod.PUT, value = "atualizar")
+	@PreAuthorize("hasRole('GERENTE')")
+	public ResponseEntity<?> update(@RequestBody Gerente gerente) {
+		if (gerenteRepository.existsByNomeUsuario(gerente.getNomeUsuario())) {
+			return new ResponseEntity<>(new ResponseMessage("Erro -> Usuário já está em uso!"), HttpStatus.BAD_REQUEST);
+		}
+		gerenteRepository.save(gerente);
+		return new ResponseEntity<>(new ResponseMessage("Dados Atualizados com sucesso!"), HttpStatus.OK);
+	}
 
-    
-    @RequestMapping(method = RequestMethod.GET, path = "getByNome/{nome}")
-    @PreAuthorize("hasRole('GERENTE')")
-    public Gerente getGerenteByNome(@PathVariable("nome") String nome) {
-        Gerente gerente = gerenteRepository.findByNome(nome);
-        return gerente;
-    }
+	@RequestMapping(method = RequestMethod.DELETE, path = "/{id}")
+	@PreAuthorize("hasRole('GERENTE')")
+	public Gerente deleteGerenteById(@PathVariable("id") long id) {
+		Gerente gerente = gerenteRepository.findById(id);
+		gerenteRepository.delete(gerente);
+		return gerente;
+	}
 
-    @RequestMapping(method = RequestMethod.PUT, value = "atualizar")
-    @PreAuthorize("hasRole('GERENTE')")
-    public Gerente update(@RequestBody Gerente gerente) {
-        gerenteRepository.save(gerente);
-        return gerente;
-    }
+	@RequestMapping(method = RequestMethod.POST, path = "/logar")
+	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginForm loginRequest) {
 
+		Authentication authentication = authenticationManager.authenticate(
+				new UsernamePasswordAuthenticationToken(loginRequest.getNomeUsuario(), loginRequest.getSenha()));
 
+		SecurityContextHolder.getContext().setAuthentication(authentication);
 
-   
-    @RequestMapping(method = RequestMethod.DELETE, path = "/{id}")
-    @PreAuthorize("hasRole('GERENTE')")
-    public Gerente deleteGerenteById(@PathVariable("id") long id) {
-        Gerente gerente = gerenteRepository.findById(id);
-        gerenteRepository.delete(gerente);
-        return gerente;
-    }
+		String jwt = jwtProvider.generateJwtToken(authentication);
+		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 
-    
-    @RequestMapping(method = RequestMethod.POST, path = "/logar")
-    public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginForm loginRequest) {
+		return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getUsername(), userDetails.getAuthorities()));
+	}
 
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(loginRequest.getNomeUsuario(), loginRequest.getSenha()));
+	@RequestMapping(method = RequestMethod.POST, path = "/cadastrar")
+	public ResponseEntity<?> registerUser(@Valid @RequestBody CadastroFormGerente signUpRequest) {
 
-        SecurityContextHolder.getContext().setAuthentication(authentication);
+		if (gerenteRepository.existsByNomeUsuario(signUpRequest.getNomeUsuario())) {
+			return new ResponseEntity<>(new ResponseMessage("Erro -> Usuário já está em uso!"), HttpStatus.BAD_REQUEST);
+		}
 
-        String jwt = jwtProvider.generateJwtToken(authentication);
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+		if (gerenteRepository.existsByEmail(signUpRequest.getEmail())) {
+			return new ResponseEntity<>(new ResponseMessage("Erro -> Email Já está em uso !"), HttpStatus.BAD_REQUEST);
+		}
+		if (gerenteRepository.existsByNome(signUpRequest.getNome())) {
+			return new ResponseEntity<>(new ResponseMessage("Erro -> Nome Já está em uso !"), HttpStatus.BAD_REQUEST);
+		}
+		if (gerenteRepository.existsByCpf((signUpRequest.getCpf()))) {
+			return new ResponseEntity<>(new ResponseMessage("Erro -> CPF Já está em uso !"), HttpStatus.BAD_REQUEST);
+		}
+		if (gerenteRepository.existsByRg(signUpRequest.getRg())) {
+			return new ResponseEntity<>(new ResponseMessage("Erro -> RG Já está em uso !"), HttpStatus.BAD_REQUEST);
+		}
+		if (gerenteRepository.existsBySenha(signUpRequest.getSenha())) {
+			return new ResponseEntity<>(new ResponseMessage("Erro -> Senha Já está em uso !"), HttpStatus.BAD_REQUEST);
+		}
 
-        return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getUsername(), userDetails.getAuthorities()));
-    }
+		// Creating user's account
+		Gerente user = new Gerente();
+		user.setNome(signUpRequest.getNome());
+		user.setCpf(signUpRequest.getCpf());
+		user.setEmail(signUpRequest.getEmail());
+		user.setRg(signUpRequest.getRg());
+		user.setNomeUsuario(signUpRequest.getNomeUsuario());
+		user.setSenhaConfirm(encoder.encode(signUpRequest.getSenhaConfirm()));
+		user.setSenha(encoder.encode(signUpRequest.getSenha()));
 
-    @RequestMapping(method = RequestMethod.POST, path = "/cadastrar")
-    public ResponseEntity<?> registerUser(@Valid @RequestBody CadastroFormGerente signUpRequest) {
+		String strRoles = signUpRequest.getRole();
 
+		Set<Role> roles = new HashSet<>();
 
+		if (strRoles.equals("gerente")) {
+			Role gerenterole = roleRepository.findByNome(RoleName.ROLE_GERENTE)
+					.orElseThrow(() -> new RuntimeException("Fail! ->  Cause: Gerente Role not find."));
+			roles.add(gerenterole);
 
-        if (gerenteRepository.existsByNomeUsuario(signUpRequest.getNomeUsuario())) {
-            return new ResponseEntity<>(new ResponseMessage("Erro -> Usuário já está em uso!"),
-                    HttpStatus.BAD_REQUEST);
-        }
+		} else {
+			Role userRole = roleRepository.findByNome(RoleName.ROLE_ADMIN)
+					.orElseThrow(() -> new RuntimeException("Fail! ->    Cause: Gerente Role not find."));
+			roles.add(userRole);
 
-        if (gerenteRepository.existsByEmail(signUpRequest.getEmail())) {
-            return new ResponseEntity<>(new ResponseMessage("Erro -> Email Já está em uso !"),
-                    HttpStatus.BAD_REQUEST);
-        }
-        if (gerenteRepository.existsByNome(signUpRequest.getNome())) {
-            return new ResponseEntity<>(new ResponseMessage("Erro -> Nome Já está em uso !"),
-                    HttpStatus.BAD_REQUEST);
-        }
-        if (gerenteRepository.existsByCpf((signUpRequest.getCpf()))) {
-            return new ResponseEntity<>(new ResponseMessage("Erro -> CPF Já está em uso !"),
-                    HttpStatus.BAD_REQUEST);
-        }
-        if (gerenteRepository.existsByRg(signUpRequest.getRg())) {
-            return new ResponseEntity<>(new ResponseMessage("Erro -> RG Já está em uso !"),
-                    HttpStatus.BAD_REQUEST);
-        }
-        if (gerenteRepository.existsBySenha(signUpRequest.getSenha())) {
-            return new ResponseEntity<>(new ResponseMessage("Erro -> Senha Já está em uso !"),
-                    HttpStatus.BAD_REQUEST);
-        }
+		}
 
+		user.setRoles(roles);
+		gerenteRepository.save(user);
 
-        // Creating user's account
-        Gerente user = new Gerente();
-        user.setNome(signUpRequest.getNome());
-        user.setCpf(signUpRequest.getCpf());
-        user.setEmail(signUpRequest.getEmail());
-        user.setRg(signUpRequest.getRg());
-        user.setNomeUsuario(signUpRequest.getNomeUsuario());
-        user.setSenhaConfirm(encoder.encode(signUpRequest.getSenhaConfirm()));
-        user.setSenha(encoder.encode(signUpRequest.getSenha()));
-
-
-        String strRoles = signUpRequest.getRole();
-
-        Set<Role> roles = new HashSet<>();
-
-        if(strRoles.equals("gerente")) {
-            Role gerenterole =
-                    roleRepository.findByNome(RoleName.ROLE_GERENTE)
-                            .orElseThrow(() -> new RuntimeException("Fail! ->  Cause: Gerente Role not find."));
-            roles.add(gerenterole);
-
-        }else {
-                    Role userRole = roleRepository.findByNome(RoleName.ROLE_ADMIN)
-                            .orElseThrow(() -> new RuntimeException("Fail! ->    Cause: Gerente Role not find."));
-                    roles.add(userRole);
-
-        }
-
-        user.setRoles(roles);
-        gerenteRepository.save(user);
-
-        return new ResponseEntity<>(new ResponseMessage("Gerente Cadastrado com sucesso!"), HttpStatus.OK);
-    }
-
-
+		return new ResponseEntity<>(new ResponseMessage("Gerente Cadastrado com sucesso!"), HttpStatus.OK);
+	}
 
 }
