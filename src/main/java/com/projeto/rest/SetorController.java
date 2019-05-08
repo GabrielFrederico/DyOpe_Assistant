@@ -1,7 +1,6 @@
 package com.projeto.rest;
 
 
-import com.projeto.models.RoleName;
 import com.projeto.models.Setor;
 import com.projeto.repository.SetorRepository;
 import org.springframework.beans.factory.annotation.Autowired;

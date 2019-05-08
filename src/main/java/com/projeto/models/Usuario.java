@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
+
 @Entity
 public abstract class Usuario {
 
@@ -22,8 +23,9 @@ public abstract class Usuario {
     private String senha;
     private String senhaConfirm;
     private String email;
+    
 
-    public String getEmail() {
+	public String getEmail() {
         return email;
     }
 

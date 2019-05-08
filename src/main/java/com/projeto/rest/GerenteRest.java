@@ -82,10 +82,9 @@ public class GerenteRest {
         return gerente;
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "atualizar/{id}")
+    @RequestMapping(method = RequestMethod.PUT, value = "atualizar")
     @PreAuthorize("hasRole('GERENTE')")
-    public Gerente updateGerenteById(@PathVariable("id") long id) {
-        Gerente gerente = gerenteRepository.findById(id);
+    public Gerente update(@RequestBody Gerente gerente) {
         gerenteRepository.save(gerente);
         return gerente;
     }

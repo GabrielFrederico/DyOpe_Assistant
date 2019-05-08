@@ -42,7 +42,8 @@ public class UsuarioController {
 
     @Autowired
     JwtProvider jwtProvider;
-  
+    
+    
 
     @RequestMapping(method = RequestMethod.POST, path = "/logar")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginForm loginRequest) {
@@ -54,8 +55,8 @@ public class UsuarioController {
 
         String jwt = jwtProvider.generateJwtToken(authentication);
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-
-        return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getUsername(), userDetails.getAuthorities()));
+   
+        return ResponseEntity.ok(new JwtResponse(jwt,userDetails.getUsername(),userDetails.getAuthorities()));
     }
 
     @RequestMapping(method = RequestMethod.GET)

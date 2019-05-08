@@ -7,14 +7,17 @@ import {Observable, of} from 'rxjs';
 import {forEach} from '@angular/router/src/utils/collection';
 import {first, map} from 'rxjs/operators';
 import {async} from "@angular/core/testing";
+import {NgForm} from "@angular/forms";
 
 ;
 
 @Component({
   selector: 'app-perfil-gerente',
-  templateUrl: './perfil-gerente.component.html'
+  templateUrl: './perfil-gerente.component.html',
+
 })
 export class PerfilGerenteComponent implements OnInit {
+  title:'Perfil Gerente';
   // tslint:disable-next-line:max-line-length
   constructor(private modalService: NgbModal, private token: TokenStorageService, private gerenteService: GerenteService, private router: Router) {
   }
@@ -62,15 +65,31 @@ export class PerfilGerenteComponent implements OnInit {
 
   datareload() {
     this.gerentes = this.gerenteService.getinfoGerentes();
+
+    this.gerentes.forEach((ger)=>{
+      for (let gerent of ger){
+        if (gerent.nomeUsuario == this.info.username){
+          this.gerenteLogado = true;
+          this.gerente = gerent;
+        }
+      }
+    })
   }
 
 
-  onSubmit(id: number) {
-    this.gerenteService.atualizarGerenteId(id)
-      .pipe()
+  onSubmit(nome: HTMLInputElement,nomeUsuario: HTMLInputElement,cpf: HTMLInputElement,rg: HTMLInputElement,email: HTMLInputElement) {
+
+    this.gerente.nome = nome.value;
+    this.gerente.nomeUsuario = nomeUsuario.value;
+    this.gerente.rg = rg.value;
+    this.gerente.email = email.value;
+    this.gerente.cpf = cpf.value;
+    this.gerenteService.atualizarGerente(this.gerente)
+      .pipe(first())
       .subscribe(
         data => {
-           alert('Dados atualizados.'+ data.nome);
+          alert('Dados atualizados!');
+          this.isReadonly = true;
         },
         error => {
           alert(error);

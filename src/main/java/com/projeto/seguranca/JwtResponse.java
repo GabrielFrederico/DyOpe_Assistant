@@ -14,7 +14,11 @@ public class JwtResponse {
 	    this.authorities = authorities;
 	  }
 	 
-	  public String getAccessToken() {
+	  public void setAuthorities(java.util.Collection<? extends GrantedAuthority> authorities) {
+		this.authorities = authorities;
+	}
+
+	public String getAccessToken() {
 	    return token;
 	  }
 	 

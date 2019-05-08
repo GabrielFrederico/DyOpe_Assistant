@@ -152,10 +152,9 @@ public class FuncionarioController {
     }
 
 
-    @RequestMapping(method = RequestMethod.PUT, value = "funcionario/{id}")
-    @PreAuthorize("hasRole('FUNCIONARIO') or hasRole('ADMIN')")
-    public Funcionario updateFuncionarioById(@PathVariable("id") long id) {
-        Funcionario funcionario = funcionarioRepository.findById(id);
+    @RequestMapping(method = RequestMethod.PUT, value = "atualizar")
+    @PreAuthorize("hasRole('FUNCIONARIO')")
+    public Funcionario update(@RequestBody Funcionario funcionario) {
         funcionarioRepository.save(funcionario);
         return funcionario;
     }

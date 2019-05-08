@@ -1,4 +1,4 @@
-<div *ngIf="validado" id="page-top"  class>
+<div *ngIf="validado && gerenteLogado" id="page-top"  class>
 
 <app-nav-bar></app-nav-bar>
 <div id="wrapper" >
@@ -26,15 +26,15 @@
     </div>
 
     
-    <div class="container "  *ngFor="let gerent of gerentes | async" style="float: left; max-width: 70%; padding-left: 5%"  >
-      <form *ngIf="gerent.nomeUsuario === info.username" (ngSubmit)="onSubmit(gerent.id)">
+    <div class="container "   style="float: left; max-width: 70%; padding-left: 5%"  >
+      <form #gerenteForm="ngForm" (ngSubmit)="onSubmit(nome,nomeUsuario,rg,cpf,email)">
         <div class="form-group">
           <div class="form-row">
             <div class="col-md-6">
               <div class="form-group">
                 <div class="form-label-group" >
-                  <input [readonly]="isReadonly" type="text" name="nome"  id="nomeCompleto" class="form-control"
-                         autofocus="autofocus" [(ngModel)]="gerent.nome"
+                  <input [readonly]="isReadonly"  type="text" name="nome"  id="nomeCompleto" class="form-control"
+                         autofocus="autofocus" [(ngModel)]="gerente.nome" #nome
                          placeholder="Nome Completo" required="required">
                   <label for="nomeCompleto">Nome Completo</label>
                 </div>
@@ -44,7 +44,7 @@
               <div class="form-group">
                 <div class="form-label-group">
                   <input [readonly]="isReadonly" type="text" name="nomeUsuario" id="nomeUsuario" class="form-control"
-                         autofocus="autofocus" [(ngModel)]="gerent.nomeUsuario"
+                         autofocus="autofocus" [(ngModel)]="gerente.nomeUsuario" #nomeUsuario
                          placeholder="Nome Usuário" required="required">
                   <label for="nomeUsuario">Nome de usuário</label>
                 </div>
@@ -56,7 +56,7 @@
               <div class="form-group">
                 <div class="form-label-group">
                   <input [readonly]="isReadonly" type="text" name="cpf" id="cpf" class="form-control"
-                         placeholder="CPF"[(ngModel)]="gerent.cpf"
+                         placeholder="CPF"[(ngModel)]="gerente.cpf" #cpf
                          required="required">
                   <label for="cpf">CPF</label>
                 </div>
@@ -66,7 +66,7 @@
               <div class="form-group">
                 <div class="form-label-group">
                   <input [readonly]="isReadonly" type="text" name="rg" id="rg" class="form-control"
-                         placeholder="RG"  [(ngModel)]="gerent.rg"
+                         placeholder="RG"  [(ngModel)]="gerente.rg" #rg
                          required>
                   <label for="rg">RG</label>
                 </div>
@@ -76,7 +76,7 @@
           <div class="form-group">
             <div class="form-label-group">
               <input [readonly]="isReadonly" type="email" name="email" id="inputEmail"
-                     class="form-control" [(ngModel)]="gerent.email"
+                     class="form-control" [(ngModel)]="gerente.email" #email
                      placeholder="Endereço de e-mail"
                      required="required">
               <label for="inputEmail">Endereço de e-mail</label>
@@ -84,7 +84,7 @@
 
           </div>
 
-          <input [readonly]="isReadonly" class="btn btn-success" type="submit" value="Salvar">
+          <input [readonly]="isReadonly" class="btn btn-success" type="submit" [disabled]="!gerenteForm.form.valid" value="Salvar">
           <a [readonly]="isReadonly" class="btn btn-info" href="#" data-toggle="modal"
              data-target=".redefinir-senha">Redefinir
             senha</a>
@@ -135,8 +135,8 @@
 
                     <div class="col-md-auto">
                       <div class="form-label-group">
-                        <input type="password" id="current-password" name="senha" class="form-control"
-                               placeholder="Senha atual:"  value="current-password"
+                        <input type="password" id="current-password" name="current-password" class="form-control"
+                               placeholder="Senha atual:"
                                required="required">
                         <label for="current-password">Senha atual:</label>
                       </div>
@@ -147,8 +147,8 @@
 
                     <div class="col-md-auto">
                       <div class="form-label-group">
-                        <input type="password" id="new-password" name="senha" class="form-control"
-                               placeholder="Nova senha:"  value="new-password"
+                        <input type="password" id="new-password" name="new-password" class="form-control"
+                               placeholder="Nova senha:"
                                required="required">
                         <label for="new-password">Nova senha:</label>
                       </div>
@@ -159,8 +159,8 @@
 
                     <div class="col-md-auto">
                       <div class="form-label-group">
-                        <input type="password" id="new-passwordconfirm"  class="form-control"
-                               placeholder="Confirmar senha:" value="new-password"
+                        <input type="password" id="new-passwordconfirm" name="new-password" class="form-control"
+                               placeholder="Confirmar senha:"
                                required="required">
                         <label for="new-passwordconfirm">Confirmar senha:</label>
                       </div>
