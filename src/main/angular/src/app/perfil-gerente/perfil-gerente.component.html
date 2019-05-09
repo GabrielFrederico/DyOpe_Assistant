@@ -1,4 +1,4 @@
-<div *ngIf="validado && gerenteLogado" id="page-top"  class>
+<div *ngIf="validado" id="page-top"  class>
 
 <app-nav-bar></app-nav-bar>
 <div id="wrapper" >
@@ -90,7 +90,7 @@
             senha</a>
           <input class="btn btn-info" type="button" (click)="toggleReadonly()" value="Editar">
           <div *ngIf="gerenteForm.submitted && updateFailed" class="alert alert-warning">
-            Cadastro Falhou!<br/>{{errorMessage}}
+            Atualização Falhou!<br/>{{errorMessage}}
           </div>
 
           <!-- /.container-fluid -->

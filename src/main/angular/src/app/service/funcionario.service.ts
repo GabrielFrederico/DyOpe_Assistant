@@ -46,7 +46,10 @@ export class FuncionarioService {
   getFuncionarios() {
     return this.httpClient.get<Funcionario[]>('http://localhost:8080/funcionarios');
   }
+  atualizarFuncionario(funcionario:Funcionario): Observable<Funcionario> {
+    return this.httpClient.put<Funcionario>( 'http://localhost:8080/funcionarios/atualizar',funcionario);
 
+  }
   cadastrarFuncionario(funcionario: Funcionario): Observable<Funcionario> {
     return this.httpClient.post<Funcionario>('http://localhost:8080/funcionarios/cadastrarfuncionario', funcionario);
   }

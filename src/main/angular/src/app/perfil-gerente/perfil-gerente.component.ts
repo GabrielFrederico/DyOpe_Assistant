@@ -29,7 +29,7 @@ export class PerfilGerenteComponent implements OnInit {
   public gerenteLogado: boolean;
   public validado: boolean;
   public updateFailed: boolean;
-public errorMessage = '';
+  public errorMessage = '';
   public info: any;
   form: any = {};
   public isCollapsed = false;
@@ -74,6 +74,7 @@ public errorMessage = '';
         if (gerent.nomeUsuario == this.info.username) {
           this.gerenteLogado = true;
           this.gerente = gerent;
+          console.clear();
         }
       }
     })
@@ -85,7 +86,6 @@ public errorMessage = '';
 
     this.token.saveUsername(this.gerente.nomeUsuario);
     this.info.username = this.gerente.nomeUsuario;
-    alert(this.info.username);
     this.gerenteService.atualizarGerente(this.gerente)
       .pipe(first())
       .subscribe(

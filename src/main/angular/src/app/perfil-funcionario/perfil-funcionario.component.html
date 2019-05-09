@@ -57,16 +57,15 @@
       <img src="assets/imagens/imgperfil.jpg" style="height: 200px; width: 200px; float: left; padding-left: 1%;">
     </div>
 
-    <div class="container " style="float: left; max-width: 70%; padding-left: 5%"
-         *ngFor="let funcionario of funcionarios | async">
-      <form *ngIf="funcionario.nomeUsuario === info.username">
+    <div class="container " style="float: left; max-width: 70%; padding-left: 5%">
+      <form #f="ngForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
           <div class="form-row">
             <div class="col-md-6">
               <div class="form-group">
                 <div class="form-label-group">
-                  <input [readonly]="isReadonly" type="text" name="funcionario" id="nomeCompleto" class="form-control"
-                         autofocus="autofocus" value="{{funcionario.nome}}"
+                  <input [readonly]="isReadonly" type="text" name="nome" id="nomeCompleto" class="form-control"
+                         autofocus="autofocus" [(ngModel)]="funcionario.nome"
                          placeholder="Nome Completo" required="required">
                   <label for="nomeCompleto">Nome Completo</label>
                 </div>
@@ -76,8 +75,8 @@
             <div class="col-md-6">
               <div class="form-group">
                 <div class="form-label-group">
-                  <input [readonly]="isReadonly" type="text" name="funcionario" id="nomeUsuario" class="form-control"
-                         autofocus="autofocus" value="{{funcionario.nomeUsuario}}"
+                  <input [readonly]="isReadonly" type="text" name="nomeUsuario" id="nomeUsuario" class="form-control"
+                         autofocus="autofocus" [(ngModel)]="funcionario.nomeUsuario"
                          placeholder="Usuário" required="required">
                   <label for="nomeUsuario">Usuário</label>
                 </div>
@@ -89,7 +88,7 @@
               <div class="form-group">
                 <div class="form-label-group">
                   <input [readonly]="isReadonly" type="text" name="cpf" id="cpf" class="form-control"
-                         placeholder="CPF" value="{{funcionario.cpf}}"
+                         placeholder="CPF" [(ngModel)]="funcionario.cpf"
                          required="required">
                   <label for="cpf">CPF</label>
                 </div>
@@ -99,7 +98,7 @@
               <div class="form-group">
                 <div class="form-label-group">
                   <input [readonly]="isReadonly" type="text" name="rg" id="rg" class="form-control" placeholder="RG"
-                         value="{{funcionario.cpf}}"
+                         [(ngModel)]="funcionario.rg"
                          required="required">
                   <label for="rg">RG</label>
                 </div>
@@ -109,19 +108,21 @@
           <div class="form-group">
             <div class="form-label-group">
               <input [readonly]="isReadonly" type="email" name="emailGer" id="inputEmail" class="form-control"
-                     placeholder="Endereço de e-mail" value="{{funcionario.email}}"
+                     placeholder="Endereço de e-mail" [(ngModel)]="funcionario.email"
                      required="required">
               <label for="inputEmail">Endereço de e-mail</label>
             </div>
 
           </div>
 
-          <input class="btn btn-success" type="submit" value="Salvar">
+          <input [disabled]="!f.form.valid" class="btn btn-success" type="submit" value="Salvar">
           <a class="btn btn-info" href="#" data-toggle="modal"
              data-target=".redefinir-senha">Redefinir
             senha</a>
           <input class="btn btn-info" type="button" (click)="toggleReadonly()" value="Editar">
-
+          <div *ngIf="f.submitted && updateFailed" class="alert alert-warning">
+            Atualização Falhou!<br/>{{errorMessage}}
+          </div>
 
           <!-- /.container-fluid -->
 
