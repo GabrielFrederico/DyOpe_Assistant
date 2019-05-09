@@ -83,15 +83,19 @@ export class PerfilGerenteComponent implements OnInit {
 
   onSubmit() {
 
-
-    this.token.saveUsername(this.gerente.nomeUsuario);
-    this.info.username = this.gerente.nomeUsuario;
     this.gerenteService.atualizarGerente(this.gerente)
       .pipe(first())
       .subscribe(
         data => {
-          alert('Dados atualizados!');
+
           this.isReadonly = true;
+          if (this.info.username !== this.gerente.nomeUsuario) {
+            alert("Nome de usuário atuializado! Faça o login denovo!");
+            this.token.logOut();
+            this.router.navigate(['/logingerente']);
+          }else {
+            alert('Dados atualizados!');
+          }
 
         },
         error => {
