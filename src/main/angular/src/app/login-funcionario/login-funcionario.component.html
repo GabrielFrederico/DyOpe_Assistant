@@ -36,7 +36,7 @@
             <input type="text" id="inputEmail" name="nomeUsuario" [(ngModel)]="form.nomeUsuario" #nomeUsuario="ngModel"
                    class="form-control"
                    placeholder="Email" required="required"
-                   autofocus="autofocus">
+                   [autofocus]="true" >
             <label for="inputEmail">Usuario</label>
           </div>
           <div *ngIf="f.submitted && nomeUsuario.invalid">
@@ -44,12 +44,12 @@
           </div>
         </div>
         <div class="form-group">
-          <show-hide-password btnStyle="primary">
-          <div class="form-label-group" style="width: 85%">
-            <input type="password" name="senha" id="inputPassword" [(ngModel)]="form.senha" minlength="6"
-                   #senha="ngModel" class="form-control"
+          <show-hide-password (click)="focosenha()" btnStyle="primary">
+          <div class="form-label-group inputsenha">
+            <input type="password" name="senha" id="senha" [(ngModel)]="form.senha" minlength="6"
+                   #senha="ngModel" class="form-control" #inputPassword
                    placeholder="Senha" required="required">
-            <label for="inputPassword"> Senha</label>
+            <label for="senha"> Senha</label>
           </div>
           </show-hide-password>
           <div *ngIf="f.submitted && senha.invalid">

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {AuthService} from "../auth/auth.service";
 import {TokenStorageService} from "../auth/token-storage.service";
@@ -18,6 +18,7 @@ export class LoginFuncionarioComponent implements OnInit {
   errorMessage = '';
   roles: string[] = [];
   private loginInfo: loginFuncionarioInfo;
+  @ViewChild("inputPassword") senhainput: ElementRef;
 
   constructor(private modalService: NgbModal, private authService: AuthService, private tokenStorage: TokenStorageService, private router: Router) {
   }
@@ -29,7 +30,9 @@ export class LoginFuncionarioComponent implements OnInit {
     }
   }
 
-
+  focosenha(){
+    this.senhainput.nativeElement.focus();
+  }
   onSubmit() {
     console.log(this.form);
 

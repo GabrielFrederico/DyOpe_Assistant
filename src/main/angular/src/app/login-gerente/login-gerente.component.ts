@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {TokenStorageService} from '../auth/token-storage.service';
 import {AuthService} from '../auth/auth.service';
@@ -21,6 +21,7 @@ export class LoginGerenteComponent implements OnInit {
   errorMessage = '';
   roles: string[] = [];
   private loginInfo: LoginInfo;
+  @ViewChild("inputPassword") senhainput: ElementRef;
 
   constructor(private modalService: NgbModal, private authService: AuthService, private tokenStorage: TokenStorageService, private router: Router) {
   }
@@ -31,7 +32,9 @@ export class LoginGerenteComponent implements OnInit {
       this.roles = this.tokenStorage.getAuthorities();
     }
   }
-
+  focosenha(){
+   this.senhainput.nativeElement.focus();
+  }
 
   onSubmit() {
     console.log(this.form);

@@ -12,6 +12,10 @@
   transform: translate3d(5px, 56px, 0px);
 }
 
+.inputsenha{
+  width: 85%;
+
+}
 .menu:hover .menudrop {
   display: block;
 }
