@@ -32,23 +32,41 @@
     <div class="card-header bg-info text-light">Redefinir Senha</div>
     <div class="card-body">
       <div class="text-center mb-4">
-        <h4>Esqueceu sua senha?</h4>
-        <p>Digite seu endereço de e-mail e nós lhe enviaremos instruções sobre como redefinir sua senha.</p>
+        <h4>Insira abaixo sua nova senha.</h4>
       </div>
-      <form [noValidate]="$any(false)">
-        <div class="form-group">
+
+      <div class="form-group">
+
+      <div class="form-group">
+
+        <div class="col-md-auto">
           <div class="form-label-group">
-            <input type="email" id="inputEmail" class="form-control" placeholder="Insira seu e-mail"
-                   required="required" [autofocus]="true">
-            <label for="inputEmail">Insira seu e-mail</label>
+            <input type="password" id="new-password" name="new-password" class="form-control"
+                   placeholder="Nova senha:"
+                   required="required">
+            <label for="new-password">Nova senha:</label>
           </div>
         </div>
-        <input class="btn btn-primary btn-block" type="submit" value="Redefinir Senha">
-      </form>
+      </div>
 
-          <div class="alert alert-dismissible alert-success" style="margin-top: 5%;">
-            Link para redefinir a senha foi enviado para seu e-mail
+      <div class="form-group">
+
+        <div class="col-md-auto">
+          <div class="form-label-group">
+            <input type="password" id="new-passwordconfirm" name="new-password" class="form-control"
+                   placeholder="Confirmar senha:"
+                   required="required">
+            <label for="new-passwordconfirm">Confirmar senha:</label>
           </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="modal-footer col-md-12">
+      <input class="btn btn-primary" type="submit" value="Confirmar">
+    </div>
 
       <div class="text-center">
         <a class="d-block small" routerLink=""> Página de Login</a>

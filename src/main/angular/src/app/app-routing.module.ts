@@ -21,6 +21,7 @@ import {OperacaoCosturaComponent} from './operacao-costura/operacao-costura.comp
 import {OperacaoRiscoComponent} from './operacao-risco/operacao-risco.component';
 import {GerenteComponent} from './gerente/gerente.component';
 import {NavComponent} from './nav/nav.component';
+import {RedefinirSenhaComponent} from "./redefinir-senha/redefinir-senha.component";
 
 
 const routes: Routes = [
@@ -44,7 +45,8 @@ const routes: Routes = [
   {path: 'operacaocostura', component: OperacaoCosturaComponent},
   {path: 'operacaorisco', component: OperacaoRiscoComponent},
   {path: 'gerente', component: GerenteComponent},
-  {path: 'testebarra', component: NavComponent}
+  {path: 'testebarra', component: NavComponent},
+  {path: 'redefinirsenha', component: RedefinirSenhaComponent}
 
 ];
 
@@ -66,3 +68,5 @@ export const routingComponent4 = [FuncionarioIndexComponent, InformacoesSetorCom
 export const routingComponent5 = [OperacaoAcabamentoComponent, OperacaoBeneficiamentoComponent, OperacaoCorteComponent];
 
 export const routingComponent6 = [OperacaoCosturaComponent, OperacaoRiscoComponent, GerenteComponent, NavComponent];
+
+export const routingComponent7 = [RedefinirSenhaComponent];

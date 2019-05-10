@@ -1,198 +1,199 @@
-<div *ngIf="validado" id="page-top"  class>
+<div *ngIf="validado" id="page-top" class>
 
-<app-nav-bar></app-nav-bar>
-<div id="wrapper" >
+  <app-nav-bar></app-nav-bar>
+  <div id="wrapper">
 
-  <!-- Sidebar -->
-  <ul class="sidebar toggled bg-primary navbar-nav">
+    <!-- Sidebar -->
+    <ul class="sidebar toggled bg-primary navbar-nav">
 
-    <app-sidebar></app-sidebar>
-    <li class="nav-item text-light">
-      <a class="nav-link text-light" routerLink="/controlefuncionarios">
-        <span>Controle</span>
+      <app-sidebar></app-sidebar>
+      <li class="nav-item text-light">
+        <a class="nav-link text-light" routerLink="/controlefuncionarios">
+          <span>Controle</span>
+        </a>
+
+      </li>
+
+    </ul>
+
+    <div id="content-wrapper" class="fundo">
+
+      <div class="container-fluid">
+
+        <!-- Page Content -->
+        <h1>Perfil </h1>
+        <hr>
+      </div>
+
+
+      <div class="container " style="float: left; max-width: 70%; padding-left: 5%">
+        <form #gerenteForm="ngForm" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <div class="form-row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <div class="form-label-group">
+                    <input [readonly]="isReadonly" type="text" name="nome" id="nomeCompleto" class="form-control"
+                           autofocus="autofocus" [(ngModel)]="gerente.nome" #nome
+                           placeholder="Nome Completo" required="required">
+                    <label for="nomeCompleto">Nome Completo</label>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <div class="form-label-group">
+                    <input [readonly]="isReadonly" type="text" name="nomeUsuario" id="nomeUsuario" class="form-control"
+                           autofocus="autofocus" [(ngModel)]="gerente.nomeUsuario" #nomeUsuario
+                           placeholder="Nome Usuário" required="required">
+                    <label for="nomeUsuario">Nome de usuário</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <div class="form-label-group">
+                    <input [readonly]="isReadonly" type="text" name="cpf" id="cpf" class="form-control"
+                           placeholder="CPF" [(ngModel)]="gerente.cpf" #cpf
+                           required="required">
+                    <label for="cpf">CPF</label>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <div class="form-label-group">
+                    <input [readonly]="isReadonly" type="text" name="rg" id="rg" class="form-control"
+                           placeholder="RG" [(ngModel)]="gerente.rg" #rg
+                           required>
+                    <label for="rg">RG</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="form-label-group">
+                <input [readonly]="isReadonly" type="email" name="email" id="inputEmail"
+                       class="form-control" [(ngModel)]="gerente.email" #email
+                       placeholder="Endereço de e-mail"
+                       required="required">
+                <label for="inputEmail">Endereço de e-mail</label>
+              </div>
+
+            </div>
+
+            <input [readonly]="isReadonly" class="btn btn-success" type="submit" [disabled]="!gerenteForm.form.valid"
+                   value="Salvar">
+            <a [readonly]="isReadonly" class="btn btn-info" href="#" data-toggle="modal"
+               data-target=".redefinir-senha">Redefinir
+              senha</a>
+            <input class="btn btn-info" type="button" (click)="toggleReadonly()" value="Editar">
+            <div *ngIf="gerenteForm.submitted && updateFailed" class="alert alert-warning">
+              Atualização Falhou!<br/>{{errorMessage}}
+            </div>
+
+            <!-- /.container-fluid -->
+
+            <!-- Sticky Footer -->
+            <footer class="sticky-footer">
+              <div class="container my-auto ">
+                <div class="copyright text-center my-auto ">
+                  <span>Copyright © DyOpe Assistant 2019</span>
+                </div>
+              </div>
+            </footer>
+
+          </div>
+        </form>
+        <!-- /.content-wrapper -->
+
+      </div>
+      <!-- /#wrapper -->
+
+      <!-- Scroll to Top Button-->
+      <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
       </a>
 
-    </li>
 
-  </ul>
+      <!--Modal Redefinir Senha: -->
+      <div class="modal fade redefinir-senha" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+           aria-hidden="true">
+        <div class="modal-dialog modal-body">
 
-  <div id="content-wrapper" class="fundo">
-
-    <div class="container-fluid" >
-
-      <!-- Page Content -->
-      <h1>Perfil </h1>
-      <hr>
-    </div>
-
-    
-    <div class="container "   style="float: left; max-width: 70%; padding-left: 5%"  >
-      <form #gerenteForm="ngForm" (ngSubmit)="onSubmit()">
-        <div class="form-group">
-          <div class="form-row">
-            <div class="col-md-6">
-              <div class="form-group">
-                <div class="form-label-group" >
-                  <input [readonly]="isReadonly"  type="text" name="nome"  id="nomeCompleto" class="form-control"
-                         autofocus="autofocus" [(ngModel)]="gerente.nome" #nome
-                         placeholder="Nome Completo" required="required">
-                  <label for="nomeCompleto">Nome Completo</label>
-                </div>
-              </div>
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title" id="myLargeModalLabel">Redefinir senha:</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
             </div>
-            <div class="col-md-6">
-              <div class="form-group">
-                <div class="form-label-group">
-                  <input [readonly]="isReadonly" type="text" name="nomeUsuario" id="nomeUsuario" class="form-control"
-                         autofocus="autofocus" [(ngModel)]="gerente.nomeUsuario" #nomeUsuario
-                         placeholder="Nome Usuário" required="required">
-                  <label for="nomeUsuario">Nome de usuário</label>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="col-md-6">
-              <div class="form-group">
-                <div class="form-label-group">
-                  <input [readonly]="isReadonly" type="text" name="cpf" id="cpf" class="form-control"
-                         placeholder="CPF"[(ngModel)]="gerente.cpf" #cpf
-                         required="required">
-                  <label for="cpf">CPF</label>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group">
-                <div class="form-label-group">
-                  <input [readonly]="isReadonly" type="text" name="rg" id="rg" class="form-control"
-                         placeholder="RG"  [(ngModel)]="gerente.rg" #rg
-                         required>
-                  <label for="rg">RG</label>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="form-label-group">
-              <input [readonly]="isReadonly" type="email" name="email" id="inputEmail"
-                     class="form-control" [(ngModel)]="gerente.email" #email
-                     placeholder="Endereço de e-mail"
-                     required="required">
-              <label for="inputEmail">Endereço de e-mail</label>
-            </div>
-
-          </div>
-
-          <input [readonly]="isReadonly" class="btn btn-success" type="submit" [disabled]="!gerenteForm.form.valid" value="Salvar">
-          <a [readonly]="isReadonly" class="btn btn-info" href="#" data-toggle="modal"
-             data-target=".redefinir-senha">Redefinir
-            senha</a>
-          <input class="btn btn-info" type="button" (click)="toggleReadonly()" value="Editar">
-          <div *ngIf="gerenteForm.submitted && updateFailed" class="alert alert-warning">
-            Atualização Falhou!<br/>{{errorMessage}}
-          </div>
-
-          <!-- /.container-fluid -->
-
-          <!-- Sticky Footer -->
-          <footer class="sticky-footer">
-            <div class="container my-auto ">
-              <div class="copyright text-center my-auto ">
-                <span>Copyright © DyOpe Assistant 2019</span>
-              </div>
-            </div>
-          </footer>
-
-        </div>
-      </form>
-      <!-- /.content-wrapper -->
-
-    </div>
-    <!-- /#wrapper -->
-
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-      <i class="fas fa-angle-up"></i>
-    </a>
-
-
-    <!--Modal Redefinir Senha: -->
-    <div class="modal fade redefinir-senha" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-         aria-hidden="true">
-      <div class="modal-dialog modal-body">
-
-        <div class="modal-content">
-          <div class="modal-header">
-            <h4 class="modal-title" id="myLargeModalLabel">Redefinir senha:</h4>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">×</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <div class="card-body">
-              <form >
-                <div class="form-group">
-
+            <div class="modal-body">
+              <div class="card-body">
+                <form>
                   <div class="form-group">
 
-                    <div class="col-md-auto">
-                      <div class="form-label-group">
-                        <input type="password" id="current-password" name="current-password" class="form-control"
-                               placeholder="Senha atual:"
-                               required="required">
-                        <label for="current-password">Senha atual:</label>
+                    <div class="form-group">
+
+                      <div class="col-md-auto">
+                        <div class="form-label-group">
+                          <input type="password" id="current-password" name="current-password" class="form-control"
+                                 placeholder="Senha atual:"
+                                 required="required">
+                          <label for="current-password">Senha atual:</label>
+                        </div>
                       </div>
                     </div>
-                  </div>
 
-                  <div class="form-group">
+                    <div class="form-group">
 
-                    <div class="col-md-auto">
-                      <div class="form-label-group">
-                        <input type="password" id="new-password" name="new-password" class="form-control"
-                               placeholder="Nova senha:"
-                               required="required">
-                        <label for="new-password">Nova senha:</label>
+                      <div class="col-md-auto">
+                        <div class="form-label-group">
+                          <input type="password" id="new-password" name="new-password" class="form-control"
+                                 placeholder="Nova senha:"
+                                 required="required">
+                          <label for="new-password">Nova senha:</label>
+                        </div>
                       </div>
                     </div>
-                  </div>
 
-                  <div class="form-group">
+                    <div class="form-group">
 
-                    <div class="col-md-auto">
-                      <div class="form-label-group">
-                        <input type="password" id="new-passwordconfirm" name="new-password" class="form-control"
-                               placeholder="Confirmar senha:"
-                               required="required">
-                        <label for="new-passwordconfirm">Confirmar senha:</label>
+                      <div class="col-md-auto">
+                        <div class="form-label-group">
+                          <input type="password" id="new-passwordconfirm" name="new-password" class="form-control"
+                                 placeholder="Confirmar senha:"
+                                 required="required">
+                          <label for="new-passwordconfirm">Confirmar senha:</label>
+                        </div>
                       </div>
+
                     </div>
 
                   </div>
 
-                </div>
-
-                <div class="modal-footer col-md-12">
-                  <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-                  <input class="btn btn-primary" type="submit" value="Confirmar">
-                </div>
-              </form>
+                  <div class="modal-footer col-md-12">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                    <input class="btn btn-primary" type="submit" value="Confirmar">
+                  </div>
+                </form>
+              </div>
             </div>
           </div>
         </div>
       </div>
+
+
     </div>
 
 
+    <!-- Bootstrap core JavaScript-->
+
   </div>
-
-
-  <!-- Bootstrap core JavaScript-->
-
-</div>
-<ng-template #loggedOut>
-  Acesso negado! <br>
-  Faça o <a routerLink="/logingerente">login.</a>
-</ng-template>
+  <ng-template #loggedOut>
+    Acesso negado! <br>
+    Faça o <a routerLink="/logingerente">login.</a>
+  </ng-template>
 </div>

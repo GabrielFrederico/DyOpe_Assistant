@@ -27,6 +27,7 @@ import {coerceBooleanProperty} from '@angular/cdk/coercion';
 import {ShowHidePasswordModule} from 'ngx-show-hide-password';
 import {NavegacaoComponent} from './navegacao/navegacao.component';
 import {AuthInterceptorService} from './auth/auth-interceptor.service';
+import { RedefinirSenhaComponent } from './redefinir-senha/redefinir-senha.component';
 
 @Directive({
   // tslint:disable-next-line:directive-selector
@@ -65,7 +66,8 @@ class ReadonlyDirective {
     NavComponent,
     GerenteComponent,
     NavegacaoComponent,
-    ReadonlyDirective
+    ReadonlyDirective,
+    RedefinirSenhaComponent
   ],
   imports: [
     AppRoutingModule,
