@@ -11,7 +11,7 @@ import {Alert} from "selenium-webdriver";
   templateUrl: './login-funcionario.component.html'
 })
 export class LoginFuncionarioComponent implements OnInit {
-
+  title = 'Login Funcionario';
   form: any = {};
   isLoggedIn = false;
   isLoginFailed = false;

@@ -81,15 +81,18 @@ export class PerfilFuncionarioComponent implements OnInit {
 
   onSubmit() {
 
-
-    this.token.saveUsername(this.funcionario.nomeUsuario);
-    this.info.username = this.funcionario.nomeUsuario;
     this.funcionarioService.atualizarFuncionario(this.funcionario)
       .pipe(first())
       .subscribe(
         data => {
-          alert('Dados atualizados!');
           this.isReadonly = true;
+          if (this.info.username !== this.funcionario.nomeUsuario) {
+            alert("Nome de usuário atualizado! Faça o login denovo!");
+            this.token.logOut();
+            this.router.navigate(['/logingerente']);
+          }else {
+            alert('Dados atualizados!');
+          }
 
         },
         error => {

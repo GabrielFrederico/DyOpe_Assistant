@@ -11,6 +11,7 @@ import {NavBarComponent} from "../nav-bar/nav-bar.component";
   templateUrl: './gerente-index.component.html'
 })
 export class GerenteIndexComponent implements OnInit {
+  title = 'DyOpe Assistant';
   info: any;
   form: any = {};
   public isCollapsed = false;

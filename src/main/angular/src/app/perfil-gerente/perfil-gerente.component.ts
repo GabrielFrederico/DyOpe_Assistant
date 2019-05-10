@@ -90,7 +90,7 @@ export class PerfilGerenteComponent implements OnInit {
 
           this.isReadonly = true;
           if (this.info.username !== this.gerente.nomeUsuario) {
-            alert("Nome de usuário atuializado! Faça o login denovo!");
+            alert("Nome de usuário atualizado! Faça o login denovo!");
             this.token.logOut();
             this.router.navigate(['/logingerente']);
           }else {
