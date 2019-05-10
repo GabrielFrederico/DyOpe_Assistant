@@ -1,3 +1,4 @@
+<title>Perfil</title>
 <div *ngIf="validado" id="page-top" class>
 
   <app-nav-bar></app-nav-bar>
@@ -90,7 +91,7 @@
                data-target=".redefinir-senha">Redefinir
               senha</a>
             <input class="btn btn-info" type="button" (click)="toggleReadonly()" value="Editar">
-            <div *ngIf="gerenteForm.submitted && updateFailed" class="alert alert-warning">
+            <div *ngIf="gerenteForm.submitted && updateFailed" class="alert alert-warning separa">
               Atualização Falhou!<br/>{{errorMessage}}
             </div>
 

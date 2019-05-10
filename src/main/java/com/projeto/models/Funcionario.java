@@ -1,9 +1,16 @@
 package com.projeto.models;
 
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Funcionario extends Usuario {
@@ -17,7 +24,28 @@ public class Funcionario extends Usuario {
 
 	private String cpf;
 
+	@ManyToOne(cascade = CascadeType.ALL)
+    private Setor setor;
+	
+	public Setor getSetor() {
+		return setor;
+	}
 
+	public void setSetor(Setor setor) {
+		this.setor = setor;
+	}
+
+	public Set<InfoSetor> getInfosetor() {
+		return infosetores;
+	}
+
+	public void setInfosetor(Set<InfoSetor> infosetor) {
+		this.infosetores = infosetor;
+	}
+
+	@OneToMany(mappedBy="funcionario",cascade = CascadeType.ALL)
+    private Set<InfoSetor> infosetores;
+	
 
 	public long getId() {
 		return id;
@@ -49,6 +77,16 @@ public class Funcionario extends Usuario {
 
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
+	}
+
+	public Funcionario() {
+		super();
+	}
+
+	public Funcionario(InfoSetor infosetor) {
+		super();
+		this.infosetores = Stream.of(infosetor).collect(Collectors.toSet());
+		this.infosetores.forEach(x -> x.setFuncionario(this));
 	}
 
 

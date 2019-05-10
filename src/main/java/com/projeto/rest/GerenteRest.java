@@ -25,8 +25,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.projeto.models.Gerente;
 import com.projeto.models.Role;
 import com.projeto.models.RoleName;
+import com.projeto.repository.FuncionarioRepository;
 import com.projeto.repository.GerenteRepository;
 import com.projeto.repository.RoleRepository;
+import com.projeto.repository.UsuarioRepository;
 import com.projeto.seguranca.CadastroFormGerente;
 import com.projeto.seguranca.JwtResponse;
 import com.projeto.seguranca.LoginForm;
@@ -40,8 +42,15 @@ public class GerenteRest {
 
 	@Autowired
 	GerenteRepository gerenteRepository;
+	
+	@Autowired
+	FuncionarioRepository funcionarioRepository;
+	
 	@Autowired
 	AuthenticationManager authenticationManager;
+	
+	@Autowired
+	UsuarioRepository usuarioRepository;
 
 	@Autowired
 	RoleRepository roleRepository;
@@ -82,9 +91,10 @@ public class GerenteRest {
 	@RequestMapping(method = RequestMethod.PUT, value = "atualizar")
 	@PreAuthorize("hasRole('GERENTE')")
 	public ResponseEntity<?> update(@RequestBody Gerente gerente) {
-		if (gerenteRepository.existsByNomeUsuario(gerente.getNomeUsuario())) {
+		if (funcionarioRepository.existsByNomeUsuario(gerente.getNomeUsuario())) {
 			return new ResponseEntity<>(new ResponseMessage("Erro -> Usuário já está em uso!"), HttpStatus.BAD_REQUEST);
 		}
+		
 		gerenteRepository.save(gerente);
 		return new ResponseEntity<>(new ResponseMessage("Dados Atualizados com sucesso!"), HttpStatus.OK);
 	}
@@ -114,11 +124,11 @@ public class GerenteRest {
 	@RequestMapping(method = RequestMethod.POST, path = "/cadastrar")
 	public ResponseEntity<?> registerUser(@Valid @RequestBody CadastroFormGerente signUpRequest) {
 
-		if (gerenteRepository.existsByNomeUsuario(signUpRequest.getNomeUsuario())) {
+		if (usuarioRepository.existsByNomeUsuario(signUpRequest.getNomeUsuario())) {
 			return new ResponseEntity<>(new ResponseMessage("Erro -> Usuário já está em uso!"), HttpStatus.BAD_REQUEST);
 		}
 
-		if (gerenteRepository.existsByEmail(signUpRequest.getEmail())) {
+		if (usuarioRepository.existsByEmail(signUpRequest.getEmail())) {
 			return new ResponseEntity<>(new ResponseMessage("Erro -> Email Já está em uso !"), HttpStatus.BAD_REQUEST);
 		}
 		if (gerenteRepository.existsByNome(signUpRequest.getNome())) {
@@ -130,7 +140,7 @@ public class GerenteRest {
 		if (gerenteRepository.existsByRg(signUpRequest.getRg())) {
 			return new ResponseEntity<>(new ResponseMessage("Erro -> RG Já está em uso !"), HttpStatus.BAD_REQUEST);
 		}
-		if (gerenteRepository.existsBySenha(signUpRequest.getSenha())) {
+		if (usuarioRepository.existsBySenha(signUpRequest.getSenha())) {
 			return new ResponseEntity<>(new ResponseMessage("Erro -> Senha Já está em uso !"), HttpStatus.BAD_REQUEST);
 		}
 

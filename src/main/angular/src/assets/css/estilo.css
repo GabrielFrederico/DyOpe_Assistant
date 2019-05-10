@@ -14,7 +14,9 @@
 
 .inputsenha{
   width: 85%;
-
+}
+.separa{
+  margin-top: 5%;
 }
 .menu:hover .menudrop {
   display: block;

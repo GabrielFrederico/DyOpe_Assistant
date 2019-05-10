@@ -13,7 +13,7 @@
             <label for="inputEmail">Usuario</label>
           </div>
           <div *ngIf="f.submitted && nomeUsuario.invalid">
-            <div *ngIf="nomeUsuario.errors.required">Preencha o campo</div>
+            <div>Preencha o campo</div>
           </div>
         </div>
         <div class="form-group">
@@ -31,8 +31,8 @@
         </div>
 
         <input class="btn btn-info btn-block" type="submit" value="Login">
-        <div *ngIf="f.submitted && isLoginFailed" class="alert alert-dismissible alert-danger">
-          Login inválido!
+        <div *ngIf="f.submitted && isLoginFailed" class="alert alert-dismissible alert-danger separa">
+          Usuário ou senha estão incorretos!
         </div>
       </form>
       <div class="text-center">

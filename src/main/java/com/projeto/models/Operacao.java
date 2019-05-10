@@ -28,9 +28,29 @@ public class Operacao {
 	
 	private int qtdPecasOpe;
 	private char statusSYS;
+	
+	@ManyToOne(cascade = CascadeType.ALL)
+	private Gerente gerente;
+
+    @OneToOne(mappedBy="operacaoescolhida", cascade = CascadeType.ALL)
+    private InfoSetor infoSetor;
 
 
+	public InfoSetor getInfoSetor() {
+		return infoSetor;
+	}
 
+	public void setInfoSetor(InfoSetor infoSetor) {
+		this.infoSetor = infoSetor;
+	}
+
+	public Gerente getGerente() {
+		return gerente;
+	}
+
+	public void setGerente(Gerente gerente) {
+		this.gerente = gerente;
+	}
 
 	@OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "idTipoOpe", referencedColumnName = "idTipoOpe")
