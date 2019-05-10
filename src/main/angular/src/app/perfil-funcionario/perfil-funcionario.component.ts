@@ -89,7 +89,7 @@ export class PerfilFuncionarioComponent implements OnInit {
           if (this.info.username !== this.funcionario.nomeUsuario) {
             alert("Nome de usuário atualizado! Faça o login denovo!");
             this.token.logOut();
-            this.router.navigate(['/logingerente']);
+            this.router.navigate(['/loginfuncionario']);
           }else {
             alert('Dados atualizados!');
           }
