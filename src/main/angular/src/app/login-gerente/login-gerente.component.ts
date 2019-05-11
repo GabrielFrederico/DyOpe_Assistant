@@ -32,8 +32,9 @@ export class LoginGerenteComponent implements OnInit {
       this.roles = this.tokenStorage.getAuthorities();
     }
   }
-  focosenha(){
-   this.senhainput.nativeElement.focus();
+
+  focosenha() {
+    this.senhainput.nativeElement.focus();
   }
 
   onSubmit() {

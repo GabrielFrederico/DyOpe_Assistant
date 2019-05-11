@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Gerente, GerenteService} from '../service/gerente.service';
 import {Router} from '@angular/router';
 import {AuthService} from '../auth/auth.service';
@@ -13,12 +13,22 @@ export class CadastroGerenteComponent implements OnInit {
   isSignedUp = false;
   isSignUpFailed = false;
   errorMessage = '';
+  @ViewChild("inputPassword") senhainput: ElementRef;
+  @ViewChild("inputPasswordConfirm") confirmasenhainput: ElementRef;
 
   constructor(private http: GerenteService,
               private router: Router, private authService: AuthService) {
   }
 
   ngOnInit() {
+  }
+
+  focosenha() {
+    this.senhainput.nativeElement.focus();
+  }
+
+  fococonfirmarsenha() {
+    this.confirmasenhainput.nativeElement.focus();
   }
 
   OnSubmit() {
@@ -33,21 +43,24 @@ export class CadastroGerenteComponent implements OnInit {
       this.form.senhaConfirm,
       this.form.senha);
 
-    this.authService.cadastrarGerenteAuth(this.gerenteInfo).subscribe(
-      data => {
-        console.log(data);
-        this.isSignedUp = true;
-        this.isSignUpFailed = false;
-        this.router.navigate(['/logingerente']);
-        alert('Cadastrado com sucesso!');
-      },
-      error => {
-        console.log(error);
-        this.errorMessage = error.error.message;
-        this.isSignUpFailed = true;
-      }
-    );
-
+    if(this.gerenteInfo.senha !== this.gerenteInfo.senhaConfirm) {
+      this.isSignUpFailed = true;
+    }else{
+      this.authService.cadastrarGerenteAuth(this.gerenteInfo).subscribe(
+        data => {
+          console.log(data);
+          this.isSignedUp = true;
+          this.isSignUpFailed = false;
+          this.router.navigate(['/logingerente']);
+          alert('Cadastrado com sucesso!');
+        },
+        error => {
+          console.log(error);
+          this.errorMessage = error.error.message;
+          this.isSignUpFailed = true;
+        }
+      );
+    }
 
   }
 }
