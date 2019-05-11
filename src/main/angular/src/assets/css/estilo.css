@@ -129,3 +129,48 @@ div.menu_index span {
     margin-left: 15%;
   }
 }
+@media screen and (max-width: 420px) {
+  .inputsenha {
+    width: 85%;
+  }
+}
+@media screen and (max-width: 416px) {
+  .inputsenha {
+    width: 84%;
+  }
+}
+@media screen and (max-width: 394px) {
+  .inputsenha {
+    width: 83%;
+  }
+}
+@media screen and (max-width: 375px) {
+  .inputsenha {
+    width: 82%;
+  }
+}
+@media screen and (max-width: 358px) {
+  .inputsenha {
+    width: 81%;
+  }
+}
+@media screen and (max-width: 343px) {
+  .inputsenha {
+    width: 80%;
+  }
+}
+@media screen and (max-width: 330px) {
+  .inputsenha {
+    width: 79%;
+  }
+}
+@media screen and (max-width: 317px) {
+  .inputsenha {
+    width: 78%;
+  }
+}
+@media screen and (max-width: 306px) {
+  .inputsenha {
+    width: 77%;
+  }
+}
