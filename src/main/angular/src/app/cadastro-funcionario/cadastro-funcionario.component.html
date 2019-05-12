@@ -73,7 +73,8 @@
         </div>
         <div class="form-group">
           <div class="form-label-group">
-            <input type="email" name="email" [(ngModel)]="form.email" #email="ngModel" id="inputEmail" class="form-control"
+            <input type="email" name="email" [(ngModel)]="form.email" #email="ngModel" id="inputEmail"
+                   class="form-control"
                    placeholder="Endereço de e-mail"
                    required="required">
             <label for="inputEmail">Endereço de e-mail</label>
@@ -86,25 +87,33 @@
         <div class="form-group">
           <div class="form-row">
             <div class="col-md-6">
-              <div class="form-label-group">
-                <input type="password" name="senha" [(ngModel)]="form.senha" #senha="ngModel" id="inputPassword" class="form-control"
-                       placeholder="Senha"  minlength="6"
-                       required="required">
-                <label for="inputPassword">Senha</label>
-              </div>
+              <show-hide-password (click)="focosenha()" btnStyle="primary">
+                <div class="form-label-group senhacadastro">
+                  <input type="password" #inputPassword name="senha" [(ngModel)]="form.senha" #senha="ngModel"
+                         id="inputPassword"
+                         class="form-control"
+                         placeholder="Senha" minlength="6"
+                         required="required">
+                  <label for="inputPassword">Senha</label>
+                </div>
+              </show-hide-password>
               <div *ngIf="f.submitted && senha.invalid">>
-                <div *ngIf="senha.errors.minlength">Senha precisa de pelomenos 6 caracteres</div>
+                <div *ngIf="senha.errors.minlength">Senha precisa de pelo menos 6 caracteres</div>
               </div>
             </div>
             <div class="col-md-6">
-              <div class="form-label-group">
-                <input type="password" name="senhaConfirm" [(ngModel)]="form.senhaConfirm" #senhaConfirm="ngModel" id="confirmPassword"
-                       class="form-control"
-                       placeholder="Confirmar senha" required="required">
-                <label for="confirmPassword">Confirmar senha</label>
-                <div *ngIf="f.submitted && senhaConfirm.invalid">
-                  <div>Senhas não são iguais!</div>
+              <show-hide-password (click)="fococonfirmarsenha()" btnStyle="primary">
+                <div class="form-label-group senhacadastro">
+                  <input type="password" #inputPasswordConfirm name="senhaConfirm" [(ngModel)]="form.senhaConfirm"
+                         #senhaConfirm="ngModel"
+                         id="confirmPassword"
+                         class="form-control"
+                         placeholder="Confirmar senha" required="required">
+                  <label for="confirmPassword">Confirmar senha</label>
                 </div>
+              </show-hide-password>
+              <div *ngIf="f.submitted && senhaConfirm.invalid">
+                <div *ngIf="senhaConfirm !== senha">As senhas não coincidem!</div>
               </div>
             </div>
           </div>

@@ -43,9 +43,9 @@ export class CadastroGerenteComponent implements OnInit {
       this.form.senhaConfirm,
       this.form.senha);
 
-    if(this.gerenteInfo.senha !== this.gerenteInfo.senhaConfirm) {
+    if (this.gerenteInfo.senha !== this.gerenteInfo.senhaConfirm) {
       this.isSignUpFailed = true;
-    }else{
+    } else {
       this.authService.cadastrarGerenteAuth(this.gerenteInfo).subscribe(
         data => {
           console.log(data);
@@ -61,6 +61,5 @@ export class CadastroGerenteComponent implements OnInit {
         }
       );
     }
-
   }
 }

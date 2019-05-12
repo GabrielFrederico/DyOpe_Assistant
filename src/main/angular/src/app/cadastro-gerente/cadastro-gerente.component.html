@@ -91,7 +91,7 @@
           <div class="form-row">
             <div class="col-md-6">
               <show-hide-password (click)="focosenha()" btnStyle="primary">
-                <div class="form-label-group">
+                <div class="form-label-group senhacadastro">
                   <input type="password" #inputPassword [(ngModel)]="form.senha" #senha="ngModel" name="senha"
                          id="inputPassword"
                          class="form-control"
@@ -101,12 +101,12 @@
                 </div>
               </show-hide-password>
               <div *ngIf="f.submitted && senha.invalid">>
-                <div *ngIf="senha.errors.minlength">Senha precisa de pelomenos 6 caracteres</div>
+                <div *ngIf="senha.errors.minlength">Senha precisa de pelo menos 6 caracteres</div>
               </div>
             </div>
             <div class="col-md-6">
               <show-hide-password (click)="fococonfirmarsenha()" btnStyle="primary">
-              <div class="form-label-group">
+              <div class="form-label-group senhacadastro">
                 <input type="password" #inputPasswordConfirm required="required" [(ngModel)]="form.senhaConfirm"
                        #senhaConfirm="ngModel"
                        name="senhaConfirm" id="confirmPassword"

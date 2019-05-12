@@ -180,3 +180,98 @@ div.menu_index span {
     width: 77%;
   }
 }
+
+@media screen and (max-width: 2560px) {
+  .senhacadastro {
+    width: 82%;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .senhacadastro {
+    width: 91%;
+  }
+}
+
+@media screen and (max-width: 645px) {
+  .senhacadastro {
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 588px) {
+  .senhacadastro {
+    width: 89%;
+  }
+}
+
+@media screen and (max-width: 541px) {
+  .senhacadastro {
+    width: 88%;
+  }
+}
+
+@media screen and (max-width: 502px) {
+  .senhacadastro {
+    width: 87%;
+  }
+}
+
+@media screen and (max-width: 469px) {
+  .senhacadastro {
+    width: 86%;
+  }
+}
+
+@media screen and (max-width: 440px) {
+  .senhacadastro {
+    width: 85%;
+  }
+}
+
+@media screen and (max-width: 416px) {
+  .senhacadastro {
+    width: 84%;
+  }
+}
+
+@media screen and (max-width: 394px) {
+  .senhacadastro {
+    width: 83%;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .senhacadastro {
+    width: 82%;
+  }
+}
+
+@media screen and (max-width: 358px) {
+  .senhacadastro {
+    width: 81%;
+  }
+}
+
+@media screen and (max-width: 343px) {
+  .senhacadastro {
+    width: 80%;
+  }
+}
+
+@media screen and (max-width: 330px) {
+  .senhacadastro {
+    width: 79%;
+  }
+}
+
+@media screen and (max-width: 317px) {
+  .senhacadastro {
+    width: 78%;
+  }
+}
+@media screen and (max-width: 306px) {
+  .senhacadastro {
+    width: 77%;
+  }
+}
