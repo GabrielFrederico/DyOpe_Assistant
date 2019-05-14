@@ -28,6 +28,7 @@ import {ShowHidePasswordModule} from 'ngx-show-hide-password';
 import {NavegacaoComponent} from './navegacao/navegacao.component';
 import {AuthInterceptorService} from './auth/auth-interceptor.service';
 import { RedefinirSenhaComponent } from './redefinir-senha/redefinir-senha.component';
+import {BrMaskerModule} from "brmasker-ionic-3";
 
 @Directive({
   // tslint:disable-next-line:directive-selector
@@ -87,7 +88,8 @@ class ReadonlyDirective {
     MatMenuModule,
     MatButtonToggleModule,
     BrowserModule,
-    ShowHidePasswordModule
+    ShowHidePasswordModule,
+    BrMaskerModule
   ],
   exports: [RouterModule],
   providers: [ {

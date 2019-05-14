@@ -16,8 +16,7 @@ export class CadastroGerenteComponent implements OnInit {
   @ViewChild("inputPassword") senhainput: ElementRef;
   @ViewChild("inputPasswordConfirm") confirmasenhainput: ElementRef;
 
-  constructor(private http: GerenteService,
-              private router: Router, private authService: AuthService) {
+  constructor(private http: GerenteService, private router: Router, private authService: AuthService) {
   }
 
   ngOnInit() {

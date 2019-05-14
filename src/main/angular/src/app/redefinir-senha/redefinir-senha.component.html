@@ -37,36 +37,40 @@
 
       <div class="form-group">
 
-      <div class="form-group">
+        <div class="form-group">
 
-        <div class="col-md-auto">
-          <div class="form-label-group">
-            <input type="password" id="new-password" name="new-password" class="form-control"
-                   placeholder="Nova senha:"
-                   required="required">
-            <label for="new-password">Nova senha:</label>
-          </div>
-        </div>
-      </div>
-
-      <div class="form-group">
-
-        <div class="col-md-auto">
-          <div class="form-label-group">
-            <input type="password" id="new-passwordconfirm" name="new-password" class="form-control"
-                   placeholder="Confirmar senha:"
-                   required="required">
-            <label for="new-passwordconfirm">Confirmar senha:</label>
+          <div class="col-md-auto">
+            <show-hide-password (click)="foconewsenha()" btnStyle="primary">
+              <div class="form-label-group senhacadastro">
+                <input type="password" #inputNewPassword id="new-password" name="new-password" class="form-control"
+                       placeholder="Nova senha:" minlength="6" required="required">
+                <label for="new-password">Nova senha:</label>
+              </div>
+            </show-hide-password>
           </div>
         </div>
 
+        <div class="form-group">
+
+          <div class="col-md-auto">
+            <show-hide-password (click)="fococonfirmarsenha()" btnStyle="primary">
+              <div class="form-label-group senhacadastro">
+                <input type="password" #inputPasswordConfirm id="new-passwordconfirm" name="new-password"
+                       class="form-control"
+                       placeholder="Confirmar senha:"
+                       required="required">
+                <label for="new-passwordconfirm">Confirmar senha:</label>
+              </div>
+            </show-hide-password>
+          </div>
+
+        </div>
+
       </div>
 
-    </div>
-
-    <div class="modal-footer col-md-12">
-      <input class="btn btn-primary" type="submit" value="Confirmar">
-    </div>
+      <div class="modal-footer col-md-12">
+        <input class="btn btn-primary" type="submit" value="Confirmar">
+      </div>
 
       <div class="text-center">
         <a class="d-block small" routerLink=""> Página de Login</a>
