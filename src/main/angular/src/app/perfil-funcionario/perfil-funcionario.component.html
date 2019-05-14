@@ -141,36 +141,42 @@
                   <div class="form-group">
 
                     <div class="col-md-auto">
-                      <div class="form-label-group">
-                        <input type="password" id="senha_atual" class="form-control"
-                               placeholder="Senha atual:"
-                               required="required">
-                        <label for="senha_atual">Senha atual:</label>
-                      </div>
+                      <show-hide-password (click)="focosenhaatual()" btnStyle="primary">
+                        <div class="form-label-group inputsenha">
+                          <input type="password" #inputPassword id="senha_atual" class="form-control"
+                                 placeholder="Senha atual:"
+                                 required="required">
+                          <label for="senha_atual">Senha atual:</label>
+                        </div>
+                      </show-hide-password>
                     </div>
                   </div>
 
                   <div class="form-group">
 
                     <div class="col-md-auto">
-                      <div class="form-label-group">
-                        <input type="password" id="senha_nova" name="senha" class="form-control"
-                               placeholder="Nova senha:"
-                               required="required">
-                        <label for="senha_nova">Nova senha:</label>
-                      </div>
+                      <show-hide-password (click)="foconovasenha()" btnStyle="primary">
+                        <div class="form-label-group inputsenha">
+                          <input type="password" #inputNewPassword id="senha_nova" name="senha" class="form-control"
+                                 placeholder="Nova senha:"
+                                 required="required">
+                          <label for="senha_nova">Nova senha:</label>
+                        </div>
+                      </show-hide-password>
                     </div>
                   </div>
 
                   <div class="form-group">
 
                     <div class="col-md-auto">
-                      <div class="form-label-group">
-                        <input type="password" id="senha_confirmar" class="form-control"
-                               placeholder="Confirmar senha:"
-                               required="required">
-                        <label for="senha_confirmar">Confirmar senha:</label>
-                      </div>
+                      <show-hide-password (click)="fococonfirmarsenha()" btnStyle="primary">
+                        <div class="form-label-group inputsenha">
+                          <input type="password" #inputPasswordConfirm id="senha_confirmar" class="form-control"
+                                 placeholder="Confirmar senha:"
+                                 required="required">
+                          <label for="senha_confirmar">Confirmar senha:</label>
+                        </div>
+                      </show-hide-password>
                     </div>
 
                   </div>

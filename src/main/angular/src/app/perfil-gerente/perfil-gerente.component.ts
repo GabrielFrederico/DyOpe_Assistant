@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {TokenStorageService} from '../auth/token-storage.service';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Gerente, GerenteService, loginGerenteInfo} from '../service/gerente.service';
@@ -19,6 +19,9 @@ import {Alert} from "selenium-webdriver";
 })
 export class PerfilGerenteComponent implements OnInit {
   title: 'Perfil Gerente';
+  @ViewChild("inputPassword") senhainput: ElementRef;
+  @ViewChild("inputNewPassword") newsenhainput: ElementRef;
+  @ViewChild("inputPasswordConfirm") confirmasenhainput: ElementRef;
 
   // tslint:disable-next-line:max-line-length
   constructor(private modalService: NgbModal, private token: TokenStorageService, private gerenteService: GerenteService, private router: Router) {
@@ -66,6 +69,18 @@ export class PerfilGerenteComponent implements OnInit {
     this.datareload();
   }
 
+  focosenhaatual() {
+    this.senhainput.nativeElement.focus();
+  }
+
+  foconovasenha() {
+    this.newsenhainput.nativeElement.focus();
+  }
+
+  fococonfirmarsenha() {
+    this.confirmasenhainput.nativeElement.focus();
+  }
+
   datareload() {
     this.gerentes = this.gerenteService.getinfoGerentes();
 
@@ -93,7 +108,7 @@ export class PerfilGerenteComponent implements OnInit {
             alert("Nome de usuário atualizado! Faça o login denovo!");
             this.token.logOut();
             this.router.navigate(['/logingerente']);
-          }else {
+          } else {
             alert('Dados atualizados!');
           }
 

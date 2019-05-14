@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {InfosetorService} from "../service/infosetor.service";
 import {Router} from "@angular/router";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
@@ -23,6 +23,9 @@ export class PerfilFuncionarioComponent implements OnInit {
   private roles: string[];
   private authority: string;
   public errorMessage = '';
+  @ViewChild("inputPassword") senhainput: ElementRef;
+  @ViewChild("inputNewPassword") newsenhainput: ElementRef;
+  @ViewChild("inputPasswordConfirm") confirmasenhainput: ElementRef;
 
   ngOnInit() {
     this.info = {
@@ -44,6 +47,18 @@ export class PerfilFuncionarioComponent implements OnInit {
         }
       });
     }
+  }
+
+  focosenhaatual() {
+    this.senhainput.nativeElement.focus();
+  }
+
+  foconovasenha() {
+    this.newsenhainput.nativeElement.focus();
+  }
+
+  fococonfirmarsenha() {
+    this.confirmasenhainput.nativeElement.focus();
   }
 
   constructor(private http: InfosetorService,
@@ -90,7 +105,7 @@ export class PerfilFuncionarioComponent implements OnInit {
             alert("Nome de usuário atualizado! Faça o login denovo!");
             this.token.logOut();
             this.router.navigate(['/loginfuncionario']);
-          }else {
+          } else {
             alert('Dados atualizados!');
           }
 
