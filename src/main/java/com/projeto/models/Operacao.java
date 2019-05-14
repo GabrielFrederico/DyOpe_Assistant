@@ -147,14 +147,6 @@ public class Operacao {
 
 
 
-	public long getIdGerente() {
-		return idGerente;
-	}
-
-	public void setIdGerente(long idGerente) {
-		this.idGerente = idGerente;
-	}
-
 	public float getPrecoPecaOpe() {
 		return precoPecaOpe;
 	}
@@ -163,7 +155,7 @@ public class Operacao {
 		this.precoPecaOpe = precoPecaOpe;
 	}
 
-	private long idGerente;
+
 	
 	private float precoPecaOpe;
 	

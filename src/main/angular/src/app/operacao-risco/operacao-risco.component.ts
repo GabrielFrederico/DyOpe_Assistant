@@ -1,13 +1,21 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {TokenStorageService} from '../auth/token-storage.service';
 import {Router} from '@angular/router';
+import {CadastroOperacaoService, Operacao, TipoOperacao} from '../service/cadastro-operacao.service';
+import {Observable} from "rxjs";
+import {Gerente, GerenteService} from '../service/gerente.service';
+import {PerfilGerenteComponent} from "../perfil-gerente/perfil-gerente.component";
 
 @Component({
   selector: 'app-operacao-risco',
   templateUrl: './operacao-risco.component.html'
 })
 export class OperacaoRiscoComponent implements OnInit {
+  @Input() operacao: Operacao = new Operacao();
+  @Input() operacoes: Observable<Operacao[]>;
+  perfil: PerfilGerenteComponent;
+  public gerentes: Observable<Gerente[]>;
   closeResult: string;
   public info: any;
 
@@ -18,10 +26,12 @@ export class OperacaoRiscoComponent implements OnInit {
       authorities: this.token.getAuthorities(),
       senha: this.token.getPassword()
     };
-    this.naoAutenticado()
+
+    this.naoAutenticado();
+    this.datareload();
   }
 
-  constructor(private modalService: NgbModal, private token: TokenStorageService, private router: Router) {
+  constructor(private gerenteService: GerenteService, private modalService: NgbModal,private operacaoService: CadastroOperacaoService,private token: TokenStorageService, private router: Router) {
   }
 
 
@@ -52,6 +62,7 @@ export class OperacaoRiscoComponent implements OnInit {
   }
 
   private validado: boolean;
+
   naoAutenticado() {
     if (this.info.authorities.toString() !== 'ROLE_GERENTE') {
       this.validado = false;
@@ -62,8 +73,19 @@ export class OperacaoRiscoComponent implements OnInit {
       this.validado = true;
     }
   }
-
   isReadonly = true;
+datareload(){
+  this.gerentes = this.gerenteService.getGerentes();
+  this.operacao.gerente = this.gerenteService.datareload();
+  this.operacoes = this.operacaoService.getOperacoes();
+}
+
+
+  cadastrar() {
+
+  this.operacaoService.cadastrarOperacao(this.operacao).subscribe(value => console.log(value), error => console.log(error));
+    alert('Operação cadastrada com sucesso!')
+  }
 
   toggleReadonly() {
     this.isReadonly = !this.isReadonly;

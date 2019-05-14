@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import {TokenStorageService} from "../auth/token-storage.service";
 
 
 // tslint:disable-next-line:class-name
@@ -13,7 +14,9 @@ export class loginGerenteInfo {
     this.senha = senha;
   }
 }
-
+const httpOptions = {
+  headers: new HttpHeaders({'Content-Type': 'application/json'})
+};
 // tslint:disable-next-line:class-name
 export class Gerente {
   public id: number;
@@ -42,11 +45,34 @@ export class Gerente {
   providedIn: 'root'
 })
 export class GerenteService {
-  constructor(private httpClient: HttpClient) {
+  public info: any;
+  public gerentes : Observable<Gerente[]>;
+  public gerente: Observable<Gerente>;
+  constructor(private httpClient: HttpClient,private token: TokenStorageService) {
+    this.info = {
+      token: this.token.getToken(),
+      username: this.token.getUsername(),
+      authorities: this.token.getAuthorities()
+    };
+
+  }
+
+  datareload(){
+    this.gerentes = this.getinfoGerentes();
+
+    this.gerentes.forEach((ger) => {
+      for (let gerent of ger) {
+        if (gerent.nomeUsuario == this.info.username) {
+           this.gerente = this.getGerenteId(gerent.id);
+          console.clear();
+        }
+      }
+    });
+    return this.gerente;
   }
 
   getGerenteId(id: number): Observable<Gerente> {
-    return this.httpClient.get<Gerente>('http://localhost:8080/gerentes/atualizar/' + id);
+    return this.httpClient.get<Gerente>('http://localhost:8080/gerentes/gerente/' + id, httpOptions);
   }
   atualizarGerente(gerente:Gerente): Observable<Gerente> {
     return this.httpClient.put<Gerente>( 'http://localhost:8080/gerentes/atualizar',gerente);

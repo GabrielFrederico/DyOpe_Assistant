@@ -54,10 +54,8 @@
           <div class="card border-info mb-3 lista">
             <div class="card-header border-info">Operações a fazer</div>
             <div class="card-body text-secondary">
-              <a class="btn btn-outline-info list-group-item list-group-item-action " href="javascript:void(0)"
-                 data-toggle="modal" (click)="openInformacoes(content)" data-target=".informations">
-                Costura
-              </a>
+              <a *ngFor="let operacao of operacoes | async" class="btn btn-outline-info list-group-item list-group-item-action " href="javascript:void(0)"
+                 data-toggle="modal" (click)="openInformacoes(content)" data-target=".informations">{{operacao.descricao}}</a>
               <a class="btn btn-outline-info list-group-item list-group-item-action ">
                 Beneficiamento
               </a>
@@ -214,6 +212,14 @@
                     <label for="TempoPeca">Tempo necessário por peça:</label>
                   </div>
                 </div>
+                <div class="col-md-6">
+                  <div class="form-label-group">
+                    <input [readonly]="isReadonly" type="text" id="precoPeca" class="form-control"
+                           placeholder="Preço da peça:"
+                           required="required">
+                    <label for="precoPeca">Preço da peça:</label>
+                  </div>
+                </div>
               </div>
 
 
@@ -248,20 +254,20 @@
     </div>
     <div class="modal-body">
       <div class="card-body">
-        <form [noValidate]="$any(false)">
+        <form [noValidate]="$any(false)" (ngSubmit)="cadastrar() && modal.close()">
           <div class="form-group">
             <div class="form-group">
 
               <label for="DescricaoOp">Descrição da operação:</label>
-              <textarea required="required" name="descricao" class="form-control" rows="2"
-                        id="DescricaoOp"></textarea>
+              <input required="required" name="descricao" [(ngModel)]="operacao.descricao" class="form-control"
+                        id="DescricaoOp">
             </div>
             <div class="form-group">
               <div class="form-row">
                 <div class="col-md-6">
                   <div class="form-label-group">
                     <input type="date" id="datainici" name="dataInicio" class="form-control"
-                           placeholder="Data Inicio:"
+                           placeholder="Data Inicio:" [(ngModel)]="operacao.dataInicio"
                            required="required">
                     <label for="datainici">Data Inicio:</label>
                   </div>
@@ -270,7 +276,7 @@
                 <div class="col-md-6">
                   <div class="form-label-group">
                     <input type="date" id="datalimit" name="prazo" class="form-control"
-                           placeholder="Data limite:"
+                           placeholder="Data limite:" [(ngModel)]="operacao.prazo"
                            required="required">
                     <label for="datalimit">Data limite:</label>
                   </div>
@@ -283,7 +289,7 @@
                 <div class="form-label-group">
                   <input type="text" id="custosOp" name="custosOpe"
                          class="form-control fa-credit-card"
-                         placeholder="Custos"
+                         placeholder="Custos" [(ngModel)]="operacao.custosOpe"
                          required="required">
                   <label for="custosOp">Custos:</label>
                 </div>
@@ -291,7 +297,7 @@
               <div class="col-md-6">
                 <div class="form-label-group">
                   <input type="number" id="LotePro" name="loteProducao" class="form-control"
-                         placeholder="Lote de Produção"
+                         placeholder="Lote de Produção" [(ngModel)]="operacao.loteProducao"
                          required="required">
                   <label for="LotePro">Lote de Produção:</label>
                 </div>
