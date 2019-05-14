@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,17 +17,21 @@ import javax.persistence.OneToMany;
 public class Funcionario extends Usuario {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "idfuncionario")
 	private long id;
 
+	@Column(name = "nome_funcionario")
 	private String nome;
 
+	@Column(name = "rg_funcionario")
 	private String rg;
 
+	@Column(name = "cpf_funcionario")
 	private String cpf;
 
 	@ManyToOne(cascade = CascadeType.ALL)
     private Setor setor;
-	
+
 	public Setor getSetor() {
 		return setor;
 	}
@@ -45,7 +50,7 @@ public class Funcionario extends Usuario {
 
 	@OneToMany(mappedBy="funcionario",cascade = CascadeType.ALL)
     private Set<InfoSetor> infosetores;
-	
+
 
 	public long getId() {
 		return id;
