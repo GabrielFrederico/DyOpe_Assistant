@@ -25,7 +25,7 @@ export class Operacao {
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'}),
-  body: Gerente
+  gerente: Gerente
 };
 
 @Injectable({
@@ -39,6 +39,6 @@ export class CadastroOperacaoService {
   return this.httpClient.get<Operacao[]>('http://localhost:8080/operacoes');
 }
   cadastrarOperacao(operacao: Operacao, gerente: Gerente) {
-    return this.httpClient.post<Operacao>('http://localhost:8080/operacoes/cadastraroperacao', operacao, httpOptions);
+    return this.httpClient.post<Operacao>('http://localhost:8080/operacoes/cadastraroperacao', operacao && gerente, httpOptions);
   }
 }
