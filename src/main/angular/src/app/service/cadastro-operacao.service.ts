@@ -24,7 +24,8 @@ export class Operacao {
 }
 
 const httpOptions = {
-  headers: new HttpHeaders({'Content-Type': 'application/json'})
+  headers: new HttpHeaders({'Content-Type': 'application/json'}),
+  body: Gerente
 };
 
 @Injectable({
