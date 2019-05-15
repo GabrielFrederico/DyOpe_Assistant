@@ -1,5 +1,7 @@
 package com.projeto.rest;
 
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.projeto.models.Gerente;
 import com.projeto.models.Operacao;
 import com.projeto.repository.OperacaoRepository;
 
@@ -29,6 +32,12 @@ public class OperacaoController {
 	@RequestMapping(method = RequestMethod.GET)
 	public  Iterable<Operacao> listAll(){
 		return operacaoRepository.findAll();
+	}
+	
+	@RequestMapping(method = RequestMethod.GET, value ="operacoes")
+	@PreAuthorize("hasRole('GERENTE')")
+	public  Set<Operacao> listAllOpe(@RequestBody Gerente gerente){
+		return gerente.getOperacoes();
 	}
 
 	@RequestMapping(method = RequestMethod.GET, path = "/getByNome/{descricao}")

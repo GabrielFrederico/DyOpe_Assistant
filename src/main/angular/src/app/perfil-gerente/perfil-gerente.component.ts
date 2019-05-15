@@ -93,6 +93,7 @@ export class PerfilGerenteComponent implements OnInit {
         }
       }
     })
+    return this.gerente;
   }
 
 

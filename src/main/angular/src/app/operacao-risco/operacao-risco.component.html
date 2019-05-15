@@ -254,7 +254,7 @@
     </div>
     <div class="modal-body">
       <div class="card-body">
-        <form [noValidate]="$any(false)" (ngSubmit)="cadastrar() && modal.close()">
+        <form [noValidate]="$any(false)" (ngSubmit)="cadastrar()" >
           <div class="form-group">
             <div class="form-group">
 
@@ -308,7 +308,7 @@
 
           <div class="modal-footer col-md-12">
             <button class="btn btn-secondary" (click)="modal.close()" type="button" data-dismiss="modal">Cancelar</button>
-            <input class="btn btn-primary" type="submit" value="Cadastrar">
+            <input class="btn btn-primary"  type="submit" value="Cadastrar">
           </div>
         </form>
       </div>

@@ -6,6 +6,7 @@ import {CadastroOperacaoService, Operacao, TipoOperacao} from '../service/cadast
 import {Observable} from "rxjs";
 import {Gerente, GerenteService} from '../service/gerente.service';
 import {PerfilGerenteComponent} from "../perfil-gerente/perfil-gerente.component";
+import {map} from "rxjs/operators";
 
 @Component({
   selector: 'app-operacao-risco',
@@ -14,11 +15,11 @@ import {PerfilGerenteComponent} from "../perfil-gerente/perfil-gerente.component
 export class OperacaoRiscoComponent implements OnInit {
   @Input() operacao: Operacao = new Operacao();
   @Input() operacoes: Observable<Operacao[]>;
-  perfil: PerfilGerenteComponent;
-  public gerentes: Observable<Gerente[]>;
+  @Input() gerente: Gerente;
+  @Input() gerentes: Observable<Gerente[]>;
   closeResult: string;
   public info: any;
-
+  private gerenteData: PerfilGerenteComponent;
   ngOnInit() {
     this.info = {
       token: this.token.getToken(),
@@ -28,7 +29,9 @@ export class OperacaoRiscoComponent implements OnInit {
     };
 
     this.naoAutenticado();
+
     this.datareload();
+
   }
 
   constructor(private gerenteService: GerenteService, private modalService: NgbModal,private operacaoService: CadastroOperacaoService,private token: TokenStorageService, private router: Router) {
@@ -75,16 +78,32 @@ export class OperacaoRiscoComponent implements OnInit {
   }
   isReadonly = true;
 datareload(){
-  this.gerentes = this.gerenteService.getGerentes();
-  this.operacao.gerente = this.gerenteService.datareload();
-  this.operacoes = this.operacaoService.getOperacoes();
+  this.gerentes = this.gerenteService.getinfoGerentes();
+
+  this.gerentes.forEach((ger) => {
+    for (let gerent of ger) {
+      if (gerent.nomeUsuario == this.info.username) {
+        this.gerente = gerent;
+        console.clear();
+      }
+    }
+  })
+
+  this.gerente.operacoes = this.gerenteService.getOperacoes();
+
 }
 
 
   cadastrar() {
 
+    this.operacao.gerente = this.gerente;
+
   this.operacaoService.cadastrarOperacao(this.operacao).subscribe(value => console.log(value), error => console.log(error));
-    alert('Operação cadastrada com sucesso!')
+    alert('Operação cadastrada com sucesso!');
+    this.gerente.operacoes.forEach((operations)=>{
+      operations.push(this.operacao);
+    })
+    this.gerenteService.atualizarGerente(this.gerente);
   }
 
   toggleReadonly() {

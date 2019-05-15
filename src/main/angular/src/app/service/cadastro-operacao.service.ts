@@ -19,7 +19,7 @@ export class Operacao {
   public qtdPecasOpe: number;
   public tempoNesc: number;
   public numFuncionariosOpe: number;
-  public gerente: Observable<Gerente>;
+  public gerente: Gerente;
   public  tipoOpe: TipoOperacao;
 }
 
@@ -35,7 +35,7 @@ export class CadastroOperacaoService {
   constructor(private httpClient: HttpClient) {
   }
   getOperacoes(){
-  return this.httpClient.get<Operacao[]>('http://localhost:8080/operacoes',httpOptions);
+  return this.httpClient.get<Operacao[]>('http://localhost:8080/operacoes');
 }
   cadastrarOperacao(operacao: Operacao): Observable<Operacao> {
     return this.httpClient.post<Operacao>('http://localhost:8080/operacoes/cadastraroperacao', operacao, httpOptions);

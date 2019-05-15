@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.projeto.models.Gerente;
+import com.projeto.models.Operacao;
 import com.projeto.models.Role;
 import com.projeto.models.RoleName;
 import com.projeto.repository.FuncionarioRepository;
@@ -42,6 +43,7 @@ public class GerenteRest {
 
 	@Autowired
 	GerenteRepository gerenteRepository;
+	
 	
 	@Autowired
 	FuncionarioRepository funcionarioRepository;
@@ -73,14 +75,25 @@ public class GerenteRest {
 	public Iterable<Gerente> listAll() {
 		return gerenteRepository.findAll();
 	}
-
+	
+	@RequestMapping(method = RequestMethod.GET, value ="operacoes")
+	@PreAuthorize("hasRole('GERENTE')")
+	public  Iterable<Operacao> listAllOpe(@RequestBody Gerente gerente){
+		return gerente.getOperacoes();
+	}
 	@RequestMapping(method = RequestMethod.GET, path = "gerente/{id}")
 	@PreAuthorize("hasRole('GERENTE')")
 	public Gerente getGerenteById(@PathVariable("id") long id) {
 		Gerente gerente = gerenteRepository.findById(id);
 		return gerente;
 	}
-
+    
+	@RequestMapping(method = RequestMethod.GET, path = "gerente")
+	@PreAuthorize("hasRole('GERENTE')")
+	public Gerente getGerente(@RequestBody Gerente gerente){
+		return gerente;
+	}
+	
 	@RequestMapping(method = RequestMethod.GET, path = "getByNome/{nome}")
 	@PreAuthorize("hasRole('GERENTE')")
 	public Gerente getGerenteByNome(@PathVariable("nome") String nome) {
