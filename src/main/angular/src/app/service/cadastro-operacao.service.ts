@@ -38,6 +38,6 @@ export class CadastroOperacaoService {
   return this.httpClient.get<Operacao[]>('http://localhost:8080/operacoes');
 }
   cadastrarOperacao(operacao: Operacao): Observable<Operacao> {
-    return this.httpClient.post<Operacao>('http://localhost:8080/operacoes/cadastraroperacao', operacao, httpOptions);
+    return this.httpClient.post<Operacao>('http://localhost:8080/gerentes/cadastraroperacao', operacao, httpOptions);
   }
 }

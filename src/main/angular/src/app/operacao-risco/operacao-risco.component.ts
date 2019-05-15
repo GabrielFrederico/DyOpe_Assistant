@@ -1,12 +1,12 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {TokenStorageService} from '../auth/token-storage.service';
-import {Router} from '@angular/router';
-import {CadastroOperacaoService, Operacao, TipoOperacao} from '../service/cadastro-operacao.service';
-import {Observable} from "rxjs";
-import {Gerente, GerenteService} from '../service/gerente.service';
-import {PerfilGerenteComponent} from "../perfil-gerente/perfil-gerente.component";
-import {map} from "rxjs/operators";
+import { Component, Input, OnInit } from '@angular/core';
+import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { TokenStorageService } from '../auth/token-storage.service';
+import { Router } from '@angular/router';
+import { CadastroOperacaoService, Operacao, TipoOperacao } from '../service/cadastro-operacao.service';
+import { Observable } from "rxjs";
+import { Gerente, GerenteService } from '../service/gerente.service';
+import { PerfilGerenteComponent } from "../perfil-gerente/perfil-gerente.component";
+import { map, first } from "rxjs/operators";
 
 @Component({
   selector: 'app-operacao-risco',
@@ -17,6 +17,8 @@ export class OperacaoRiscoComponent implements OnInit {
   @Input() operacoes: Observable<Operacao[]>;
   @Input() gerente: Gerente;
   @Input() gerentes: Observable<Gerente[]>;
+  public erro: boolean;
+  public errorMessage = '';
   closeResult: string;
   public info: any;
   private gerenteData: PerfilGerenteComponent;
@@ -34,12 +36,12 @@ export class OperacaoRiscoComponent implements OnInit {
 
   }
 
-  constructor(private gerenteService: GerenteService, private modalService: NgbModal,private operacaoService: CadastroOperacaoService,private token: TokenStorageService, private router: Router) {
+  constructor(private gerenteService: GerenteService, private modalService: NgbModal, private operacaoService: CadastroOperacaoService, private token: TokenStorageService, private router: Router) {
   }
 
 
   openCadastro(cadastro) {
-    this.modalService.open(cadastro, {size: 'lg', ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+    this.modalService.open(cadastro, { size: 'lg', ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
@@ -47,7 +49,7 @@ export class OperacaoRiscoComponent implements OnInit {
   }
 
   openInformacoes(content) {
-    this.modalService.open(content, {size: 'lg', ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+    this.modalService.open(content, { size: 'lg', ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
@@ -77,33 +79,51 @@ export class OperacaoRiscoComponent implements OnInit {
     }
   }
   isReadonly = true;
-datareload(){
-  this.gerentes = this.gerenteService.getinfoGerentes();
+  datareload() {
 
-  this.gerentes.forEach((ger) => {
-    for (let gerent of ger) {
-      if (gerent.nomeUsuario == this.info.username) {
-        this.gerente = gerent;
-        console.clear();
+    this.gerentes = this.gerenteService.getinfoGerentes();
+
+    this.gerentes.forEach((ger) => {
+      for (let gerent of ger) {
+        if (gerent.nomeUsuario == this.info.username) {
+          this.gerente = gerent;
+          console.clear();
+        }
       }
-    }
-  })
+    })
 
-  this.gerente.operacoes = this.gerenteService.getOperacoes();
+    this.operacoes = this.gerente.operacoes;
 
-}
+  }
 
 
   cadastrar() {
 
     this.operacao.gerente = this.gerente;
 
-  this.operacaoService.cadastrarOperacao(this.operacao).subscribe(value => console.log(value), error => console.log(error));
-    alert('Operação cadastrada com sucesso!');
-    this.gerente.operacoes.forEach((operations)=>{
-      operations.push(this.operacao);
-    })
-    this.gerenteService.atualizarGerente(this.gerente);
+    this.operacaoService.cadastrarOperacao(this.operacao).subscribe(value => {
+      alert('Operação cadastrada com sucesso!');
+      console.log(value)
+    },
+
+      error => {
+        this.erro = true;
+        console.log(error);
+        this.errorMessage = error.error.message;
+      });
+
+
+    this.gerenteService.atualizarGerente(this.gerente)
+      .pipe(first())
+      .subscribe(
+        data => {
+          alert('Dados atualizados!');
+        },
+        error => {
+          this.erro = true;
+          console.log(error);
+          this.errorMessage = error.error.message;
+        });
   }
 
   toggleReadonly() {

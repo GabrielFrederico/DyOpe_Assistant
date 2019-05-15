@@ -1,5 +1,6 @@
 package com.projeto.models;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -32,7 +33,7 @@ public class Gerente extends Usuario {
 	private String cpf;
 
 	@OneToMany(mappedBy = "gerente", cascade = CascadeType.ALL)
-	private Set<Operacao> operacoes;
+	private List<Operacao> operacoes;
 
 	@OneToMany(mappedBy = "gerente", cascade = CascadeType.ALL)
 	private Set<Setor> setores;
@@ -48,10 +49,9 @@ public class Gerente extends Usuario {
 		this.setores = setores;
 	}
 
-	public Gerente(Operacao operacoes, Setor setores) {
+
+	public Gerente(Setor setores) {
 		super();
-		this.operacoes = Stream.of(operacoes).collect(Collectors.toSet());
-		this.operacoes.forEach(x -> x.setGerente(this));
 		this.setores = Stream.of(setores).collect(Collectors.toSet());
 		this.setores.forEach(x -> x.setGerente(this));
 	}
@@ -60,11 +60,11 @@ public class Gerente extends Usuario {
 		super();
 	}
 
-	public Set<Operacao> getOperacoes() {
+	public List<Operacao> getOperacoes() {
 		return operacoes;
 	}
 
-	public void setOperacoes(Set<Operacao> operacoes) {
+	public void setOperacoes(List<Operacao> operacoes) {
 		this.operacoes = operacoes;
 	}
 

@@ -87,13 +87,11 @@ export class PerfilGerenteComponent implements OnInit {
     this.gerentes.forEach((ger) => {
       for (let gerent of ger) {
         if (gerent.nomeUsuario == this.info.username) {
-          this.gerenteLogado = true;
           this.gerente = gerent;
           console.clear();
         }
       }
     })
-    return this.gerente;
   }
 
 

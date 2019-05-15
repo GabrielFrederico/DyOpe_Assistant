@@ -10,7 +10,8 @@ import com.projeto.models.Gerente;
 public interface GerenteRepository extends CrudRepository<Gerente, Serializable> {
 
     Gerente findById(long id);
-
+    
+    
     Boolean existsByNomeUsuario(String nomeUsuario);
 
     Boolean existsByEmail(String email);
@@ -24,6 +25,8 @@ public interface GerenteRepository extends CrudRepository<Gerente, Serializable>
     Boolean existsByNome(String nome);
 
     Gerente findByNome(String nome);
-
+    
+ 
+    
     Optional<Gerente> findByNomeUsuario(String nomeUsuario);
 }

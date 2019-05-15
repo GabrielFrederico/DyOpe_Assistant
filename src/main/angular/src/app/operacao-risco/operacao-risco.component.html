@@ -1,33 +1,7 @@
-<!DOCTYPE html>
-<html lang="pt-br">
 
-<head>
-
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
-  <base href="/src">
   <title>Operações</title>
 
-  <!-- Bootstrap core CSS-->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-  <!-- Custom fonts for this template-->
-
-
-  <!-- Page level plugin CSS-->
-  <link href="assets/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
-
-  <!-- Custom styles for this template-->
-  <link href="assets/css/sb-admin.css" rel="stylesheet">
-
-  <link rel="stylesheet" href="assets/css/estilo.css">
-
-</head>
-
-<body *ngIf="validado"  id="page-top">
+<div *ngIf="validado"  id="page-top">
 
 
 <app-nav-bar></app-nav-bar>
@@ -254,7 +228,7 @@
     </div>
     <div class="modal-body">
       <div class="card-body">
-        <form [noValidate]="$any(false)" (ngSubmit)="cadastrar()" >
+        <form #cadastrarOperacao="ngForm" [noValidate]="$any(false)" (ngSubmit)="cadastrar()" >
           <div class="form-group">
             <div class="form-group">
 
@@ -308,7 +282,10 @@
 
           <div class="modal-footer col-md-12">
             <button class="btn btn-secondary" (click)="modal.close()" type="button" data-dismiss="modal">Cancelar</button>
-            <input class="btn btn-primary"  type="submit" value="Cadastrar">
+            <input class="btn btn-primary" type="submit" value="Cadastrar">
+          </div>
+          <div *ngIf="cadastrarOperacao.submitted && erro" class="alert alert-warning separa">
+            Cadastro Falhou!<br/>{{errorMessage}}
           </div>
         </form>
       </div>
@@ -317,20 +294,4 @@
 
 </ng-template>
 
-<!-- Bootstrap core JavaScript-->
-<script src="assets/vendor/jquery/jquery.min.js"></script>
-<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-<!-- Core plugin JavaScript-->
-<script src="assets/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-<!-- Custom scripts for all pages-->
-
-
-</body>
-<ng-template #loggedOut >
-  Acesso negado! <br>
-  Faça o <a routerLink="/logingerente">login.</a>
-</ng-template>
-
-</html>
+</div>
