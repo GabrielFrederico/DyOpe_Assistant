@@ -1,6 +1,8 @@
 package com.projeto.rest;
 
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -24,7 +26,7 @@ public class OperacaoController {
 	OperacaoRepository operacaoRepository;
 
 	@RequestMapping(method = RequestMethod.POST, value="/cadastraroperacao")
-	public Operacao save(@RequestBody Operacao operacao, @RequestBody Gerente gerente) {
+	public Operacao save(@Valid @RequestBody Operacao operacao, Gerente gerente) {
 		operacao.setGerente(gerente);
 		operacaoRepository.save(operacao);
 		return operacao;
