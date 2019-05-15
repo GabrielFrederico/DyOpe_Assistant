@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.projeto.models.Gerente;
 import com.projeto.models.Operacao;
 import com.projeto.repository.OperacaoRepository;
 
@@ -22,7 +24,8 @@ public class OperacaoController {
 	OperacaoRepository operacaoRepository;
 
 	@RequestMapping(method = RequestMethod.POST, value="/cadastraroperacao")
-	public Operacao save(@RequestBody Operacao operacao) {
+	public Operacao save(@RequestBody Operacao operacao, @RequestBody Gerente gerente) {
+		operacao.setGerente(gerente);
 		operacaoRepository.save(operacao);
 		return operacao;
 	}

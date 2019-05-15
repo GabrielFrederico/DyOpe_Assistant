@@ -101,8 +101,8 @@ export class OperacaoRiscoComponent implements OnInit {
 
   cadastrar() {
 
-
-    this.operacaoService.cadastrarOperacao(this.operacao).subscribe(value => {
+    this.operacao.gerente = this.gerente;
+    this.operacaoService.cadastrarOperacao(this.operacao,this.operacao.gerente).subscribe(value => {
         alert('Operação cadastrada com sucesso!');
         console.log(value)
       },
