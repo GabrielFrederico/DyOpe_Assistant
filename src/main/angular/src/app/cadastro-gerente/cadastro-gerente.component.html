@@ -114,8 +114,8 @@
                   <label for="confirmPassword">Confirmar senha</label>
                 </div>
               </show-hide-password>
-              <div *ngIf="f.submitted && senhaConfirm !== senha">
-                <div *ngIf="senhaConfirm !== senha">As senhas não coincidem!</div>
+              <div *ngIf="f.submitted && senhaerrada">
+                <div class="alert alert-danger separa" *ngIf="senhaConfirm !== senha">As senhas não coincidem!</div>
               </div>
             </div>
           </div>

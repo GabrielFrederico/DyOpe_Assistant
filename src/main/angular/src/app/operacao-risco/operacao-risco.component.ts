@@ -1,12 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { TokenStorageService } from '../auth/token-storage.service';
-import { Router } from '@angular/router';
-import { CadastroOperacaoService, Operacao, TipoOperacao } from '../service/cadastro-operacao.service';
-import { Observable } from "rxjs";
-import { Gerente, GerenteService } from '../service/gerente.service';
-import { PerfilGerenteComponent } from "../perfil-gerente/perfil-gerente.component";
-import { map, first } from "rxjs/operators";
+import {Component, Input, OnInit} from '@angular/core';
+import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {TokenStorageService} from '../auth/token-storage.service';
+import {Router} from '@angular/router';
+import {CadastroOperacaoService, Operacao, TipoOperacao} from '../service/cadastro-operacao.service';
+import {Observable} from "rxjs";
+import {Gerente, GerenteService} from '../service/gerente.service';
+import {PerfilGerenteComponent} from "../perfil-gerente/perfil-gerente.component";
+import {map, first} from "rxjs/operators";
 
 @Component({
   selector: 'app-operacao-risco',
@@ -21,7 +21,7 @@ export class OperacaoRiscoComponent implements OnInit {
   public errorMessage = '';
   closeResult: string;
   public info: any;
-  private gerenteData: PerfilGerenteComponent;
+
   ngOnInit() {
     this.info = {
       token: this.token.getToken(),
@@ -41,7 +41,7 @@ export class OperacaoRiscoComponent implements OnInit {
 
 
   openCadastro(cadastro) {
-    this.modalService.open(cadastro, { size: 'lg', ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+    this.modalService.open(cadastro, {size: 'lg', ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
@@ -49,7 +49,7 @@ export class OperacaoRiscoComponent implements OnInit {
   }
 
   openInformacoes(content) {
-    this.modalService.open(content, { size: 'lg', ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+    this.modalService.open(content, {size: 'lg', ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
@@ -78,7 +78,9 @@ export class OperacaoRiscoComponent implements OnInit {
       this.validado = true;
     }
   }
+
   isReadonly = true;
+
   datareload() {
 
     this.gerentes = this.gerenteService.getinfoGerentes();
@@ -99,31 +101,16 @@ export class OperacaoRiscoComponent implements OnInit {
 
   cadastrar() {
 
-    this.operacao.gerente = this.gerente;
 
     this.operacaoService.cadastrarOperacao(this.operacao).subscribe(value => {
-      alert('Operação cadastrada com sucesso!');
-      console.log(value)
-    },
-
+        alert('Operação cadastrada com sucesso!');
+        console.log(value)
+      },
       error => {
         this.erro = true;
         console.log(error);
         this.errorMessage = error.error.message;
       });
-
-
-    this.gerenteService.atualizarGerente(this.gerente)
-      .pipe(first())
-      .subscribe(
-        data => {
-          alert('Dados atualizados!');
-        },
-        error => {
-          this.erro = true;
-          console.log(error);
-          this.errorMessage = error.error.message;
-        });
   }
 
   toggleReadonly() {

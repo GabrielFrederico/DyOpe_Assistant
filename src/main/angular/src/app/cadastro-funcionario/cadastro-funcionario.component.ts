@@ -12,6 +12,7 @@ export class CadastroFuncionarioComponent implements OnInit {
   public funcionarioInfo: Funcionario;
   isSignedUp = false;
   isSignUpFailed = false;
+  senhaerrada = false;
   errorMessage = '';
   @ViewChild("inputPassword") senhainput: ElementRef;
   @ViewChild("inputPasswordConfirm") confirmasenhainput: ElementRef;
@@ -44,7 +45,7 @@ export class CadastroFuncionarioComponent implements OnInit {
       this.form.senha);
 
     if (this.funcionarioInfo.senha !== this.funcionarioInfo.senhaConfirm) {
-      this.isSignUpFailed = true;
+      this.senhaerrada = true;
     } else {
       this.authService.cadastrarFuncionarioAuth(this.funcionarioInfo).subscribe(
         data => {
