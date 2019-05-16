@@ -32,6 +32,7 @@ export class PerfilGerenteComponent implements OnInit {
   @Input() gerente: Gerente;
   public gerenteLogado: boolean;
   public validado: boolean;
+  public senhaerrada: boolean;
   public updateFailed: boolean;
   public errorMessage = '';
   public info: any;
@@ -93,14 +94,14 @@ export class PerfilGerenteComponent implements OnInit {
 
 
   onSubmit() {
-
+    if(this.newsenhainput.nativeElement.value == this.confirmasenhainput.nativeElement.value){
+this.gerente.senha = this.newsenhainput.nativeElement.value;
     this.gerenteService.atualizarGerente(this.gerente)
       .pipe(first())
       .subscribe(
         data => {
 
           this.isReadonly = true;
-
             if (this.info.username !== this.gerente.nomeUsuario) {
               alert("Nome de usuário atualizado! Faça o login denovo!");
               this.token.logOut();
@@ -108,15 +109,18 @@ export class PerfilGerenteComponent implements OnInit {
             } else {
               alert('Dados atualizados!');
             }
-
-
         },
         error => {
           console.log(error);
           this.errorMessage = error.error.message;
           this.updateFailed = true;
         });
+  } else{
+  this.senhaerrada = false;
+
   }
+
+}
 
   naoAutenticado() {
     if (this.info.authorities.toString() !== 'ROLE_GERENTE') {
