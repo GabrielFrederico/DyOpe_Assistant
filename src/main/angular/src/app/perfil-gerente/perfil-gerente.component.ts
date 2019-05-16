@@ -1,14 +1,14 @@
-import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
-import {TokenStorageService} from '../auth/token-storage.service';
-import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {Gerente, GerenteService, loginGerenteInfo} from '../service/gerente.service';
-import {Router} from '@angular/router';
-import {Observable, of} from 'rxjs';
-import {forEach} from '@angular/router/src/utils/collection';
-import {first, map} from 'rxjs/operators';
-import {async} from "@angular/core/testing";
-import {NgForm} from "@angular/forms";
-import {Alert} from "selenium-webdriver";
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { TokenStorageService } from '../auth/token-storage.service';
+import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Gerente, GerenteService, loginGerenteInfo } from '../service/gerente.service';
+import { Router } from '@angular/router';
+import { Observable, of } from 'rxjs';
+import { forEach } from '@angular/router/src/utils/collection';
+import { first, map } from 'rxjs/operators';
+import { async } from "@angular/core/testing";
+import { NgForm } from "@angular/forms";
+import { Alert } from "selenium-webdriver";
 
 ;
 
@@ -28,6 +28,7 @@ export class PerfilGerenteComponent implements OnInit {
   }
 
   @Input() gerentes: Observable<Gerente[]>;
+  @Input() gerenteObjeto: Observable<Gerente>;
   @Input() gerente: Gerente;
   public gerenteLogado: boolean;
   public validado: boolean;
@@ -51,7 +52,7 @@ export class PerfilGerenteComponent implements OnInit {
   }
 
   openLogout(content) {
-    this.modalService.open(content, {size: 'sm', ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+    this.modalService.open(content, { size: 'sm', ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${PerfilGerenteComponent.getDismissReason(reason)}`;
@@ -82,16 +83,12 @@ export class PerfilGerenteComponent implements OnInit {
   }
 
   datareload() {
-    this.gerentes = this.gerenteService.getinfoGerentes();
-
-    this.gerentes.forEach((ger) => {
-      for (let gerent of ger) {
-        if (gerent.nomeUsuario == this.info.username) {
-          this.gerente = gerent;
-          console.clear();
-        }
-      }
+    this.gerenteObjeto = this.gerenteService.getGerenteLogado(this.info.username);
+    this.gerenteObjeto.subscribe(data=>{
+        this.gerente = data;
+        console.clear();
     })
+
   }
 
 
@@ -103,13 +100,15 @@ export class PerfilGerenteComponent implements OnInit {
         data => {
 
           this.isReadonly = true;
-          if (this.info.username !== this.gerente.nomeUsuario) {
-            alert("Nome de usuário atualizado! Faça o login denovo!");
-            this.token.logOut();
-            this.router.navigate(['/logingerente']);
-          } else {
-            alert('Dados atualizados!');
-          }
+
+            if (this.info.username !== this.gerente.nomeUsuario) {
+              alert("Nome de usuário atualizado! Faça o login denovo!");
+              this.token.logOut();
+              this.router.navigate(['/logingerente']);
+            } else {
+              alert('Dados atualizados!');
+            }
+
 
         },
         error => {

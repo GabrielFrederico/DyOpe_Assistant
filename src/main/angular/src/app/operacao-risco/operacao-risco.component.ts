@@ -15,6 +15,7 @@ import { map, first } from "rxjs/operators";
 export class OperacaoRiscoComponent implements OnInit {
   @Input() operacao: Operacao = new Operacao();
   @Input() gerente: Gerente;
+  @Input() gerenteObjeto: Observable<Gerente>;
   @Input() gerentes: Observable<Gerente[]>;
   public erro: boolean;
   public errorMessage = '';
@@ -66,7 +67,7 @@ export class OperacaoRiscoComponent implements OnInit {
   }
 
   private validado: boolean;
-
+ private cadastrado: boolean;
   naoAutenticado() {
     if (this.info.authorities.toString() !== 'ROLE_GERENTE') {
       this.validado = false;
@@ -82,24 +83,23 @@ export class OperacaoRiscoComponent implements OnInit {
 
   datareload() {
 
-    this.gerentes = this.gerenteService.getinfoGerentes();
-
-    this.gerentes.forEach((ger) => {
-      for (let gerent of ger) {
-        if (gerent.nomeUsuario == this.info.username) {
-          this.gerente = gerent;
-          console.clear();
-        }
-      }
+    this.gerenteObjeto = this.gerenteService.getGerenteLogado(this.info.username);
+    this.gerenteObjeto.subscribe(data=>{
+      this.gerente = data;
+      console.clear();
     })
 
   }
 
 
   cadastrar() {
-    this.operacao.gerente_id = this.gerente.id;
-    this.gerente.operacoes.push(this.operacao);
-    this.gerenteService.atualizarGerente(this.gerente).pipe(first()).subscribe(data => { alert("Operação cadastrada com sucesso!") }, error => { alert(error) });
+
+      this.operacao.gerente_id = this.gerente.id;
+      this.gerente.operacoes.push(this.operacao);
+      this.gerenteService.atualizarGerente(this.gerente).pipe(first()).subscribe(data => { alert("Operação cadastrada com sucesso!")
+
+      this.getDismissReason(ModalDismissReasons.BACKDROP_CLICK); }, error => { alert(error) });
+
 
   }
 

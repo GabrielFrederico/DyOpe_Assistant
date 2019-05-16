@@ -100,6 +100,14 @@ public class GerenteRest {
 		return gerente;
 	}
 	
+	
+	@RequestMapping(method = RequestMethod.GET, path = "getByNomeUsuario/{nomeUsuario}")
+	@PreAuthorize("hasRole('GERENTE')")
+	public Gerente getGerenteByNomeUsuario(@PathVariable("nomeUsuario") String nomeUsuario) {
+		Gerente gerente = gerenteRepository.findByNomeUsuario(nomeUsuario);
+		return gerente;
+	}
+	
 	@RequestMapping(method = RequestMethod.GET, path = "getByNome/{nome}")
 	@PreAuthorize("hasRole('GERENTE')")
 	public Gerente getGerenteByNome(@PathVariable("nome") String nome) {
