@@ -183,8 +183,8 @@
                   <div class="modal-footer col-md-12">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
                     <input class="btn btn-primary" type="submit" value="Confirmar">
-                    <div class="alert alert-danger" *ngIf="alterarsenha.submitted && senhaerrada">
-                     <span>Senhas não coinciden!</span>
+                    <div *ngIf="alterarsenha.submitted && senhaerrada" class="alert alert-warning separa">
+                     Senhas não coinciden!
                     </div>
                   </div>
                 </form>
