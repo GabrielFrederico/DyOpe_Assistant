@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 
 export class loginFuncionarioInfo {
@@ -12,6 +12,9 @@ export class loginFuncionarioInfo {
   }
 }
 
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 export class Funcionario {
   public id:number;
@@ -45,6 +48,10 @@ export class FuncionarioService {
 
   getFuncionarios() {
     return this.httpClient.get<Funcionario[]>('http://localhost:8080/funcionarios');
+  }
+
+  getFuncionarioLogado(nomeUsuario: string): Observable<Funcionario>{
+    return this.httpClient.get<Funcionario>('http://localhost:8080/funcionarios/getByNomeUsuario/'+ nomeUsuario, httpOptions);
   }
   atualizarFuncionario(funcionario:Funcionario): Observable<Funcionario> {
     return this.httpClient.put<Funcionario>( 'http://localhost:8080/funcionarios/atualizar',funcionario);
