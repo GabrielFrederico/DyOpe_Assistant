@@ -1,12 +1,12 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {TokenStorageService} from '../auth/token-storage.service';
-import {Router} from '@angular/router';
-import {CadastroOperacaoService, Operacao, TipoOperacao} from '../service/cadastro-operacao.service';
-import {Observable} from "rxjs";
-import {Gerente, GerenteService} from '../service/gerente.service';
-import {PerfilGerenteComponent} from "../perfil-gerente/perfil-gerente.component";
-import {map, first} from "rxjs/operators";
+import { Component, Input, OnInit } from '@angular/core';
+import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { TokenStorageService } from '../auth/token-storage.service';
+import { Router } from '@angular/router';
+import { CadastroOperacaoService, Operacao, TipoOperacao } from '../service/cadastro-operacao.service';
+import { Observable } from "rxjs";
+import { Gerente, GerenteService } from '../service/gerente.service';
+import { PerfilGerenteComponent } from "../perfil-gerente/perfil-gerente.component";
+import { map, first } from "rxjs/operators";
 
 @Component({
   selector: 'app-operacao-risco',
@@ -14,7 +14,6 @@ import {map, first} from "rxjs/operators";
 })
 export class OperacaoRiscoComponent implements OnInit {
   @Input() operacao: Operacao = new Operacao();
-  @Input() operacoes: Observable<Operacao[]>;
   @Input() gerente: Gerente;
   @Input() gerentes: Observable<Gerente[]>;
   public erro: boolean;
@@ -41,7 +40,7 @@ export class OperacaoRiscoComponent implements OnInit {
 
 
   openCadastro(cadastro) {
-    this.modalService.open(cadastro, {size: 'lg', ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+    this.modalService.open(cadastro, { size: 'lg', ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
@@ -49,7 +48,7 @@ export class OperacaoRiscoComponent implements OnInit {
   }
 
   openInformacoes(content) {
-    this.modalService.open(content, {size: 'lg', ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+    this.modalService.open(content, { size: 'lg', ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
@@ -94,23 +93,14 @@ export class OperacaoRiscoComponent implements OnInit {
       }
     })
 
-    this.operacoes = this.gerente.operacoes;
-
   }
 
 
   cadastrar() {
+    this.operacao.gerente_id = this.gerente.id;
+    this.gerente.operacoes.push(this.operacao);
+    this.gerenteService.atualizarGerente(this.gerente).pipe(first()).subscribe(data => { alert("Operação cadastrada com sucesso!") }, error => { alert(error) });
 
-    this.operacao.gerente = this.gerente;
-    this.operacaoService.cadastrarOperacao(this.operacao,this.operacao.gerente).subscribe(value => {
-        alert('Operação cadastrada com sucesso!');
-        console.log(value)
-      },
-      error => {
-        this.erro = true;
-        console.log(error);
-        this.errorMessage = error.error.message;
-      });
   }
 
   toggleReadonly() {

@@ -19,13 +19,13 @@ export class Operacao {
   public qtdPecasOpe: number;
   public tempoNesc: number;
   public numFuncionariosOpe: number;
-  public gerente: Gerente;
+  public gerente_id: number;
   public  tipoOpe: TipoOperacao;
+  public statusSYS: true;
 }
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'}),
-  gerente: Gerente
 };
 
 @Injectable({
@@ -36,9 +36,9 @@ export class CadastroOperacaoService {
   constructor(private httpClient: HttpClient) {
   }
   getOperacoes(){
-  return this.httpClient.get<Operacao[]>('http://localhost:8080/operacoes');
+  return this.httpClient.get<Operacao[]>('http://localhost:8080/gerentes/operacoes', httpOptions);
 }
-  cadastrarOperacao(operacao: Operacao, gerente: Gerente) {
-    return this.httpClient.post<Operacao>('http://localhost:8080/operacoes/cadastraroperacao', operacao && gerente, httpOptions);
+  cadastrarOperacao(operacao: Operacao) {
+    return this.httpClient.post<Operacao>('http://localhost:8080/gerentes/cadastraroperacao', operacao, httpOptions);
   }
 }

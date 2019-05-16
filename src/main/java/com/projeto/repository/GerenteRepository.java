@@ -1,11 +1,13 @@
 package com.projeto.repository;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.repository.CrudRepository;
 
 import com.projeto.models.Gerente;
+import com.projeto.models.Operacao;
 
 public interface GerenteRepository extends CrudRepository<Gerente, Serializable> {
 
@@ -26,7 +28,6 @@ public interface GerenteRepository extends CrudRepository<Gerente, Serializable>
 
     Gerente findByNome(String nome);
     
- 
-    
+
     Optional<Gerente> findByNomeUsuario(String nomeUsuario);
 }

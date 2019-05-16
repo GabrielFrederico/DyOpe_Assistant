@@ -28,8 +28,7 @@ public class OperacaoController {
     
 
 	@RequestMapping(method = RequestMethod.POST, value="/cadastraroperacao")
-	public Operacao save(@Valid @RequestBody Operacao operacao, @RequestParam Gerente gerente) {
-		operacao.setGerente(gerente);
+	public Operacao save(@Valid @RequestBody Operacao operacao) {
 		operacaoRepository.save(operacao);
 		return operacao;
 	}

@@ -37,8 +37,6 @@ import com.projeto.seguranca.LoginForm;
 import com.projeto.seguranca.ResponseMessage;
 import com.projeto.seguranca.jwt.JwtProvider;
 
-import antlr.collections.List;
-
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("gerentes")
@@ -75,6 +73,12 @@ public class GerenteRest {
 		return gerente;
 	}
 	
+	@RequestMapping(method = RequestMethod.POST, value = "/cadastraroperacao")
+	public Operacao save(@RequestBody Operacao operacao) {
+		operacaoRepository.save(operacao);
+		return operacao;
+	}
+	
 
 	@RequestMapping(method = RequestMethod.GET)
 	@PreAuthorize("hasRole('GERENTE')")
@@ -82,7 +86,7 @@ public class GerenteRest {
 		return gerenteRepository.findAll();
 	}
 	
-
+	
 	@RequestMapping(method = RequestMethod.GET, path = "gerente/{id}")
 	@PreAuthorize("hasRole('GERENTE')")
 	public Gerente getGerenteById(@PathVariable("id") long id) {

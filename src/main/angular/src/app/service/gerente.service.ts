@@ -29,7 +29,7 @@ export class Gerente {
   public senhaConfirm: string;
   public senha: string;
   role: string;
-  public operacoes: Observable<Operacao[]>;
+  public operacoes:Operacao[];
 
   constructor(nome: string, nomeUsuario: string, cpf: string, rg: string, email: string, senha: string, senhaConfirm: string) {
     this.nome = nome;
