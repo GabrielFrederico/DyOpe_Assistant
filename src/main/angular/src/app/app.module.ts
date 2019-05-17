@@ -27,6 +27,7 @@ import {coerceBooleanProperty} from '@angular/cdk/coercion';
 import {ShowHidePasswordModule} from 'ngx-show-hide-password';
 import {NavegacaoComponent} from './navegacao/navegacao.component';
 import {AuthInterceptorService} from './auth/auth-interceptor.service';
+import { BrMaskerModule } from 'brmasker-ionic-3';
 import { RedefinirSenhaComponent } from './redefinir-senha/redefinir-senha.component';
 
 @Directive({
@@ -46,8 +47,9 @@ class ReadonlyDirective {
   }
 
   // tslint:disable-next-line:use-life-cycle-interface
-  
+
 }
+
 
 @NgModule({
   schemas: [
@@ -88,6 +90,7 @@ class ReadonlyDirective {
     MatButtonToggleModule,
     BrowserModule,
     ShowHidePasswordModule,
+    BrMaskerModule
   ],
   exports: [RouterModule],
   providers: [ {

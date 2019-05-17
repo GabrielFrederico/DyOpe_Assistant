@@ -22,7 +22,7 @@ export class PerfilGerenteComponent implements OnInit {
   @ViewChild("inputPassword") senhainput: ElementRef;
   @ViewChild("inputNewPassword") newsenhainput: ElementRef;
   @ViewChild("inputPasswordConfirm") confirmasenhainput: ElementRef;
-
+  @ViewChild("cpf") cpf: ElementRef;
   // tslint:disable-next-line:max-line-length
   constructor(private modalService: NgbModal, private token: TokenStorageService, private gerenteService: GerenteService, private router: Router) {
   }
@@ -85,23 +85,25 @@ export class PerfilGerenteComponent implements OnInit {
 
   datareload() {
     this.gerenteObjeto = this.gerenteService.getGerenteLogado(this.info.username);
-    this.gerenteObjeto.subscribe(data=>{
-        this.gerente = data;
-        console.clear();
+    this.gerenteObjeto.subscribe(data => {
+      this.gerente = data;
+      console.clear();
     })
+  
 
   }
 
+  onSubmit(cpf: string) {
 
-  onSubmit() {
-    if(this.newsenhainput.nativeElement.value == this.confirmasenhainput.nativeElement.value){
-this.gerente.senha = this.newsenhainput.nativeElement.value;
-    this.gerenteService.atualizarGerente(this.gerente)
-      .pipe(first())
-      .subscribe(
-        data => {
+    this.gerente.cpf = cpf;
+    if (this.newsenhainput.nativeElement.value == this.confirmasenhainput.nativeElement.value) {
+      this.gerente.senha = this.newsenhainput.nativeElement.value;
+      this.gerenteService.atualizarGerente(this.gerente)
+        .pipe(first())
+        .subscribe(
+          data => {
 
-          this.isReadonly = true;
+            this.isReadonly = true;
             if (this.info.username !== this.gerente.nomeUsuario) {
               alert("Nome de usuário atualizado! Faça o login denovo!");
               this.token.logOut();
@@ -109,18 +111,18 @@ this.gerente.senha = this.newsenhainput.nativeElement.value;
             } else {
               alert('Dados atualizados!');
             }
-        },
-        error => {
-          console.log(error);
-          this.errorMessage = error.error.message;
-          this.updateFailed = true;
-        });
-  } else{
-  this.senhaerrada = false;
+          },
+          error => {
+            console.log(error);
+            this.errorMessage = error.error.message;
+            this.updateFailed = true;
+          });
+    } else {
+      this.senhaerrada = false;
+
+    }
 
   }
-
-}
 
   naoAutenticado() {
     if (this.info.authorities.toString() !== 'ROLE_GERENTE') {

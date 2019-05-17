@@ -16,7 +16,7 @@ export class CadastroGerenteComponent implements OnInit {
   errorMessage = '';
   @ViewChild("inputPassword") senhainput: ElementRef;
   @ViewChild("inputPasswordConfirm") confirmasenhainput: ElementRef;
-
+  @ViewChild("cpd") cpf: ElementRef;
   constructor(private http: GerenteService, private router: Router, private authService: AuthService) {
   }
 
@@ -32,6 +32,7 @@ export class CadastroGerenteComponent implements OnInit {
   }
 
   OnSubmit() {
+    this.form.cpf = this.cpf.nativeElement.value;
     console.log(this.form);
 
     this.gerenteInfo = new Gerente(

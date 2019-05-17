@@ -28,7 +28,7 @@
 
 
       <div class="container " style="float: left; max-width: 70%; padding-left: 5%">
-        <form #gerenteForm="ngForm" (ngSubmit)="onSubmit()">
+        <form #gerenteForm="ngForm" (ngSubmit)="onSubmit(cpf.value)">
           <div class="form-group">
             <div class="form-row">
               <div class="col-md-6">
@@ -57,7 +57,7 @@
                 <div class="form-group">
                   <div class="form-label-group">
                     <input [readonly]="isReadonly" type="text" name="cpf" id="cpf" class="form-control"
-                           placeholder="CPF" [(ngModel)]="gerente.cpf" #cpf
+                           placeholder="CPF" [(ngModel)]="gerente.cpf" [brmasker]="{mask:'000.000.000-00', len:14}"  #cpf
                            required="required">
                     <label for="cpf">CPF</label>
                   </div>

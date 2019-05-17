@@ -59,7 +59,7 @@
           <div class="form-row">
             <div class="col-md-6">
               <div class="form-label-group">
-                <input type="text" [(ngModel)]="form.cpf" name="cpf" id="cpf" class="form-control" placeholder="CPF"
+                <input type="text" name="cpf" [brmasker]="{mask:'000.000.000-00', len:14}" #cpf  id="cpf" class="form-control" placeholder="CPF"
                        required="required">
                 <label for="cpf">CPF</label>
               </div>
