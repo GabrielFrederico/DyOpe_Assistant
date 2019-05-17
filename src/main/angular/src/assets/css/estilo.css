@@ -127,11 +127,7 @@ div.menu_index span {
   }
 }
 
-@media screen and (max-width: 420px) {
-  .inputsenha {
-    width: 85%;
-  }
-}
+
 
 @media screen and (max-width: 416px) {
   .inputsenha {
@@ -180,6 +176,8 @@ div.menu_index span {
     width: 77%;
   }
 }
+
+
 
 @media screen and (max-width: 2560px) {
   .senhacadastro {
@@ -270,8 +268,154 @@ div.menu_index span {
     width: 78%;
   }
 }
+
 @media screen and (max-width: 306px) {
   .senhacadastro {
     width: 77%;
+  }
+}
+
+
+
+@media screen and (max-width: 2560px) {
+  .showredefinir {
+    width: 85%;
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .showredefinir {
+    width: 87%;
+  }
+}
+
+@media screen and (max-width: 549px) {
+  .showredefinir {
+    width: 86%;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .showredefinir {
+    width: 85%;
+  }
+}
+
+@media screen and (max-width: 496px) {
+  .showredefinir {
+    width: 84%;
+  }
+}
+
+@media screen and (max-width: 474px) {
+  .showredefinir {
+    width: 83%;
+  }
+}
+
+@media screen and (max-width: 455px) {
+  .showredefinir {
+    width: 82%;
+  }
+}
+
+@media screen and (max-width: 438px) {
+  .showredefinir {
+    width: 81%;
+  }
+}
+
+@media screen and (max-width: 423px) {
+  .showredefinir {
+    width: 80%;
+  }
+}
+
+@media screen and (max-width: 410px) {
+  .showredefinir {
+    width: 79%;
+  }
+}
+
+@media screen and (max-width: 397px) {
+  .showredefinir {
+    width: 78%;
+  }
+}
+
+@media screen and (max-width: 386px) {
+  .showredefinir {
+    width: 77%;
+  }
+}
+
+@media screen and (max-width: 376px) {
+  .showredefinir {
+    width: 76%;
+  }
+}
+
+@media screen and (max-width: 367px) {
+  .showredefinir {
+    width: 75%;
+  }
+}
+@media screen and (max-width: 358px) {
+  .showredefinir {
+    width: 74%;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .showredefinir {
+    width: 73%;
+  }
+}
+
+@media screen and (max-width: 343px) {
+  .showredefinir {
+    width: 72%;
+  }
+}
+
+@media screen and (max-width: 336px) {
+  .showredefinir {
+    width: 71%;
+  }
+}
+
+@media screen and (max-width: 330px) {
+  .showredefinir {
+    width: 70%;
+  }
+}
+
+@media screen and (max-width: 324px) {
+  .showredefinir {
+    width: 69%;
+  }
+}
+
+@media screen and (max-width: 318px) {
+  .showredefinir {
+    width: 68%;
+  }
+}
+
+@media screen and (max-width: 313px) {
+  .showredefinir {
+    width: 67%;
+  }
+}
+
+@media screen and (max-width: 308px) {
+  .showredefinir {
+    width: 66%;
+  }
+}
+
+@media screen and (max-width: 303px) {
+  .showredefinir {
+    width: 65%;
   }
 }
