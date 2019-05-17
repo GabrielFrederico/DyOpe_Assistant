@@ -118,7 +118,8 @@ public class GerenteRest {
 	@RequestMapping(method = RequestMethod.PUT, value = "atualizar")
 	@PreAuthorize("hasRole('GERENTE')")
 	public ResponseEntity<?> update(@RequestBody Gerente gerente) {
-		
+		gerente.setSenha(encoder.encode(gerente.getSenha()));
+		gerente.setSenhaConfirm(encoder.encode(gerente.getSenha()));
 		if (funcionarioRepository.existsByNomeUsuario(gerente.getNomeUsuario())) {
 			return new ResponseEntity<>(new ResponseMessage("Erro -> Usuário já está em uso!"), HttpStatus.BAD_REQUEST);
 		}
