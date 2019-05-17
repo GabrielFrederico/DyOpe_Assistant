@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {TokenStorageService} from "../auth/token-storage.service";
-import {Router} from "@angular/router";
-import {SidebarComponent} from "../sidebar/sidebar.component";
-import {GerenteIndexComponent} from "../gerente-index/gerente-index.component";
+import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { TokenStorageService } from "../auth/token-storage.service";
+import { Router } from "@angular/router";
+import { GerenteIndexComponent } from "../gerente-index/gerente-index.component";
 
 @Component({
   selector: 'app-nav-bar',
@@ -22,8 +21,8 @@ export class NavBarComponent implements OnInit {
       authorities: this.token.getAuthorities()
     };
 
-    if(this.isCollapsed){
-      this.gerenteIndex.isCollapsed= true;
+    if (this.isCollapsed) {
+      this.gerenteIndex.isCollapsed = true;
     }
   }
 
@@ -36,7 +35,7 @@ export class NavBarComponent implements OnInit {
   }
 
   openLogout(content) {
-    this.modalService.open(content, { size: 'lg', ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+    this.modalService.open(content, { size: 'lg', ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${NavBarComponent.getDismissReason(reason)}`;
@@ -49,7 +48,7 @@ export class NavBarComponent implements OnInit {
     } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
       return 'by clicking on a backdrop';
     } else {
-      return  `with: ${reason}`;
+      return `with: ${reason}`;
     }
   }
 }

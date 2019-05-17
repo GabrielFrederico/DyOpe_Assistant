@@ -1,10 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Input} from '@angular/core';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {TokenStorageService} from '../auth/token-storage.service';
-import {loginGerenteInfo} from '../service/gerente.service';
 import {Router} from '@angular/router';
-import {NavBarComponent} from "../nav-bar/nav-bar.component";
-
+import {TipoOperacao, CadastroOperacaoService} from '../service/cadastro-operacao.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-gerente-index',
@@ -15,6 +14,7 @@ export class GerenteIndexComponent implements OnInit {
   info: any;
   form: any = {};
   public isCollapsed = false;
+  @Input() tiposOperacao: Observable<TipoOperacao[]>;
 
   closeResult: string;
   private roles: string[];
@@ -43,7 +43,7 @@ export class GerenteIndexComponent implements OnInit {
 
   }
 
-  constructor(private modalService: NgbModal, private token: TokenStorageService, private  router: Router) {
+  constructor(private modalService: NgbModal,private tipoOpeservice: CadastroOperacaoService, private token: TokenStorageService, private  router: Router) {
   }
 
 
@@ -51,6 +51,11 @@ export class GerenteIndexComponent implements OnInit {
     this.token.logOut();
     window.location.reload();
   }
+
+ dataReload(){
+  this.tiposOperacao = this.tipoOpeservice.getTiposOperacoes();
+
+ }
 
   openLogout(content) {
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {

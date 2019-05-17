@@ -1,7 +1,6 @@
 package com.projeto.repository;
 
 import java.io.Serializable;
-import java.util.Optional;
 
 import org.springframework.data.repository.CrudRepository;
 

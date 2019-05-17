@@ -6,11 +6,6 @@
   </a>
   <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="pagesDropdown" x-placement="bottom-start">
     <h6 class="dropdown-header">Etapas da produção</h6>
-    <a class="dropdown-item" routerLink="/operacaorisco">Risco</a>
-    <a class="dropdown-item" routerLink="/operacaocorte">Corte</a>
-    <a class="dropdown-item" routerLink="/operacaocostura">Costura</a>
-    <a class="dropdown-item" routerLink="/operacaobeneficiamento">Beneficiamento</a>
-    <a class="dropdown-item" routerLink="/operacaoacabamento">Acabamento</a>
+    <a href="javascript:void(0)" *ngFor="let operacao of tiposOperacao | async" routerLink="/operacaorisco" class="dropdown-item">{{operacao.tipoOpe}}</a>
   </div>
 </li>
-

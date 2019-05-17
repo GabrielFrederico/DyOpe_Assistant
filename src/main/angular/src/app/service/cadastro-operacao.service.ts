@@ -1,11 +1,12 @@
-import {Injectable} from '@angular/core';
-import {Gerente} from "./gerente.service";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {Observable} from "rxjs";
+import { Injectable } from '@angular/core';
+import { Gerente } from "./gerente.service";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { Observable } from "rxjs";
 
-export class TipoOperacao{
+export class TipoOperacao {
   public idTipoOpe: number;
   public tipoOpe: string;
+  public statusSYS: 'A';
 
 }
 export class Operacao {
@@ -20,12 +21,12 @@ export class Operacao {
   public tempoNesc: number;
   public numFuncionariosOpe: number;
   public gerente_id: number;
-  public  tipoOpe: TipoOperacao;
+  public tipoOpe: TipoOperacao;
   public statusSYS: true;
 }
 
 const httpOptions = {
-  headers: new HttpHeaders({'Content-Type': 'application/json'}),
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
 };
 
 @Injectable({
@@ -35,9 +36,12 @@ export class CadastroOperacaoService {
 
   constructor(private httpClient: HttpClient) {
   }
-  getOperacoes(){
-  return this.httpClient.get<Operacao[]>('http://localhost:8080/gerentes/operacoes', httpOptions);
-}
+  getOperacoes() {
+    return this.httpClient.get<Operacao[]>('http://localhost:8080/gerentes/operacoes', httpOptions);
+  }
+  getTiposOperacoes() {
+    return this.httpClient.get<TipoOperacao[]>('http://localhost:8080/tipoOpe', httpOptions);
+  }
   cadastrarOperacao(operacao: Operacao) {
     return this.httpClient.post<Operacao>('http://localhost:8080/gerentes/cadastraroperacao', operacao, httpOptions);
   }

@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { CadastroOperacaoService, Operacao, TipoOperacao } from '../service/cadastro-operacao.service';
 import { Observable } from "rxjs";
 import { Gerente, GerenteService } from '../service/gerente.service';
-import { PerfilGerenteComponent } from "../perfil-gerente/perfil-gerente.component";
 import { map, first } from "rxjs/operators";
 
 @Component({
