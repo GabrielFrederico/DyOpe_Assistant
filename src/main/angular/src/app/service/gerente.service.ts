@@ -1,6 +1,8 @@
-import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { TokenStorageService } from "../auth/token-storage.service";
+import { Operacao } from "./cadastro-operacao.service";
 
 
 // tslint:disable-next-line:class-name
@@ -13,7 +15,9 @@ export class loginGerenteInfo {
     this.senha = senha;
   }
 }
-
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 // tslint:disable-next-line:class-name
 export class Gerente {
   public id: number;
@@ -25,6 +29,7 @@ export class Gerente {
   public senhaConfirm: string;
   public senha: string;
   role: string;
+  public operacoes: Operacao[];
 
   constructor(nome: string, nomeUsuario: string, cpf: string, rg: string, email: string, senha: string, senhaConfirm: string) {
     this.nome = nome;
@@ -42,15 +47,30 @@ export class Gerente {
   providedIn: 'root'
 })
 export class GerenteService {
-  constructor(private httpClient: HttpClient) {
+  public info: any;
+  public gerentes: Observable<Gerente[]>;
+  public gerente: Observable<Gerente>;
+  public gerent: Gerente;
+  constructor(private httpClient: HttpClient, private token: TokenStorageService) {
+    this.info = {
+      token: this.token.getToken(),
+      username: this.token.getUsername(),
+      authorities: this.token.getAuthorities()
+    };
+
   }
+
 
   getGerenteId(id: number): Observable<Gerente> {
-    return this.httpClient.get<Gerente>('http://localhost:8080/gerentes/atualizar/' + id);
+    return this.httpClient.get<Gerente>('http://localhost:8080/gerentes/gerente/' + id, httpOptions);
   }
-  atualizarGerente(gerente:Gerente): Observable<Gerente> {
-    return this.httpClient.put<Gerente>( 'http://localhost:8080/gerentes/atualizar',gerente);
 
+  atualizarGerente(gerente:  Gerente ): Observable<Gerente>{
+    return this.httpClient.put<Gerente>('http://localhost:8080/gerentes/atualizar', gerente);
+
+  }
+  getGerenteLogado(nomeUsuario: string): Observable<Gerente>{
+    return this.httpClient.get<Gerente>('http://localhost:8080/gerentes/getByNomeUsuario/'+ nomeUsuario, httpOptions);
   }
 
   getGerentes() {

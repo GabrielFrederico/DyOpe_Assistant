@@ -54,7 +54,14 @@ public class FuncionarioController {
         funcionarioRepository.save(funcionario);
         return funcionario;
     }
-
+    
+    @RequestMapping(method = RequestMethod.GET, path = "getByNomeUsuario/{nomeUsuario}")
+	@PreAuthorize("hasRole('FUNCIONARIO')")
+	public Funcionario getFuncionarioByNomeUsuario(@PathVariable("nomeUsuario") String nomeUsuario) {
+		Funcionario funcionario = funcionarioRepository.findByNomeUsuario(nomeUsuario);
+		return funcionario;
+	}
+    
     @RequestMapping(method = RequestMethod.POST, path = "/cadastrar")
     public ResponseEntity<?> registerUser(@Valid @RequestBody CadastroFormFuncionario signUpRequest) {
 

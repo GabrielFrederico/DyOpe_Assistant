@@ -1,33 +1,7 @@
-<!DOCTYPE html>
-<html lang="pt-br">
 
-<head>
-
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
-  <base href="/src">
   <title>Operações</title>
 
-  <!-- Bootstrap core CSS-->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-  <!-- Custom fonts for this template-->
-
-
-  <!-- Page level plugin CSS-->
-  <link href="assets/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
-
-  <!-- Custom styles for this template-->
-  <link href="assets/css/sb-admin.css" rel="stylesheet">
-
-  <link rel="stylesheet" href="assets/css/estilo.css">
-
-</head>
-
-<body *ngIf="validado"  id="page-top">
+<div *ngIf="validado"  id="page-top">
 
 
 <app-nav-bar></app-nav-bar>
@@ -54,13 +28,8 @@
           <div class="card border-info mb-3 lista">
             <div class="card-header border-info">Operações a fazer</div>
             <div class="card-body text-secondary">
-              <a class="btn btn-outline-info list-group-item list-group-item-action " href="javascript:void(0)"
-                 data-toggle="modal" (click)="openInformacoes(content)" data-target=".informations">
-                Costura
-              </a>
-              <a class="btn btn-outline-info list-group-item list-group-item-action ">
-                Beneficiamento
-              </a>
+              <a *ngFor="let operacao of gerente.operacoes" class="btn btn-outline-info list-group-item list-group-item-action " href="javascript:void(0)"
+                 data-toggle="modal" (click)="openInformacoes(content)" data-target=".informations">{{operacao.descricao}}</a>
             </div>
             <div class="card-footer bg-transparent border-info">
               <a class="btn btn-info" href="javascript:void(0)" (click)="openCadastro(cadastro)" data-toggle="modal"
@@ -214,6 +183,14 @@
                     <label for="TempoPeca">Tempo necessário por peça:</label>
                   </div>
                 </div>
+                <div class="col-md-6">
+                  <div class="form-label-group">
+                    <input [readonly]="isReadonly" type="text" id="precoPeca" class="form-control"
+                           placeholder="Preço da peça:"
+                           required="required">
+                    <label for="precoPeca">Preço da peça:</label>
+                  </div>
+                </div>
               </div>
 
 
@@ -248,20 +225,20 @@
     </div>
     <div class="modal-body">
       <div class="card-body">
-        <form [noValidate]="$any(false)">
+        <form #cadastrarOperacao="ngForm" [noValidate]="$any(false)" (ngSubmit)="cadastrar()" >
           <div class="form-group">
             <div class="form-group">
 
               <label for="DescricaoOp">Descrição da operação:</label>
-              <textarea required="required" name="descricao" class="form-control" rows="2"
-                        id="DescricaoOp"></textarea>
+              <input required="required" name="descricao" [(ngModel)]="operacao.descricao" class="form-control"
+                        id="DescricaoOp">
             </div>
             <div class="form-group">
               <div class="form-row">
                 <div class="col-md-6">
                   <div class="form-label-group">
                     <input type="date" id="datainici" name="dataInicio" class="form-control"
-                           placeholder="Data Inicio:"
+                           placeholder="Data Inicio:" [(ngModel)]="operacao.dataInicio"
                            required="required">
                     <label for="datainici">Data Inicio:</label>
                   </div>
@@ -270,7 +247,7 @@
                 <div class="col-md-6">
                   <div class="form-label-group">
                     <input type="date" id="datalimit" name="prazo" class="form-control"
-                           placeholder="Data limite:"
+                           placeholder="Data limite:" [(ngModel)]="operacao.prazo"
                            required="required">
                     <label for="datalimit">Data limite:</label>
                   </div>
@@ -283,7 +260,7 @@
                 <div class="form-label-group">
                   <input type="text" id="custosOp" name="custosOpe"
                          class="form-control fa-credit-card"
-                         placeholder="Custos"
+                         placeholder="Custos" [(ngModel)]="operacao.custosOpe"
                          required="required">
                   <label for="custosOp">Custos:</label>
                 </div>
@@ -291,7 +268,7 @@
               <div class="col-md-6">
                 <div class="form-label-group">
                   <input type="number" id="LotePro" name="loteProducao" class="form-control"
-                         placeholder="Lote de Produção"
+                         placeholder="Lote de Produção" [(ngModel)]="operacao.loteProducao"
                          required="required">
                   <label for="LotePro">Lote de Produção:</label>
                 </div>
@@ -304,6 +281,9 @@
             <button class="btn btn-secondary" (click)="modal.close()" type="button" data-dismiss="modal">Cancelar</button>
             <input class="btn btn-primary" type="submit" value="Cadastrar">
           </div>
+          <div *ngIf="cadastrarOperacao.submitted && erro" class="alert alert-warning separa">
+            Cadastro Falhou!<br/>{{errorMessage}}
+          </div>
         </form>
       </div>
     </div>
@@ -311,20 +291,4 @@
 
 </ng-template>
 
-<!-- Bootstrap core JavaScript-->
-<script src="assets/vendor/jquery/jquery.min.js"></script>
-<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-<!-- Core plugin JavaScript-->
-<script src="assets/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-<!-- Custom scripts for all pages-->
-
-
-</body>
-<ng-template #loggedOut >
-  Acesso negado! <br>
-  Faça o <a routerLink="/logingerente">login.</a>
-</ng-template>
-
-</html>
+</div>

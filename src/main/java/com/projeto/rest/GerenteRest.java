@@ -23,10 +23,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.projeto.models.Gerente;
+import com.projeto.models.Operacao;
 import com.projeto.models.Role;
 import com.projeto.models.RoleName;
 import com.projeto.repository.FuncionarioRepository;
 import com.projeto.repository.GerenteRepository;
+import com.projeto.repository.OperacaoRepository;
 import com.projeto.repository.RoleRepository;
 import com.projeto.repository.UsuarioRepository;
 import com.projeto.seguranca.CadastroFormGerente;
@@ -42,6 +44,9 @@ public class GerenteRest {
 
 	@Autowired
 	GerenteRepository gerenteRepository;
+	
+	@Autowired
+	OperacaoRepository operacaoRepository;
 	
 	@Autowired
 	FuncionarioRepository funcionarioRepository;
@@ -67,20 +72,42 @@ public class GerenteRest {
 		gerenteRepository.save(gerente);
 		return gerente;
 	}
+	
+	@RequestMapping(method = RequestMethod.POST, value = "/cadastraroperacao")
+	public Operacao save(@RequestBody Operacao operacao) {
+		operacaoRepository.save(operacao);
+		return operacao;
+	}
+	
 
 	@RequestMapping(method = RequestMethod.GET)
 	@PreAuthorize("hasRole('GERENTE')")
 	public Iterable<Gerente> listAll() {
 		return gerenteRepository.findAll();
 	}
-
+	
+	
 	@RequestMapping(method = RequestMethod.GET, path = "gerente/{id}")
 	@PreAuthorize("hasRole('GERENTE')")
 	public Gerente getGerenteById(@PathVariable("id") long id) {
 		Gerente gerente = gerenteRepository.findById(id);
 		return gerente;
 	}
-
+    
+	@RequestMapping(method = RequestMethod.GET, path = "gerente")
+	@PreAuthorize("hasRole('GERENTE')")
+	public Gerente getGerente(@RequestBody Gerente gerente){
+		return gerente;
+	}
+	
+	
+	@RequestMapping(method = RequestMethod.GET, path = "getByNomeUsuario/{nomeUsuario}")
+	@PreAuthorize("hasRole('GERENTE')")
+	public Gerente getGerenteByNomeUsuario(@PathVariable("nomeUsuario") String nomeUsuario) {
+		Gerente gerente = gerenteRepository.findByNomeUsuario(nomeUsuario);
+		return gerente;
+	}
+	
 	@RequestMapping(method = RequestMethod.GET, path = "getByNome/{nome}")
 	@PreAuthorize("hasRole('GERENTE')")
 	public Gerente getGerenteByNome(@PathVariable("nome") String nome) {
@@ -91,6 +118,19 @@ public class GerenteRest {
 	@RequestMapping(method = RequestMethod.PUT, value = "atualizar")
 	@PreAuthorize("hasRole('GERENTE')")
 	public ResponseEntity<?> update(@RequestBody Gerente gerente) {
+		
+		if (funcionarioRepository.existsByNomeUsuario(gerente.getNomeUsuario())) {
+			return new ResponseEntity<>(new ResponseMessage("Erro -> Usuário já está em uso!"), HttpStatus.BAD_REQUEST);
+		}
+		
+		gerenteRepository.save(gerente);
+		return new ResponseEntity<>(new ResponseMessage("Dados Atualizados com sucesso!"), HttpStatus.OK);
+	}
+	
+	@RequestMapping(method = RequestMethod.PUT, value = "atualizar2")
+	@PreAuthorize("hasRole('GERENTE')")
+	public ResponseEntity<?> update2(@RequestBody Gerente gerente) {
+		
 		if (funcionarioRepository.existsByNomeUsuario(gerente.getNomeUsuario())) {
 			return new ResponseEntity<>(new ResponseMessage("Erro -> Usuário já está em uso!"), HttpStatus.BAD_REQUEST);
 		}
@@ -99,6 +139,7 @@ public class GerenteRest {
 		return new ResponseEntity<>(new ResponseMessage("Dados Atualizados com sucesso!"), HttpStatus.OK);
 	}
 
+	
 	@RequestMapping(method = RequestMethod.DELETE, path = "/{id}")
 	@PreAuthorize("hasRole('GERENTE')")
 	public Gerente deleteGerenteById(@PathVariable("id") long id) {

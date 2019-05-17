@@ -12,6 +12,7 @@ export class CadastroGerenteComponent implements OnInit {
   public gerenteInfo: Gerente;
   isSignedUp = false;
   isSignUpFailed = false;
+  senhaerrada = false;
   errorMessage = '';
   @ViewChild("inputPassword") senhainput: ElementRef;
   @ViewChild("inputPasswordConfirm") confirmasenhainput: ElementRef;
@@ -43,7 +44,7 @@ export class CadastroGerenteComponent implements OnInit {
       this.form.senha);
 
     if (this.gerenteInfo.senha !== this.gerenteInfo.senhaConfirm) {
-      this.isSignUpFailed = true;
+      this.senhaerrada = true;
     } else {
       this.authService.cadastrarGerenteAuth(this.gerenteInfo).subscribe(
         data => {

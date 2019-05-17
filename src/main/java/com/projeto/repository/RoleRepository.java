@@ -10,4 +10,5 @@ import com.projeto.models.RoleName;
 
 public interface RoleRepository extends CrudRepository<Role, Serializable> {
 	Optional<Role> findByNome(RoleName nome);
+	 Boolean existsByNome(RoleName nome);
 }

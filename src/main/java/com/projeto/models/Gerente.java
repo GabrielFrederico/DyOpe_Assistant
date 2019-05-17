@@ -1,10 +1,20 @@
 package com.projeto.models;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Gerente extends Usuario {
@@ -31,8 +41,11 @@ public class Gerente extends Usuario {
 	@Column(name = "cpf_gerente")
 	private String cpf;
 
-	@OneToMany(mappedBy = "gerente", cascade = CascadeType.ALL)
-	private Set<Operacao> operacoes;
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "gerente_operacoes",
+    joinColumns = @JoinColumn(name = "gerente_id"),
+    inverseJoinColumns = @JoinColumn(name = "operacao_id"))
+	private Set<Operacao> operacoes = new HashSet<>();
 
 	@OneToMany(mappedBy = "gerente", cascade = CascadeType.ALL)
 	private Set<Setor> setores;
@@ -48,13 +61,13 @@ public class Gerente extends Usuario {
 		this.setores = setores;
 	}
 
-	public Gerente(Operacao operacoes, Setor setores) {
+
+	public Gerente(Setor setores) {
 		super();
-		this.operacoes = Stream.of(operacoes).collect(Collectors.toSet());
-		this.operacoes.forEach(x -> x.setGerente(this));
 		this.setores = Stream.of(setores).collect(Collectors.toSet());
 		this.setores.forEach(x -> x.setGerente(this));
 	}
+	
 
 	public Gerente() {
 		super();

@@ -104,16 +104,14 @@
             <div class="col-md-6">
               <show-hide-password (click)="fococonfirmarsenha()" btnStyle="primary">
                 <div class="form-label-group senhacadastro">
-                  <input type="password" #inputPasswordConfirm name="senhaConfirm" [(ngModel)]="form.senhaConfirm"
-                         #senhaConfirm="ngModel"
-                         id="confirmPassword"
-                         class="form-control"
-                         placeholder="Confirmar senha" required="required">
+                  <input type="password" #inputPasswordConfirm required="required" [(ngModel)]="form.senhaConfirm"
+                         #senhaConfirm="ngModel" name="senhaConfirm" id="confirmPassword" class="form-control"
+                         minlength="6" placeholder="Confirmar senha">
                   <label for="confirmPassword">Confirmar senha</label>
                 </div>
               </show-hide-password>
-              <div *ngIf="f.submitted && senhaConfirm !== senha">
-                <div class="alert alert-warning" *ngIf="senhaConfirm !== senha">As senhas não coincidem!</div>
+              <div *ngIf="f.submitted && senhaerrada">
+                <div class="alert alert-danger separa" *ngIf="senhaConfirm !== senha">As senhas não coincidem!</div>
               </div>
             </div>
           </div>

@@ -1,5 +1,8 @@
 package com.projeto.rest;
 
+
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -20,17 +23,21 @@ public class OperacaoController {
 
 	@Autowired
 	OperacaoRepository operacaoRepository;
+    
 
 	@RequestMapping(method = RequestMethod.POST, value="/cadastraroperacao")
-	public Operacao save(@RequestBody Operacao operacao) {
+	public Operacao save(@Valid @RequestBody Operacao operacao) {
 		operacaoRepository.save(operacao);
 		return operacao;
 	}
+	
+
+	
 	@RequestMapping(method = RequestMethod.GET)
 	public  Iterable<Operacao> listAll(){
 		return operacaoRepository.findAll();
 	}
-
+	
 	@RequestMapping(method = RequestMethod.GET, path = "/getByNome/{descricao}")
 	public Operacao getOperacaoByNome(@PathVariable("descricao") String descricao) {
 		Operacao operacao  = operacaoRepository.findByDescricao(descricao);

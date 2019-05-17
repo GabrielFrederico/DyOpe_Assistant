@@ -13,12 +13,14 @@ import {first} from "rxjs/operators";
 })
 export class PerfilFuncionarioComponent implements OnInit {
   @Input() funcionarios: Observable<Funcionario[]>;
+  @Input() funcionarioObjeto: Observable<Funcionario>;
+  @Input() funcionario: Funcionario;
   info: any;
   form: any = {};
   public isCollapsed = false;
   public funcionarioLogado: boolean;
   public updateFailed: boolean;
-  @Input() funcionario: Funcionario;
+
   closeResult: string;
   private roles: string[];
   private authority: string;
@@ -66,16 +68,10 @@ export class PerfilFuncionarioComponent implements OnInit {
   }
 
   datareload() {
-    this.funcionarios = this.funcionarioService.getFuncionarios();
-
-    this.funcionarios.forEach((ger) => {
-      for (let funciona of ger) {
-        if (funciona.nomeUsuario == this.info.username) {
-          this.funcionarioLogado = true;
-          this.funcionario = funciona;
-          console.clear();
-        }
-      }
+    this.funcionarioObjeto = this.funcionarioService.getFuncionarioLogado(this.info.username);
+    this.funcionarioObjeto.subscribe(data=>{
+        this.funcionario = data;
+        console.clear();
     })
   }
 

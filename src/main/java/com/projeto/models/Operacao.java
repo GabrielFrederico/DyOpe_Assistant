@@ -27,11 +27,8 @@ public class Operacao {
 	private int numFuncionariosOpe;
 	
 	private int qtdPecasOpe;
-	private char statusSYS;
+	private boolean statusSYS;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
-	private Gerente gerente;
-
     @OneToOne(mappedBy="operacaoescolhida", cascade = CascadeType.ALL)
     private InfoSetor infoSetor;
 
@@ -44,13 +41,6 @@ public class Operacao {
 		this.infoSetor = infoSetor;
 	}
 
-	public Gerente getGerente() {
-		return gerente;
-	}
-
-	public void setGerente(Gerente gerente) {
-		this.gerente = gerente;
-	}
 
 	@OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "idTipoOpe", referencedColumnName = "idTipoOpe")
@@ -72,11 +62,11 @@ public class Operacao {
 		this.id = id;
 	}
 
-	public char getStatusSYS() {
+	public boolean getStatusSYS() {
 		return statusSYS;
 	}
 
-	public void setStatusSYS(char statusSYS) {
+	public void setStatusSYS(boolean statusSYS) {
 		this.statusSYS = statusSYS;
 	}
 
@@ -147,14 +137,6 @@ public class Operacao {
 
 
 
-	public long getIdGerente() {
-		return idGerente;
-	}
-
-	public void setIdGerente(long idGerente) {
-		this.idGerente = idGerente;
-	}
-
 	public float getPrecoPecaOpe() {
 		return precoPecaOpe;
 	}
@@ -163,7 +145,7 @@ public class Operacao {
 		this.precoPecaOpe = precoPecaOpe;
 	}
 
-	private long idGerente;
+
 	
 	private float precoPecaOpe;
 	
