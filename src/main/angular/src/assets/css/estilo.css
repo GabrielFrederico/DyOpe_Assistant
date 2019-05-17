@@ -369,6 +369,7 @@ div.menu_index span {
     width: 75%;
   }
 }
+
 @media screen and (max-width: 358px) {
   .showredefinir {
     width: 74%;
