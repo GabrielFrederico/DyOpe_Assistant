@@ -1,10 +1,11 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { TokenStorageService } from '../auth/token-storage.service';
-import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Gerente, GerenteService } from '../service/gerente.service';
-import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { first} from 'rxjs/operators';
+import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {TokenStorageService} from '../auth/token-storage.service';
+import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {Gerente, GerenteService} from '../service/gerente.service';
+import {Router} from '@angular/router';
+import {Observable} from 'rxjs';
+import {first} from 'rxjs/operators';
+
 ;
 
 @Component({
@@ -18,6 +19,8 @@ export class PerfilGerenteComponent implements OnInit {
   @ViewChild("inputNewPassword") newsenhainput: ElementRef;
   @ViewChild("inputPasswordConfirm") confirmasenhainput: ElementRef;
   @ViewChild("cpf") cpf: ElementRef;
+  @ViewChild("rg") rg: ElementRef;
+
   // tslint:disable-next-line:max-line-length
   constructor(private modalService: NgbModal, private token: TokenStorageService, private gerenteService: GerenteService, private router: Router) {
   }
@@ -48,7 +51,7 @@ export class PerfilGerenteComponent implements OnInit {
   }
 
   openLogout(content) {
-    this.modalService.open(content, { size: 'sm', ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+    this.modalService.open(content, {size: 'sm', ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${PerfilGerenteComponent.getDismissReason(reason)}`;
@@ -87,6 +90,7 @@ export class PerfilGerenteComponent implements OnInit {
 
 
   }
+
   redefinirSenha() {
     if (this.newsenhainput.nativeElement.value == this.confirmasenhainput.nativeElement.value) {
       this.gerente.senha = this.newsenhainput.nativeElement.value;
@@ -94,10 +98,10 @@ export class PerfilGerenteComponent implements OnInit {
         .pipe(first())
         .subscribe(
           data => {
-          this.router.navigate(['/logingerente']);
-          this.token.logOut();
-          alert("Senha atualizada! Faça o login denovo!");
-           },
+            this.router.navigate(['/logingerente']);
+            this.token.logOut();
+            alert("Senha atualizada! Faça o login denovo!");
+          },
           error => {
             console.log(error);
             this.errorMessage = error.error.message;
@@ -108,9 +112,11 @@ export class PerfilGerenteComponent implements OnInit {
 
     }
   }
-  onSubmit(cpf: string) {
+
+  onSubmit(cpf, rg: string) {
 
     this.gerente.cpf = cpf;
+    this.gerente.rg = rg;
     if (this.newsenhainput.nativeElement.value == this.confirmasenhainput.nativeElement.value) {
       this.gerente.senha = this.newsenhainput.nativeElement.value;
       this.gerenteService.atualizarGerente(this.gerente)
@@ -133,7 +139,6 @@ export class PerfilGerenteComponent implements OnInit {
             this.updateFailed = true;
           });
     }
-
   }
 
   naoAutenticado() {

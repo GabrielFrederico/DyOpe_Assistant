@@ -28,6 +28,8 @@ export class PerfilFuncionarioComponent implements OnInit {
   @ViewChild("inputPassword") senhainput: ElementRef;
   @ViewChild("inputNewPassword") newsenhainput: ElementRef;
   @ViewChild("inputPasswordConfirm") confirmasenhainput: ElementRef;
+  @ViewChild("cpf") cpf: ElementRef;
+  @ViewChild("rg") rg: ElementRef;
 
   ngOnInit() {
     this.info = {
@@ -69,9 +71,9 @@ export class PerfilFuncionarioComponent implements OnInit {
 
   datareload() {
     this.funcionarioObjeto = this.funcionarioService.getFuncionarioLogado(this.info.username);
-    this.funcionarioObjeto.subscribe(data=>{
-        this.funcionario = data;
-        console.clear();
+    this.funcionarioObjeto.subscribe(data => {
+      this.funcionario = data;
+      console.clear();
     })
   }
 
@@ -90,27 +92,32 @@ export class PerfilFuncionarioComponent implements OnInit {
 
   isReadonly = true;
 
-  onSubmit() {
+  onSubmit(cpf, rg: string) {
 
-    this.funcionarioService.atualizarFuncionario(this.funcionario)
-      .pipe(first())
-      .subscribe(
-        data => {
-          this.isReadonly = true;
-          if (this.info.username !== this.funcionario.nomeUsuario) {
-            alert("Nome de usuário atualizado! Faça o login denovo!");
-            this.token.logOut();
-            this.router.navigate(['/loginfuncionario']);
-          } else {
-            alert('Dados atualizados!');
-          }
+    this.funcionario.cpf = cpf;
+    this.funcionario.rg = rg;
+    if (this.newsenhainput.nativeElement.value == this.confirmasenhainput.nativeElement.value) {
+      this.funcionario.senha = this.newsenhainput.nativeElement.value;
+      this.funcionarioService.atualizarFuncionario(this.funcionario)
+        .pipe(first())
+        .subscribe(
+          data => {
+            this.isReadonly = true;
+            if (this.info.username !== this.funcionario.nomeUsuario) {
+              alert("Nome de usuário atualizado! Faça o login denovo!");
+              this.token.logOut();
+              this.router.navigate(['/loginfuncionario']);
+            } else {
+              alert('Dados atualizados!');
+            }
 
-        },
-        error => {
-          console.log(error);
-          this.errorMessage = error.error.message;
-          this.updateFailed = true;
-        });
+          },
+          error => {
+            console.log(error);
+            this.errorMessage = error.error.message;
+            this.updateFailed = true;
+          });
+    }
   }
 
   toggleReadonly() {

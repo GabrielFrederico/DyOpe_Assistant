@@ -16,6 +16,8 @@ export class CadastroFuncionarioComponent implements OnInit {
   errorMessage = '';
   @ViewChild("inputPassword") senhainput: ElementRef;
   @ViewChild("inputPasswordConfirm") confirmasenhainput: ElementRef;
+  @ViewChild("cpf") cpf: ElementRef;
+  @ViewChild("rg") rg: ElementRef;
 
   ngOnInit() {
   }
@@ -32,7 +34,9 @@ export class CadastroFuncionarioComponent implements OnInit {
               private router: Router, private authService: AuthService) {
   }
 
-  OnSubmit() {
+  OnSubmit(cpf, rg: string) {
+    this.form.cpf = cpf;
+    this.form.rg = rg;
     console.log(this.form);
 
     this.funcionarioInfo = new Funcionario(

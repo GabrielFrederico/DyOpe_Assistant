@@ -31,7 +31,7 @@
   <div class="card card-register mx-auto mt-5">
     <div class="card-header bg-info text-light">Cadastro</div>
     <div class="card-body">
-      <form [noValidate]="$any(false)" (ngSubmit)="f.form.valid && OnSubmit()" #f="ngForm">
+      <form (ngSubmit)="f.form.valid && OnSubmit(cpf.value,rg.value)" #f="ngForm" [noValidate]="$any(false)">
         <div class="form-group">
           <div class="form-group">
             <div class="form-row">
@@ -57,15 +57,15 @@
           <div class="form-row">
             <div class="col-md-6">
               <div class="form-label-group">
-                <input type="text" name="cpf" [(ngModel)]="form.cpf" id="cpf" class="form-control" placeholder="CPF"
-                       required="required">
+                <input type="text" name="cpf" [brmasker]="{mask:'000.000.000-00', len:14}" #cpf id="cpf"
+                       class="form-control" placeholder="CPF" required="required">
                 <label for="cpf">CPF</label>
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-label-group">
-                <input type="text" name="rg" id="rg" [(ngModel)]="form.rg" class="form-control" placeholder="RG"
-                       required="required">
+                <input type="text" [brmasker]="{mask:'0.000.000', len:9}" #rg name="rg" id="rg" class="form-control"
+                       placeholder="RG" required="required">
                 <label for="rg">RG</label>
               </div>
             </div>

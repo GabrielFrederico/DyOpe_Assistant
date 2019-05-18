@@ -29,7 +29,7 @@
       </div>
 
       <div class="container " style="float: left; max-width: 70%; padding-left: 5%">
-        <form #f="ngForm" (ngSubmit)="onSubmit()">
+        <form #f="ngForm" (ngSubmit)="onSubmit(cpf.value,rg.value)">
           <div class="form-group">
             <div class="form-row">
               <div class="col-md-6">
@@ -59,7 +59,8 @@
                 <div class="form-group">
                   <div class="form-label-group">
                     <input [readonly]="isReadonly" type="text" name="cpf" id="cpf" class="form-control"
-                           placeholder="CPF" [(ngModel)]="funcionario.cpf"
+                           placeholder="CPF" [(ngModel)]="funcionario.cpf" [brmasker]="{mask:'000.000.000-00', len:14}"
+                           #cpf
                            required="required">
                     <label for="cpf">CPF</label>
                   </div>
@@ -69,8 +70,7 @@
                 <div class="form-group">
                   <div class="form-label-group">
                     <input [readonly]="isReadonly" type="text" name="rg" id="rg" class="form-control" placeholder="RG"
-                           [(ngModel)]="funcionario.rg"
-                           required="required">
+                           [(ngModel)]="funcionario.cpf" [brmasker]="{mask:'0.000.000', len:9}" #rg required="required">
                     <label for="rg">RG</label>
                   </div>
                 </div>

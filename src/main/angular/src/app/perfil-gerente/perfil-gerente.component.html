@@ -28,7 +28,7 @@
 
 
       <div class="container " style="float: left; max-width: 70%; padding-left: 5%">
-        <form #gerenteForm="ngForm" (ngSubmit)="onSubmit(cpf.value)">
+        <form #gerenteForm="ngForm" (ngSubmit)="onSubmit(cpf.value,rg.value)">
           <div class="form-group">
             <div class="form-row">
               <div class="col-md-6">
@@ -57,7 +57,7 @@
                 <div class="form-group">
                   <div class="form-label-group">
                     <input [readonly]="isReadonly" type="text" name="cpf" id="cpf" class="form-control"
-                           placeholder="CPF" [(ngModel)]="gerente.cpf" [brmasker]="{mask:'000.000.000-00', len:14}"  #cpf
+                           placeholder="CPF" [(ngModel)]="gerente.cpf" [brmasker]="{mask:'000.000.000-00', len:14}" #cpf
                            required="required">
                     <label for="cpf">CPF</label>
                   </div>
@@ -67,7 +67,7 @@
                 <div class="form-group">
                   <div class="form-label-group">
                     <input [readonly]="isReadonly" type="text" name="rg" id="rg" class="form-control"
-                           placeholder="RG" [(ngModel)]="gerente.rg" #rg
+                           placeholder="RG" [(ngModel)]="gerente.rg" [brmasker]="{mask:'0.000.000', len:9}" #rg
                            required>
                     <label for="rg">RG</label>
                   </div>
@@ -182,9 +182,9 @@
 
                   <div class="modal-footer col-md-12">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-                    <input class="btn btn-primary" type="submit" (click)="redefinirSenha()"  value="Confirmar">
+                    <input class="btn btn-primary" type="submit" (click)="redefinirSenha()" value="Confirmar">
                     <div *ngIf="f.submitted && senhaerrada" class="alert alert-warning separa">
-                    As novas senhas não coincidem!
+                      As novas senhas não coincidem!
                     </div>
                   </div>
                 </form>
