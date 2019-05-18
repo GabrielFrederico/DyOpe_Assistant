@@ -9,6 +9,7 @@ public class TipoOperacao {
     @GeneratedValue(strategy = GenerationType.AUTO)
 
     private long idTipoOpe;
+    
     @OneToOne(mappedBy = "tipoope")
     private Operacao operacao;
 

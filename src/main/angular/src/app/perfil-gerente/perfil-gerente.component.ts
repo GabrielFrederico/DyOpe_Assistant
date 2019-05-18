@@ -1,15 +1,10 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { TokenStorageService } from '../auth/token-storage.service';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Gerente, GerenteService, loginGerenteInfo } from '../service/gerente.service';
+import { Gerente, GerenteService } from '../service/gerente.service';
 import { Router } from '@angular/router';
-import { Observable, of } from 'rxjs';
-import { forEach } from '@angular/router/src/utils/collection';
-import { first, map } from 'rxjs/operators';
-import { async } from "@angular/core/testing";
-import { NgForm } from "@angular/forms";
-import { Alert } from "selenium-webdriver";
-
+import { Observable } from 'rxjs';
+import { first} from 'rxjs/operators';
 ;
 
 @Component({
@@ -89,10 +84,30 @@ export class PerfilGerenteComponent implements OnInit {
       this.gerente = data;
       console.clear();
     })
-  
+
 
   }
+  redefinirSenha() {
+    if (this.newsenhainput.nativeElement.value == this.confirmasenhainput.nativeElement.value) {
+      this.gerente.senha = this.newsenhainput.nativeElement.value;
+      this.gerenteService.atualizarGerente(this.gerente)
+        .pipe(first())
+        .subscribe(
+          data => {
+          this.router.navigate(['/logingerente']);
+          this.token.logOut();
+          alert("Senha atualizada! Faça o login denovo!");
+           },
+          error => {
+            console.log(error);
+            this.errorMessage = error.error.message;
+            this.updateFailed = true;
+          });
+    } else {
+      this.senhaerrada = true;
 
+    }
+  }
   onSubmit(cpf: string) {
 
     this.gerente.cpf = cpf;
@@ -117,9 +132,6 @@ export class PerfilGerenteComponent implements OnInit {
             this.errorMessage = error.error.message;
             this.updateFailed = true;
           });
-    } else {
-      this.senhaerrada = false;
-
     }
 
   }

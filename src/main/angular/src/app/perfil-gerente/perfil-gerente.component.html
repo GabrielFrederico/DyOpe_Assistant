@@ -133,7 +133,7 @@
             </div>
             <div class="modal-body">
               <div class="card-body">
-                <form>
+                <form #f="ngForm" (ngSubmit)="redefinirSenha()">
                   <div class="form-group">
 
                     <div class="form-group">
@@ -182,7 +182,10 @@
 
                   <div class="modal-footer col-md-12">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-                    <input class="btn btn-primary" type="submit" value="Confirmar">
+                    <input class="btn btn-primary" type="submit" (click)="redefinirSenha()"  value="Confirmar">
+                    <div *ngIf="f.submitted && senhaerrada" class="alert alert-warning separa">
+                    As novas senhas não coincidem!
+                    </div>
                   </div>
                 </form>
               </div>
