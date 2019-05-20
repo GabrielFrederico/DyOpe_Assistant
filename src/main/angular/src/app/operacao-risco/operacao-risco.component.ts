@@ -95,7 +95,7 @@ export class OperacaoRiscoComponent implements OnInit {
 
       this.operacao.gerente_id = this.gerente.id;
       this.gerente.operacoes.push(this.operacao);
-      this.gerenteService.atualizarGerente(this.gerente).pipe(first()).subscribe(data => { alert("Operação cadastrada com sucesso!")
+      this.gerenteService.cadastrarOperacao(this.gerente).pipe(first()).subscribe(data => { alert("Operação cadastrada com sucesso!")
 
       this.getDismissReason(ModalDismissReasons.BACKDROP_CLICK); }, error => { alert(error) });
 

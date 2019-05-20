@@ -73,12 +73,6 @@ public class GerenteRest {
 		return gerente;
 	}
 	
-	@RequestMapping(method = RequestMethod.POST, value = "/cadastraroperacao")
-	public Operacao save(@RequestBody Operacao operacao) {
-		operacaoRepository.save(operacao);
-		return operacao;
-	}
-	
 
 	@RequestMapping(method = RequestMethod.GET)
 	@PreAuthorize("hasRole('GERENTE')")
@@ -128,14 +122,10 @@ public class GerenteRest {
 		return new ResponseEntity<>(new ResponseMessage("Dados Atualizados com sucesso!"), HttpStatus.OK);
 	}
 	
-	@RequestMapping(method = RequestMethod.PUT, value = "atualizar2")
+	@RequestMapping(method = RequestMethod.PUT, value = "cadastraroperacao")
 	@PreAuthorize("hasRole('GERENTE')")
 	public ResponseEntity<?> update2(@RequestBody Gerente gerente) {
-		
-		if (funcionarioRepository.existsByNomeUsuario(gerente.getNomeUsuario())) {
-			return new ResponseEntity<>(new ResponseMessage("Erro -> Usuário já está em uso!"), HttpStatus.BAD_REQUEST);
-		}
-		
+
 		gerenteRepository.save(gerente);
 		return new ResponseEntity<>(new ResponseMessage("Dados Atualizados com sucesso!"), HttpStatus.OK);
 	}

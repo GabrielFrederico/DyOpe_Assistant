@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {CadastroSetorService, Setor} from '../service/cadastro-setor.service';
-import {Router} from '@angular/router';
-import {TokenStorageService} from '../auth/token-storage.service';
-import {Observable} from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { CadastroSetorService, Setor } from '../service/cadastro-setor.service';
+import { Router } from '@angular/router';
+import { TokenStorageService } from '../auth/token-storage.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-cadastro-setor',
@@ -27,7 +27,7 @@ export class CadastroSetorComponent implements OnInit {
     this.dataReload();
   }
   constructor(private setorService: CadastroSetorService,
-              private router: Router, private setorservice: CadastroSetorService, private token: TokenStorageService) {
+    private router: Router, private setorservice: CadastroSetorService, private token: TokenStorageService) {
   }
 
 
@@ -36,6 +36,8 @@ export class CadastroSetorComponent implements OnInit {
       this.setor)
       .subscribe(value => console.log(value), error => console.log(error));
     alert('Cadastrado com sucesso!');
+    this.dataReload();
+
   }
 
   naoAutenticado() {

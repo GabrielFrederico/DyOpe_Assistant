@@ -67,7 +67,9 @@ export class GerenteService {
 
   atualizarGerente(gerente:  Gerente ): Observable<Gerente>{
     return this.httpClient.put<Gerente>('http://localhost:8080/gerentes/atualizar', gerente);
-
+  }
+  cadastrarOperacao(gerente:  Gerente ): Observable<Gerente>{
+    return this.httpClient.put<Gerente>('http://localhost:8080/gerentes/cadastraroperacao', gerente);
   }
   getGerenteLogado(nomeUsuario: string): Observable<Gerente>{
     return this.httpClient.get<Gerente>('http://localhost:8080/gerentes/getByNomeUsuario/'+ nomeUsuario, httpOptions);
