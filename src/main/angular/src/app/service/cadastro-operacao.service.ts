@@ -39,6 +39,9 @@ export class CadastroOperacaoService {
   getOperacoes() {
     return this.httpClient.get<Operacao[]>('http://localhost:8080/gerentes/operacoes', httpOptions);
   }
+  getTipoOperacao(id: number): Observable<TipoOperacao>{
+    return this.httpClient.get<TipoOperacao>('http://localhost:8080/tipoOpe/'+id, httpOptions);
+  }
   getTiposOperacoes() {
     return this.httpClient.get<TipoOperacao[]>('http://localhost:8080/tipoOpe', httpOptions);
   }

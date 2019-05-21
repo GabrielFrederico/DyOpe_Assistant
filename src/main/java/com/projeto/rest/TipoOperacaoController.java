@@ -24,7 +24,7 @@ public class TipoOperacaoController {
         return tipoOperacaoRepository.findAll();
     }
 
-    @RequestMapping(method = RequestMethod.GET, path = "/{idtipoope}")
+    @RequestMapping(method = RequestMethod.GET, path = "/{idTipoOpe}")
     public TipoOperacao getTipoOperacaoById(@PathVariable("idTipoOpe") long idTipoOpe) {
         TipoOperacao tipoOperacao = tipoOperacaoRepository.findByidTipoOpe(idTipoOpe);
         return tipoOperacao;

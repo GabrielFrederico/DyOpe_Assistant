@@ -20,7 +20,7 @@
 
       <!-- Page Content -->
 
-      <h1>Operação Risco</h1>
+      <h1>Operação {{tipoOpe.tipoOpe}}</h1>
       <hr>
 
       <div class="row">
@@ -238,7 +238,7 @@
                 <div class="col-md-6">
                   <div class="form-label-group">
                     <input type="date" id="datainici" name="dataInicio" class="form-control"
-                           placeholder="Data Inicio:" [(ngModel)]="operacao.dataInicio" 
+                           placeholder="Data Inicio:" [(ngModel)]="operacao.dataInicio"
                            required="required">
                     <label for="datainici">Data Inicio:</label>
                   </div>

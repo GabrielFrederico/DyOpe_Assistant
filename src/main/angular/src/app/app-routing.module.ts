@@ -43,7 +43,7 @@ const routes: Routes = [
   {path: 'operacaobeneficiamento', component: OperacaoBeneficiamentoComponent},
   {path: 'operacaocorte', component: OperacaoCorteComponent},
   {path: 'operacaocostura', component: OperacaoCosturaComponent},
-  {path: 'operacaorisco', component: OperacaoRiscoComponent},
+  {path: 'operacaorisco/:id', component: OperacaoRiscoComponent},
   {path: 'gerente', component: GerenteComponent},
   {path: 'testebarra', component: NavComponent},
   {path: 'redefinirsenha', component: RedefinirSenhaComponent}

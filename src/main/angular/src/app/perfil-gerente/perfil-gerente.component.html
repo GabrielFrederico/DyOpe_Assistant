@@ -28,7 +28,7 @@
 
 
       <div class="container " style="float: left; max-width: 70%; padding-left: 5%">
-        <form #gerenteForm="ngForm" (ngSubmit)="onSubmit(cpf.value,rg.value)">
+        <form #gerenteForm="ngForm" [noValidate]="$any(false)" (ngSubmit)="onSubmit(cpf.value,rg.value)">
           <div class="form-group">
             <div class="form-row">
               <div class="col-md-6">
@@ -133,7 +133,7 @@
             </div>
             <div class="modal-body">
               <div class="card-body">
-                <form #f="ngForm" (ngSubmit)="redefinirSenha()">
+                <form #f="ngForm" [noValidate]="$any(false)" (ngSubmit)="redefinirSenha()">
                   <div class="form-group">
 
                     <div class="form-group">
@@ -182,7 +182,7 @@
 
                   <div class="modal-footer col-md-12">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-                    <input class="btn btn-primary" type="submit" (click)="redefinirSenha()" value="Confirmar">
+                    <input class="btn btn-primary" type="submit"  value="Confirmar">
                     <div *ngIf="f.submitted && senhaerrada" class="alert alert-warning separa">
                       As novas senhas não coincidem!
                     </div>

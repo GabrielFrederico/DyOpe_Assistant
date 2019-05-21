@@ -1,9 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TokenStorageService } from '../auth/token-storage.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { CadastroOperacaoService, Operacao, TipoOperacao } from '../service/cadastro-operacao.service';
-import { Observable } from "rxjs";
+import { Observable, Subscription } from "rxjs";
 import { Gerente, GerenteService } from '../service/gerente.service';
 import { map, first } from "rxjs/operators";
 
@@ -16,11 +16,12 @@ export class OperacaoRiscoComponent implements OnInit {
   @Input() gerente: Gerente;
   @Input() gerenteObjeto: Observable<Gerente>;
   @Input() gerentes: Observable<Gerente[]>;
+  @Input() tipoOpe: TipoOperacao;
   public erro: boolean;
   public errorMessage = '';
   closeResult: string;
   public info: any;
-
+  sub: Subscription;
   ngOnInit() {
     this.info = {
       token: this.token.getToken(),
@@ -29,13 +30,14 @@ export class OperacaoRiscoComponent implements OnInit {
       senha: this.token.getPassword()
     };
 
+
     this.naoAutenticado();
 
     this.datareload();
 
   }
 
-  constructor(private gerenteService: GerenteService, private modalService: NgbModal, private operacaoService: CadastroOperacaoService, private token: TokenStorageService, private router: Router) {
+  constructor(private route: ActivatedRoute, private gerenteService: GerenteService, private modalService: NgbModal, private operacaoService: CadastroOperacaoService, private token: TokenStorageService, private router: Router) {
   }
 
 
@@ -66,7 +68,7 @@ export class OperacaoRiscoComponent implements OnInit {
   }
 
   private validado: boolean;
- private cadastrado: boolean;
+  private cadastrado: boolean;
   naoAutenticado() {
     if (this.info.authorities.toString() !== 'ROLE_GERENTE') {
       this.validado = false;
@@ -83,21 +85,34 @@ export class OperacaoRiscoComponent implements OnInit {
   datareload() {
 
     this.gerenteObjeto = this.gerenteService.getGerenteLogado(this.info.username);
-    this.gerenteObjeto.subscribe(data=>{
+    this.gerenteObjeto.subscribe(data => {
       this.gerente = data;
       console.clear();
-    })
 
+      this.sub = this.route.params.subscribe(params => {
+        const id = params['id'];
+        if (id) {
+          this.operacaoService.getTipoOperacao(id).subscribe((tipoope: any) => {
+            if (tipoope) {
+              this.tipoOpe = tipoope;
+              console.clear();
+            }
+          })
+        }
+      })
+    })
   }
 
 
   cadastrar() {
 
-      this.operacao.gerente_id = this.gerente.id;
-      this.gerente.operacoes.push(this.operacao);
-      this.gerenteService.cadastrarOperacao(this.gerente).pipe(first()).subscribe(data => { alert("Operação cadastrada com sucesso!")
+    this.operacao.gerente_id = this.gerente.id;
+    this.gerente.operacoes.push(this.operacao);
+    this.gerenteService.cadastrarOperacao(this.gerente).pipe(first()).subscribe(data => {
+      alert("Operação cadastrada com sucesso!")
 
-      this.getDismissReason(ModalDismissReasons.BACKDROP_CLICK); }, error => { alert(error) });
+      this.getDismissReason(ModalDismissReasons.BACKDROP_CLICK);
+    }, error => { alert(error) });
 
 
   }
