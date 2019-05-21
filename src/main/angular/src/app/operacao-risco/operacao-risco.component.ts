@@ -5,7 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { CadastroOperacaoService, Operacao, TipoOperacao } from '../service/cadastro-operacao.service';
 import { Observable, Subscription } from "rxjs";
 import { Gerente, GerenteService } from '../service/gerente.service';
-import { map, first } from "rxjs/operators";
+import {first } from "rxjs/operators";
 
 @Component({
   selector: 'app-operacao-risco',
@@ -23,17 +23,15 @@ export class OperacaoRiscoComponent implements OnInit {
   public info: any;
   sub: Subscription;
   ngOnInit() {
+
     this.info = {
       token: this.token.getToken(),
       username: this.token.getUsername(),
       authorities: this.token.getAuthorities(),
       senha: this.token.getPassword()
     };
-
-
-    this.naoAutenticado();
-
     this.datareload();
+    this.naoAutenticado();
 
   }
 
