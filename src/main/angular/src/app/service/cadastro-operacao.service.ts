@@ -21,7 +21,7 @@ export class Operacao {
   public tempoNesc: number;
   public numFuncionariosOpe: number;
   public gerente_id: number;
-  public tipoOpe: TipoOperacao;
+  public id_tipo_ope: number;
   public statusSYS: true;
 }
 
