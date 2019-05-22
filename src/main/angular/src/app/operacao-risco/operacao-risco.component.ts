@@ -88,7 +88,7 @@ export class OperacaoRiscoComponent implements OnInit {
         this.operacaoService.getTipoOperacao(id).subscribe((tipoope: any) => {
           if (tipoope) {
             this.tipoOpe = tipoope;
-
+console.clear();
           }
         })
       }
@@ -105,7 +105,6 @@ export class OperacaoRiscoComponent implements OnInit {
 
 
   cadastrar() {
-
     this.operacao.gerente_id = this.gerente.id;
     this.gerente.operacoes.push(this.operacao);
     this.gerenteService.cadastrarOperacao(this.gerente).pipe(first()).subscribe(data => {
@@ -114,10 +113,9 @@ export class OperacaoRiscoComponent implements OnInit {
       this.getDismissReason(ModalDismissReasons.BACKDROP_CLICK);
     }, error => { alert(error) });
 
-
   }
   trackByFn(index, operacao) {
-     return operacao.id; 
+     return operacao.id;
   }
 
   toggleReadonly() {
