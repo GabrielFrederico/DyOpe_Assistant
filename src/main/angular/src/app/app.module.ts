@@ -38,7 +38,7 @@ import { RedefinirSenhaComponent } from './redefinir-senha/redefinir-senha.compo
     '[attr.readonly]': '_isReadonly ? "" : null'
   }
 })
-class ReadonlyDirective {
+export class ReadonlyDirective {
   // tslint:disable-next-line:variable-name
   _isReadonly = false;
 
@@ -92,7 +92,7 @@ class ReadonlyDirective {
     BrowserModule,
     ShowHidePasswordModule,
     BrMaskerModule  ],
-  exports: [RouterModule],
+  exports: [RouterModule, ReadonlyDirective],
   providers: [ {
     provide: HTTP_INTERCEPTORS,
   useClass: AuthInterceptorService,
