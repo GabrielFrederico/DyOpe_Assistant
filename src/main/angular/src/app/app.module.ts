@@ -3,7 +3,7 @@ import {CUSTOM_ELEMENTS_SCHEMA, Directive, Input, NgModule} from '@angular/core'
 
 import {AppComponent} from './app.component';
 import {RouterModule, Routes} from '@angular/router';
-import {AppRoutingModule, routingComponent, routingComponent2} from './app-routing.module';
+import {AppRoutingModule, routingComponent, routingComponent2, routingComponent7} from './app-routing.module';
 import {routingComponent3, routingComponent4, routingComponent5, routingComponent6} from './app-routing.module';
 import {SidebarComponent} from './sidebar/sidebar.component';
 import {NavBarComponent} from './nav-bar/nav-bar.component';
@@ -63,6 +63,7 @@ class ReadonlyDirective {
     routingComponent4,
     routingComponent5,
     routingComponent6,
+    routingComponent7,
     SidebarComponent,
     NavBarComponent,
     NavComponent,
@@ -74,11 +75,11 @@ class ReadonlyDirective {
   imports: [
     AppRoutingModule,
     BrowserModule,
-    NgbCollapseModule,
     NgbModule,
     AngularFontAwesomeModule,
     BrowserAnimationsModule,
     LayoutModule,
+    NgbCollapseModule,
     MatToolbarModule,
     MatButtonModule,
     MatSidenavModule,
@@ -90,8 +91,7 @@ class ReadonlyDirective {
     MatButtonToggleModule,
     BrowserModule,
     ShowHidePasswordModule,
-    BrMaskerModule
-  ],
+    BrMaskerModule  ],
   exports: [RouterModule],
   providers: [ {
     provide: HTTP_INTERCEPTORS,

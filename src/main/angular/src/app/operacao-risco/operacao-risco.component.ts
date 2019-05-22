@@ -5,7 +5,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { CadastroOperacaoService, Operacao, TipoOperacao } from '../service/cadastro-operacao.service';
 import { Observable, Subscription } from "rxjs";
 import { Gerente, GerenteService } from '../service/gerente.service';
-import {first } from "rxjs/operators";
+import { first } from "rxjs/operators";
+import {List} from 'immutable';
 
 @Component({
   selector: 'app-operacao-risco',
@@ -15,15 +16,16 @@ export class OperacaoRiscoComponent implements OnInit {
   @Input() operacao: Operacao = new Operacao();
   @Input() gerente: Gerente;
   @Input() gerenteObjeto: Observable<Gerente>;
-  @Input() gerentes: Observable<Gerente[]>;
+  @Input() gerentes: List<Gerente>;
   @Input() tipoOpe: TipoOperacao;
+  @Input() operacoes: List<Operacao>;
   public erro: boolean;
   public errorMessage = '';
   closeResult: string;
   public info: any;
   sub: Subscription;
   ngOnInit() {
-
+    this.etapasproducao();
     this.info = {
       token: this.token.getToken(),
       username: this.token.getUsername(),
@@ -79,25 +81,25 @@ export class OperacaoRiscoComponent implements OnInit {
   }
 
   isReadonly = true;
+  etapasproducao() {
+    this.sub = this.route.params.subscribe(params => {
+      const id = params['id'];
+      if (id) {
+        this.operacaoService.getTipoOperacao(id).subscribe((tipoope: any) => {
+          if (tipoope) {
+            this.tipoOpe = tipoope;
 
+          }
+        })
+      }
+    })
+  }
   datareload() {
-
     this.gerenteObjeto = this.gerenteService.getGerenteLogado(this.info.username);
     this.gerenteObjeto.subscribe(data => {
       this.gerente = data;
-      console.clear();
+      this.operacoes = List(this.gerente.operacoes);
 
-      this.sub = this.route.params.subscribe(params => {
-        const id = params['id'];
-        if (id) {
-          this.operacaoService.getTipoOperacao(id).subscribe((tipoope: any) => {
-            if (tipoope) {
-              this.tipoOpe = tipoope;
-              console.clear();
-            }
-          })
-        }
-      })
     })
   }
 
@@ -113,6 +115,9 @@ export class OperacaoRiscoComponent implements OnInit {
     }, error => { alert(error) });
 
 
+  }
+  trackByFn(index, operacao) {
+     return operacao.id; 
   }
 
   toggleReadonly() {

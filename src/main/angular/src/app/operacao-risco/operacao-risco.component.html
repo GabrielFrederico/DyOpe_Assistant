@@ -20,7 +20,7 @@
 
       <!-- Page Content -->
 
-      <h1>Operação {{tipoOpe.tipoOpe}}</h1>
+      <h1>{{tipoOpe.tipoOpe}}</h1>
       <hr>
 
       <div class="row">
@@ -28,7 +28,7 @@
           <div class="card border-info mb-3 lista">
             <div class="card-header border-info">Operações a fazer</div>
             <div class="card-body text-secondary">
-              <a *ngFor="let operacao of gerente.operacoes" class="btn btn-outline-info list-group-item list-group-item-action " href="javascript:void(0)"
+              <a *ngFor="let operacao of operacoes; trackBy: trackByFn" class="btn btn-outline-info list-group-item list-group-item-action " href="javascript:void(0)"
                  data-toggle="modal" (click)="openInformacoes(content)" data-target=".informations">{{operacao.descricao}}</a>
             </div>
             <div class="card-footer bg-transparent border-info">
