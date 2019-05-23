@@ -17,7 +17,7 @@ export class OperacaoRiscoComponent implements OnInit {
   @Input() gerente: Gerente;
   @Input() gerenteObjeto: Observable<Gerente>;
   @Input() gerentes: Observable<Gerente[]>;
-  @Input() tipoOpe: EtapaProducao;
+  @Input() etapaproducao: EtapaProducao;
   @Input() operacoes: Operacao[];
   public erro: boolean;
   public errorMessage = '';
@@ -85,9 +85,9 @@ export class OperacaoRiscoComponent implements OnInit {
     this.sub = this.route.params.subscribe(params => {
       const id = params['id'];
       if (id) {
-        this.operacaoService.getEtapaProducao(id).subscribe((tipoope: any) => {
-          if (tipoope) {
-            this.tipoOpe = tipoope;
+        this.operacaoService.getEtapaProducao(id).subscribe((etapaproducao: EtapaProducao) => {
+          if (etapaproducao) {
+            this.etapaproducao = etapaproducao;
             console.clear();
           }
         })
@@ -98,20 +98,20 @@ export class OperacaoRiscoComponent implements OnInit {
     this.gerenteObjeto = this.gerenteService.getGerenteLogado(this.info.username);
     this.gerenteObjeto.subscribe(data => {
       this.gerente = data;
-      this.gerente.etapasproducao.push(this.tipoOpe);
-      this.operacoes = this.tipoOpe.operacoes;
+
+
+      this.operacoes = this.etapaproducao.operacoes;
 
     })
   }
-
-
   cadastrar() {
-    this.tipoOpe.gerente_id = this.gerente.id;
-    this.operacao.id_tipo_ope = this.tipoOpe.idTipoOpe;
+    this.operacao.etapa_producao_id = this.etapaproducao.idTipoOpe;
+    this.etapaproducao.gerente_id = this.gerente.id;
+    this.gerente.etapasproducao.push(this.etapaproducao);
+
     this.gerenteService.cadastrarOperacao(this.gerente).pipe(first()).subscribe(data => {
       alert("Operação cadastrada com sucesso!")
 
-      this.getDismissReason(ModalDismissReasons.BACKDROP_CLICK);
     }, error => { alert(error) });
 
   }

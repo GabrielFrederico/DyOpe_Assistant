@@ -22,7 +22,7 @@ export class Operacao {
   public qtdPecasOpe: number;
   public tempoNesc: number;
   public numFuncionariosOpe: number;
-  public id_tipo_ope: number;
+  public etapa_producao_id: number;
   public statusSYS: true;
 }
 
