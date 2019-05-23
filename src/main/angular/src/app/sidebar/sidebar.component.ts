@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { TipoOperacao, CadastroOperacaoService } from '../service/cadastro-operacao.service';
+import { EtapaProducao, CadastroOperacaoService } from '../service/cadastro-operacao.service';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 export class SidebarComponent implements OnInit {
   public isCollapsed = false;
 
-  @Input() tiposOperacao: Observable<TipoOperacao[]>;
+  @Input() tiposOperacao: Observable<EtapaProducao[]>;
 
   constructor(private tipoOpeservice: CadastroOperacaoService) {
   }

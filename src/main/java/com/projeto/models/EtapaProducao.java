@@ -1,27 +1,27 @@
 package com.projeto.models;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.*;
 
 @Entity
-public class TipoOperacao {
+public class EtapaProducao {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
 
     private long idTipoOpe;
     
-    @OneToOne(mappedBy = "tipoope")
-    private Operacao operacao;
-
-    public Operacao getOperacao() {
-        return operacao;
-    }
-
-    public void setOperacao(Operacao operacao) {
-        this.operacao = operacao;
-    }
-
     private String tipoOpe;
+    
+    @OneToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "etapa_producao_operacoes",
+    joinColumns = @JoinColumn(name = "etapa_producao_id"),
+    inverseJoinColumns = @JoinColumn(name = "operacao_id"))
+	private Set<Operacao> operacoes = new HashSet<>();
+
+    
     private char statusSYS;
 
     public char getStatusSYS() {

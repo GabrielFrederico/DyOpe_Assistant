@@ -2,7 +2,7 @@ import {Component, OnInit, Input} from '@angular/core';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {TokenStorageService} from '../auth/token-storage.service';
 import {Router} from '@angular/router';
-import {TipoOperacao, CadastroOperacaoService} from '../service/cadastro-operacao.service';
+import {EtapaProducao, CadastroOperacaoService} from '../service/cadastro-operacao.service';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -14,7 +14,7 @@ export class GerenteIndexComponent implements OnInit {
   info: any;
   form: any = {};
   public isCollapsed = false;
-  @Input() tiposOperacao: Observable<TipoOperacao[]>;
+  @Input() tiposOperacao: Observable<EtapaProducao[]>;
 
   closeResult: string;
   private roles: string[];

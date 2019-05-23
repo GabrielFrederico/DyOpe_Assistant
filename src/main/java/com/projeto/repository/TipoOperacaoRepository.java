@@ -1,13 +1,13 @@
 package com.projeto.repository;
 
-import com.projeto.models.TipoOperacao;
+import com.projeto.models.EtapaProducao;
 import org.springframework.data.repository.CrudRepository;
 
 import java.io.Serializable;
 
-public interface TipoOperacaoRepository extends CrudRepository<TipoOperacao, Serializable> {
+public interface EtapaProducaoRepository extends CrudRepository<EtapaProducao, Serializable> {
 
-    TipoOperacao findByidTipoOpe(long idTipoOpe);
+    EtapaProducao findByidTipoOpe(long idTipoOpe);
 
-    TipoOperacao findBytipoOpe(String tipoOpe);
+    EtapaProducao findBytipoOpe(String tipoOpe);
 }

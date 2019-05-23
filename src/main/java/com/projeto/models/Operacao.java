@@ -41,19 +41,6 @@ public class Operacao {
 		this.infoSetor = infoSetor;
 	}
 
-
-	@OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "idTipoOpe", referencedColumnName = "idTipoOpe")
-    private TipoOperacao tipoope;
-
-    public TipoOperacao getTipoope() {
-        return tipoope;
-    }
-
-    public void setTipoope(TipoOperacao tipoope) {
-        this.tipoope = tipoope;
-    }
-
 	public long getId() {
 		return id;
 	}

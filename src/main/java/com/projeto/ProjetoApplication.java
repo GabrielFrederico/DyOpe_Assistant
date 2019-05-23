@@ -14,11 +14,11 @@ import com.projeto.models.Funcionario;
 import com.projeto.models.Gerente;
 import com.projeto.models.Role;
 import com.projeto.models.RoleName;
-import com.projeto.models.TipoOperacao;
+import com.projeto.models.EtapaProducao;
 import com.projeto.repository.FuncionarioRepository;
 import com.projeto.repository.GerenteRepository;
 import com.projeto.repository.RoleRepository;
-import com.projeto.repository.TipoOperacaoRepository;
+import com.projeto.repository.EtapaProducaoRepository;
 
 @SpringBootApplication
 public class ProjetoApplication {
@@ -32,7 +32,7 @@ public class ProjetoApplication {
 	FuncionarioRepository funcionarioRepository;
 
 	@Autowired
-	TipoOperacaoRepository tipoOperacaoRepository;
+	EtapaProducaoRepository etapaProducaoRepository;
 
 	@Autowired
 	PasswordEncoder encoder;
@@ -58,11 +58,11 @@ public class ProjetoApplication {
 			roleRepository.save(rolefuncionario);
 			rolesgerente.add(rolegerente);
 			rolesfuncionario.add(rolefuncionario);
-			TipoOperacao risco = new TipoOperacao();
-			TipoOperacao corte = new TipoOperacao();
-			TipoOperacao costura = new TipoOperacao();
-			TipoOperacao beneficiamento = new TipoOperacao();
-			TipoOperacao acabamento = new TipoOperacao();
+			EtapaProducao risco = new EtapaProducao();
+			EtapaProducao corte = new EtapaProducao();
+			EtapaProducao costura = new EtapaProducao();
+			EtapaProducao beneficiamento = new EtapaProducao();
+			EtapaProducao acabamento = new EtapaProducao();
 
 			risco.setIdTipoOpe(1);
 			risco.setTipoOpe("Risco");
@@ -84,11 +84,11 @@ public class ProjetoApplication {
 			acabamento.setTipoOpe("Acabamento");
 			acabamento.setStatusSYS('A');
 
-			tipoOperacaoRepository.save(risco);
-			tipoOperacaoRepository.save(corte);
-			tipoOperacaoRepository.save(costura);
-			tipoOperacaoRepository.save(beneficiamento);
-			tipoOperacaoRepository.save(acabamento);
+			etapaProducaoRepository.save(risco);
+			etapaProducaoRepository.save(corte);
+			etapaProducaoRepository.save(costura);
+			etapaProducaoRepository.save(beneficiamento);
+			etapaProducaoRepository.save(acabamento);
 
 			Gerente juanGerente = new Gerente();
 			Funcionario juanFuncionario = new Funcionario();

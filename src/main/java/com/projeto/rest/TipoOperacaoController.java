@@ -1,7 +1,7 @@
 package com.projeto.rest;
 
-import com.projeto.models.TipoOperacao;
-import com.projeto.repository.TipoOperacaoRepository;
+import com.projeto.models.EtapaProducao;
+import com.projeto.repository.EtapaProducaoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -14,26 +14,26 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("tipoOpe")
 @CrossOrigin(origins = "*", maxAge = 3600)
 @PreAuthorize("hasRole('GERENTE')")
-public class TipoOperacaoController {
+public class EtapaProducaoController {
 
     @Autowired
-    TipoOperacaoRepository tipoOperacaoRepository;
+    EtapaProducaoRepository etapaProducaoRepository;
 
     @RequestMapping(method = RequestMethod.GET)
-    public Iterable<TipoOperacao> listAll() {
-        return tipoOperacaoRepository.findAll();
+    public Iterable<EtapaProducao> listAll() {
+        return etapaProducaoRepository.findAll();
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/{idTipoOpe}")
-    public TipoOperacao getTipoOperacaoById(@PathVariable("idTipoOpe") long idTipoOpe) {
-        TipoOperacao tipoOperacao = tipoOperacaoRepository.findByidTipoOpe(idTipoOpe);
-        return tipoOperacao;
+    public EtapaProducao getEtapaProducaoById(@PathVariable("idTipoOpe") long idTipoOpe) {
+        EtapaProducao etapaProducao = etapaProducaoRepository.findByidTipoOpe(idTipoOpe);
+        return etapaProducao;
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/getByNome/{tipoope}")
-    public TipoOperacao getTipoOperacaoByNome(@PathVariable("tipoOpe") String tipoOpe) {
-        TipoOperacao tipoOperacao = tipoOperacaoRepository.findBytipoOpe(tipoOpe);
-        return tipoOperacao;
+    public EtapaProducao getEtapaProducaoByNome(@PathVariable("tipoOpe") String tipoOpe) {
+        EtapaProducao etapaProducao = etapaProducaoRepository.findBytipoOpe(tipoOpe);
+        return etapaProducao;
     }
 
 }

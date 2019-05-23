@@ -42,10 +42,10 @@ public class Gerente extends Usuario {
 	private String cpf;
 
 	@OneToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "gerente_operacoes",
+	@JoinTable(name = "gerente_etapas_producao",
     joinColumns = @JoinColumn(name = "gerente_id"),
-    inverseJoinColumns = @JoinColumn(name = "operacao_id"))
-	private Set<Operacao> operacoes = new HashSet<>();
+    inverseJoinColumns = @JoinColumn(name = "etapa_producao_id"))
+	private Set<EtapaProducao> etapasproducao = new HashSet<>();
 
 	@OneToMany(mappedBy = "gerente", cascade = CascadeType.ALL)
 	private Set<Setor> setores;
@@ -73,12 +73,12 @@ public class Gerente extends Usuario {
 		super();
 	}
 
-	public Set<Operacao> getOperacoes() {
-		return operacoes;
+	public Set<EtapaProducao> getEtapasProd() {
+		return etapasproducao;
 	}
 
-	public void setOperacoes(Set<Operacao> operacoes) {
-		this.operacoes = operacoes;
+	public void setEtapasProd(Set<EtapaProducao> etapasproducao) {
+		this.etapasproducao = etapasproducao;
 	}
 
 	public long getId() {

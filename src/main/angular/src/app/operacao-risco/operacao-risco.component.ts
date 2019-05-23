@@ -2,11 +2,11 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TokenStorageService } from '../auth/token-storage.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { CadastroOperacaoService, Operacao, TipoOperacao } from '../service/cadastro-operacao.service';
+import { CadastroOperacaoService, Operacao, EtapaProducao } from '../service/cadastro-operacao.service';
 import { Observable, Subscription } from "rxjs";
 import { Gerente, GerenteService } from '../service/gerente.service';
 import { first } from "rxjs/operators";
-import {List} from 'immutable';
+import { List } from 'immutable';
 
 @Component({
   selector: 'app-operacao-risco',
@@ -16,9 +16,9 @@ export class OperacaoRiscoComponent implements OnInit {
   @Input() operacao: Operacao = new Operacao();
   @Input() gerente: Gerente;
   @Input() gerenteObjeto: Observable<Gerente>;
-  @Input() gerentes: List<Gerente>;
-  @Input() tipoOpe: TipoOperacao;
-  @Input() operacoes: List<Operacao>;
+  @Input() gerentes: Observable<Gerente[]>;
+  @Input() tipoOpe: EtapaProducao;
+  @Input() operacoes: Operacao[];
   public erro: boolean;
   public errorMessage = '';
   closeResult: string;
@@ -85,10 +85,10 @@ export class OperacaoRiscoComponent implements OnInit {
     this.sub = this.route.params.subscribe(params => {
       const id = params['id'];
       if (id) {
-        this.operacaoService.getTipoOperacao(id).subscribe((tipoope: any) => {
+        this.operacaoService.getEtapaProducao(id).subscribe((tipoope: any) => {
           if (tipoope) {
             this.tipoOpe = tipoope;
-console.clear();
+            console.clear();
           }
         })
       }
@@ -98,15 +98,16 @@ console.clear();
     this.gerenteObjeto = this.gerenteService.getGerenteLogado(this.info.username);
     this.gerenteObjeto.subscribe(data => {
       this.gerente = data;
-      this.operacoes = List(this.gerente.operacoes);
+      this.gerente.etapasproducao.push(this.tipoOpe);
+      this.operacoes = this.tipoOpe.operacoes;
 
     })
   }
 
 
   cadastrar() {
-    this.operacao.gerente_id = this.gerente.id;
-    this.gerente.operacoes.push(this.operacao);
+    this.tipoOpe.gerente_id = this.gerente.id;
+    this.operacao.id_tipo_ope = this.tipoOpe.idTipoOpe;
     this.gerenteService.cadastrarOperacao(this.gerente).pipe(first()).subscribe(data => {
       alert("Operação cadastrada com sucesso!")
 
@@ -115,7 +116,7 @@ console.clear();
 
   }
   trackByFn(index, operacao) {
-     return operacao.id;
+    return operacao.id;
   }
 
   toggleReadonly() {

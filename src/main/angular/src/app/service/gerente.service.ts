@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { TokenStorageService } from "../auth/token-storage.service";
-import { Operacao } from "./cadastro-operacao.service";
+import { Operacao, EtapaProducao } from "./cadastro-operacao.service";
 
 
 // tslint:disable-next-line:class-name
@@ -29,7 +29,7 @@ export class Gerente {
   public senhaConfirm: string;
   public senha: string;
   role: string;
-  public operacoes: Operacao[];
+  public etapasproducao: EtapaProducao[];
 
   constructor(nome: string, nomeUsuario: string, cpf: string, rg: string, email: string, senha: string, senhaConfirm: string) {
     this.nome = nome;
