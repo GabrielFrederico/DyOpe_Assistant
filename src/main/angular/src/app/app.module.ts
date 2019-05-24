@@ -47,7 +47,7 @@ export class ReadonlyDirective {
   }
 
   // tslint:disable-next-line:use-life-cycle-interface
-
+ //C:\Users\juan.159417\Documents\NODE_PATH; pasta node
 }
 
 

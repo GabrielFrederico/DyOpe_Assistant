@@ -19,7 +19,9 @@ export class OperacaoRiscoComponent implements OnInit {
   @Input() ope: Operacao;
   @Input() gerenteObjeto: Observable<Gerente>;
   @Input() gerentes: Observable<Gerente[]>;
-  @Input() etapaproducao: EtapaProducao;
+  @Input() operacoesAFazer: Operacao[];
+  @Input() operacoesEmAndamento: Operacao[];
+  @Input() operacoesNoPrazo: Operacao[];
   @Input() operacoes: Operacao[];
   public erro: boolean;
   public errorMessage = '';
@@ -27,7 +29,7 @@ export class OperacaoRiscoComponent implements OnInit {
   public info: any;
   sub: Subscription;
   ngOnInit() {
-    this.etapasproducao();
+    //  this.etapasproducao();
     this.info = {
       token: this.token.getToken(),
       username: this.token.getUsername(),
@@ -83,28 +85,24 @@ export class OperacaoRiscoComponent implements OnInit {
   }
 
   isReadonly = true;
-  etapasproducao() {
-    this.sub = this.route.params.subscribe(params => {
-      const id = params['id'];
-      if (id) {
-        this.operacaoService.getEtapaProducao(id).subscribe((etapaproducao: EtapaProducao) => {
-          if (etapaproducao) {
-            this.etapaproducao = etapaproducao;
-            console.clear();
-          }
-        })
-      }
-    })
-  }
+  //etapasproducao() {    this.sub = this.route.params.subscribe(params => {      const id = params['id'];      if (id) {        this.operacaoService.getEtapaProducao(id).subscribe((etapaproducao: EtapaProducao) => {          if (etapaproducao) {            this.etapaproducao = etapaproducao;     console.clear();          }        })     }    })  }
   datareload() {
     this.gerenteObjeto = this.gerenteService.getGerenteLogado(this.info.username);
     this.gerenteObjeto.subscribe(data => {
       this.gerente = data;
+      console.clear();
     })
+    //this.operacoes = this.gerente.operacoes;
+    //this.gerente.operacoes.filter(filtro => {
 
+      //if (filtro.etapa_producao_id === 1) {
+      //     this.operacoes.push(filtro);
+      //}
+     //}
+  //  )
   }
   cadastrar() {
-    this.operacao.etapa_producao_id = this.etapaproducao.idTipoOpe;
+    this.operacao.etapa_producao_id = 1;
     this.operacao.gerente_id = this.gerente.id;
     this.gerente.operacoes.push(this.operacao);
     this.gerenteService.cadastrarOperacao(this.gerente).pipe(first()).subscribe(data => {
@@ -116,7 +114,10 @@ export class OperacaoRiscoComponent implements OnInit {
   trackByFn(operacao) {
     return operacao.id;
   }
+onSelect(operacao: Operacao){
+  this.ope = operacao;
 
+}
   toggleReadonly() {
     this.isReadonly = !this.isReadonly;
 

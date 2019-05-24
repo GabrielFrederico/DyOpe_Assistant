@@ -20,7 +20,7 @@
 
       <!-- Page Content -->
 
-      <h1>{{etapaproducao.tipoOpe}}</h1>
+      <h1>Risco</h1>
       <hr>
 
       <div class="row">
@@ -28,12 +28,10 @@
           <div class="card border-info mb-3 lista">
             <div class="card-header border-info">Operações a fazer</div>
             <div class="card-body text-secondary">
-                        <a *ngFor="let operacao of gerente.operacoes; trackBy: trackByFn"  class="btn btn-outline-info list-group-item list-group-item-action " href="javascript:void(0)"
+                        <a *ngFor="let operacao of gerente.operacoes; trackBy: trackByFn" (click)="onSelect(operacao)" class="btn btn-outline-info list-group-item list-group-item-action " href="javascript:void(0)"
                  data-toggle="modal" (click)="openInformacoes(content)" data-target=".informations">{{operacao.descricao}}</a>
             </div>
-            <div class="card-body text-secondary" [(ngModel)]="ope">
-              <option  class="btn btn-outline-info list-group-item list-group-item-action "  data-toggle="modal" (click)="openInformacoes(content)" data-target=".informations" *ngFor="let operacao of gerente.operacoes; trackBy: trackByFn" [value]="operacao">{{operacao.descricao}}</option>
-            </div>
+
             <div class="card-footer bg-transparent border-info">
               <a class="btn btn-info" href="javascript:void(0)" (click)="openCadastro(cadastro)" data-toggle="modal"
                  data-target=".cadastro-operacoes">Cadastrar</a>
@@ -111,7 +109,7 @@
           <div class="form-group">
             <div class="form-group">
               <label for="DescricaoOpe">Descrição da operação:</label>
-              <input [readonly]="isReadonly" required="required" name="descricao" class="form-control"
+              <input [readonly]="isReadonly" [(ngModel)]="ope.descricao" required="required" name="descricao" class="form-control"
                         id="DescricaoOpe">
             </div>
             <div class="form-group">
@@ -119,7 +117,7 @@
                 <div class="col-md-6">
                   <div class="form-label-group">
                     <input [readonly]="isReadonly" type="date" id="datainicio" class="form-control"
-                           placeholder="Data Inicio:"
+                           placeholder="Data Inicio:"  [(ngModel)]="ope.dataInicio" name="dataInicio"
                            required="required">
                     <label for="datainicio">Data Inicio:</label>
                   </div>
@@ -128,7 +126,7 @@
                 <div class="col-md-6">
                   <div class="form-label-group">
                     <input [readonly]="isReadonly" type="date" id="datalimite" class="form-control"
-                           placeholder="Data limite:"
+                           placeholder="Data limite:"  [(ngModel)]="ope.prazo" name="prazo"
                            required="required">
                     <label for="datalimite">Data limite:</label>
                   </div>
@@ -140,7 +138,7 @@
                 <div class="col-md-6">
                   <div class="form-label-group">
                     <input [readonly]="isReadonly" type="text" id="custosOpe" class="form-control fa-credit-card"
-                           placeholder="Custos"
+                           placeholder="Custos"  [(ngModel)]="ope.custosOpe"  name="custosOpe"
                            required="required">
                     <label for="custosOpe">Custos:</label>
                   </div>
@@ -148,7 +146,7 @@
                 <div class="col-md-6">
                   <div class="form-label-group">
                     <input [readonly]="isReadonly" type="number" id="LoteProd" class="form-control"
-                           placeholder="Lote de Produção"
+                           placeholder="Lote de Produção"  [(ngModel)]="ope.loteProducao"  name="loteProducao"
                            required="required">
                     <label for="LoteProd">Lote de Produção:</label>
                   </div>
@@ -160,7 +158,7 @@
                 <div class="col-md-6">
                   <div class="form-label-group">
                     <input [readonly]="isReadonly" type="number" id="FuncNesc" class="form-control"
-                           placeholder="Funcionários necessários:"
+                           placeholder="Funcionários necessários:"   [(ngModel)]="ope.numFuncionariosOpe" name="numFuncionariosOpe"
                            required="required">
                     <label for="FuncNesc">Funcionários necessários:</label>
                   </div>
@@ -168,7 +166,7 @@
                 <div class="col-md-6">
                   <div class="form-label-group">
                     <input [readonly]="isReadonly" type="number" id="QtdPecasFunc" class="form-control"
-                           placeholder="Quantidade de peças por funcionário:"
+                           placeholder="Quantidade de peças por funcionário:" [(ngModel)]="ope.qtdPecasOpe" name="qtdPecasOpe"
                            required="required">
                     <label for="QtdPecasFunc">Quantidade de peças por funcionário:</label>
                   </div>
@@ -180,7 +178,7 @@
                 <div class="col-md-6">
                   <div class="form-label-group">
                     <input [readonly]="isReadonly" type="number" id="TempoPeca" class="form-control"
-                           placeholder="Tempo necessário por peça:"
+                           placeholder="Tempo necessário por peça:" [(ngModel)]="ope.tempoNesc" name="tempoNesc"
                            required="required">
                     <label for="TempoPeca">Tempo necessário por peça:</label>
                   </div>
@@ -188,7 +186,7 @@
                 <div class="col-md-6">
                   <div class="form-label-group">
                     <input [readonly]="isReadonly" type="text" id="precoPeca" class="form-control"
-                           placeholder="Preço da peça:"
+                           placeholder="Preço da peça:" [(ngModel)]="ope.precoPecaOpe" name="precoPecaOpe"
                            required="required">
                     <label for="precoPeca">Preço da peça:</label>
                   </div>
