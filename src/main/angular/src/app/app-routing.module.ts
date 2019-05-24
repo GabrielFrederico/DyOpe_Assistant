@@ -65,6 +65,6 @@ export const routingComponent4 = [FuncionarioIndexComponent, InformacoesSetorCom
 
 export const routingComponent5 = [OperacaoAcabamentoComponent, OperacaoBeneficiamentoComponent, OperacaoCorteComponent];
 
-export const routingComponent6 = [GerenteComponent,GerenteIndexComponent, NavComponent];
+export const routingComponent6 = [GerenteComponent, NavComponent];
 
 export const routingComponent7 = [RedefinirSenhaComponent, OperacaoRiscoComponent];
