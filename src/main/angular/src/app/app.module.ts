@@ -64,8 +64,6 @@ export class ReadonlyDirective {
     routingComponent5,
     routingComponent6,
     routingComponent7,
-    SidebarComponent,
-    NavBarComponent,
     NavComponent,
     GerenteComponent,
     NavegacaoComponent,
