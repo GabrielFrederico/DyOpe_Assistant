@@ -46,14 +46,16 @@ public class Gerente extends Usuario {
 	@JoinTable(name = "gerente_operacoes",
     joinColumns = @JoinColumn(name = "gerente_id"),
     inverseJoinColumns = @JoinColumn(name = "operacao_id"))
-	private Set<EtapaProducao> etapasproducao = new HashSet<>();
+	private Set<Operacao> operacoes = new HashSet<>();
 
-	public Set<EtapaProducao> getEtapasproducao() {
-		return etapasproducao;
+	
+
+	public Set<Operacao> getOperacoes() {
+		return operacoes;
 	}
 
-	public void setEtapasproducao(Set<EtapaProducao> etapasproducao) {
-		this.etapasproducao = etapasproducao;
+	public void setOperacoes(Set<Operacao> operacoes) {
+		this.operacoes = operacoes;
 	}
 
 	@OneToMany(mappedBy = "gerente", cascade = CascadeType.ALL)

@@ -28,8 +28,11 @@
           <div class="card border-info mb-3 lista">
             <div class="card-header border-info">Operações a fazer</div>
             <div class="card-body text-secondary">
-              <a *ngFor="let operacao of operacoes; trackBy: trackByFn" class="btn btn-outline-info list-group-item list-group-item-action " href="javascript:void(0)"
+                        <a *ngFor="let operacao of gerente.operacoes; trackBy: trackByFn"  class="btn btn-outline-info list-group-item list-group-item-action " href="javascript:void(0)"
                  data-toggle="modal" (click)="openInformacoes(content)" data-target=".informations">{{operacao.descricao}}</a>
+            </div>
+            <div class="card-body text-secondary" [(ngModel)]="ope">
+              <option  class="btn btn-outline-info list-group-item list-group-item-action "  data-toggle="modal" (click)="openInformacoes(content)" data-target=".informations" *ngFor="let operacao of gerente.operacoes; trackBy: trackByFn" [value]="operacao">{{operacao.descricao}}</option>
             </div>
             <div class="card-footer bg-transparent border-info">
               <a class="btn btn-info" href="javascript:void(0)" (click)="openCadastro(cadastro)" data-toggle="modal"
@@ -107,10 +110,9 @@
         <form [noValidate]="$any(false)">
           <div class="form-group">
             <div class="form-group">
-
-              <label  for="DescricaoOpe">Descrição da operação:</label>
-              <textarea [readonly]="isReadonly" required="required" class="form-control" rows="2"
-                        id="DescricaoOpe"></textarea>
+              <label for="DescricaoOpe">Descrição da operação:</label>
+              <input [readonly]="isReadonly" required="required" name="descricao" class="form-control"
+                        id="DescricaoOpe">
             </div>
             <div class="form-group">
               <div class="form-row">

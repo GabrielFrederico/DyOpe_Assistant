@@ -23,6 +23,7 @@ export class Operacao {
   public tempoNesc: number;
   public numFuncionariosOpe: number;
   public etapa_producao_id: number;
+  public gerente_id: number;
   public statusSYS: true;
 }
 
@@ -39,6 +40,9 @@ export class CadastroOperacaoService {
   }
   getOperacoes() {
     return this.httpClient.get<Operacao[]>('http://localhost:8080/gerentes/operacoes', httpOptions);
+  }
+  getOperacaoId(id:number): Observable<Operacao>{
+    return this.httpClient.get<Operacao>('http://localhost:8080/operacoes/'+id,httpOptions);
   }
   getEtapaProducao(id: number): Observable<EtapaProducao>{
     return this.httpClient.get<EtapaProducao>('http://localhost:8080/tipoOpe/'+id, httpOptions);

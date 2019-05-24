@@ -15,6 +15,8 @@ import { List } from 'immutable';
 export class OperacaoRiscoComponent implements OnInit {
   @Input() operacao: Operacao = new Operacao();
   @Input() gerente: Gerente;
+  @Input() infoOpe: Observable<Operacao>;
+  @Input() ope: Operacao;
   @Input() gerenteObjeto: Observable<Gerente>;
   @Input() gerentes: Observable<Gerente[]>;
   @Input() etapaproducao: EtapaProducao;
@@ -98,24 +100,20 @@ export class OperacaoRiscoComponent implements OnInit {
     this.gerenteObjeto = this.gerenteService.getGerenteLogado(this.info.username);
     this.gerenteObjeto.subscribe(data => {
       this.gerente = data;
-
-
-      this.operacoes = this.etapaproducao.operacoes;
-
     })
+
   }
   cadastrar() {
     this.operacao.etapa_producao_id = this.etapaproducao.idTipoOpe;
-    this.etapaproducao.gerente_id = this.gerente.id;
-    this.gerente.etapasproducao.push(this.etapaproducao);
-
+    this.operacao.gerente_id = this.gerente.id;
+    this.gerente.operacoes.push(this.operacao);
     this.gerenteService.cadastrarOperacao(this.gerente).pipe(first()).subscribe(data => {
       alert("Operação cadastrada com sucesso!")
 
     }, error => { alert(error) });
 
   }
-  trackByFn(index, operacao) {
+  trackByFn(operacao) {
     return operacao.id;
   }
 
