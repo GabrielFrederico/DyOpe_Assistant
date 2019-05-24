@@ -11,10 +11,6 @@
   transform: translate3d(5px, 56px, 0px);
 }
 
-.testefonte {
-  font-size: 0.8rem;
-}
-
 .confirmar_fonte {
   font-size: 0.8rem;
   font-weight: 500;
@@ -427,5 +423,11 @@ div.menu_index span {
 @media screen and (max-width: 303px) {
   .showredefinir {
     width: 65%;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .testefonte {
+    font-size: 14px;
   }
 }
