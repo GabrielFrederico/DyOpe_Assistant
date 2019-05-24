@@ -27,7 +27,7 @@ const routes: Routes = [
   {path: 'logingerente', component: LoginGerenteComponent},
   {path: 'loginfuncionario', component: LoginFuncionarioComponent},
   {path: '', component: IndexComponent},
-  {path: 'gerenteindex', component: GerenteIndexComponent},
+  {path: 'gerenteindex', loadChildren: './gerente-index/gerente-index.module#GerenteIndexModule'},
   {path: '404', component: ErroComponent},
   {path: 'esqueceusenha', component: EsqueceuSenhaComponent},
   {path: 'cadastrogerente', component: CadastroGerenteComponent},

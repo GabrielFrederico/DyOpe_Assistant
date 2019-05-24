@@ -8,7 +8,7 @@ const rotas: Routes = [
 {path: 'gerenteindex', component: GerenteIndexComponent}];
 
 @NgModule({
-  imports: [RouterModule.forRoot(rotas)],
+  imports: [RouterModule.forChild(rotas)],
   exports: [RouterModule]
 })
 export class GerenteIndexRoutingModule {

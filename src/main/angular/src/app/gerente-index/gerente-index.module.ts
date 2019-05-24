@@ -5,6 +5,7 @@ import { GerenteIndexRoutingModule } from './gerente-index.routing.module';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { OperacaoCosturaComponent } from '../operacao-costura/operacao-costura.component';
 import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   schemas: [
@@ -19,8 +20,6 @@ import { RouterModule } from '@angular/router';
   imports: [
     GerenteIndexRoutingModule,
     ],
-  exports: [RouterModule],
-
 })
 export class GerenteIndexModule {
 }
