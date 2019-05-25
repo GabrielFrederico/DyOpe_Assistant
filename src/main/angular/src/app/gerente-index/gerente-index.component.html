@@ -6,13 +6,13 @@
 <div id="wrapper">
 
   <!-- Sidebar -->
-  <ul [ngbCollapse]="isCollapsed" class="sidebar bg-primary navbar-nav" >
+  <ul  class="sidebar bg-primary navbar-nav" >
     <app-sidebar></app-sidebar>
     <li class="nav-item text-light" >
-      <a class="nav-link text-light" routerLink="/controlefuncionarios">
+      <a class="nav-link text-light" routerLink="/gerenteindex/controlefuncionarios">
         <span>Controle</span>
       </a>
-    
+
 
     </li>
   </ul>
@@ -20,10 +20,10 @@
   <div id="content-wrapper" class="fundo justify-content-center">
 
     <div class="container-fluid">
+        <router-outlet></router-outlet>
 
-   <router-outlet></router-outlet>
       <!-- Page Content -->
-      <h1>Home</h1>
+    <!--  <h1>Home</h1>
       <hr>
       <div class="menu_index">
         <span class="badge badge-info tam"> Bem-vindo {{info.username}}!</span>
@@ -72,4 +72,5 @@
 <ng-template #loggedOut >
   Acesso negado! <br>
   Faça o <a routerLink="/logingerente">login.</a>
+
 </ng-template>

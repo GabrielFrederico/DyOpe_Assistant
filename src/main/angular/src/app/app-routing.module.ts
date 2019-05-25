@@ -31,18 +31,10 @@ const routes: Routes = [
   {path: '404', component: ErroComponent},
   {path: 'esqueceusenha', component: EsqueceuSenhaComponent},
   {path: 'cadastrogerente', component: CadastroGerenteComponent},
-  {path: 'perfilgerente', component: PerfilGerenteComponent},
   {path: 'cadastrofuncionario', component: CadastroFuncionarioComponent},
-  {path: 'cadastrosetor', component: CadastroSetorComponent},
-  {path: 'controlefuncionarios', component: ControleFuncionariosComponent},
-  {path: 'funcionarioindex', component: FuncionarioIndexComponent},
+{path: 'funcionarioindex', component: FuncionarioIndexComponent},
   {path: 'informacoessetor', component: InformacoesSetorComponent},
   {path: 'perfilfuncionario', component: PerfilFuncionarioComponent},
-  {path: 'operacaoacabamento', component: OperacaoAcabamentoComponent},
-  {path: 'operacaobeneficiamento', component: OperacaoBeneficiamentoComponent},
-  {path: 'operacaocorte', component: OperacaoCorteComponent},
-  {path: 'operacaorisco',  component: OperacaoRiscoComponent},
-  {path: 'gerente', component: GerenteComponent},
   {path: 'testebarra', component: NavComponent},
   {path: 'redefinirsenha', component: RedefinirSenhaComponent}
 
@@ -57,14 +49,14 @@ export class AppRoutingModule {
 
 export const routingComponent = [LoginGerenteComponent, LoginFuncionarioComponent, IndexComponent];
 
-export const routingComponent2 = [ErroComponent, EsqueceuSenhaComponent, CadastroGerenteComponent, PerfilGerenteComponent];
+export const routingComponent2 = [ErroComponent, EsqueceuSenhaComponent, CadastroGerenteComponent];
 
-export const routingComponent3 = [CadastroFuncionarioComponent, CadastroSetorComponent, ControleFuncionariosComponent];
+export const routingComponent3 = [CadastroFuncionarioComponent];
 
 export const routingComponent4 = [FuncionarioIndexComponent, InformacoesSetorComponent, PerfilFuncionarioComponent];
 
-export const routingComponent5 = [OperacaoAcabamentoComponent, OperacaoBeneficiamentoComponent, OperacaoCorteComponent];
+export const routingComponent5 = [ ];
 
 export const routingComponent6 = [GerenteComponent, NavComponent];
 
-export const routingComponent7 = [RedefinirSenhaComponent, OperacaoRiscoComponent];
+export const routingComponent7 = [RedefinirSenhaComponent];

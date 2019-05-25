@@ -1,24 +1,5 @@
 
   <title>Operações</title>
-
-<div *ngIf="validado"  id="page-top">
-<app-nav-bar></app-nav-bar>
-
-<div id="wrapper">
-
-  <!-- Sidebar -->
-  <ul class="sidebar bg-primary navbar-nav">
-
-    <app-sidebar></app-sidebar>
-  </ul>
-
-
-  <div id="content-wrapper" class="fundo">
-
-    <div class="container-fluid ">
-
-      <!-- Page Content -->
-
       <h1>Operação Corte</h1>
       <hr>
 
@@ -75,8 +56,6 @@
 
       </div>
 
-    </div>
-    <!-- /.container-fluid -->
 
     <!-- Sticky Footer -->
     <footer class="sticky-footer">
@@ -86,12 +65,6 @@
         </div>
       </div>
     </footer>
-
-  </div>
-  <!-- /.content-wrapper -->
-
-</div>
-<!-- /#wrapper -->
 
 <!-- Scroll to Top Button-->
 <a class="scroll-to-top rounded" href="#page-top">
@@ -173,10 +146,3 @@
     </div>
   </div>
 </div>
-
-
-</div>
-<ng-template #loggedOut >
-  Acesso negado! <br>
-  Faça o <a routerLink="/logingerente">login.</a>
-</ng-template>

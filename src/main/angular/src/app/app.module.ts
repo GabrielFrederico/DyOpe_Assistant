@@ -29,26 +29,11 @@ import {NavegacaoComponent} from './navegacao/navegacao.component';
 import {AuthInterceptorService} from './auth/auth-interceptor.service';
 import { BrMaskerModule } from 'brmasker-ionic-3';
 import { RedefinirSenhaComponent } from './redefinir-senha/redefinir-senha.component';
+import { SharedModule } from './sidebar/shared.module';
 
-@Directive({
-  // tslint:disable-next-line:directive-selector
-  selector: '[readonly],[readOnly]',
-  // tslint:disable-next-line:use-host-property-decorator
-  host: {
-    '[attr.readonly]': '_isReadonly ? "" : null'
-  }
-})
-export class ReadonlyDirective {
-  // tslint:disable-next-line:variable-name
-  _isReadonly = false;
 
-  @Input() set readonly(v) {
-    this._isReadonly = coerceBooleanProperty(v);
-  }
 
-  // tslint:disable-next-line:use-life-cycle-interface
- //C:\Users\juan.159417\Documents\NODE_PATH; pasta node
-}
+
 
 
 @NgModule({
@@ -67,12 +52,10 @@ export class ReadonlyDirective {
     NavComponent,
     GerenteComponent,
     NavegacaoComponent,
-    ReadonlyDirective,
     RedefinirSenhaComponent
   ],
   imports: [
     AppRoutingModule,
-    BrowserModule,
     NgbModule,
     AngularFontAwesomeModule,
     BrowserAnimationsModule,
@@ -87,10 +70,9 @@ export class ReadonlyDirective {
     FormsModule,
     MatMenuModule,
     MatButtonToggleModule,
-    BrowserModule,
     ShowHidePasswordModule,
-    BrMaskerModule  ],
-  exports: [RouterModule, ReadonlyDirective],
+    BrMaskerModule, SharedModule  ],
+  exports: [RouterModule],
   providers: [ {
     provide: HTTP_INTERCEPTORS,
   useClass: AuthInterceptorService,
