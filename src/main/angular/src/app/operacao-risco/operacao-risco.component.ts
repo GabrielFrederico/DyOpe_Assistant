@@ -88,18 +88,17 @@ export class OperacaoRiscoComponent implements OnInit {
   //etapasproducao() {    this.sub = this.route.params.subscribe(params => {      const id = params['id'];      if (id) {        this.operacaoService.getEtapaProducao(id).subscribe((etapaproducao: EtapaProducao) => {          if (etapaproducao) {            this.etapaproducao = etapaproducao;     console.clear();          }        })     }    })  }
   datareload() {
     this.gerenteObjeto = this.gerenteService.getGerenteLogado(this.info.username);
-    this.gerenteObjeto.subscribe(data => {
-      this.gerente = data;
-      console.clear();
-    })
+    this.gerenteObjeto.subscribe(data => this.gerente = data)
+    console.clear()
+
     //this.operacoes = this.gerente.operacoes;
     //this.gerente.operacoes.filter(filtro => {
 
-      //if (filtro.etapa_producao_id === 1) {
-      //     this.operacoes.push(filtro);
-      //}
-     //}
-  //  )
+    //if (filtro.etapa_producao_id === 1) {
+    //     this.operacoes.push(filtro);
+    //}
+    //}
+    //  )
   }
   cadastrar() {
     this.operacao.etapa_producao_id = 1;
@@ -114,10 +113,10 @@ export class OperacaoRiscoComponent implements OnInit {
   trackByFn(operacao) {
     return operacao.id;
   }
-onSelect(operacao: Operacao){
-  this.ope = operacao;
+  onSelect(operacao: Operacao) {
+    this.ope = operacao;
 
-}
+  }
   toggleReadonly() {
     this.isReadonly = !this.isReadonly;
 

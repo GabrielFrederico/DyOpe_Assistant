@@ -65,8 +65,9 @@ export class PerfilGerenteComponent implements OnInit {
       username: this.token.getUsername(),
       authorities: this.token.getAuthorities()
     };
+      this.datareload();
     this.naoAutenticado();
-    this.datareload();
+
   }
 
   focosenhaatual() {
@@ -83,10 +84,9 @@ export class PerfilGerenteComponent implements OnInit {
 
   datareload() {
     this.gerenteObjeto = this.gerenteService.getGerenteLogado(this.info.username);
-    this.gerenteObjeto.subscribe(data => {
-      this.gerente = data;
+this.gerenteObjeto.subscribe(data=> this.gerente = data)
       console.clear();
-    })
+
 
 
   }
