@@ -12,7 +12,6 @@
                         <a  *ngFor="let operacao of gerente.operacoes; async " (click)="onSelect(operacao)" class="btn btn-outline-info list-group-item list-group-item-action " href="javascript:void(0)"
                  data-toggle="modal" (click)="openInformacoes(content)" data-target=".informations">{{operacao.descricao}}</a>
             </div>
-
             <div class="card-footer bg-transparent border-info">
               <a class="btn btn-info" href="javascript:void(0)" (click)="openCadastro(cadastro)" data-toggle="modal"
                  data-target=".cadastro-operacoes">Cadastrar</a>
@@ -50,6 +49,8 @@
         </div>
 
       </div>
+
+    </div>
     <!-- /.container-fluid -->
 
     <!-- Sticky Footer -->
@@ -61,6 +62,11 @@
       </div>
     </footer>
 
+  </div>
+  <!-- /.content-wrapper -->
+
+</div>
+<!-- /#wrapper -->
 
 <!-- Scroll to Top Button-->
 <a class="scroll-to-top rounded" href="#page-top">
@@ -82,27 +88,28 @@
         <form [noValidate]="$any(false)">
           <div class="form-group">
             <div class="form-group">
-              <label for="DescricaoOpe">Descrição da operação:</label>
-              <input [readonly]="isReadonly" [(ngModel)]="ope.descricao" required="required" name="descricao" class="form-control"
-                        id="DescricaoOpe">
+
+              <label  for="DescricaoOpe">Descrição da operação:</label>
+              <textarea [readonly]="isReadonly" required="required" class="form-control" rows="2"
+                        id="DescricaoOpe"></textarea>
             </div>
             <div class="form-group">
               <div class="form-row">
                 <div class="col-md-6">
                   <div class="form-label-group">
                     <input [readonly]="isReadonly" type="date" id="datainicio" class="form-control"
-                           placeholder="Data Inicio:"  [(ngModel)]="ope.dataInicio" name="dataInicio"
+                           placeholder="Data Inicio:"
                            required="required">
-                    <label for="datainicio">Data Inicio:</label>
+                    <label for="datainicio" class="testefonte">Data Inicio:</label>
                   </div>
                 </div>
 
                 <div class="col-md-6">
                   <div class="form-label-group">
                     <input [readonly]="isReadonly" type="date" id="datalimite" class="form-control"
-                           placeholder="Data limite:"  [(ngModel)]="ope.prazo" name="prazo"
+                           placeholder="Data limite:"
                            required="required">
-                    <label for="datalimite">Data limite:</label>
+                    <label for="datalimite" class="testefonte">Data limite:</label>
                   </div>
                 </div>
               </div>
@@ -112,17 +119,17 @@
                 <div class="col-md-6">
                   <div class="form-label-group">
                     <input [readonly]="isReadonly" type="text" id="custosOpe" class="form-control fa-credit-card"
-                           placeholder="Custos"  [(ngModel)]="ope.custosOpe"  name="custosOpe"
+                           placeholder="Custos"
                            required="required">
-                    <label for="custosOpe">Custos:</label>
+                    <label for="custosOpe" class="testefonte">Custos:</label>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-label-group">
                     <input [readonly]="isReadonly" type="number" id="LoteProd" class="form-control"
-                           placeholder="Lote de Produção"  [(ngModel)]="ope.loteProducao"  name="loteProducao"
+                           placeholder="Lote de Produção"
                            required="required">
-                    <label for="LoteProd">Lote de Produção:</label>
+                    <label for="LoteProd" class="testefonte">Lote de Produção:</label>
                   </div>
                 </div>
               </div>
@@ -132,17 +139,17 @@
                 <div class="col-md-6">
                   <div class="form-label-group">
                     <input [readonly]="isReadonly" type="number" id="FuncNesc" class="form-control"
-                           placeholder="Funcionários necessários:"   [(ngModel)]="ope.numFuncionariosOpe" name="numFuncionariosOpe"
+                           placeholder="Funcionários necessários:"
                            required="required">
-                    <label for="FuncNesc">Funcionários necessários:</label>
+                    <label for="FuncNesc" class="testefonte">Funcionários necessários:</label>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-label-group">
                     <input [readonly]="isReadonly" type="number" id="QtdPecasFunc" class="form-control"
-                           placeholder="Quantidade de peças por funcionário:" [(ngModel)]="ope.qtdPecasOpe" name="qtdPecasOpe"
+                           placeholder="Quantidade de peças por funcionário:"
                            required="required">
-                    <label for="QtdPecasFunc">Quantidade de peças por funcionário:</label>
+                    <label for="QtdPecasFunc" class="testefonte">Quantidade de peças por funcionário:</label>
                   </div>
                 </div>
               </div>
@@ -152,17 +159,17 @@
                 <div class="col-md-6">
                   <div class="form-label-group">
                     <input [readonly]="isReadonly" type="number" id="TempoPeca" class="form-control"
-                           placeholder="Tempo necessário por peça:" [(ngModel)]="ope.tempoNesc" name="tempoNesc"
+                           placeholder="Tempo necessário por peça:"
                            required="required">
-                    <label for="TempoPeca">Tempo necessário por peça:</label>
+                    <label for="TempoPeca" class="testefonte">Tempo necessário por peça:</label>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-label-group">
                     <input [readonly]="isReadonly" type="text" id="precoPeca" class="form-control"
-                           placeholder="Preço da peça:" [(ngModel)]="ope.precoPecaOpe" name="precoPecaOpe"
+                           placeholder="Preço da peça:"
                            required="required">
-                    <label for="precoPeca">Preço da peça:</label>
+                    <label for="precoPeca" class="testefonte">Preço da peça:</label>
                   </div>
                 </div>
               </div>
@@ -264,3 +271,5 @@
   </div>
 
 </ng-template>
+
+</div>
