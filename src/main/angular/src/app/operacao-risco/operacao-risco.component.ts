@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TokenStorageService } from '../auth/token-storage.service';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -12,7 +12,7 @@ import { List } from 'immutable';
   selector: 'app-operacao-risco',
   templateUrl: './operacao-risco.component.html'
 })
-export class OperacaoRiscoComponent implements OnInit {
+export class OperacaoRiscoComponent implements OnInit, OnDestroy {
   @Input() operacao: Operacao = new Operacao();
   @Input() gerente: Gerente;
   @Input() infoOpe: Observable<Operacao>;
@@ -23,13 +23,14 @@ export class OperacaoRiscoComponent implements OnInit {
   @Input() operacoesEmAndamento: Operacao[];
   @Input() operacoesNoPrazo: Operacao[];
   @Input() operacoes: Operacao[];
+  @Input() etapaproducao: EtapaProducao;
   public erro: boolean;
   public errorMessage = '';
   closeResult: string;
   public info: any;
   sub: Subscription;
   ngOnInit() {
-    //  this.etapasproducao();
+    this.etapasproducao();
     this.info = {
       token: this.token.getToken(),
       username: this.token.getUsername(),
@@ -43,7 +44,9 @@ export class OperacaoRiscoComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private gerenteService: GerenteService, private modalService: NgbModal, private operacaoService: CadastroOperacaoService, private token: TokenStorageService, private router: Router) {
   }
-
+  ngOnDestroy() {
+    this.sub.unsubscribe();
+  }
 
   openCadastro(cadastro) {
     this.modalService.open(cadastro, { size: 'lg', ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
@@ -85,23 +88,22 @@ export class OperacaoRiscoComponent implements OnInit {
   }
 
   isReadonly = true;
-  //etapasproducao() {    this.sub = this.route.params.subscribe(params => {      const id = params['id'];      if (id) {        this.operacaoService.getEtapaProducao(id).subscribe((etapaproducao: EtapaProducao) => {          if (etapaproducao) {            this.etapaproducao = etapaproducao;     console.clear();          }        })     }    })  }
+  etapasproducao() { this.sub = this.route.params.subscribe(params => { const id = params['id']; if (id) { this.operacaoService.getEtapaProducao(id).subscribe((etapaproducao: EtapaProducao) => { if (etapaproducao) { this.etapaproducao = etapaproducao; console.clear() } }) } }) }
   datareload() {
     this.gerenteObjeto = this.gerenteService.getGerenteLogado(this.info.username);
     this.gerenteObjeto.subscribe(data => this.gerente = data)
-    console.clear()
+    console.clear();
 
-    //this.operacoes = this.gerente.operacoes;
-    //this.gerente.operacoes.filter(filtro => {
+    this.gerente.operacoes = this.gerente.operacoes.filter(filtro => {
+      console.log(filtro.etapa_producao_id);
+      return filtro.etapa_producao_id.toFixed().indexOf(this.etapaproducao.idTipoOpe.toFixed());
 
-    //if (filtro.etapa_producao_id === 1) {
-    //     this.operacoes.push(filtro);
-    //}
-    //}
-    //  )
+
+    });
+    console.clear();
   }
   cadastrar() {
-    this.operacao.etapa_producao_id = 1;
+    this.operacao.etapa_producao_id = this.etapaproducao.idTipoOpe;
     this.operacao.gerente_id = this.gerente.id;
     this.gerente.operacoes.push(this.operacao);
     this.gerenteService.cadastrarOperacao(this.gerente).pipe(first()).subscribe(data => {

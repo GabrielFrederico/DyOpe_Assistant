@@ -22,7 +22,6 @@ import { OperacaoRiscoComponent } from '../operacao-risco/operacao-risco.compone
 import { OperacaoAcabamentoComponent } from '../operacao-acabamento/operacao-acabamento.component';
 import { OperacaoBeneficiamentoComponent } from '../operacao-beneficiamento/operacao-beneficiamento.component';
 import { SharedModule } from '../sidebar/shared.module';
-
 @NgModule({
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA

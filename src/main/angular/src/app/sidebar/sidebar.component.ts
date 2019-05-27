@@ -10,13 +10,13 @@ import { Observable } from 'rxjs';
 export class SidebarComponent implements OnInit {
   public isCollapsed = false;
 
-  @Input() tiposOperacao: Observable<EtapaProducao[]>;
+  @Input() etapas: Observable<EtapaProducao[]>;
 
   constructor(private tipoOpeservice: CadastroOperacaoService) {
   }
 
   ngOnInit() {
-    this.tiposOperacao = this.tipoOpeservice.getTiposOperacoes();
+    this.etapas = this.tipoOpeservice.getTiposOperacoes();
 
   }
 

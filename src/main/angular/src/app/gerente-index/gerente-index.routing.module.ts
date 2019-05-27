@@ -17,12 +17,12 @@ children:[
   {path: 'operacaocorte', component: OperacaoCorteComponent},
   {path: 'operacaoacabamento', component: OperacaoAcabamentoComponent},
   {path: 'operacaobeneficiamento', component: OperacaoBeneficiamentoComponent},
-  {path: 'operacaorisco',  component: OperacaoRiscoComponent},
+  {path: 'operacaorisco/:id',  component: OperacaoRiscoComponent},
   {path: 'cadastrosetor', component: CadastroSetorComponent},
   {path: 'controlefuncionarios', component: ControleFuncionariosComponent},
   {path: 'cadastrosetor', component: CadastroSetorComponent},
   {path: 'perfilgerente', component: PerfilGerenteComponent},
-  
+
 ]}];
 
 @NgModule({
