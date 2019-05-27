@@ -427,7 +427,13 @@ div.menu_index span {
 }
 
 @media screen and (max-width: 991px) {
-  .testefonte {
+  .fonterisco {
     font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 901px) {
+  .fontecorte {
+    text-indent: -1%;
   }
 }

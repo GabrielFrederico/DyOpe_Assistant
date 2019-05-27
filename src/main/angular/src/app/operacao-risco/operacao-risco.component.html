@@ -1,8 +1,8 @@
 <base href="/src">
-  <title>Operações</title>
+<title>Operações</title>
 
-      <h1>{{etapaproducao.tipoOpe}}</h1>
-      <hr>
+<h1>{{etapaproducao.tipoOpe}}</h1>
+<hr>
 
       <div class="row">
         <div class="col-sm-4">
@@ -20,44 +20,44 @@
         </div>
 
 
-        <div class="col-sm-4">
-          <div class="card border-warning mb-3 lista">
-            <div class="card-header border-warning">Operações em andamento</div>
-            <div class="card-body text-warning">
-              <a class="btn btn-outline-warning list-group-item list-group-item-action ">
-                Acabamento
-              </a>
-
-            </div>
-
-          </div>
-        </div>
-
-        <div class="col-sm-4">
-          <div class="card border-success mb-3 lista">
-            <div class="card-header border-success">Operações concluídas</div>
-            <div class="card-body text-success">
-              <a class="btn btn-outline-success list-group-item list-group-item-action ">
-                Risco
-              </a>
-
-              <a class="btn btn-outline-success list-group-item list-group-item-action ">
-                Corte
-              </a>
-            </div>
-          </div>
-        </div>
+  <div class="col-sm-4">
+    <div class="card border-warning mb-3 lista">
+      <div class="card-header border-warning">Operações em andamento</div>
+      <div class="card-body text-warning">
+        <a class="btn btn-outline-warning list-group-item list-group-item-action ">
+          Acabamento
+        </a>
 
       </div>
 
-    <!-- Sticky Footer -->
-    <footer class="sticky-footer">
-      <div class="container my-auto">
-        <div class="copyright text-center my-auto">
-          <span>Copyright © DyOpe Assistant 2019</span>
-        </div>
+    </div>
+  </div>
+
+  <div class="col-sm-4">
+    <div class="card border-success mb-3 lista">
+      <div class="card-header border-success">Operações concluídas</div>
+      <div class="card-body text-success">
+        <a class="btn btn-outline-success list-group-item list-group-item-action ">
+          Risco
+        </a>
+
+        <a class="btn btn-outline-success list-group-item list-group-item-action ">
+          Corte
+        </a>
       </div>
-    </footer>
+    </div>
+  </div>
+
+</div>
+
+<!-- Sticky Footer -->
+<footer class="sticky-footer">
+  <div class="container my-auto">
+    <div class="copyright text-center my-auto">
+      <span>Copyright © DyOpe Assistant 2019</span>
+    </div>
+  </div>
+</footer>
 
 
 <!-- Scroll to Top Button-->
@@ -81,26 +81,29 @@
           <div class="form-group">
             <div class="form-group">
 
-              <label  for="DescricaoOpe">Descrição da operação:</label>
-              <input [readonly]="isReadonly" [(ngModel)]="ope.descricao" required="required" class="form-control" name="descricao" id="DescricaoOpe">
+              <label for="DescricaoOpe">Descrição da operação:</label>
+              <input [readonly]="isReadonly" [(ngModel)]="ope.descricao" required="required" class="form-control"
+                     name="descricao" id="DescricaoOpe">
             </div>
             <div class="form-group">
               <div class="form-row">
                 <div class="col-md-6">
                   <div class="form-label-group">
-                    <input [readonly]="isReadonly" [(ngModel)]="ope.dataInicio" type="date" id="datainicio" class="form-control"
+                    <input [readonly]="isReadonly" [(ngModel)]="ope.dataInicio" type="date" id="datainicio"
+                           class="form-control"
                            placeholder="Data Inicio:" name="dataInicio"
                            required="required">
-                    <label for="datainicio" class="testefonte">Data Inicio:</label>
+                    <label for="datainicio" class="fonterisco">Data Inicio:</label>
                   </div>
                 </div>
 
                 <div class="col-md-6">
                   <div class="form-label-group">
-                    <input [readonly]="isReadonly" [(ngModel)]="ope.prazo" type="date" id="datalimite" class="form-control"
+                    <input [readonly]="isReadonly" [(ngModel)]="ope.prazo" type="date" id="datalimite"
+                           class="form-control"
                            placeholder="Data limite:" name="prazo"
                            required="required">
-                    <label for="datalimite" class="testefonte">Prazo:</label>
+                    <label for="datalimite" class="fonterisco">Prazo:</label>
                   </div>
                 </div>
               </div>
@@ -109,18 +112,20 @@
               <div class="form-row">
                 <div class="col-md-6">
                   <div class="form-label-group">
-                    <input [readonly]="isReadonly" [(ngModel)]="ope.custosOpe" type="text" id="custosOpe" class="form-control fa-credit-card"
+                    <input [readonly]="isReadonly" [(ngModel)]="ope.custosOpe" type="text" id="custosOpe"
+                           class="form-control fa-credit-card"
                            placeholder="Custos" name="custosOpe"
                            required="required">
-                    <label for="custosOpe" class="testefonte">Custos:</label>
+                    <label for="custosOpe" class="fonterisco">Custos:</label>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-label-group">
-                    <input [readonly]="isReadonly" [(ngModel)]="ope.loteProducao" type="number" id="LoteProd" class="form-control"
+                    <input [readonly]="isReadonly" [(ngModel)]="ope.loteProducao" type="number" id="LoteProd"
+                           class="form-control"
                            placeholder="Lote de Produção" name="loteProducao"
                            required="required">
-                    <label for="LoteProd" class="testefonte">Lote de Produção:</label>
+                    <label for="LoteProd" class="fonterisco">Lote de Produção:</label>
                   </div>
                 </div>
               </div>
@@ -129,18 +134,20 @@
               <div class="form-row">
                 <div class="col-md-6">
                   <div class="form-label-group">
-                    <input [readonly]="isReadonly" [(ngModel)]="ope.numFuncionariosOpe" type="number" id="FuncNesc" class="form-control"
+                    <input [readonly]="isReadonly" [(ngModel)]="ope.numFuncionariosOpe" type="number" id="FuncNesc"
+                           class="form-control"
                            placeholder="Funcionários necessários:" name="numFuncionariosOpe"
                            required="required">
-                    <label for="FuncNesc" class="testefonte">Funcionários necessários:</label>
+                    <label for="FuncNesc" class="fonterisco">Funcionários necessários:</label>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-label-group">
-                    <input [readonly]="isReadonly" [(ngModel)]="ope.qtdPecasOpe"  type="number" id="QtdPecasFunc" class="form-control"
+                    <input [readonly]="isReadonly" [(ngModel)]="ope.qtdPecasOpe" type="number" id="QtdPecasFunc"
+                           class="form-control"
                            placeholder="Quantidade de peças por funcionário:" name="qtdPecasOpe"
                            required="required">
-                    <label for="QtdPecasFunc" class="testefonte">Quantidade de peças por funcionário:</label>
+                    <label for="QtdPecasFunc" class="fonterisco">Quantidade de peças por funcionário:</label>
                   </div>
                 </div>
               </div>
@@ -149,18 +156,20 @@
               <div class="form-row">
                 <div class="col-md-6">
                   <div class="form-label-group">
-                    <input [readonly]="isReadonly" [(ngModel)]="ope.tempoNesc" type="number" id="TempoPeca" class="form-control"
+                    <input [readonly]="isReadonly" [(ngModel)]="ope.tempoNesc" type="number" id="TempoPeca"
+                           class="form-control"
                            placeholder="Tempo necessário por peça:" name="tempoNesc"
                            required="required">
-                    <label for="TempoPeca" class="testefonte">Tempo necessário por peça:</label>
+                    <label for="TempoPeca" class="fonterisco">Tempo necessário por peça:</label>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-label-group">
-                    <input [readonly]="isReadonly"  [(ngModel)]="ope.precoPecaOpe" type="text" id="precoPeca" class="form-control"
+                    <input [readonly]="isReadonly" [(ngModel)]="ope.precoPecaOpe" type="text" id="precoPeca"
+                           class="form-control"
                            placeholder="Preço da peça:" name="precoPecaOpe"
                            required="required">
-                    <label for="precoPeca" class="testefonte">Preço da peça:</label>
+                    <label for="precoPeca" class="fonterisco">Preço da peça:</label>
                   </div>
                 </div>
               </div>
@@ -197,13 +206,13 @@
     </div>
     <div class="modal-body">
       <div class="card-body">
-        <form #cadastrarOperacao="ngForm" [noValidate]="$any(false)" (ngSubmit)="cadastrar()" >
+        <form #cadastrarOperacao="ngForm" [noValidate]="$any(false)" (ngSubmit)="cadastrar()">
           <div class="form-group">
             <div class="form-group">
 
               <label for="DescricaoOp">Descrição da operação:</label>
               <input required="required" name="descricao" [(ngModel)]="operacao.descricao" class="form-control"
-                        id="DescricaoOp">
+                     id="DescricaoOp">
             </div>
             <div class="form-group">
               <div class="form-row">
@@ -250,7 +259,8 @@
           </div>
 
           <div class="modal-footer col-md-12">
-            <button class="btn btn-secondary" (click)="modal.close()" type="button" data-dismiss="modal">Cancelar</button>
+            <button class="btn btn-secondary" (click)="modal.close()" type="button" data-dismiss="modal">Cancelar
+            </button>
             <input class="btn btn-primary" type="submit" value="Cadastrar">
           </div>
           <div *ngIf="cadastrarOperacao.submitted && erro" class="alert alert-warning separa">
