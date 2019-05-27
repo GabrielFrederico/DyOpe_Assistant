@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnDestroy } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TokenStorageService } from '../auth/token-storage.service';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -8,9 +8,12 @@ import { Gerente, GerenteService } from '../service/gerente.service';
 import { first } from "rxjs/operators";
 import { List } from 'immutable';
 
+
+  ChangeDetectionStrategy.OnPush
 @Component({
   selector: 'app-operacao-risco',
-  templateUrl: './operacao-risco.component.html'
+  templateUrl: './operacao-risco.component.html',
+  preserveWhitespaces: false
 })
 export class OperacaoRiscoComponent implements OnInit, OnDestroy {
   @Input() operacao: Operacao = new Operacao();
@@ -21,7 +24,7 @@ export class OperacaoRiscoComponent implements OnInit, OnDestroy {
   @Input() operacoesAFazer: Operacao[];
   @Input() operacoesEmAndamento: Operacao[];
   @Input() operacoesNoPrazo: Operacao[];
-  @Input() operacoes: Operacao[];
+  @Input() operacoes: List<Operacao>;
   @Input() etapaproducao: EtapaProducao;
   public erro: boolean;
   public errorMessage = '';
@@ -45,6 +48,7 @@ export class OperacaoRiscoComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy() {
     this.sub.unsubscribe();
+
   }
 
   openCadastro(cadastro) {

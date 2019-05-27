@@ -1,15 +1,18 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, OnInit, Input, ChangeDetectionStrategy} from '@angular/core';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {TokenStorageService} from '../auth/token-storage.service';
 import {Router} from '@angular/router';
 import {EtapaProducao, CadastroOperacaoService} from '../service/cadastro-operacao.service';
 import { Observable } from 'rxjs';
 
+  ChangeDetectionStrategy.OnPush
 @Component({
   selector: 'app-gerente-index',
-  templateUrl: './gerente-index.component.html'
+  templateUrl: './gerente-index.component.html',
+  preserveWhitespaces: false
 })
 export class GerenteIndexComponent implements OnInit {
+
   title = 'DyOpe Assistant';
   info: any;
   form: any = {};
