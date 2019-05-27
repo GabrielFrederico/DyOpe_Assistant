@@ -4,20 +4,21 @@
 <h1>{{etapaproducao.tipoOpe}}</h1>
 <hr>
 
-      <div class="row">
-        <div class="col-sm-4">
-          <div class="card border-info mb-3 lista">
-            <div class="card-header border-info">Operações a fazer</div>
-            <div class="card-body text-secondary">
-                        <a  *ngFor="let operacao of gerente.operacoes; async " (click)="onSelect(operacao)" class="btn btn-outline-info list-group-item list-group-item-action " href="javascript:void(0)"
-                 data-toggle="modal" (click)="openInformacoes(content)" data-target=".informations">{{operacao.descricao}}</a>
-            </div>
-            <div class="card-footer bg-transparent border-info">
-              <a class="btn btn-info" href="javascript:void(0)" (click)="openCadastro(cadastro)" data-toggle="modal"
-                 data-target=".cadastro-operacoes">Cadastrar</a>
-            </div>
-          </div>
-        </div>
+<div class="row">
+  <div class="col-sm-4">
+    <div class="card border-info mb-3 lista">
+      <div class="card-header border-info">Operações a fazer</div>
+      <div class="card-body text-secondary">
+        <a *ngFor="let operacao of gerente.operacoes; async " (click)="onSelect(operacao)"
+           class="btn btn-outline-info list-group-item list-group-item-action " href="javascript:void(0)"
+           data-toggle="modal" (click)="openInformacoes(content)" data-target=".informations">{{operacao.descricao}}</a>
+      </div>
+      <div class="card-footer bg-transparent border-info">
+        <a class="btn btn-info" href="javascript:void(0)" (click)="openCadastro(cadastro)" data-toggle="modal"
+           data-target=".cadastro-operacoes">Cadastrar</a>
+      </div>
+    </div>
+  </div>
 
 
   <div class="col-sm-4">
