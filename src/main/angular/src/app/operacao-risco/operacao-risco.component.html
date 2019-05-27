@@ -50,9 +50,6 @@
 
       </div>
 
-    </div>
-    <!-- /.container-fluid -->
-
     <!-- Sticky Footer -->
     <footer class="sticky-footer">
       <div class="container my-auto">
@@ -62,11 +59,6 @@
       </div>
     </footer>
 
-  </div>
-  <!-- /.content-wrapper -->
-
-</div>
-<!-- /#wrapper -->
 
 <!-- Scroll to Top Button-->
 <a class="scroll-to-top rounded" href="#page-top">
@@ -90,15 +82,14 @@
             <div class="form-group">
 
               <label  for="DescricaoOpe">Descrição da operação:</label>
-              <textarea [readonly]="isReadonly" required="required" class="form-control" rows="2"
-                        id="DescricaoOpe"></textarea>
+              <input [readonly]="isReadonly" [(ngModel)]="ope.descricao" required="required" class="form-control" name="descricao" id="DescricaoOpe">
             </div>
             <div class="form-group">
               <div class="form-row">
                 <div class="col-md-6">
                   <div class="form-label-group">
-                    <input [readonly]="isReadonly" type="date" id="datainicio" class="form-control"
-                           placeholder="Data Inicio:"
+                    <input [readonly]="isReadonly" [(ngModel)]="ope.dataInicio" type="date" id="datainicio" class="form-control"
+                           placeholder="Data Inicio:" name="dataInicio"
                            required="required">
                     <label for="datainicio" class="testefonte">Data Inicio:</label>
                   </div>
@@ -106,10 +97,10 @@
 
                 <div class="col-md-6">
                   <div class="form-label-group">
-                    <input [readonly]="isReadonly" type="date" id="datalimite" class="form-control"
-                           placeholder="Data limite:"
+                    <input [readonly]="isReadonly" [(ngModel)]="ope.prazo" type="date" id="datalimite" class="form-control"
+                           placeholder="Data limite:" name="prazo"
                            required="required">
-                    <label for="datalimite" class="testefonte">Data limite:</label>
+                    <label for="datalimite" class="testefonte">Prazo:</label>
                   </div>
                 </div>
               </div>
@@ -118,16 +109,16 @@
               <div class="form-row">
                 <div class="col-md-6">
                   <div class="form-label-group">
-                    <input [readonly]="isReadonly" type="text" id="custosOpe" class="form-control fa-credit-card"
-                           placeholder="Custos"
+                    <input [readonly]="isReadonly" [(ngModel)]="ope.custosOpe" type="text" id="custosOpe" class="form-control fa-credit-card"
+                           placeholder="Custos" name="custosOpe"
                            required="required">
                     <label for="custosOpe" class="testefonte">Custos:</label>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-label-group">
-                    <input [readonly]="isReadonly" type="number" id="LoteProd" class="form-control"
-                           placeholder="Lote de Produção"
+                    <input [readonly]="isReadonly" [(ngModel)]="ope.loteProducao" type="number" id="LoteProd" class="form-control"
+                           placeholder="Lote de Produção" name="loteProducao"
                            required="required">
                     <label for="LoteProd" class="testefonte">Lote de Produção:</label>
                   </div>
@@ -138,16 +129,16 @@
               <div class="form-row">
                 <div class="col-md-6">
                   <div class="form-label-group">
-                    <input [readonly]="isReadonly" type="number" id="FuncNesc" class="form-control"
-                           placeholder="Funcionários necessários:"
+                    <input [readonly]="isReadonly" [(ngModel)]="ope.numFuncionariosOpe" type="number" id="FuncNesc" class="form-control"
+                           placeholder="Funcionários necessários:" name="numFuncionariosOpe"
                            required="required">
                     <label for="FuncNesc" class="testefonte">Funcionários necessários:</label>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-label-group">
-                    <input [readonly]="isReadonly" type="number" id="QtdPecasFunc" class="form-control"
-                           placeholder="Quantidade de peças por funcionário:"
+                    <input [readonly]="isReadonly" [(ngModel)]="ope.qtdPecasOpe"  type="number" id="QtdPecasFunc" class="form-control"
+                           placeholder="Quantidade de peças por funcionário:" name="qtdPecasOpe"
                            required="required">
                     <label for="QtdPecasFunc" class="testefonte">Quantidade de peças por funcionário:</label>
                   </div>
@@ -158,16 +149,16 @@
               <div class="form-row">
                 <div class="col-md-6">
                   <div class="form-label-group">
-                    <input [readonly]="isReadonly" type="number" id="TempoPeca" class="form-control"
-                           placeholder="Tempo necessário por peça:"
+                    <input [readonly]="isReadonly" [(ngModel)]="ope.tempoNesc" type="number" id="TempoPeca" class="form-control"
+                           placeholder="Tempo necessário por peça:" name="tempoNesc"
                            required="required">
                     <label for="TempoPeca" class="testefonte">Tempo necessário por peça:</label>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-label-group">
-                    <input [readonly]="isReadonly" type="text" id="precoPeca" class="form-control"
-                           placeholder="Preço da peça:"
+                    <input [readonly]="isReadonly"  [(ngModel)]="ope.precoPecaOpe" type="text" id="precoPeca" class="form-control"
+                           placeholder="Preço da peça:" name="precoPecaOpe"
                            required="required">
                     <label for="precoPeca" class="testefonte">Preço da peça:</label>
                   </div>
@@ -271,5 +262,3 @@
   </div>
 
 </ng-template>
-
-</div>

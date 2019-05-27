@@ -15,7 +15,6 @@ import { List } from 'immutable';
 export class OperacaoRiscoComponent implements OnInit, OnDestroy {
   @Input() operacao: Operacao = new Operacao();
   @Input() gerente: Gerente;
-  @Input() infoOpe: Observable<Operacao>;
   @Input() ope: Operacao;
   @Input() gerenteObjeto: Observable<Gerente>;
   @Input() gerentes: Observable<Gerente[]>;
