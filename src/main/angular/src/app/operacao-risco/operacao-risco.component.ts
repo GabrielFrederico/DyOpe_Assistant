@@ -96,19 +96,11 @@ export class OperacaoRiscoComponent implements OnInit, OnDestroy {
     this.gerenteObjeto = this.gerenteService.getGerenteLogado(this.info.username);
     this.gerenteObjeto.subscribe(data => this.gerente = data)
     console.clear();
-
-    this.gerente.operacoes = this.gerente.operacoes.filter(filtro => {
-      console.log(filtro.etapa_producao_id);
-      return filtro.etapa_producao_id.toFixed().indexOf(this.etapaproducao.idTipoOpe.toFixed());
-
-
-    });
-    console.clear();
   }
   cadastrar() {
     this.operacao.etapa_producao_id = this.etapaproducao.idTipoOpe;
     this.operacao.gerente_id = this.gerente.id;
-    this.gerente.operacoes.push(this.operacao);
+    this.gerente.operacoesFazer.push(this.operacao);
     this.gerenteService.cadastrarOperacao(this.gerente).pipe(first()).subscribe(data => {
       alert("Operação cadastrada com sucesso!")
 

@@ -29,7 +29,9 @@ export class Gerente {
   public senhaConfirm: string;
   public senha: string;
   role: string;
-  public operacoes: Operacao[];
+  public operacoesFazer: Operacao[];
+  public operacoesAndamento: Operacao[];
+  public operacoesPrazo: Operacao[];
 
   constructor(nome: string, nomeUsuario: string, cpf: string, rg: string, email: string, senha: string, senhaConfirm: string) {
     this.nome = nome;
