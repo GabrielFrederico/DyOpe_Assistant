@@ -4,7 +4,7 @@ import { TokenStorageService } from '../auth/token-storage.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CadastroOperacaoService, Operacao, EtapaProducao } from '../service/cadastro-operacao.service';
 import { Observable, Subscription } from "rxjs";
-import { Gerente, GerenteService } from '../service/gerente.service';
+import { Gerente, GerenteService, Peca } from '../service/gerente.service';
 import { first } from "rxjs/operators";
 import { List } from 'immutable';
 
@@ -20,7 +20,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
   @Input() gerente: Gerente;
   @Input() ope: Operacao;
   @Input() gerenteObjeto: Observable<Gerente>;
-  @Input() gerentes: Observable<Gerente[]>;
+  @Input() peca: Peca = new Peca();
   @Input() operacoesAFazer: Operacao[];
   @Input() operacoesEmAndamento: Operacao[];
   @Input() operacoesNoPrazo: Operacao[];
@@ -103,6 +103,16 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
     this.gerente.operacoesFazer.push(this.operacao);
     this.gerenteService.cadastrarOperacao(this.gerente).pipe(first()).subscribe(data => {
       alert("Operação cadastrada com sucesso!")
+
+    }, error => { alert(error) });
+
+  }
+  cadastrarPeca() {
+    this.peca.etapa_producao_id = this.etapaproducao.idTipoOpe;
+    this.peca.gerente_id = this.gerente.id;
+    this.gerente.pecas.push(this.peca);
+    this.gerenteService.cadastrarOperacao(this.gerente).pipe(first()).subscribe(data => {
+      alert("Peça cadastrada com sucesso!")
 
     }, error => { alert(error) });
 

@@ -48,6 +48,8 @@ export class Gerente {
 export class Peca{
   public id:number;
   public descricao: string;
+  public gerente_id: number;
+  public etapa_producao_id: number;
 }
 
 @Injectable({

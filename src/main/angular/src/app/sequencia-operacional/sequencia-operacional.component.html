@@ -46,12 +46,13 @@
                 <label for="tempoOpe">Tempo </label>
               </div>
             </div>
+            <a class="btn btn-danger" href="javascript:void(0)">-</a>
           </div>
         </div>
         </div>
       <div class="card-footer bg-transparent border-info">
         <a class="btn btn-info" href="javascript:void(0)" (click)="openCadastro(cadastro)" data-toggle="modal"
-           data-target=".cadastro-operacoes">+</a>
+           data-target=".cadastro-operacoes">Add</a>
       </div>
     </div>
   </div>
@@ -142,14 +143,14 @@
             <div class="form-group">
 
               <label for="DescricaoOpe">Descrição da operação:</label>
-              <input [readonly]="isReadonly" [(ngModel)]="ope.descricao" required="required" class="form-control"
+              <input [readonly]="isReadonly"  required="required" class="form-control"
                      name="descricao" id="DescricaoOpe">
             </div>
             <div class="form-group">
               <div class="form-row">
                 <div class="col-md-6">
                   <div class="form-label-group">
-                    <input [readonly]="isReadonly" [(ngModel)]="ope.dataInicio" type="date" id="datainicio"
+                    <input [readonly]="isReadonly"  type="date" id="datainicio"
                            class="form-control"
                            placeholder="Data Inicio:" name="dataInicio"
                            required="required">
@@ -159,7 +160,7 @@
 
                 <div class="col-md-6">
                   <div class="form-label-group">
-                    <input [readonly]="isReadonly" [(ngModel)]="ope.prazo" type="date" id="datalimite"
+                    <input [readonly]="isReadonly"  type="date" id="datalimite"
                            class="form-control"
                            placeholder="Data limite:" name="prazo"
                            required="required">
@@ -172,7 +173,7 @@
               <div class="form-row">
                 <div class="col-md-6">
                   <div class="form-label-group">
-                    <input [readonly]="isReadonly" [(ngModel)]="ope.custosOpe" type="text" id="custosOpe"
+                    <input [readonly]="isReadonly"  type="text" id="custosOpe"
                            class="form-control fa-credit-card"
                            placeholder="Custos" name="custosOpe"
                            required="required">
@@ -181,7 +182,7 @@
                 </div>
                 <div class="col-md-6">
                   <div class="form-label-group">
-                    <input [readonly]="isReadonly" [(ngModel)]="ope.loteProducao" type="number" id="LoteProd"
+                    <input [readonly]="isReadonly"  type="number" id="LoteProd"
                            class="form-control"
                            placeholder="Lote de Produção" name="loteProducao"
                            required="required">
@@ -194,7 +195,7 @@
               <div class="form-row">
                 <div class="col-md-6">
                   <div class="form-label-group">
-                    <input [readonly]="isReadonly" [(ngModel)]="ope.numFuncionariosOpe" type="number" id="FuncNesc"
+                    <input [readonly]="isReadonly" type="number" id="FuncNesc"
                            class="form-control"
                            placeholder="Funcionários necessários:" name="numFuncionariosOpe"
                            required="required">
@@ -203,7 +204,7 @@
                 </div>
                 <div class="col-md-6">
                   <div class="form-label-group">
-                    <input [readonly]="isReadonly" [(ngModel)]="ope.qtdPecasOpe" type="number" id="QtdPecasFunc"
+                    <input [readonly]="isReadonly"  type="number" id="QtdPecasFunc"
                            class="form-control"
                            placeholder="Quantidade de peças por funcionário:" name="qtdPecasOpe"
                            required="required">
@@ -216,7 +217,7 @@
               <div class="form-row">
                 <div class="col-md-6">
                   <div class="form-label-group">
-                    <input [readonly]="isReadonly" [(ngModel)]="ope.tempoNesc" type="number" id="TempoPeca"
+                    <input [readonly]="isReadonly" type="number" id="TempoPeca"
                            class="form-control"
                            placeholder="Tempo necessário por peça:" name="tempoNesc"
                            required="required">
@@ -225,7 +226,7 @@
                 </div>
                 <div class="col-md-6">
                   <div class="form-label-group">
-                    <input [readonly]="isReadonly" [(ngModel)]="ope.precoPecaOpe" type="text" id="precoPeca"
+                    <input [readonly]="isReadonly"  type="text" id="precoPeca"
                            class="form-control"
                            placeholder="Preço da peça:" name="precoPecaOpe"
                            required="required">
@@ -234,9 +235,7 @@
                 </div>
               </div>
 
-
             </div>
-
 
           </div>
           <div class="modal-footer col-md-12">
@@ -268,24 +267,13 @@
       <div class="card-body">
         <form #cadastrarOperacao="ngForm" [noValidate]="$any(false)" (ngSubmit)="cadastrar()">
           <div class="form-group">
-            <div class="form-group">
-
+            <div class="form-row">
+            <div class="col-md-6">
               <label for="DescricaoOp">Descrição da operação:</label>
               <input required="required" name="descricao" [(ngModel)]="operacao.descricao" class="form-control"
                      id="DescricaoOp">
-            </div>
+                 </div>
 
-
-            <div class="form-row">
-              <div class="col-md-6">
-                <div class="form-label-group">
-                  <input type="text" id="custosOp" name="custosOpe"
-                         class="form-control fa-credit-card"
-                         placeholder="Custos" [(ngModel)]="operacao.custosOpe"
-                         required="required">
-                  <label for="custosOp">Custos:</label>
-                </div>
-              </div>
               <div class="col-md-6">
                 <div class="form-label-group">
                   <input type="number" id="LotePro" name="loteProducao" class="form-control"
@@ -294,9 +282,9 @@
                   <label for="LotePro">Lote de Produção:</label>
                 </div>
               </div>
-
+               </div>
             </div>
-          </div>
+
 
           <div class="modal-footer col-md-12">
             <button class="btn btn-secondary" (click)="modal.close()" type="button" data-dismiss="modal">Cancelar
