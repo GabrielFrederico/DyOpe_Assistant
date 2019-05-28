@@ -32,6 +32,7 @@ export class Gerente {
   public operacoesFazer: Operacao[];
   public operacoesAndamento: Operacao[];
   public operacoesPrazo: Operacao[];
+  public pecas: Peca[];
 
   constructor(nome: string, nomeUsuario: string, cpf: string, rg: string, email: string, senha: string, senhaConfirm: string) {
     this.nome = nome;
@@ -43,6 +44,10 @@ export class Gerente {
     this.role = 'gerente';
     this.senhaConfirm = senhaConfirm;
   }
+}
+export class Peca{
+  public id:number;
+  public descricao: string;
 }
 
 @Injectable({

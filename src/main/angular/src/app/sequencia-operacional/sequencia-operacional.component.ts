@@ -11,17 +11,17 @@ import { List } from 'immutable';
 
   ChangeDetectionStrategy.OnPush
 @Component({
-  selector: 'app-operacao-risco',
-  templateUrl: './operacao-risco.component.html',
+  selector: 'app-sequenci-operacional',
+  templateUrl: './sequencia-operacional.component.html',
   preserveWhitespaces: false
 })
-export class OperacaoRiscoComponent implements OnInit, OnDestroy {
+export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
   @Input() operacao: Operacao = new Operacao();
   @Input() gerente: Gerente;
   @Input() ope: Operacao;
   @Input() gerenteObjeto: Observable<Gerente>;
   @Input() gerentes: Observable<Gerente[]>;
-  @Input() operacoesFazer: Operacao[];
+  @Input() operacoesAFazer: Operacao[];
   @Input() operacoesEmAndamento: Operacao[];
   @Input() operacoesNoPrazo: Operacao[];
   @Input() operacoes: List<Operacao>;
@@ -94,10 +94,8 @@ export class OperacaoRiscoComponent implements OnInit, OnDestroy {
   etapasproducao() { this.sub = this.route.params.subscribe(params => { const id = params['id']; if (id) { this.operacaoService.getEtapaProducao(id).subscribe((etapaproducao: EtapaProducao) => { if (etapaproducao) { this.etapaproducao = etapaproducao; console.clear() } }) } }) }
   datareload() {
     this.gerenteObjeto = this.gerenteService.getGerenteLogado(this.info.username);
-    this.gerenteObjeto.subscribe(data => this.gerente = data);
+    this.gerenteObjeto.subscribe(data => this.gerente = data)
     console.clear();
-    this.operacoes = List(this.gerente.operacoesFazer);
-
   }
   cadastrar() {
     this.operacao.etapa_producao_id = this.etapaproducao.idTipoOpe;

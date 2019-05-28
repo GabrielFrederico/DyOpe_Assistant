@@ -1,33 +1,74 @@
 <base href="/src">
 <title>Operações</title>
-<h1>{{etapaproducao.tipoOpe}}</h1>
-<hr>
+<div >
+  <h1>{{etapaproducao.tipoOpe}}</h1>
+</div>
 
+
+<div class="btn-group">
+<div class="dropdown">
+  <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Peças
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <a class="dropdown-item">Jeans</a>
+
+  </div>
+</div>
+</div>
+<hr>
+<div class="card-header">Sequencia Operacional</div>
+<div class="card-body bg-light">
 <div class="row">
   <div class="col-sm-4">
-    <div class="card border-info mb-3 lista">
-      <div class="card-header border-info">Operações a fazer</div>
+    <div class="card border-info mb-3 operacoes">
+      <div class="card-header border-info">Operações</div>
       <div class="card-body text-secondary">
-        <a *ngFor="let operacao of gerente.operacoesFazer; trackBy: trackByFn " (click)="onSelect(operacao)"
-           class="btn btn-outline-info list-group-item list-group-item-action " href="javascript:void(0)"
-           data-toggle="modal" (click)="openInformacoes(content)" data-target=".informations">{{operacao.descricao}}</a>
-      </div>
+        <div class="form-group">
+          <div class="form-row">
+            <div class="col-sm-6">
+              <div class="form-label-group">
+                <input type="text"  name="dataescricao"
+                       id="dataescricao"
+                       class="form-control" minlength="3"
+                       autofocus="autofocus"
+                       placeholder="Descricao" required="required">
+                <label for="dataescricao">Descrição</label>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-label-group">
+                <input type="number"  name="tempoOpe"
+                       id="tempoOpe"
+                       class="form-control" minlength="3"
+                       autofocus="autofocus"
+                       placeholder="Tempo" required="required">
+                <label for="tempoOpe">Tempo </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
       <div class="card-footer bg-transparent border-info">
         <a class="btn btn-info" href="javascript:void(0)" (click)="openCadastro(cadastro)" data-toggle="modal"
-           data-target=".cadastro-operacoes">Cadastrar</a>
+           data-target=".cadastro-operacoes">+</a>
       </div>
     </div>
   </div>
 
 
   <div class="col-sm-4">
-    <div class="card border-warning mb-3 lista">
-      <div class="card-header border-warning">Operações em andamento</div>
+    <div class="card border-warning mb-3 operacoes">
       <div class="card-body text-warning">
-        <a class="btn btn-outline-warning list-group-item list-group-item-action ">
-          Acabamento
-        </a>
-
+        <div class="col-sm-8">
+          <div class="form-label-group">
+            <input  type="number" id="LoteProd"
+                   class="form-control"
+                   placeholder="Lote de Produção" name="loteProducao"
+                   required="required">
+            <label for="LoteProd" class="fonterisco">Lote de Produção:</label>
+          </div>
+        </div>
       </div>
 
     </div>
@@ -35,19 +76,38 @@
 
   <div class="col-sm-4">
     <div class="card border-success mb-3 lista">
-      <div class="card-header border-success">Operações concluídas</div>
       <div class="card-body text-success">
-        <a class="btn btn-outline-success list-group-item list-group-item-action ">
-          Risco
-        </a>
+        <div class="form-group">
+          <div class="form-row">
+            <div class="col-md-6">
+              <div class="form-label-group">
+                <input type="date" id="datainici" name="dataInicio" class="form-control"
+                       placeholder="Data Inicio:"
+                       required="required">
+                <label for="datainici">Data Inicio:</label>
+              </div>
+            </div>
 
-        <a class="btn btn-outline-success list-group-item list-group-item-action ">
-          Corte
+            <div class="col-md-6">
+              <div class="form-label-group">
+                <input type="date" id="datalimit" name="prazo" class="form-control"
+                       placeholder="Prazo:"
+                       required="required">
+                <label for="datalimit">Prazo:</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <a class="btn btn-outline-success list-group-item list-group-item-action" (click)="openInformacoes(content)">
+          Ver dados
+        </a>
+        <a class="btn btn-outline-success list-group-item list-group-item-action" [routerLink]="['/gerenteindex/operacaorisco', etapaproducao.idTipoOpe]">
+          Ver Andamento
         </a>
       </div>
     </div>
   </div>
-
+</div>
 </div>
 
 <!-- Sticky Footer -->
@@ -214,27 +274,7 @@
               <input required="required" name="descricao" [(ngModel)]="operacao.descricao" class="form-control"
                      id="DescricaoOp">
             </div>
-            <div class="form-group">
-              <div class="form-row">
-                <div class="col-md-6">
-                  <div class="form-label-group">
-                    <input type="date" id="datainici" name="dataInicio" class="form-control"
-                           placeholder="Data Inicio:" [(ngModel)]="operacao.dataInicio"
-                           required="required">
-                    <label for="datainici">Data Inicio:</label>
-                  </div>
-                </div>
 
-                <div class="col-md-6">
-                  <div class="form-label-group">
-                    <input type="date" id="datalimit" name="prazo" class="form-control"
-                           placeholder="Data limite:" [(ngModel)]="operacao.prazo"
-                           required="required">
-                    <label for="datalimit">Data limite:</label>
-                  </div>
-                </div>
-              </div>
-            </div>
 
             <div class="form-row">
               <div class="col-md-6">

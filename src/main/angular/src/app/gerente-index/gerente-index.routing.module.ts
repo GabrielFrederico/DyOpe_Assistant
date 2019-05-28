@@ -9,6 +9,7 @@ import { OperacaoBeneficiamentoComponent } from '../operacao-beneficiamento/oper
 import { CadastroSetorComponent } from '../cadastro-setor/cadastro-setor.component';
 import { ControleFuncionariosComponent } from '../controle-funcionarios/controle-funcionarios.component';
 import { PerfilGerenteComponent } from '../perfil-gerente/perfil-gerente.component';
+import { SequenciaOperacionalComponent } from '../sequencia-operacional/sequencia-operacional.component';
 
 const rotas: Routes = [
 {path: '', component: GerenteIndexComponent,
@@ -22,6 +23,8 @@ children:[
   {path: 'controlefuncionarios', component: ControleFuncionariosComponent},
   {path: 'cadastrosetor', component: CadastroSetorComponent},
   {path: 'perfilgerente', component: PerfilGerenteComponent},
+  {path: 'operacoes/:id',  component: SequenciaOperacionalComponent},
+
 
 ]}];
 

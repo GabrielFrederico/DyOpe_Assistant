@@ -23,6 +23,7 @@ import { OperacaoAcabamentoComponent } from '../operacao-acabamento/operacao-aca
 import { OperacaoBeneficiamentoComponent } from '../operacao-beneficiamento/operacao-beneficiamento.component';
 import { SharedModule } from '../sidebar/shared.module';
 import { Ng2SearchPipeModule } from 'ng2-search-filter'
+import { SequenciaOperacionalComponent } from '../sequencia-operacional/sequencia-operacional.component';
 @NgModule({
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
@@ -39,6 +40,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter'
     CadastroSetorComponent,
     ControleFuncionariosComponent,
     NavBarComponent,
+    SequenciaOperacionalComponent
   ],
   imports: [
     GerenteIndexRoutingModule,
