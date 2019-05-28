@@ -1,0 +1,5 @@
+npm i ng2-search-filter --save
+
+npm install prerender-node --save
+
+npm run start --aot

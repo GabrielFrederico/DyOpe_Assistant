@@ -1,5 +1,6 @@
 package com.projeto.models;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -9,9 +10,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 @Entity
 public class Setor {
@@ -20,34 +21,51 @@ public class Setor {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String nomeSetor;
-    private String operacao;
     private char statusSYS;
     
-    @ManyToOne(cascade = CascadeType.ALL)
-	private Gerente gerente;
+   
+    @OneToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "setor_funcionarios",
+    joinColumns = @JoinColumn(name = "setor_id"),
+    inverseJoinColumns = @JoinColumn(name = "funcionario_id"))
+	private Set<Funcionario> funcionarios  = new HashSet<>();
     
-    @OneToMany(mappedBy="setor",cascade = CascadeType.ALL)
-	private Set<Funcionario> funcionarios;
+    @OneToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "setor_etapaproducao",
+    joinColumns = @JoinColumn(name = "setor_id"),
+    inverseJoinColumns = @JoinColumn(name = "etapaproducao_id"))
+	private Set<EtapaProducao> etapaproducao  = new HashSet<>();
     
-    @OneToMany(mappedBy="setorescolhido", cascade = CascadeType.ALL)
-	private Set<InfoSetor> infosetores;
+    @OneToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "setor_infosetores",
+    joinColumns = @JoinColumn(name = "setor_id"),
+    inverseJoinColumns = @JoinColumn(name = "infosetor_id"))
+	private Set<InfoSetor> infosetores = new HashSet<>();
     
-    @OneToOne(cascade = CascadeType.ALL)
-	private Operacao operacaoo;
-    
+
 
     public Setor() {
 		super();
 	}
     
+    
 
 	public Setor(Funcionario funcionario, InfoSetor infosetor) {
 		super();
 		this.funcionarios = Stream.of(funcionario).collect(Collectors.toSet());
-		this.funcionarios.forEach(x -> x.setSetor(this));
-		this.infosetores = Stream.of(infosetor).collect(Collectors.toSet());
-		this.infosetores.forEach(x -> x.setSetorescolhido(this));
 	}
+
+
+	public Set<InfoSetor> getInfosetores() {
+		return infosetores;
+	}
+
+
+
+	public void setInfosetores(Set<InfoSetor> infosetores) {
+		this.infosetores = infosetores;
+	}
+
 
 
 	public Set<Funcionario> getFuncionario() {
@@ -56,22 +74,6 @@ public class Setor {
 
 	public void setFuncionario(Set<Funcionario> funcionario) {
 		this.funcionarios = funcionario;
-	}
-
-	public Operacao getOperacaoo() {
-		return operacaoo;
-	}
-
-	public void setOperacaoo(Operacao operacaoo) {
-		this.operacaoo = operacaoo;
-	}
-
-	public Gerente getGerente() {
-		return gerente;
-	}
-
-	public void setGerente(Gerente gerente) {
-		this.gerente = gerente;
 	}
 
 	
@@ -85,14 +87,6 @@ public class Setor {
 	}
 
 
-	public Set<InfoSetor> getInfosetores() {
-		return infosetores;
-	}
-
-
-	public void setInfosetores(Set<InfoSetor> infosetores) {
-		this.infosetores = infosetores;
-	}
 
 
 	public char getStatusSYS() {
@@ -119,12 +113,19 @@ public class Setor {
         this.nomeSetor = nomeSetor;
     }
 
-    public String getOperacao() {
-        return operacao;
-    }
 
-    public void setOperacao(String operacao) {
-        this.operacao = operacao;
-    }
 
+	public Set<EtapaProducao> getEtapaproducao() {
+		return etapaproducao;
+	}
+
+
+
+	public void setEtapaproducao(Set<EtapaProducao> etapaproducao) {
+		this.etapaproducao = etapaproducao;
+	}
+
+
+
+  
 }

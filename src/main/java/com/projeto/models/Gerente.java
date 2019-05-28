@@ -2,8 +2,6 @@ package com.projeto.models;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -14,7 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 @Entity
 public class Gerente extends Usuario {
@@ -23,14 +20,6 @@ public class Gerente extends Usuario {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "idgerente")
 	private long id;
-
-	public InfoSetor getInfosetores() {
-		return infosetores;
-	}
-
-	public void setInfosetores(InfoSetor infosetores) {
-		this.infosetores = infosetores;
-	}
 
 	@Column(name = "nome_gerente")
 	private String nome;
@@ -43,26 +32,66 @@ public class Gerente extends Usuario {
 	private String cpf;
 
 	@OneToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "gerente_operacoes",
+	@JoinTable(name = "gerente_operacoesAndamento ",
     joinColumns = @JoinColumn(name = "gerente_id"),
     inverseJoinColumns = @JoinColumn(name = "operacao_id"))
-	private Set<Operacao> operacoes = new HashSet<>();
+	private Set<Operacao> operacoesAndamento = new HashSet<>();
+    
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "gerente_operacoesFazer",
+    joinColumns = @JoinColumn(name = "gerente_id"),
+    inverseJoinColumns = @JoinColumn(name = "operacao_id"))
+	private Set<Operacao> operacoesFazer = new HashSet<>();
 
-	
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "gerente_operacoesPrazo",
+    joinColumns = @JoinColumn(name = "gerente_id"),
+    inverseJoinColumns = @JoinColumn(name = "operacao_id"))
+	private Set<Operacao> operacoesPrazo = new HashSet<>();
 
-	public Set<Operacao> getOperacoes() {
-		return operacoes;
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "gerente_pecas",
+    joinColumns = @JoinColumn(name = "gerente_id"),
+    inverseJoinColumns = @JoinColumn(name = "peca_id"))
+	private Set<Peca> pecas = new HashSet<>();
+
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "gerente_setores",
+    joinColumns = @JoinColumn(name = "gerente_id"),
+    inverseJoinColumns = @JoinColumn(name = "setor_id"))
+	private Set<Setor> setores = new HashSet<>();
+
+	public Set<Operacao> getOperacoesAndamento() {
+		return operacoesAndamento;
 	}
 
-	public void setOperacoes(Set<Operacao> operacoes) {
-		this.operacoes = operacoes;
+	public void setOperacoesAndamento(Set<Operacao> operacoesAndamento) {
+		this.operacoesAndamento = operacoesAndamento;
 	}
 
-	@OneToMany(mappedBy = "gerente", cascade = CascadeType.ALL)
-	private Set<Setor> setores;
+	public Set<Operacao> getOperacoesFazer() {
+		return operacoesFazer;
+	}
 
-	@OneToOne(mappedBy = "gerenteescolhido", cascade = CascadeType.ALL)
-	private InfoSetor infosetores;
+	public void setOperacoesFazer(Set<Operacao> operacoesFazer) {
+		this.operacoesFazer = operacoesFazer;
+	}
+
+	public Set<Operacao> getOperacoesPrazo() {
+		return operacoesPrazo;
+	}
+
+	public void setOperacoesPrazo(Set<Operacao> operacoesPrazo) {
+		this.operacoesPrazo = operacoesPrazo;
+	}
+
+	public Set<Peca> getPecas() {
+		return pecas;
+	}
+
+	public void setPecas(Set<Peca> pecas) {
+		this.pecas = pecas;
+	}
 
 	public Set<Setor> getSetores() {
 		return setores;
@@ -71,14 +100,6 @@ public class Gerente extends Usuario {
 	public void setSetores(Set<Setor> setores) {
 		this.setores = setores;
 	}
-
-
-	public Gerente(Setor setores) {
-		super();
-		this.setores = Stream.of(setores).collect(Collectors.toSet());
-		this.setores.forEach(x -> x.setGerente(this));
-	}
-	
 
 	public Gerente() {
 		super();

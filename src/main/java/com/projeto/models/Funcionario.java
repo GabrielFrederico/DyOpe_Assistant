@@ -1,5 +1,6 @@
 package com.projeto.models;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -10,7 +11,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -29,16 +31,6 @@ public class Funcionario extends Usuario {
 	@Column(name = "cpf_funcionario")
 	private String cpf;
 
-	@ManyToOne(cascade = CascadeType.ALL)
-    private Setor setor;
-
-	public Setor getSetor() {
-		return setor;
-	}
-
-	public void setSetor(Setor setor) {
-		this.setor = setor;
-	}
 
 	public Set<InfoSetor> getInfosetor() {
 		return infosetores;
@@ -48,9 +40,12 @@ public class Funcionario extends Usuario {
 		this.infosetores = infosetor;
 	}
 
-	@OneToMany(mappedBy="funcionario",cascade = CascadeType.ALL)
-    private Set<InfoSetor> infosetores;
-
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "funcionario_infosetores",
+    joinColumns = @JoinColumn(name = "funcionario_id"),
+    inverseJoinColumns = @JoinColumn(name = "infosetor_id"))
+	private Set<InfoSetor> infosetores = new HashSet<>();
+    
 
 	public long getId() {
 		return id;
@@ -72,6 +67,14 @@ public class Funcionario extends Usuario {
 		return rg;
 	}
 
+	public Set<InfoSetor> getInfosetores() {
+		return infosetores;
+	}
+
+	public void setInfosetores(Set<InfoSetor> infosetores) {
+		this.infosetores = infosetores;
+	}
+
 	public void setRg(String rg) {
 		this.rg = rg;
 	}
@@ -91,7 +94,6 @@ public class Funcionario extends Usuario {
 	public Funcionario(InfoSetor infosetor) {
 		super();
 		this.infosetores = Stream.of(infosetor).collect(Collectors.toSet());
-		this.infosetores.forEach(x -> x.setFuncionario(this));
 	}
 
 

@@ -29,17 +29,6 @@ public class Operacao {
 	private int qtdPecasOpe;
 	private boolean statusSYS;
 	
-    @OneToOne(mappedBy="operacaoescolhida", cascade = CascadeType.ALL)
-    private InfoSetor infoSetor;
-
-
-	public InfoSetor getInfoSetor() {
-		return infoSetor;
-	}
-
-	public void setInfoSetor(InfoSetor infoSetor) {
-		this.infoSetor = infoSetor;
-	}
 
 	public long getId() {
 		return id;
@@ -123,7 +112,6 @@ public class Operacao {
 	}
 
 
-
 	public float getPrecoPecaOpe() {
 		return precoPecaOpe;
 	}
@@ -133,7 +121,6 @@ public class Operacao {
 	}
 
 
-	
 	private float precoPecaOpe;
 	
 	
