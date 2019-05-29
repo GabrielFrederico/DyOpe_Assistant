@@ -25,6 +25,26 @@ public class Operacao {
 	private int loteProducao;
 	
 	private int numFuncionariosOpe;
+        
+        private int numFuncionariosDisponiveis;
+        
+        private float producaoHora;
+
+    public float getProducaoHora() {
+        return producaoHora;
+    }
+
+    public void setProducaoHora(float producaoHora) {
+        this.producaoHora = producaoHora;
+    }
+
+    public int getNumFuncionariosDisponiveis() {
+        return numFuncionariosDisponiveis;
+    }
+
+    public void setNumFuncionariosDisponiveis(int numFuncionariosDisponiveis) {
+        this.numFuncionariosDisponiveis = numFuncionariosDisponiveis;
+    }
 	
 	private int qtdPecasOpe;
 	private boolean statusSYS;

@@ -47,6 +47,10 @@ export class CadastroOperacaoService {
   getEtapaProducao(id: number): Observable<EtapaProducao>{
     return this.httpClient.get<EtapaProducao>('http://localhost:8080/tipoOpe/'+id, httpOptions);
   }
+  getEtapaProducaoNome(etapa: string): Observable<EtapaProducao>{
+    return this.httpClient.get<EtapaProducao>('http://localhost:8080/tipoOpe/getByNome/'+etapa, httpOptions);
+  }
+
   getTiposOperacoes() {
     return this.httpClient.get<EtapaProducao[]>('http://localhost:8080/tipoOpe', httpOptions);
   }

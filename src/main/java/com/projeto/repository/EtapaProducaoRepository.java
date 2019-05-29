@@ -9,5 +9,5 @@ public interface EtapaProducaoRepository extends CrudRepository<EtapaProducao, S
 
     EtapaProducao findByidTipoOpe(long idTipoOpe);
 
-    EtapaProducao findBytipoOpe(String tipoOpe);
+    EtapaProducao findByEtapaProducao(String etapaProducao);
 }

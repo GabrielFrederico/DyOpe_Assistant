@@ -30,10 +30,10 @@ public class EtapaProducaoController {
         return etapaProducao;
     }
 
-    @RequestMapping(method = RequestMethod.GET, path = "/getByNome/{tipoope}")
-    public EtapaProducao getEtapaProducaoByNome(@PathVariable("tipoOpe") String tipoOpe) {
-        EtapaProducao etapaProducao = etapaProducaoRepository.findBytipoOpe(tipoOpe);
-        return etapaProducao;
+    @RequestMapping(method = RequestMethod.GET, path = "/getByNome/{etapaProducao}")
+    public EtapaProducao getEtapaProducaoByNome(@PathVariable("etapaProducao") String etapaProducao) {
+        EtapaProducao etapaproducao = etapaProducaoRepository.findByEtapaProducao(etapaProducao);
+        return etapaproducao;
     }
 
 }

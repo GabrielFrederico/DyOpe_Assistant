@@ -23,7 +23,7 @@ children:[
   {path: 'controlefuncionarios', component: ControleFuncionariosComponent},
   {path: 'cadastrosetor', component: CadastroSetorComponent},
   {path: 'perfilgerente', component: PerfilGerenteComponent},
-  {path: 'operacoes/:id',  component: SequenciaOperacionalComponent},
+  {path: 'operacoes/:etapaProducao',  component: SequenciaOperacionalComponent},
 
 
 ]}];

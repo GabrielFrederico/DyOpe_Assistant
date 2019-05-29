@@ -9,7 +9,7 @@ import { first } from "rxjs/operators";
 import { List } from 'immutable';
 
 
-  ChangeDetectionStrategy.OnPush
+ChangeDetectionStrategy.OnPush
 @Component({
   selector: 'app-sequenci-operacional',
   templateUrl: './sequencia-operacional.component.html',
@@ -91,7 +91,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
   }
 
   isReadonly = true;
-  etapasproducao() { this.sub = this.route.params.subscribe(params => { const id = params['id']; if (id) { this.operacaoService.getEtapaProducao(id).subscribe((etapaproducao: EtapaProducao) => { if (etapaproducao) { this.etapaproducao = etapaproducao; console.clear() } }) } }) }
+  etapasproducao() { this.sub = this.route.params.subscribe(params => { const etapaProducao = params['etapaProducao']; if (etapaProducao) { this.operacaoService.getEtapaProducaoNome(etapaProducao).subscribe((etapaproducao: EtapaProducao) => { if (etapaproducao) { this.etapaproducao = etapaproducao; console.clear() } }) } }) }
   datareload() {
     this.gerenteObjeto = this.gerenteService.getGerenteLogado(this.info.username);
     this.gerenteObjeto.subscribe(data => this.gerente = data)

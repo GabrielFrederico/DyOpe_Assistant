@@ -13,7 +13,7 @@ public class EtapaProducao {
 
     private long idTipoOpe;
     
-    private String tipoOpe;
+    private String etapaProducao;
     
     @OneToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "etapa_producao_operacoes",
@@ -41,10 +41,10 @@ public class EtapaProducao {
     }
 
     public String getTipoOpe() {
-        return tipoOpe;
+        return etapaProducao;
     }
 
-    public void setTipoOpe(String tipoOpe) {
-        this.tipoOpe = tipoOpe;
+    public void setTipoOpe(String etapaProducao) {
+        this.etapaProducao = etapaProducao;
     }
 }
