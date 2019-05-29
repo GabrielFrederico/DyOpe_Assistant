@@ -10,15 +10,17 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import com.projeto.models.EtapaProducao;
 import com.projeto.models.Funcionario;
 import com.projeto.models.Gerente;
+import com.projeto.models.Operacao;
 import com.projeto.models.Role;
 import com.projeto.models.RoleName;
-import com.projeto.models.EtapaProducao;
+import com.projeto.repository.EtapaProducaoRepository;
 import com.projeto.repository.FuncionarioRepository;
 import com.projeto.repository.GerenteRepository;
+import com.projeto.repository.OperacaoRepository;
 import com.projeto.repository.RoleRepository;
-import com.projeto.repository.EtapaProducaoRepository;
 
 @SpringBootApplication
 public class ProjetoApplication {
@@ -27,6 +29,9 @@ public class ProjetoApplication {
 
 	@Autowired
 	GerenteRepository gerenteRepository;
+	
+	@Autowired
+	OperacaoRepository operacaoRepository;
 
 	@Autowired
 	FuncionarioRepository funcionarioRepository;
@@ -63,7 +68,27 @@ public class ProjetoApplication {
 			EtapaProducao costura = new EtapaProducao();
 			EtapaProducao beneficiamento = new EtapaProducao();
 			EtapaProducao acabamento = new EtapaProducao();
-
+            Operacao revisar = new Operacao();
+            Operacao limpar = new Operacao();
+            Operacao passar = new Operacao();
+            Operacao tag = new Operacao();
+            Operacao embalar = new Operacao();
+            revisar.setDescricao("Revisar");
+            revisar.setId(26);
+            limpar.setDescricao("Limpar");
+            limpar.setId(27);
+            passar.setDescricao("Passar");
+            passar.setId(28);
+            tag.setDescricao("Tag");
+            tag.setId(29);
+            embalar.setDescricao("Embalar");
+            embalar.setId(30);
+            operacaoRepository.save(revisar);
+            operacaoRepository.save(limpar);
+            operacaoRepository.save(passar);
+            operacaoRepository.save(tag);
+            operacaoRepository.save(embalar);
+            
 			risco.setIdTipoOpe(1);
 			risco.setTipoOpe("Risco");
 			risco.setStatusSYS('A');

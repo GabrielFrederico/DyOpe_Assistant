@@ -39,7 +39,7 @@ export class CadastroOperacaoService {
   constructor(private httpClient: HttpClient) {
   }
   getOperacoes() {
-    return this.httpClient.get<Operacao[]>('http://localhost:8080/gerentes/operacoes', httpOptions);
+    return this.httpClient.get<Operacao[]>('http://localhost:8080/operacoes', httpOptions);
   }
   getOperacaoId(id:number): Observable<Operacao>{
     return this.httpClient.get<Operacao>('http://localhost:8080/operacoes/'+id,httpOptions);

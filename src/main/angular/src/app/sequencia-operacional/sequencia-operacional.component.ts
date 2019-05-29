@@ -11,25 +11,25 @@ import { List } from 'immutable';
 
 ChangeDetectionStrategy.OnPush
 @Component({
-  selector: 'app-sequenci-operacional',
+  selector: 'app-sequencia-operacional',
   templateUrl: './sequencia-operacional.component.html',
   preserveWhitespaces: false
 })
 export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
-  @Input() operacao: Operacao = new Operacao();
+   operacao: Operacao = new Operacao();
   @Input() gerente: Gerente;
   @Input() ope: Operacao;
-  @Input() gerenteObjeto: Observable<Gerente>;
-  @Input() peca: Peca = new Peca();
-  @Input() operacoesAFazer: Operacao[];
-  @Input() operacoesEmAndamento: Operacao[];
-  @Input() operacoesNoPrazo: Operacao[];
-  @Input() operacoes: List<Operacao>;
+  gerenteObjeto: Observable<Gerente>;
+  newpeca: Peca = new Peca();
+  @Input() peca: Peca;
+  operacoesObj: Observable<Operacao[]>;
+  @Input() operacoes: Operacao[];
   @Input() etapaproducao: EtapaProducao;
   public erro: boolean;
   public errorMessage = '';
   closeResult: string;
   public info: any;
+  tipoOpe: string;
   sub: Subscription;
   ngOnInit() {
     this.etapasproducao();
@@ -78,7 +78,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
   }
 
   private validado: boolean;
-  private cadastrado: boolean;
+  private carregado: boolean;
   naoAutenticado() {
     if (this.info.authorities.toString() !== 'ROLE_GERENTE') {
       this.validado = false;
@@ -94,7 +94,11 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
   etapasproducao() { this.sub = this.route.params.subscribe(params => { const etapaProducao = params['etapaProducao']; if (etapaProducao) { this.operacaoService.getEtapaProducaoNome(etapaProducao).subscribe((etapaproducao: EtapaProducao) => { if (etapaproducao) { this.etapaproducao = etapaproducao; console.clear() } }) } }) }
   datareload() {
     this.gerenteObjeto = this.gerenteService.getGerenteLogado(this.info.username);
-    this.gerenteObjeto.subscribe(data => this.gerente = data)
+    this.gerenteObjeto.subscribe(data => this.gerente = data);
+    this.operacoesObj = this.operacaoService.getOperacoes();
+    this.operacoesObj.subscribe(data=>{this.operacoes = data});
+    this.tipoOpe = this.etapaproducao.tipoOpe;
+    this.carregado = true;
     console.clear();
   }
   cadastrar() {
@@ -108,9 +112,9 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
 
   }
   cadastrarPeca() {
-    this.peca.etapa_producao_id = this.etapaproducao.idTipoOpe;
-    this.peca.gerente_id = this.gerente.id;
-    this.gerente.pecas.push(this.peca);
+    this.newpeca.etapa_producao_id = this.etapaproducao.idTipoOpe;
+    this.newpeca.gerente_id = this.gerente.id;
+    this.gerente.pecas.push(this.newpeca);
     this.gerenteService.cadastrarOperacao(this.gerente).pipe(first()).subscribe(data => {
       alert("Peça cadastrada com sucesso!")
 
@@ -122,7 +126,9 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
   }
   onSelect(operacao: Operacao) {
     this.ope = operacao;
-
+  }
+  selectsPeca(peca: Peca){
+    this.peca = peca;
   }
   toggleReadonly() {
     this.isReadonly = !this.isReadonly;

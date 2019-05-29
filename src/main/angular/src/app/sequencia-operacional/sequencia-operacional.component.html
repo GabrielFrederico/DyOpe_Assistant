@@ -4,7 +4,6 @@
   <h1>{{etapaproducao.tipoOpe}}</h1>
 </div>
 
-
 <div class="btn-group">
 <div class="dropdown">
   <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -23,13 +22,13 @@
   <div class="col-sm-4">
     <div class="card border-info mb-3 operacoes">
       <div class="card-header border-info">Operações</div>
-      <div class="card-body text-secondary">
+      <div class="card-body text-secondary" >
         <div class="form-group">
-          <div class="form-row">
+          <div *ngFor="let operacao of operacoes | filter:tipoOpe" class="form-row">
             <div class="col-sm-6">
               <div class="form-label-group">
-                <input type="text"  name="dataescricao"
-                       id="dataescricao"
+                <input type="text"  name="escricao"
+                       id="dataescricao" value="{{operacao.descricao}}"
                        class="form-control" minlength="3"
                        autofocus="autofocus"
                        placeholder="Descricao" required="required">
@@ -39,14 +38,16 @@
             <div class="col-sm-6">
               <div class="form-label-group">
                 <input type="number"  name="tempoOpe"
-                       id="tempoOpe"
+                       id="tempoOpe" value="{{operacao.tempoNesc}}"
                        class="form-control" minlength="3"
                        autofocus="autofocus"
                        placeholder="Tempo" required="required">
                 <label for="tempoOpe">Tempo </label>
               </div>
             </div>
+            <div class="col-sm-6">
             <a class="btn btn-danger" href="javascript:void(0)">-</a>
+          </div>
           </div>
         </div>
         </div>
@@ -281,11 +282,12 @@
           <div class="form-group">
             <div class="form-row">
             <div class="col-md-6">
+              <div class="form-label-group">
               <label for="DescricaoOp">Descrição da operação:</label>
               <input required="required" name="descricao" [(ngModel)]="operacao.descricao" class="form-control"
                      id="DescricaoOp">
                  </div>
-
+            </div>
               <div class="col-md-6">
                 <div class="form-label-group">
                   <input type="number" id="LotePro" name="loteProducao" class="form-control"
@@ -311,4 +313,8 @@
     </div>
   </div>
 
+</ng-template >
+
+<ng-template *ngIf="!carregado">
+Carregando....
 </ng-template>
