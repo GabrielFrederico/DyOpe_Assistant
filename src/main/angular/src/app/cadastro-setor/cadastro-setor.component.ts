@@ -3,6 +3,7 @@ import { CadastroSetorService, Setor } from '../service/cadastro-setor.service';
 import { Router } from '@angular/router';
 import { TokenStorageService } from '../auth/token-storage.service';
 import { Observable } from 'rxjs';
+import { CadastroOperacaoService, EtapaProducao } from '../service/cadastro-operacao.service';
 
 @Component({
   selector: 'app-cadastro-setor',
@@ -16,7 +17,9 @@ export class CadastroSetorComponent implements OnInit {
   public setores: Observable<Setor[]>;
   public info: any;
   public validado: boolean;
+  public etapas: Observable<EtapaProducao[]>
   ngOnInit() {
+    this.etapas = this.etapaService.getTiposOperacoes();
     this.info = {
       token: this.token.getToken(),
       username: this.token.getUsername(),
@@ -27,9 +30,11 @@ export class CadastroSetorComponent implements OnInit {
     this.dataReload();
   }
   constructor(private setorService: CadastroSetorService,
-    private router: Router, private setorservice: CadastroSetorService, private token: TokenStorageService) {
+    private router: Router, private etapaService: CadastroOperacaoService, private setorservice: CadastroSetorService, private token: TokenStorageService) {
   }
+  selectEtapa(etapa: EtapaProducao) {
 
+  }
 
   save() {
     this.setorService.cadastrarSetor(

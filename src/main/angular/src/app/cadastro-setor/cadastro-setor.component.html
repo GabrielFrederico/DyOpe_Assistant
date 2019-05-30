@@ -1,27 +1,4 @@
 <title>Controle</title>
-<div *ngIf="validado" id="page-top">
-
-  <app-nav-bar></app-nav-bar>
-  <div id="wrapper">
-
-    <!-- Sidebar -->
-    <ul class="sidebar bg-primary navbar-nav">
-      <li ngbDropdown class="nav-item dropdown">
-        <a ngbDropdownToggle class="nav-link text-light" href="javascript:void(0)" id="pagesDropdown"
-           role="button">
-          <span>Setores</span>
-        </a>
-        <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="pagesDropdown" x-placement="bottom-start">
-          <a href="javascript:void(0)" *ngFor="let setor of setores | async"
-             class="dropdown-item">{{setor.nomeSetor}}</a>
-        </div>
-      </li>
-
-
-    </ul>
-
-    <div id="content-wrapper" class="fundo">
-
       <div class="container-fluid">
 
         <!-- Page Content -->
@@ -33,21 +10,23 @@
         <form [noValidate]="$any(false)" (ngSubmit)="save()">
           <div class="form-group">
             <div class="form-group">
-              <div class="form-label-group">
+
+                <label for="nomeCompleto">Nome do setor:</label>
                 <input type="text" name="nomeSetor" id="nomeCompleto" class="form-control"
                        autofocus="autofocus" [(ngModel)]="setor.nomeSetor"
-                       placeholder="Nome Completo" required="required">
-                <label for="nomeCompleto">Nome do setor:</label>
-              </div>
+                       placeholder="Nome Setor" required="required">
+
             </div>
           </div>
           <div class="form-group">
-            <div class="form-label-group">
-              <input type="text" name="operacao" id="operacao" [(ngModel)]="setor.operacao" class="form-control"
-                     placeholder="Operação"
-                     required="required">
-              <label for="operacao">Operação:</label>
-            </div>
+            <label for="etapaProducao">Etapa da Produção:</label>
+              <select class="form-control" id="etapaProducao">
+                <option>Selecione..</option>
+                <option *ngFor="let etapa of etapas | async"(click)="selectEtapa(etapa)">{{etapa.tipoOpe}}</option>
+                <option *ngIf="etapas.length ===0">Carregando...</option>
+
+              </select>
+
           </div>
 
           <a class="btn btn-info" routerLink="/controlefuncionarios">Voltar</a>
@@ -69,17 +48,13 @@
       </div>
       <!-- /.content-wrapper -->
 
-    </div>
-    <!-- /#wrapper -->
 
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
       <i class="fas fa-angle-up"></i>
     </a>
-  </div>
-</div>
+
 <ng-template #loggedOut class="">
   Não tem autorização! <br>
   Faça o <a routerLink="/logingerente">login.</a>
 </ng-template>
-
