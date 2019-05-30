@@ -26,6 +26,7 @@
         <div class="form-group">
           <div *ngFor="let operacao of suboperacoes; async" class="form-row">
             <div class="col-sm-6">
+              <div class="form-group">
               <div class="form-label-group">
                 <input type="text"  name="escricao"
                        id="dataescricao" value="{{operacao.descricao}}"
@@ -34,8 +35,10 @@
                        placeholder="Descricao" required="required">
                 <label for="dataescricao">Descrição</label>
               </div>
+              </div>
             </div>
             <div class="col-sm-6">
+              <div class="form-group">
               <div class="form-label-group">
                 <input type="number"  name="tempoOpe"
                        id="tempoOpe" value="{{operacao.tempoNesc}}"
@@ -43,6 +46,7 @@
                        autofocus="autofocus"
                        placeholder="Tempo" required="required">
                 <label for="tempoOpe">Tempo </label>
+              </div>
               </div>
             </div>
             <div class="col-sm-6">

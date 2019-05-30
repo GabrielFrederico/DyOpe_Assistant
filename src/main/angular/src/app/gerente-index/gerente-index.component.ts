@@ -52,7 +52,6 @@ export class GerenteIndexComponent implements OnInit {
 
   logout() {
     this.token.logOut();
-    window.location.reload();
   }
 
  dataReload(){
