@@ -2,7 +2,7 @@ import { Component, Input, OnInit, OnDestroy, ChangeDetectionStrategy } from '@a
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TokenStorageService } from '../auth/token-storage.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { CadastroOperacaoService, Operacao, EtapaProducao } from '../service/cadastro-operacao.service';
+import { CadastroOperacaoService, Operacao, EtapaProducao, SubOperacao } from '../service/cadastro-operacao.service';
 import { Observable, Subscription } from "rxjs";
 import { Gerente, GerenteService, Peca } from '../service/gerente.service';
 import { first } from "rxjs/operators";
@@ -22,8 +22,8 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
   gerenteObjeto: Observable<Gerente>;
   newpeca: Peca = new Peca();
   @Input() peca: Peca;
-  operacoesObj: Observable<Operacao[]>;
-  @Input() operacoes: Operacao[];
+  suboperacoesObj: Observable<SubOperacao[]>;
+  @Input() suboperacoes: SubOperacao[];
   @Input() etapaproducao: EtapaProducao;
   public erro: boolean;
   public errorMessage = '';
@@ -95,9 +95,9 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
   datareload() {
     this.gerenteObjeto = this.gerenteService.getGerenteLogado(this.info.username);
     this.gerenteObjeto.subscribe(data => this.gerente = data);
-    this.operacoesObj = this.operacaoService.getOperacoes();
-    this.operacoesObj.subscribe(data=>{this.operacoes = data});
-    this.tipoOpe = this.etapaproducao.tipoOpe;
+    this.suboperacoesObj = this.operacaoService.getSubOperacoes();
+    this.suboperacoesObj.subscribe(data=>{this.suboperacoes = data});
+    this.tipoOpe = this.etapaproducao.idTipoOpe.toString();
     this.carregado = true;
     console.clear();
   }

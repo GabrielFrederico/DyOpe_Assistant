@@ -38,11 +38,6 @@ public class OperacaoController {
 		return operacaoRepository.findAll();
 	}
 	
-	@RequestMapping(method = RequestMethod.GET, path = "/getByNome/{descricao}")
-	public Operacao getOperacaoByNome(@PathVariable("descricao") String descricao) {
-		Operacao operacao  = operacaoRepository.findByDescricao(descricao);
-		return operacao ;
-	}
 	@RequestMapping(method = RequestMethod.GET, path = "/{id}")
 	public Operacao getOperacaoById(@PathVariable("id") long id) {
 		Operacao operacao = operacaoRepository.findById(id);

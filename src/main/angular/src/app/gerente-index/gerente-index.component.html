@@ -5,7 +5,9 @@
 
     <a class="navbar-brand mr-1" routerLink="/gerenteindex" role="link">DyOpe Assistant</a>
 
-    <button class="btn btn-link btn-sm  order-1 order-sm-0" id="sidebarToggle" href="#">
+    <button (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed"
+            class="btn btn-link btn-sm  order-1 order-sm-0" id="sidebarToggle"
+            role="button">
       <i class="fas fa-bars"></i>
     </button>
 
@@ -77,6 +79,7 @@
   </ng-template>
 
 
+
 <div id="wrapper">
 
   <!-- Sidebar -->
@@ -106,10 +109,10 @@
         <span class="badge badge-info tam"> Controle o andamento da produção</span>
       </div>
 
-    </div>
+
     <!-- /.container-fluid -->
 
-
+  </div>
     <!-- Sticky Footer -->
     <footer class="sticky-footer">
       <div class="container my-auto ">
@@ -132,14 +135,12 @@
 
 
 
-<!-- Bootstrap core JavaScript-->
 <script src="assets/vendor/jquery/jquery.min.js"></script>
 <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-<!-- Core plugin JavaScript-->
 <script src="assets/vendor/jquery-easing/jquery.easing.min.js"></script>
 
-<!-- Custom scripts for all pages-->
+<script src="assets/js/sb-admin.min.js"></script>
 
 </div>
 

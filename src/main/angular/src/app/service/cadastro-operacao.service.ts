@@ -15,18 +15,22 @@ export class Operacao {
   public id: number;
   public precoPecaOpe: any;
   public custosOpe: any;
-  public descricao: string;
+
   public dataInicio: Date;
   public prazo: Date;
   public loteProducao: number;
   public qtdPecasOpe: number;
-  public tempoNesc: number;
   public numFuncionariosOpe: number;
   public etapa_producao_id: number;
   public gerente_id: number;
   public statusSYS: true;
 }
 
+export class SubOperacao{
+  public id: number;
+  public descricao: string;
+  public tempoNesc: number;
+}
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
 };
@@ -37,6 +41,9 @@ const httpOptions = {
 export class CadastroOperacaoService {
 
   constructor(private httpClient: HttpClient) {
+  }
+  getSubOperacoes() {
+    return this.httpClient.get<SubOperacao[]>('http://localhost:8080/suboperacoes', httpOptions);
   }
   getOperacoes() {
     return this.httpClient.get<Operacao[]>('http://localhost:8080/operacoes', httpOptions);

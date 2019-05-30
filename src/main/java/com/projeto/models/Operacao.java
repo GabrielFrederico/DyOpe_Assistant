@@ -1,8 +1,17 @@
 package com.projeto.models;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
 
 
 @Entity
@@ -12,12 +21,23 @@ public class Operacao {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
-	private String descricao;
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "operacao_suboperacoes",
+    joinColumns = @JoinColumn(name = "operacao_id"),
+    inverseJoinColumns = @JoinColumn(name = "suboperacao_id"))
+	private Set<SubOperacao> operacoes= new HashSet<>();
 	
 	private java.sql.Date dataInicio;
 	
-	private int tempoNesc;
 	
+	public Set<SubOperacao> getOperacoes() {
+		return operacoes;
+	}
+
+	public void setOperacoes(Set<SubOperacao> operacoes) {
+		this.operacoes = operacoes;
+	}
+
 	private java.sql.Date prazo;
 	
 	private float custosOpe;
@@ -66,15 +86,7 @@ public class Operacao {
 		this.statusSYS = statusSYS;
 	}
 
-	public String getDescricao() {
-		return descricao;
-	}
-
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
-
-
+	
 	public Date getDataInicio() {
 		return dataInicio;
 	}
@@ -83,14 +95,7 @@ public class Operacao {
 		this.dataInicio = dataInicio;
 	}
 
-	public int getTempoNesc() {
-		return tempoNesc;
-	}
-
-	public void setTempoNesc(int tempoNesc) {
-		this.tempoNesc = tempoNesc;
-	}
-
+	
 	public Date getPrazo() {
 		return prazo;
 	}
