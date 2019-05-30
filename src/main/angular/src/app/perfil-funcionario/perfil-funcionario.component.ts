@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild, OnDestroy, AfterViewInit } from '@angular/core';
 import { InfosetorService } from "../service/infosetor.service";
 import { Router, ActivatedRoute } from "@angular/router";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
@@ -6,14 +6,16 @@ import { TokenStorageService } from "../auth/token-storage.service";
 import { Funcionario, FuncionarioService } from "../service/funcionario.service";
 import { Observable, Subscription } from "rxjs";
 import { first } from "rxjs/operators";
+import { FuncionarioIndexComponent } from '../funcionario-index/funcionario-index.component';
 
 @Component({
   selector: 'app-perfil-funcionario',
   templateUrl: './perfil-funcionario.component.html'
 })
-export class PerfilFuncionarioComponent implements OnInit, OnDestroy {
+export class PerfilFuncionarioComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() funcionarioObjeto: Observable<Funcionario>;
   @Input() funcionario: Funcionario;
+  @ViewChild(FuncionarioIndexComponent) dados;
   info: any;
   form: any = {};
   public isCollapsed = false;
@@ -32,7 +34,10 @@ export class PerfilFuncionarioComponent implements OnInit, OnDestroy {
   @ViewChild("cpf") cpf: ElementRef;
   @ViewChild("rg") rg: ElementRef;
 
-  ngOnInit() {
+    ngAfterViewInit() {
+      this.funcionario = this.dados.funcionario;
+     }
+   ngOnInit() {
     this.funcionariologado();
     this.info = {
       token: this.token.getToken(),
