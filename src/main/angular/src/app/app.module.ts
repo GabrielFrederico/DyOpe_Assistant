@@ -47,8 +47,6 @@ import { SharedModule } from './sidebar/shared.module';
     routingComponent3,
     routingComponent4,
     routingComponent5,
-    routingComponent6,
-    routingComponent7,
     NavComponent,
     GerenteComponent,
     NavegacaoComponent,

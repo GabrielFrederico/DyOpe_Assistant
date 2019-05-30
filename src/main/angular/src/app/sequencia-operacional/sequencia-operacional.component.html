@@ -24,7 +24,7 @@
       <div class="card-header border-info">Operações</div>
       <div class="card-body text-secondary" >
         <div class="form-group">
-          <div *ngFor="let operacao of operacoes | filter:tipoOpe" class="form-row">
+          <div *ngFor="let operacao of suboperacoes; async" class="form-row">
             <div class="col-sm-6">
               <div class="form-label-group">
                 <input type="text"  name="escricao"

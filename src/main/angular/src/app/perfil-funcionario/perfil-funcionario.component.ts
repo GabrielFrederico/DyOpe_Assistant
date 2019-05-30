@@ -91,7 +91,28 @@ export class PerfilFuncionarioComponent implements OnInit {
   }
 
   isReadonly = true;
+  senhaerrada = false;
+  redefinirSenha() {
+    if (this.newsenhainput.nativeElement.value == this.confirmasenhainput.nativeElement.value) {
+      this.funcionario.senha = this.newsenhainput.nativeElement.value;
+      this.funcionarioService.atualizarFuncionario(this.funcionario)
+        .pipe(first())
+        .subscribe(
+          data => {
+            this.router.navigate(['/loginfuncionario']);
+            this.token.logOut();
+            alert("Senha atualizada! Faça o login denovo!");
+          },
+          error => {
+            console.log(error);
+            this.errorMessage = error.error.message;
+            this.updateFailed = true;
+          });
+    } else {
+      this.senhaerrada = true;
 
+    }
+  }
   onSubmit(cpf, rg: string) {
 
     this.funcionario.cpf = cpf;
