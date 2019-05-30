@@ -1,30 +1,8 @@
 <title>Informações do Setor</title>
-
-<div id="page-top" *ngIf="validado">
-
-  <app-navegacao></app-navegacao>
-  <div id="wrapper">
-
-    <!-- Sidebar -->
-    <ul class="sidebar toggled bg-primary navbar-nav">
-
-      <li class="nav-item text-light">
-        <a class="nav-link text-light" href="javascript:void(0)">
-          <span>Enviar informações</span>
-        </a>
-
-      </li>
-
-    </ul>
-
-    <div id="content-wrapper" class="fundo">
-
-      <div class="container-fluid">
-
         <!-- Page Content -->
         <h1>Informações do Setor</h1>
         <hr>
-      </div>
+      
 
       <div class="container " style="float: left; max-width: 70%; padding-left: 5%">
         <form (ngSubmit)="save()" [noValidate]="$any(false)">
@@ -86,9 +64,6 @@
         </form>
       </div>
       <!-- /.content-wrapper -->
-
-    </div>
-    <!-- /#wrapper -->
 
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
@@ -183,6 +158,3 @@
         </div>
       </div>
     </div>
-  </div>
-</div>
-

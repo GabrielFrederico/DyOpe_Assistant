@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 export class loginFuncionarioInfo {
   nomeUsuario: string;
@@ -17,7 +17,7 @@ const httpOptions = {
 };
 
 export class Funcionario {
-  public id:number;
+  public id: number;
   public nome: string;
   public nomeUsuario: string;
   public cpf: string;
@@ -49,12 +49,15 @@ export class FuncionarioService {
   getFuncionarios() {
     return this.httpClient.get<Funcionario[]>('http://localhost:8080/funcionarios');
   }
+  getId(id: number): Observable<Funcionario> {
+    return this.httpClient.get<Funcionario>('http://localhost:8080/funcionarios/getById/' + id, httpOptions);
 
-  getFuncionarioLogado(nomeUsuario: string): Observable<Funcionario>{
-    return this.httpClient.get<Funcionario>('http://localhost:8080/funcionarios/getByNomeUsuario/'+ nomeUsuario, httpOptions);
   }
-  atualizarFuncionario(funcionario:Funcionario): Observable<Funcionario> {
-    return this.httpClient.put<Funcionario>( 'http://localhost:8080/funcionarios/atualizar',funcionario);
+  getFuncionarioLogado(nomeUsuario: string): Observable<Funcionario> {
+    return this.httpClient.get<Funcionario>('http://localhost:8080/funcionarios/getByNomeUsuario/' + nomeUsuario, httpOptions);
+  }
+  atualizarFuncionario(funcionario: Funcionario): Observable<Funcionario> {
+    return this.httpClient.put<Funcionario>('http://localhost:8080/funcionarios/atualizar', funcionario);
 
   }
   cadastrarFuncionario(funcionario: Funcionario): Observable<Funcionario> {

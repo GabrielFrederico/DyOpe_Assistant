@@ -1,18 +1,17 @@
-import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
-import {InfosetorService} from "../service/infosetor.service";
-import {Router} from "@angular/router";
-import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {TokenStorageService} from "../auth/token-storage.service";
-import {Funcionario, FuncionarioService} from "../service/funcionario.service";
-import {Observable} from "rxjs";
-import {first} from "rxjs/operators";
+import { Component, ElementRef, Input, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { InfosetorService } from "../service/infosetor.service";
+import { Router, ActivatedRoute } from "@angular/router";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { TokenStorageService } from "../auth/token-storage.service";
+import { Funcionario, FuncionarioService } from "../service/funcionario.service";
+import { Observable, Subscription } from "rxjs";
+import { first } from "rxjs/operators";
 
 @Component({
   selector: 'app-perfil-funcionario',
   templateUrl: './perfil-funcionario.component.html'
 })
-export class PerfilFuncionarioComponent implements OnInit {
-  @Input() funcionarios: Observable<Funcionario[]>;
+export class PerfilFuncionarioComponent implements OnInit, OnDestroy {
   @Input() funcionarioObjeto: Observable<Funcionario>;
   @Input() funcionario: Funcionario;
   info: any;
@@ -20,6 +19,8 @@ export class PerfilFuncionarioComponent implements OnInit {
   public isCollapsed = false;
   public funcionarioLogado: boolean;
   public updateFailed: boolean;
+
+  sub: Subscription;
 
   closeResult: string;
   private roles: string[];
@@ -38,7 +39,7 @@ export class PerfilFuncionarioComponent implements OnInit {
       authorities: this.token.getAuthorities()
     };
     this.naoAutenticado();
-    this.datareload();
+    //  this.datareload();
     if (this.token.getToken()) {
       this.roles = this.token.getAuthorities();
       this.roles.every(role => {
@@ -51,6 +52,24 @@ export class PerfilFuncionarioComponent implements OnInit {
         }
       });
     }
+  }
+  ngOnDestroy() {
+    this.sub.unsubscribe();
+
+  }
+  funcionariologado() {
+  this.sub = this.route.params.subscribe(
+    params => {
+      const id = params['id'];
+      if (id) {
+        this.funcionarioService.getId(id).subscribe((func: Funcionario) => {
+          if (func) {
+            this.funcionario = func;
+            console.clear()
+          }
+        })
+      }
+    })
   }
 
   focosenhaatual() {
@@ -65,8 +84,8 @@ export class PerfilFuncionarioComponent implements OnInit {
     this.confirmasenhainput.nativeElement.focus();
   }
 
-  constructor(private http: InfosetorService,
-              private router: Router, private funcionarioService: FuncionarioService, private modalService: NgbModal, private token: TokenStorageService) {
+  constructor(private route: ActivatedRoute, private http: InfosetorService,
+    private router: Router, private funcionarioService: FuncionarioService, private modalService: NgbModal, private token: TokenStorageService) {
   }
 
   datareload() {

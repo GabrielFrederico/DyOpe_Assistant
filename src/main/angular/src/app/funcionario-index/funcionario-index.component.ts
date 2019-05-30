@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {TokenStorageService} from "../auth/token-storage.service";
 import {Router} from "@angular/router";
+import { Observable } from 'rxjs';
+import { Funcionario, FuncionarioService } from '../service/funcionario.service';
 
 @Component({
   selector: 'app-funcionario-index',
@@ -12,6 +14,8 @@ export class FuncionarioIndexComponent implements OnInit {
   form: any = {};
   public isCollapsed = false;
 
+  @Input() funcionarioObjeto: Observable<Funcionario>;
+  @Input() funcionario: Funcionario;
   closeResult: string;
   private roles: string[];
   private authority: string;
@@ -22,6 +26,7 @@ export class FuncionarioIndexComponent implements OnInit {
       username: this.token.getUsername(),
       authorities: this.token.getAuthorities()
     };
+    this.datareload();
     this.naoAutenticado()
     if (this.token.getToken()) {
       this.roles = this.token.getAuthorities();
@@ -39,7 +44,7 @@ export class FuncionarioIndexComponent implements OnInit {
 
   }
 
-  constructor(private modalService: NgbModal, private token: TokenStorageService, private  router: Router) {
+  constructor(private modalService: NgbModal, private funcionarioService: FuncionarioService, private token: TokenStorageService, private  router: Router) {
   }
 
 
@@ -65,7 +70,13 @@ export class FuncionarioIndexComponent implements OnInit {
       return `with: ${reason}`;
     }
   }
-
+  datareload() {
+    this.funcionarioObjeto = this.funcionarioService.getFuncionarioLogado(this.info.username);
+    this.funcionarioObjeto.subscribe(data => {
+      this.funcionario = data;
+      console.clear();
+    })
+  }
   private validado: boolean;
   naoAutenticado() {
     if (this.info.authorities.toString() !== 'ROLE_FUNCIONARIO') {
