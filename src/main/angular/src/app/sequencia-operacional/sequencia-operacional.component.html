@@ -1,131 +1,133 @@
 <base href="/src">
 <title>Operações</title>
-<div >
+<div>
   <h1>{{etapaproducao.tipoOpe}}</h1>
 </div>
 
 <div class="btn-group">
-<div class="dropdown">
-  <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Peças
-  </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <a class="dropdown-item">Jeans</a>
+  <div class="dropdown">
+    <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+      Peças
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <a class="dropdown-item">Jeans</a>
 
+    </div>
   </div>
-</div>
 </div>
 <hr>
 <div class="card-header">Sequencia Operacional</div>
-<div class="card-body bg-light">
-<div class="row">
-  <div class="col-sm-4">
-    <div class="card border-info mb-3 operacoes">
-      <div class="card-header border-info">Operações</div>
-      <div class="card-body text-secondary" >
-        <div class="form-group">
-          <div *ngFor="let operacao of suboperacoes; async" class="form-row">
-            <div class="col-sm-6">
-              <div class="form-group">
-              <div class="form-label-group">
-                <input type="text"  name="escricao"
-                       id="dataescricao" value="{{operacao.descricao}}"
-                       class="form-control" minlength="3"
-                       autofocus="autofocus"
-                       placeholder="Descricao" required="required">
-                <label for="dataescricao">Descrição</label>
+<div class="card-body">
+  <div class="row">
+    <div class="col-sm-3">
+      <div class="card border-info mb-3 operacoes">
+        <div class="card-header border-info">Operações</div>
+        <div class="card-body text-secondary">
+          <div class="form-group">
+            <div *ngFor="let operacao of suboperacoes; async" class="form-row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <div class="form-label-group">
+                    <input type="text" name="escricao"
+                           id="dataescricao" value="{{operacao.descricao}}"
+                           class="form-control" minlength="3"
+                           autofocus="autofocus"
+                           placeholder="Descricao" required="required">
+                    <label for="dataescricao">Descrição</label>
+                  </div>
+                </div>
               </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <div class="form-label-group">
+                    <input type="number" name="tempoOpe"
+                           id="tempoOpe" value="{{operacao.tempoNesc}}"
+                           class="form-control" minlength="3"
+                           autofocus="autofocus"
+                           placeholder="Tempo" required="required">
+                    <label for="tempoOpe">Tempo </label>
+                  </div>
+                </div>
               </div>
-            </div>
-            <div class="col-sm-6">
-              <div class="form-group">
-              <div class="form-label-group">
-                <input type="number"  name="tempoOpe"
-                       id="tempoOpe" value="{{operacao.tempoNesc}}"
-                       class="form-control" minlength="3"
-                       autofocus="autofocus"
-                       placeholder="Tempo" required="required">
-                <label for="tempoOpe">Tempo </label>
-              </div>
-              </div>
-            </div>
-            <div class="col-sm-6">
-            <a class="btn btn-danger" href="javascript:void(0)">-</a>
-          </div>
-          </div>
-        </div>
-        </div>
-      <div class="card-footer bg-transparent border-info">
-        <a class="btn btn-info" href="javascript:void(0)" (click)="openCadastro(cadastro)" data-toggle="modal"
-           data-target=".cadastro-operacoes">Add</a>
-      </div>
-    </div>
-  </div>
-
-
-  <div class="col-sm-4">
-    <div class="card border-warning mb-3 operacoes">
-      <div class="card-body text-warning">
-        <div class="form-group">
-          <div class="form-row">
-        <div class="col-md-6">
-          <div class="form-label-group">
-            <input  type="number" id="LoteProd"
-                   class="form-control"
-                   placeholder="Lote de Produção" name="loteProducao"
-                   required="required">
-            <label for="LoteProd" class="fonterisco">Lote de Produção:</label>
-          </div>
-         </div>
-         <div class="col-md-6">
-           <div class="form-label-group">
-             <input  type="number" id="numFun"
-                    class="form-control"
-                    placeholder="N° de Funcionários" name="numFun"
-                    required="required">
-             <label for="numFun" class="fonterisco">N° de Funcionários</label>
-           </div>
-          </div>
-       </div>
-      </div>
-     </div>
-    </div>
-  </div>
-
-  <div class="col-sm-4">
-    <div class="card border-success mb-3 lista">
-      <div class="card-body text-success">
-        <div class="form-group">
-          <div class="form-row">
-            <div class="col-md-6">
-              <div class="form-label-group">
-                <input type="date" id="datainici" name="dataInicio" class="form-control"
-                       placeholder="Data Inicio:"
-                       required="required">
-                <label for="datainici">Data Inicio:</label>
-              </div>
-            </div>
-
-            <div class="col-md-6">
-              <div class="form-label-group">
-                <input type="date" id="datalimit" name="prazo" class="form-control"
-                       placeholder="Prazo:"
-                       required="required">
-                <label for="datalimit">Prazo:</label>
+              <div class="col-sm-6">
+                <a class="btn btn-danger" href="javascript:void(0)">-</a>
               </div>
             </div>
           </div>
         </div>
-        <a class="btn btn-outline-success list-group-item list-group-item-action" (click)="openInformacoes(content)">
-          Ver dados
-        </a>
-        <a class="btn btn-outline-success list-group-item list-group-item-action" [routerLink]="['/gerenteindex/operacaorisco', etapaproducao.idTipoOpe]">
-          Ver Andamento
-        </a>
+        <div class="card-footer bg-transparent border-info">
+          <a class="btn btn-info" href="javascript:void(0)" (click)="openCadastro(cadastro)" data-toggle="modal"
+             data-target=".cadastro-operacoes">Add</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-4">
+      <div class="card border-warning mb-3 operacoes">
+        <div class="card-body text-warning">
+          <div class="form-group">
+            <div class="form-row testando123">
+              <div class="col-md-auto">
+                <div class="form-label-group">
+                  <input type="number" id="LoteProd"
+                         class="form-control"
+                         placeholder="Lote de Produção" name="loteProducao"
+                         required="required">
+                  <label for="LoteProd" class="fonterisco">Lote de Produção:</label>
+                </div>
+              </div>
+              <div class="col-md-auto">
+                <div class="form-label-group">
+                  <input type="number" id="numFun"
+                         class="form-control"
+                         placeholder="N° de Funcionários" name="numFun"
+                         required="required">
+                  <label for="numFun" class="fonterisco">N° de Funcionários</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-5">
+
+      <div class="card border-success mb-3 lista">
+        <div class="card-body text-success">
+          <div class="form-group">
+            <div class="form-row">
+              <div class="col-md-6">
+                <div class="form-label-group">
+                  <input type="date" id="datainici" name="dataInicio" class="form-control"
+                         placeholder="Data Inicio:"
+                         required="required">
+                  <label for="datainici">Data Inicio:</label>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-label-group">
+                  <input type="date" id="datalimit" name="prazo" class="form-control"
+                         placeholder="Prazo:"
+                         required="required">
+                  <label for="datalimit">Prazo:</label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <a class="btn btn-outline-success list-group-item list-group-item-action" (click)="openInformacoes(content)">
+            Ver dados
+          </a>
+          <a class="btn btn-outline-success list-group-item list-group-item-action"
+             [routerLink]="['/gerenteindex/operacaorisco', etapaproducao.idTipoOpe]">
+            Ver Andamento
+          </a>
+        </div>
       </div>
     </div>
   </div>
-</div>
 </div>
 
 <!-- Sticky Footer -->
@@ -160,14 +162,14 @@
             <div class="form-group">
 
               <label for="DescricaoOpe">Descrição da operação:</label>
-              <input [readonly]="isReadonly"  required="required" class="form-control"
+              <input [readonly]="isReadonly" required="required" class="form-control"
                      name="descricao" id="DescricaoOpe">
             </div>
             <div class="form-group">
               <div class="form-row">
                 <div class="col-md-6">
                   <div class="form-label-group">
-                    <input [readonly]="isReadonly"  type="date" id="datainicio"
+                    <input [readonly]="isReadonly" type="date" id="datainicio"
                            class="form-control"
                            placeholder="Data Inicio:" name="dataInicio"
                            required="required">
@@ -177,7 +179,7 @@
 
                 <div class="col-md-6">
                   <div class="form-label-group">
-                    <input [readonly]="isReadonly"  type="date" id="datalimite"
+                    <input [readonly]="isReadonly" type="date" id="datalimite"
                            class="form-control"
                            placeholder="Data limite:" name="prazo"
                            required="required">
@@ -190,7 +192,7 @@
               <div class="form-row">
                 <div class="col-md-6">
                   <div class="form-label-group">
-                    <input [readonly]="isReadonly"  type="text" id="custosOpe"
+                    <input [readonly]="isReadonly" type="text" id="custosOpe"
                            class="form-control fa-credit-card"
                            placeholder="Custos" name="custosOpe"
                            required="required">
@@ -199,7 +201,7 @@
                 </div>
                 <div class="col-md-6">
                   <div class="form-label-group">
-                    <input [readonly]="isReadonly"  type="number" id="LoteProd"
+                    <input [readonly]="isReadonly" type="number" id="LoteProd"
                            class="form-control"
                            placeholder="Lote de Produção" name="loteProducao"
                            required="required">
@@ -221,7 +223,7 @@
                 </div>
                 <div class="col-md-6">
                   <div class="form-label-group">
-                    <input [readonly]="isReadonly"  type="number" id="QtdPecasFunc"
+                    <input [readonly]="isReadonly" type="number" id="QtdPecasFunc"
                            class="form-control"
                            placeholder="Quantidade de peças por funcionário:" name="qtdPecasOpe"
                            required="required">
@@ -243,7 +245,7 @@
                 </div>
                 <div class="col-md-6">
                   <div class="form-label-group">
-                    <input [readonly]="isReadonly"  type="text" id="precoPeca"
+                    <input [readonly]="isReadonly" type="text" id="precoPeca"
                            class="form-control"
                            placeholder="Preço da peça:" name="precoPecaOpe"
                            required="required">
@@ -285,13 +287,13 @@
         <form #cadastrarOperacao="ngForm" [noValidate]="$any(false)" (ngSubmit)="cadastrar()">
           <div class="form-group">
             <div class="form-row">
-            <div class="col-md-6">
-              <div class="form-label-group">
-              <label for="DescricaoOp">Descrição da operação:</label>
-              <input required="required" name="descricao" [(ngModel)]="operacao.descricao" class="form-control"
-                     id="DescricaoOp">
-                 </div>
-            </div>
+              <div class="col-md-6">
+                <div class="form-label-group">
+                  <label for="DescricaoOp">Descrição da operação:</label>
+                  <input required="required" name="descricao" [(ngModel)]="operacao.descricao" class="form-control"
+                         id="DescricaoOp">
+                </div>
+              </div>
               <div class="col-md-6">
                 <div class="form-label-group">
                   <input type="number" id="LotePro" name="loteProducao" class="form-control"
@@ -300,8 +302,8 @@
                   <label for="LotePro">Lote de Produção:</label>
                 </div>
               </div>
-               </div>
             </div>
+          </div>
 
 
           <div class="modal-footer col-md-12">
@@ -317,8 +319,8 @@
     </div>
   </div>
 
-</ng-template >
+</ng-template>
 
 <ng-template *ngIf="!carregado">
-Carregando....
+  Carregando....
 </ng-template>
