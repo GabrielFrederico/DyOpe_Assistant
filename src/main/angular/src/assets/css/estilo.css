@@ -76,6 +76,11 @@ div.menu_index span {
   background-color: #8fecff !important;
 }
 
+.testando123 {
+  display: inline-block;
+  width: 100% ;
+}
+
 @media screen and (max-width: 570px) {
   .tam {
     font-size: 140%;
@@ -135,8 +140,6 @@ div.menu_index span {
   }
 }
 
-
-
 @media screen and (max-width: 416px) {
   .inputsenha {
     width: 84%;
@@ -184,8 +187,6 @@ div.menu_index span {
     width: 77%;
   }
 }
-
-
 
 @media screen and (max-width: 2560px) {
   .senhacadastro {
@@ -282,8 +283,6 @@ div.menu_index span {
     width: 77%;
   }
 }
-
-
 
 @media screen and (max-width: 2560px) {
   .showredefinir {
@@ -430,7 +429,7 @@ div.menu_index span {
 }
 
 @media screen and (max-width: 991px) {
-  .fonterisco {
+  .fonteriscoinfo {
     font-size: 14px;
   }
 }
@@ -438,5 +437,23 @@ div.menu_index span {
 @media screen and (max-width: 901px) {
   .fontecorte {
     text-indent: -1%;
+  }
+}
+
+@media screen and (max-width: 990px) {
+  .fonterisco {
+    font-size: 15px;
+  }
+}
+
+@media screen and (max-width: 965px) {
+  .fonterisco {
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 940px) {
+  .fonterisco {
+    font-size: 13px;
   }
 }

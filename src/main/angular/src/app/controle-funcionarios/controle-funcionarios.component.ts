@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject} from '@angular/core';
+import {Component, OnInit, Inject} from '@angular/core';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {TokenStorageService} from '../auth/token-storage.service';
 import {Route, Router} from '@angular/router';
@@ -17,11 +17,12 @@ export class ControleFuncionariosComponent implements OnInit {
   public info: any;
   private validado: boolean;
 
-  constructor(private modalService: NgbModal, private setorservice: CadastroSetorService, private token: TokenStorageService, private router: Router, private infosetorService: InfosetorService) {}
+  constructor(private modalService: NgbModal, private setorservice: CadastroSetorService, private token: TokenStorageService, private router: Router, private infosetorService: InfosetorService) {
+  }
 
   ngOnInit() {
     this.infosetorService.getInfosetor()
-      .subscribe( data => {
+      .subscribe(data => {
       });
     this.info = {
       token: this.token.getToken(),
@@ -43,8 +44,9 @@ export class ControleFuncionariosComponent implements OnInit {
       this.validado = true;
     }
   }
-    dataReload() {
-      this.infosetor = this.infosetorService.getInfosetor();
-      this.setores = this.setorservice.getSetor();
-    }
+
+  dataReload() {
+    this.infosetor = this.infosetorService.getInfosetor();
+    this.setores = this.setorservice.getSetor();
+  }
 }

@@ -19,9 +19,10 @@
     <!-- Navbar -->
 
     <ul class="navbar-nav ml-auto ml-md-0">
-      <li  ngbDropdown class="nav-item dropdown no-arrow mx-1 show">
-        <a ngbDropdownToggle class="nav-link "  href="javascript:void(0)" id="alertsDropdown" role="button" aria-haspopup="true" aria-expanded="false">
-   <i class="fas fa-bell fa-fw"><span class="badge-danger badge-counter badge">1+</span></i>
+      <li ngbDropdown class="nav-item dropdown no-arrow mx-1 show">
+        <a ngbDropdownToggle class="nav-link " href="javascript:void(0)" id="alertsDropdown" role="button"
+           aria-haspopup="true" aria-expanded="false">
+          <i class="fas fa-bell fa-fw"><span class="badge-danger badge-counter badge">1+</span></i>
 
           <!-- Counter - Alerts -->
         </a>
@@ -46,13 +47,14 @@
         </div>
       </li>
       <li ngbDropdown class="nav-item dropdown no-arrow">
-        <a  ngbDropdownToggle class="nav-link nav-link active" href="javascript:void(0)" id="userDropdown" role="button">
+        <a ngbDropdownToggle class="nav-link nav-link active" href="javascript:void(0)" id="userDropdown" role="button">
           <i class="fas fa-user-circle fa-fw"></i>
         </a>
         <div ngbDropdownMenu class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
           <a class="dropdown-item" routerLink="/gerenteindex/perfilgerente">Perfil</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#" (click)="openLogout(content)" data-toggle="modal" data-target="#logoutModal">Sair</a>
+          <a class="dropdown-item" href="#" (click)="openLogout(content)" data-toggle="modal"
+             data-target="#logoutModal">Sair</a>
         </div>
       </li>
     </ul>
@@ -79,72 +81,70 @@
   </ng-template>
 
 
+  <div id="wrapper">
 
-<div id="wrapper">
-
-  <!-- Sidebar -->
-  <ul  class="sidebar bg-primary navbar-nav" >
-    <app-sidebar></app-sidebar>
-    <li class="nav-item text-light" >
-      <a class="nav-link text-light" routerLink="/gerenteindex/controlefuncionarios">
-        <span>Controle</span>
-      </a>
+    <!-- Sidebar -->
+    <ul class="sidebar bg-primary navbar-nav">
+      <app-sidebar></app-sidebar>
+      <li class="nav-item text-light">
+        <a class="nav-link text-light" routerLink="/gerenteindex/cadastrosetor">
+          <span>Cadastrar Setor</span>
+        </a>
 
 
-    </li>
-  </ul>
+      </li>
+    </ul>
 
-  <div id="content-wrapper" class="fundo justify-content-center">
+    <div id="content-wrapper" class="fundo justify-content-center">
 
-    <div class="container-fluid">
+      <div class="container-fluid">
         <router-outlet></router-outlet>
 
-      <!-- Page Content -->
-    <!--  <h1>Home</h1>
-      <hr>
-      <div class="menu_index">
-        <span class="badge badge-info tam"> Bem-vindo {{info.username}}!</span>
-        <span class="badge badge-info tam"> Cadastre Operações</span>
-        <span class="badge badge-info tam"> Receberá informações úteis</span>
-        <span class="badge badge-info tam"> Controle o andamento da produção</span>
+        <!-- Page Content -->
+        <!--  <h1>Home</h1>
+          <hr>
+          <div class="menu_index">
+            <span class="badge badge-info tam"> Bem-vindo {{info.username}}!</span>
+            <span class="badge badge-info tam"> Cadastre Operações</span>
+            <span class="badge badge-info tam"> Receberá informações úteis</span>
+            <span class="badge badge-info tam"> Controle o andamento da produção</span>
+          </div>
+
+
+        <!-- /.container-fluid -->
+
       </div>
-
-
-    <!-- /.container-fluid -->
-
-  </div>
-    <!-- Sticky Footer -->
-    <footer class="sticky-footer">
-      <div class="container my-auto ">
-        <div class="copyright text-center my-auto ">
-          <span>Copyright © DyOpe Assistant 2019</span>
+      <!-- Sticky Footer -->
+      <footer class="sticky-footer">
+        <div class="container my-auto ">
+          <div class="copyright text-center my-auto ">
+            <span>Copyright © DyOpe Assistant 2019</span>
+          </div>
         </div>
-      </div>
-    </footer>
+      </footer>
+
+    </div>
+    <!-- /.content-wrapper -->
 
   </div>
-  <!-- /.content-wrapper -->
+  <!-- /#wrapper -->
 
-</div>
-<!-- /#wrapper -->
-
-<!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded" href="#page-top">
-  <i class="fas fa-angle-up"></i>
-</a>
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
 
 
+  <script src="assets/vendor/jquery/jquery.min.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-<script src="assets/vendor/jquery/jquery.min.js"></script>
-<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/jquery-easing/jquery.easing.min.js"></script>
 
-<script src="assets/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-<script src="assets/js/sb-admin.min.js"></script>
+  <script src="assets/js/sb-admin.min.js"></script>
 
 </div>
 
-<ng-template #loggedOut >
+<ng-template #loggedOut>
   Acesso negado! <br>
   Faça o <a routerLink="/logingerente">login.</a>
 
