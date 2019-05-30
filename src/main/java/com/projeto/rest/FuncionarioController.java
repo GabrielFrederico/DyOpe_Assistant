@@ -62,10 +62,15 @@ public class FuncionarioController {
 		return funcionario;
 	}
     
+    @RequestMapping(method = RequestMethod.GET, path = "getById/{id}")
+	@PreAuthorize("hasRole('FUNCIONARIO')")
+    public Funcionario getFuncionarioById(@PathVariable("id") long id) {
+		Funcionario funcionario = funcionarioRepository.findById(id);
+		return funcionario;
+	}
     @RequestMapping(method = RequestMethod.POST, path = "/cadastrar")
     public ResponseEntity<?> registerUser(@Valid @RequestBody CadastroFormFuncionario signUpRequest) {
-
-
+ 
 
         if (usuarioRepository.existsByNomeUsuario(signUpRequest.getNomeUsuario())) {
             return new ResponseEntity<>(new ResponseMessage("Erro -> Usuário já está em uso!"),

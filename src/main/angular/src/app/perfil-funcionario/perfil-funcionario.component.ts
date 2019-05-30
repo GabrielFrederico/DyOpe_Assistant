@@ -33,6 +33,7 @@ export class PerfilFuncionarioComponent implements OnInit, OnDestroy {
   @ViewChild("rg") rg: ElementRef;
 
   ngOnInit() {
+    this.funcionariologado();
     this.info = {
       token: this.token.getToken(),
       username: this.token.getUsername(),
