@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { TokenStorageService } from "../auth/token-storage.service";
 import { Operacao, EtapaProducao } from "./cadastro-operacao.service";
+import { Setor } from './cadastro-setor.service';
 
 
 // tslint:disable-next-line:class-name
@@ -29,9 +30,11 @@ export class Gerente {
   public senhaConfirm: string;
   public senha: string;
   role: string;
+  public operacoes: Operacao[];
   public operacoesFazer: Operacao[];
   public operacoesAndamento: Operacao[];
   public operacoesPrazo: Operacao[];
+  public setores: Setor[];
   public pecas: Peca[];
 
   constructor(nome: string, nomeUsuario: string, cpf: string, rg: string, email: string, senha: string, senhaConfirm: string) {

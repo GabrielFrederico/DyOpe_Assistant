@@ -12,10 +12,9 @@ import { FuncionarioIndexComponent } from '../funcionario-index/funcionario-inde
   selector: 'app-perfil-funcionario',
   templateUrl: './perfil-funcionario.component.html'
 })
-export class PerfilFuncionarioComponent implements OnInit, OnDestroy, AfterViewInit {
+export class PerfilFuncionarioComponent implements OnInit, OnDestroy {
   @Input() funcionarioObjeto: Observable<Funcionario>;
   @Input() funcionario: Funcionario;
-  @ViewChild(FuncionarioIndexComponent) dados;
   info: any;
   form: any = {};
   public isCollapsed = false;
@@ -34,18 +33,15 @@ export class PerfilFuncionarioComponent implements OnInit, OnDestroy, AfterViewI
   @ViewChild("cpf") cpf: ElementRef;
   @ViewChild("rg") rg: ElementRef;
 
-    ngAfterViewInit() {
-      this.funcionario = this.dados.funcionario;
-     }
+
    ngOnInit() {
-    this.funcionariologado();
     this.info = {
       token: this.token.getToken(),
       username: this.token.getUsername(),
       authorities: this.token.getAuthorities()
     };
     this.naoAutenticado();
-    //  this.datareload();
+    this.datareload();
     if (this.token.getToken()) {
       this.roles = this.token.getAuthorities();
       this.roles.every(role => {
@@ -63,21 +59,6 @@ export class PerfilFuncionarioComponent implements OnInit, OnDestroy, AfterViewI
     this.sub.unsubscribe();
 
   }
-  funcionariologado() {
-  this.sub = this.route.params.subscribe(
-    params => {
-      const id = params['id'];
-      if (id) {
-        this.funcionarioService.getId(id).subscribe((func: Funcionario) => {
-          if (func) {
-            this.funcionario = func;
-            console.clear()
-          }
-        })
-      }
-    })
-  }
-
   focosenhaatual() {
     this.senhainput.nativeElement.focus();
   }

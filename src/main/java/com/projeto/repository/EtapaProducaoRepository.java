@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 public interface EtapaProducaoRepository extends CrudRepository<EtapaProducao, Serializable> {
 
-    EtapaProducao findByidTipoOpe(long idTipoOpe);
+    EtapaProducao findById(long id);
 
     EtapaProducao findByEtapaProducao(String etapaProducao);
 }

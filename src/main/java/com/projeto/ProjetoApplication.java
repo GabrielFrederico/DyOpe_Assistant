@@ -89,24 +89,24 @@ public class ProjetoApplication {
             suboperacaoRepository.save(tag);
             suboperacaoRepository.save(embalar);
             
-			risco.setIdTipoOpe(1);
-			risco.setTipoOpe("Risco");
+			risco.setId(1);
+			risco.setEtapaProducao("Risco");
 			risco.setStatusSYS('A');
 
-			corte.setIdTipoOpe(2);
-			corte.setTipoOpe("Corte");
+			corte.setId(2);
+			corte.setEtapaProducao("Corte");
 			corte.setStatusSYS('A');
 
-			costura.setIdTipoOpe(3);
-			costura.setTipoOpe("Costura");
+			costura.setId(3);
+			costura.setEtapaProducao("Costura");
 			costura.setStatusSYS('A');
 
-			beneficiamento.setIdTipoOpe(4);
-			beneficiamento.setTipoOpe("Beneficiamento");
+			beneficiamento.setId(4);
+			beneficiamento.setEtapaProducao("Beneficiamento");
 			beneficiamento.setStatusSYS('A');
 
-			acabamento.setIdTipoOpe(5);
-			acabamento.setTipoOpe("Acabamento");
+			acabamento.setId(5);
+			acabamento.setEtapaProducao("Acabamento");
 			acabamento.setStatusSYS('A');
 
 			etapaProducaoRepository.save(risco);

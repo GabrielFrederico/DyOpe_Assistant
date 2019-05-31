@@ -7,7 +7,7 @@ import { InformacoesSetorComponent } from '../informacoes-setor/informacoes-seto
 const rotas: Routes = [
 {path: '', component: FuncionarioIndexComponent,
 children:[
-    {path: 'perfilfuncionario/:id', component: PerfilFuncionarioComponent},
+    {path: 'perfilfuncionario', component: PerfilFuncionarioComponent},
     {path: 'informacoessetor', component: InformacoesSetorComponent}
 
 ]}];

@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { CadastroSetorService, Setor } from '../service/cadastro-setor.service';
 import { Router } from '@angular/router';
 import { TokenStorageService } from '../auth/token-storage.service';
 import { Observable } from 'rxjs';
 import { CadastroOperacaoService, EtapaProducao } from '../service/cadastro-operacao.service';
+import { Gerente, GerenteService } from '../service/gerente.service';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-cadastro-setor',
@@ -14,6 +16,8 @@ import { CadastroOperacaoService, EtapaProducao } from '../service/cadastro-oper
 
 export class CadastroSetorComponent implements OnInit {
   setor: Setor = new Setor();
+  @Input() gerente: Gerente;
+  gerenteObjeto: Observable<Gerente>;
   public setores: Observable<Setor[]>;
   public info: any;
   public validado: boolean;
@@ -26,22 +30,25 @@ export class CadastroSetorComponent implements OnInit {
       authorities: this.token.getAuthorities(),
       senha: this.token.getPassword()
     };
-    this.naoAutenticado();
     this.dataReload();
+    this.naoAutenticado();
+
   }
   constructor(private setorService: CadastroSetorService,
-    private router: Router, private etapaService: CadastroOperacaoService, private setorservice: CadastroSetorService, private token: TokenStorageService) {
+    private router: Router, private etapaService: CadastroOperacaoService, private gerenteService: GerenteService, private setorservice: CadastroSetorService, private token: TokenStorageService) {
   }
-  selectEtapa(etapa: EtapaProducao) {
-
+  selectEtapa(etapa: number) {
+    this.setor.etapaproducao_id = etapa;
   }
 
   save() {
-    this.setorService.cadastrarSetor(
-      this.setor)
-      .subscribe(value => console.log(value), error => console.log(error));
-    alert('Cadastrado com sucesso!');
-    this.dataReload();
+    this.setor.gerente_id = this.gerente.id;
+    this.gerente.setores.push(this.setor);
+    this.gerenteService.cadastrarOperacao(this.gerente).pipe(first()).subscribe(data => {
+      alert("Setor cadastrado com sucesso!");
+
+    }, error => { alert(error) });
+
 
   }
 
@@ -56,6 +63,8 @@ export class CadastroSetorComponent implements OnInit {
     }
   }
   dataReload() {
+    this.gerenteObjeto = this.gerenteService.getGerenteLogado(this.info.username);
+    this.gerenteObjeto.subscribe(data => this.gerente = data);
     this.setores = this.setorservice.getSetor();
   }
 }

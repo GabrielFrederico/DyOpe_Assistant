@@ -4,8 +4,8 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
 
 export class EtapaProducao{
-  public idTipoOpe: number;
-  public tipoOpe: string;
+  public id: number;
+  public etapaProducao: string;
   public statusSYS: 'A';
   public gerente_id: number;
   public operacoes: Operacao[];
@@ -52,14 +52,14 @@ export class CadastroOperacaoService {
     return this.httpClient.get<Operacao>('http://localhost:8080/operacoes/'+id,httpOptions);
   }
   getEtapaProducao(id: number): Observable<EtapaProducao>{
-    return this.httpClient.get<EtapaProducao>('http://localhost:8080/tipoOpe/'+id, httpOptions);
+    return this.httpClient.get<EtapaProducao>('http://localhost:8080/etapaProducao/'+id, httpOptions);
   }
   getEtapaProducaoNome(etapa: string): Observable<EtapaProducao>{
-    return this.httpClient.get<EtapaProducao>('http://localhost:8080/tipoOpe/getByNome/'+etapa, httpOptions);
+    return this.httpClient.get<EtapaProducao>('http://localhost:8080/etapaProducao/getByNome/'+etapa, httpOptions);
   }
 
   getTiposOperacoes() {
-    return this.httpClient.get<EtapaProducao[]>('http://localhost:8080/tipoOpe', httpOptions);
+    return this.httpClient.get<EtapaProducao[]>('http://localhost:8080/etapaProducao', httpOptions);
   }
   cadastrarOperacao(operacao: Operacao) {
     return this.httpClient.post<Operacao>('http://localhost:8080/gerentes/cadastraroperacao', operacao, httpOptions);

@@ -11,8 +11,8 @@
           <div class="form-group">
             <div class="form-group">
 
-                <label for="nomeCompleto">Nome do setor:</label>
-                <input type="text" name="nomeSetor" id="nomeCompleto" class="form-control"
+                <label for="nomeSetor">Nome do setor:</label>
+                <input type="text" name="nomeSetor" id="nomeSetor" class="form-control"
                        autofocus="autofocus" [(ngModel)]="setor.nomeSetor"
                        placeholder="Nome Setor" required="required">
 
@@ -22,14 +22,12 @@
             <label for="etapaProducao">Etapa da Produção:</label>
               <select class="form-control" id="etapaProducao">
                 <option>Selecione..</option>
-                <option *ngFor="let etapa of etapas | async"(click)="selectEtapa(etapa)">{{etapa.tipoOpe}}</option>
-                <option *ngIf="etapas.length ===0">Carregando...</option>
+                <option *ngFor="let etapa of etapas | async"(click)="selectEtapa(etapa.id)">{{etapa.etapaProducao}}</option>
+                <option *ngIf="!etapas">Carregando...</option>
 
               </select>
 
           </div>
-
-          <a class="btn btn-info" routerLink="/controlefuncionarios">Voltar</a>
           <input class="btn btn-success" type="submit" value="Cadastrar">
 
         </form>

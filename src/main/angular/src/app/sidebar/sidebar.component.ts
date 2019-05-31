@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
 
 import { EtapaProducao, CadastroOperacaoService } from '../service/cadastro-operacao.service';
 import { Observable } from 'rxjs';
@@ -7,7 +7,8 @@ import {CadastroSetorService, Setor} from "../service/cadastro-setor.service";
 
 @Component({
   selector: 'app-sidebar',
-  templateUrl: './sidebar.component.html'
+  templateUrl: './sidebar.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SidebarComponent implements OnInit {
   public isCollapsed = false;

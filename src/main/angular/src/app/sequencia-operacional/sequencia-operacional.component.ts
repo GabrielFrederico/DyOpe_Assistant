@@ -13,7 +13,8 @@ ChangeDetectionStrategy.OnPush
 @Component({
   selector: 'app-sequencia-operacional',
   templateUrl: './sequencia-operacional.component.html',
-  preserveWhitespaces: false
+  preserveWhitespaces: false,
+
 })
 export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
    operacao: Operacao = new Operacao();
@@ -97,12 +98,12 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
     this.gerenteObjeto.subscribe(data => this.gerente = data);
     this.suboperacoesObj = this.operacaoService.getSubOperacoes();
     this.suboperacoesObj.subscribe(data=>{this.suboperacoes = data});
-    this.tipoOpe = this.etapaproducao.idTipoOpe.toString();
+    this.tipoOpe = this.etapaproducao.id.toString();
     this.carregado = true;
     console.clear();
   }
   cadastrar() {
-    this.operacao.etapa_producao_id = this.etapaproducao.idTipoOpe;
+    this.operacao.etapa_producao_id = this.etapaproducao.id;
     this.operacao.gerente_id = this.gerente.id;
     this.gerente.operacoesFazer.push(this.operacao);
     this.gerenteService.cadastrarOperacao(this.gerente).pipe(first()).subscribe(data => {
@@ -112,7 +113,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
 
   }
   cadastrarPeca() {
-    this.newpeca.etapa_producao_id = this.etapaproducao.idTipoOpe;
+    this.newpeca.etapa_producao_id = this.etapaproducao.id;
     this.newpeca.gerente_id = this.gerente.id;
     this.gerente.pecas.push(this.newpeca);
     this.gerenteService.cadastrarOperacao(this.gerente).pipe(first()).subscribe(data => {

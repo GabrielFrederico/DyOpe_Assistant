@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("tipoOpe")
+@RequestMapping("etapaProducao")
 @CrossOrigin(origins = "*", maxAge = 3600)
 @PreAuthorize("hasRole('GERENTE')")
 public class EtapaProducaoController {
@@ -24,9 +24,9 @@ public class EtapaProducaoController {
         return etapaProducaoRepository.findAll();
     }
 
-    @RequestMapping(method = RequestMethod.GET, path = "/{idTipoOpe}")
-    public EtapaProducao getEtapaProducaoById(@PathVariable("idTipoOpe") long idTipoOpe) {
-        EtapaProducao etapaProducao = etapaProducaoRepository.findByidTipoOpe(idTipoOpe);
+    @RequestMapping(method = RequestMethod.GET, path = "/{id}")
+    public EtapaProducao getEtapaProducaoById(@PathVariable("id") long id) {
+        EtapaProducao etapaProducao = etapaProducaoRepository.findById(id);
         return etapaProducao;
     }
 

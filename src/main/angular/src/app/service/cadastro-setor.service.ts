@@ -1,15 +1,17 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { EtapaProducao } from './cadastro-operacao.service';
 
 export class Setor {
   public id: number;
- public  nomeSetor: string;
- public operacao: string;
+  public nomeSetor: string;
+  public etapaproducao_id: number;
+  public gerente_id: number;
 }
 
 const httpOptions = {
-  headers: new HttpHeaders({'Content-Type': 'application/json'})
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
 @Injectable({

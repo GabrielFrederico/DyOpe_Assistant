@@ -5,11 +5,12 @@ import {Router} from '@angular/router';
 import {EtapaProducao, CadastroOperacaoService} from '../service/cadastro-operacao.service';
 import { Observable } from 'rxjs';
 
-  ChangeDetectionStrategy.OnPush
+
 @Component({
   selector: 'app-gerente-index',
   templateUrl: './gerente-index.component.html',
-  preserveWhitespaces: false
+  preserveWhitespaces: false,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GerenteIndexComponent implements OnInit {
 

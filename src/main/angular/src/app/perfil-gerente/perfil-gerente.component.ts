@@ -89,8 +89,6 @@ export class PerfilGerenteComponent implements OnInit{
 this.gerenteObjeto.subscribe(data=> this.gerente = data)
       console.clear();
 
-
-
   }
 
   redefinirSenha() {

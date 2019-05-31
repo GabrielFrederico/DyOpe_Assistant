@@ -11,7 +11,7 @@ public class EtapaProducao {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
 
-    private long idTipoOpe;
+    private long id;
     
     private String etapaProducao;
     
@@ -32,19 +32,30 @@ public class EtapaProducao {
         this.statusSYS = statusSYS;
     }
 
-    public long getIdTipoOpe() {
-        return idTipoOpe;
-    }
+	public long getId() {
+		return id;
+	}
 
-    public void setIdTipoOpe(long idTipoOpe) {
-        this.idTipoOpe = idTipoOpe;
-    }
+	public void setId(long id) {
+		this.id = id;
+	}
 
-    public String getTipoOpe() {
-        return etapaProducao;
-    }
+	public String getEtapaProducao() {
+		return etapaProducao;
+	}
 
-    public void setTipoOpe(String etapaProducao) {
-        this.etapaProducao = etapaProducao;
-    }
+	public void setEtapaProducao(String etapaProducao) {
+		this.etapaProducao = etapaProducao;
+	}
+
+	public Set<Operacao> getOperacoes() {
+		return operacoes;
+	}
+
+	public void setOperacoes(Set<Operacao> operacoes) {
+		this.operacoes = operacoes;
+	}
+
+
+
 }

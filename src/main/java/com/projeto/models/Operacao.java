@@ -13,23 +13,19 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 
-
 @Entity
 public class Operacao {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	
+
 	@OneToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "operacao_suboperacoes",
-    joinColumns = @JoinColumn(name = "operacao_id"),
-    inverseJoinColumns = @JoinColumn(name = "suboperacao_id"))
-	private Set<SubOperacao> operacoes= new HashSet<>();
-	
+	@JoinTable(name = "operacao_suboperacoes", joinColumns = @JoinColumn(name = "operacao_id"), inverseJoinColumns = @JoinColumn(name = "suboperacao_id"))
+	private Set<SubOperacao> operacoes = new HashSet<>();
+
 	private java.sql.Date dataInicio;
-	
-	
+
 	public Set<SubOperacao> getOperacoes() {
 		return operacoes;
 	}
@@ -39,36 +35,35 @@ public class Operacao {
 	}
 
 	private java.sql.Date prazo;
-	
+
 	private float custosOpe;
-	
+
 	private int loteProducao;
-	
+
 	private int numFuncionariosOpe;
-        
-        private int numFuncionariosDisponiveis;
-        
-        private float producaoHora;
 
-    public float getProducaoHora() {
-        return producaoHora;
-    }
+	private int numFuncionariosDisponiveis;
 
-    public void setProducaoHora(float producaoHora) {
-        this.producaoHora = producaoHora;
-    }
+	private float producaoHora;
 
-    public int getNumFuncionariosDisponiveis() {
-        return numFuncionariosDisponiveis;
-    }
+	public float getProducaoHora() {
+		return producaoHora;
+	}
 
-    public void setNumFuncionariosDisponiveis(int numFuncionariosDisponiveis) {
-        this.numFuncionariosDisponiveis = numFuncionariosDisponiveis;
-    }
-	
+	public void setProducaoHora(float producaoHora) {
+		this.producaoHora = producaoHora;
+	}
+
+	public int getNumFuncionariosDisponiveis() {
+		return numFuncionariosDisponiveis;
+	}
+
+	public void setNumFuncionariosDisponiveis(int numFuncionariosDisponiveis) {
+		this.numFuncionariosDisponiveis = numFuncionariosDisponiveis;
+	}
+
 	private int qtdPecasOpe;
 	private boolean statusSYS;
-	
 
 	public long getId() {
 		return id;
@@ -86,7 +81,6 @@ public class Operacao {
 		this.statusSYS = statusSYS;
 	}
 
-	
 	public Date getDataInicio() {
 		return dataInicio;
 	}
@@ -95,7 +89,6 @@ public class Operacao {
 		this.dataInicio = dataInicio;
 	}
 
-	
 	public Date getPrazo() {
 		return prazo;
 	}
@@ -136,7 +129,6 @@ public class Operacao {
 		this.qtdPecasOpe = qtdPecasOpe;
 	}
 
-
 	public float getPrecoPecaOpe() {
 		return precoPecaOpe;
 	}
@@ -145,9 +137,6 @@ public class Operacao {
 		this.precoPecaOpe = precoPecaOpe;
 	}
 
-
 	private float precoPecaOpe;
-	
-	
-	
+
 }
