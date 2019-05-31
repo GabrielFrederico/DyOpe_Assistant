@@ -67,7 +67,7 @@ export class PerfilGerenteComponent implements OnInit{
       username: this.token.getUsername(),
       authorities: this.token.getAuthorities()
     };
-    //  this.datareload();
+   this.datareload();
     this.naoAutenticado();
 
   }

@@ -24,7 +24,7 @@ export class InformacoesSetorComponent implements OnInit {
 
   infosetor: Infosetor = new Infosetor();
 
-  private validado: boolean;
+  public validado: boolean;
 
   ngOnInit() {
     this.info = {

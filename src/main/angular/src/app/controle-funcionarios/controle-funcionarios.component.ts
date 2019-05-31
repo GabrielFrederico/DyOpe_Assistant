@@ -15,7 +15,7 @@ export class ControleFuncionariosComponent implements OnInit {
   infosetor: Observable<Infosetor[]>;
   public setores: Observable<Setor[]>;
   public info: any;
-  private validado: boolean;
+  public validado: boolean;
 
   constructor(private modalService: NgbModal, private setorservice: CadastroSetorService, private token: TokenStorageService, private router: Router, private infosetorService: InfosetorService) {
   }

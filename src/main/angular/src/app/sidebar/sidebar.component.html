@@ -20,6 +20,6 @@
   <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="pagesDropdown" x-placement="bottom-start">
     <h6 class="dropdown-header">Setores</h6>
     <a *ngFor="let setor of setores | async" href="javascript:void(0)"
-       [routerLink]="['/gerenteindex/cadastrosetor', setor.id]" class="dropdown-item">{{setor.nomeSetor}}</a>
+       [routerLink]="['/gerenteindex/controlefuncionarios', setor.id]" class="dropdown-item">{{setor.nomeSetor}}</a>
   </div>
 </li>

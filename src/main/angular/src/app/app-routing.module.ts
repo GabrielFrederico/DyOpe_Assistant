@@ -7,7 +7,6 @@ import {CadastroGerenteComponent} from './cadastro-gerente/cadastro-gerente.comp
 import {LoginFuncionarioComponent} from './login-funcionario/login-funcionario.component';
 import {ErroComponent} from './erro/erro.component';
 import {CadastroFuncionarioComponent} from './cadastro-funcionario/cadastro-funcionario.component';
-import {GerenteComponent} from './gerente/gerente.component';
 import {NavComponent} from './nav/nav.component';
 import {RedefinirSenhaComponent} from "./redefinir-senha/redefinir-senha.component";
 
@@ -40,6 +39,6 @@ export const routingComponent2 = [ErroComponent, EsqueceuSenhaComponent, Cadastr
 
 export const routingComponent3 = [CadastroFuncionarioComponent];
 
-export const routingComponent4 = [GerenteComponent, NavComponent];
+export const routingComponent4 = [NavComponent];
 
 export const routingComponent5= [RedefinirSenhaComponent];

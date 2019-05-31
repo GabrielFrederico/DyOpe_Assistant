@@ -77,8 +77,8 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
     }
   }
 
-  private validado: boolean;
-  private carregado: boolean;
+  public validado: boolean;
+  public carregado: boolean;
   naoAutenticado() {
     if (this.info.authorities.toString() !== 'ROLE_GERENTE') {
       this.validado = false;

@@ -18,7 +18,6 @@ import {
   MatListModule,
   MatMenuModule, MatButtonToggleModule
 } from '@angular/material';
-import {GerenteComponent} from './gerente/gerente.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 import {coerceBooleanProperty} from '@angular/cdk/coercion';
@@ -45,7 +44,6 @@ import { SharedModule } from './sidebar/shared.module';
     routingComponent4,
     routingComponent5,
     NavComponent,
-    GerenteComponent,
     RedefinirSenhaComponent
   ],
   imports: [

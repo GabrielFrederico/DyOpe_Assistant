@@ -77,7 +77,7 @@ export class GerenteIndexComponent implements OnInit {
     }
   }
 
-  private validado: boolean;
+  public validado: boolean;
   naoAutenticado() {
     if (this.info.authorities.toString() !== 'ROLE_GERENTE') {
       this.validado = false;

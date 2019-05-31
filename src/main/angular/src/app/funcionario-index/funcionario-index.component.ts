@@ -77,7 +77,7 @@ export class FuncionarioIndexComponent implements OnInit {
       console.clear();
     })
   }
-  private validado: boolean;
+  public validado: boolean;
   naoAutenticado() {
     if (this.info.authorities.toString() !== 'ROLE_FUNCIONARIO') {
       this.validado = false;

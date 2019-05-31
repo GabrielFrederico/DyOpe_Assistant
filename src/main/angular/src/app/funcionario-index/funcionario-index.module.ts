@@ -20,7 +20,6 @@ import { InformacoesSetorComponent } from '../informacoes-setor/informacoes-seto
   ],
   declarations: [
     FuncionarioIndexComponent,
-    OperacaoCosturaComponent,
     PerfilFuncionarioComponent,
     NavegacaoComponent,
     PerfilFuncionarioComponent,

@@ -77,7 +77,7 @@ export class OperacaoRiscoComponent implements OnInit, OnDestroy {
     }
   }
 
-  private validado: boolean;
+  public validado: boolean;
   private cadastrado: boolean;
   naoAutenticado() {
     if (this.info.authorities.toString() !== 'ROLE_GERENTE') {
