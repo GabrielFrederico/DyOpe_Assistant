@@ -14,6 +14,10 @@ import { Observable } from 'rxjs';
 })
 export class GerenteIndexComponent implements OnInit {
 
+// tslint:disable-next-line: max-line-length
+  constructor(private modalService: NgbModal, private tipoOpeservice: CadastroOperacaoService, private token: TokenStorageService, private  router: Router) {
+  }
+
   title = 'DyOpe Assistant';
   info: any;
   form: any = {};
@@ -24,13 +28,15 @@ export class GerenteIndexComponent implements OnInit {
   private roles: string[];
   private authority: string;
 
+  public validado: boolean;
+
   ngOnInit() {
     this.info = {
       token: this.token.getToken(),
       username: this.token.getUsername(),
       authorities: this.token.getAuthorities()
     };
-    this.naoAutenticado()
+    this.naoAutenticado();
     if (this.token.getToken()) {
       this.roles = this.token.getAuthorities();
       this.roles.every(role => {
@@ -47,15 +53,13 @@ export class GerenteIndexComponent implements OnInit {
 
   }
 
-  constructor(private modalService: NgbModal,private tipoOpeservice: CadastroOperacaoService, private token: TokenStorageService, private  router: Router) {
-  }
-
 
   logout() {
     this.token.logOut();
+    this.router.navigate(['/logingerente']);
   }
 
- dataReload(){
+ dataReload() {
   this.tiposOperacao = this.tipoOpeservice.getTiposOperacoes();
 
  }
@@ -77,8 +81,6 @@ export class GerenteIndexComponent implements OnInit {
       return `with: ${reason}`;
     }
   }
-
-  public validado: boolean;
   naoAutenticado() {
     if (this.info.authorities.toString() !== 'ROLE_GERENTE') {
       this.validado = false;
