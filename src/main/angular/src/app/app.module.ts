@@ -23,14 +23,9 @@ import {FormsModule} from '@angular/forms';
 import {coerceBooleanProperty} from '@angular/cdk/coercion';
 import {ShowHidePasswordModule} from 'ngx-show-hide-password';
 import {AuthInterceptorService} from './auth/auth-interceptor.service';
-import { BrMaskerModule } from 'brmasker-ionic-3';
-import { RedefinirSenhaComponent } from './redefinir-senha/redefinir-senha.component';
-import { SharedModule } from './sidebar/shared.module';
-
-
-
-
-
+import {BrMaskerModule} from 'brmasker-ionic-3';
+import {RedefinirSenhaComponent} from './redefinir-senha/redefinir-senha.component';
+import {SharedModule} from './sidebar/shared.module';
 
 @NgModule({
   schemas: [
@@ -63,13 +58,13 @@ import { SharedModule } from './sidebar/shared.module';
     MatMenuModule,
     MatButtonToggleModule,
     ShowHidePasswordModule,
-    BrMaskerModule, SharedModule  ],
+    BrMaskerModule, SharedModule],
   exports: [RouterModule],
-  providers: [ {
+  providers: [{
     provide: HTTP_INTERCEPTORS,
-  useClass: AuthInterceptorService,
-  multi: true
-  } ],
+    useClass: AuthInterceptorService,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule {

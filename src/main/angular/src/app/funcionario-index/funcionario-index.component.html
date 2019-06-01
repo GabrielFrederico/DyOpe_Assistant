@@ -1,5 +1,4 @@
-
-  <title>DyOpe Assistant</title>
+<title>DyOpe Assistant</title>
 
 
 <div id="page-top" *ngIf="validado">
@@ -76,64 +75,62 @@
         </div>
         <div class="modal-footer">
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-          <a class="btn btn-primary text-light"  (click)="logout()" routerLink="/" data-dismiss="modal">Sair</a>
+          <a class="btn btn-primary text-light" (click)="logout()" routerLink="/" data-dismiss="modal">Sair</a>
         </div>
       </div>
     </div>
   </div>
 
-<div id="wrapper">
+  <div id="wrapper">
 
-  <!-- Sidebar -->
-  <ul class="sidebar bg-primary navbar-nav">
+    <!-- Sidebar -->
+    <ul class="sidebar bg-primary navbar-nav">
 
-    <li class="nav-item text-light">
-      <a class="nav-link text-light" routerLink="/funcionarioindex/informacoessetor">
-        <span>Enviar informações</span>
-      </a>
+      <li class="nav-item text-light">
+        <a class="nav-link text-light" routerLink="/funcionarioindex/informacoessetor">
+          <span>Enviar informações</span>
+        </a>
 
-    </li>
+      </li>
 
-  </ul>
+    </ul>
 
-  <div id="content-wrapper" class="fundo">
+    <div id="content-wrapper" class="fundo">
 
-    <div class="container-fluid">
-      <router-outlet></router-outlet>
+      <div class="container-fluid">
+        <router-outlet></router-outlet>
 
-      <!-- Page Content
-      <h1>Home</h1>
-      <hr>
+        <!-- Page Content
+        <h1>Home</h1>
+        <hr>
 
-      <div class="menu_index">
-        <span class="badge badge-info tam"> Bem-vindo {{info.username}}!</span>
-        <span class="badge badge-info tam"> Envie informações ao gerente</span>
-      </div>
-               -->
-    </div>
-    <!-- /.container-fluid -->
-
-    <!-- Sticky Footer -->
-    <footer class="sticky-footer">
-      <div class="container my-auto ">
-        <div class="copyright text-center my-auto ">
-          <span>Copyright © DyOpe Assistant 2019</span>
+        <div class="menu_index">
+          <span class="badge badge-info tam"> Bem-vindo {{info.username}}!</span>
+          <span class="badge badge-info tam"> Envie informações ao gerente</span>
         </div>
+                 -->
       </div>
-    </footer>
+      <!-- /.container-fluid -->
+
+      <!-- Sticky Footer -->
+      <footer class="sticky-footer">
+        <div class="container my-auto ">
+          <div class="copyright text-center my-auto ">
+            <span>Copyright © DyOpe Assistant 2019</span>
+          </div>
+        </div>
+      </footer>
+
+    </div>
+    <!-- /.content-wrapper -->
 
   </div>
-  <!-- /.content-wrapper -->
+  <!-- /#wrapper -->
 
-</div>
-<!-- /#wrapper -->
-
-<!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded" href="#page-top">
-  <i class="fas fa-angle-up"></i>
-</a>
-
-
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
 
 
 </div>

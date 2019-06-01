@@ -30,9 +30,10 @@ export class LoginFuncionarioComponent implements OnInit {
     }
   }
 
-  focosenha(){
+  focosenha() {
     this.senhainput.nativeElement.focus();
   }
+
   onSubmit() {
     console.log(this.form);
 
@@ -41,30 +42,30 @@ export class LoginFuncionarioComponent implements OnInit {
       this.form.senha);
 
 
-      this.authService.loginAutenticado(this.loginInfo).subscribe(
-        data => {
-          this.tokenStorage.saveToken(data.accessToken);
-          this.tokenStorage.saveUsername(data.username);
-          this.tokenStorage.saveAuthorities(data.authorities);
-          this.roles = this.tokenStorage.getAuthorities();
+    this.authService.loginAutenticado(this.loginInfo).subscribe(
+      data => {
+        this.tokenStorage.saveToken(data.accessToken);
+        this.tokenStorage.saveUsername(data.username);
+        this.tokenStorage.saveAuthorities(data.authorities);
+        this.roles = this.tokenStorage.getAuthorities();
 
-          if (this.roles.toString() == 'ROLE_FUNCIONARIO') {
+        if (this.roles.toString() == 'ROLE_FUNCIONARIO') {
 
-            this.isLoginFailed = false;
-            this.isLoggedIn = true;
+          this.isLoginFailed = false;
+          this.isLoggedIn = true;
 
-            this.router.navigate(['/funcionarioindex']);
-          } else {
-            this.tokenStorage.logOut();
-            this.isLoginFailed = true;
-          }
-    },
-        error => {
-          console.log(error);
-          this.errorMessage = error.error.message;
+          this.router.navigate(['/funcionarioindex/homefuncionario']);
+        } else {
+          this.tokenStorage.logOut();
           this.isLoginFailed = true;
         }
-      );
+      },
+      error => {
+        console.log(error);
+        this.errorMessage = error.error.message;
+        this.isLoginFailed = true;
+      }
+    );
 
   }
 }

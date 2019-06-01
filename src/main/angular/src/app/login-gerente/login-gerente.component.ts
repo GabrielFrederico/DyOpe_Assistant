@@ -57,7 +57,7 @@ export class LoginGerenteComponent implements OnInit {
           this.isLoginFailed = false;
           this.isLoggedIn = true;
 
-          this.router.navigate(['/gerenteindex']);
+          this.router.navigate(['/gerenteindex/homegerente']);
         } else {
           this.tokenStorage.logOut();
           this.isLoginFailed = true;
