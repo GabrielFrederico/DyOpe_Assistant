@@ -4,7 +4,7 @@
 </div>
 <title>Operações</title>
 <div>
-  <h1>{{etapaproducao.etapaproducao}}</h1>
+  <h1>{{etapaproducao.etapaProducao}}</h1>
 </div>
 
 <div class="btn-group">
@@ -293,16 +293,16 @@
               <div class="col-md-6">
                 <div class="form-label-group">
                   <label for="DescricaoOp">Descrição da operação:</label>
-                  <input required="required" name="descricao" [(ngModel)]="operacao.descricao" class="form-control"
+                  <input required="required" name="descricao" [(ngModel)]="suboperacao.descricao" class="form-control"
                          id="DescricaoOp">
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-label-group">
-                  <input type="number" id="LotePro" name="loteProducao" class="form-control"
-                         placeholder="Lote de Produção" [(ngModel)]="operacao.loteProducao"
+                  <input type="time" id="tempo" name="tempo" class="form-control"
+                         placeholder="Tempo" [(ngModel)]="suboperacao.tempoNesc"
                          required="required">
-                  <label for="LotePro">Lote de Produção:</label>
+                  <label for="tempo">Tempo:</label>
                 </div>
               </div>
             </div>

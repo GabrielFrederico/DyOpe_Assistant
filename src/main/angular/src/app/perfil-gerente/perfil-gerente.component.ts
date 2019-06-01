@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { TokenStorageService } from '../auth/token-storage.service';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Gerente, GerenteService } from '../service/gerente.service';
@@ -7,14 +7,14 @@ import { Observable } from 'rxjs';
 import { first } from 'rxjs/operators';
 import { GerenteIndexComponent } from '../gerente-index/gerente-index.component';
 
-;
-
 @Component({
   selector: 'app-perfil-gerente',
   templateUrl: './perfil-gerente.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  preserveWhitespaces: false
 
 })
-export class PerfilGerenteComponent implements OnInit{
+export class PerfilGerenteComponent implements OnInit {
   title: 'Perfil Gerente';
   @ViewChild("inputPassword") senhainput: ElementRef;
   @ViewChild("inputNewPassword") newsenhainput: ElementRef;
@@ -25,8 +25,6 @@ export class PerfilGerenteComponent implements OnInit{
   // tslint:disable-next-line:max-line-length
   constructor(private modalService: NgbModal, private token: TokenStorageService, private gerenteService: GerenteService, private router: Router) {
   }
-
-  @Input() gerentes: Observable<Gerente[]>;
   @Input() gerenteObjeto: Observable<Gerente>;
   @Input() gerente: Gerente;
   public gerenteLogado: boolean;
@@ -67,7 +65,7 @@ export class PerfilGerenteComponent implements OnInit{
       username: this.token.getUsername(),
       authorities: this.token.getAuthorities()
     };
-   this.datareload();
+    this.datareload();
     this.naoAutenticado();
 
   }
@@ -86,8 +84,8 @@ export class PerfilGerenteComponent implements OnInit{
 
   datareload() {
     this.gerenteObjeto = this.gerenteService.getGerenteLogado(this.info.username);
-this.gerenteObjeto.subscribe(data=> this.gerente = data)
-      console.clear();
+    this.gerenteObjeto.subscribe(data => this.gerente = data)
+    console.clear();
 
   }
 

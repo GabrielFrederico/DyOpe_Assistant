@@ -21,9 +21,9 @@ export class HomeFuncionarioComponent implements OnInit {
     this.naoAutenticado();
   }
   naoAutenticado() {
-    if (this.info.authorities.toString() !== 'ROLE_GERENTE') {
+    if (this.info.authorities.toString() !== 'ROLE_FUNCIONARIO') {
       this.validado = false;
-      this.router.navigate(['/logingerente']);
+      this.router.navigate(['/loginfuncionario']);
       alert('Acesso Negado! Faça o Login!');
 
     } else {

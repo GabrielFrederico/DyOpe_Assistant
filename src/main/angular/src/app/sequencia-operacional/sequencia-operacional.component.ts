@@ -3,21 +3,22 @@ import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TokenStorageService } from '../auth/token-storage.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CadastroOperacaoService, Operacao, EtapaProducao, SubOperacao } from '../service/cadastro-operacao.service';
-import { Observable, Subscription } from "rxjs";
+import { Observable, Subscription } from 'rxjs';
 import { Gerente, GerenteService, Peca } from '../service/gerente.service';
-import { first } from "rxjs/operators";
+import { first } from 'rxjs/operators';
 import { List } from 'immutable';
 
 
-ChangeDetectionStrategy.OnPush
 @Component({
   selector: 'app-sequencia-operacional',
   templateUrl: './sequencia-operacional.component.html',
   preserveWhitespaces: false,
+  changeDetection: ChangeDetectionStrategy.OnPush
 
 })
 export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
-   operacao: Operacao = new Operacao();
+  operacao: Operacao = new Operacao();
+  suboperacao: SubOperacao = new SubOperacao;
   @Input() gerente: Gerente;
   @Input() ope: Operacao;
   gerenteObjeto: Observable<Gerente>;
@@ -97,7 +98,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
     this.gerenteObjeto = this.gerenteService.getGerenteLogado(this.info.username);
     this.gerenteObjeto.subscribe(data => this.gerente = data);
     this.suboperacoesObj = this.operacaoService.getSubOperacoes();
-    this.suboperacoesObj.subscribe(data=>{this.suboperacoes = data});
+    this.suboperacoesObj.subscribe(data => { this.suboperacoes = data });
     this.tipoOpe = this.etapaproducao.id.toString();
     this.carregado = true;
     console.clear();
@@ -107,7 +108,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
     this.operacao.gerente_id = this.gerente.id;
     this.gerente.operacoesFazer.push(this.operacao);
     this.gerenteService.cadastrarOperacao(this.gerente).pipe(first()).subscribe(data => {
-      alert("Operação cadastrada com sucesso!")
+      alert('Operação cadastrada com sucesso!')
 
     }, error => { alert(error) });
 
@@ -117,7 +118,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
     this.newpeca.gerente_id = this.gerente.id;
     this.gerente.pecas.push(this.newpeca);
     this.gerenteService.cadastrarOperacao(this.gerente).pipe(first()).subscribe(data => {
-      alert("Peça cadastrada com sucesso!")
+      alert('Peça cadastrada com sucesso!')
 
     }, error => { alert(error) });
 
@@ -128,7 +129,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
   onSelect(operacao: Operacao) {
     this.ope = operacao;
   }
-  selectsPeca(peca: Peca){
+  selectsPeca(peca: Peca) {
     this.peca = peca;
   }
   toggleReadonly() {

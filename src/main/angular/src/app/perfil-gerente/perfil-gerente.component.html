@@ -5,7 +5,7 @@
         <hr>
 
 
-      <div class="container " style="float: left; max-width: 70%; padding-left: 5%">
+      <div class="container"  style="float: left; max-width: 70%; padding-left: 5%">
         <form #gerenteForm="ngForm" [noValidate]="$any(false)" (ngSubmit)="onSubmit(cpf.value,rg.value)">
           <div class="form-group">
             <div class="form-row">
@@ -171,3 +171,7 @@
           </div>
         </div>
       </div>
+
+      <ng-template #loading>
+
+      </ng-template>
