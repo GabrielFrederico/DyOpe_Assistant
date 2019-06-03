@@ -104,7 +104,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
         this.operacaoService.getEtapaProducaoNome(etapaProducao).subscribe((etapaproducao: EtapaProducao) => {
           if (etapaproducao) {
             this.etapaproducao = etapaproducao;
-
+            console.clear();
           }
         })
       }
@@ -115,8 +115,8 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
     this.gerenteObjeto = this.gerenteService.getGerenteLogado(this.info.username);
     this.gerenteObjeto.subscribe(data => this.gerente = data);
     this.suboperacoesObj = this.operacaoService.getSubOperacoes();
-    this.gerente.operacoes.filter(operacao =>{
-      if(operacao.etapa_producao_id == this.etapaproducao.id){
+    this.gerente.operacoes.forEach(operacao => {
+      if (operacao.etapa_producao_id == this.etapaproducao.id) {
         this.suboperacoes = operacao.suboperacoes;
       }
     });
@@ -135,13 +135,13 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
     this.gerente.operacoes.push(this.operacao);
     this.operacaoService.cadastrarOperacao(this.gerente).pipe(first()).subscribe(data => {
       alert('Operação cadastrada com sucesso!')
-
     }, error => {
       alert(error)
     });
-
   }
-
+  cadastrarSubOperacao(){
+    
+  }
   cadastrarPeca() {
     this.newpeca.etapa_producao_id = this.etapaproducao.id;
     this.newpeca.gerente_id = this.gerente.id;
@@ -152,7 +152,6 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
     }, error => {
       alert(error)
     });
-
   }
 
   trackByFn(operacao) {
