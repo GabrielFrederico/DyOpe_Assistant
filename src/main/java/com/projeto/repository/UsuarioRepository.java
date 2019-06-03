@@ -18,4 +18,6 @@ public interface UsuarioRepository extends CrudRepository<Usuario, Serializable>
     Boolean existsByNomeUsuario(String nomeUsuario);
 
     Boolean existsBySenha(String senha);
+    
+    Usuario findBySenha(String senha);
 }

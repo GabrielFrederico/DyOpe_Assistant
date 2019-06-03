@@ -101,7 +101,7 @@ export class PerfilFuncionarioComponent implements OnInit, OnDestroy {
   redefinirSenha() {
     if (this.newsenhainput.nativeElement.value == this.confirmasenhainput.nativeElement.value) {
       this.funcionario.senha = this.newsenhainput.nativeElement.value;
-      this.funcionarioService.atualizarFuncionario(this.funcionario)
+      this.funcionarioService.atualizarSenhaFuncionario(this.funcionario)
         .pipe(first())
         .subscribe(
           data => {

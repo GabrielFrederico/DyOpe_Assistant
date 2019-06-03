@@ -25,5 +25,7 @@ public interface FuncionarioRepository extends CrudRepository<Funcionario, Seria
     Funcionario findByNome(String nome);
 
     Funcionario findByNomeUsuario(String nomeUsuario);
+    
+
 
 }

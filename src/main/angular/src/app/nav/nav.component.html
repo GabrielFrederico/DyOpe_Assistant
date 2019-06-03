@@ -1,56 +1,61 @@
 
+<mat-sidenav-container>
 
-  <mat-toolbar class="example-toolbar bg-lightblue">
-    <button mat-icon-button (click)="snav.toggle()">
-      <mat-icon>menu</mat-icon>
-    </button>
-    <h1 class="example-app-name">Responsive App</h1>
-  </mat-toolbar>
+  <mat-sidenav #sidenav mode="over">
 
+    <mat-toolbar>
+      <mat-toolbar-row>
+        <h2 class="toolbar-title"> DyOpe Assistant</h2>
+      </mat-toolbar-row>
+    </mat-toolbar>
 
+    <mat-nav-list>
 
-    <mat-sidenav-container class="example-sidenav-container">
-
-      <mat-sidenav class="bg-primary sidebar navbar-nav" #snav>
-        <ul class="sidebar bg-primary navbar-nav">
-          <app-sidebar></app-sidebar>
-          <li class="nav-item text-light">
-            <a class="nav-link text-light" routerLink="/controlefuncionarios">
-              <span>Controle</span>
-            </a>
-
-          </li>
-        </ul>
-      </mat-sidenav>
-
-      <mat-sidenav-content class="container-fluid">
-
-          <h1>Home</h1>
-          <hr>
-
-          <div class="menu_index">
-            <span class="badge badge-info tam"> Bem-vindo Juan!</span>
-            <span class="badge badge-info tam"> Cadastre Operações</span>
-            <span class="badge badge-info tam"> Receberá informações úteis</span>
-            <span class="badge badge-info tam"> Controle o andamento da produção</span>
-          </div>
-        <!-- /.container-fluid -->
-
-        <!-- Sticky Footer -->
-        <footer class="sticky-footer">
-          <div class="container my-auto ">
-            <div class="copyright text-center my-auto ">
-              <span>Copyright © DyOpe Assistant 2019</span>
-            </div>
-          </div>
-        </footer>
-
-      </mat-sidenav-content>
-
-    </mat-sidenav-container>
+      <h2 matSubheader></h2>
 
 
+      <mat-divider></mat-divider>
 
-<!-- Copyright 2019 Google Inc. All Rights Reserved.
-    Use of this source code is governed by an MIT-style license that
-    can be found in the LICENSE file at http://angular.io/license -->
+      <h2 matSubheader> </h2>
+
+
+    </mat-nav-list>
+
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <crm-navigation-bar (click)="sidenav.toggle()"></crm-navigation-bar>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+
+</mat-sidenav-container>
+
+<!--
+<a *ngFor="let item of myWorkRoutes"
+   mat-list-item
+   (click)="sidenav.close()"
+   routerLinkActive
+   #routerLinkActiveInstance="routerLinkActive"
+   [class.list-item-active]="routerLinkActiveInstance.isActive"
+   [routerLink]="[item.route]">
+  <mat-icon matListIcon class="app-nav-list-icon"> {{ item.icon }} </mat-icon>
+  {{item.title}}
+</a>
+-->
+
+<!--
+<a *ngFor="let item of customerRoutes"
+   mat-list-item
+   (click)="sidenav.close()"
+   routerLinkActive
+   #routerLinkActiveInstance="routerLinkActive"
+   [class.list-item-active]="routerLinkActiveInstance.isActive"
+   [routerLink]="[item.route]">
+  <mat-icon matListIcon class="app-nav-list-icon"> {{ item.icon }} </mat-icon>
+  {{item.title}}
+</a>
+-->
+
+<!--
+  <crm-navigation-bar *ngIf="isAuthenticated()" (toggleSidenav)="sidenav.toggle()"></crm-navigation-bar>
+-->

@@ -103,7 +103,7 @@ export class OperacaoRiscoComponent implements OnInit, OnDestroy {
     this.operacao.etapa_producao_id = this.etapaproducao.id;
     this.operacao.gerente_id = this.gerente.id;
     this.gerente.operacoesFazer.push(this.operacao);
-    this.gerenteService.cadastrarOperacao(this.gerente).pipe(first()).subscribe(data => {
+    this.gerenteService.atualizarGerente(this.gerente).pipe(first()).subscribe(data => {
       alert("Operação cadastrada com sucesso!")
 
     }, error => { alert(error) });

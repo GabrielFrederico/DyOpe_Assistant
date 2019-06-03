@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { TokenStorageService } from "../auth/token-storage.service";
-import { Operacao, EtapaProducao } from "./cadastro-operacao.service";
-import { Setor } from './cadastro-setor.service';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {TokenStorageService} from "../auth/token-storage.service";
+import {Operacao, EtapaProducao} from "./cadastro-operacao.service";
+import {Setor} from './cadastro-setor.service';
 
 
 // tslint:disable-next-line:class-name
@@ -16,9 +16,11 @@ export class loginGerenteInfo {
     this.senha = senha;
   }
 }
+
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  headers: new HttpHeaders({'Content-Type': 'application/json'})
 };
+
 // tslint:disable-next-line:class-name
 export class Gerente {
   public id: number;
@@ -29,6 +31,7 @@ export class Gerente {
   public email: string;
   public senhaConfirm: string;
   public senha: string;
+  public chaveAcesso: string;
   role: string;
   public operacoes: Operacao[];
   public operacoesFazer: Operacao[];
@@ -48,8 +51,9 @@ export class Gerente {
     this.senhaConfirm = senhaConfirm;
   }
 }
-export class Peca{
-  public id:number;
+
+export class Peca {
+  public id: number;
   public descricao: string;
   public gerente_id: number;
   public etapa_producao_id: number;
@@ -59,17 +63,7 @@ export class Peca{
   providedIn: 'root'
 })
 export class GerenteService {
-  public info: any;
-  public gerentes: Observable<Gerente[]>;
-  public gerente: Observable<Gerente>;
-  public gerent: Gerente;
-  constructor(private httpClient: HttpClient, private token: TokenStorageService) {
-    this.info = {
-      token: this.token.getToken(),
-      username: this.token.getUsername(),
-      authorities: this.token.getAuthorities()
-    };
-
+  constructor(private httpClient: HttpClient) {
   }
 
 
@@ -77,15 +71,17 @@ export class GerenteService {
     return this.httpClient.get<Gerente>('http://localhost:8080/gerentes/gerente/' + id, httpOptions);
   }
 
-  atualizarGerente(gerente: Gerente): Observable<Gerente> {
-    return this.httpClient.put<Gerente>('http://localhost:8080/gerentes/atualizar', gerente);
+  atualizarSenhaGerente(gerente: Gerente): Observable<Gerente> {
+    return this.httpClient.put<Gerente>('http://localhost:8080/gerentes/atualizarsenha', gerente);
   }
-  cadastrarOperacao(gerente: Gerente): Observable<Gerente> {
-    return this.httpClient.put<Gerente>('http://localhost:8080/gerentes/cadastraroperacao', gerente);
-  }
-  getGerenteLogado(nomeUsuario: string): Observable<Gerente>{
 
-    return  this.httpClient.get<Gerente>('http://localhost:8080/gerentes/getByNomeUsuario/' + nomeUsuario, httpOptions);
+  atualizarGerente(gerente: Gerente): Observable<Gerente> {
+    return this.httpClient.put<Gerente>('http://localhost:8080/gerentes/atualizargerente', gerente);
+  }
+
+  getGerenteLogado(nomeUsuario: string): Observable<Gerente> {
+
+    return this.httpClient.get<Gerente>('http://localhost:8080/gerentes/getByNomeUsuario/' + nomeUsuario, httpOptions);
   }
 
   getGerentes() {

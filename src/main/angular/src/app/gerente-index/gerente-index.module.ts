@@ -25,6 +25,7 @@ import {SharedModule} from '../sidebar/shared.module';
 import {Ng2SearchPipeModule} from 'ng2-search-filter'
 import {SequenciaOperacionalComponent} from '../sequencia-operacional/sequencia-operacional.component';
 import {HomeGerenteComponent} from "../home-gerente/home-gerente.component";
+import {NavComponent} from "../nav/nav.component";
 
 @NgModule({
   schemas: [

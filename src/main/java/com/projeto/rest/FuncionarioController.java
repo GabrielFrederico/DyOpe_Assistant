@@ -1,11 +1,10 @@
 package com.projeto.rest;
 
-import com.projeto.models.Role;
-import com.projeto.models.RoleName;
-import com.projeto.repository.RoleRepository;
-import com.projeto.repository.UsuarioRepository;
-import com.projeto.seguranca.*;
-import com.projeto.seguranca.jwt.JwtProvider;
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,14 +15,25 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.projeto.models.Funcionario;
+import com.projeto.models.Role;
+import com.projeto.models.RoleName;
 import com.projeto.repository.FuncionarioRepository;
-
-import javax.validation.Valid;
-import java.util.HashSet;
-import java.util.Set;
+import com.projeto.repository.GerenteRepository;
+import com.projeto.repository.RoleRepository;
+import com.projeto.repository.UsuarioRepository;
+import com.projeto.seguranca.CadastroFormFuncionario;
+import com.projeto.seguranca.JwtResponse;
+import com.projeto.seguranca.LoginForm;
+import com.projeto.seguranca.ResponseMessage;
+import com.projeto.seguranca.jwt.JwtProvider;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -32,6 +42,10 @@ public class FuncionarioController {
 
     @Autowired
     FuncionarioRepository funcionarioRepository;
+    
+    @Autowired
+    GerenteRepository gerenteRepository;
+    
 
     @Autowired
     UsuarioRepository usuarioRepository;
@@ -170,4 +184,15 @@ public class FuncionarioController {
         funcionarioRepository.save(funcionario);
         return funcionario;
     }
+    
+    @RequestMapping(method = RequestMethod.PUT, value = "atualizarsenha")
+    @PreAuthorize("hasRole('FUNCIONARIO')")
+    public Funcionario update2(@RequestBody Funcionario funcionario) {
+    	
+    	funcionario.setSenha(encoder.encode(funcionario.getSenha()));
+    	funcionario.setSenha(encoder.encode(funcionario.getSenhaConfirm()));
+        funcionarioRepository.save(funcionario);
+        return funcionario;
+    }
+    
 }

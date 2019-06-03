@@ -1,11 +1,11 @@
-import { Component, ElementRef, Input, OnInit, ViewChild, ChangeDetectionStrategy } from '@angular/core';
-import { TokenStorageService } from '../auth/token-storage.service';
-import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Gerente, GerenteService } from '../service/gerente.service';
-import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { first } from 'rxjs/operators';
-import { GerenteIndexComponent } from '../gerente-index/gerente-index.component';
+import {Component, ElementRef, Input, OnInit, ViewChild, ChangeDetectionStrategy} from '@angular/core';
+import {TokenStorageService} from '../auth/token-storage.service';
+import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {Gerente, GerenteService} from '../service/gerente.service';
+import {Router} from '@angular/router';
+import {Observable} from 'rxjs';
+import {first} from 'rxjs/operators';
+import {GerenteIndexComponent} from '../gerente-index/gerente-index.component';
 
 @Component({
   selector: 'app-perfil-gerente',
@@ -25,6 +25,7 @@ export class PerfilGerenteComponent implements OnInit {
   // tslint:disable-next-line:max-line-length
   constructor(private modalService: NgbModal, private token: TokenStorageService, private gerenteService: GerenteService, private router: Router) {
   }
+
   @Input() gerenteObjeto: Observable<Gerente>;
   @Input() gerente: Gerente;
   public gerenteLogado: boolean;
@@ -50,7 +51,7 @@ export class PerfilGerenteComponent implements OnInit {
   }
 
   openLogout(content) {
-    this.modalService.open(content, { size: 'sm', ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+    this.modalService.open(content, {size: 'sm', ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${PerfilGerenteComponent.getDismissReason(reason)}`;
@@ -92,7 +93,7 @@ export class PerfilGerenteComponent implements OnInit {
   redefinirSenha() {
     if (this.newsenhainput.nativeElement.value == this.confirmasenhainput.nativeElement.value) {
       this.gerente.senha = this.newsenhainput.nativeElement.value;
-      this.gerenteService.atualizarGerente(this.gerente)
+      this.gerenteService.atualizarSenhaGerente(this.gerente)
         .pipe(first())
         .subscribe(
           data => {

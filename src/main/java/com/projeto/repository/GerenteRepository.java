@@ -8,23 +8,23 @@ import com.projeto.models.Gerente;
 
 public interface GerenteRepository extends CrudRepository<Gerente, Serializable> {
 
-    Gerente findById(long id);
-    
-    
-    Boolean existsByNomeUsuario(String nomeUsuario);
+	Gerente findById(long id);
 
-    Boolean existsByEmail(String email);
+	Boolean existsByNomeUsuario(String nomeUsuario);
 
-    Boolean existsByCpf(String cpf);
+	Boolean existsByEmail(String email);
 
-    Boolean existsByRg(String rg);
+	Boolean existsByCpf(String cpf);
 
-    Boolean existsBySenha(String senha);
+	Boolean existsByRg(String rg);
 
-    Boolean existsByNome(String nome);
+	Boolean existsBySenha(String senha);
 
-    Gerente findByNome(String nome);
-    
+	Boolean existsByNome(String nome);
 
-    Gerente findByNomeUsuario(String nomeUsuario);
+	Gerente findByNome(String nome);
+
+	Gerente findBySenha(String senha);
+
+	Gerente findByNomeUsuario(String nomeUsuario);
 }

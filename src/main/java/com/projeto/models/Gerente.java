@@ -26,7 +26,24 @@ public class Gerente extends Usuario {
 
 	@Column(name = "rg_gerente")
 	private String rg;
+    
+	private String chaveAcesso;
 
+	public String getChaveAcesso() {
+		return chaveAcesso;
+	}
+
+	public void setChaveAcesso(String chaveAcesso) {
+		this.chaveAcesso = chaveAcesso;
+	}
+
+	public Set<Operacao> getOperacoes() {
+		return operacoes;
+	}
+
+	public void setOperacoes(Set<Operacao> operacoes) {
+		this.operacoes = operacoes;
+	}
 
 	@Column(name = "cpf_gerente")
 	private String cpf;
@@ -42,6 +59,12 @@ public class Gerente extends Usuario {
     joinColumns = @JoinColumn(name = "gerente_id"),
     inverseJoinColumns = @JoinColumn(name = "operacao_id"))
 	private Set<Operacao> operacoesFazer = new HashSet<>();
+	
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "gerente_operacoes",
+    joinColumns = @JoinColumn(name = "gerente_id"),
+    inverseJoinColumns = @JoinColumn(name = "operacao_id"))
+	private Set<Operacao> operacoes = new HashSet<>();
 
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "gerente_operacoesPrazo",

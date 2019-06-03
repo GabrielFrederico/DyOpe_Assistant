@@ -1,17 +1,16 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { CadastroSetorService, Setor } from '../service/cadastro-setor.service';
-import { Router } from '@angular/router';
-import { TokenStorageService } from '../auth/token-storage.service';
-import { Observable } from 'rxjs';
-import { CadastroOperacaoService, EtapaProducao } from '../service/cadastro-operacao.service';
-import { Gerente, GerenteService } from '../service/gerente.service';
-import { first } from 'rxjs/operators';
+import {Component, OnInit, Input} from '@angular/core';
+import {CadastroSetorService, Setor} from '../service/cadastro-setor.service';
+import {Router} from '@angular/router';
+import {TokenStorageService} from '../auth/token-storage.service';
+import {Observable} from 'rxjs';
+import {CadastroOperacaoService, EtapaProducao} from '../service/cadastro-operacao.service';
+import {Gerente, GerenteService} from '../service/gerente.service';
+import {first} from 'rxjs/operators';
 
 @Component({
   selector: 'app-cadastro-setor',
   templateUrl: './cadastro-setor.component.html'
 })
-
 
 
 export class CadastroSetorComponent implements OnInit {
@@ -22,6 +21,8 @@ export class CadastroSetorComponent implements OnInit {
   public info: any;
   public validado: boolean;
   public etapas: Observable<EtapaProducao[]>
+  public etapa_id: number;
+
   ngOnInit() {
     this.etapas = this.etapaService.getTiposOperacoes();
     this.info = {
@@ -34,21 +35,25 @@ export class CadastroSetorComponent implements OnInit {
     this.naoAutenticado();
 
   }
+
   constructor(private setorService: CadastroSetorService,
-    private router: Router, private etapaService: CadastroOperacaoService, private gerenteService: GerenteService, private setorservice: CadastroSetorService, private token: TokenStorageService) {
+              private router: Router, private etapaService: CadastroOperacaoService, private gerenteService: GerenteService, private setorservice: CadastroSetorService, private token: TokenStorageService) {
   }
+
   selectEtapa(etapa: number) {
-    this.setor.etapaproducao_id = etapa;
+    this.etapa_id = etapa;
   }
 
   save() {
     this.setor.gerente_id = this.gerente.id;
-    this.gerente.setores.push(this.setor);
-    this.gerenteService.cadastrarOperacao(this.gerente).pipe(first()).subscribe(data => {
+    this.setor.etapaproducao_id = this.etapa_id;
+      this.gerente.setores.push(this.setor);
+    this.gerenteService.atualizarGerente(this.gerente).pipe(first()).subscribe(data => {
       alert("Setor cadastrado com sucesso!");
 
-    }, error => { alert(error) });
-
+    }, error => {
+      alert(error)
+    });
 
   }
 
@@ -62,6 +67,7 @@ export class CadastroSetorComponent implements OnInit {
       this.validado = true;
     }
   }
+
   dataReload() {
     this.gerenteObjeto = this.gerenteService.getGerenteLogado(this.info.username);
     this.gerenteObjeto.subscribe(data => this.gerente = data);
