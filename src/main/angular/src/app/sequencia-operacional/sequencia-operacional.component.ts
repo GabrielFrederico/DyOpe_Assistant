@@ -26,6 +26,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
   @Input() peca: Peca;
   suboperacoesObj: Observable<SubOperacao[]>;
   @Input() suboperacoes: SubOperacao[];
+  @Input() operacoes: Operacao[];
   @Input() etapaproducao: EtapaProducao;
   public erro: boolean;
   public errorMessage = '';
@@ -113,13 +114,11 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
 
   datareload() {
     this.gerenteObjeto = this.gerenteService.getGerenteLogado(this.info.username);
-    this.gerenteObjeto.subscribe(data => this.gerente = data);
-    this.suboperacoesObj = this.operacaoService.getSubOperacoes();
-    this.gerente.operacoes.forEach(operacao => {
-      if (operacao.etapa_producao_id == this.etapaproducao.id) {
-        this.suboperacoes = operacao.suboperacoes;
+    this.gerenteObjeto.subscribe(data => {
+        this.gerente = data;
       }
-    });
+    );
+    this.suboperacoesObj = this.operacaoService.getSubOperacoes();
     this.suboperacoesObj.subscribe(data => {
       this.suboperacoes = data
     });
@@ -139,14 +138,16 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
       alert(error)
     });
   }
-  cadastrarSubOperacao(){
-    
+
+  cadastrarSubOperacao() {
+
   }
+
   cadastrarPeca() {
     this.newpeca.etapa_producao_id = this.etapaproducao.id;
     this.newpeca.gerente_id = this.gerente.id;
     this.gerente.pecas.push(this.newpeca);
-    this.gerenteService.atualizarGerente(this.gerente).pipe(first()).subscribe(data => {
+    this.gerenteService.cadastrarAlgo(this.gerente).pipe(first()).subscribe(data => {
       alert('Peça cadastrada com sucesso!')
 
     }, error => {

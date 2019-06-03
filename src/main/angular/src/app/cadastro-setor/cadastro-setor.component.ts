@@ -48,7 +48,7 @@ export class CadastroSetorComponent implements OnInit {
     this.setor.gerente_id = this.gerente.id;
     this.setor.etapaproducao_id = this.etapa_id;
       this.gerente.setores.push(this.setor);
-    this.gerenteService.atualizarGerente(this.gerente).pipe(first()).subscribe(data => {
+    this.gerenteService.cadastrarAlgo(this.gerente).pipe(first()).subscribe(data => {
       alert("Setor cadastrado com sucesso!");
 
     }, error => {

@@ -27,7 +27,6 @@ import com.projeto.models.Role;
 import com.projeto.models.RoleName;
 import com.projeto.repository.FuncionarioRepository;
 import com.projeto.repository.GerenteRepository;
-import com.projeto.repository.OperacaoRepository;
 import com.projeto.repository.RoleRepository;
 import com.projeto.repository.UsuarioRepository;
 import com.projeto.seguranca.CadastroFormGerente;
@@ -123,13 +122,20 @@ public class GerenteRest {
 	public ResponseEntity<?> update2(@RequestBody Gerente gerente) {
 
 		if (usuarioRepository.existsBySenha(gerente.getSenha()) && gerenteRepository.findByNomeUsuario(gerente.getNomeUsuario()) != gerente) {
-			return new ResponseEntity<>(new ResponseMessage("Erro -> Usuário já está em uso!"), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(new ResponseMessage("Erro -> Senha já está em uso!"), HttpStatus.BAD_REQUEST);
 		}
 
 		gerenteRepository.save(gerente);
 		return new ResponseEntity<>(new ResponseMessage("Dados Atualizados com sucesso!"), HttpStatus.OK);
 	}
+	
+	@RequestMapping(method = RequestMethod.PUT, value = "cadastraralgo")
+	@PreAuthorize("hasRole('GERENTE')")
+	public ResponseEntity<?> cadastrarAlgo(@RequestBody Gerente gerente) {
 
+		gerenteRepository.save(gerente);
+		return new ResponseEntity<>(new ResponseMessage("Dados Atualizados com sucesso!"), HttpStatus.OK);
+	}
 	@RequestMapping(method = RequestMethod.DELETE, path = "/{id}")
 	@PreAuthorize("hasRole('GERENTE')")
 	public Gerente deleteGerenteById(@PathVariable("id") long id) {

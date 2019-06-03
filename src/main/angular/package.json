@@ -9,12 +9,12 @@
     "ng add @angular/material": "ng add @angular/material",
     "npm install --save @ng-bootstrap/ng-bootstrap": "npm install --save @ng-bootstrap/ng-bootstrap",
     "npm install -g npm": "npm install -g npm",
-    "start": "ng serve --prod --aot",
+    "start": "ng serve",
     "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "start prod": "ng serve --prod"
+    "startprod": "ng serve --prod"
   },
   "private": true,
   "dependencies": {
