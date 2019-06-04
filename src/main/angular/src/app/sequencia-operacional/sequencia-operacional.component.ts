@@ -122,7 +122,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
     this.suboperacoesObj.subscribe(data => {
       this.suboperacoes = data
     });
-    this.operacoes = this.gerente.operacoes.filter(ope => ope.etapa_producao_id = this.etapaproducao.id)
+    this.operacoes = this.gerente.operacoes.filter(ope => {return ope.etapa_producao_id = this.etapaproducao.id})
     this.carregado = true;
     console.clear();
   }

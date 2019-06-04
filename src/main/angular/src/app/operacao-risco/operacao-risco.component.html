@@ -8,9 +8,9 @@
     <div class="card border-info mb-3 lista">
       <div class="card-header border-info">Operações a fazer</div>
       <div class="card-body text-secondary">
-        <a *ngFor="let operacao of gerente.operacoesFazer; trackBy: trackByFn " (click)="onSelect(operacao)"
+        <a *ngFor="let operacao of gerente.operacoes; trackBy: trackByFn " (click)="onSelect(operacao)"
            class="btn btn-outline-info list-group-item list-group-item-action " href="javascript:void(0)"
-           data-toggle="modal" (click)="openInformacoes(content)" data-target=".informations">{{operacao.descricao}}</a>
+           data-toggle="modal" (click)="openInformacoes(content)" data-target=".informations">{{operacao.id}}</a>
       </div>
       <div class="card-footer bg-transparent border-info">
         <a class="btn btn-info" href="javascript:void(0)" (click)="openCadastro(cadastro)" data-toggle="modal"
@@ -82,7 +82,7 @@
             <div class="form-group">
 
               <label for="DescricaoOpe">Descrição da operação:</label>
-              <input [readonly]="isReadonly" [(ngModel)]="ope.descricao" required="required" class="form-control"
+              <input [readonly]="isReadonly"  required="required" class="form-control"
                      name="descricao" id="DescricaoOpe">
             </div>
             <div class="form-group">
@@ -156,7 +156,7 @@
               <div class="form-row">
                 <div class="col-md-6">
                   <div class="form-label-group">
-                    <input [readonly]="isReadonly" [(ngModel)]="ope.tempoNesc" type="number" id="TempoPeca"
+                    <input [readonly]="isReadonly" type="number" id="TempoPeca"
                            class="form-control"
                            placeholder="Tempo necessário por peça:" name="tempoNesc"
                            required="required">
@@ -211,7 +211,7 @@
             <div class="form-group">
 
               <label for="DescricaoOp">Descrição da operação:</label>
-              <input required="required" name="descricao" [(ngModel)]="operacao.descricao" class="form-control"
+              <input required="required" name="descricao"  class="form-control"
                      id="DescricaoOp">
             </div>
             <div class="form-group">
