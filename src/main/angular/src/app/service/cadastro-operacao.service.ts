@@ -31,7 +31,8 @@ export class Operacao {
 export class SubOperacao {
   public id: number;
   public descricao: string;
-  public tempoNesc: number;
+  public tempoNesc: string;
+  public operacao_id:number;
 }
 
 const httpOptions = {

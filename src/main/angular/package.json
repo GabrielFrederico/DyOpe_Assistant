@@ -14,7 +14,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "startprod": "ng serve --prod"
+    "startprod": "ng serve --prod --aot"
   },
   "private": true,
   "dependencies": {

@@ -7,8 +7,7 @@ import {CadastroSetorService, Setor} from "../service/cadastro-setor.service";
 
 @Component({
   selector: 'app-sidebar',
-  templateUrl: './sidebar.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './sidebar.component.html'
 })
 export class SidebarComponent implements OnInit {
   public isCollapsed = false;

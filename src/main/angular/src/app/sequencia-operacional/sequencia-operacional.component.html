@@ -5,28 +5,35 @@
   <h1>{{etapaproducao.etapaProducao}}</h1>
 </div>
 
-<div class="btn-group">
-  <div class="dropdown">
-    <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-      Peças
-    </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-      <a class="dropdown-item">Jeans</a>
+<div class="row">
+  <div class="col-sm-3">
+    <div class="dropdown">
+      <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+        Peças
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" *ngFor="let peca of this.gerente.pecas | number:etapa" (click)="selectsPeca(peca.id)" >{{peca.descricao}}</a>
+      </div>
 
     </div>
   </div>
+  <div class="col-sm-3">
+    <a class="btn btn-info" href="#" data-toggle="modal"
+       data-target=".cadastrar-peca">Cadastrar Peça</a>
+  </div>
+
 </div>
 <hr>
 <div class="card-header">Sequencia Operacional</div>
 <div class="card-body">
   <div class="row">
-    <div class="col-sm-3">
+    <div class="col-md-3">
       <div class="card border-info mb-3 operacoes">
         <div class="card-header border-info">Operações</div>
         <div class="card-body text-secondary">
           <div class="form-group">
-            <div *ngFor="let operacao of suboperacoes; async" class="form-row">
+            <div *ngFor="let operacao of suboperacoes | filter: idope" class="form-row">
               <div class="col-sm-6">
                 <div class="form-group">
                   <div class="form-label-group">
@@ -39,10 +46,10 @@
                   </div>
                 </div>
               </div>
-              <div class="col-sm-6">
+              <div class="col-md-6">
                 <div class="form-group">
                   <div class="form-label-group">
-                    <input type="number" name="tempoOpe"
+                    <input type="time" name="tempoOpe"
                            id="tempoOpe" value="{{operacao.tempoNesc}}"
                            class="form-control" minlength="3"
                            autofocus="autofocus"
@@ -51,7 +58,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-sm-6">
+              <div class="col-md-6">
                 <a class="btn btn-danger" href="javascript:void(0)">-</a>
               </div>
             </div>
@@ -59,12 +66,12 @@
         </div>
         <div class="card-footer bg-transparent border-info">
           <a class="btn btn-info" href="javascript:void(0)" (click)="openCadastro(cadastro)" data-toggle="modal"
-             data-target=".cadastro-operacoes">Add</a>
+             data-target=".cadastro-operacoes">Adicionar</a>
         </div>
       </div>
     </div>
 
-    <div class="col-sm-4">
+    <div class="col-md-4">
       <div class="card border-warning mb-3 operacoes">
         <div class="card-body text-warning">
           <div class="form-group">
@@ -273,7 +280,7 @@
   </div>
 </ng-template>
 
-<!--Modal Cadastro: -->
+<!--Modal Cadastro operações: -->
 
 <ng-template let-modal #cadastro class="modal fade cadastro-operacoes modal-dialog modal-lg">
   <div class="modal-content">
@@ -319,8 +326,44 @@
       </div>
     </div>
   </div>
-
 </ng-template>
+
+<!-- cadastro de peça -->
+<div class="modal fade cadastrar-peca" tabindex="-1" role="dialog" aria-labelledby="modalpeca"
+     aria-hidden="true">
+  <div class="modal-dialog modal-body">
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="modalpeca">Cadastrar peça:</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="card-body">
+          <form (ngSubmit)="cadastrarPeca()">
+            <div class="form-group">
+              <div class="col-md-auto">
+                <div class="form-label-group">
+                  <input type="text" #nomePeca id="nomePeca" class="form-control"
+                         placeholder="Nome da peça:" [(ngModel)]="newpeca.descricao"
+                         required="required">
+                  <label for="nomePeca">Nome da peça:</label>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer col-md-12">
+              <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+              <input class="btn btn-primary" type="submit" value="Confirmar">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <ng-template *ngIf="!carregado">
   Carregando....

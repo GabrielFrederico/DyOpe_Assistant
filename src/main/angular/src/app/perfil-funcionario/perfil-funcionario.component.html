@@ -1,174 +1,174 @@
 <title>Perfil</title>
 
-        <!-- Page Content -->
-        <h1>Perfil</h1>
-        <hr>
+<!-- Page Content -->
+<h1>Perfil</h1>
+<hr>
 
 
-    <!--  <div alt="Imagem de perfil" class="img-rounded .img-responsive" id="img-perfil">
-        <img src="assets/imagens/imgperfil.jpg" style="height: 200px; width: 200px; float: left; padding-left: 1%;">
-      </div> -->
+<!--  <div alt="Imagem de perfil" class="img-rounded .img-responsive" id="img-perfil">
+    <img src="assets/imagens/imgperfil.jpg" style="height: 200px; width: 200px; float: left; padding-left: 1%;">
+  </div> -->
 
-      <div class="container " style="float: left; max-width: 70%; padding-left: 5%">
-        <form #f="ngForm" (ngSubmit)="onSubmit(cpf.value,rg.value)">
+<div class="container " style="float: left; max-width: 70%; padding-left: 5%">
+  <form #f="ngForm" (ngSubmit)="onSubmit(cpf.value,rg.value)">
+    <div class="form-group">
+      <div class="form-row">
+        <div class="col-md-6">
           <div class="form-group">
-            <div class="form-row">
-              <div class="col-md-6">
-                <div class="form-group">
-                  <div class="form-label-group">
-                    <input [readonly]="isReadonly" type="text" name="nome" id="nomeCompleto" class="form-control"
-                           autofocus="autofocus" [(ngModel)]="funcionario.nome"
-                           placeholder="Nome Completo" required="required">
-                    <label for="nomeCompleto">Nome Completo</label>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-md-6">
-                <div class="form-group">
-                  <div class="form-label-group">
-                    <input [readonly]="isReadonly" type="text" name="nomeUsuario" id="nomeUsuario" class="form-control"
-                           autofocus="autofocus" [(ngModel)]="funcionario.nomeUsuario"
-                           placeholder="Usuário" required="required">
-                    <label for="nomeUsuario">Usuário</label>
-                  </div>
-                </div>
-              </div>
+            <div class="form-label-group">
+              <input [readonly]="isReadonly" type="text" name="nome" id="nomeCompleto" class="form-control"
+                     autofocus="autofocus" [(ngModel)]="funcionario.nome"
+                     placeholder="Nome Completo" required="required">
+              <label for="nomeCompleto">Nome Completo</label>
             </div>
-            <div class="form-row">
-              <div class="col-md-6">
-                <div class="form-group">
-                  <div class="form-label-group">
-                    <input [readonly]="isReadonly" type="text" name="cpf" id="cpf" class="form-control"
-                           placeholder="CPF" [(ngModel)]="funcionario.cpf" [brmasker]="{mask:'000.000.000-00', len:14}"
-                           #cpf
-                           required="required">
-                    <label for="cpf">CPF</label>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group">
-                  <div class="form-label-group">
-                    <input [readonly]="isReadonly" type="text" name="rg" id="rg" class="form-control" placeholder="RG"
-                           [(ngModel)]="funcionario.cpf" [brmasker]="{mask:'0.000.000', len:9}" #rg required="required">
-                    <label for="rg">RG</label>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="form-label-group">
-                <input [readonly]="isReadonly" type="email" name="emailGer" id="inputEmail" class="form-control"
-                       placeholder="Endereço de e-mail" [(ngModel)]="funcionario.email"
-                       required="required">
-                <label for="inputEmail">Endereço de e-mail</label>
-              </div>
-
-            </div>
-
-            <input [disabled]="!f.form.valid" class="btn btn-success" type="submit" value="Salvar">
-            <a class="btn btn-info" href="#" data-toggle="modal"
-               data-target=".redefinir-senha">Redefinir
-              senha</a>
-            <input class="btn btn-info" type="button" (click)="toggleReadonly()" value="Editar">
-            <div *ngIf="f.submitted && updateFailed" class="alert alert-warning separa">
-              Atualização Falhou!<br/>{{errorMessage}}
-            </div>
-
-            <!-- /.container-fluid -->
-
-            <!-- Sticky Footer -->
-            <footer class="sticky-footer">
-              <div class="container my-auto ">
-                <div class="copyright text-center my-auto ">
-                  <span>Copyright © DyOpe Assistant 2019</span>
-                </div>
-              </div>
-            </footer>
           </div>
-        </form>
+        </div>
 
-      </div>
-      <!-- /.content-wrapper -->
-
-
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-      <i class="fas fa-angle-up"></i>
-    </a>
-
-
-    <!--Modal Redefinir Senha: -->
-
-    <div class="modal fade redefinir-senha" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-         aria-hidden="true">
-      <div class="modal-dialog modal-body">
-
-        <div class="modal-content">
-          <div class="modal-header">
-            <h4 class="modal-title" id="myLargeModalLabel">Redefinir senha:</h4>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">×</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <div class="card-body">
-              <form method="put" action="funcionarios/redefinirsenhaperfil">
-                <div class="form-group">
-
-                  <div class="form-group">
-
-                    <div class="col-md-auto">
-                      <show-hide-password (click)="focosenhaatual()" btnStyle="primary">
-                        <div class="form-label-group showredefinir">
-                          <input type="password" #inputPassword id="senha_atual" class="form-control"
-                                 placeholder="Senha atual:"
-                                 required="required">
-                          <label for="senha_atual">Senha atual:</label>
-                        </div>
-                      </show-hide-password>
-                    </div>
-                  </div>
-
-                  <div class="form-group">
-
-                    <div class="col-md-auto">
-                      <show-hide-password (click)="foconovasenha()" btnStyle="primary">
-                        <div class="form-label-group showredefinir">
-                          <input type="password" #inputNewPassword id="senha_nova" name="senha" class="form-control"
-                                 placeholder="Nova senha:"
-                                 required="required">
-                          <label for="senha_nova">Nova senha:</label>
-                        </div>
-                      </show-hide-password>
-                    </div>
-                  </div>
-
-                  <div class="form-group">
-
-                    <div class="col-md-auto">
-                      <show-hide-password (click)="fococonfirmarsenha()" btnStyle="primary">
-                        <div class="form-label-group showredefinir">
-                          <input type="password" #inputPasswordConfirm id="senha_confirmar" class="form-control"
-                                 placeholder="Confirmar senha:"
-                                 required="required">
-                          <label for="senha_confirmar">Confirmar senha:</label>
-                        </div>
-                      </show-hide-password>
-                    </div>
-
-                  </div>
-
-                </div>
-
-                <div class="modal-footer col-md-12">
-                  <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-                  <input class="btn btn-primary" type="submit" value="Confirmar">
-                </div>
-              </form>
+        <div class="col-md-6">
+          <div class="form-group">
+            <div class="form-label-group">
+              <input [readonly]="isReadonly" type="text" name="nomeUsuario" id="nomeUsuario" class="form-control"
+                     autofocus="autofocus" [(ngModel)]="funcionario.nomeUsuario"
+                     placeholder="Usuário" required="required">
+              <label for="nomeUsuario">Usuário</label>
             </div>
           </div>
         </div>
       </div>
+      <div class="form-row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <div class="form-label-group">
+              <input [readonly]="isReadonly" type="text" name="cpf" id="cpf" class="form-control"
+                     placeholder="CPF" [(ngModel)]="funcionario.cpf" [brmasker]="{mask:'000.000.000-00', len:14}"
+                     #cpf
+                     required="required">
+              <label for="cpf">CPF</label>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <div class="form-label-group">
+              <input [readonly]="isReadonly" type="text" name="rg" id="rg" class="form-control" placeholder="RG"
+                     [(ngModel)]="funcionario.cpf" [brmasker]="{mask:'0.000.000', len:9}" #rg required="required">
+              <label for="rg">RG</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="form-label-group">
+          <input [readonly]="isReadonly" type="email" name="emailGer" id="inputEmail" class="form-control"
+                 placeholder="Endereço de e-mail" [(ngModel)]="funcionario.email"
+                 required="required">
+          <label for="inputEmail">Endereço de e-mail</label>
+        </div>
+
+      </div>
+
+      <input [disabled]="!f.form.valid" class="btn btn-success" type="submit" value="Salvar">
+      <a class="btn btn-info" href="#" data-toggle="modal"
+         data-target=".redefinir-senha">Redefinir
+        senha</a>
+      <input class="btn btn-info" type="button" (click)="toggleReadonly()" value="Editar">
+      <div *ngIf="f.submitted && updateFailed" class="alert alert-warning separa">
+        Atualização Falhou!<br/>{{errorMessage}}
+      </div>
+
+      <!-- /.container-fluid -->
+
+      <!-- Sticky Footer -->
+      <footer class="sticky-footer">
+        <div class="container my-auto ">
+          <div class="copyright text-center my-auto ">
+            <span>Copyright © DyOpe Assistant 2019</span>
+          </div>
+        </div>
+      </footer>
     </div>
+  </form>
+
+</div>
+<!-- /.content-wrapper -->
+
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+  <i class="fas fa-angle-up"></i>
+</a>
+
+
+<!--Modal Redefinir Senha: -->
+
+<div class="modal fade redefinir-senha" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-body">
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myLargeModalLabel">Redefinir senha:</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="card-body">
+          <form method="put" action="funcionarios/redefinirsenhaperfil">
+            <div class="form-group">
+
+              <div class="form-group">
+
+                <div class="col-md-auto">
+                  <show-hide-password (click)="focosenhaatual()" btnStyle="primary">
+                    <div class="form-label-group showredefinir">
+                      <input type="password" #inputPassword id="senha_atual" class="form-control"
+                             placeholder="Senha atual:"
+                             required="required">
+                      <label for="senha_atual">Senha atual:</label>
+                    </div>
+                  </show-hide-password>
+                </div>
+              </div>
+
+              <div class="form-group">
+
+                <div class="col-md-auto">
+                  <show-hide-password (click)="foconovasenha()" btnStyle="primary">
+                    <div class="form-label-group showredefinir">
+                      <input type="password" #inputNewPassword id="senha_nova" name="senha" class="form-control"
+                             placeholder="Nova senha:"
+                             required="required">
+                      <label for="senha_nova">Nova senha:</label>
+                    </div>
+                  </show-hide-password>
+                </div>
+              </div>
+
+              <div class="form-group">
+
+                <div class="col-md-auto">
+                  <show-hide-password (click)="fococonfirmarsenha()" btnStyle="primary">
+                    <div class="form-label-group showredefinir">
+                      <input type="password" #inputPasswordConfirm id="senha_confirmar" class="form-control"
+                             placeholder="Confirmar senha:"
+                             required="required">
+                      <label for="senha_confirmar">Confirmar senha:</label>
+                    </div>
+                  </show-hide-password>
+                </div>
+
+              </div>
+
+            </div>
+
+            <div class="modal-footer col-md-12">
+              <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+              <input class="btn btn-primary" type="submit" value="Confirmar">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
