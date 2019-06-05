@@ -51,7 +51,19 @@ export class GerenteIndexComponent implements OnInit {
 
 
   }
+  
 
+toggled = true;
+classidebar: string;
+sidebar(){
+If(toggled){
+classidebar= "....";
+toggled = false;
+}else{
+classidebar= ".... toggled";
+toggled = true;
+  }
+}
 
   logout() {
     this.token.logOut();
