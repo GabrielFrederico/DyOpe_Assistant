@@ -2,7 +2,7 @@
   max-width: 24rem;
 }
 
-.operecoes{
+.operacoes{
 max-width: 28rem;
 
 }
@@ -35,7 +35,9 @@ max-width: 28rem;
 h1 {
   color: #00dcff;
 }
-
+h3{
+  color: #00dcff;
+}
 .pos {
 
   right: -3.9rem;

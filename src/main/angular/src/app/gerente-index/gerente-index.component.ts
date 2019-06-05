@@ -9,8 +9,7 @@ import { Observable } from 'rxjs';
 @Component({
   selector: 'app-gerente-index',
   templateUrl: './gerente-index.component.html',
-  preserveWhitespaces: false,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  preserveWhitespaces: false
 })
 export class GerenteIndexComponent implements OnInit {
 
