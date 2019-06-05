@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("etapaProducao")
 @CrossOrigin(origins = "*", maxAge = 3600)
+@RequestMapping("etapaProducao")
 @PreAuthorize("hasRole('GERENTE')")
 public class EtapaProducaoController {
 

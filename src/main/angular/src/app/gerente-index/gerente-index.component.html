@@ -6,7 +6,7 @@
     <a class="navbar-brand mr-1" routerLink="/gerenteindex/homegerente" role="link">DyOpe Assistant</a>
 
 
-    <button class="btn btn-link btn-sm order-1 order-sm-0" id="sidebarToggle" href="#">
+    <button class="btn btn-link btn-sm order-1 order-sm-0" id="sidebarToggle" (click)="sidebar()" href="#">
       <i class="fas fa-bars"></i>
     </button>
 
@@ -83,7 +83,7 @@
   <div id="wrapper">
 
     <!-- Sidebar -->
-    <ul class="sidebar bg-primary navbar-nav">
+    <ul class="{{classidebar}}">
       <app-sidebar></app-sidebar>
       <li class="nav-item text-light">
         <a class="nav-link text-light" routerLink="/gerenteindex/cadastrosetor">

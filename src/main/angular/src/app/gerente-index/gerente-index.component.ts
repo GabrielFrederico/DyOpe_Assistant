@@ -1,8 +1,8 @@
-import {Component, OnInit, Input, ChangeDetectionStrategy} from '@angular/core';
-import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {TokenStorageService} from '../auth/token-storage.service';
-import {Router} from '@angular/router';
-import {EtapaProducao, CadastroOperacaoService} from '../service/cadastro-operacao.service';
+import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
+import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { TokenStorageService } from '../auth/token-storage.service';
+import { Router } from '@angular/router';
+import { EtapaProducao, CadastroOperacaoService } from '../service/cadastro-operacao.service';
 import { Observable } from 'rxjs';
 
 
@@ -13,8 +13,8 @@ import { Observable } from 'rxjs';
 })
 export class GerenteIndexComponent implements OnInit {
 
-// tslint:disable-next-line: max-line-length
-  constructor(private modalService: NgbModal, private tipoOpeservice: CadastroOperacaoService, private token: TokenStorageService, private  router: Router) {
+  // tslint:disable-next-line: max-line-length
+  constructor(private modalService: NgbModal, private tipoOpeservice: CadastroOperacaoService, private token: TokenStorageService, private router: Router) {
   }
 
   title = 'DyOpe Assistant';
@@ -51,32 +51,34 @@ export class GerenteIndexComponent implements OnInit {
 
 
   }
-  
 
-toggled = true;
-classidebar: string;
-sidebar(){
-If(toggled){
-classidebar= "sidebar bg-primary navbar-nav";
-toggled = false;
-}else{
-classidebar= "sidebar bg-primary navbar-nav toggled";
-toggled = true;
+
+  toggled = false;
+  classidebar = "sidebar bg-primary navbar-nav";
+
+  sidebar() {
+    if (this.toggled) {
+      this.classidebar = "sidebar bg-primary navbar-nav";
+      this.toggled = false;
+    }
+    else {
+      this.classidebar = "sidebar bg-primary navbar-nav toggled";
+      this.toggled = true;
+    }
   }
-}
 
   logout() {
     this.token.logOut();
     this.router.navigate(['/logingerente']);
   }
 
- dataReload() {
-  this.tiposOperacao = this.tipoOpeservice.getTiposOperacoes();
+  dataReload() {
+    this.tiposOperacao = this.tipoOpeservice.getTiposOperacoes();
 
- }
+  }
 
   openLogout(content) {
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
@@ -92,6 +94,7 @@ toggled = true;
       return `with: ${reason}`;
     }
   }
+
   naoAutenticado() {
     if (this.info.authorities.toString() !== 'ROLE_GERENTE') {
       this.validado = false;
