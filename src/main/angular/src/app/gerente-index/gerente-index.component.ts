@@ -57,10 +57,10 @@ toggled = true;
 classidebar: string;
 sidebar(){
 If(toggled){
-classidebar= "....";
+classidebar= "sidebar bg-primary navbar-nav";
 toggled = false;
 }else{
-classidebar= ".... toggled";
+classidebar= "sidebar bg-primary navbar-nav toggled";
 toggled = true;
   }
 }
