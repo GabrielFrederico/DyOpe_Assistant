@@ -26,7 +26,7 @@
 
 </div>
 <hr>
-<div class="card">
+<form class="card" [noValidate]="$any(false)">
   <div class="card-header">Sequencia Operacional</div>
   <div class="card-body border-info">
     <div class="row">
@@ -74,10 +74,9 @@
       </div>
 
       <div class="col-md-3">
-        <div class="card border-warning mb-3 operacoes">
+        <div class="card border-warning mb-3 operacoes" >
           <div class="card-body text-warning">
             <div class="form-group">
-              <div class="form-row testando123">
                 <div class="col-md-auto">
                   <div class="form-label-group">
                     <input type="number" id="LoteProdu"
@@ -96,16 +95,30 @@
                     <label for="numFun" class="fonterisco">N° de Funcionários</label>
                   </div>
                 </div>
-              </div>
+                <div class="col-md-auto">
+                  <div class="form-group">
+                    <div class="form-label-group">
+                      <input type="time" name="tempoTrab"
+                             id="tempoTrab"
+                             class="form-control" minlength="3"
+                             autofocus="autofocus"
+                             placeholder="Tempo Trabalho" required="required">
+                      <label for="tempoTrab">Tempo trabalhado</label>
+                    </div>
+                  </div>
+                </div>
+            </div>
+          </div>
+            <div class="card-footer bg-transparent border-info">
+              <input class="btn btn-primary" type="submit" value="Cadastrar">
             </div>
           </div>
         </div>
-      </div>
 
       <div class="col-sm-5">
 
-        <div class="card border-success mb-3 lista">
-          <div class="card-body text-success">
+        <div class="card border-success mb-3 lista" >
+          <div class="card-body text-success" >
             <div class="form-group">
               <div class="form-row">
                 <div class="col-md-6">
@@ -140,7 +153,7 @@
       </div>
     </div>
   </div>
-</div>
+</form>
 <!-- Sticky Footer -->
 <footer class="sticky-footer">
   <div class="container my-auto">
@@ -345,7 +358,7 @@
       </div>
       <div class="modal-body">
         <div class="card-body">
-          <form (ngSubmit)="cadastrarPeca()">
+          <form (ngSubmit)="cadastrarPeca()" [noValidate]="$any(false)">
             <div class="form-group">
               <div class="col-md-auto">
                 <div class="form-label-group">

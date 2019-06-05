@@ -42,8 +42,6 @@ public class Operacao {
 
 	private int loteProducao;
 
-	private int numFuncionariosOpe;
-
 	private int numFuncionariosDisponiveis;
 
 	private float producaoHora;
@@ -113,14 +111,6 @@ public class Operacao {
 
 	public void setLoteProducao(int loteProducao) {
 		this.loteProducao = loteProducao;
-	}
-
-	public int getNumFuncionariosOpe() {
-		return numFuncionariosOpe;
-	}
-
-	public void setNumFuncionariosOpe(int numFuncionariosOpe) {
-		this.numFuncionariosOpe = numFuncionariosOpe;
 	}
 
 	public int getQtdPecasOpe() {

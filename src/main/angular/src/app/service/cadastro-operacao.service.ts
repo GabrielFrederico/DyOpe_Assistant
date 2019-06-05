@@ -21,7 +21,7 @@ export class Operacao {
   public prazo: Date;
   public loteProducao: number;
   public qtdPecasOpe: number;
-  public numFuncionariosOpe: number;
+  public numFuncionariosDisponiveis: number;
   public etapa_producao_id: number;
   public gerente_id: number;
   public peca_id: number;
@@ -32,6 +32,7 @@ export class SubOperacao {
   public id: number;
   public descricao: string;
   public tempoNesc: string;
+  public numFuncionarios: string;
   public operacao_id:number;
 }
 

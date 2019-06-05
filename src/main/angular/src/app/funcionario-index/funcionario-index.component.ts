@@ -50,7 +50,7 @@ export class FuncionarioIndexComponent implements OnInit {
 
   logout() {
     this.token.logOut();
-    window.location.reload();
+    this.router.navigate['/loginfuncionario'];
   }
 
   openLogout(content) {
