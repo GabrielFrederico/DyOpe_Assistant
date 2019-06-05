@@ -13,7 +13,7 @@
         Peças
       </button>
       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item" *ngFor="let peca of this.gerente.pecas | filter:etapa"
+        <a class="dropdown-item" *ngFor="let peca of this.gerente.pecas | async"
            (click)="selectsPeca(peca.id)">{{peca.descricao}}</a>
       </div>
 
@@ -35,7 +35,7 @@
           <div class="card-header border-info">Operações</div>
           <div class="card-body text-secondary">
             <div class="form-group">
-              <div *ngFor="let operacao of suboperacoes; async" class="row">
+              <div *ngFor="let operacao of suboperacoes | async" class="row">
                 <div class="col-md-4">
                   <div class="form-group">
                     <div class="form-label-group">
