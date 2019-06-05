@@ -26,119 +26,121 @@
 
 </div>
 <hr>
-<div class="card-header">Sequencia Operacional</div>
-<div class="card-body">
-  <div class="row">
-    <div class="col-md-4">
-      <div class="card border-info mb-3 operacoes">
-        <div class="card-header border-info">Operações</div>
-        <div class="card-body text-secondary">
-          <div class="form-group">
-            <div *ngFor="let operacao of suboperacoes; async" class="row">
-              <div class="col-md-4">
-                <div class="form-group">
-                  <div class="form-label-group">
-                    <input type="text" name="escricao"
-                           id="dataescricao" value="{{operacao.descricao}}"
-                           class="form-control" minlength="3"
-                           autofocus="autofocus"
-                           placeholder="Descricao" required="required">
-                    <label for="dataescricao">Descrição</label>
+<div class="card border-light">
+  <div class="card-header">Sequencia Operacional</div>
+  <div class="card-body border-info">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card border-info mb-3 operacoes">
+          <div class="card-header border-info">Operações</div>
+          <div class="card-body text-secondary">
+            <div class="form-group">
+              <div *ngFor="let operacao of suboperacoes; async" class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <div class="form-label-group">
+                      <input type="text" name="escricao"
+                             id="dataescricao" value="{{operacao.descricao}}"
+                             class="form-control" minlength="3"
+                             autofocus="autofocus"
+                             placeholder="Descricao" required="required">
+                      <label for="dataescricao">Descrição</label>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="col-md-4">
-                <div class="form-group">
-                  <div class="form-label-group">
-                    <input type="time" name="tempoOpe"
-                           id="tempoOpe" value="{{operacao.tempoNesc}}"
-                           class="form-control" minlength="3"
-                           autofocus="autofocus"
-                           placeholder="Tempo" required="required">
-                    <label for="tempoOpe">Tempo </label>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <div class="form-label-group">
+                      <input type="time" name="tempoOpe"
+                             id="tempoOpe" value="{{operacao.tempoNesc}}"
+                             class="form-control" minlength="3"
+                             autofocus="autofocus"
+                             placeholder="Tempo" required="required">
+                      <label for="tempoOpe">Tempo </label>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="col-md-3">
-                <a class="btn btn-danger" href="javascript:void(0)">-</a>
+                <div class="col-md-3">
+                  <a class="btn btn-danger" href="javascript:void(0)">-</a>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="card-footer bg-transparent border-info">
-          <a class="btn btn-info" href="javascript:void(0)" (click)="openCadastro(cadastro)" data-toggle="modal"
-             data-target=".cadastro-operacoes">Adicionar</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-3">
-      <div class="card border-warning mb-3 operacoes">
-        <div class="card-body text-warning">
-          <div class="form-group">
-            <div class="form-row testando123">
-              <div class="col-md-auto">
-                <div class="form-label-group">
-                  <input type="number" id="LoteProdu"
-                         class="form-control"
-                         placeholder="Lote de Produção" name="loteProducao"
-                         required="required">
-                  <label for="LoteProdu" class="fonterisco">Lote de Produção:</label>
-                </div>
-              </div>
-              <div class="col-md-auto">
-                <div class="form-label-group">
-                  <input type="number" id="numFun"
-                         class="form-control"
-                         placeholder="N° de Funcionários" name="numFun"
-                         required="required">
-                  <label for="numFun" class="fonterisco">N° de Funcionários</label>
-                </div>
-              </div>
-            </div>
+          <div class="card-footer bg-transparent border-info">
+            <a class="btn btn-info" href="javascript:void(0)" (click)="openCadastro(cadastro)" data-toggle="modal"
+               data-target=".cadastro-operacoes">Adicionar</a>
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="col-sm-5">
-
-      <div class="card border-success mb-3 lista">
-        <div class="card-body text-success">
-          <div class="form-group">
-            <div class="form-row">
-              <div class="col-md-6">
-                <div class="form-label-group">
-                  <input type="date" id="datainici" name="dataInicio" class="form-control"
-                         placeholder="Data Inicio:"
-                         required="required">
-                  <label for="datainici">Data Inicio:</label>
+      <div class="col-md-3">
+        <div class="card border-warning mb-3 operacoes">
+          <div class="card-body text-warning">
+            <div class="form-group">
+              <div class="form-row testando123">
+                <div class="col-md-auto">
+                  <div class="form-label-group">
+                    <input type="number" id="LoteProdu"
+                           class="form-control"
+                           placeholder="Lote de Produção" name="loteProducao"
+                           required="required">
+                    <label for="LoteProdu" class="fonterisco">Lote de Produção:</label>
+                  </div>
                 </div>
-              </div>
-
-              <div class="col-md-6">
-                <div class="form-label-group">
-                  <input type="date" id="datalimit" name="prazo" class="form-control"
-                         placeholder="Prazo:"
-                         required="required">
-                  <label for="datalimit">Prazo:</label>
+                <div class="col-md-auto">
+                  <div class="form-label-group">
+                    <input type="number" id="numFun"
+                           class="form-control"
+                           placeholder="N° de Funcionários" name="numFun"
+                           required="required">
+                    <label for="numFun" class="fonterisco">N° de Funcionários</label>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-          <a class="btn btn-outline-success list-group-item list-group-item-action" (click)="openInformacoes(content)">
-            Ver dados
-          </a>
-          <a class="btn btn-outline-success list-group-item list-group-item-action"
-             [routerLink]="['/gerenteindex/operacaorisco', etapaproducao.id]">
-            Ver Andamento
-          </a>
+        </div>
+      </div>
+
+      <div class="col-sm-5">
+
+        <div class="card border-success mb-3 lista">
+          <div class="card-body text-success">
+            <div class="form-group">
+              <div class="form-row">
+                <div class="col-md-6">
+                  <div class="form-label-group">
+                    <input type="date" id="datainici" name="dataInicio" class="form-control"
+                           placeholder="Data Inicio:"
+                           required="required">
+                    <label for="datainici">Data Inicio:</label>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-label-group">
+                    <input type="date" id="datalimit" name="prazo" class="form-control"
+                           placeholder="Prazo:"
+                           required="required">
+                    <label for="datalimit">Prazo:</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <a class="btn btn-outline-success list-group-item list-group-item-action"
+               (click)="openInformacoes(content)">
+              Ver dados
+            </a>
+            <a class="btn btn-outline-success list-group-item list-group-item-action"
+               [routerLink]="['/gerenteindex/operacaorisco', etapaproducao.id]">
+              Ver Andamento
+            </a>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-
 <!-- Sticky Footer -->
 <footer class="sticky-footer">
   <div class="container my-auto">
