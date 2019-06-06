@@ -17,12 +17,12 @@ const routes: Routes = [
   {path: '', component: IndexComponent},
   {path: 'gerenteindex', loadChildren: './gerente-index/gerente-index.module#GerenteIndexModule'},
   {path: 'funcionarioindex', loadChildren: './funcionario-index/funcionario-index.module#FuncionarioIndexModule'},
-  {path: '**', component: ErroComponent},
   {path: 'esqueceusenha', component: EsqueceuSenhaComponent},
   {path: 'cadastrogerente', component: CadastroGerenteComponent},
   {path: 'cadastrofuncionario', component: CadastroFuncionarioComponent},
   {path: 'testebarra', component: NavComponent},
-  {path: 'redefinirsenha', component: RedefinirSenhaComponent}
+  {path: 'redefinirsenha', component: RedefinirSenhaComponent},
+  {path: '**', component: ErroComponent}
 
 ];
 
