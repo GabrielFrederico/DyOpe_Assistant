@@ -3,7 +3,11 @@ package com.projeto.rest;
 
 import com.projeto.models.Setor;
 import com.projeto.repository.SetorRepository;
+import com.projeto.seguranca.ResponseMessage;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -18,9 +22,12 @@ public class SetorController {
     SetorRepository setorRepository;
 
     @RequestMapping(method = RequestMethod.POST, value = "/cadastrarsetor")
-    public Setor save(@RequestBody Setor setor, ModelAndView model) {
+    public ResponseEntity<?> save(@RequestBody Setor setor, ModelAndView model) {
+    	if(setorRepository.existsByNomeSetor(setor.getNomeSetor())) {
+    		return new ResponseEntity<>(new ResponseMessage("Erro -> RG Já está em uso !"), HttpStatus.BAD_REQUEST);
+    	}
         setorRepository.save(setor);
-        return setor;
+        return new ResponseEntity<>(new ResponseMessage("Setor Cadastrado com sucesso!"), HttpStatus.OK);
     }
 
 

@@ -14,6 +14,8 @@ export class FuncionarioIndexComponent implements OnInit {
   form: any = {};
   public isCollapsed = false;
 
+  classidebar = "sidebar bg-primary navbar-nav";
+
   @Input() funcionarioObjeto: Observable<Funcionario>;
   @Input() funcionario: Funcionario;
   closeResult: string;
@@ -27,7 +29,7 @@ export class FuncionarioIndexComponent implements OnInit {
       authorities: this.token.getAuthorities()
     };
     this.datareload();
-    this.naoAutenticado()
+    this.naoAutenticado();
     if (this.token.getToken()) {
       this.roles = this.token.getAuthorities();
       this.roles.every(role => {
@@ -47,7 +49,17 @@ export class FuncionarioIndexComponent implements OnInit {
   constructor(private modalService: NgbModal, private funcionarioService: FuncionarioService, private token: TokenStorageService, private  router: Router) {
   }
 
-
+  toggled = false;
+  sidebar() {
+    if (this.toggled) {
+      this.classidebar = "sidebar bg-primary navbar-nav";
+      this.toggled = false;
+    }
+    else {
+      this.classidebar = "sidebar bg-primary navbar-nav toggled";
+      this.toggled = true;
+    }
+  }
   logout() {
     this.token.logOut();
     this.router.navigate['/loginfuncionario'];
