@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { EtapaProducao } from './cadastro-operacao.service';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {EtapaProducao} from './cadastro-operacao.service';
 
 export class Setor {
   public id: number;
@@ -11,7 +11,7 @@ export class Setor {
 }
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  headers: new HttpHeaders({'Content-Type': 'application/json'})
 };
 
 @Injectable({
@@ -19,9 +19,15 @@ const httpOptions = {
 })
 export class CadastroSetorService {
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) {
+  }
+
   getSetor() {
     return this.httpClient.get<Setor[]>('http://localhost:8080/setores', httpOptions);
+  }
+
+  getSetorNome(nome: string): Observable<Setor>   {
+    return this.httpClient.get<Setor>('http://localhost:8080/setores/getByNome/'+nome, httpOptions);
   }
 
   cadastrarSetor(setor: Setor): Observable<Setor> {

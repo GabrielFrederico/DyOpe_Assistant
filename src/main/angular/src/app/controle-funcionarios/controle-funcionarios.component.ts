@@ -1,37 +1,34 @@
-import {Component, OnInit, Inject} from '@angular/core';
+import {Component, OnInit, Inject, OnDestroy} from '@angular/core';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {TokenStorageService} from '../auth/token-storage.service';
-import {Route, Router} from '@angular/router';
-import {Observable} from 'rxjs';
+import {ActivatedRoute, Route, Router} from '@angular/router';
+import {Observable, Subscription} from 'rxjs';
 import {CadastroSetorService, Setor} from '../service/cadastro-setor.service';
 import {Infosetor, InfosetorService} from '../service/infosetor.service';
 
 @Component({
   selector: 'app-controle-funcionarios',
-  templateUrl: './controle-funcionarios.component.html'
+  templateUrl: './controle-funcionarios.component.html',
+  preserveWhitespaces: false
 })
-export class ControleFuncionariosComponent implements OnInit {
+export class ControleFuncionariosComponent implements OnInit, OnDestroy {
 
   infosetor: Observable<Infosetor[]>;
-  public setores: Observable<Setor[]>;
   public info: any;
   public validado: boolean;
+  public setor: Setor;
+  sub: Subscription;
 
-  constructor(private modalService: NgbModal, private setorservice: CadastroSetorService, private token: TokenStorageService, private router: Router, private infosetorService: InfosetorService) {
+  constructor(private modalService: NgbModal, private setorservice: CadastroSetorService, private route: ActivatedRoute, private token: TokenStorageService, private router: Router, private infosetorService: InfosetorService) {
   }
 
   ngOnInit() {
-    this.infosetorService.getInfosetor()
-      .subscribe(data => {
-      });
-    this.info = {
-      token: this.token.getToken(),
-      username: this.token.getUsername(),
-      authorities: this.token.getAuthorities(),
-      senha: this.token.getPassword()
-    };
     this.naoAutenticado();
-    this.dataReload();
+    this.setorEscolhido();
+  }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe();
   }
 
   naoAutenticado() {
@@ -45,8 +42,19 @@ export class ControleFuncionariosComponent implements OnInit {
     }
   }
 
-  dataReload() {
-    this.infosetor = this.infosetorService.getInfosetor();
-    this.setores = this.setorservice.getSetor();
+  setorEscolhido() {
+    this.sub = this.route.params['nomeSetor'].subscribe(params => {
+      const nomeSetor = params['nomeSetor'];
+      if (nomeSetor) {
+        this.setorservice.getSetorNome(nomeSetor).subscribe((setor: Setor) => {
+          if (setor) {
+            this.setor = setor;
+            console.clear();
+          }
+        })
+      }
+    })
+
   }
+
 }

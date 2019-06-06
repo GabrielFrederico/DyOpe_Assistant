@@ -1,125 +1,83 @@
+<title>Controle</title>
 
-  <title>Controle</title>
+<div id="page-top">
+  <!-- Page Content -->
 
-<div *ngIf="validado" id="page-top">
+  <h1>Informações dos funcionários:</h1>
+  <hr>
 
-<app-nav-bar></app-nav-bar>
-<div id="wrapper">
-
-  <!-- Sidebar -->
-  <ul class="sidebar bg-primary navbar-nav">
-    <li ngbDropdown class="nav-item dropdown">
-      <a ngbDropdownToggle class="nav-link text-light" href="javascript:void(0)" id="pagesDropdown" role="button"
-      >
-        <span>Setores</span>
-      </a>
-      <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="pagesDropdown" x-placement="bottom-start">
-        <a  href="javascript:void(0)" *ngFor="let setor of setores | async" class="dropdown-item">{{setor.nomeSetor}}</a>
-      </div>
-    </li>
-
-    <li class="nav-item text-light">
-      <a class="nav-link text-light" routerLink="/cadastrosetor">
-        <span>Cadastrar setor</span>
-      </a>
-
-    </li>
-  </ul>
-
-  <div id="content-wrapper" class="fundo">
-
-    <div class="container-fluid">
-
-      <!-- Page Content -->
-
-      <h1>Informações dos funcionários:</h1>
-      <hr>
-
-      <div class="card border-info mb-3">
-        <div class="card-header border-info">Setor de Costura</div>
-        <table class="table table table-bordered dataTable">
-          <thead>
-          <tr>
-            <th>Funcionário</th>
-            <th>Setor</th>
-            <th>Operação</th>
-            <th>Quantidade de peças</th>
-            <th>Tempo necessário</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr *ngFor="let infosetor of infosetor | async">
-            <td></td>
-            <td>{{infosetor.setor}}</td>
-            <td>{{infosetor.operacao}}</td>
-            <td>{{infosetor.qtdPecasOpe}}</td>
-            <td>{{infosetor.tempoNecessario}}</td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!--      <div class="card border-info mb-3">-->
-      <!--        <div class="card-header border-info">Setor de Costura</div>-->
-      <!--        <table class="table table table-bordered dataTable">-->
-      <!--          <thead>-->
-      <!--          <tr>-->
-      <!--            <th>Funcionário</th>-->
-      <!--            <th>Operação</th>-->
-      <!--            <th>Quantidade de peças</th>-->
-      <!--            <th></th>-->
-      <!--            <th></th>-->
-      <!--          </tr>-->
-      <!--          </thead>-->
-      <!--          <tbody>-->
-      <!--          <tr>-->
-      <!--            <td>John</td>-->
-      <!--            <td>Costura</td>-->
-      <!--            <td>122</td>-->
-      <!--            <td></td>-->
-      <!--            <td></td>-->
-      <!--          </tr>-->
-      <!--          <tr>-->
-      <!--            <td>Mary</td>-->
-      <!--            <td>Costura</td>-->
-      <!--            <td>122</td>-->
-      <!--            <td></td>-->
-      <!--            <td></td>-->
-      <!--          </tr>-->
-      <!--          <tr>-->
-      <!--            <td>July</td>-->
-      <!--            <td>Costura</td>-->
-      <!--            <td>1222</td>-->
-      <!--            <td></td>-->
-      <!--            <td></td>-->
-      <!--          </tr>-->
-      <!--          </tbody>-->
-      <!--        </table>-->
-      <!--      </div>-->
-
-
-    </div>
-    <!-- /.container-fluid -->
-
-    <!-- Sticky Footer -->
-    <footer class="sticky-footer">
-      <div class="container my-auto">
-        <div class="copyright text-center my-auto">
-          <span>Copyright © DyOpe Assistant 2019</span>
-        </div>
-      </div>
-    </footer>
-
+  <div class="card border-info mb-3">
+    <div class="card-header border-info">Setor de Costura</div>
+    <table class="table table table-bordered dataTable">
+      <thead>
+      <tr>
+        <th>Funcionário</th>
+        <th>Setor</th>
+        <th>Operação</th>
+        <th>Quantidade de peças</th>
+        <th>Tempo necessário</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let infosetor of infosetor | async">
+        <td></td>
+        <td>{{infosetor.setor}}</td>
+        <td>{{infosetor.operacao}}</td>
+        <td>{{infosetor.qtdPecasOpe}}</td>
+        <td>{{infosetor.tempoNecessario}}</td>
+      </tr>
+      </tbody>
+    </table>
   </div>
-  <!-- /.content-wrapper -->
 
-</div>
-<!-- /#wrapper -->
+  <!--      <div class="card border-info mb-3">-->
+  <!--        <div class="card-header border-info">Setor de Costura</div>-->
+  <!--        <table class="table table table-bordered dataTable">-->
+  <!--          <thead>-->
+  <!--          <tr>-->
+  <!--            <th>Funcionário</th>-->
+  <!--            <th>Operação</th>-->
+  <!--            <th>Quantidade de peças</th>-->
+  <!--            <th></th>-->
+  <!--            <th></th>-->
+  <!--          </tr>-->
+  <!--          </thead>-->
+  <!--          <tbody>-->
+  <!--          <tr>-->
+  <!--            <td>John</td>-->
+  <!--            <td>Costura</td>-->
+  <!--            <td>122</td>-->
+  <!--            <td></td>-->
+  <!--            <td></td>-->
+  <!--          </tr>-->
+  <!--          <tr>-->
+  <!--            <td>Mary</td>-->
+  <!--            <td>Costura</td>-->
+  <!--            <td>122</td>-->
+  <!--            <td></td>-->
+  <!--            <td></td>-->
+  <!--          </tr>-->
+  <!--          <tr>-->
+  <!--            <td>July</td>-->
+  <!--            <td>Costura</td>-->
+  <!--            <td>1222</td>-->
+  <!--            <td></td>-->
+  <!--            <td></td>-->
+  <!--          </tr>-->
+  <!--          </tbody>-->
+  <!--        </table>-->
+  <!--      </div>-->
 
-<!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded" href="#page-top">
-  <i class="fas fa-angle-up"></i>
-</a>
 
+  <!-- /.container-fluid -->
+
+  <!-- Sticky Footer -->
+  <footer class="sticky-footer">
+    <div class="container my-auto">
+      <div class="copyright text-center my-auto">
+        <span>Copyright © DyOpe Assistant 2019</span>
+      </div>
+    </div>
+  </footer>
 
 </div>

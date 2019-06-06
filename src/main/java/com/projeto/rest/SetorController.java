@@ -38,7 +38,7 @@ public class SetorController {
         return setor;
     }
     @PreAuthorize("hasRole('GERENTE') or hasRole('admin')")
-    @RequestMapping(method = RequestMethod.GET, path = "/getByNome/{nomesetor}")
+    @RequestMapping(method = RequestMethod.GET, path = "/getByNome/{nomeSetor}")
     public Setor getSetorByNome(@PathVariable("nomeSetor") String nomeSetor) {
         Setor setor = setorRepository.findByNomeSetor(nomeSetor);
         return setor;

@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Funcionario} from "../service/funcionario.service";
 import {Observable} from 'rxjs';
 
 export class Infosetor {
   public id:number;
   public setor: string;
   public operacao: string;
+  public gerente_id: number;
+  public operacao_id: number;
+  public funcionario_id: number;
   public qtdPecasOpe: string;
   public tempoNecessario: string;
 }
