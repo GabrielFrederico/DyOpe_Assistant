@@ -172,7 +172,8 @@ public escolheu = false;
    });
    for(let operacao of  this.operacoes){
      if(operacao.etapa_producao_id === this.etapaproducao.id){
-       this.suboperacoes = operacao.suboperacoes;
+       this.operacaoEscolhida = operacao;
+       this.operacaoEscolhida.suboperacoes = this.suboperacoes;
      }
    }
   }
