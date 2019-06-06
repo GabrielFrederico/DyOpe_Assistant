@@ -14,7 +14,7 @@
       </button>
       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
         <a class="dropdown-item" href="javascript:void(0)" *ngFor="let peca of this.gerente.pecas; async"
-           (click)="selectsPeca(peca.id)">{{peca.descricao}}</a>
+           (click)="selectsPeca(peca)">{{peca.descricao}}</a>
       </div>
 
     </div>
@@ -23,10 +23,13 @@
     <a class="btn btn-info" href="#" data-toggle="modal"
        data-target=".cadastrar-peca">Cadastrar Peça</a>
   </div>
+  <div *ngIf="escolheu" class="col-md-1">
+    <span >{{peca.descricao}}</span>
+  </div>
 
 </div>
 <hr>
-<form class="card" [noValidate]="$any(false)">
+<form  *ngIf="escolheu; else naoescolheu"class="card" [noValidate]="$any(false)">
   <div class="card-header">Sequencia Operacional</div>
   <div class="card-body border-info">
     <div class="row">
@@ -381,6 +384,6 @@
 </div>
 
 
-<ng-template *ngIf="!carregado">
-  Carregando....
+<ng-template #naoescolheu>
+  Escolha uma Peça!
 </ng-template>

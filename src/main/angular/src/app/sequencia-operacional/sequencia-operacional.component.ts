@@ -122,7 +122,6 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
     this.suboperacoesObj.subscribe(data => {
       this.suboperacoes = data
     });
-    this.operacoes = this.gerente.operacoes.filter(ope => {return ope.etapa_producao_id = this.etapaproducao.id})
     this.carregado = true;
     console.clear();
   }
@@ -155,7 +154,6 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
     this.gerente.pecas.push(this.newpeca);
     this.gerenteService.cadastrarAlgo(this.gerente).pipe(first()).subscribe(data => {
       alert('Peça cadastrada com sucesso!')
-
     }, error => {
       alert(error)
     });
@@ -165,12 +163,18 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
     return operacao.id;
   }
 
-
+public escolheu = false;
   selectsPeca(peca: Peca) {
    this.peca = peca;
-   this.peca.operacoes.filter(ope=> {
-     return this.operacaoEscolhida.etapa_producao_id === ope.etapa_producao_id;
-   })
+   this.escolheu = true;
+   this.operacoes = this.peca.operacoes.filter(ope=> {
+     return ope.etapa_producao_id === this.etapaproducao.id;
+   });
+   for(let operacao of  this.operacoes){
+     if(operacao.etapa_producao_id === this.etapaproducao.id){
+       this.suboperacoes = operacao.suboperacoes;
+     }
+   }
   }
 
   toggleReadonly() {
