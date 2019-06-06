@@ -131,7 +131,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
     this.operacao.etapa_producao_id = this.etapaproducao.id;
     this.operacao.gerente_id = this.gerente.id;
     this.operacao.peca_id = this.peca.id;
-    this.gerente.operacoes.push(this.operacao);
+    this.peca.operacoes.push(this.operacao);
     this.operacaoService.cadastrarOperacao(this.gerente).pipe(first()).subscribe(data => {
       alert('Operação cadastrada com sucesso!')
     }, error => {
@@ -140,6 +140,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
   }
 
   cadastrarSubOperacao() {
+    this.suboperacao.operacao_id = this.operacaoEscolhida.id;
     this.gerenteService.cadastrarAlgo(this.gerente).pipe(first()).subscribe(data => {
       alert('Peça cadastrada com sucesso!')
 
@@ -164,17 +165,15 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
     return operacao.id;
   }
 
-  onSelect(operacao: Operacao) {
-    this.operacao = operacao;
-  }
 
-  selectsPeca(peca: number) {
-   this.operacao.peca_id = peca;
-
+  selectsPeca(peca: Peca) {
+   this.peca = peca;
+   this.peca.operacoes.filter(ope=> {
+     return this.operacaoEscolhida.etapa_producao_id === ope.etapa_producao_id;
+   })
   }
 
   toggleReadonly() {
     this.isReadonly = !this.isReadonly;
-
   }
 }

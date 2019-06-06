@@ -55,6 +55,7 @@ export class Gerente {
 export class Peca {
   public id: number;
   public descricao: string;
+  public operacoes: Operacao[];
   public gerente_id: number;
   public etapa_producao_id: number;
 }

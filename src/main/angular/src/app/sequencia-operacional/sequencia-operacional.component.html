@@ -9,11 +9,11 @@
   <div class="col-md-1">
     <div class="dropdown">
       <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false">
+              aria-haspopup="true" aria-expandsed="false">
         Peças
       </button>
       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item" *ngFor="let peca of this.gerente.pecas; async"
+        <a class="dropdown-item" href="javascript:void(0)" *ngFor="let peca of this.gerente.pecas; async"
            (click)="selectsPeca(peca.id)">{{peca.descricao}}</a>
       </div>
 
@@ -308,16 +308,17 @@
     </div>
     <div class="modal-body">
       <div class="card-body">
-        <form #cadastrarOperacao="ngForm" [noValidate]="$any(false)" (ngSubmit)="cadastrar()">
+        <form #cadastrarOperacao="ngForm" [noValidate]="$any(false)" (ngSubmit)="cadastrarSubOperacao()">
           <div class="form-group">
             <div class="form-row">
               <div class="col-md-6">
-                <div class="form-label-group">
-                  <label for="DescricaoOp">Descrição da operação:</label>
-                  <input required="required" name="descricao" [(ngModel)]="suboperacao.descricao" class="form-control"
+               <div class="form-label-group">
+                  <input type="text" required="required" name="descricao" [(ngModel)]="suboperacao.descricao" class="form-control"
                          id="DescricaoOp">
+                 <label for="DescricaoOp">Descrição da operação:</label>
                 </div>
-              </div>
+             </div>
+
               <div class="col-md-6">
                 <div class="form-label-group">
                   <input type="time" id="tempo" name="tempo" class="form-control"
@@ -327,8 +328,7 @@
                 </div>
               </div>
             </div>
-          </div>
-
+        </div>
 
           <div class="modal-footer col-md-12">
             <button class="btn btn-secondary" (click)="modal.close()" type="button" data-dismiss="modal">Cancelar
@@ -345,7 +345,7 @@
 </ng-template>
 
 <!-- cadastro de peça -->
-<div class="modal fade cadastrar-peca" tabindex="-1" role="dialog" aria-labelledby="modalpeca"
+<div class="modal fade cadastrar-peca"  tabindex="-1" role="dialog" aria-labelledby="modalpeca"
      aria-hidden="true">
   <div class="modal-dialog modal-body">
 
@@ -371,7 +371,7 @@
             </div>
             <div class="modal-footer col-md-12">
               <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-              <input class="btn btn-primary" type="submit" value="Confirmar">
+              <input class="btn btn-primary"  type="submit" value="Confirmar">
             </div>
           </form>
         </div>
