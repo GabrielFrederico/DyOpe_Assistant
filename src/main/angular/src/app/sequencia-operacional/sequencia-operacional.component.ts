@@ -1,11 +1,11 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {TokenStorageService} from '../auth/token-storage.service';
-import {ActivatedRoute, Router} from '@angular/router';
-import {CadastroOperacaoService, EtapaProducao, Operacao, SubOperacao} from '../service/cadastro-operacao.service';
-import {Observable, Subscription} from 'rxjs';
-import {Gerente, GerenteService, Peca} from '../service/gerente.service';
-import {first} from 'rxjs/operators';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { TokenStorageService } from '../auth/token-storage.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CadastroOperacaoService, EtapaProducao, Operacao, SubOperacao } from '../service/cadastro-operacao.service';
+import { Observable, Subscription } from 'rxjs';
+import { Gerente, GerenteService, Peca } from '../service/gerente.service';
+import { first } from 'rxjs/operators';
 
 
 @Component({
@@ -61,7 +61,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
       if (this.peca.operacoes.length === 0) {
         this.operacaoEscolhida = this.operacao;
       } else {
-        for (const operacao of  this.peca.operacoes) {
+        for (const operacao of this.peca.operacoes) {
           if (operacao.peca_id === this.peca.id) {
             this.operacaoEscolhida = operacao;
             if (this.operacaoEscolhida.suboperacoes.length === 0) {
@@ -79,7 +79,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
   }
 
   openCadastro(cadastro) {
-    this.modalService.open(cadastro, {size: 'lg', ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+    this.modalService.open(cadastro, { size: 'lg', ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
@@ -87,7 +87,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
   }
 
   openInformacoes(content) {
-    this.modalService.open(content, {size: 'lg', ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+    this.modalService.open(content, { size: 'lg', ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
@@ -195,9 +195,9 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
       return ope.etapa_producao_id === this.etapaproducao.id;
     });
     if (this.peca.operacoes.isEmpty()) {
-       this.cadastrar();
+      this.cadastrar();
     } else {
-      for (const operacao of  this.peca.operacoes) {
+      for (const operacao of this.peca.operacoes) {
         if (operacao.peca_id === this.peca.id) {
           this.operacaoEscolhida = operacao;
           if (this.operacaoEscolhida.suboperacoes.length === 0) {

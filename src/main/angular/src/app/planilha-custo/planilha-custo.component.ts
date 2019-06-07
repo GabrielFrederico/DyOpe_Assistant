@@ -1,4 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { GerenteService } from '../service/gerente.service';
+import { TokenStorageService } from '../auth/token-storage.service';
 
 @Component({
   selector: 'app-planilha-custo',
@@ -7,10 +9,17 @@ import {Component, OnInit} from '@angular/core';
 })
 export class PlanilhaCustoComponent implements OnInit {
 
-  constructor() {
+  constructor(private gerente: GerenteService, private token: TokenStorageService) {
   }
+  public info: any;
 
   ngOnInit() {
+    this.info = {
+      token: this.token.getToken(),
+      username: this.token.getUsername(),
+      authorities: this.token.getAuthorities(),
+      senha: this.token.getPassword()
+    };
   }
 
 }
