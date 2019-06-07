@@ -23,8 +23,6 @@ public class Operacao {
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "operacao_suboperacoes", joinColumns = @JoinColumn(name = "operacao_id"), inverseJoinColumns = @JoinColumn(name = "suboperacao_id"))
 	private Set<SubOperacao> operacoes = new HashSet<>();
-	
-	
 
 	private java.sql.Date dataInicio;
 
@@ -41,6 +39,17 @@ public class Operacao {
 	private float custosOpe;
 
 	private int loteProducao;
+	private int tempoTrab;
+
+	
+
+	public int getTempoTrab() {
+		return tempoTrab;
+	}
+
+	public void setTempoTrab(int tempoTrab) {
+		this.tempoTrab = tempoTrab;
+	}
 
 	private int numFuncionariosDisponiveis;
 
