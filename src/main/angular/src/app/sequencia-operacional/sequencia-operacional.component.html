@@ -1,6 +1,16 @@
 <base href="/src">
 
 <title>Operações</title>
+<nav>
+  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+    <a class="nav-item nav-link active" id="nav-profile-tab" data-toggle="tab"
+       [routerLink]="['/gerenteindex/operacoes', etapaproducao.etapaProducao]" role="tab" aria-controls="nav-profile"
+       aria-selected="false">Sequência Operacional</a>
+    <a class="nav-item nav-link " id="nav-home-tab" data-toggle="tab"
+       [routerLink]="['/gerenteindex/andamentooperacoes', etapaproducao.etapaProducao]" role="tab"
+       aria-controls="nav-home" aria-selected="true">Andamento</a>
+  </div>
+</nav>
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item active" aria-current="page"><a

@@ -10,9 +10,9 @@ import {CadastroSetorComponent} from '../cadastro-setor/cadastro-setor.component
 import {ControleFuncionariosComponent} from '../controle-funcionarios/controle-funcionarios.component';
 import {PerfilGerenteComponent} from '../perfil-gerente/perfil-gerente.component';
 import {SequenciaOperacionalComponent} from '../sequencia-operacional/sequencia-operacional.component';
-import {HomeGerenteComponent} from "../home-gerente/home-gerente.component";
-import {PlanilhaCustoComponent} from "../planilha-custo/planilha-custo.component";
-import {ErroComponent} from "../erro/erro.component";
+import {HomeGerenteComponent} from '../home-gerente/home-gerente.component';
+import {PlanilhaCustoComponent} from '../planilha-custo/planilha-custo.component';
+import {ErroComponent} from '../erro/erro.component';
 
 const rotas: Routes = [
   {

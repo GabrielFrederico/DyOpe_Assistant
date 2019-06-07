@@ -2,9 +2,10 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {TokenStorageService} from '../auth/token-storage.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Observable, Subscription} from 'rxjs';
-import {CadastroSetorService, Setor} from '../service/cadastro-setor.service';
-import {Infosetor, InfosetorService} from '../service/infosetor.service';
+import {Subscription} from 'rxjs';
+import {CadastroSetorService} from '../service/cadastro-setor.service';
+import {InfosetorService} from '../service/infosetor.service';
+import {GerenteService} from '../service/gerente.service';
 
 @Component({
   selector: 'app-controle-funcionarios',
@@ -12,14 +13,13 @@ import {Infosetor, InfosetorService} from '../service/infosetor.service';
   preserveWhitespaces: false
 })
 export class ControleFuncionariosComponent implements OnInit, OnDestroy {
-
-  infosetor: Observable<Infosetor[]>;
   public info: any;
   public validado: boolean;
-  public setor: Setor;
+  public setor: any;
   sub: Subscription;
 
-  constructor(private modalService: NgbModal, private setorservice: CadastroSetorService, private route: ActivatedRoute, private token: TokenStorageService, private router: Router, private infosetorService: InfosetorService) {
+  // tslint:disable-next-line:max-line-length
+  constructor(private gerenteService: GerenteService, private modalService: NgbModal, private setorservice: CadastroSetorService, private route: ActivatedRoute, private token: TokenStorageService, private router: Router, private infosetorService: InfosetorService) {
   }
 
   ngOnInit() {
@@ -43,17 +43,17 @@ export class ControleFuncionariosComponent implements OnInit, OnDestroy {
   }
 
   setorEscolhido() {
-    this.sub = this.route.params['nomeSetor'].subscribe(params => {
-      const nomeSetor = params['nomeSetor'];
+    this.sub = this.route.params.subscribe(params => {
+      const nomeSetor = params.nomeSetor;
       if (nomeSetor) {
-        this.setorservice.getSetorNome(nomeSetor).subscribe((setor: Setor) => {
+        this.setorservice.getSetorNome(nomeSetor).subscribe((setor: any) => {
           if (setor) {
             this.setor = setor;
             console.clear();
           }
-        })
+        });
       }
-    })
+    });
 
   }
 

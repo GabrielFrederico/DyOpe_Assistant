@@ -1,14 +1,14 @@
 ﻿<base href="/src">
 <title>Operações</title>
-<nav aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item active" aria-current="page"><a
-      [routerLink]="['/gerenteindex/operacoes', etapaproducao.etapaProducao]">Sequência Operacional</a>
-    </li>
-    <li class="breadcrumb-item active" aria-current="page"><a
-      [routerLink]="['/gerenteindex/andamentooperacoes', etapaproducao.etapaProducao]">Andamento</a>
-    </li>
-  </ol>
+<nav>
+  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+    <a class="nav-item nav-link " id="nav-profile-tab" data-toggle="tab"
+       [routerLink]="['/gerenteindex/operacoes', etapaproducao.etapaProducao]" role="tab" aria-controls="nav-profile"
+       aria-selected="false">Sequência Operacional</a>
+    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab"
+       [routerLink]="['/gerenteindex/andamentooperacoes', etapaproducao.etapaProducao]" role="tab"
+       aria-controls="nav-home" aria-selected="true">Andamento</a>
+  </div>
 </nav>
 <hr>
 
