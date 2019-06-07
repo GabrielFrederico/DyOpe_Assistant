@@ -1,8 +1,5 @@
 package com.projeto.rest;
 
-
-import java.util.Date;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,9 +30,7 @@ public class OperacaoController {
 		operacaoRepository.save(operacao);
 		return operacao;
 	}
-	
-
-	
+		
 	@RequestMapping(method = RequestMethod.GET)
 	public  Iterable<Operacao> listAll(){
 		return operacaoRepository.findAll();
@@ -48,16 +43,21 @@ public class OperacaoController {
 	}
 
 	@RequestMapping(method = RequestMethod.PUT)
-	public Operacao update(@RequestBody Operacao operacao ) {
+	public Operacao update(@RequestBody Operacao operacao) {
 		int tempos = 0;
 		for (SubOperacao subope : operacao.getOperacoes()) {
 			tempos = subope.getTempoNesc();
 			tempos+=tempos;
 		}
-	    float result, diasNesc;
+		
+	    float result, diasNesc,funcionariosNecessários;
 	    result = tempos*operacao.getLoteProducao();
-	    diasNesc = result/operacao.getTempoTrab();	    
-		operacaoRepository.save(operacao );
+	    diasNesc = result/operacao.getTempoTrab();
+	    funcionariosNecessários = operacao.getNumFuncionariosDisponiveis() * operacao.getTempoTrab();
+	    operacao.setNumFuncionarios(funcionariosNecessários);
+	   
+	    
+		operacaoRepository.save(operacao);
 		return operacao ;
 	}
 

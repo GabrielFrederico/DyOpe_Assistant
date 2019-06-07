@@ -18,11 +18,10 @@
     <div class="card border-info mb-3 lista">
       <div class="card-header border-info">Operações a fazer</div>
       <div class="card-body text-secondary">
-        <a *ngFor="let operacao of gerente.operacoes; trackBy: trackByFn " (click)="onSelect(operacao)"
+        <a *ngFor="let operacao of gerente.operacoes; trackBy: trackByFn "
            class="btn btn-outline-info list-group-item list-group-item-action">{{operacao.id}}</a>
-      </div>
-      <div class="card-footer bg-transparent border-info">
-        <a class="btn btn-info">Cadastrar</a>
+        <a *ngIf="!gerente.operacoes"
+           class="btn btn-outline-info list-group-item list-group-item-action">Nenhuma Operação cadastrada</a>
       </div>
     </div>
   </div>
@@ -35,7 +34,6 @@
         <a class="btn btn-outline-warning list-group-item list-group-item-action ">
           Acabamento
         </a>
-
       </div>
 
     </div>

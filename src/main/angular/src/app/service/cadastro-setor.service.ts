@@ -5,7 +5,9 @@ import {Observable} from 'rxjs';
 export class Setor {
   public id: number;
   public nomeSetor: string;
+  // tslint:disable-next-line:variable-name variable-name
   public etapaproducao_id: number;
+  // tslint:disable-next-line:variable-name
   public gerente_id: number;
 }
 
@@ -25,8 +27,8 @@ export class CadastroSetorService {
     return this.httpClient.get<Setor[]>('http://localhost:8080/setores', httpOptions);
   }
 
-  getSetorNome(nome: string): Observable<Setor> {
-    return this.httpClient.get<Setor>('http://localhost:8080/setores/getByNome/' + nome, httpOptions);
+  getSetorNome(nome: string) {
+    return this.httpClient.get('http://localhost:8080/setores/getByNome/' + nome);
   }
 
   cadastrarSetor(setor: Setor): Observable<Setor> {

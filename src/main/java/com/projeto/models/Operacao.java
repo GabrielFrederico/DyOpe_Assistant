@@ -25,7 +25,15 @@ public class Operacao {
 	private Set<SubOperacao> operacoes = new HashSet<>();
 
 	private java.sql.Date dataInicio;
+	private float numFuncionarios;
+	public float getNumFuncionarios() {
+		return numFuncionarios;
+	}
 
+	public void setNumFuncionarios(float numFuncionarios) {
+		this.numFuncionarios = numFuncionarios;
+	}
+	
 	public Set<SubOperacao> getOperacoes() {
 		return operacoes;
 	}

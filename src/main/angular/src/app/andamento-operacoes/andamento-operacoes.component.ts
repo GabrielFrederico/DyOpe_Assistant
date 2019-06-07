@@ -1,15 +1,13 @@
-import {ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {TokenStorageService} from '../auth/token-storage.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {CadastroOperacaoService, EtapaProducao, Operacao} from '../service/cadastro-operacao.service';
-import {Observable, Subscription} from "rxjs";
-import {Gerente, GerenteService} from '../service/gerente.service';
-import {first} from "rxjs/operators";
+import {CadastroOperacaoService, Operacao} from '../service/cadastro-operacao.service';
+import {Subscription} from 'rxjs';
+import {GerenteService} from '../service/gerente.service';
+import {first} from 'rxjs/operators';
 import {List} from 'immutable';
 
-
-ChangeDetectionStrategy.OnPush
 
 @Component({
   selector: 'app-andamento-operacoes',
@@ -17,21 +15,29 @@ ChangeDetectionStrategy.OnPush
   preserveWhitespaces: false
 })
 export class AndamentoOperacoesComponent implements OnInit, OnDestroy {
-  @Input() operacao: Operacao = new Operacao();
-  @Input() gerente: Gerente;
-  @Input() ope: Operacao;
-  @Input() gerenteObjeto: Observable<Gerente>;
-  @Input() gerentes: Observable<Gerente[]>;
-  @Input() operacoesFazer: Operacao[];
-  @Input() operacoesEmAndamento: Operacao[];
-  @Input() operacoesNoPrazo: Operacao[];
+
+  // tslint:disable-next-line:max-line-length
+  constructor(private route: ActivatedRoute, private gerenteService: GerenteService, private modalService: NgbModal, private operacaoService: CadastroOperacaoService, private token: TokenStorageService, private router: Router) {
+  }
+
+  operacao: any = {};
+  gerente: any;
+  ope: Operacao;
+  operacoesFazer: any;
+  operacoesEmAndamento: any;
+  operacoesNoPrazo: any;
   @Input() operacoes: List<Operacao>;
-  @Input() etapaproducao: EtapaProducao;
+  etapaproducao: any;
   public erro: boolean;
   public errorMessage = '';
   closeResult: string;
   public info: any;
   sub: Subscription;
+
+  public validado: boolean;
+  private cadastrado: boolean;
+
+  isReadonly = true;
 
   ngOnInit() {
     this.etapasproducao();
@@ -44,9 +50,6 @@ export class AndamentoOperacoesComponent implements OnInit, OnDestroy {
     this.datareload();
     this.naoAutenticado();
 
-  }
-
-  constructor(private route: ActivatedRoute, private gerenteService: GerenteService, private modalService: NgbModal, private operacaoService: CadastroOperacaoService, private token: TokenStorageService, private router: Router) {
   }
 
   ngOnDestroy() {
@@ -80,9 +83,6 @@ export class AndamentoOperacoesComponent implements OnInit, OnDestroy {
     }
   }
 
-  public validado: boolean;
-  private cadastrado: boolean;
-
   naoAutenticado() {
     if (this.info.authorities.toString() !== 'ROLE_GERENTE') {
       this.validado = false;
@@ -94,51 +94,33 @@ export class AndamentoOperacoesComponent implements OnInit, OnDestroy {
     }
   }
 
-  isReadonly = true;
-
   etapasproducao() {
     this.sub = this.route.params.subscribe(params => {
-      const etapaProducao = params['etapaProducao'];
+      const etapaProducao = params.etapaProducao;
       if (etapaProducao) {
-        this.operacaoService.getEtapaProducaoNome(etapaProducao).subscribe((etapaproducao: EtapaProducao) => {
+        this.operacaoService.getEtapaProducaoNome(etapaProducao).subscribe((etapaproducao: any) => {
           if (etapaproducao) {
             this.etapaproducao = etapaproducao;
             console.clear();
           }
-        })
+        }
+      )
+        ;
       }
-    })
+    });
   }
 
   datareload() {
-    this.gerenteObjeto = this.gerenteService.getGerenteLogado(this.info.username);
-    this.gerenteObjeto.subscribe(data => this.gerente = data);
+    this.gerenteService.getGerente(this.info.username).subscribe(data => this.gerente = data);
     console.clear();
-    this.operacoes = List(this.gerente.operacoesFazer);
 
   }
 
-  cadastrar() {
-    this.operacao.etapa_producao_id = this.etapaproducao.id;
-    this.operacao.gerente_id = this.gerente.id;
-    this.gerente.operacoesFazer.push(this.operacao);
-    this.gerenteService.atualizarGerente(this.gerente).pipe(first()).subscribe(data => {
-      alert("Operação cadastrada com sucesso!")
-
-    }, error => {
-      alert(error)
-    });
-
-  }
 
   trackByFn(operacao) {
     return operacao.id;
   }
 
-  onSelect(operacao: Operacao) {
-    this.ope = operacao;
-
-  }
 
   toggleReadonly() {
     this.isReadonly = !this.isReadonly;

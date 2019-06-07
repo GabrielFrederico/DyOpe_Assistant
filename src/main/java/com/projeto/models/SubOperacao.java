@@ -13,14 +13,7 @@ public class SubOperacao {
 	private long id;
 	
 	private String descricao;
-	private int numFuncionarios;
-	public int getNumFuncionarios() {
-		return numFuncionarios;
-	}
-
-	public void setNumFuncionarios(int numFuncionarios) {
-		this.numFuncionarios = numFuncionarios;
-	}
+	
 
 	private int tempoNesc;
 	

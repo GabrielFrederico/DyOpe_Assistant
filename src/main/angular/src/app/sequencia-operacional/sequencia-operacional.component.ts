@@ -1,10 +1,10 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {TokenStorageService} from '../auth/token-storage.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {CadastroOperacaoService, EtapaProducao, Operacao, SubOperacao} from '../service/cadastro-operacao.service';
-import {Observable, Subscription} from 'rxjs';
-import {Gerente, GerenteService, Peca} from '../service/gerente.service';
+import {CadastroOperacaoService, Operacao} from '../service/cadastro-operacao.service';
+import {Subscription} from 'rxjs';
+import {GerenteService, Peca} from '../service/gerente.service';
 import {first} from 'rxjs/operators';
 
 
@@ -19,8 +19,9 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
   // tslint:disable-next-line:max-line-length
   constructor(private route: ActivatedRoute, private gerenteService: GerenteService, private modalService: NgbModal, private operacaoService: CadastroOperacaoService, private token: TokenStorageService, private router: Router) {
   }
+
   operacao: Operacao = new Operacao();
-  newsuboperacao: any;
+  newsuboperacao: any = {};
   suboperacaoEscolhida: any;
   gerente: any;
   operacaoEscolhida: any;
@@ -149,6 +150,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
     this.operacao.peca_id = this.peca.id;
     this.peca.operacoes.push(this.operacao);
     this.gerenteService.cadastrarAlgo(this.gerente).pipe(first()).subscribe(data => {
+      this.operacaoEscolhida = data;
       alert('Operação cadastrada com sucesso!');
     }, error => {
       alert(error);
@@ -191,19 +193,17 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
   selectsPeca(peca: any) {
     this.peca = peca;
     this.escolheu = true;
-    this.peca.operacoes = this.gerente.operacoes.filter(ope => {
+    this.peca.operacoes = this.peca.operacoes.filter(ope => {
       return ope.etapa_producao_id === this.etapaproducao.id;
     });
-    if (this.peca.operacoes.isEmpty()) {
-       this.cadastrar();
-    } else {
-      for (const operacao of  this.peca.operacoes) {
+
+    this.cadastrar();
+    for (const operacao of  this.peca.operacoes) {
         if (operacao.peca_id === this.peca.id) {
           this.operacaoEscolhida = operacao;
-          if (this.operacaoEscolhida.suboperacoes.length === 0) {
+          alert(this.operacaoEscolhida.id);
+          if (!this.operacaoEscolhida.suboperacoes) {
             this.operacaoEscolhida.suboperacoes = this.suboperacoes;
-          }
-
         }
       }
     }

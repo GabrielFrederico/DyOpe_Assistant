@@ -11,17 +11,16 @@
        aria-controls="nav-home" aria-selected="true">Andamento</a>
   </div>
 </nav>
- <!--<nav aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item active" aria-current="page"><a
-      [routerLink]="['/gerenteindex/operacoes', etapaproducao.etapaProducao]">Sequência Operacional</a>
-    </li>
-    <li class="breadcrumb-item active" aria-current="page"><a
-      [routerLink]="['/gerenteindex/andamentooperacoes', etapaproducao.etapaProducao]">Andamento</a>
-    </li>
-  </ol>
+<!--<nav aria-label="breadcrumb">
+ <ol class="breadcrumb">
+   <li class="breadcrumb-item active" aria-current="page"><a
+     [routerLink]="['/gerenteindex/operacoes', etapaproducao.etapaProducao]">Sequência Operacional</a>
+   </li>
+   <li class="breadcrumb-item active" aria-current="page"><a
+     [routerLink]="['/gerenteindex/andamentooperacoes', etapaproducao.etapaProducao]">Andamento</a>
+   </li>
+ </ol>
 </nav> -->
-
 <hr>
 
 <div class="row">
@@ -38,14 +37,13 @@
         <a class="dropdown-item" href="javascript:void(0)" *ngFor="let peca of this.gerente.pecas"
            (click)="selectsPeca(peca)">{{peca.descricao}}</a>
       </div>
-
     </div>
   </div>
-  <div class="col-md-1">
+  <div class="col-md-2">
     <a class="btn btn-info" href="#" data-toggle="modal"
        data-target=".cadastrar-peca">Cadastrar Peça</a>
   </div>
-  <div *ngIf="escolheu" class="col-md-3">
+  <div *ngIf="escolheu" class="col-md-2">
     <h3>{{peca.descricao}}</h3>
   </div>
 
@@ -59,7 +57,7 @@
           <div class="card-header border-info">Operações</div>
           <div class="card-body text-secondary">
             <div class="form-group">
-              <div *ngFor="let operacao of suboperacoes" class="row">
+              <div *ngFor="let operacao of operacaoEscolhida.operacoes" class="row">
                 <div class="col-md-4">
                   <div class="form-group">
                     <div class="form-label-group">
@@ -91,8 +89,7 @@
             </div>
           </div>
           <div class="card-footer bg-transparent border-info">
-            <a class="btn btn-info" href="javascript:void(0)" (click)="openCadastro(cadastro)" data-toggle="modal"
-               data-target=".cadastro-operacoes">Adicionar</a>
+            <a class="btn btn-info" href="javascript:void(0)" (click)="openCadastro(cadastro)">Adicionar</a>
           </div>
         </div>
       </div>
@@ -168,10 +165,6 @@
                (click)="openInformacoes(content)">
               Ver dados
             </a>
-            <a class="btn btn-outline-success list-group-item list-group-item-action"
-               [routerLink]="['/gerenteindex/andamentooperacoes', etapaproducao.id]">
-              Ver Andamento
-            </a>
           </div>
         </div>
       </div>
@@ -206,36 +199,6 @@
     <div class="modal-body">
       <div class="card-body">
         <form [noValidate]="$any(false)">
-          <div class="form-group">
-            <div class="form-group">
-
-              <label for="DescricaoOpe">Descrição da operação:</label>
-              <input [readonly]="isReadonly" required="required" class="form-control"
-                     name="descricao" id="DescricaoOpe">
-            </div>
-            <div class="form-group">
-              <div class="form-row">
-                <div class="col-md-6">
-                  <div class="form-label-group">
-                    <input [readonly]="isReadonly" type="date" id="datainicio"
-                           class="form-control"
-                           placeholder="Data Inicio:" name="dataInicio"
-                           required="required">
-                    <label for="datainicio" class="fonterisco">Data Inicio:</label>
-                  </div>
-                </div>
-
-                <div class="col-md-6">
-                  <div class="form-label-group">
-                    <input [readonly]="isReadonly" type="date" id="datalimite"
-                           class="form-control"
-                           placeholder="Data limite:" name="prazo"
-                           required="required">
-                    <label for="datalimite" class="fonterisco">Prazo:</label>
-                  </div>
-                </div>
-              </div>
-            </div>
             <div class="form-group">
               <div class="form-row">
                 <div class="col-md-6">
@@ -247,23 +210,15 @@
                     <label for="custosOpe" class="fonterisco">Custos:</label>
                   </div>
                 </div>
-                <div class="col-md-6">
-                  <div class="form-label-group">
-                    <input [readonly]="isReadonly" type="number" id="LoteProd"
-                           class="form-control"
-                           placeholder="Lote de Produção" name="loteProducao"
-                           required="required">
-                    <label for="LoteProd" class="fonterisco">Lote de Produção:</label>
-                  </div>
-                </div>
               </div>
             </div>
+
             <div class="form-group">
               <div class="form-row">
                 <div class="col-md-6">
                   <div class="form-label-group">
                     <input [readonly]="isReadonly" type="number" id="FuncNesc"
-                           class="form-control"
+                           class="form-control" value="{{operacaoEscolhida.numFuncionarios}}"
                            placeholder="Funcionários necessários:" name="numFuncionariosOpe"
                            required="required">
                     <label for="FuncNesc" class="fonterisco">Funcionários necessários:</label>
@@ -280,40 +235,7 @@
                 </div>
               </div>
             </div>
-            <div class="form-group">
-              <div class="form-row">
-                <div class="col-md-6">
-                  <div class="form-label-group">
-                    <input [readonly]="isReadonly" type="number" id="TempoPeca"
-                           class="form-control"
-                           placeholder="Tempo necessário por peça:" name="tempoNesc"
-                           required="required">
-                    <label for="TempoPeca" class="fonterisco">Tempo necessário por peça:</label>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-label-group">
-                    <input [readonly]="isReadonly" type="text" id="precoPeca"
-                           class="form-control"
-                           placeholder="Preço da peça:" name="precoPecaOpe"
-                           required="required">
-                    <label for="precoPeca" class="fonterisco">Preço da peça:</label>
-                  </div>
-                </div>
-              </div>
 
-            </div>
-
-          </div>
-          <div class="modal-footer col-md-12">
-
-            <button class="btn btn-secondary" type="button" (click)="modal.close('Save click')" data-dismiss="modal">
-              Sair
-            </button>
-            <input class="btn btn-info" type="button" (click)="toggleReadonly()" value="Editar">
-            <input class="btn btn-success" type="submit" value="Salvar">
-
-          </div>
         </form>
       </div>
     </div>
@@ -396,7 +318,7 @@
             </div>
             <div class="modal-footer col-md-12">
               <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-              <input class="btn btn-primary" type="submit" value="Confirmar">
+              <input class="btn btn-primary" type="submit" value="Cadastrar">
             </div>
           </form>
         </div>
