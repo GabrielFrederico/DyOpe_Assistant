@@ -46,13 +46,13 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
     this.datareload();
     this.naoAutenticado();
 
-    if(this.escolheu){
+    if (this.escolheu) {
       this.peca.operacoes = this.gerente.operacoes.filter(ope => {
         return ope.etapa_producao_id === this.etapaproducao.id;
       });
-      if(this.peca.operacoes.length === 0){
+      if (this.peca.operacoes.length === 0) {
         this.operacaoEscolhida = this.operacao;
-      }else{
+      } else {
         for (let operacao of  this.peca.operacoes) {
           if (operacao.peca_id === this.peca.id) {
             this.operacaoEscolhida = operacao;
@@ -126,7 +126,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
             console.clear();
           }
         })
-      }else{
+      } else {
         this.router.navigate(['/**']);
       }
     })
@@ -151,28 +151,28 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
     this.operacao.gerente_id = this.gerente.id;
     this.operacao.peca_id = this.peca.id;
     this.peca.operacoes.push(this.operacao);
-    this.operacaoService.cadastrarOperacao(this.gerente).pipe(first()).subscribe(data => {
+    this.gerenteService.cadastrarAlgo(this.gerente).pipe(first()).subscribe(data => {
       alert('Operação cadastrada com sucesso!')
     }, error => {
       alert(error)
     });
   }
 
-  cadastrarSubOperacao() {
-    if(this.peca.operacoes.length === 0){
-      alert(this.operacaoEscolhida.id);
-      this.suboperacao.operacao_id = this.operacao.id;
-      this.operacao.suboperacoes.push(this.suboperacao);
-      this.gerenteService.cadastrarAlgo(this.gerente).pipe(first()).subscribe(data => {
-        alert('SubOperação cadastrada com sucesso!')
+  atualizar() {
+    this.operacaoService.updateOperacao(this.operacaoEscolhida);
+  }
 
-      }, error => {
-        alert(error)
-      });
-    }else{
-      this.operacaoEscolhida.suboperacoes.push(this.suboperacao);
-      this.operacaoService.updateOperacao(this.operacaoEscolhida);
-    }
+  cadastrarSubOperacao() {
+    alert(this.operacaoEscolhida.id);
+    this.suboperacao.operacao_id = this.operacaoEscolhida.id;
+    this.operacaoEscolhida.suboperacoes.push(this.suboperacao);
+    this.atualizar();
+    // this.gerenteService.cadastrarAlgo(this.gerente).pipe(first()).subscribe(data => {
+    //   alert('SubOperação cadastrada com sucesso!')
+    //  }, error => {
+    //    alert(error)
+    //  });
+    //
 
   }
 
@@ -199,9 +199,10 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
     this.peca.operacoes = this.gerente.operacoes.filter(ope => {
       return ope.etapa_producao_id === this.etapaproducao.id;
     });
-    if(this.peca.operacoes.length === 0){
-      this.operacaoEscolhida = this.operacao;
-    }else{
+    alert(this.peca.operacoes.length);
+    if (this.peca.operacoes.length === 0) {
+
+    } else {
       for (let operacao of  this.peca.operacoes) {
         if (operacao.peca_id === this.peca.id) {
           this.operacaoEscolhida = operacao;
