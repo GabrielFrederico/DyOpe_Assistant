@@ -1,3 +1,70 @@
-<p>
-  planilha-custo works!
-</p>
+<base href="/src">
+
+<title>Operações</title>
+
+ <!--<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item active" aria-current="page"><a
+      [routerLink]="['/gerenteindex/operacoes', etapaproducao.etapaProducao]">Sequência Operacional</a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page"><a
+      [routerLink]="['/gerenteindex/andamentooperacoes', etapaproducao.etapaProducao]">Andamento</a>
+    </li>
+  </ol>
+</nav> -->
+
+<hr>
+
+<!-- Sticky Footer -->
+<footer class="sticky-footer">
+  <div class="container my-auto">
+    <div class="copyright text-center my-auto">
+      <span>Copyright © DyOpe Assistant 2019</span>
+    </div>
+  </div>
+</footer>
+
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+  <i class="fas fa-angle-up"></i>
+</a>
+
+<!-- cadastro de planilha de custo -->
+<div class="modal fade cadastrar-peca" tabindex="-1" role="dialog" aria-labelledby="modalpeca"
+     aria-hidden="true">
+  <div class="modal-dialog modal-body">
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="card-body">
+          <form (ngSubmit)="cadastrarPlanilha()" [noValidate]="$any(false)">
+            <div class="form-group">
+              <div class="col-md-auto">
+                <div class="form-label-group">
+                  <input type="text" #nomePeca id="nomePeca" class="form-control" name="descricaop"
+                         placeholder="Nome da peça:" required="required"
+                         required="required">
+                  <label for="nomePeca">Nome da peça:</label>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer col-md-12">
+              <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+              <input class="btn btn-primary" type="submit" value="Confirmar">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #naoescolheu>
+  Escolha uma Peça!
+</ng-template>
