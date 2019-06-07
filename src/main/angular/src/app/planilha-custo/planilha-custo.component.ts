@@ -22,4 +22,8 @@ export class PlanilhaCustoComponent implements OnInit {
     };
   }
 
+  cadastrarPlanilha() {
+
+  }
+
 }
