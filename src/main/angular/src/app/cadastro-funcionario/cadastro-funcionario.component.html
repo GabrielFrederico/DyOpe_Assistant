@@ -1,109 +1,108 @@
-
-  <title>Cadastro</title>
+<title>Cadastro</title>
 
 
 <div>
 
-<div class="container-fluid">
-  <div class="card card-register mx-auto mt-5">
-    <div class="card-header bg-info text-light">Cadastro</div>
-    <div class="card-body">
-      <form (ngSubmit)="f.form.valid && OnSubmit(cpf.value,rg.value)" #f="ngForm" [noValidate]="$any(false)">
-        <div class="form-group">
+  <div class="container-fluid">
+    <div class="card card-register mx-auto mt-5">
+      <div class="card-header bg-info text-light">Cadastro</div>
+      <div class="card-body">
+        <form (ngSubmit)="f.form.valid && OnSubmit(cpf.value,rg.value)" #f="ngForm" [noValidate]="$any(false)">
           <div class="form-group">
+            <div class="form-group">
+              <div class="form-row">
+                <div class="col-md-6">
+                  <div class="form-label-group">
+                    <input type="text" name="nome" [(ngModel)]="form.nome" id="nomeCompleto" class="form-control"
+                           [autofocus]="true"
+                           placeholder="Nome Completo" required="required">
+                    <label for="nomeCompleto">Nome Completo</label>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-label-group">
+                    <input type="text" name="nomeUsuario" [(ngModel)]="form.nomeUsuario" id="nomeUser"
+                           class="form-control"
+                           autofocus="autofocus"
+                           placeholder="Nome Completo" required="required">
+                    <label for="nomeUser">Nome de usuario</label>
+                  </div>
+                </div>
+              </div>
+            </div>
             <div class="form-row">
               <div class="col-md-6">
                 <div class="form-label-group">
-                  <input type="text" name="nome" [(ngModel)]="form.nome" id="nomeCompleto" class="form-control"
-                         [autofocus]="true"
-                         placeholder="Nome Completo" required="required">
-                  <label for="nomeCompleto">Nome Completo</label>
+                  <input type="text" name="cpf" [brmasker]="{mask:'000.000.000-00', len:14}" #cpf id="cpf"
+                         class="form-control" placeholder="CPF" required="required">
+                  <label for="cpf">CPF</label>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-label-group">
-                  <input type="text" name="nomeUsuario" [(ngModel)]="form.nomeUsuario" id="nomeUser"
-                         class="form-control"
-                         autofocus="autofocus"
-                         placeholder="Nome Completo" required="required">
-                  <label for="nomeUser">Nome de usuario</label>
+                  <input type="text" [brmasker]="{mask:'0.000.000', len:9}" #rg name="rg" id="rg" class="form-control"
+                         placeholder="RG" required="required">
+                  <label for="rg">RG</label>
                 </div>
               </div>
             </div>
           </div>
-          <div class="form-row">
-            <div class="col-md-6">
-              <div class="form-label-group">
-                <input type="text" name="cpf" [brmasker]="{mask:'000.000.000-00', len:14}" #cpf id="cpf"
-                       class="form-control" placeholder="CPF" required="required">
-                <label for="cpf">CPF</label>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-label-group">
-                <input type="text" [brmasker]="{mask:'0.000.000', len:9}" #rg name="rg" id="rg" class="form-control"
-                       placeholder="RG" required="required">
-                <label for="rg">RG</label>
+          <div class="form-group">
+            <div class="form-label-group">
+              <input type="email" name="email" [(ngModel)]="form.email" #email="ngModel" id="inputEmail"
+                     class="form-control"
+                     placeholder="Endereço de e-mail"
+                     required="required">
+              <label for="inputEmail">Endereço de e-mail</label>
+              <div *ngIf="f.submitted && email.invalid">
+                <div *ngIf="email.errors.required">Email é obrigatório</div>
+                <div *ngIf="email.errors.email">Email inválido!</div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="form-group">
-          <div class="form-label-group">
-            <input type="email" name="email" [(ngModel)]="form.email" #email="ngModel" id="inputEmail"
-                   class="form-control"
-                   placeholder="Endereço de e-mail"
-                   required="required">
-            <label for="inputEmail">Endereço de e-mail</label>
-            <div *ngIf="f.submitted && email.invalid">
-              <div *ngIf="email.errors.required">Email é obrigatório</div>
-              <div *ngIf="email.errors.email">Email inválido!</div>
-            </div>
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="form-row">
-            <div class="col-md-6">
-              <show-hide-password (click)="focosenha()" btnStyle="primary">
-                <div class="form-label-group senhacadastro">
-                  <input type="password" #inputPassword name="senha" [(ngModel)]="form.senha" #senha="ngModel"
-                         id="inputPassword"
-                         class="form-control"
-                         placeholder="Senha" minlength="6"
-                         required="required">
-                  <label for="inputPassword">Senha</label>
+          <div class="form-group">
+            <div class="form-row">
+              <div class="col-md-6">
+                <show-hide-password (click)="focosenha()" btnStyle="primary">
+                  <div class="form-label-group senhacadastro">
+                    <input type="password" #inputPassword name="senha" [(ngModel)]="form.senha" #senha="ngModel"
+                           id="inputPassword"
+                           class="form-control"
+                           placeholder="Senha" minlength="6"
+                           required="required">
+                    <label for="inputPassword">Senha</label>
+                  </div>
+                </show-hide-password>
+                <div *ngIf="f.submitted && senha.invalid">>
+                  <div *ngIf="senha.errors.minlength">Senha precisa de pelo menos 6 caracteres</div>
                 </div>
-              </show-hide-password>
-              <div *ngIf="f.submitted && senha.invalid">>
-                <div *ngIf="senha.errors.minlength">Senha precisa de pelo menos 6 caracteres</div>
               </div>
-            </div>
-            <div class="col-md-6">
-              <show-hide-password (click)="fococonfirmarsenha()" btnStyle="primary">
-                <div class="form-label-group senhacadastro">
-                  <input type="password" #inputPasswordConfirm required="required" [(ngModel)]="form.senhaConfirm"
-                         #senhaConfirm="ngModel" name="senhaConfirm" id="confirmPassword" class="form-control"
-                         minlength="6" placeholder="Confirmar senha">
-                  <label for="confirmPassword">Confirmar senha</label>
+              <div class="col-md-6">
+                <show-hide-password (click)="fococonfirmarsenha()" btnStyle="primary">
+                  <div class="form-label-group senhacadastro">
+                    <input type="password" #inputPasswordConfirm required="required" [(ngModel)]="form.senhaConfirm"
+                           #senhaConfirm="ngModel" name="senhaConfirm" id="confirmPassword" class="form-control"
+                           minlength="6" placeholder="Confirmar senha">
+                    <label for="confirmPassword">Confirmar senha</label>
+                  </div>
+                </show-hide-password>
+                <div *ngIf="f.submitted && senhaerrada">
+                  <div class="alert alert-danger separa" *ngIf="senhaConfirm !== senha">As senhas não coincidem!</div>
                 </div>
-              </show-hide-password>
-              <div *ngIf="f.submitted && senhaerrada">
-                <div class="alert alert-danger separa" *ngIf="senhaConfirm !== senha">As senhas não coincidem!</div>
               </div>
             </div>
           </div>
+          <input class="btn btn-info btn-block" type="submit" value="Cadastrar">
+          <div *ngIf="f.submitted && isSignUpFailed" class="alert alert-danger separa">
+            Cadastro Falhou!<br/>{{errorMessage}}
+          </div>
+        </form>
+        <div class="text-center">
+          <a class="d-block small mt-3" routerLink="/loginfuncionario">Página de login</a>
+          <a class="d-block small" routerLink="/esqueceusenha">Esqueceu a senha?</a>
         </div>
-        <input class="btn btn-info btn-block" type="submit" value="Cadastrar">
-        <div *ngIf="f.submitted && isSignUpFailed" class="alert alert-danger separa">
-          Cadastro Falhou!<br/>{{errorMessage}}
-        </div>
-      </form>
-      <div class="text-center">
-        <a class="d-block small mt-3" routerLink="/loginfuncionario">Página de login</a>
-        <a class="d-block small" routerLink="/esqueceusenha">Esqueceu a senha?</a>
       </div>
     </div>
   </div>
-</div>
 
 </div>

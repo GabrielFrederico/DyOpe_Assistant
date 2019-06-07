@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { RedefinirSenhaComponent } from './redefinir-senha.component';
+import {RedefinirSenhaComponent} from './redefinir-senha.component';
 
 describe('RedefinirSenhaComponent', () => {
   let component: RedefinirSenhaComponent;
@@ -8,9 +8,9 @@ describe('RedefinirSenhaComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RedefinirSenhaComponent ]
+      declarations: [RedefinirSenhaComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

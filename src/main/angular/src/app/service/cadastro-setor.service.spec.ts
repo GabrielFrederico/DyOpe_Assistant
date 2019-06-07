@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { CadastroSetorService } from './cadastro-setor.service';
+import {CadastroSetorService} from './cadastro-setor.service';
 
 describe('CadastroSetorService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));

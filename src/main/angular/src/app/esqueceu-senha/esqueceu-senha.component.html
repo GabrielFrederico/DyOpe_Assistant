@@ -1,36 +1,35 @@
-
-  <title>Redefinir senha</title>
+<title>Redefinir senha</title>
 
 <div>
- 
-<div class="container-fluid">
-  <div class="card card-login mx-auto mt-5">
-    <div class="card-header bg-info text-light">Redefinir Senha</div>
-    <div class="card-body">
-      <div class="text-center mb-4">
-        <h4>Esqueceu sua senha?</h4>
-        <p>Digite seu endereço de e-mail e nós lhe enviaremos instruções sobre como redefinir sua senha.</p>
-      </div>
-      <form [noValidate]="$any(false)">
-        <div class="form-group">
-          <div class="form-label-group">
-            <input type="email" id="inputEmail" class="form-control" placeholder="Insira seu e-mail"
-                   required="required" [autofocus]="true">
-            <label for="inputEmail">Insira seu e-mail</label>
-          </div>
+
+  <div class="container-fluid">
+    <div class="card card-login mx-auto mt-5">
+      <div class="card-header bg-info text-light">Redefinir Senha</div>
+      <div class="card-body">
+        <div class="text-center mb-4">
+          <h4>Esqueceu sua senha?</h4>
+          <p>Digite seu endereço de e-mail e nós lhe enviaremos instruções sobre como redefinir sua senha.</p>
         </div>
-        <input class="btn btn-primary btn-block" type="submit" value="Redefinir Senha">
-      </form>
-
-          <div class="alert alert-dismissible alert-success separa" >
-            Link para redefinir a senha foi enviado para seu e-mail
+        <form [noValidate]="$any(false)">
+          <div class="form-group">
+            <div class="form-label-group">
+              <input type="email" id="inputEmail" class="form-control" placeholder="Insira seu e-mail"
+                     required="required" [autofocus]="true">
+              <label for="inputEmail">Insira seu e-mail</label>
+            </div>
           </div>
+          <input class="btn btn-primary btn-block" type="submit" value="Redefinir Senha">
+        </form>
 
-      <div class="text-center">
-        <a class="d-block small" routerLink=""> Página de Login</a>
+        <div class="alert alert-dismissible alert-success separa">
+          Link para redefinir a senha foi enviado para seu e-mail
+        </div>
+
+        <div class="text-center">
+          <a class="d-block small" routerLink=""> Página de Login</a>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
 </div>

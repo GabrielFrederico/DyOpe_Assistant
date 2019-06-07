@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { PerfilGerenteComponent } from './perfil-gerente.component';
+import {PerfilGerenteComponent} from './perfil-gerente.component';
 
 describe('PerfilGerenteComponent', () => {
   let component: PerfilGerenteComponent;
@@ -8,9 +8,9 @@ describe('PerfilGerenteComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PerfilGerenteComponent ]
+      declarations: [PerfilGerenteComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

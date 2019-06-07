@@ -1,26 +1,31 @@
-import {BrowserModule} from '@angular/platform-browser';
-import {CUSTOM_ELEMENTS_SCHEMA, Directive, Input, NgModule} from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
-import {RouterModule, Routes} from '@angular/router';
-import {AppRoutingModule, routingComponent, routingComponent2} from './app-routing.module';
-import {routingComponent3, routingComponent4, routingComponent5} from './app-routing.module';
+import {RouterModule} from '@angular/router';
+import {
+  AppRoutingModule,
+  routingComponent,
+  routingComponent2,
+  routingComponent3,
+  routingComponent4,
+  routingComponent5
+} from './app-routing.module';
 import {NgbCollapseModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {AngularFontAwesomeModule} from 'angular-font-awesome';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NavComponent} from './nav/nav.component';
 import {LayoutModule} from '@angular/cdk/layout';
 import {
-  MatToolbarModule,
   MatButtonModule,
-  MatSidenavModule,
+  MatButtonToggleModule,
   MatIconModule,
   MatListModule,
-  MatMenuModule, MatButtonToggleModule
+  MatMenuModule,
+  MatSidenavModule,
+  MatToolbarModule
 } from '@angular/material';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
-import {coerceBooleanProperty} from '@angular/cdk/coercion';
 import {ShowHidePasswordModule} from 'ngx-show-hide-password';
 import {AuthInterceptorService} from './auth/auth-interceptor.service';
 import {BrMaskerModule} from 'brmasker-ionic-3';
@@ -39,7 +44,8 @@ import {SharedModule} from './sidebar/shared.module';
     routingComponent4,
     routingComponent5,
     NavComponent,
-    RedefinirSenhaComponent
+    RedefinirSenhaComponent,
+
   ],
   imports: [
     AppRoutingModule,

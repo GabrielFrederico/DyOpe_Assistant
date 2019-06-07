@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ControleFuncionariosComponent } from './controle-funcionarios.component';
+import {ControleFuncionariosComponent} from './controle-funcionarios.component';
 
 describe('ControleFuncionariosComponent', () => {
   let component: ControleFuncionariosComponent;
@@ -8,9 +8,9 @@ describe('ControleFuncionariosComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ControleFuncionariosComponent ]
+      declarations: [ControleFuncionariosComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

@@ -4,7 +4,6 @@ import {AuthService} from "../auth/auth.service";
 import {TokenStorageService} from "../auth/token-storage.service";
 import {Router} from "@angular/router";
 import {loginFuncionarioInfo} from '../service/funcionario.service';
-import {Alert} from "selenium-webdriver";
 
 @Component({
   selector: 'app-login-funcionario',

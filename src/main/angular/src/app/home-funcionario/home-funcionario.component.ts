@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { TokenStorageService } from '../auth/token-storage.service';
-import { Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {TokenStorageService} from '../auth/token-storage.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-home-funcionario',
@@ -10,7 +10,9 @@ export class HomeFuncionarioComponent implements OnInit {
   public info: any;
 
   public validado: boolean;
-  constructor(private token: TokenStorageService, private  router: Router) { }
+
+  constructor(private token: TokenStorageService, private  router: Router) {
+  }
 
   ngOnInit() {
     this.info = {
@@ -20,6 +22,7 @@ export class HomeFuncionarioComponent implements OnInit {
     };
     this.naoAutenticado();
   }
+
   naoAutenticado() {
     if (this.info.authorities.toString() !== 'ROLE_FUNCIONARIO') {
       this.validado = false;

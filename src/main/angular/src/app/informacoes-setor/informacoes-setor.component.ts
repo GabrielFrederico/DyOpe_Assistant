@@ -47,6 +47,7 @@ export class InformacoesSetorComponent implements OnInit {
     this.router.navigate(['/funcionarioindex']);
     alert('Cadastrado com sucesso!');
   }
+
   naoAutenticado() {
     if (this.info.authorities.toString() !== 'ROLE_FUNCIONARIO') {
       this.validado = false;

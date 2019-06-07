@@ -1,8 +1,7 @@
-import {Component, OnInit, Input, ChangeDetectionStrategy} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
-import {EtapaProducao, CadastroOperacaoService} from '../service/cadastro-operacao.service';
+import {CadastroOperacaoService, EtapaProducao} from '../service/cadastro-operacao.service';
 import {Observable} from 'rxjs';
-import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {CadastroSetorService, Setor} from "../service/cadastro-setor.service";
 import {TokenStorageService} from "../auth/token-storage.service";
 import {Gerente, GerenteService} from "../service/gerente.service";

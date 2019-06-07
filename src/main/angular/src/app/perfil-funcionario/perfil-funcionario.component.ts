@@ -1,12 +1,11 @@
-import { Component, ElementRef, Input, OnInit, ViewChild, OnDestroy, AfterViewInit } from '@angular/core';
-import { InfosetorService } from "../service/infosetor.service";
-import { Router, ActivatedRoute } from "@angular/router";
-import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
-import { TokenStorageService } from "../auth/token-storage.service";
-import { Funcionario, FuncionarioService } from "../service/funcionario.service";
-import { Observable, Subscription } from "rxjs";
-import { first } from "rxjs/operators";
-import { FuncionarioIndexComponent } from '../funcionario-index/funcionario-index.component';
+import {Component, ElementRef, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {InfosetorService} from "../service/infosetor.service";
+import {ActivatedRoute, Router} from "@angular/router";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {TokenStorageService} from "../auth/token-storage.service";
+import {Funcionario, FuncionarioService} from "../service/funcionario.service";
+import {Observable, Subscription} from "rxjs";
+import {first} from "rxjs/operators";
 
 @Component({
   selector: 'app-perfil-funcionario',
@@ -34,7 +33,7 @@ export class PerfilFuncionarioComponent implements OnInit, OnDestroy {
   @ViewChild("rg") rg: ElementRef;
 
 
-   ngOnInit() {
+  ngOnInit() {
     this.info = {
       token: this.token.getToken(),
       username: this.token.getUsername(),
@@ -55,10 +54,12 @@ export class PerfilFuncionarioComponent implements OnInit, OnDestroy {
       });
     }
   }
+
   ngOnDestroy() {
     this.sub.unsubscribe();
 
   }
+
   focosenhaatual() {
     this.senhainput.nativeElement.focus();
   }
@@ -72,7 +73,7 @@ export class PerfilFuncionarioComponent implements OnInit, OnDestroy {
   }
 
   constructor(private route: ActivatedRoute, private http: InfosetorService,
-    private router: Router, private funcionarioService: FuncionarioService, private modalService: NgbModal, private token: TokenStorageService) {
+              private router: Router, private funcionarioService: FuncionarioService, private modalService: NgbModal, private token: TokenStorageService) {
   }
 
   datareload() {
@@ -98,6 +99,7 @@ export class PerfilFuncionarioComponent implements OnInit, OnDestroy {
 
   isReadonly = true;
   senhaerrada = false;
+
   redefinirSenha() {
     if (this.newsenhainput.nativeElement.value == this.confirmasenhainput.nativeElement.value) {
       this.funcionario.senha = this.newsenhainput.nativeElement.value;
@@ -119,6 +121,7 @@ export class PerfilFuncionarioComponent implements OnInit, OnDestroy {
 
     }
   }
+
   onSubmit(cpf, rg: string) {
 
     this.funcionario.cpf = cpf;

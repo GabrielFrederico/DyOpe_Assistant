@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { FuncionarioIndexComponent } from './funcionario-index.component';
+import {FuncionarioIndexComponent} from './funcionario-index.component';
 
 describe('FuncionarioIndexComponent', () => {
   let component: FuncionarioIndexComponent;
@@ -8,9 +8,9 @@ describe('FuncionarioIndexComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FuncionarioIndexComponent ]
+      declarations: [FuncionarioIndexComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

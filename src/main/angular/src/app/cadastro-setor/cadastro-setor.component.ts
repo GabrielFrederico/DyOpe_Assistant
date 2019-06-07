@@ -1,4 +1,4 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {CadastroSetorService, Setor} from '../service/cadastro-setor.service';
 import {Router} from '@angular/router';
 import {TokenStorageService} from '../auth/token-storage.service';
@@ -47,7 +47,7 @@ export class CadastroSetorComponent implements OnInit {
   save() {
     this.setor.gerente_id = this.gerente.id;
     this.setor.etapaproducao_id = this.etapa_id;
-      this.gerente.setores.push(this.setor);
+    this.gerente.setores.push(this.setor);
     this.gerenteService.cadastrarAlgo(this.gerente).pipe(first()).subscribe(data => {
       alert("Setor cadastrado com sucesso!");
 

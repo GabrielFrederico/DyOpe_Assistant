@@ -1,160 +1,160 @@
 <title>Informações do Setor</title>
-        <!-- Page Content -->
-        <h1>Informações do Setor</h1>
-        <hr>
-      
+<!-- Page Content -->
+<h1>Informações do Setor</h1>
+<hr>
 
-      <div class="container " style="float: left; max-width: 70%; padding-left: 5%">
-        <form (ngSubmit)="save()" [noValidate]="$any(false)">
-          <div class="form-group">
-            <div class="form-row">
-              <div class="col-md-6">
-                <div class="form-label-group">
-                  <input type="text" [(ngModel)]="infosetor.setor" name="setor" id="setor" class="form-control"
-                         autofocus="autofocus"
-                         placeholder="Setor:" required="required">
-                  <label for="setor">Setor:</label>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-label-group">
-                  <input type="text" [(ngModel)]="infosetor.operacao" name="operacao" id="operacao" class="form-control"
-                         autofocus="autofocus"
-                         placeholder="Operação:" required="required">
-                  <label for="operacao">Operação:</label>
-                </div>
-              </div>
-            </div>
+
+<div class="container " style="float: left; max-width: 70%; padding-left: 5%">
+  <form (ngSubmit)="save()" [noValidate]="$any(false)">
+    <div class="form-group">
+      <div class="form-row">
+        <div class="col-md-6">
+          <div class="form-label-group">
+            <input type="text" [(ngModel)]="infosetor.setor" name="setor" id="setor" class="form-control"
+                   autofocus="autofocus"
+                   placeholder="Setor:" required="required">
+            <label for="setor">Setor:</label>
           </div>
-          <div class="form-group">
-            <div class="form-row">
-              <div class="col-md-6">
-                <div class="form-label-group">
-                  <input type="number" [(ngModel)]="infosetor.qtdPecasOpe" name="qtdPecasOpe" id="qtdPecasOpe"
-                         class="form-control"
-                         placeholder="Quantidade de peças da operação:"
-                         required="required">
-                  <label for="qtdPecasOpe">Quantidade de peças da operação:</label>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-label-group">
-                  <input type="time" [(ngModel)]="infosetor.tempoNecessario" name="tempoNecessario" id="tempoNecessari"
-                         class="form-control"
-                         placeholder="Tempo necessário:"
-                         required="required">
-                  <label for="tempoNecessari">Tempo necessário:</label>
-                </div>
-              </div>
-            </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-label-group">
+            <input type="text" [(ngModel)]="infosetor.operacao" name="operacao" id="operacao" class="form-control"
+                   autofocus="autofocus"
+                   placeholder="Operação:" required="required">
+            <label for="operacao">Operação:</label>
           </div>
-
-          <input class="btn btn-success" type="submit" value="Enviar">
-
-          <!-- /.container-fluid -->
-
-          <!-- Sticky Footer -->
-          <footer class="sticky-footer">
-            <div class="container my-auto ">
-              <div class="copyright text-center my-auto ">
-                <span>Copyright © DyOpe Assistant 2019</span>
-              </div>
-            </div>
-          </footer>
-        </form>
+        </div>
       </div>
-      <!-- /.content-wrapper -->
-
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-      <i class="fas fa-angle-up"></i>
-    </a>
-
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-         aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Pronto para sair?</h5>
-            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">×</span>
-            </button>
+    </div>
+    <div class="form-group">
+      <div class="form-row">
+        <div class="col-md-6">
+          <div class="form-label-group">
+            <input type="number" [(ngModel)]="infosetor.qtdPecasOpe" name="qtdPecasOpe" id="qtdPecasOpe"
+                   class="form-control"
+                   placeholder="Quantidade de peças da operação:"
+                   required="required">
+            <label for="qtdPecasOpe">Quantidade de peças da operação:</label>
           </div>
-          <div class="modal-body">Selecione "Sair" abaixo se você estiver pronto para encerrar sua sessão atual.
-          </div>
-          <div class="modal-footer">
-            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-            <a class="btn btn-primary" href="index">Sair</a>
+        </div>
+        <div class="col-md-6">
+          <div class="form-label-group">
+            <input type="time" [(ngModel)]="infosetor.tempoNecessario" name="tempoNecessario" id="tempoNecessari"
+                   class="form-control"
+                   placeholder="Tempo necessário:"
+                   required="required">
+            <label for="tempoNecessari">Tempo necessário:</label>
           </div>
         </div>
       </div>
     </div>
 
-    <!--Modal Redefinir Senha: -->
+    <input class="btn btn-success" type="submit" value="Enviar">
 
-    <div class="modal fade redefinir-senha" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-         aria-hidden="true">
-      <div class="modal-dialog modal-body">
+    <!-- /.container-fluid -->
 
-        <div class="modal-content">
-          <div class="modal-header">
-            <h4 class="modal-title" id="myLargeModalLabel">Redefinir senha:</h4>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">×</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <div class="card-body">
-              <form method="post" action="infoSetor/cadastrarinfosetor">
-                <div class="form-group">
+    <!-- Sticky Footer -->
+    <footer class="sticky-footer">
+      <div class="container my-auto ">
+        <div class="copyright text-center my-auto ">
+          <span>Copyright © DyOpe Assistant 2019</span>
+        </div>
+      </div>
+    </footer>
+  </form>
+</div>
+<!-- /.content-wrapper -->
 
-                  <div class="form-group">
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+  <i class="fas fa-angle-up"></i>
+</a>
 
-                    <div class="col-md-auto">
-                      <div class="form-label-group">
-                        <input type="password" id="senha_atual" class="form-control"
-                               placeholder="Senha atual:"
-                               required="required">
-                        <label for="senha_atual">Senha atual:</label>
-                      </div>
-                    </div>
+<!-- Logout Modal-->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Pronto para sair?</h5>
+        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">Selecione "Sair" abaixo se você estiver pronto para encerrar sua sessão atual.
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+        <a class="btn btn-primary" href="index">Sair</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Modal Redefinir Senha: -->
+
+<div class="modal fade redefinir-senha" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-body">
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myLargeModalLabel">Redefinir senha:</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="card-body">
+          <form method="post" action="infoSetor/cadastrarinfosetor">
+            <div class="form-group">
+
+              <div class="form-group">
+
+                <div class="col-md-auto">
+                  <div class="form-label-group">
+                    <input type="password" id="senha_atual" class="form-control"
+                           placeholder="Senha atual:"
+                           required="required">
+                    <label for="senha_atual">Senha atual:</label>
                   </div>
+                </div>
+              </div>
 
-                  <div class="form-group">
+              <div class="form-group">
 
-                    <div class="col-md-auto">
-                      <div class="form-label-group">
-                        <input type="password" id="senha_nova" name="senha" class="form-control"
-                               placeholder="Nova senha:"
-                               required="required">
-                        <label for="senha_nova">Nova senha:</label>
-                      </div>
-                    </div>
+                <div class="col-md-auto">
+                  <div class="form-label-group">
+                    <input type="password" id="senha_nova" name="senha" class="form-control"
+                           placeholder="Nova senha:"
+                           required="required">
+                    <label for="senha_nova">Nova senha:</label>
                   </div>
+                </div>
+              </div>
 
-                  <div class="form-group">
+              <div class="form-group">
 
-                    <div class="col-md-auto">
-                      <div class="form-label-group">
-                        <input type="password" id="senha_confirmar" class="form-control"
-                               placeholder="Confirmar senha:"
-                               required="required">
-                        <label for="senha_confirmar">Confirmar senha:</label>
-                      </div>
-                    </div>
-
+                <div class="col-md-auto">
+                  <div class="form-label-group">
+                    <input type="password" id="senha_confirmar" class="form-control"
+                           placeholder="Confirmar senha:"
+                           required="required">
+                    <label for="senha_confirmar">Confirmar senha:</label>
                   </div>
-
                 </div>
 
-                <div class="modal-footer col-md-12">
-                  <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-                  <input class="btn btn-primary" type="submit" value="Cadastrar">
-                </div>
-              </form>
+              </div>
+
             </div>
-          </div>
+
+            <div class="modal-footer col-md-12">
+              <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+              <input class="btn btn-primary" type="submit" value="Cadastrar">
+            </div>
+          </form>
         </div>
       </div>
     </div>
+  </div>
+</div>

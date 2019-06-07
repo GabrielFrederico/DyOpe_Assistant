@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { EsqueceuSenhaComponent } from './esqueceu-senha.component';
+import {EsqueceuSenhaComponent} from './esqueceu-senha.component';
 
 describe('EsqueceuSenhaComponent', () => {
   let component: EsqueceuSenhaComponent;
@@ -8,9 +8,9 @@ describe('EsqueceuSenhaComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EsqueceuSenhaComponent ]
+      declarations: [EsqueceuSenhaComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

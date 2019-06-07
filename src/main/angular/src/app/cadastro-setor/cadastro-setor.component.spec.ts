@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { CadastroSetorComponent } from './cadastro-setor.component';
+import {CadastroSetorComponent} from './cadastro-setor.component';
 
 describe('CadastroSetorComponent', () => {
   let component: CadastroSetorComponent;
@@ -8,9 +8,9 @@ describe('CadastroSetorComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CadastroSetorComponent ]
+      declarations: [CadastroSetorComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

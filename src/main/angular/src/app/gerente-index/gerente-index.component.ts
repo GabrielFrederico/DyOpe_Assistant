@@ -1,9 +1,9 @@
-import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
-import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { TokenStorageService } from '../auth/token-storage.service';
-import { Router } from '@angular/router';
-import { EtapaProducao, CadastroOperacaoService } from '../service/cadastro-operacao.service';
-import { Observable } from 'rxjs';
+import {Component, Input, OnInit} from '@angular/core';
+import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {TokenStorageService} from '../auth/token-storage.service';
+import {Router} from '@angular/router';
+import {CadastroOperacaoService, EtapaProducao} from '../service/cadastro-operacao.service';
+import {Observable} from 'rxjs';
 
 
 @Component({
@@ -60,8 +60,7 @@ export class GerenteIndexComponent implements OnInit {
     if (this.toggled) {
       this.classidebar = "sidebar bg-primary navbar-nav";
       this.toggled = false;
-    }
-    else {
+    } else {
       this.classidebar = "sidebar bg-primary navbar-nav toggled";
       this.toggled = true;
     }
@@ -78,7 +77,7 @@ export class GerenteIndexComponent implements OnInit {
   }
 
   openLogout(content) {
-    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;

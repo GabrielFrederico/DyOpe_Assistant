@@ -3,8 +3,7 @@ import {Router} from '@angular/router';
 import {TokenStorageService} from '../auth/token-storage.service';
 import {AuthService} from '../auth/auth.service';
 import {loginGerenteInfo} from '../service/gerente.service';
-import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {not} from "rxjs/internal-compatibility";
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {LoginInfo} from "../service/login-info";
 
 @Component({

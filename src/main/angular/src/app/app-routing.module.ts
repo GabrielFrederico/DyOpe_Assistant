@@ -35,10 +35,10 @@ export class AppRoutingModule {
 
 export const routingComponent = [LoginGerenteComponent, LoginFuncionarioComponent, IndexComponent];
 
-export const routingComponent2 = [ErroComponent, EsqueceuSenhaComponent, CadastroGerenteComponent];
+export const routingComponent2 = [EsqueceuSenhaComponent, CadastroGerenteComponent];
 
 export const routingComponent3 = [CadastroFuncionarioComponent];
 
 export const routingComponent4 = [NavComponent];
 
-export const routingComponent5= [RedefinirSenhaComponent];
+export const routingComponent5 = [RedefinirSenhaComponent];

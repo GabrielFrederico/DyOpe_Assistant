@@ -40,7 +40,7 @@ export class AuthService {
     return this.http.post<Gerente>(this.signupUrlGerente, info, httpOptions);
   }
 
-  cadastrarFuncionarioAuth(info: Funcionario): Observable<Funcionario>{
+  cadastrarFuncionarioAuth(info: Funcionario): Observable<Funcionario> {
     return this.http.post<Funcionario>(this.signupUrlFuncionario, info, httpOptions);
   }
 

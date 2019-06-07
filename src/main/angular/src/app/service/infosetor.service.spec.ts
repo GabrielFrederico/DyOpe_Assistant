@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { InfosetorService } from './infosetor.service';
+import {InfosetorService} from './infosetor.service';
 
 describe('InfosetorService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));

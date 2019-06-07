@@ -1,15 +1,15 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { SequenciaOperacionalComponent } from './sequencia-operacional.component';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {SequenciaOperacionalComponent} from './sequencia-operacional.component';
 
-describe('OperacaoRiscoComponent', () => {
+describe('AndamentoOperacoesComponent', () => {
   let component: SequenciaOperacionalComponent;
   let fixture: ComponentFixture<SequenciaOperacionalComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SequenciaOperacionalComponent ]
+      declarations: [SequenciaOperacionalComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

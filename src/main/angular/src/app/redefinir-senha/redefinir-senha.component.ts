@@ -8,7 +8,8 @@ export class RedefinirSenhaComponent implements OnInit {
   @ViewChild("inputNewPassword") newsenhainput: ElementRef;
   @ViewChild("inputPasswordConfirm") confirmasenhainput: ElementRef;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }

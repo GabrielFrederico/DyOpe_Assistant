@@ -1,17 +1,19 @@
-import { Component, OnInit } from '@angular/core';
-import { CadastroOperacaoService } from '../service/cadastro-operacao.service';
-import { TokenStorageService } from '../auth/token-storage.service';
-import { Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {CadastroOperacaoService} from '../service/cadastro-operacao.service';
+import {TokenStorageService} from '../auth/token-storage.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-home-gerente',
   templateUrl: './home-gerente.component.html'
 })
 export class HomeGerenteComponent implements OnInit {
-public info: any;
+  public info: any;
 
-public validado: boolean;
-  constructor(private tipoOpeservice: CadastroOperacaoService, private token: TokenStorageService, private  router: Router) { }
+  public validado: boolean;
+
+  constructor(private tipoOpeservice: CadastroOperacaoService, private token: TokenStorageService, private  router: Router) {
+  }
 
   ngOnInit() {
     this.info = {
@@ -20,7 +22,7 @@ public validado: boolean;
       authorities: this.token.getAuthorities()
     };
     this.naoAutenticado();
-}
+  }
 
   naoAutenticado() {
     if (this.info.authorities.toString() !== 'ROLE_GERENTE') {

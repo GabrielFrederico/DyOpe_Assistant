@@ -33,7 +33,7 @@ export class SubOperacao {
   public descricao: string;
   public tempoNesc: string;
   public numFuncionarios: string;
-  public operacao_id:number;
+  public operacao_id: number;
 }
 
 const httpOptions = {
@@ -55,7 +55,14 @@ export class CadastroOperacaoService {
   getOperacoes() {
     return this.httpClient.get<Operacao[]>('http://localhost:8080/operacoes', httpOptions);
   }
+  updateOperacao(operacao: Operacao){
+    return this.httpClient.put<Operacao>('http://localhost:8080/operacoes', operacao);
 
+  }
+  updateSubOperacao(operacao: SubOperacao){
+    return this.httpClient.put<SubOperacao>('http://localhost:8080/operacoes', operacao);
+
+  }
   getOperacaoId(id: number): Observable<Operacao> {
     return this.httpClient.get<Operacao>('http://localhost:8080/operacoes/' + id, httpOptions);
   }

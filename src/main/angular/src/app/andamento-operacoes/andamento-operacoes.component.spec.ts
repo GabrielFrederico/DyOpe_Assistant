@@ -1,20 +1,20 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {GerenteIndexComponent} from './gerente-index.component';
+import {AndamentoOperacoesComponent} from './andamento-operacoes.component';
 
-describe('GerenteIndexComponent', () => {
-  let component: GerenteIndexComponent;
-  let fixture: ComponentFixture<GerenteIndexComponent>;
+describe('AndamentoOperacoesComponent', () => {
+  let component: AndamentoOperacoesComponent;
+  let fixture: ComponentFixture<AndamentoOperacoesComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [GerenteIndexComponent]
+      declarations: [AndamentoOperacoesComponent]
     })
       .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(GerenteIndexComponent);
+    fixture = TestBed.createComponent(AndamentoOperacoesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

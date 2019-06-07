@@ -17,9 +17,10 @@ export class AppComponent implements OnInit {
 
   constructor(private tokenStorage: TokenStorageService) {
   }
-  gerenteLogado(){
 
-}
+  gerenteLogado() {
+
+  }
 
   ngOnInit() {
 

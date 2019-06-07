@@ -1,8 +1,5 @@
-import {SidebarComponent} from '../sidebar/sidebar.component';
 import {FuncionarioIndexComponent} from './funcionario-index.component';
-import {NgModule, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
-import {OperacaoCosturaComponent} from '../operacao-costura/operacao-costura.component';
-import {RouterModule} from '@angular/router';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {AngularFontAwesomeModule} from 'angular-font-awesome';

@@ -1,9 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {TokenStorageService} from "../auth/token-storage.service";
 import {Router} from "@angular/router";
-import { Observable } from 'rxjs';
-import { Funcionario, FuncionarioService } from '../service/funcionario.service';
+import {Observable} from 'rxjs';
+import {Funcionario, FuncionarioService} from '../service/funcionario.service';
 
 @Component({
   selector: 'app-funcionario-index',
@@ -50,16 +50,17 @@ export class FuncionarioIndexComponent implements OnInit {
   }
 
   toggled = false;
+
   sidebar() {
     if (this.toggled) {
       this.classidebar = "sidebar bg-primary navbar-nav";
       this.toggled = false;
-    }
-    else {
+    } else {
       this.classidebar = "sidebar bg-primary navbar-nav toggled";
       this.toggled = true;
     }
   }
+
   logout() {
     this.token.logOut();
     this.router.navigate['/loginfuncionario'];
@@ -82,6 +83,7 @@ export class FuncionarioIndexComponent implements OnInit {
       return `with: ${reason}`;
     }
   }
+
   datareload() {
     this.funcionarioObjeto = this.funcionarioService.getFuncionarioLogado(this.info.username);
     this.funcionarioObjeto.subscribe(data => {
@@ -89,7 +91,9 @@ export class FuncionarioIndexComponent implements OnInit {
       console.clear();
     })
   }
+
   public validado: boolean;
+
   naoAutenticado() {
     if (this.info.authorities.toString() !== 'ROLE_FUNCIONARIO') {
       this.validado = false;

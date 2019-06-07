@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 
 export class Infosetor {
-  public id:number;
+  public id: number;
   public setor: string;
   public operacao: string;
   public gerente_id: number;
@@ -18,7 +18,8 @@ export class Infosetor {
 })
 export class InfosetorService {
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) {
+  }
 
   getInfosetor() {
     return this.httpClient.get<Infosetor[]>('http://localhost:8080/infosetor');

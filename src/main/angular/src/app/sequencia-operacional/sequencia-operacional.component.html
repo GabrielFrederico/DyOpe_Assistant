@@ -1,6 +1,18 @@
 <base href="/src">
 
 <title>Operações</title>
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item active" aria-current="page"><a
+      [routerLink]="['/gerenteindex/operacoes', etapaproducao.etapaProducao]">Sequência Operacional</a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page"><a
+      [routerLink]="['/gerenteindex/andamentooperacoes', etapaproducao.etapaProducao]">Andamento</a>
+    </li>
+  </ol>
+</nav>
+
+<hr>
 
 <div class="row">
   <div class="col-md-3">
@@ -23,13 +35,12 @@
     <a class="btn btn-info" href="#" data-toggle="modal"
        data-target=".cadastrar-peca">Cadastrar Peça</a>
   </div>
-  <div *ngIf="escolheu" class="col-md-1">
-    <span >{{peca.descricao}}</span>
+  <div *ngIf="escolheu" class="col-md-3">
+    <h3>{{peca.descricao}}</h3>
   </div>
 
 </div>
-<hr>
-<form  *ngIf="escolheu; else naoescolheu"class="card" [noValidate]="$any(false)">
+<form *ngIf="escolheu; else naoescolheu" class="card" [noValidate]="$any(false)">
   <div class="card-header">Sequencia Operacional</div>
   <div class="card-body border-info">
     <div class="row">
@@ -77,51 +88,51 @@
       </div>
 
       <div class="col-md-3">
-        <div class="card border-warning mb-3 operacoes" >
+        <div class="card border-warning mb-3 operacoes">
           <div class="card-body text-warning">
             <div class="form-group">
-                <div class="col-md-auto">
+              <div class="col-md-auto">
+                <div class="form-label-group">
+                  <input type="number" id="LoteProdu"
+                         class="form-control"
+                         placeholder="Lote de Produção" name="loteProducao"
+                         required="required">
+                  <label for="LoteProdu" class="fonterisco">Lote de Produção:</label>
+                </div>
+              </div>
+              <div class="col-md-auto">
+                <div class="form-label-group">
+                  <input type="number" id="numFun"
+                         class="form-control"
+                         placeholder="N° de Funcionários" name="numFun"
+                         required="required">
+                  <label for="numFun" class="fonterisco">N° de Funcionários</label>
+                </div>
+              </div>
+              <div class="col-md-auto">
+                <div class="form-group">
                   <div class="form-label-group">
-                    <input type="number" id="LoteProdu"
-                           class="form-control"
-                           placeholder="Lote de Produção" name="loteProducao"
-                           required="required">
-                    <label for="LoteProdu" class="fonterisco">Lote de Produção:</label>
+                    <input type="time" name="tempoTrab"
+                           id="tempoTrab"
+                           class="form-control" minlength="3"
+                           autofocus="autofocus"
+                           placeholder="Tempo Trabalho" required="required">
+                    <label for="tempoTrab">Tempo trabalhado</label>
                   </div>
                 </div>
-                <div class="col-md-auto">
-                  <div class="form-label-group">
-                    <input type="number" id="numFun"
-                           class="form-control"
-                           placeholder="N° de Funcionários" name="numFun"
-                           required="required">
-                    <label for="numFun" class="fonterisco">N° de Funcionários</label>
-                  </div>
-                </div>
-                <div class="col-md-auto">
-                  <div class="form-group">
-                    <div class="form-label-group">
-                      <input type="time" name="tempoTrab"
-                             id="tempoTrab"
-                             class="form-control" minlength="3"
-                             autofocus="autofocus"
-                             placeholder="Tempo Trabalho" required="required">
-                      <label for="tempoTrab">Tempo trabalhado</label>
-                    </div>
-                  </div>
-                </div>
+              </div>
             </div>
           </div>
-            <div class="card-footer bg-transparent border-info">
-              <input class="btn btn-primary" type="submit" value="Cadastrar">
-            </div>
+          <div class="card-footer bg-transparent border-info">
+            <input class="btn btn-primary" type="submit" value="Cadastrar">
           </div>
         </div>
+      </div>
 
       <div class="col-sm-5">
 
-        <div class="card border-success mb-3 lista" >
-          <div class="card-body text-success" >
+        <div class="card border-success mb-3 lista">
+          <div class="card-body text-success">
             <div class="form-group">
               <div class="form-row">
                 <div class="col-md-6">
@@ -148,7 +159,7 @@
               Ver dados
             </a>
             <a class="btn btn-outline-success list-group-item list-group-item-action"
-               [routerLink]="['/gerenteindex/operacaorisco', etapaproducao.id]">
+               [routerLink]="['/gerenteindex/andamentooperacoes', etapaproducao.id]">
               Ver Andamento
             </a>
           </div>
@@ -315,12 +326,13 @@
           <div class="form-group">
             <div class="form-row">
               <div class="col-md-6">
-               <div class="form-label-group">
-                  <input type="text" required="required" name="descricao" [(ngModel)]="suboperacao.descricao" class="form-control"
+                <div class="form-label-group">
+                  <input type="text" required="required" name="descricao" [(ngModel)]="suboperacao.descricao"
+                         class="form-control"
                          id="DescricaoOp">
-                 <label for="DescricaoOp">Descrição da operação:</label>
+                  <label for="DescricaoOp">Descrição da operação:</label>
                 </div>
-             </div>
+              </div>
 
               <div class="col-md-6">
                 <div class="form-label-group">
@@ -331,7 +343,7 @@
                 </div>
               </div>
             </div>
-        </div>
+          </div>
 
           <div class="modal-footer col-md-12">
             <button class="btn btn-secondary" (click)="modal.close()" type="button" data-dismiss="modal">Cancelar
@@ -348,7 +360,7 @@
 </ng-template>
 
 <!-- cadastro de peça -->
-<div class="modal fade cadastrar-peca"  tabindex="-1" role="dialog" aria-labelledby="modalpeca"
+<div class="modal fade cadastrar-peca" tabindex="-1" role="dialog" aria-labelledby="modalpeca"
      aria-hidden="true">
   <div class="modal-dialog modal-body">
 
@@ -374,7 +386,7 @@
             </div>
             <div class="modal-footer col-md-12">
               <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-              <input class="btn btn-primary"  type="submit" value="Confirmar">
+              <input class="btn btn-primary" type="submit" value="Confirmar">
             </div>
           </form>
         </div>

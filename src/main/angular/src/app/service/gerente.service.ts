@@ -1,8 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {TokenStorageService} from "../auth/token-storage.service";
-import {Operacao, EtapaProducao} from "./cadastro-operacao.service";
+import {Operacao} from "./cadastro-operacao.service";
 import {Setor} from './cadastro-setor.service';
 
 
@@ -83,6 +82,7 @@ export class GerenteService {
   cadastrarAlgo(gerente: Gerente): Observable<Gerente> {
     return this.httpClient.put<Gerente>('http://localhost:8080/gerentes/cadastraralgo', gerente);
   }
+
   getGerenteLogado(nomeUsuario: string): Observable<Gerente> {
 
     return this.httpClient.get<Gerente>('http://localhost:8080/gerentes/getByNomeUsuario/' + nomeUsuario, httpOptions);

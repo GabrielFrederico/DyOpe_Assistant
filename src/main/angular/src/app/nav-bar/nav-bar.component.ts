@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { TokenStorageService } from "../auth/token-storage.service";
-import { Router } from "@angular/router";
-import { GerenteIndexComponent } from "../gerente-index/gerente-index.component";
+import {Component, OnInit} from '@angular/core';
+import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {TokenStorageService} from "../auth/token-storage.service";
+import {Router} from "@angular/router";
+import {GerenteIndexComponent} from "../gerente-index/gerente-index.component";
 
 @Component({
   selector: 'app-nav-bar',
@@ -14,6 +14,7 @@ export class NavBarComponent implements OnInit {
   gerenteIndex: GerenteIndexComponent;
 
   closeResult: string;
+
   ngOnInit() {
     this.info = {
       token: this.token.getToken(),
@@ -35,7 +36,7 @@ export class NavBarComponent implements OnInit {
   }
 
   openLogout(content) {
-    this.modalService.open(content, { size: 'lg', ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+    this.modalService.open(content, {size: 'lg', ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${NavBarComponent.getDismissReason(reason)}`;

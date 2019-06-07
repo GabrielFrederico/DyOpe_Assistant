@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { HomeGerenteComponent } from './home-gerente.component';
+import {HomeGerenteComponent} from './home-gerente.component';
 
 describe('HomeGerenteComponent', () => {
   let component: HomeGerenteComponent;
@@ -8,9 +8,9 @@ describe('HomeGerenteComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HomeGerenteComponent ]
+      declarations: [HomeGerenteComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

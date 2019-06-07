@@ -1,21 +1,22 @@
-import { Component, Input, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
-import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { TokenStorageService } from '../auth/token-storage.service';
-import { Router, ActivatedRoute } from '@angular/router';
-import { CadastroOperacaoService, Operacao, EtapaProducao } from '../service/cadastro-operacao.service';
-import { Observable, Subscription } from "rxjs";
-import { Gerente, GerenteService } from '../service/gerente.service';
-import { first } from "rxjs/operators";
-import { List } from 'immutable';
+import {ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {TokenStorageService} from '../auth/token-storage.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {CadastroOperacaoService, EtapaProducao, Operacao} from '../service/cadastro-operacao.service';
+import {Observable, Subscription} from "rxjs";
+import {Gerente, GerenteService} from '../service/gerente.service';
+import {first} from "rxjs/operators";
+import {List} from 'immutable';
 
 
-  ChangeDetectionStrategy.OnPush
+ChangeDetectionStrategy.OnPush
+
 @Component({
-  selector: 'app-operacao-risco',
-  templateUrl: './operacao-risco.component.html',
+  selector: 'app-andamento-operacoes',
+  templateUrl: './andamento-operacoes.component.html',
   preserveWhitespaces: false
 })
-export class OperacaoRiscoComponent implements OnInit, OnDestroy {
+export class AndamentoOperacoesComponent implements OnInit, OnDestroy {
   @Input() operacao: Operacao = new Operacao();
   @Input() gerente: Gerente;
   @Input() ope: Operacao;
@@ -31,6 +32,7 @@ export class OperacaoRiscoComponent implements OnInit, OnDestroy {
   closeResult: string;
   public info: any;
   sub: Subscription;
+
   ngOnInit() {
     this.etapasproducao();
     this.info = {
@@ -46,13 +48,14 @@ export class OperacaoRiscoComponent implements OnInit, OnDestroy {
 
   constructor(private route: ActivatedRoute, private gerenteService: GerenteService, private modalService: NgbModal, private operacaoService: CadastroOperacaoService, private token: TokenStorageService, private router: Router) {
   }
+
   ngOnDestroy() {
     this.sub.unsubscribe();
 
   }
 
   openCadastro(cadastro) {
-    this.modalService.open(cadastro, { size: 'lg', ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+    this.modalService.open(cadastro, {size: 'lg', ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
@@ -60,7 +63,7 @@ export class OperacaoRiscoComponent implements OnInit, OnDestroy {
   }
 
   openInformacoes(content) {
-    this.modalService.open(content, { size: 'lg', ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+    this.modalService.open(content, {size: 'lg', ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
@@ -79,6 +82,7 @@ export class OperacaoRiscoComponent implements OnInit, OnDestroy {
 
   public validado: boolean;
   private cadastrado: boolean;
+
   naoAutenticado() {
     if (this.info.authorities.toString() !== 'ROLE_GERENTE') {
       this.validado = false;
@@ -91,7 +95,21 @@ export class OperacaoRiscoComponent implements OnInit, OnDestroy {
   }
 
   isReadonly = true;
-  etapasproducao() { this.sub = this.route.params.subscribe(params => { const id = params['id']; if (id) { this.operacaoService.getEtapaProducao(id).subscribe((etapaproducao: EtapaProducao) => { if (etapaproducao) { this.etapaproducao = etapaproducao; console.clear() } }) } }) }
+
+  etapasproducao() {
+    this.sub = this.route.params.subscribe(params => {
+      const etapaProducao = params['etapaProducao'];
+      if (etapaProducao) {
+        this.operacaoService.getEtapaProducaoNome(etapaProducao).subscribe((etapaproducao: EtapaProducao) => {
+          if (etapaproducao) {
+            this.etapaproducao = etapaproducao;
+            console.clear();
+          }
+        })
+      }
+    })
+  }
+
   datareload() {
     this.gerenteObjeto = this.gerenteService.getGerenteLogado(this.info.username);
     this.gerenteObjeto.subscribe(data => this.gerente = data);
@@ -99,6 +117,7 @@ export class OperacaoRiscoComponent implements OnInit, OnDestroy {
     this.operacoes = List(this.gerente.operacoesFazer);
 
   }
+
   cadastrar() {
     this.operacao.etapa_producao_id = this.etapaproducao.id;
     this.operacao.gerente_id = this.gerente.id;
@@ -106,16 +125,21 @@ export class OperacaoRiscoComponent implements OnInit, OnDestroy {
     this.gerenteService.atualizarGerente(this.gerente).pipe(first()).subscribe(data => {
       alert("Operação cadastrada com sucesso!")
 
-    }, error => { alert(error) });
+    }, error => {
+      alert(error)
+    });
 
   }
+
   trackByFn(operacao) {
     return operacao.id;
   }
+
   onSelect(operacao: Operacao) {
     this.ope = operacao;
 
   }
+
   toggleReadonly() {
     this.isReadonly = !this.isReadonly;
 

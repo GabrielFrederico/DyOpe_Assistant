@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { CadastroFuncionarioComponent } from './cadastro-funcionario.component';
+import {CadastroFuncionarioComponent} from './cadastro-funcionario.component';
 
 describe('CadastroFuncionarioComponent', () => {
   let component: CadastroFuncionarioComponent;
@@ -8,9 +8,9 @@ describe('CadastroFuncionarioComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CadastroFuncionarioComponent ]
+      declarations: [CadastroFuncionarioComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

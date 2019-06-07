@@ -1,7 +1,7 @@
-import {Component, OnInit, Inject, OnDestroy} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {TokenStorageService} from '../auth/token-storage.service';
-import {ActivatedRoute, Route, Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Observable, Subscription} from 'rxjs';
 import {CadastroSetorService, Setor} from '../service/cadastro-setor.service';
 import {Infosetor, InfosetorService} from '../service/infosetor.service';

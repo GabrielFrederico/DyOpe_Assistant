@@ -1,11 +1,10 @@
-import {Component, ElementRef, Input, OnInit, ViewChild, ChangeDetectionStrategy} from '@angular/core';
+import {ChangeDetectionStrategy, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {TokenStorageService} from '../auth/token-storage.service';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Gerente, GerenteService} from '../service/gerente.service';
 import {Router} from '@angular/router';
 import {Observable} from 'rxjs';
 import {first} from 'rxjs/operators';
-import {GerenteIndexComponent} from '../gerente-index/gerente-index.component';
 
 @Component({
   selector: 'app-perfil-gerente',

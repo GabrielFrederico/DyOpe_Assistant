@@ -114,6 +114,7 @@ public class ProjetoApplication {
 			etapaProducaoRepository.save(costura);
 			etapaProducaoRepository.save(beneficiamento);
 			etapaProducaoRepository.save(acabamento);
+			
 
 			Gerente juanGerente = new Gerente();
 			Funcionario juanFuncionario = new Funcionario();

@@ -32,7 +32,8 @@ export class TokenStorageService {
     window.sessionStorage.removeItem(USERNAME_KEY);
     window.sessionStorage.setItem(USERNAME_KEY, nomeUsuario);
   }
-  public savePassword(senha:string){
+
+  public savePassword(senha: string) {
     window.sessionStorage.removeItem(PASSWORD_KEY);
     window.sessionStorage.setItem(PASSWORD_KEY, senha);
 
@@ -41,6 +42,7 @@ export class TokenStorageService {
   public getPassword(): string {
     return sessionStorage.getItem(PASSWORD_KEY);
   }
+
   public getUsername(): string {
     return sessionStorage.getItem(USERNAME_KEY);
   }
