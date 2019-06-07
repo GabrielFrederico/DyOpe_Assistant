@@ -9,24 +9,22 @@ import {first} from 'rxjs/operators';
 @Component({
   selector: 'app-perfil-gerente',
   templateUrl: './perfil-gerente.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   preserveWhitespaces: false
 
 })
 export class PerfilGerenteComponent implements OnInit {
   title: 'Perfil Gerente';
-  @ViewChild("inputPassword") senhainput: ElementRef;
-  @ViewChild("inputNewPassword") newsenhainput: ElementRef;
-  @ViewChild("inputPasswordConfirm") confirmasenhainput: ElementRef;
-  @ViewChild("cpf") cpf: ElementRef;
-  @ViewChild("rg") rg: ElementRef;
+  @ViewChild('inputPassword') senhainput: ElementRef;
+  @ViewChild('inputNewPassword') newsenhainput: ElementRef;
+  @ViewChild('inputPasswordConfirm') confirmasenhainput: ElementRef;
+  @ViewChild('cpf') cpf: ElementRef;
+  @ViewChild('rg') rg: ElementRef;
 
   // tslint:disable-next-line:max-line-length
   constructor(private modalService: NgbModal, private token: TokenStorageService, private gerenteService: GerenteService, private router: Router) {
   }
 
-  @Input() gerenteObjeto: Observable<Gerente>;
-  @Input() gerente: Gerente;
+  gerente: any;
   public gerenteLogado: boolean;
   public validado: boolean;
   public senhaerrada: boolean;
@@ -59,12 +57,14 @@ export class PerfilGerenteComponent implements OnInit {
 
 
   ngOnInit() {
-
     this.info = {
       token: this.token.getToken(),
       username: this.token.getUsername(),
       authorities: this.token.getAuthorities()
     };
+    this.gerenteService.getGerente(this.info.username).subscribe(data => {
+      this.gerente = data;
+    });
     this.datareload();
     this.naoAutenticado();
 
@@ -83,14 +83,13 @@ export class PerfilGerenteComponent implements OnInit {
   }
 
   datareload() {
-    this.gerenteObjeto = this.gerenteService.getGerenteLogado(this.info.username);
-    this.gerenteObjeto.subscribe(data => this.gerente = data)
+
     console.clear();
 
   }
 
   redefinirSenha() {
-    if (this.newsenhainput.nativeElement.value == this.confirmasenhainput.nativeElement.value) {
+    if (this.newsenhainput.nativeElement.value === this.confirmasenhainput.nativeElement.value) {
       this.gerente.senha = this.newsenhainput.nativeElement.value;
       this.gerenteService.atualizarSenhaGerente(this.gerente)
         .pipe(first())
@@ -98,7 +97,7 @@ export class PerfilGerenteComponent implements OnInit {
           data => {
             this.router.navigate(['/logingerente']);
             this.token.logOut();
-            alert("Senha atualizada! Faça o login denovo!");
+            alert('Senha atualizada! Faça o login denovo!');
           },
           error => {
             console.log(error);
@@ -122,7 +121,7 @@ export class PerfilGerenteComponent implements OnInit {
 
           this.isReadonly = true;
           if (this.info.username !== this.gerente.nomeUsuario) {
-            alert("Nome de usuário atualizado! Faça o login denovo!");
+            alert('Nome de usuário atualizado! Faça o login denovo!');
             this.token.logOut();
             this.router.navigate(['/logingerente']);
           } else {

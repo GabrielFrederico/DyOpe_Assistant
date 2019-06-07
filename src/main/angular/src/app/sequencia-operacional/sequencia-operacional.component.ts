@@ -15,18 +15,19 @@ import {first} from 'rxjs/operators';
 
 })
 export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
+
+  // tslint:disable-next-line:max-line-length
+  constructor(private route: ActivatedRoute, private gerenteService: GerenteService, private modalService: NgbModal, private operacaoService: CadastroOperacaoService, private token: TokenStorageService, private router: Router) {
+  }
   operacao: Operacao = new Operacao();
-  suboperacao: SubOperacao = new SubOperacao;
-  suboperacaoEscolhida: SubOperacao = new SubOperacao;
-  @Input() gerente: Gerente;
-  @Input() operacaoEscolhida: Operacao;
-  gerenteObjeto: Observable<Gerente>;
+  newsuboperacao: any;
+  suboperacaoEscolhida: any;
+  gerente: any;
+  operacaoEscolhida: any;
   newpeca: Peca = new Peca();
-  @Input() peca: Peca;
-  suboperacoesObj: Observable<SubOperacao[]>;
-  @Input() suboperacoes: SubOperacao[];
-  @Input() operacoes: Operacao[];
-  @Input() etapaproducao: EtapaProducao;
+  peca: any;
+  suboperacoes: any;
+  etapaproducao: any;
   public erro: boolean;
   public errorMessage = '';
   closeResult: string;
@@ -34,6 +35,13 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
   etapa: string;
   idope: string;
   sub: Subscription;
+
+  public validado: boolean;
+  public carregado: boolean;
+
+  isReadonly = true;
+
+  public escolheu = false;
 
   ngOnInit() {
     this.etapasproducao();
@@ -53,7 +61,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
       if (this.peca.operacoes.length === 0) {
         this.operacaoEscolhida = this.operacao;
       } else {
-        for (let operacao of  this.peca.operacoes) {
+        for (const operacao of  this.peca.operacoes) {
           if (operacao.peca_id === this.peca.id) {
             this.operacaoEscolhida = operacao;
             if (this.operacaoEscolhida.suboperacoes.length === 0) {
@@ -64,9 +72,6 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
         }
       }
     }
-  }
-
-  constructor(private route: ActivatedRoute, private gerenteService: GerenteService, private modalService: NgbModal, private operacaoService: CadastroOperacaoService, private token: TokenStorageService, private router: Router) {
   }
 
   ngOnDestroy() {
@@ -99,9 +104,6 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
     }
   }
 
-  public validado: boolean;
-  public carregado: boolean;
-
   naoAutenticado() {
     if (this.info.authorities.toString() !== 'ROLE_GERENTE') {
       this.validado = false;
@@ -113,34 +115,29 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
     }
   }
 
-  isReadonly = true;
-
   etapasproducao() {
     this.sub = this.route.params.subscribe(params => {
-      const etapaProducao = params['etapaProducao'];
+      const etapaProducao = params.etapaProducao;
       if (etapaProducao) {
-        this.operacaoService.getEtapaProducaoNome(etapaProducao).subscribe((etapaproducao: EtapaProducao) => {
+        this.operacaoService.getEtapaProducaoNome(etapaProducao).subscribe((etapaproducao: any) => {
           if (etapaproducao) {
             this.etapaproducao = etapaproducao;
             this.etapa = this.etapaproducao.id.toString();
             console.clear();
           }
-        })
+        });
       } else {
         this.router.navigate(['/**']);
       }
-    })
+    });
   }
 
   datareload() {
-    this.gerenteObjeto = this.gerenteService.getGerenteLogado(this.info.username);
-    this.gerenteObjeto.subscribe(data => {
-        this.gerente = data;
-      }
-    );
-    this.suboperacoesObj = this.operacaoService.getSubOperacoes();
-    this.suboperacoesObj.subscribe(data => {
-      this.suboperacoes = data
+    this.gerenteService.getGerente(this.info.username).subscribe(data => {
+      this.gerente = data;
+    });
+    this.operacaoService.getSubOperacoes().subscribe(data => {
+      this.suboperacoes = data;
     });
     this.carregado = true;
     console.clear();
@@ -152,9 +149,9 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
     this.operacao.peca_id = this.peca.id;
     this.peca.operacoes.push(this.operacao);
     this.gerenteService.cadastrarAlgo(this.gerente).pipe(first()).subscribe(data => {
-      alert('Operação cadastrada com sucesso!')
+      alert('Operação cadastrada com sucesso!');
     }, error => {
-      alert(error)
+      alert(error);
     });
   }
 
@@ -164,8 +161,8 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
 
   cadastrarSubOperacao() {
     alert(this.operacaoEscolhida.id);
-    this.suboperacao.operacao_id = this.operacaoEscolhida.id;
-    this.operacaoEscolhida.suboperacoes.push(this.suboperacao);
+    this.newsuboperacao.operacao_id = this.operacaoEscolhida.id;
+    this.operacaoEscolhida.suboperacoes.push(this.newsuboperacao);
     this.atualizar();
     // this.gerenteService.cadastrarAlgo(this.gerente).pipe(first()).subscribe(data => {
     //   alert('SubOperação cadastrada com sucesso!')
@@ -181,9 +178,9 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
     this.newpeca.gerente_id = this.gerente.id;
     this.gerente.pecas.push(this.newpeca);
     this.gerenteService.cadastrarAlgo(this.gerente).pipe(first()).subscribe(data => {
-      alert('Peça cadastrada com sucesso!')
+      alert('Peça cadastrada com sucesso!');
     }, error => {
-      alert(error)
+      alert(error);
     });
   }
 
@@ -191,19 +188,16 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
     return operacao.id;
   }
 
-  public escolheu = false;
-
-  selectsPeca(peca: Peca) {
+  selectsPeca(peca: any) {
     this.peca = peca;
     this.escolheu = true;
     this.peca.operacoes = this.gerente.operacoes.filter(ope => {
       return ope.etapa_producao_id === this.etapaproducao.id;
     });
-    alert(this.peca.operacoes.length);
-    if (this.peca.operacoes.length === 0) {
-
+    if (this.peca.operacoes.isEmpty()) {
+       this.cadastrar();
     } else {
-      for (let operacao of  this.peca.operacoes) {
+      for (const operacao of  this.peca.operacoes) {
         if (operacao.peca_id === this.peca.id) {
           this.operacaoEscolhida = operacao;
           if (this.operacaoEscolhida.suboperacoes.length === 0) {

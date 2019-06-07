@@ -21,13 +21,17 @@ export class GerenteIndexComponent implements OnInit {
   info: any;
   form: any = {};
   public isCollapsed = false;
-  @Input() tiposOperacao: Observable<EtapaProducao[]>;
+  etapas: any;
 
   closeResult: string;
   private roles: string[];
   private authority: string;
 
   public validado: boolean;
+
+
+  toggled = false;
+  classidebar = 'sidebar bg-primary navbar-nav';
 
   ngOnInit() {
     this.info = {
@@ -52,16 +56,12 @@ export class GerenteIndexComponent implements OnInit {
 
   }
 
-
-  toggled = false;
-  classidebar = "sidebar bg-primary navbar-nav";
-
   sidebar() {
     if (this.toggled) {
-      this.classidebar = "sidebar bg-primary navbar-nav";
+      this.classidebar = 'sidebar bg-primary navbar-nav';
       this.toggled = false;
     } else {
-      this.classidebar = "sidebar bg-primary navbar-nav toggled";
+      this.classidebar = 'sidebar bg-primary navbar-nav toggled';
       this.toggled = true;
     }
   }
@@ -72,7 +72,9 @@ export class GerenteIndexComponent implements OnInit {
   }
 
   dataReload() {
-    this.tiposOperacao = this.tipoOpeservice.getTiposOperacoes();
+    this.tipoOpeservice.getTiposOperacoes().subscribe(data => {
+      this.etapas = data;
+    });
 
   }
 

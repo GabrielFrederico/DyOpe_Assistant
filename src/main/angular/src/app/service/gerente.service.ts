@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {Operacao} from "./cadastro-operacao.service";
+import {Operacao} from './cadastro-operacao.service';
 import {Setor} from './cadastro-setor.service';
 
 
@@ -55,7 +55,9 @@ export class Peca {
   public id: number;
   public descricao: string;
   public operacoes: Operacao[];
+  // tslint:disable-next-line:variable-name
   public gerente_id: number;
+  // tslint:disable-next-line:variable-name
   public etapa_producao_id: number;
 }
 
@@ -71,21 +73,26 @@ export class GerenteService {
     return this.httpClient.get<Gerente>('http://localhost:8080/gerentes/gerente/' + id, httpOptions);
   }
 
-  atualizarSenhaGerente(gerente: Gerente): Observable<Gerente> {
-    return this.httpClient.put<Gerente>('http://localhost:8080/gerentes/atualizarsenha', gerente);
+  atualizarSenhaGerente(gerente: any) {
+    return this.httpClient.put('http://localhost:8080/gerentes/atualizarsenha', gerente);
   }
 
   atualizarGerente(gerente: Gerente): Observable<Gerente> {
     return this.httpClient.put<Gerente>('http://localhost:8080/gerentes/atualizargerente', gerente);
   }
 
-  cadastrarAlgo(gerente: Gerente): Observable<Gerente> {
-    return this.httpClient.put<Gerente>('http://localhost:8080/gerentes/cadastraralgo', gerente);
+  cadastrarAlgo(gerente: any) {
+    return this.httpClient.put('http://localhost:8080/gerentes/cadastraralgo', gerente);
   }
 
   getGerenteLogado(nomeUsuario: string): Observable<Gerente> {
 
     return this.httpClient.get<Gerente>('http://localhost:8080/gerentes/getByNomeUsuario/' + nomeUsuario, httpOptions);
+  }
+
+  getGerente(nomeUsuario: string) {
+
+    return this.httpClient.get('http://localhost:8080/gerentes/getByNomeUsuario/' + nomeUsuario);
   }
 
   getGerentes() {

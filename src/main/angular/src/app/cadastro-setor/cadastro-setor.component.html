@@ -22,7 +22,7 @@
       <label for="etapaProducao">Etapa da Produção:</label>
       <select class="form-control" id="etapaProducao">
         <option>Selecione..</option>
-        <option *ngFor="let etapa of etapas | async" (click)="selectEtapa(etapa.id)">{{etapa.etapaProducao}}</option>
+        <option *ngFor="let etapa of etapas" (click)="selectEtapa(etapa.id)">{{etapa.etapaProducao}}</option>
         <option *ngIf="!etapas">Carregando...</option>
 
       </select>

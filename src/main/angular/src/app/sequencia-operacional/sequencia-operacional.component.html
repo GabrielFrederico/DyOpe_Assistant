@@ -25,7 +25,7 @@
         Peças
       </button>
       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item" href="javascript:void(0)" *ngFor="let peca of this.gerente.pecas; async"
+        <a class="dropdown-item" href="javascript:void(0)" *ngFor="let peca of this.gerente.pecas"
            (click)="selectsPeca(peca)">{{peca.descricao}}</a>
       </div>
 
@@ -49,7 +49,7 @@
           <div class="card-header border-info">Operações</div>
           <div class="card-body text-secondary">
             <div class="form-group">
-              <div *ngFor="let operacao of suboperacoes; async" class="row">
+              <div *ngFor="let operacao of suboperacoes" class="row">
                 <div class="col-md-4">
                   <div class="form-group">
                     <div class="form-label-group">
@@ -327,7 +327,7 @@
             <div class="form-row">
               <div class="col-md-6">
                 <div class="form-label-group">
-                  <input type="text" required="required" name="descricao" [(ngModel)]="suboperacao.descricao"
+                  <input type="text" required="required" name="descricao" [(ngModel)]="newsuboperacao.descricao"
                          class="form-control"
                          id="DescricaoOp">
                   <label for="DescricaoOp">Descrição da operação:</label>
@@ -337,7 +337,7 @@
               <div class="col-md-6">
                 <div class="form-label-group">
                   <input type="time" id="tempo" name="tempo" class="form-control"
-                         placeholder="Tempo" [(ngModel)]="suboperacao.tempoNesc"
+                         placeholder="Tempo" [(ngModel)]="newsuboperacao.tempoNesc"
                          required="required">
                   <label for="tempo">Tempo:</label>
                 </div>

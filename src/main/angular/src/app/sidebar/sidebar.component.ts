@@ -1,10 +1,9 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
-import {CadastroOperacaoService, EtapaProducao} from '../service/cadastro-operacao.service';
-import {Observable} from 'rxjs';
-import {CadastroSetorService, Setor} from "../service/cadastro-setor.service";
-import {TokenStorageService} from "../auth/token-storage.service";
-import {Gerente, GerenteService} from "../service/gerente.service";
+import {CadastroOperacaoService} from '../service/cadastro-operacao.service';
+import {CadastroSetorService} from '../service/cadastro-setor.service';
+import {TokenStorageService} from '../auth/token-storage.service';
+import {GerenteService} from '../service/gerente.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -13,13 +12,11 @@ import {Gerente, GerenteService} from "../service/gerente.service";
 })
 export class SidebarComponent implements OnInit {
   public isCollapsed = false;
-
-  @Input() etapas: Observable<EtapaProducao[]>;
-  @Input() setores: Observable<Setor[]>;
-  public gerenteObj: Observable<Gerente>;
-  @Input() gerente: Gerente;
+  etapas: any;
+  gerente: any;
 
 
+  // tslint:disable-next-line:max-line-length
   constructor(private gerenteService: GerenteService, private tipoOpeservice: CadastroOperacaoService, private token: TokenStorageService, private setorservice: CadastroSetorService) {
   }
 
@@ -32,10 +29,10 @@ export class SidebarComponent implements OnInit {
       authorities: this.token.getAuthorities(),
       senha: this.token.getPassword()
     };
-    this.gerenteObj = this.gerenteService.getGerenteLogado(this.info.username);
-    this.gerenteObj.subscribe(data => this.gerente = data);
-    this.etapas = this.tipoOpeservice.getTiposOperacoes();
-    this.setores = this.setorservice.getSetor();
+    this.gerenteService.getGerenteLogado(this.info.username).subscribe(data => this.gerente = data);
+    this.tipoOpeservice.getTiposOperacoes().subscribe(data => {
+      this.etapas = data;
+    });
   }
 
 

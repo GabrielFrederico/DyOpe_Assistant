@@ -1,12 +1,13 @@
 import {Injectable} from '@angular/core';
-import {Gerente} from "./gerente.service";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {Gerente} from './gerente.service';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Observable} from 'rxjs';
 
 export class EtapaProducao {
   public id: number;
   public etapaProducao: string;
   public statusSYS: 'A';
+  // tslint:disable-next-line:variable-name
   public gerente_id: number;
   public operacoes: Operacao[];
 
@@ -22,8 +23,11 @@ export class Operacao {
   public loteProducao: number;
   public qtdPecasOpe: number;
   public numFuncionariosDisponiveis: number;
+  // tslint:disable-next-line:variable-name
   public etapa_producao_id: number;
+  // tslint:disable-next-line:variable-name
   public gerente_id: number;
+  // tslint:disable-next-line:variable-name
   public peca_id: number;
   public statusSYS: true;
 }
@@ -33,6 +37,7 @@ export class SubOperacao {
   public descricao: string;
   public tempoNesc: string;
   public numFuncionarios: string;
+  // tslint:disable-next-line:variable-name
   public operacao_id: number;
 }
 
@@ -49,17 +54,17 @@ export class CadastroOperacaoService {
   }
 
   getSubOperacoes() {
-    return this.httpClient.get<SubOperacao[]>('http://localhost:8080/suboperacoes', httpOptions);
+    return this.httpClient.get('http://localhost:8080/suboperacoes');
   }
 
   getOperacoes() {
     return this.httpClient.get<Operacao[]>('http://localhost:8080/operacoes', httpOptions);
   }
-  updateOperacao(operacao: Operacao){
-    return this.httpClient.put<Operacao>('http://localhost:8080/operacoes', operacao);
+  updateOperacao(operacao: any) {
+    return this.httpClient.put('http://localhost:8080/operacoes', operacao);
 
   }
-  updateSubOperacao(operacao: SubOperacao){
+  updateSubOperacao(operacao: SubOperacao) {
     return this.httpClient.put<SubOperacao>('http://localhost:8080/operacoes', operacao);
 
   }
@@ -71,12 +76,12 @@ export class CadastroOperacaoService {
     return this.httpClient.get<EtapaProducao>('http://localhost:8080/etapaProducao/' + id, httpOptions);
   }
 
-  getEtapaProducaoNome(etapa: string): Observable<EtapaProducao> {
-    return this.httpClient.get<EtapaProducao>('http://localhost:8080/etapaProducao/getByNome/' + etapa, httpOptions);
+  getEtapaProducaoNome(etapa: string) {
+    return this.httpClient.get('http://localhost:8080/etapaProducao/getByNome/' + etapa);
   }
 
   getTiposOperacoes() {
-    return this.httpClient.get<EtapaProducao[]>('http://localhost:8080/etapaProducao', httpOptions);
+    return this.httpClient.get('http://localhost:8080/etapaProducao');
   }
 
   cadastrarOperacao(operacao: Gerente) {
