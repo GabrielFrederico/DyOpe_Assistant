@@ -48,7 +48,7 @@
   </div>
 
 </div>
-<form *ngIf="escolheu; else naoescolheu" class="card" [noValidate]="$any(false)">
+<form *ngIf="escolheu; else naoescolheu" (ngSubmit)="cadastrar()" class="card" [noValidate]="$any(false)">
   <div class="card-header">Sequencia Operacional</div>
   <div class="card-body border-info">
     <div class="row">
@@ -57,7 +57,7 @@
           <div class="card-header border-info">Operações</div>
           <div class="card-body text-secondary">
             <div class="form-group">
-              <div *ngFor="let operacao of operacaoEscolhida.operacoes" class="row">
+              <div *ngFor="let operacao of operacao.operacoes" class="row">
                 <div class="col-md-4">
                   <div class="form-group">
                     <div class="form-label-group">
@@ -248,7 +248,7 @@
   <div class="modal-content">
     <div class="modal-header">
       <h4 class="modal-title" id="cadastrooperacoes">Cadastro de Operações:</h4>
-      <button type="button" (click)="modal.close()" class="close" data-dismiss="modal" aria-label="Close">
+      <button type="button" (click)="modal.close()" #closeModal class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">×</span>
       </button>
     </div>
@@ -299,7 +299,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title" id="modalpeca">Cadastrar peça:</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" #closeModalPeca class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">×</span>
         </button>
       </div>

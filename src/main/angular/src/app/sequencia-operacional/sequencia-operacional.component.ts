@@ -1,8 +1,8 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {TokenStorageService} from '../auth/token-storage.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {CadastroOperacaoService, Operacao} from '../service/cadastro-operacao.service';
+import {CadastroOperacaoService} from '../service/cadastro-operacao.service';
 import {Subscription} from 'rxjs';
 import {GerenteService, Peca} from '../service/gerente.service';
 import {first} from 'rxjs/operators';
@@ -20,7 +20,9 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
   constructor(private route: ActivatedRoute, private gerenteService: GerenteService, private modalService: NgbModal, private operacaoService: CadastroOperacaoService, private token: TokenStorageService, private router: Router) {
   }
 
-  operacao: Operacao = new Operacao();
+  @ViewChild('closeModal') closeOpeModal: ElementRef;
+  @ViewChild('modal') closeModalPeca: ElementRef;
+  operacao: any = {};
   newsuboperacao: any = {};
   suboperacaoEscolhida: any;
   gerente: any;
@@ -55,24 +57,6 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
     this.datareload();
     this.naoAutenticado();
 
-    if (this.escolheu) {
-      this.peca.operacoes = this.gerente.operacoes.filter(ope => {
-        return ope.etapa_producao_id === this.etapaproducao.id;
-      });
-      if (this.peca.operacoes.length === 0) {
-        this.operacaoEscolhida = this.operacao;
-      } else {
-        for (const operacao of  this.peca.operacoes) {
-          if (operacao.peca_id === this.peca.id) {
-            this.operacaoEscolhida = operacao;
-            if (this.operacaoEscolhida.suboperacoes.length === 0) {
-              this.operacaoEscolhida.suboperacoes = this.suboperacoes;
-            }
-
-          }
-        }
-      }
-    }
   }
 
   ngOnDestroy() {
@@ -146,32 +130,24 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
 
   cadastrar() {
     this.operacao.etapa_producao_id = this.etapaproducao.id;
-    this.operacao.gerente_id = this.gerente.id;
     this.operacao.peca_id = this.peca.id;
     this.peca.operacoes.push(this.operacao);
-    this.gerenteService.cadastrarAlgo(this.gerente).pipe(first()).subscribe(data => {
-      this.operacaoEscolhida = data;
-      alert('Operação cadastrada com sucesso!');
+    this.gerenteService.atualizarPeca(this.peca).pipe(first()).subscribe(data => {
+
     }, error => {
       alert(error);
     });
   }
 
   atualizar() {
-    this.operacaoService.updateOperacao(this.operacaoEscolhida);
+    this.operacaoService.updateOperacao(this.operacao);
   }
 
   cadastrarSubOperacao() {
-    alert(this.operacaoEscolhida.id);
-    this.newsuboperacao.operacao_id = this.operacaoEscolhida.id;
-    this.operacaoEscolhida.suboperacoes.push(this.newsuboperacao);
+    this.newsuboperacao.operacao_id = this.operacao.id;
+    this.operacao.operacoes.push(this.newsuboperacao);
+
     this.atualizar();
-    // this.gerenteService.cadastrarAlgo(this.gerente).pipe(first()).subscribe(data => {
-    //   alert('SubOperação cadastrada com sucesso!')
-    //  }, error => {
-    //    alert(error)
-    //  });
-    //
 
   }
 
@@ -198,17 +174,10 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
     });
 
     this.cadastrar();
-    for (const operacao of  this.peca.operacoes) {
-        if (operacao.peca_id === this.peca.id) {
-          this.operacaoEscolhida = operacao;
-          alert(this.operacaoEscolhida.id);
-          if (!this.operacaoEscolhida.suboperacoes) {
-            this.operacaoEscolhida.suboperacoes = this.suboperacoes;
-        }
-      }
-    }
+
 
   }
+
 
   toggleReadonly() {
     this.isReadonly = !this.isReadonly;

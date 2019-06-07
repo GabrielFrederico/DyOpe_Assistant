@@ -90,6 +90,10 @@ export class GerenteService {
     return this.httpClient.get<Gerente>('http://localhost:8080/gerentes/getByNomeUsuario/' + nomeUsuario, httpOptions);
   }
 
+  atualizarPeca(peca: any) {
+    return this.httpClient.put('http://localhost:8080/pecas', peca);
+  }
+
   getGerente(nomeUsuario: string) {
 
     return this.httpClient.get('http://localhost:8080/gerentes/getByNomeUsuario/' + nomeUsuario);
