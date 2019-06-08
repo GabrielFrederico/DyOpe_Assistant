@@ -186,7 +186,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
 
   selectsPeca(peca: any) {
     this.peca = peca;
-    this.operacao.operacoes = this.suboperacoes;
+    this.operacao.suboperacoes = this.suboperacoes;
     this.escolheu = true;
 
   }
