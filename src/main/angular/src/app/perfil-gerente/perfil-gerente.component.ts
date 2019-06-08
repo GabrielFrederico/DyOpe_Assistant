@@ -114,7 +114,7 @@ export class PerfilGerenteComponent implements OnInit {
 
     this.gerente.cpf = cpf;
     this.gerente.rg = rg;
-    this.gerenteService.atualizarGerente(this.gerente)
+    this.gerenteService.cadastrarAlgo(this.gerente)
       .pipe(first())
       .subscribe(
         data => {

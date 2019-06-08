@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.projeto.models.Gerente;
 import com.projeto.models.Operacao;
 import com.projeto.models.SubOperacao;
 import com.projeto.repository.OperacaoRepository;
@@ -41,8 +42,14 @@ public class OperacaoController {
 		Operacao operacao = operacaoRepository.findById(id);
 		return operacao;
 	}
-
-	@RequestMapping(method = RequestMethod.PUT)
+	@RequestMapping(method = RequestMethod.GET, path = "operacao")
+	@PreAuthorize("hasRole('GERENTE')")
+	public Operacao getGerente(@RequestBody Operacao operacao) {
+		return operacao;
+	}
+	
+	@RequestMapping(method = RequestMethod.PUT, path = "atualizar")
+	@PreAuthorize("hasRole('GERENTE')")
 	public Operacao update(@RequestBody Operacao operacao) {
 		int tempos = 0;
 		for (SubOperacao subope : operacao.getOperacoes()) {

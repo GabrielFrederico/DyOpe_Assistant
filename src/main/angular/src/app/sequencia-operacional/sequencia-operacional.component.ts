@@ -4,7 +4,7 @@ import {TokenStorageService} from '../auth/token-storage.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CadastroOperacaoService} from '../service/cadastro-operacao.service';
 import {Subscription} from 'rxjs';
-import {GerenteService, Peca} from '../service/gerente.service';
+import {GerenteService} from '../service/gerente.service';
 import {first} from 'rxjs/operators';
 
 
@@ -38,7 +38,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
   etapa: string;
   idope: string;
   sub: Subscription;
-  public opeEscolida =  false;
+  public opeEscolida = false;
   public validado: boolean;
   public carregado: boolean;
 
@@ -128,10 +128,15 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
     console.clear();
   }
 
+  atualizarSubOpe() {
+    this.operacaoService.updateSubOperacao(this.suboperacaoEscolhida).pipe(first()).subscribe(data => {
+    });
+  }
+
   cadastrar() {
     this.operacao.etapa_producao_id = this.etapaproducao.id;
     this.operacao.peca_id = this.peca.id;
-
+    this.operacao.operacoes = this.suboperacoes;
     this.peca.operacoes.push(this.operacao);
     this.gerenteService.atualizarPeca(this.peca).pipe(first()).subscribe(data => {
     }, error => {
@@ -139,20 +144,20 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
     });
     this.operacaoService.getOperacao(this.operacao).subscribe(data => {
       this.operacaoEscolhida = data;
-      this.operacaoEscolhida.operacoes = this.suboperacoes;
     });
     this.opeEscolida = true;
     this.escolheu = true;
   }
 
   atualizar() {
-    alert(this.operacaoEscolhida.id);
-    this.operacaoService.updateOperacao(this.operacaoEscolhida);
+    this.operacaoService.updateOperacao(this.operacao).pipe(first()).subscribe(data => {
+      alert('Operação Cadastrada!');
+    });
   }
 
   cadastrarSubOperacao() {
-    this.newsuboperacao.operacao_id = this.operacaoEscolhida.id;
-    this.operacaoEscolhida.operacoes.push(this.newsuboperacao);
+    this.newsuboperacao.operacao_id = this.operacao.id;
+    this.operacao.operacoes.push(this.newsuboperacao);
 
     this.atualizar();
 
@@ -171,6 +176,11 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
 
   trackByFn(operacao) {
     return operacao.id;
+  }
+
+  subopeEscolhida(subope: any) {
+    this.suboperacaoEscolhida = subope;
+    this.atualizarSubOpe();
   }
 
   selectsPeca(peca: any) {

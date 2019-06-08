@@ -66,12 +66,12 @@ export class CadastroOperacaoService {
   }
 
   updateOperacao(operacao: any) {
-    return this.httpClient.put('http://localhost:8080/operacoes', operacao);
+    return this.httpClient.put('http://localhost:8080/operacoes/atualizar', operacao);
 
   }
 
-  updateSubOperacao(operacao: SubOperacao) {
-    return this.httpClient.put<SubOperacao>('http://localhost:8080/operacoes', operacao);
+  updateSubOperacao(operacao: any) {
+    return this.httpClient.put('http://localhost:8080/suboperacoes', operacao);
 
   }
 
