@@ -27,7 +27,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
   suboperacaoEscolhida: any;
   gerente: any;
   operacaoEscolhida: any;
-  newpeca: Peca = new Peca();
+  newpeca: any = {};
   peca: any;
   suboperacoes: any;
   etapaproducao: any;
@@ -38,7 +38,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
   etapa: string;
   idope: string;
   sub: Subscription;
-
+  public opeEscolida =  false;
   public validado: boolean;
   public carregado: boolean;
 
@@ -131,21 +131,28 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
   cadastrar() {
     this.operacao.etapa_producao_id = this.etapaproducao.id;
     this.operacao.peca_id = this.peca.id;
+
     this.peca.operacoes.push(this.operacao);
     this.gerenteService.atualizarPeca(this.peca).pipe(first()).subscribe(data => {
-
     }, error => {
       alert(error);
     });
+    this.operacaoService.getOperacao(this.operacao).subscribe(data => {
+      this.operacaoEscolhida = data;
+      this.operacaoEscolhida.operacoes = this.suboperacoes;
+    });
+    this.opeEscolida = true;
+    this.escolheu = true;
   }
 
   atualizar() {
-    this.operacaoService.updateOperacao(this.operacao);
+    alert(this.operacaoEscolhida.id);
+    this.operacaoService.updateOperacao(this.operacaoEscolhida);
   }
 
   cadastrarSubOperacao() {
-    this.newsuboperacao.operacao_id = this.operacao.id;
-    this.operacao.operacoes.push(this.newsuboperacao);
+    this.newsuboperacao.operacao_id = this.operacaoEscolhida.id;
+    this.operacaoEscolhida.operacoes.push(this.newsuboperacao);
 
     this.atualizar();
 
@@ -168,12 +175,14 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
 
   selectsPeca(peca: any) {
     this.peca = peca;
-    this.escolheu = true;
     this.peca.operacoes = this.peca.operacoes.filter(ope => {
       return ope.etapa_producao_id === this.etapaproducao.id;
     });
-
-    this.cadastrar();
+    if (!this.opeEscolida) {
+      this.cadastrar();
+    } else {
+      this.escolheu = true;
+    }
 
 
   }

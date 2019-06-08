@@ -48,8 +48,12 @@
   </div>
 
 </div>
-<form *ngIf="escolheu; else naoescolheu" (ngSubmit)="cadastrar()" class="card" [noValidate]="$any(false)">
+<form *ngIf="escolheu; else naoescolheu" (ngSubmit)="atualizar()" class="card" [noValidate]="$any(false)">
+
   <div class="card-header">Sequencia Operacional</div>
+  <label> cadastrar
+    <input type="submit" (click)="atualizar()" value="cadastrar">
+  </label>
   <div class="card-body border-info">
     <div class="row">
       <div class="col-md-4">
@@ -57,7 +61,7 @@
           <div class="card-header border-info">Operações</div>
           <div class="card-body text-secondary">
             <div class="form-group">
-              <div *ngFor="let operacao of operacao.operacoes" class="row">
+              <div *ngFor="let operacao of operacaoEscolhida.operacoes" class="row">
                 <div class="col-md-4">
                   <div class="form-group">
                     <div class="form-label-group">
@@ -73,7 +77,7 @@
                 <div class="col-md-4">
                   <div class="form-group">
                     <div class="form-label-group">
-                      <input type="time" name="tempoOpe"
+                      <input type="number" name="tempoOpe"
                              id="tempoOpe" value="{{operacao.tempoNesc}}"
                              class="form-control" minlength="3"
                              autofocus="autofocus"
@@ -102,7 +106,7 @@
                 <div class="form-label-group">
                   <input type="number" id="LoteProdu"
                          class="form-control"
-                         placeholder="Lote de Produção" name="loteProducao"
+                         placeholder="Lote de Produção" name="loteProducao" [(ngModel)]="operacao.loteProducao"
                          required="required">
                   <label for="LoteProdu" class="fonterisco">Lote de Produção:</label>
                 </div>
@@ -110,7 +114,7 @@
               <div class="col-md-auto">
                 <div class="form-label-group">
                   <input type="number" id="numFun"
-                         class="form-control"
+                         class="form-control"  [(ngModel)]="operacao.numFuncionarios"
                          placeholder="N° de Funcionários" name="numFun"
                          required="required">
                   <label for="numFun" class="fonterisco">N° de Funcionários</label>
@@ -119,10 +123,10 @@
               <div class="col-md-auto">
                 <div class="form-group">
                   <div class="form-label-group">
-                    <input type="time" name="tempoTrab"
+                    <input type="number" name="tempoTrab"
                            id="tempoTrab"
                            class="form-control" minlength="3"
-                           autofocus="autofocus"
+                           autofocus="autofocus" [(ngModel)]="operacao.tempoTrab"
                            placeholder="Tempo Trabalho" required="required">
                     <label for="tempoTrab">Tempo trabalhado</label>
                   </div>
@@ -227,7 +231,7 @@
                 <div class="col-md-6">
                   <div class="form-label-group">
                     <input [readonly]="isReadonly" type="number" id="QtdPecasFunc"
-                           class="form-control"
+                           class="form-control" value="{{operacaoEscolhida.qtdPecasOpe}}"
                            placeholder="Quantidade de peças por funcionário:" name="qtdPecasOpe"
                            required="required">
                     <label for="QtdPecasFunc" class="fonterisco">Quantidade de peças por funcionário:</label>
@@ -268,7 +272,7 @@
 
               <div class="col-md-6">
                 <div class="form-label-group">
-                  <input type="time" id="tempo" name="tempo" class="form-control"
+                  <input type="number" id="tempo" name="tempo" class="form-control"
                          placeholder="Tempo" [(ngModel)]="newsuboperacao.tempoNesc"
                          required="required">
                   <label for="tempo">Tempo:</label>

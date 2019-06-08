@@ -57,17 +57,24 @@ export class CadastroOperacaoService {
     return this.httpClient.get('http://localhost:8080/suboperacoes');
   }
 
+  getOperacao(operacao: any) {
+    return this.httpClient.get('http://localhost:8080/operacoes', operacao);
+  }
+
   getOperacoes() {
     return this.httpClient.get<Operacao[]>('http://localhost:8080/operacoes', httpOptions);
   }
+
   updateOperacao(operacao: any) {
     return this.httpClient.put('http://localhost:8080/operacoes', operacao);
 
   }
+
   updateSubOperacao(operacao: SubOperacao) {
     return this.httpClient.put<SubOperacao>('http://localhost:8080/operacoes', operacao);
 
   }
+
   getOperacaoId(id: number): Observable<Operacao> {
     return this.httpClient.get<Operacao>('http://localhost:8080/operacoes/' + id, httpOptions);
   }
