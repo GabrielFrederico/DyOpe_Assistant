@@ -10,24 +10,21 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 
-@Entity	
+@Entity
 public class Peca {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	
+
 	public String descricao;
-    
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "peca_operacoes",
-    joinColumns = @JoinColumn(name = "peca_id"),
-    inverseJoinColumns = @JoinColumn(name = "operacao_id"))
-	private Set<Operacao> operacoes= new HashSet<>();
-    
-	
+
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "peca_operacoes", joinColumns = @JoinColumn(name = "peca_id"), inverseJoinColumns = @JoinColumn(name = "operacao_id"))
+	private Set<Operacao> operacoes = new HashSet<>();
+
 	public Set<Operacao> getOperacoes() {
 		return operacoes;
 	}
@@ -51,7 +48,5 @@ public class Peca {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	
 
 }
- 

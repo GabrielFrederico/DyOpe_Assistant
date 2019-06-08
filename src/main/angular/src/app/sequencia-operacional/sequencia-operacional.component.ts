@@ -140,7 +140,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
     this.peca.operacoes.push(this.operacao);
     this.gerenteService.atualizarPeca(this.peca).pipe(first()).subscribe(data => {
     }, error => {
-      alert(error);
+      console.log(error.error);
     });
     this.operacaoService.getOperacao(this.operacao).subscribe(data => {
       this.operacaoEscolhida = data;
