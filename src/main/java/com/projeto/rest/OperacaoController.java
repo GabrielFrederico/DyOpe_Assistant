@@ -52,7 +52,7 @@ public class OperacaoController {
 	@PreAuthorize("hasRole('GERENTE')")
 	public Operacao update(@RequestBody Operacao operacao) {
 		int tempos = 0;
-		for (SubOperacao subope : operacao.getOperacoes()) {
+		for (SubOperacao subope : operacao.getSuboperacoes()) {
 			tempos = subope.getTempoNesc();
 			tempos+=tempos;
 		}

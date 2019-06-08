@@ -18,9 +18,9 @@
     <div class="card border-info mb-3 lista">
       <div class="card-header border-info">Operações a fazer</div>
       <div class="card-body text-secondary">
-        <a *ngFor="let operacao of gerente.operacoes; trackBy: trackByFn "
+        <a *ngFor="let operacao of gerente.operacoes;"
            class="btn btn-outline-info list-group-item list-group-item-action">{{operacao.id}}</a>
-        <a *ngIf="!gerente.operacoes"
+        <a *ngIf="!peca.operacoes"
            class="btn btn-outline-info list-group-item list-group-item-action">Nenhuma Operação cadastrada</a>
       </div>
     </div>

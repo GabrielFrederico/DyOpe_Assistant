@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -22,8 +23,12 @@ public class Operacao {
 
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "operacao_suboperacoes", joinColumns = @JoinColumn(name = "operacao_id"), inverseJoinColumns = @JoinColumn(name = "suboperacao_id"))
-	private Set<SubOperacao> operacoes = new HashSet<>();
+	private Set<SubOperacao> suboperacoes = new HashSet<>();
 
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinTable(name = "operacao_peca", joinColumns = @JoinColumn(name = "operacao_id"), inverseJoinColumns = @JoinColumn(name = "peca_id"))
+	private Peca peca;
+	
 	private java.sql.Date dataInicio;
 	private float numFuncionarios;
 	public float getNumFuncionarios() {
@@ -34,13 +39,25 @@ public class Operacao {
 		this.numFuncionarios = numFuncionarios;
 	}
 	
-	public Set<SubOperacao> getOperacoes() {
-		return operacoes;
+
+
+	public Set<SubOperacao> getSuboperacoes() {
+		return suboperacoes;
 	}
 
-	public void setOperacoes(Set<SubOperacao> operacoes) {
-		this.operacoes = operacoes;
+	public void setSuboperacoes(Set<SubOperacao> suboperacoes) {
+		this.suboperacoes = suboperacoes;
 	}
+
+	public Peca getPeca() {
+		return peca;
+	}
+
+	public void setPeca(Peca peca) {
+		this.peca = peca;
+	}
+
+
 
 	private java.sql.Date prazo;
 

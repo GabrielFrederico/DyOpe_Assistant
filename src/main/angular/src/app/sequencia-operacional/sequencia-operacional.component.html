@@ -23,7 +23,7 @@
 </nav> -->
 <hr>
 
-<div class="row">
+<div class="row" *ngIf="gerente.pecas">
   <div class="col-md-3">
     <h3>{{etapaproducao.etapaProducao}}</h3>
   </div>
@@ -48,7 +48,7 @@
   </div>
 
 </div>
-<form *ngIf="escolheu; else naoescolheu" (ngSubmit)="atualizar()" class="card" [noValidate]="$any(false)">
+<form *ngIf="escolheu; else naoescolheu" (ngSubmit)="cadastrar()" class="card" [noValidate]="$any(false)">
 
   <div class="card-header">Sequencia Operacional</div>
   <label> cadastrar
@@ -86,9 +86,14 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-1">
                   <a class="btn btn-danger" href="javascript:void(0)">-</a>
+                </div>
+                <div class="col-md-1">
                   <a class="btn btn-info" (click)="subopeEscolhida(operacao)" href="javascript:void(0)">E</a>
+                </div>
+                <div class="col-md-1">
+                  <a class="btn btn-info" (click)="atualizarSubOpe()" href="javascript:void(0)">Save</a>
                 </div>
               </div>
             </div>
@@ -115,7 +120,7 @@
               <div class="col-md-auto">
                 <div class="form-label-group">
                   <input type="number" id="numFun"
-                         class="form-control"  [(ngModel)]="operacao.numFuncionarios"
+                         class="form-control" [(ngModel)]="operacao.numFuncionariosDisponiveis"
                          placeholder="N° de Funcionários" name="numFun"
                          required="required">
                   <label for="numFun" class="fonterisco">N° de Funcionários</label>
@@ -204,42 +209,42 @@
     <div class="modal-body">
       <div class="card-body">
         <form [noValidate]="$any(false)">
-            <div class="form-group">
-              <div class="form-row">
-                <div class="col-md-6">
-                  <div class="form-label-group">
-                    <input [readonly]="isReadonly" type="text" id="custosOpe"
-                           class="form-control fa-credit-card"
-                           placeholder="Custos" name="custosOpe"
-                           required="required">
-                    <label for="custosOpe" class="fonterisco">Custos:</label>
-                  </div>
+          <div class="form-group">
+            <div class="form-row">
+              <div class="col-md-6">
+                <div class="form-label-group">
+                  <input [readonly]="isReadonly" type="text" id="custosOpe"
+                         class="form-control fa-credit-card"
+                         placeholder="Custos" name="custosOpe"
+                         required="required">
+                  <label for="custosOpe" class="fonterisco">Custos:</label>
                 </div>
               </div>
             </div>
+          </div>
 
-            <div class="form-group">
-              <div class="form-row">
-                <div class="col-md-6">
-                  <div class="form-label-group">
-                    <input [readonly]="isReadonly" type="number" id="FuncNesc"
-                           class="form-control" value="{{operacaoEscolhida.numFuncionarios}}"
-                           placeholder="Funcionários necessários:" name="numFuncionariosOpe"
-                           required="required">
-                    <label for="FuncNesc" class="fonterisco">Funcionários necessários:</label>
-                  </div>
+          <div class="form-group">
+            <div class="form-row">
+              <div class="col-md-6">
+                <div class="form-label-group">
+                  <input [readonly]="isReadonly" type="number" id="FuncNesc"
+                         class="form-control" value="{{operacaoEscolhida.numFuncionarios}}"
+                         placeholder="Funcionários necessários:" name="numFuncionariosOpe"
+                         required="required">
+                  <label for="FuncNesc" class="fonterisco">Funcionários necessários:</label>
                 </div>
-                <div class="col-md-6">
-                  <div class="form-label-group">
-                    <input [readonly]="isReadonly" type="number" id="QtdPecasFunc"
-                           class="form-control" value="{{operacaoEscolhida.qtdPecasOpe}}"
-                           placeholder="Quantidade de peças por funcionário:" name="qtdPecasOpe"
-                           required="required">
-                    <label for="QtdPecasFunc" class="fonterisco">Quantidade de peças por funcionário:</label>
-                  </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-label-group">
+                  <input [readonly]="isReadonly" type="number" id="QtdPecasFunc"
+                         class="form-control" value="{{operacaoEscolhida.qtdPecasOpe}}"
+                         placeholder="Quantidade de peças por funcionário:" name="qtdPecasOpe"
+                         required="required">
+                  <label for="QtdPecasFunc" class="fonterisco">Quantidade de peças por funcionário:</label>
                 </div>
               </div>
             </div>
+          </div>
 
         </form>
       </div>

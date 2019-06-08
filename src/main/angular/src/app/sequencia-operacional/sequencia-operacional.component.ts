@@ -130,21 +130,25 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
 
   atualizarSubOpe() {
     this.operacaoService.updateSubOperacao(this.suboperacaoEscolhida).pipe(first()).subscribe(data => {
+      alert('subope updated');
+    }, error => {
+      alert(error.error);
     });
   }
 
   cadastrar() {
     this.operacao.etapa_producao_id = this.etapaproducao.id;
     this.operacao.peca_id = this.peca.id;
-    this.operacao.operacoes = this.suboperacoes;
-    this.peca.operacoes.push(this.operacao);
-    this.gerenteService.atualizarPeca(this.peca).pipe(first()).subscribe(data => {
+    this.operacao.gerente_id = this.gerente.id;
+    this.gerente.operacoes.push(this.operacao);
+    this.gerente.operacoes = this.gerente.operacoes.filter(ope => {
+      return ope.etapa_producao_id === this.etapaproducao.id;
+    });
+    this.gerenteService.cadastrarAlgo(this.gerente).pipe(first()).subscribe(data => {
     }, error => {
       console.log(error.error);
     });
-    this.operacaoService.getOperacao(this.operacao).subscribe(data => {
-      this.operacaoEscolhida = data;
-    });
+    this.atualizar();
     this.opeEscolida = true;
     this.escolheu = true;
   }
@@ -157,10 +161,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
 
   cadastrarSubOperacao() {
     this.newsuboperacao.operacao_id = this.operacao.id;
-    this.operacao.operacoes.push(this.newsuboperacao);
-
-    this.atualizar();
-
+    this.operacao.suboperacoes.push(this.newsuboperacao);
   }
 
   cadastrarPeca() {
@@ -180,20 +181,13 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
 
   subopeEscolhida(subope: any) {
     this.suboperacaoEscolhida = subope;
-    this.atualizarSubOpe();
+
   }
 
   selectsPeca(peca: any) {
     this.peca = peca;
-    this.peca.operacoes = this.peca.operacoes.filter(ope => {
-      return ope.etapa_producao_id === this.etapaproducao.id;
-    });
-    if (!this.opeEscolida) {
-      this.cadastrar();
-    } else {
-      this.escolheu = true;
-    }
-
+    this.operacao.operacoes = this.suboperacoes;
+    this.escolheu = true;
 
   }
 

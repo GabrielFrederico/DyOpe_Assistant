@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -28,7 +29,7 @@ public class Setor {
 	@JoinTable(name = "setor_funcionarios", joinColumns = @JoinColumn(name = "setor_id"), inverseJoinColumns = @JoinColumn(name = "funcionario_id"))
 	private Set<Funcionario> funcionarios = new HashSet<>();
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinTable(name = "setor_etapaproducao", joinColumns = @JoinColumn(name = "setor_id"), inverseJoinColumns = @JoinColumn(name = "etapaproducao_id"))
 	private EtapaProducao etapaproducao;
 

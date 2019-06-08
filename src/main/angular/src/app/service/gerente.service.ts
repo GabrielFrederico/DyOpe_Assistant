@@ -85,6 +85,10 @@ export class GerenteService {
     return this.httpClient.put('http://localhost:8080/gerentes/cadastraralgo', gerente);
   }
 
+  getPecaNome(nome: string) {
+    return this.httpClient.get('http://localhost:8080/pecas/getByNome/' + nome);
+  }
+
   getGerenteLogado(nomeUsuario: string): Observable<Gerente> {
 
     return this.httpClient.get<Gerente>('http://localhost:8080/gerentes/getByNomeUsuario/' + nomeUsuario, httpOptions);

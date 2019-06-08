@@ -5,7 +5,6 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {CadastroOperacaoService, Operacao} from '../service/cadastro-operacao.service';
 import {Subscription} from 'rxjs';
 import {GerenteService} from '../service/gerente.service';
-import {first} from 'rxjs/operators';
 import {List} from 'immutable';
 
 
@@ -33,7 +32,7 @@ export class AndamentoOperacoesComponent implements OnInit, OnDestroy {
   closeResult: string;
   public info: any;
   sub: Subscription;
-
+  peca: any;
   public validado: boolean;
   private cadastrado: boolean;
 
@@ -99,12 +98,12 @@ export class AndamentoOperacoesComponent implements OnInit, OnDestroy {
       const etapaProducao = params.etapaProducao;
       if (etapaProducao) {
         this.operacaoService.getEtapaProducaoNome(etapaProducao).subscribe((etapaproducao: any) => {
-          if (etapaproducao) {
-            this.etapaproducao = etapaproducao;
-            console.clear();
+            if (etapaproducao) {
+              this.etapaproducao = etapaproducao;
+              console.clear();
+            }
           }
-        }
-      )
+        )
         ;
       }
     });
@@ -112,6 +111,15 @@ export class AndamentoOperacoesComponent implements OnInit, OnDestroy {
 
   datareload() {
     this.gerenteService.getGerente(this.info.username).subscribe(data => this.gerente = data);
+    for (const peca of  this.gerente.pecas) {
+
+      this.gerenteService.getPecaNome(peca.descricao).subscribe(data => {
+        this.peca = data;
+      });
+      this.peca.operacoes = this.peca.operacoes.filter(ope => {
+        return ope.etapa_producao_id === this.etapaproducao.id;
+      });
+    }
     console.clear();
 
   }
