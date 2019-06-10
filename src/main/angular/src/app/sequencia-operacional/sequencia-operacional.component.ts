@@ -135,11 +135,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
   atualizarSubOpe() {
     this.suboperacaoEscolhida.operacao_id = this.operacaoEscolhida.id;
     this.operacaoEscolhida.suboperacoes.push(this.suboperacaoEscolhida);
-    this.operacaoService.addSubOperacao(this.suboperacaoEscolhida).subscribe(data => {
-      alert('subope updated');
-    }, error => {
-      alert(error.error);
-    });
+    this.atualizar();
   }
 
   cadastrar() {
