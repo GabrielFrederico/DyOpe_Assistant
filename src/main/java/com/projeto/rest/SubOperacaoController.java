@@ -1,5 +1,7 @@
 package com.projeto.rest;
 
+import java.util.Set;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +50,12 @@ public class SubOperacaoController {
 	@RequestMapping(method = RequestMethod.GET, path = "/{id}")
 	public SubOperacao getSubOperacaoById(@PathVariable("id") long id) {
 		SubOperacao subOperacao = subOperacaoRepository.findById(id);
+		return subOperacao;
+	}
+	
+	@RequestMapping(method = RequestMethod.GET, path = "/{idEtapa}")
+	public Set<SubOperacao> getSubOperacoesByIdEtapa(@PathVariable("idEtapa") long idEtapa) {
+		Set<SubOperacao> subOperacao = subOperacaoRepository.findByIdEtapa(idEtapa);
 		return subOperacao;
 	}
 

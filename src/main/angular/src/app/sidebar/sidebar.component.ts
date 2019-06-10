@@ -33,6 +33,7 @@ export class SidebarComponent implements OnInit {
     this.tipoOpeservice.getTiposOperacoes().subscribe(data => {
       this.etapas = data;
     });
+    console.clear();
   }
 
 

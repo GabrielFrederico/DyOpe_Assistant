@@ -61,8 +61,8 @@ export class CadastroOperacaoService {
     return this.httpClient.get('http://localhost:8080/operacoes/', operacao);
   }
 
-  getOperacoes() {
-    return this.httpClient.get<Operacao[]>('http://localhost:8080/operacoes', httpOptions);
+  getOperacoesSub(idEtapa: number) {
+    return this.httpClient.get('http://localhost:8080/suoperacoes/' + idEtapa, httpOptions);
   }
 
   updateOperacao(operacao: any) {

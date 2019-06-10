@@ -10,32 +10,32 @@
       <div class="form-row">
         <div class="col-md-4">
           <div class="form-label-group">
-     <label for="gerente">Gerente</label>
-     <select id="gerente" class="form-control">
-       <option selected>Selecione..</option>
-       <option *ngFor="let gerente of gerentes" (click)="selectGerente(gerente)">{{gerente.nome}}</option>
-     </select>
+            <label for="gerente">Gerente</label>
+            <select id="gerente" class="form-control">
+              <option selected>Selecione..</option>
+              <option *ngFor="let gerente of gerentes" (click)="selectGerente(gerente)">{{gerente.nome}}</option>
+            </select>
 
           </div>
         </div>
-        <div *ngIf="setorShow"class="col-md-4">
+        <div *ngIf="setorShow" class="col-md-4">
           <div class="form-label-group">
-     <label for="gerente">Setor</label>
-     <select id="gerente" class="form-control">
-       <option selected>Selecione..</option>
-       <option *ngFor="let setor of gerente.setores" (click)="selectSetor(setor)">{{setor.nome}}</option>
-     </select>
+            <label for="setor">Setor</label>
+            <select id="setor" class="form-control">
+              <option selected>Selecione..</option>
+              <option *ngFor="let setor of gerente.setores" (click)="selectSetor(setor)">{{setor.nome}}</option>
+            </select>
 
           </div>
         </div>
 
-        <div *ngIf="setorShow"class="col-md-4">
+        <div *ngIf="setorShow" class="col-md-4">
           <div class="form-label-group">
-     <label for="gerente">Etapa da Produção</label>
-     <select id="gerente" class="form-control">
-       <option selected>Selecione..</option>
-       <option *ngFor="let etapa of etapas" (click)="selectEtapa(etapa)">{{etapa.nome}}</option>
-     </select>
+            <label for="etapa">Etapa da Produção</label>
+            <select id="etapa" class="form-control">
+              <option selected>Selecione..</option>
+              <option *ngFor="let etapa of etapas" (click)="selectEtapa(etapa)">{{etapa.nome}}</option>
+            </select>
 
           </div>
         </div>

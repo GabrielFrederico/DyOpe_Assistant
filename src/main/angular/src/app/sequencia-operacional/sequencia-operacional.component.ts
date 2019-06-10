@@ -1,11 +1,11 @@
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { TokenStorageService } from '../auth/token-storage.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { CadastroOperacaoService } from '../service/cadastro-operacao.service';
-import { Subscription } from 'rxjs';
-import { GerenteService } from '../service/gerente.service';
-import { first } from 'rxjs/operators';
+import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {TokenStorageService} from '../auth/token-storage.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {CadastroOperacaoService} from '../service/cadastro-operacao.service';
+import {Subscription} from 'rxjs';
+import {GerenteService} from '../service/gerente.service';
+import {first} from 'rxjs/operators';
 
 
 @Component({
@@ -30,7 +30,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
   operacaoEscolhida: any;
   newpeca: any = {};
   peca: any;
-  suboperacoes: any;
+  suboperacoes: any = [];
   etapaproducao: any;
   public erro: boolean;
   public errorMessage = '';
@@ -65,7 +65,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
   }
 
   openCadastro(cadastro) {
-    this.modalService.open(cadastro, { size: 'lg', ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+    this.modalService.open(cadastro, {size: 'lg', ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
@@ -73,7 +73,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
   }
 
   openInformacoes(content) {
-    this.modalService.open(content, { size: 'lg', ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+    this.modalService.open(content, {size: 'lg', ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
@@ -126,12 +126,14 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
       this.suboperacoes = data;
     });
     this.carregado = true;
+    this.operacaoService.addOperacao(this.operacao).subscribe(data => {
+      this.operacaoEscolhida = data;
+    });
     console.clear();
   }
 
   atualizarSubOpe() {
-    this.suboperacaoEscolhida.operacao_id = this.operacao.id;
-    this.atualizar();
+    this.suboperacaoEscolhida.operacao_id = this.operacaoEscolhida.id;
     this.operacaoService.addSubOperacao(this.suboperacaoEscolhida).subscribe(data => {
       alert('subope updated');
     }, error => {
@@ -140,36 +142,35 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
   }
 
   cadastrar() {
-    this.operacao.etapa_producao_id = this.etapaproducao.id;
-    this.operacao.peca_id = this.peca.id;
-    this.peca.operacoes.push(this.operacao);
-    this.peca.operacoes = this.peca.operacoes.filter(ope => {
-      return ope.etapa_producao_id === this.etapaproducao.id;
-    });
+    this.operacaoEscolhida.etapa_producao_id = this.etapaproducao.id;
+    this.operacaoEscolhida.peca_id = this.peca.id;
+    this.peca.operacoes.push(this.operacaoEscolhida);
+    /** this.peca.operacoes = this.peca.operacoes.filter(ope => {
+    // tslint:disable-next-line:jsdoc-format
+     *  return ope.etapa_producao_id === this.etapaproducao.id;
+     * });
+     */
     this.gerenteService.atualizarPeca(this.peca).pipe(first()).subscribe(data => {
     }, error => {
       console.log(error.error);
     });
-    this.operacaoService.getOperacao(this.operacao).subscribe(data => {
-
-      this.operacaoEscolhida = data;
-    })
-    alert(this.operacao.id+'  '+this.operacaoEscolhida.id);
     this.opeEscolida = true;
-    this.escolheu = true;
+    this.escolheu = false;
   }
 
   atualizar() {
-    this.operacaoService.updateOperacao(this.operacao).pipe().subscribe(data => {
+    this.operacaoService.updateOperacao(this.operacaoEscolhida).pipe(first()).subscribe(data => {
       alert('Operação Cadastrada!');
+      this.router.navigate(['/gerenteindex/andamentooperacoes/', this.etapaproducao.etapaProducao]);
+      this.escolheu = false;
     }, error => {
       console.log(error.error);
     });
   }
 
   cadastrarSubOperacao() {
-    this.newsuboperacao.operacao_id = this.operacao.id;
-    this.operacao.suboperacoes.push(this.newsuboperacao);
+    this.newsuboperacao.operacao_id = this.operacaoEscolhida.id;
+    this.operacaoEscolhida.suboperacoes.push(this.newsuboperacao);
   }
 
   cadastrarPeca() {
@@ -195,8 +196,11 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
 
   selectsPeca(peca: any) {
     this.peca = peca;
-    this.operacao.suboperacoes = this.suboperacoes;
     this.escolheu = true;
+    this.suboperacoes.forEach((item, index) => {
+      item.operacao_id = this.operacaoEscolhida.id;
+      this.operacaoEscolhida.suboperacoes.push(item);
+    });
 
   }
 

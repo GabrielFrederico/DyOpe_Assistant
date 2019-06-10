@@ -4,8 +4,7 @@ import { TokenStorageService } from '../auth/token-storage.service';
 
 @Component({
   selector: 'app-planilha-custo',
-  templateUrl: './planilha-custo.component.html',
-  styleUrls: ['./planilha-custo.component.css']
+  templateUrl: './planilha-custo.component.html'
 })
 export class PlanilhaCustoComponent implements OnInit {
 

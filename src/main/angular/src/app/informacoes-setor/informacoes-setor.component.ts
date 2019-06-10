@@ -14,9 +14,10 @@ import { CadastroOperacaoService } from '../service/cadastro-operacao.service';
 })
 export class InformacoesSetorComponent implements OnInit {
 
+  // tslint:disable-next-line:max-line-length
   constructor(private http: InfosetorService, private funcionarioService: FuncionarioService, private etapaService: CadastroOperacaoService, private setorService: CadastroSetorService,
-    private gerenteService: GerenteService,
-    private router: Router, private modalService: NgbModal, private token: TokenStorageService) {
+              private gerenteService: GerenteService,
+              private router: Router, private modalService: NgbModal, private token: TokenStorageService) {
   }
 
   info: any;
@@ -42,11 +43,12 @@ export class InformacoesSetorComponent implements OnInit {
       authorities: this.token.getAuthorities()
     };
     this.funcionarioService.getFuncionarioLogado(this.info.username)
-      .subscribe(data => { this.funcionario == data });
-    this.gerenteService.getGerentes().subscribe(data => { this.gerentes = data });
-    this.etapaService.getTiposOperacoes().subscribe(data=>{
+      .subscribe(data => { this.funcionario = data; });
+    this.gerenteService.getGerentes().subscribe(data => { this.gerentes = data; });
+    this.etapaService.getTiposOperacoes().subscribe(data => {
       this.etapas = data;
-    })
+    });
+    console.clear();
     this.naoAutenticado();
   }
   selectGerente(gerente: any) {
@@ -60,8 +62,10 @@ export class InformacoesSetorComponent implements OnInit {
     this.etapa = etapa;
   }
   save() {
-    this.infosetor.funcionario_id = this.funcionario.id;
-    this.funcionario.infosetores.push(this.infosetor);
+    this.informacao.funcionario_id = this.funcionario.id;
+    this.informacao.setor_id = this.setor.id;
+    this.informacao.gerente_id = this.gerente.id;
+    this.funcionario.infosetores.push(this.informacao);
 
     this.http.cadastrarInfosetor(
       this.infosetor)

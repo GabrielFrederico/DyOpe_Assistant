@@ -48,7 +48,7 @@
   </div>
 
 </div>
-<form *ngIf="escolheu; else naoescolheu" (ngSubmit)="atualizar()" class="card" [noValidate]="$any(false)">
+<form *ngIf="escolheu; else naoescolheu" (ngSubmit)="cadastrar()" class="card" [noValidate]="$any(false)">
 
   <div class="card-header">Sequencia Operacional</div>
   <div class="card-body border-info">
@@ -58,7 +58,7 @@
           <div class="card-header border-info">Operações</div>
           <div class="card-body text-secondary">
             <div class="form-group">
-              <div *ngFor="let operacao of operacao.suboperacoes" class="row">
+              <div *ngFor="let operacao of operacaoEscolhida.suboperacoes" class="row">
                 <div class="col-md-4">
                   <div class="form-group">
                     <div class="form-label-group">
@@ -109,7 +109,7 @@
                 <div class="form-label-group">
                   <input type="number" id="LoteProdu"
                          class="form-control"
-                         placeholder="Lote de Produção" name="loteProducao" [(ngModel)]="operacao.loteProducao"
+                         placeholder="Lote de Produção" name="loteProducao" [(ngModel)]="operacaoEscolhida.loteProducao"
                          required="required">
                   <label for="LoteProdu" class="fonterisco">Lote de Produção:</label>
                 </div>
@@ -117,7 +117,7 @@
               <div class="col-md-auto">
                 <div class="form-label-group">
                   <input type="number" id="numFun"
-                         class="form-control" [(ngModel)]="operacao.numFuncionariosDisponiveis"
+                         class="form-control" [(ngModel)]="operacaoEscolhida.numFuncionariosDisponiveis"
                          placeholder="N° de Funcionários" name="numFun"
                          required="required">
                   <label for="numFun" class="fonterisco">N° de Funcionários</label>
@@ -129,7 +129,7 @@
                     <input type="number" name="tempoTrab"
                            id="tempoTrab"
                            class="form-control" minlength="3"
-                           autofocus="autofocus" [(ngModel)]="operacao.tempoTrab"
+                           autofocus="autofocus" [(ngModel)]="operacaoEscolhida.tempoTrab"
                            placeholder="Tempo Trabalho" required="required">
                     <label for="tempoTrab">Tempo trabalhado</label>
                   </div>
@@ -152,7 +152,7 @@
                 <div class="col-md-6">
                   <div class="form-label-group">
                     <input type="date" id="datainici" name="dataInicio" class="form-control"
-                           placeholder="Data Inicio:"
+                           placeholder="Data Inicio:" [(ngModel)]="operacaoEscolhida.dataInicio"
                            required="required">
                     <label for="datainici">Data Inicio:</label>
                   </div>
@@ -160,10 +160,10 @@
 
                 <div class="col-md-6">
                   <div class="form-label-group">
-                    <input type="date" id="datalimit" name="prazo" class="form-control"
-                           placeholder="Prazo:"
-                           required="required">
-                    <label for="datalimit">Prazo:</label>
+                    <input type="date" id="prazo" name="prazo" class="form-control"
+                           placeholder="Prazo:" [(ngModel)]="operacaoEscolhida.prazo"
+                    >
+                    <label for="prazo">Prazo:</label>
                   </div>
                 </div>
               </div>
@@ -225,7 +225,7 @@
               <div class="col-md-6">
                 <div class="form-label-group">
                   <input [readonly]="isReadonly" type="number" id="FuncNesc"
-                         class="form-control" value="{{operacaoEscolhidaEscolhida.numFuncionarios}}"
+                         class="form-control" value="{{operacaoEscolhida.numFuncionarios}}"
                          placeholder="Funcionários necessários:" name="numFuncionariosOpe"
                          required="required">
                   <label for="FuncNesc" class="fonterisco">Funcionários necessários:</label>
@@ -234,7 +234,7 @@
               <div class="col-md-6">
                 <div class="form-label-group">
                   <input [readonly]="isReadonly" type="number" id="QtdPecasFunc"
-                         class="form-control" value="{{operacaoEscolhidaEscolhida.qtdPecasOpe}}"
+                         class="form-control" value="{{operacaoEscolhida.qtdPecasOpe}}"
                          placeholder="Quantidade de peças por funcionário:" name="qtdPecasOpe"
                          required="required">
                   <label for="QtdPecasFunc" class="fonterisco">Quantidade de peças por funcionário:</label>

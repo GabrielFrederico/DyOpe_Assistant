@@ -26,10 +26,7 @@ public class OperacaoController {
 
 	@RequestMapping(method = RequestMethod.POST, value="/cadastraroperacao")
 	public Operacao save(@Valid @RequestBody Operacao operacao) {
-		//for (SubOperacao subope : operacao.getSuboperacoes()) {
-		//	tempos = subope.getTempoNesc();
-			//tempos+=tempos;
-		//}
+		
 		
 		operacaoRepository.save(operacao);
 		return operacao;
@@ -55,7 +52,10 @@ public class OperacaoController {
 	@PreAuthorize("hasRole('GERENTE')")
 	public Operacao update(@RequestBody Operacao operacao) {
 		int tempos = 0;
-	
+		for (SubOperacao subope : operacao.getSuboperacoes()) {
+				tempos = subope.getTempoNesc();
+					tempos+=tempos;
+				}
 	    float result, diasNesc,funcionariosNecessários;
 	    result = tempos*operacao.getLoteProducao();
 	    diasNesc = result/operacao.getTempoTrab();

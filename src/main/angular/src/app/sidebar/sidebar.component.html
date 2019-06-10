@@ -15,12 +15,13 @@
   <a ngbDropdownToggle class="nav-link text-light" id="setores" href="javascript:void(0)"
      role="button"
      aria-haspopup="false" aria-expanded="false">
-    <span>Controle</span>
+    <span>Informações</span>
   </a>
   <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="setores" x-placement="bottom-start">
     <h6 class="dropdown-header">Setores</h6>
     <a *ngFor="let setor of gerente.setores" href="javascript:void(0)"
        [routerLink]="['/gerenteindex/controlefuncionarios', setor.nomeSetor]"
        class="dropdown-item">{{setor.nomeSetor}}</a>
+    <a *ngIf="!gerente.setores">Cadastre um setor..</a>
   </div>
 </li>
