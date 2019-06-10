@@ -129,7 +129,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
   }
 
   atualizarSubOpe() {
-    this.operacaoService.updateSubOperacao(this.suboperacaoEscolhida).pipe(first()).subscribe(data => {
+    this.operacaoService.addSubOperacao(this.suboperacaoEscolhida).pipe(first()).subscribe(data => {
       alert('subope updated');
     }, error => {
       alert(error.error);
