@@ -139,7 +139,6 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
   cadastrar() {
     this.operacao.etapa_producao_id = this.etapaproducao.id;
     this.operacao.peca_id = this.peca.id;
-    this.operacao.gerente_id = this.gerente.id;
     this.peca.operacoes.push(this.operacao);
     this.peca.operacoes = this.peca.operacoes.filter(ope => {
       return ope.etapa_producao_id === this.etapaproducao.id;
@@ -152,13 +151,14 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
 
       this.operacaoEscolhida = data;
     })
+    this.atualizar();
     alert(this.operacao.id+'  '+this.operacaoEscolhida.id);
     this.opeEscolida = true;
     this.escolheu = true;
   }
 
   atualizar() {
-    this.operacaoService.updateOperacao(this.operacaoEscolhida).pipe().subscribe(data => {
+    this.operacaoService.updateOperacao(this.operacao).pipe().subscribe(data => {
       alert('Operação Cadastrada!');
     }, error => {
       console.log(error.error);
@@ -193,10 +193,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
 
   selectsPeca(peca: any) {
     this.peca = peca;
-    this.cadastrar();
-    this.operacaoEscolhida.suboperacoes = this.suboperacoes;
-
-
+    this.operacao.suboperacoes = this.suboperacoes;
     this.escolheu = true;
 
   }
