@@ -58,7 +58,7 @@ export class CadastroOperacaoService {
   }
 
   getOperacao(operacao: any) {
-    return this.httpClient.get('http://localhost:8080/operacoes', operacao);
+    return this.httpClient.get('http://localhost:8080/operacoes/', operacao);
   }
 
   getOperacoes() {
@@ -69,12 +69,18 @@ export class CadastroOperacaoService {
     return this.httpClient.put('http://localhost:8080/operacoes/atualizar', operacao);
 
   }
-
-  updateSubOperacao(operacao: any) {
-    return this.httpClient.put('http://localhost:8080/suboperacoes', operacao);
+  addOperacao(operacao: any) {
+    return this.httpClient.post('http://localhost:8080/operacoes/cadastraroperacao', operacao);
 
   }
 
+  updateSubOperacao(operacao: any) {
+    return this.httpClient.put('http://localhost:8080/suboperacoes', operacao);
+  }
+
+  addSubOperacao(operacao: any) {
+    return this.httpClient.post('http://localhost:8080/suboperacoes/cadastrarsubOperacao', operacao);
+  }
   getOperacaoId(id: number): Observable<Operacao> {
     return this.httpClient.get<Operacao>('http://localhost:8080/operacoes/' + id, httpOptions);
   }

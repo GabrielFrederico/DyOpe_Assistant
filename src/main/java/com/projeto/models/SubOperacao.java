@@ -13,7 +13,14 @@ public class SubOperacao {
 	private long id;
 	
 	private String descricao;
-	
+	long idEtapa;
+	public long getIdEtapa() {
+		return idEtapa;
+	}
+
+	public void setIdEtapa(long idEtapa) {
+		this.idEtapa = idEtapa;
+	}
 
 	private int tempoNesc;
 	

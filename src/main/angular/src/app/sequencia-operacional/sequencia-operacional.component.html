@@ -48,12 +48,9 @@
   </div>
 
 </div>
-<form *ngIf="escolheu; else naoescolheu" (ngSubmit)="cadastrar()" class="card" [noValidate]="$any(false)">
+<form *ngIf="escolheu; else naoescolheu" (ngSubmit)="atualizar()" class="card" [noValidate]="$any(false)">
 
   <div class="card-header">Sequencia Operacional</div>
-  <label> cadastrar
-    <input type="submit" (click)="atualizar()" value="cadastrar">
-  </label>
   <div class="card-body border-info">
     <div class="row">
       <div class="col-md-4">
@@ -61,7 +58,7 @@
           <div class="card-header border-info">Operações</div>
           <div class="card-body text-secondary">
             <div class="form-group">
-              <div *ngFor="let operacao of operacao.suboperacoes" class="row">
+              <div *ngFor="let operacao of operacaoEscolhida.suboperacoes" class="row">
                 <div class="col-md-4">
                   <div class="form-group">
                     <div class="form-label-group">
@@ -228,7 +225,7 @@
               <div class="col-md-6">
                 <div class="form-label-group">
                   <input [readonly]="isReadonly" type="number" id="FuncNesc"
-                         class="form-control" value="{{operacaoEscolhida.numFuncionarios}}"
+                         class="form-control" value="{{operacaoEscolhidaEscolhida.numFuncionarios}}"
                          placeholder="Funcionários necessários:" name="numFuncionariosOpe"
                          required="required">
                   <label for="FuncNesc" class="fonterisco">Funcionários necessários:</label>
@@ -237,7 +234,7 @@
               <div class="col-md-6">
                 <div class="form-label-group">
                   <input [readonly]="isReadonly" type="number" id="QtdPecasFunc"
-                         class="form-control" value="{{operacaoEscolhida.qtdPecasOpe}}"
+                         class="form-control" value="{{operacaoEscolhidaEscolhida.qtdPecasOpe}}"
                          placeholder="Quantidade de peças por funcionário:" name="qtdPecasOpe"
                          required="required">
                   <label for="QtdPecasFunc" class="fonterisco">Quantidade de peças por funcionário:</label>

@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.projeto.models.Gerente;
 import com.projeto.models.Operacao;
 import com.projeto.models.SubOperacao;
 import com.projeto.repository.OperacaoRepository;

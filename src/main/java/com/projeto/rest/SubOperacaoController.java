@@ -35,6 +35,11 @@ public class SubOperacaoController {
 		return subOperacaoRepository.findAll();
 	}
 	
+	@RequestMapping(method = RequestMethod.GET, value = "acabamento")
+	public  Iterable<SubOperacao> listAllacabamento(){
+		return subOperacaoRepository.findAll();
+	}
+	
 	@RequestMapping(method = RequestMethod.GET, path = "/getByNome/{descricao}")
 	public SubOperacao getSubOperacaoByNome(@PathVariable("descricao") String descricao) {
 		SubOperacao subOperacao  = subOperacaoRepository.findByDescricao(descricao);

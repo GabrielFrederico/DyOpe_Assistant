@@ -1,11 +1,11 @@
-import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {TokenStorageService} from '../auth/token-storage.service';
-import {ActivatedRoute, Router} from '@angular/router';
-import {CadastroOperacaoService} from '../service/cadastro-operacao.service';
-import {Subscription} from 'rxjs';
-import {GerenteService} from '../service/gerente.service';
-import {first} from 'rxjs/operators';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { TokenStorageService } from '../auth/token-storage.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CadastroOperacaoService } from '../service/cadastro-operacao.service';
+import { Subscription } from 'rxjs';
+import { GerenteService } from '../service/gerente.service';
+import { first } from 'rxjs/operators';
 
 
 @Component({
@@ -64,7 +64,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
   }
 
   openCadastro(cadastro) {
-    this.modalService.open(cadastro, {size: 'lg', ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+    this.modalService.open(cadastro, { size: 'lg', ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
@@ -72,7 +72,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
   }
 
   openInformacoes(content) {
-    this.modalService.open(content, {size: 'lg', ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+    this.modalService.open(content, { size: 'lg', ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
@@ -140,22 +140,28 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
     this.operacao.etapa_producao_id = this.etapaproducao.id;
     this.operacao.peca_id = this.peca.id;
     this.operacao.gerente_id = this.gerente.id;
-    this.gerente.operacoes.push(this.operacao);
-    this.gerente.operacoes = this.gerente.operacoes.filter(ope => {
+    this.peca.operacoes.push(this.operacao);
+    this.peca.operacoes = this.peca.operacoes.filter(ope => {
       return ope.etapa_producao_id === this.etapaproducao.id;
     });
-    this.gerenteService.cadastrarAlgo(this.gerente).pipe(first()).subscribe(data => {
+    this.gerenteService.atualizarPeca(this.peca).pipe(first()).subscribe(data => {
     }, error => {
       console.log(error.error);
     });
-    this.atualizar();
+    this.operacaoService.getOperacao(this.operacao).subscribe(data => {
+
+      this.operacaoEscolhida = data;
+    })
+    alert(this.operacao.id+'  '+this.operacaoEscolhida.id);
     this.opeEscolida = true;
     this.escolheu = true;
   }
 
   atualizar() {
-    this.operacaoService.updateOperacao(this.operacao).pipe(first()).subscribe(data => {
+    this.operacaoService.updateOperacao(this.operacaoEscolhida).pipe().subscribe(data => {
       alert('Operação Cadastrada!');
+    }, error => {
+      console.log(error.error);
     });
   }
 
@@ -170,6 +176,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
     this.gerente.pecas.push(this.newpeca);
     this.gerenteService.cadastrarAlgo(this.gerente).pipe(first()).subscribe(data => {
       alert('Peça cadastrada com sucesso!');
+      this.router.navigate(['/gerenteindex/operacoes/', this.etapaproducao.etapaProducao]);
     }, error => {
       alert(error);
     });
@@ -186,7 +193,10 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
 
   selectsPeca(peca: any) {
     this.peca = peca;
-    this.operacao.suboperacoes = this.suboperacoes;
+    this.cadastrar();
+    this.operacaoEscolhida.suboperacoes = this.suboperacoes;
+
+
     this.escolheu = true;
 
   }

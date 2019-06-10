@@ -25,9 +25,6 @@ public class Operacao {
 	@JoinTable(name = "operacao_suboperacoes", joinColumns = @JoinColumn(name = "operacao_id"), inverseJoinColumns = @JoinColumn(name = "suboperacao_id"))
 	private Set<SubOperacao> suboperacoes = new HashSet<>();
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinTable(name = "operacao_peca", joinColumns = @JoinColumn(name = "operacao_id"), inverseJoinColumns = @JoinColumn(name = "peca_id"))
-	private Peca peca;
 	
 	private java.sql.Date dataInicio;
 	private float numFuncionarios;

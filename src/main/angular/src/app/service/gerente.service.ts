@@ -107,10 +107,6 @@ export class GerenteService {
     return this.httpClient.get<Gerente[]>('http://localhost:8080/gerentes');
   }
 
-  getinfoGerentes() {
-    return this.httpClient.get<Gerente[]>('http://localhost:8080/gerentes');
-  }
-
   cadastrarGerente(gerente: Gerente): Observable<Gerente> {
     return this.httpClient.post<Gerente>('http://localhost:8080/gerentes/cadastrargerente', gerente);
   }

@@ -8,20 +8,35 @@
   <form (ngSubmit)="save()" [noValidate]="$any(false)">
     <div class="form-group">
       <div class="form-row">
-        <div class="col-md-6">
+        <div class="col-md-4">
           <div class="form-label-group">
-            <input type="text" [(ngModel)]="infosetor.setor" name="setor" id="setor" class="form-control"
-                   autofocus="autofocus"
-                   placeholder="Setor:" required="required">
-            <label for="setor">Setor:</label>
+     <label for="gerente">Gerente</label>
+     <select id="gerente" class="form-control">
+       <option selected>Selecione..</option>
+       <option *ngFor="let gerente of gerentes" (click)="selectGerente(gerente)">{{gerente.nome}}</option>
+     </select>
+
           </div>
         </div>
-        <div class="col-md-6">
+        <div *ngIf="setorShow"class="col-md-4">
           <div class="form-label-group">
-            <input type="text" [(ngModel)]="infosetor.operacao" name="operacao" id="operacao" class="form-control"
-                   autofocus="autofocus"
-                   placeholder="Operação:" required="required">
-            <label for="operacao">Operação:</label>
+     <label for="gerente">Setor</label>
+     <select id="gerente" class="form-control">
+       <option selected>Selecione..</option>
+       <option *ngFor="let setor of gerente.setores" (click)="selectSetor(setor)">{{setor.nome}}</option>
+     </select>
+
+          </div>
+        </div>
+
+        <div *ngIf="setorShow"class="col-md-4">
+          <div class="form-label-group">
+     <label for="gerente">Etapa da Produção</label>
+     <select id="gerente" class="form-control">
+       <option selected>Selecione..</option>
+       <option *ngFor="let etapa of etapas" (click)="selectEtapa(etapa)">{{etapa.nome}}</option>
+     </select>
+
           </div>
         </div>
       </div>

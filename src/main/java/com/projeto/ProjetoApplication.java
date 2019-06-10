@@ -75,13 +75,18 @@ public class ProjetoApplication {
             SubOperacao embalar = new SubOperacao();
             revisar.setDescricao("Revisar");
             revisar.setId(26);
+            revisar.setIdEtapa(5);
             limpar.setDescricao("Limpar");
+            limpar.setIdEtapa(5);
             limpar.setId(27);
             passar.setDescricao("Passar");
+            passar.setIdEtapa(5);
             passar.setId(28);
             tag.setDescricao("Tag");
+            tag.setIdEtapa(5);
             tag.setId(29);
             embalar.setDescricao("Embalar");
+            embalar.setIdEtapa(5);
             embalar.setId(30);
             suboperacaoRepository.save(revisar);
             suboperacaoRepository.save(limpar);
