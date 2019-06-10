@@ -25,6 +25,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
   operacao: any = {};
   newsuboperacao: any = {};
   suboperacaoEscolhida: any;
+  suboperacoesEscolhidas: any;
   gerente: any;
   operacaoEscolhida: any;
   newpeca: any = {};
@@ -129,7 +130,9 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
   }
 
   atualizarSubOpe() {
-    this.operacaoService.addSubOperacao(this.suboperacaoEscolhida).pipe(first()).subscribe(data => {
+    this.suboperacaoEscolhida.operacao_id = this.operacao.id;
+    this.atualizar();
+    this.operacaoService.addSubOperacao(this.suboperacaoEscolhida).subscribe(data => {
       alert('subope updated');
     }, error => {
       alert(error.error);
@@ -151,7 +154,6 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
 
       this.operacaoEscolhida = data;
     })
-    this.atualizar();
     alert(this.operacao.id+'  '+this.operacaoEscolhida.id);
     this.opeEscolida = true;
     this.escolheu = true;
