@@ -46,13 +46,7 @@ public class Operacao {
 		this.suboperacoes = suboperacoes;
 	}
 
-	public Peca getPeca() {
-		return peca;
-	}
-
-	public void setPeca(Peca peca) {
-		this.peca = peca;
-	}
+	
 
 
 
