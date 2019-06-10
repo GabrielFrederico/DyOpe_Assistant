@@ -75,7 +75,7 @@
                   <div class="form-group">
                     <div class="form-label-group">
                       <input type="number" name="tempoOpe"
-                             id="tempoOpe" value="{{operacao.tempoNesc}}"
+                             id="tempoOpe" [(ngModel)]="operacao.tempoNesc"
                              class="form-control" minlength="3"
                              autofocus="autofocus"
                              placeholder="Tempo" required="required">
