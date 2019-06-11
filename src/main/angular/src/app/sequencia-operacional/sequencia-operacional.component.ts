@@ -167,13 +167,10 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
 
   cadastrar() {
 
-    this.suboperacoes.forEach((item, index) => {
+    this.listasuboperacoes.forEach((item, index) => {
       item.operacao_id = this.operacaoEscolhida.id;
-      this.operacaoService.addSubOperacao(item).subscribe(data => {
-        this.listasuboperacoes.push(item);
-      }, error => {
-        console.log(error.error);
-      });
+
+        this.operacaoEscolhida.suboperacoes.push(item);
       this.operacaoEscolhida.suboperacoes =  this.listasuboperacoes;
       this.atualizar();
     }, error => {
