@@ -25,7 +25,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
   operacao: any = {};
   newsuboperacao: any = {};
   suboperacaoEscolhida: any;
-  suboperacoesEscolhidas: any;
+  subope: any = {};
   gerente: any;
   operacaoEscolhida: any;
   newpeca: any = {};
@@ -133,16 +133,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
     this.suboperacoes = this.suboperacoes.filter(subope => {
       return subope.id_etapa === this.etapaproducao.id;
     });
-      this.suboperacoes.forEach((item, index) => {
-      
-      this.operacaoService.addSubOperacao(item).subscribe(data => {
-        this.listasuboperacoes.push(item);
-      }, error => {
-        console.log(error.error);
-      });
-    }, error => {
-      console.log(error.error);
-    });
+    this.listasuboperacoes = [];
     this.carregado = true;
 
     console.clear();
@@ -169,10 +160,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
 
     this.listasuboperacoes.forEach((item, index) => {
       item.operacao_id = this.operacaoEscolhida.id;
-
-        this.operacaoEscolhida.suboperacoes.push(item);
-      this.operacaoEscolhida.suboperacoes =  this.listasuboperacoes;
-      this.atualizar();
+      this.operacaoEscolhida.suboperacoes.push(item);
     }, error => {
       console.log(error.error);
     });
@@ -233,7 +221,13 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
   selectsPeca(peca: any) {
     this.peca = peca;
     this.escolheu = true;
+    this.suboperacoes.forEach((item, index) => {
+      this.subope.descricao = item.descricao;
+      this.listasuboperacoes.push(this.subope);
 
+    }, error => {
+      console.log(error.error);
+    });
 
   }
 
