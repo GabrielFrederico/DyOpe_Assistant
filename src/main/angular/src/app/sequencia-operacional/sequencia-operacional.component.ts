@@ -131,7 +131,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
       this.suboperacoes = data;
     });
     this.suboperacoes = this.suboperacoes.filter(subope => {
-      return subope.id_etapa === this.etapaproducao.id;
+      return subope.idEtapa === this.etapaproducao.id;
     });
     this.listasuboperacoes = [];
     this.carregado = true;
