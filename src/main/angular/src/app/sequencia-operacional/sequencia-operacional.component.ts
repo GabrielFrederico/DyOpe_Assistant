@@ -225,8 +225,8 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
     this.peca = peca;
     this.escolheu = true;
 
-    this.suboperacoes.forEach(item => {
-      for (const sub of item) {
+    
+      for (const sub of this.suboperacoes) {
         this.subope.descricao = sub.descricao;
         this.listasuboperacoes.push(this.subope);
       }
@@ -234,7 +234,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
     }, error => {
       console.log(error.error);
     });
-    this.suboperacoes = [];
+    
   }
 
 
