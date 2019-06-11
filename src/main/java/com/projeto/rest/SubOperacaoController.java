@@ -37,9 +37,10 @@ public class SubOperacaoController {
 		return subOperacaoRepository.findAll();
 	}
 	
+	
 	@RequestMapping(method = RequestMethod.GET, value = "acabamento")
 	public  Iterable<SubOperacao> listAllacabamento(){
-		return subOperacaoRepository.findAll();
+		return subOperacaoRepository.listByAcabamento();
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, path = "/getByNome/{descricao}")
@@ -53,12 +54,6 @@ public class SubOperacaoController {
 		return subOperacao;
 	}
 	
-	@RequestMapping(method = RequestMethod.GET, path = "/{idEtapa}")
-	public Set<SubOperacao> getSubOperacoesByIdEtapa(@PathVariable("idEtapa") long idEtapa) {
-		Set<SubOperacao> subOperacao = subOperacaoRepository.findByIdEtapa(idEtapa);
-		return subOperacao;
-	}
-
 	@RequestMapping(method = RequestMethod.PUT)
 	public SubOperacao update(@RequestBody SubOperacao subOperacao ) {
 		subOperacaoRepository.save(subOperacao );

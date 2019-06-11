@@ -127,9 +127,12 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
     this.gerenteService.getGerente(this.info.username).subscribe(data => {
       this.gerente = data;
     });
-    this.operacaoService.getSubOperacoes().subscribe(data => {
-      this.suboperacoes = data;
-    });
+    if (this.etapaproducao.id === 5) {
+      this.operacaoService.getOperacoesSub().subscribe(data => {
+        this.suboperacoes = data;
+      });
+    }
+
     this.suboperacoes = this.suboperacoes.filter(subope => {
       return subope.idEtapa === this.etapaproducao.id;
     });
@@ -164,7 +167,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
     }, error => {
       console.log(error.error);
     });
-    this.atualizar();
+
     this.operacaoEscolhida.etapa_producao_id = this.etapaproducao.id;
     this.operacaoEscolhida.peca_id = this.peca.id;
     this.peca.operacoes.push(this.operacaoEscolhida);
@@ -173,7 +176,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
      * });
      */
     this.gerenteService.atualizarPeca(this.peca).pipe(first()).subscribe(data => {
-
+      this.atualizar();
     }, error => {
       console.log(error.error);
     });
@@ -190,7 +193,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
   }
 
   cadastrarSubOperacao() {
-    this.suboperacoes.push(this.newsuboperacao);
+    this.listasuboperacoes.push(this.newsuboperacao);
   }
 
   deletarSubOperacao() {
@@ -221,14 +224,17 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
   selectsPeca(peca: any) {
     this.peca = peca;
     this.escolheu = true;
-    this.suboperacoes.forEach((item, index) => {
-      this.subope.descricao = item.descricao;
-      this.listasuboperacoes.push(this.subope);
+
+    this.suboperacoes.forEach(item => {
+      for (const sub of item) {
+        this.subope.descricao = sub.descricao;
+        this.listasuboperacoes.push(this.subope);
+      }
 
     }, error => {
       console.log(error.error);
     });
-
+    this.suboperacoes = [];
   }
 
 

@@ -13,7 +13,7 @@ public interface SubOperacaoRepository extends CrudRepository<SubOperacao, Seria
 	SubOperacao findById(long id);
 
 	SubOperacao findByDescricao(String descricao);
-
-	@Query(value = "SELECT * FROM SUB_OPERACAO WHERE ID_ETAPA = ?1", nativeQuery = true)
-	Set<SubOperacao> findByIdEtapa(long idEtapa);
+ 
+	@Query(value = "SELECT * FROM SUB_OPERACAO WHERE ID_ETAPA = 5", nativeQuery = true)
+	Set<SubOperacao> listByAcabamento();
 }
