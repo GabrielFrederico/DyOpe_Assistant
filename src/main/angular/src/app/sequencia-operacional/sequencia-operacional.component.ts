@@ -133,6 +133,16 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
     this.suboperacoes = this.suboperacoes.filter(subope => {
       return subope.id_etapa === this.etapaproducao.id;
     });
+      this.suboperacoes.forEach((item, index) => {
+      
+      this.operacaoService.addSubOperacao(item).subscribe(data => {
+        this.listasuboperacoes.push(item);
+      }, error => {
+        console.log(error.error);
+      });
+    }, error => {
+      console.log(error.error);
+    });
     this.carregado = true;
 
     console.clear();
