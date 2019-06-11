@@ -1,26 +1,33 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {TokenStorageService} from "../auth/token-storage.service";
-import {Router} from "@angular/router";
-import {Observable} from 'rxjs';
-import {Funcionario, FuncionarioService} from '../service/funcionario.service';
+import {Component, OnInit} from '@angular/core';
+import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {TokenStorageService} from '../auth/token-storage.service';
+import {Router} from '@angular/router';
+import {FuncionarioService} from '../service/funcionario.service';
 
 @Component({
   selector: 'app-funcionario-index',
   templateUrl: './funcionario-index.component.html'
 })
 export class FuncionarioIndexComponent implements OnInit {
+
+  // tslint:disable-next-line:max-line-length
+  constructor(private modalService: NgbModal, private funcionarioService: FuncionarioService, private token: TokenStorageService, private  router: Router) {
+  }
+
   info: any;
   form: any = {};
   public isCollapsed = false;
 
-  classidebar = "sidebar bg-primary navbar-nav";
+  classidebar = 'sidebar bg-primary navbar-nav';
 
-  @Input() funcionarioObjeto: Observable<Funcionario>;
-  @Input() funcionario: Funcionario;
+
   closeResult: string;
   private roles: string[];
   private authority: string;
+
+  toggled = false;
+
+  public validado: boolean;
 
   ngOnInit() {
     this.info = {
@@ -28,42 +35,23 @@ export class FuncionarioIndexComponent implements OnInit {
       username: this.token.getUsername(),
       authorities: this.token.getAuthorities()
     };
-    this.datareload();
     this.naoAutenticado();
-    if (this.token.getToken()) {
-      this.roles = this.token.getAuthorities();
-      this.roles.every(role => {
-        if (role === 'ROLE_FUNCIONARIO') {
-          this.authority = 'funcionario';
-          return true;
-        } else if (role === 'ROLE_FUNCIONARIO') {
-          this.authority = 'funcionario';
-          return true;
-        }
-      });
-    }
-
 
   }
-
-  constructor(private modalService: NgbModal, private funcionarioService: FuncionarioService, private token: TokenStorageService, private  router: Router) {
-  }
-
-  toggled = false;
 
   sidebar() {
     if (this.toggled) {
-      this.classidebar = "sidebar bg-primary navbar-nav";
+      this.classidebar = 'sidebar bg-primary navbar-nav';
       this.toggled = false;
     } else {
-      this.classidebar = "sidebar bg-primary navbar-nav toggled";
+      this.classidebar = 'sidebar bg-primary navbar-nav toggled';
       this.toggled = true;
     }
   }
 
   logout() {
     this.token.logOut();
-    this.router.navigate['/loginfuncionario'];
+    this.router.navigate(['/loginfuncionario']);
   }
 
   openLogout(content) {
@@ -83,16 +71,6 @@ export class FuncionarioIndexComponent implements OnInit {
       return `with: ${reason}`;
     }
   }
-
-  datareload() {
-    this.funcionarioObjeto = this.funcionarioService.getFuncionarioLogado(this.info.username);
-    this.funcionarioObjeto.subscribe(data => {
-      this.funcionario = data;
-      console.clear();
-    })
-  }
-
-  public validado: boolean;
 
   naoAutenticado() {
     if (this.info.authorities.toString() !== 'ROLE_FUNCIONARIO') {

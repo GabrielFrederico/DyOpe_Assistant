@@ -20,7 +20,7 @@
       <div class="card-body text-secondary">
         <a *ngFor="let operacao of gerente.operacoes;"
            class="btn btn-outline-info list-group-item list-group-item-action">{{operacao.id}}</a>
-        <a *ngIf="!peca.operacoes"
+        <a *ngIf="gerente.operacoes.lenght <= 0"
            class="btn btn-outline-info list-group-item list-group-item-action">Nenhuma Operação cadastrada</a>
       </div>
     </div>

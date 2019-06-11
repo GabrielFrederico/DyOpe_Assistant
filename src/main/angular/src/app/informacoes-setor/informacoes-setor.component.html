@@ -9,52 +9,51 @@
     <div class="form-group">
       <div class="form-row">
         <div class="col-md-4">
-          <div class="form-label-group">
-            <label for="gerente">Gerente</label>
-            <select id="gerente" class="form-control">
-              <option selected>Selecione..</option>
-              <option *ngFor="let gerente of gerentes" (click)="selectGerente(gerente)">{{gerente.nome}}</option>
-            </select>
-
-          </div>
+          <label for="gerente">Gerente</label>
+          <select required="required" id="gerente" class="form-control">
+            <option selected>Selecione..</option>
+            <option *ngFor="let gerente of gerentes" (click)="selectGerente(gerente)">{{gerente.nome}}</option>
+          </select>
         </div>
         <div *ngIf="setorShow" class="col-md-4">
-          <div class="form-label-group">
-            <label for="setor">Setor</label>
-            <select id="setor" class="form-control">
-              <option selected>Selecione..</option>
-              <option *ngFor="let setor of gerente.setores" (click)="selectSetor(setor)">{{setor.nome}}</option>
-            </select>
+          <label for="setor">Setor</label>
+          <select required="required" id="setor" class="form-control">
+            <option selected>Selecione..</option>
+            <option *ngFor="let setor of gerente.setores" (click)="selectSetor(setor)">{{setor.nome}}</option>
+          </select>
 
-          </div>
         </div>
-
         <div *ngIf="setorShow" class="col-md-4">
-          <div class="form-label-group">
-            <label for="etapa">Etapa da Produção</label>
-            <select id="etapa" class="form-control">
-              <option selected>Selecione..</option>
-              <option *ngFor="let etapa of etapas" (click)="selectEtapa(etapa)">{{etapa.nome}}</option>
-            </select>
-
-          </div>
+          <label for="etapa">Etapa da Produção</label>
+          <select required="required" id="etapa" class="form-control">
+            <option selected>Selecione..</option>
+            <option *ngFor="let etapa of etapas" (click)="selectEtapa(etapa)">{{etapa.nome}}</option>
+          </select>
         </div>
+
       </div>
     </div>
     <div class="form-group">
       <div class="form-row">
-        <div class="col-md-6">
+        <div *ngIf="setorShow" class="col-md-4">
+          <label for="peca">Peça</label>
+          <select required="required" id="peca" class="form-control">
+            <option selected>Selecione..</option>
+            <option *ngFor="let peca of gerente.pecas">{{peca.descricao}}</option>
+          </select>
+        </div>
+        <div class="col-md-4">
           <div class="form-label-group">
-            <input type="number" [(ngModel)]="infosetor.qtdPecasOpe" name="qtdPecasOpe" id="qtdPecasOpe"
+            <input type="number" [(ngModel)]="informacao.qtdPecasOpe" name="qtdPecasOpe" id="qtdPecasOpe"
                    class="form-control"
                    placeholder="Quantidade de peças da operação:"
                    required="required">
-            <label for="qtdPecasOpe">Quantidade de peças da operação:</label>
+            <label for="qtdPecasOpe">Peças produzidas:</label>
           </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
           <div class="form-label-group">
-            <input type="time" [(ngModel)]="infosetor.tempoNecessario" name="tempoNecessario" id="tempoNecessari"
+            <input type="time" [(ngModel)]="informacao.tempoNecessario" name="tempoNecessario" id="tempoNecessari"
                    class="form-control"
                    placeholder="Tempo necessário:"
                    required="required">

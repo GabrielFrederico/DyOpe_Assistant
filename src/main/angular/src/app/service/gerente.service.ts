@@ -99,8 +99,11 @@ export class GerenteService {
   }
 
   getGerente(nomeUsuario: string) {
-
     return this.httpClient.get('http://localhost:8080/gerentes/getByNomeUsuario/' + nomeUsuario);
+  }
+
+  chaveAcesso(gerente: any) {
+    return this.httpClient.put('http://localhost:8080/gerentes/chaveAcesso', gerente);
   }
 
   getGerentes() {

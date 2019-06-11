@@ -11,7 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Operacao {
@@ -20,7 +20,7 @@ public class Operacao {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
-	@ManyToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "operacao_suboperacoes", joinColumns = @JoinColumn(name = "operacao_id"), inverseJoinColumns = @JoinColumn(name = "suboperacao_id"))
 	private Set<SubOperacao> suboperacoes = new HashSet<>();
 

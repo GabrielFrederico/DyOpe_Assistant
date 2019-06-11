@@ -11,7 +11,7 @@ import {SharedModule} from '../sidebar/shared.module';
 import {NavegacaoComponent} from '../navegacao/navegacao.component';
 import {FuncionarioIndexRoutingModule} from './funcionario-index.routing.module';
 import {InformacoesSetorComponent} from '../informacoes-setor/informacoes-setor.component';
-import {HomeFuncionarioComponent} from "../home-funcionario/home-funcionario.component";
+import {HomeFuncionarioComponent} from '../home-funcionario/home-funcionario.component';
 
 @NgModule({
   schemas: [

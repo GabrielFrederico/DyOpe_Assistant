@@ -1,11 +1,11 @@
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { TokenStorageService } from '../auth/token-storage.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { CadastroOperacaoService } from '../service/cadastro-operacao.service';
-import { Subscription } from 'rxjs';
-import { GerenteService } from '../service/gerente.service';
-import { first } from 'rxjs/operators';
+import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {TokenStorageService} from '../auth/token-storage.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {CadastroOperacaoService} from '../service/cadastro-operacao.service';
+import {Subscription} from 'rxjs';
+import {GerenteService} from '../service/gerente.service';
+import {first} from 'rxjs/operators';
 
 
 @Component({
@@ -70,7 +70,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
   }
 
   openCadastro(cadastro) {
-    this.modalService.open(cadastro, { size: 'lg', ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+    this.modalService.open(cadastro, {size: 'lg', ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
@@ -78,7 +78,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
   }
 
   openInformacoes(content) {
-    this.modalService.open(content, { size: 'lg', ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+    this.modalService.open(content, {size: 'lg', ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
@@ -159,17 +159,16 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
 
     this.suboperacoes.forEach((item, index) => {
       item.operacao_id = this.operacaoEscolhida.id;
-      this.operacaoEscolhida.suboperacoes.push(item);
-      this.operacaoService.addSubOperacao(item).subscribe(data => {
+      this.operacaoService.updateSubOperacao(item).pipe(first()).subscribe(data => {
       }, error => {
         console.log(error.error);
       });
-
+      this.operacaoEscolhida.suboperacoes.push(item);
       this.atualizar();
     }, error => {
       console.log(error.error);
     });
-
+    this.atualizar();
     this.operacaoEscolhida.etapa_producao_id = this.etapaproducao.id;
     this.operacaoEscolhida.peca_id = this.peca.id;
     this.peca.operacoes.push(this.operacaoEscolhida);
@@ -178,7 +177,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
      * });
      */
     this.gerenteService.atualizarPeca(this.peca).pipe(first()).subscribe(data => {
-      alert('Operação Cadastrada!');
+
     }, error => {
       console.log(error.error);
     });

@@ -69,11 +69,12 @@ public class GerenteRest {
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
-	@PreAuthorize("hasRole('GERENTE')")
+	@PreAuthorize("hasRole('GERENTE') or hasRole('FUNCIONARIO')")
 	public Iterable<Gerente> listAll() {
 		return gerenteRepository.findAll();
 	}
 
+	
 	@RequestMapping(method = RequestMethod.GET, path = "gerente/{id}")
 	@PreAuthorize("hasRole('GERENTE')")
 	public Gerente getGerenteById(@PathVariable("id") long id) {
@@ -105,14 +106,9 @@ public class GerenteRest {
 	@PreAuthorize("hasRole('GERENTE')")
 	public ResponseEntity<?> update(@RequestBody Gerente gerente) {
 
-
-		if (usuarioRepository.existsBySenha(gerente.getSenha()) && gerenteRepository.findBySenha(gerente.getSenha()) != gerente) {
-			return new ResponseEntity<>(new ResponseMessage("Erro -> Senha já está em uso!"), HttpStatus.BAD_REQUEST);
-		}
-		
 		gerente.setSenha(encoder.encode(gerente.getSenha()));
 		gerente.setSenhaConfirm(encoder.encode(gerente.getSenha()));
-	
+
 		gerenteRepository.save(gerente);
 		return new ResponseEntity<>(new ResponseMessage("Dados Atualizados com sucesso!"), HttpStatus.OK);
 	}
@@ -121,14 +117,23 @@ public class GerenteRest {
 	@PreAuthorize("hasRole('GERENTE')")
 	public ResponseEntity<?> update2(@RequestBody Gerente gerente) {
 
-		if (usuarioRepository.existsBySenha(gerente.getSenha()) && gerenteRepository.findByNomeUsuario(gerente.getNomeUsuario()) != gerente) {
-			return new ResponseEntity<>(new ResponseMessage("Erro -> Senha já está em uso!"), HttpStatus.BAD_REQUEST);
+		if (usuarioRepository.existsByNomeUsuario(gerente.getNomeUsuario())
+				&& gerenteRepository.findByNomeUsuario(gerente.getNomeUsuario()) != gerente) {
+			return new ResponseEntity<>(new ResponseMessage("Erro -> Usuário já está em uso!"), HttpStatus.BAD_REQUEST);
 		}
-
 		gerenteRepository.save(gerente);
 		return new ResponseEntity<>(new ResponseMessage("Dados Atualizados com sucesso!"), HttpStatus.OK);
 	}
-	
+
+	@RequestMapping(method = RequestMethod.PUT, value = "chaveAcesso")
+	@PreAuthorize("hasRole('GERENTE')")
+	public ResponseEntity<?> chaveAcesso(@RequestBody Gerente gerente) {
+		
+		gerente.setChaveAcesso(encoder.encode(gerente.getChaveAcesso()));
+		gerenteRepository.save(gerente);
+		return new ResponseEntity<>(new ResponseMessage("Dados Atualizados com sucesso!"), HttpStatus.OK);
+	}
+
 	@RequestMapping(method = RequestMethod.PUT, value = "cadastraralgo")
 	@PreAuthorize("hasRole('GERENTE')")
 	public ResponseEntity<?> cadastrarAlgo(@RequestBody Gerente gerente) {
@@ -136,7 +141,7 @@ public class GerenteRest {
 		gerenteRepository.save(gerente);
 		return new ResponseEntity<>(new ResponseMessage("Dados Atualizados com sucesso!"), HttpStatus.OK);
 	}
-	
+
 	@RequestMapping(method = RequestMethod.DELETE, path = "/{id}")
 	@PreAuthorize("hasRole('GERENTE')")
 	public Gerente deleteGerenteById(@PathVariable("id") long id) {
@@ -158,7 +163,7 @@ public class GerenteRest {
 
 		return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getUsername(), userDetails.getAuthorities()));
 	}
-	
+
 	@RequestMapping(method = RequestMethod.POST, path = "/acessarplanilha")
 	public ResponseEntity<?> acessarPlanilha(@Valid @RequestBody LoginForm loginRequest) {
 
@@ -183,16 +188,20 @@ public class GerenteRest {
 		if (usuarioRepository.existsByEmail(signUpRequest.getEmail())) {
 			return new ResponseEntity<>(new ResponseMessage("Erro -> Email Já está em uso !"), HttpStatus.BAD_REQUEST);
 		}
-		if (gerenteRepository.existsByNome(signUpRequest.getNome()) || funcionarioRepository.existsByNome(signUpRequest.getNome())) {
+		if (gerenteRepository.existsByNome(signUpRequest.getNome())
+				|| funcionarioRepository.existsByNome(signUpRequest.getNome())) {
 			return new ResponseEntity<>(new ResponseMessage("Erro -> Nome Já está em uso !"), HttpStatus.BAD_REQUEST);
 		}
-		if (gerenteRepository.existsByCpf(signUpRequest.getCpf()) || funcionarioRepository.existsByCpf(signUpRequest.getCpf())) {
+		if (gerenteRepository.existsByCpf(signUpRequest.getCpf())
+				|| funcionarioRepository.existsByCpf(signUpRequest.getCpf())) {
 			return new ResponseEntity<>(new ResponseMessage("Erro -> CPF Já está em uso !"), HttpStatus.BAD_REQUEST);
 		}
-		if (gerenteRepository.existsByRg(signUpRequest.getRg()) || funcionarioRepository.existsByRg(signUpRequest.getRg())) {
+		if (gerenteRepository.existsByRg(signUpRequest.getRg())
+				|| funcionarioRepository.existsByRg(signUpRequest.getRg())) {
 			return new ResponseEntity<>(new ResponseMessage("Erro -> RG Já está em uso !"), HttpStatus.BAD_REQUEST);
 		}
-		if (usuarioRepository.existsBySenha(signUpRequest.getSenha()) || funcionarioRepository.existsBySenha(signUpRequest.getSenha())) {
+		if (usuarioRepository.existsBySenha(signUpRequest.getSenha())
+				|| funcionarioRepository.existsBySenha(signUpRequest.getSenha())) {
 			return new ResponseEntity<>(new ResponseMessage("Erro -> Senha Já está em uso !"), HttpStatus.BAD_REQUEST);
 		}
 

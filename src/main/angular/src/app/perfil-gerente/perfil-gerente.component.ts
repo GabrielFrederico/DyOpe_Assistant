@@ -1,9 +1,8 @@
-import {ChangeDetectionStrategy, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {TokenStorageService} from '../auth/token-storage.service';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {Gerente, GerenteService} from '../service/gerente.service';
+import {GerenteService} from '../service/gerente.service';
 import {Router} from '@angular/router';
-import {Observable} from 'rxjs';
 import {first} from 'rxjs/operators';
 
 @Component({
@@ -134,6 +133,18 @@ export class PerfilGerenteComponent implements OnInit {
           this.updateFailed = true;
         });
 
+  }
+
+  cadastrarChaveAcesso() {
+    this.gerenteService.chaveAcesso(
+      this.gerente)
+      .pipe(first())
+      .subscribe(
+        data => {
+          alert('Chave de acesso cadastrada!');
+        }, error => {
+          console.log(error.error);
+        });
   }
 
   naoAutenticado() {

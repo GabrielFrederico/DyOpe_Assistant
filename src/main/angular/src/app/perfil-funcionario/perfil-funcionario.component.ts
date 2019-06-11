@@ -1,19 +1,24 @@
-import {Component, ElementRef, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {InfosetorService} from "../service/infosetor.service";
-import {ActivatedRoute, Router} from "@angular/router";
-import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {TokenStorageService} from "../auth/token-storage.service";
-import {Funcionario, FuncionarioService} from "../service/funcionario.service";
-import {Observable, Subscription} from "rxjs";
-import {first} from "rxjs/operators";
+import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {InfosetorService} from '../service/infosetor.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {TokenStorageService} from '../auth/token-storage.service';
+import {FuncionarioService} from '../service/funcionario.service';
+import {Subscription} from 'rxjs';
+import {first} from 'rxjs/operators';
 
 @Component({
   selector: 'app-perfil-funcionario',
   templateUrl: './perfil-funcionario.component.html'
 })
 export class PerfilFuncionarioComponent implements OnInit, OnDestroy {
-  @Input() funcionarioObjeto: Observable<Funcionario>;
-  @Input() funcionario: Funcionario;
+
+  constructor(private route: ActivatedRoute, private http: InfosetorService,
+              // tslint:disable-next-line:max-line-length
+              private router: Router, private funcionarioService: FuncionarioService, private modalService: NgbModal, private token: TokenStorageService) {
+  }
+
+  funcionario: any;
   info: any;
   form: any = {};
   public isCollapsed = false;
@@ -26,11 +31,16 @@ export class PerfilFuncionarioComponent implements OnInit, OnDestroy {
   private roles: string[];
   private authority: string;
   public errorMessage = '';
-  @ViewChild("inputPassword") senhainput: ElementRef;
-  @ViewChild("inputNewPassword") newsenhainput: ElementRef;
-  @ViewChild("inputPasswordConfirm") confirmasenhainput: ElementRef;
-  @ViewChild("cpf") cpf: ElementRef;
-  @ViewChild("rg") rg: ElementRef;
+  @ViewChild('inputPassword') senhainput: ElementRef;
+  @ViewChild('inputNewPassword') newsenhainput: ElementRef;
+  @ViewChild('inputPasswordConfirm') confirmasenhainput: ElementRef;
+  @ViewChild('cpf') cpf: ElementRef;
+  @ViewChild('rg') rg: ElementRef;
+
+  private validado: boolean;
+
+  isReadonly = true;
+  senhaerrada = false;
 
 
   ngOnInit() {
@@ -41,18 +51,7 @@ export class PerfilFuncionarioComponent implements OnInit, OnDestroy {
     };
     this.naoAutenticado();
     this.datareload();
-    if (this.token.getToken()) {
-      this.roles = this.token.getAuthorities();
-      this.roles.every(role => {
-        if (role === 'ROLE_GERENTE') {
-          this.authority = 'gerente';
-          return true;
-        } else if (role === 'ROLE_FUNCIONARIO') {
-          this.authority = 'funcionario';
-          return true;
-        }
-      });
-    }
+
   }
 
   ngOnDestroy() {
@@ -72,36 +71,25 @@ export class PerfilFuncionarioComponent implements OnInit, OnDestroy {
     this.confirmasenhainput.nativeElement.focus();
   }
 
-  constructor(private route: ActivatedRoute, private http: InfosetorService,
-              private router: Router, private funcionarioService: FuncionarioService, private modalService: NgbModal, private token: TokenStorageService) {
-  }
-
   datareload() {
-    this.funcionarioObjeto = this.funcionarioService.getFuncionarioLogado(this.info.username);
-    this.funcionarioObjeto.subscribe(data => {
+    this.funcionarioService.getFuncionarioLogado(this.info.username).subscribe(data => {
       this.funcionario = data;
-      console.clear();
-    })
+    });
+    console.clear();
   }
-
-  private validado: boolean;
 
   naoAutenticado() {
     if (this.info.authorities.toString() !== 'ROLE_FUNCIONARIO') {
       this.validado = false;
       this.router.navigate(['/loginfuncionario']);
       alert('Acesso Negado! Faça o Login!');
-
     } else {
       this.validado = true;
     }
   }
 
-  isReadonly = true;
-  senhaerrada = false;
-
   redefinirSenha() {
-    if (this.newsenhainput.nativeElement.value == this.confirmasenhainput.nativeElement.value) {
+    if (this.newsenhainput.nativeElement.value === this.confirmasenhainput.nativeElement.value) {
       this.funcionario.senha = this.newsenhainput.nativeElement.value;
       this.funcionarioService.atualizarSenhaFuncionario(this.funcionario)
         .pipe(first())
@@ -109,7 +97,7 @@ export class PerfilFuncionarioComponent implements OnInit, OnDestroy {
           data => {
             this.router.navigate(['/loginfuncionario']);
             this.token.logOut();
-            alert("Senha atualizada! Faça o login denovo!");
+            alert('Senha atualizada! Faça o login denovo!');
           },
           error => {
             console.log(error);
@@ -126,7 +114,7 @@ export class PerfilFuncionarioComponent implements OnInit, OnDestroy {
 
     this.funcionario.cpf = cpf;
     this.funcionario.rg = rg;
-    if (this.newsenhainput.nativeElement.value == this.confirmasenhainput.nativeElement.value) {
+    if (this.newsenhainput.nativeElement.value === this.confirmasenhainput.nativeElement.value) {
       this.funcionario.senha = this.newsenhainput.nativeElement.value;
       this.funcionarioService.atualizarFuncionario(this.funcionario)
         .pipe(first())
@@ -134,7 +122,7 @@ export class PerfilFuncionarioComponent implements OnInit, OnDestroy {
           data => {
             this.isReadonly = true;
             if (this.info.username !== this.funcionario.nomeUsuario) {
-              alert("Nome de usuário atualizado! Faça o login denovo!");
+              alert('Nome de usuário atualizado! Faça o login denovo!');
               this.token.logOut();
               this.router.navigate(['/loginfuncionario']);
             } else {

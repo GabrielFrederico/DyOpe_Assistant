@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { Infosetor, InfosetorService } from '../service/infosetor.service';
-import { Router } from '@angular/router';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { TokenStorageService } from '../auth/token-storage.service';
-import { CadastroSetorService } from '../service/cadastro-setor.service';
-import { FuncionarioService } from '../service/funcionario.service';
-import { GerenteService } from '../service/gerente.service';
-import { CadastroOperacaoService } from '../service/cadastro-operacao.service';
+import {Component, OnInit} from '@angular/core';
+import {InfosetorService} from '../service/infosetor.service';
+import {Router} from '@angular/router';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {TokenStorageService} from '../auth/token-storage.service';
+import {CadastroSetorService} from '../service/cadastro-setor.service';
+import {FuncionarioService} from '../service/funcionario.service';
+import {GerenteService} from '../service/gerente.service';
+import {CadastroOperacaoService} from '../service/cadastro-operacao.service';
 
 @Component({
   selector: 'app-informacoes-setor',
@@ -29,13 +29,12 @@ export class InformacoesSetorComponent implements OnInit {
   gerentes: any;
   etapas: any;
   closeResult: string;
-
-  infosetor: Infosetor = new Infosetor();
   informacao: any = {};
 
   public validado: boolean;
   setorShow = false;
   etapa: AnimationPlayState;
+
   ngOnInit() {
     this.info = {
       token: this.token.getToken(),
@@ -43,24 +42,32 @@ export class InformacoesSetorComponent implements OnInit {
       authorities: this.token.getAuthorities()
     };
     this.funcionarioService.getFuncionarioLogado(this.info.username)
-      .subscribe(data => { this.funcionario = data; });
-    this.gerenteService.getGerentes().subscribe(data => { this.gerentes = data; });
+      .subscribe(data => {
+        this.funcionario = data;
+      });
+    this.gerenteService.getGerentes().subscribe(data => {
+      this.gerentes = data;
+    });
     this.etapaService.getTiposOperacoes().subscribe(data => {
       this.etapas = data;
     });
     console.clear();
     this.naoAutenticado();
   }
+
   selectGerente(gerente: any) {
     this.gerente = gerente;
     this.setorShow = true;
   }
+
   selectSetor(setor: any) {
     this.setor = setor;
   }
+
   selectEtapa(etapa: any) {
     this.etapa = etapa;
   }
+
   save() {
     this.informacao.funcionario_id = this.funcionario.id;
     this.informacao.setor_id = this.setor.id;
@@ -68,7 +75,7 @@ export class InformacoesSetorComponent implements OnInit {
     this.funcionario.infosetores.push(this.informacao);
 
     this.http.cadastrarInfosetor(
-      this.infosetor)
+      this.informacao)
       .subscribe(value => console.log(value), error => console.log(error));
     this.router.navigate(['/funcionarioindex']);
     alert('Cadastrado com sucesso!');

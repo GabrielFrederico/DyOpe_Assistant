@@ -13,27 +13,29 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping("etapaProducao")
-@PreAuthorize("hasRole('GERENTE')")
 public class EtapaProducaoController {
 
-    @Autowired
-    EtapaProducaoRepository etapaProducaoRepository;
+	@Autowired
+	EtapaProducaoRepository etapaProducaoRepository;
 
-    @RequestMapping(method = RequestMethod.GET)
-    public Iterable<EtapaProducao> listAll() {
-        return etapaProducaoRepository.findAll();
-    }
+	@PreAuthorize("hasRole('GERENTE') or hasRole('FUNCIONARIO') or hasRole('ADMIN')")
+	@RequestMapping(method = RequestMethod.GET)
+	public Iterable<EtapaProducao> listAll() {
+		return etapaProducaoRepository.findAll();
+	}
 
-    @RequestMapping(method = RequestMethod.GET, path = "/{id}")
-    public EtapaProducao getEtapaProducaoById(@PathVariable("id") long id) {
-        EtapaProducao etapaProducao = etapaProducaoRepository.findById(id);
-        return etapaProducao;
-    }
+	@PreAuthorize("hasRole('GERENTE')")
+	@RequestMapping(method = RequestMethod.GET, path = "/{id}")
+	public EtapaProducao getEtapaProducaoById(@PathVariable("id") long id) {
+		EtapaProducao etapaProducao = etapaProducaoRepository.findById(id);
+		return etapaProducao;
+	}
 
-    @RequestMapping(method = RequestMethod.GET, path = "/getByNome/{etapaProducao}")
-    public EtapaProducao getEtapaProducaoByNome(@PathVariable("etapaProducao") String etapaProducao) {
-        EtapaProducao etapaproducao = etapaProducaoRepository.findByEtapaProducao(etapaProducao);
-        return etapaproducao;
-    }
+	@PreAuthorize("hasRole('GERENTE')")
+	@RequestMapping(method = RequestMethod.GET, path = "/getByNome/{etapaProducao}")
+	public EtapaProducao getEtapaProducaoByNome(@PathVariable("etapaProducao") String etapaProducao) {
+		EtapaProducao etapaproducao = etapaProducaoRepository.findByEtapaProducao(etapaProducao);
+		return etapaproducao;
+	}
 
 }
