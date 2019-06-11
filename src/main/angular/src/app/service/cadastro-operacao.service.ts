@@ -81,13 +81,7 @@ export class CadastroOperacaoService {
   addSubOperacao(operacao: any) {
     return this.httpClient.post('http://localhost:8080/suboperacoes/cadastrarsubOperacao', operacao);
   }
-  getOperacaoId(id: number): Observable<Operacao> {
-    return this.httpClient.get<Operacao>('http://localhost:8080/operacoes/' + id, httpOptions);
-  }
 
-  getEtapaProducao(id: number): Observable<EtapaProducao> {
-    return this.httpClient.get<EtapaProducao>('http://localhost:8080/etapaProducao/' + id, httpOptions);
-  }
 
   getEtapaProducaoNome(etapa: string) {
     return this.httpClient.get('http://localhost:8080/etapaProducao/getByNome/' + etapa);
@@ -97,7 +91,4 @@ export class CadastroOperacaoService {
     return this.httpClient.get('http://localhost:8080/etapaProducao');
   }
 
-  cadastrarOperacao(operacao: Gerente) {
-    return this.httpClient.post<Gerente>('http://localhost:8080/gerentes/atualizargerente', operacao, httpOptions);
-  }
 }

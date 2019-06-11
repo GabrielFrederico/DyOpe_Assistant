@@ -56,10 +56,11 @@ public class OperacaoController {
 				tempos = subope.getTempoNesc();
 					tempos+=tempos;
 				}
-	    float result, diasNesc,funcionariosNecessários;
+	    float result, diasNesc , funcCalc,funcionariosNecessários;
 	    result = tempos*operacao.getLoteProducao();
 	    diasNesc = result/operacao.getTempoTrab();
-	    funcionariosNecessários = operacao.getNumFuncionariosDisponiveis() * operacao.getTempoTrab();
+	    funcCalc = operacao.getNumFuncionariosDisponiveis() * operacao.getTempoTrab();
+	    funcionariosNecessários = result/funcCalc;
 	    operacao.setNumFuncionarios(funcionariosNecessários);
 	   
 	    

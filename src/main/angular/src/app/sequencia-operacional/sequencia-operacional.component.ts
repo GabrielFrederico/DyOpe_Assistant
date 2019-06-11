@@ -30,7 +30,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
   operacaoEscolhida: any;
   newpeca: any = {};
   peca: any;
-  suboperacoes: any = [];
+  suboperacoes: any;
   etapaproducao: any;
   public erro: boolean;
   public errorMessage = '';
@@ -42,10 +42,14 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
   public opeEscolida = false;
   public validado: boolean;
   public carregado: boolean;
+  public modal = 'modal fade cadastrar-peca';
+  public modalOpen = false;
 
   isReadonly = true;
 
   public escolheu = false;
+  ope2 = false;
+  ope3 = false;
 
   ngOnInit() {
     this.etapasproducao();
@@ -125,10 +129,11 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
     this.operacaoService.getSubOperacoes().subscribe(data => {
       this.suboperacoes = data;
     });
-    this.carregado = true;
-    this.operacaoService.addOperacao(this.operacao).subscribe(data => {
-      this.operacaoEscolhida = data;
+    this.suboperacoes = this.suboperacoes.filter(subope => {
+      return subope.id_etapa = this.etapaproducao.id;
     });
+    this.carregado = true;
+
     console.clear();
   }
 
@@ -139,36 +144,59 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
     });
   }
 
+  subopes() {
+    this.operacaoService.addOperacao(this.operacao).subscribe(data => {
+      this.operacaoEscolhida = data;
+      this.ope2 = true;
+    }, error => {
+      console.log(error.error);
+    });
+
+  }
+
   cadastrar() {
+
+    this.suboperacoes.forEach((item, index) => {
+      item.operacao_id = this.operacaoEscolhida.id;
+      this.operacaoService.addSubOperacao(item).subscribe(data => {
+        this.operacaoEscolhida.suboperacoes.push(item);
+      }, error => {
+        console.log(error.error);
+      });
+      this.atualizar();
+    }, error => {
+      console.log(error.error);
+    });
+
     this.operacaoEscolhida.etapa_producao_id = this.etapaproducao.id;
     this.operacaoEscolhida.peca_id = this.peca.id;
     this.peca.operacoes.push(this.operacaoEscolhida);
     /** this.peca.operacoes = this.peca.operacoes.filter(ope => {
-    // tslint:disable-next-line:jsdoc-format
      *  return ope.etapa_producao_id === this.etapaproducao.id;
      * });
      */
     this.gerenteService.atualizarPeca(this.peca).pipe(first()).subscribe(data => {
+      alert('Operação Cadastrada!');
     }, error => {
       console.log(error.error);
     });
-    this.opeEscolida = true;
-    this.escolheu = false;
+    this.ope3 = true;
   }
 
   atualizar() {
     this.operacaoService.updateOperacao(this.operacaoEscolhida).pipe(first()).subscribe(data => {
-      alert('Operação Cadastrada!');
-      this.router.navigate(['/gerenteindex/andamentooperacoes/', this.etapaproducao.etapaProducao]);
-      this.escolheu = false;
+
+      // this.router.navigate(['/gerenteindex/andamentooperacoes/', this.etapaproducao.etapaProducao]);
     }, error => {
       console.log(error.error);
     });
   }
 
   cadastrarSubOperacao() {
-    this.newsuboperacao.operacao_id = this.operacaoEscolhida.id;
-    this.operacaoEscolhida.suboperacoes.push(this.newsuboperacao);
+    this.suboperacoes.push(this.newsuboperacao);
+  }
+
+  deletarSubOperacao() {
   }
 
   cadastrarPeca() {
@@ -177,7 +205,8 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
     this.gerente.pecas.push(this.newpeca);
     this.gerenteService.cadastrarAlgo(this.gerente).pipe(first()).subscribe(data => {
       alert('Peça cadastrada com sucesso!');
-      this.router.navigate(['/gerenteindex/operacoes/', this.etapaproducao.etapaProducao]);
+      this.modal = 'modal fade cadastrar-peca';
+      this.modalOpen = true;
     }, error => {
       alert(error);
     });
@@ -195,10 +224,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
   selectsPeca(peca: any) {
     this.peca = peca;
     this.escolheu = true;
-    this.suboperacoes.forEach((item, index) => {
-      item.operacao_id = this.operacaoEscolhida.id;
-      this.operacaoEscolhida.suboperacoes.push(item);
-    });
+
 
   }
 

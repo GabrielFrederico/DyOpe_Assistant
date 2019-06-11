@@ -58,12 +58,12 @@
           <div class="card-header border-info">Operações</div>
           <div class="card-body text-secondary">
             <div class="form-group">
-              <div *ngFor="let operacao of operacaoEscolhida.suboperacoes" class="row">
+              <div *ngFor="let suboperacao of suboperacoes; let i = index" class="row">
                 <div class="col-md-4">
                   <div class="form-group">
                     <div class="form-label-group">
                       <input type="text" name="escricao"
-                             id="dataescricao" value="{{operacao.descricao}}"
+                             id="dataescricao"  value="{{suboperacao.descricao}}"
                              class="form-control" minlength="3"
                              autofocus="autofocus"
                              placeholder="Descricao" required="required">
@@ -75,7 +75,7 @@
                   <div class="form-group">
                     <div class="form-label-group">
                       <input type="number" name="tempoOpe"
-                             id="tempoOpe" value="{{operacao.tempoNesc}}"
+                             id="tempoOpe" value="{{suboperacao.tempoNesc}}"
                              class="form-control" minlength="3"
                              autofocus="autofocus"
                              placeholder="Tempo" required="required">
@@ -84,24 +84,19 @@
                   </div>
                 </div>
                 <div class="col-md-1">
-                  <a class="btn btn-danger" href="javascript:void(0)">-</a>
-                </div>
-                <div class="col-md-1">
-                  <a class="btn btn-info" (click)="subopeEscolhida(operacao)" href="javascript:void(0)">E</a>
-                </div>
-                <div class="col-md-1">
-                  <a class="btn btn-info" (click)="atualizarSubOpe()" href="javascript:void(0)">Save</a>
+                  <a class="btn btn-danger" href="javascript:void(0)" (click)="suboperacoes.splice(i, 1)">-</a>
                 </div>
               </div>
             </div>
           </div>
+          <a class="btn btn-info" href="javascript:void(0)" (click)="openCadastro(cadastro)">+</a>
           <div class="card-footer bg-transparent border-info">
-            <a class="btn btn-info" href="javascript:void(0)" (click)="openCadastro(cadastro)">Adicionar</a>
+            <a class="btn btn-outline-success" href="javascript:void(0)" [readonly]="ope2" (click)="subopes()">Salvar</a>
           </div>
         </div>
       </div>
 
-      <div class="col-md-3">
+      <div class="col-md-3" *ngIf="ope2">
         <div class="card border-warning mb-3 operacoes">
           <div class="card-body text-warning">
             <div class="form-group">
@@ -135,33 +130,33 @@
                   </div>
                 </div>
               </div>
+              <div class="col-md-auto">
+                <div class="form-label-group">
+                  <input type="date" id="datainici" name="dataInicio" class="form-control"
+                         placeholder="Data Inicio:" [(ngModel)]="operacaoEscolhida.dataInicio"
+                         required="required">
+                  <label for="datainici">Data Inicio:</label>
+                </div>
+              </div>
             </div>
           </div>
           <div class="card-footer bg-transparent border-info">
-            <input class="btn btn-primary" type="submit" value="Cadastrar">
+            <input class="btn btn-primary" type="submit" [readonly]="ope3"  value="Cadastrar">
           </div>
         </div>
       </div>
 
-      <div class="col-sm-5">
+      <div class="col-sm-5" *ngIf="ope3">
 
         <div class="card border-success mb-3 lista">
           <div class="card-body text-success">
             <div class="form-group">
               <div class="form-row">
-                <div class="col-md-6">
-                  <div class="form-label-group">
-                    <input type="date" id="datainici" name="dataInicio" class="form-control"
-                           placeholder="Data Inicio:" [(ngModel)]="operacaoEscolhida.dataInicio"
-                           required="required">
-                    <label for="datainici">Data Inicio:</label>
-                  </div>
-                </div>
 
                 <div class="col-md-6">
                   <div class="form-label-group">
                     <input type="date" id="prazo" name="prazo" class="form-control"
-                           placeholder="Prazo:" [(ngModel)]="operacaoEscolhida.prazo"
+                           placeholder="Prazo:" [(ngModel)]="operacao.prazo"
                     >
                     <label for="prazo">Prazo:</label>
                   </div>
