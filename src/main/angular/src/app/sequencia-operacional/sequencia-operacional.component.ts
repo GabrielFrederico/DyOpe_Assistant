@@ -30,6 +30,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
   operacaoEscolhida: any;
   newpeca: any = {};
   peca: any;
+  listasuboperacoes: any = [];
   suboperacoes: any;
   etapaproducao: any;
   public erro: boolean;
@@ -159,10 +160,11 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
     this.suboperacoes.forEach((item, index) => {
       item.operacao_id = this.operacaoEscolhida.id;
       this.operacaoService.addSubOperacao(item).subscribe(data => {
-        this.operacaoEscolhida.suboperacoes.push(item);
+        this.listasuboperacoes.push(item);
       }, error => {
         console.log(error.error);
       });
+    this.operacaoEscolhida.suboperacoes = this.listasuboperacoes;
       this.atualizar();
     }, error => {
       console.log(error.error);
