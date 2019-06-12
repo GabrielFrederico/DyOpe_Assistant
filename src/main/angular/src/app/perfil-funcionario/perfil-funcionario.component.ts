@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {InfosetorService} from '../service/infosetor.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
@@ -11,7 +11,7 @@ import {first} from 'rxjs/operators';
   selector: 'app-perfil-funcionario',
   templateUrl: './perfil-funcionario.component.html'
 })
-export class PerfilFuncionarioComponent implements OnInit, OnDestroy {
+export class PerfilFuncionarioComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private http: InfosetorService,
               // tslint:disable-next-line:max-line-length
@@ -54,10 +54,6 @@ export class PerfilFuncionarioComponent implements OnInit, OnDestroy {
 
   }
 
-  ngOnDestroy() {
-    this.sub.unsubscribe();
-
-  }
 
   focosenhaatual() {
     this.senhainput.nativeElement.focus();

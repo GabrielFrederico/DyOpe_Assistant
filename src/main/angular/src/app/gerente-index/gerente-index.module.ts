@@ -18,10 +18,10 @@ import {AndamentoOperacoesComponent} from '../andamento-operacoes/andamento-oper
 import {OperacaoAcabamentoComponent} from '../operacao-acabamento/operacao-acabamento.component';
 import {OperacaoBeneficiamentoComponent} from '../operacao-beneficiamento/operacao-beneficiamento.component';
 import {SharedModule} from '../sidebar/shared.module';
-import {Ng2SearchPipeModule} from 'ng2-search-filter'
+import {Ng2SearchPipeModule} from 'ng2-search-filter';
 import {SequenciaOperacionalComponent} from '../sequencia-operacional/sequencia-operacional.component';
-import {HomeGerenteComponent} from "../home-gerente/home-gerente.component";
-import {PlanilhaCustoComponent} from "../planilha-custo/planilha-custo.component";
+import {HomeGerenteComponent} from '../home-gerente/home-gerente.component';
+import {PlanilhaCustoComponent} from '../planilha-custo/planilha-custo.component';
 
 @NgModule({
   schemas: [
