@@ -4,7 +4,7 @@ import {TokenStorageService} from '../auth/token-storage.service';
 import {AuthService} from '../auth/auth.service';
 import {loginGerenteInfo} from '../service/gerente.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {LoginInfo} from "../service/login-info";
+import {LoginInfo} from '../service/login-info';
 
 @Component({
   selector: 'app-login',
@@ -20,8 +20,9 @@ export class LoginGerenteComponent implements OnInit {
   errorMessage = '';
   roles: string[] = [];
   private loginInfo: LoginInfo;
-  @ViewChild("inputPassword") senhainput: ElementRef;
+  @ViewChild('inputPassword') senhainput: ElementRef;
 
+  // tslint:disable-next-line:max-line-length
   constructor(private modalService: NgbModal, private authService: AuthService, private tokenStorage: TokenStorageService, private router: Router) {
   }
 
@@ -51,7 +52,7 @@ export class LoginGerenteComponent implements OnInit {
         this.tokenStorage.saveUsername(data.username);
         this.tokenStorage.saveAuthorities(data.authorities);
         this.roles = this.tokenStorage.getAuthorities();
-        if (this.roles.toString() == 'ROLE_GERENTE') {
+        if (this.roles.toString() === 'ROLE_GERENTE') {
 
           this.isLoginFailed = false;
           this.isLoggedIn = true;

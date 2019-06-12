@@ -126,20 +126,22 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
   datareload() {
     this.gerenteService.getGerente(this.info.username).subscribe(data => {
       this.gerente = data;
+
+    }, error => {
+      console.log(error.error);
     });
     if (this.etapaproducao.id === 5) {
-      this.operacaoService.getOperacoesSub().subscribe(data => {
-        this.suboperacoes = data;
-      });
-    }
 
-    this.suboperacoes = this.suboperacoes.filter(subope => {
-      return subope.idEtapa === this.etapaproducao.id;
+    }
+    this.operacaoService.getOperacoesSub().subscribe(data => {
+      this.suboperacoes = data;
+
+    }, error => {
+      console.log(error.error);
     });
-    this.listasuboperacoes = [];
+   // alert(this.suboperacoes);
     this.carregado = true;
 
-    console.clear();
   }
 
   atualizarSubOpe() {
@@ -225,16 +227,14 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
     this.peca = peca;
     this.escolheu = true;
 
-    
-      for (const sub of this.suboperacoes) {
+
+    for (const sub of this.suboperacoes) {
         this.subope.descricao = sub.descricao;
         this.listasuboperacoes.push(this.subope);
       }
 
-    }, error => {
-      console.log(error.error);
-    });
-    
+
+
   }
 
 

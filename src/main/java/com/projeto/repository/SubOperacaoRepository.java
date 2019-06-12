@@ -1,7 +1,6 @@
 package com.projeto.repository;
 
 import java.io.Serializable;
-import java.util.Set;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -15,5 +14,5 @@ public interface SubOperacaoRepository extends CrudRepository<SubOperacao, Seria
 	SubOperacao findByDescricao(String descricao);
  
 	@Query(value = "SELECT * FROM SUB_OPERACAO WHERE ID_ETAPA = 5", nativeQuery = true)
-	Set<SubOperacao> listByAcabamento();
+	Iterable<SubOperacao> listByAcabamento();
 }
