@@ -18,43 +18,99 @@
     <div class="card border-info mb-3 lista">
       <div class="card-header border-info">Operações a fazer</div>
       <div class="card-body text-secondary">
-        <a *ngFor="let operacao of gerente.operacoes;"
-           class="btn btn-outline-info list-group-item list-group-item-action">{{operacao.id}}</a>
-        <a *ngIf="gerente.operacoes.lenght <= 0"
-           class="btn btn-outline-info list-group-item list-group-item-action">Nenhuma Operação cadastrada</a>
+        <a *ngFor="let operacao of gerente.operacoesFazer"
+           class="btn btn-outline-info list-group-item list-group-item-action" (click)="openInformacoes(content)">{{operacao.id}}</a>
+        <a *ngIf="gerente.operacoesFazer.length <= 0"
+           class="btn btn-outline-info list-group-item list-group-item-action">Nenhuma Operação a fazer</a>
       </div>
     </div>
   </div>
 
+
+  <div class="col-sm-4">
+    <div class="card border-primary mb-3 lista">
+      <div class="card-header border-primary">Operações em andamento</div>
+      <div class="card-body text-primary">
+        <a class="btn btn-outline-primary list-group-item list-group-item-action" (click)="openInformacoes(content)" *ngFor="let operacao of gerente.operacoesAndamento">
+          {{operacao.id}}
+        </a>
+        <a *ngIf="gerente.operacoesAndamento.length <= 0"
+           class="btn btn-outline-primary list-group-item list-group-item-action">Nenhuma Operação em andamento</a>
+      </div>
+
+    </div>
+  </div>
 
   <div class="col-sm-4">
     <div class="card border-warning mb-3 lista">
-      <div class="card-header border-warning">Operações em andamento</div>
+      <div class="card-header border-warning">Operações no Prazo</div>
       <div class="card-body text-warning">
-        <a class="btn btn-outline-warning list-group-item list-group-item-action ">
-          Acabamento
-        </a>
-      </div>
-
-    </div>
-  </div>
-
-  <div class="col-sm-4">
-    <div class="card border-success mb-3 lista">
-      <div class="card-header border-success">Operações concluídas</div>
-      <div class="card-body text-success">
-        <a class="btn btn-outline-success list-group-item list-group-item-action ">
-          Risco
+        <a class="btn btn-outline-warning list-group-item list-group-item-action " (click)="openInformacoes(content)" *ngFor="let operacao of gerente.operacoesPrazo">
+          {{operacao.id}}
         </a>
 
-        <a class="btn btn-outline-success list-group-item list-group-item-action ">
-          Corte
-        </a>
+        <a *ngIf="gerente.operacoesAndamento.length <= 0"
+           class="btn btn-outline-warning list-group-item list-group-item-action">Nenhuma Operação no prazo</a>
       </div>
     </div>
   </div>
 
 </div>
+
+<!--Modal Informações: -->
+<ng-template #content let-modal class="modal fade informations modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title" id="myLargeModalLabel">Informações da Operações:</h4>
+      <button type="button" (click)="modal.close('Save click')" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="card-body">
+        <form [noValidate]="$any(false)">
+          <div class="form-group">
+            <div class="form-row">
+              <div class="col-md-6">
+                <div class="form-label-group">
+                  <input [readonly]="isReadonly" type="text" id="custosOpe"
+                         class="form-control fa-credit-card"
+                         placeholder="Custos" name="custosOpe"
+                         required="required">
+                  <label for="custosOpe" class="fonterisco">Custos:</label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="form-row">
+              <div class="col-md-6">
+                <div class="form-label-group">
+                  <input [readonly]="isReadonly" type="text" id="FuncNesc"
+                         class="form-control" value="{{operacaoEscolhida.numFuncionarios}}"
+                         placeholder="Funcionários necessários:" name="numFuncionarios"
+                         required="required">
+                  <label for="FuncNesc" class="fonterisco">Funcionários necessários:</label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-label-group">
+                  <input [readonly]="isReadonly" type="number" id="QtdPecasFunc"
+                         class="form-control" value="{{operacaoEscolhida.qtdPecasOpe}}"
+                         placeholder="Quantidade de peças por funcionário:" name="qtdPecasOpe"
+                         required="required">
+                  <label for="QtdPecasFunc" class="fonterisco">Quantidade de peças por funcionário:</label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</ng-template>
 
 <!-- Sticky Footer -->
 <footer class="sticky-footer">

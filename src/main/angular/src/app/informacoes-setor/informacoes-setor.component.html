@@ -15,17 +15,17 @@
             <option *ngFor="let gerente of gerentes" (click)="selectGerente(gerente)">{{gerente.nome}}</option>
           </select>
         </div>
-        <div *ngIf="setorShow" class="col-md-4">
+        <div  class="col-md-4">
           <label for="setor">Setor</label>
-          <select required="required" id="setor" class="form-control">
+          <select [disabled]="!setorShow" required="required" id="setor" class="form-control">
             <option selected>Selecione..</option>
             <option *ngFor="let setor of gerente.setores" (click)="selectSetor(setor)">{{setor.nome}}</option>
           </select>
 
         </div>
-        <div *ngIf="setorShow" class="col-md-4">
+        <div  class="col-md-4">
           <label for="etapa">Etapa da Produção</label>
-          <select required="required" id="etapa" class="form-control">
+          <select [disabled]="!setorShow" required="required" id="etapa" class="form-control">
             <option selected>Selecione..</option>
             <option *ngFor="let etapa of etapas" (click)="selectEtapa(etapa)">{{etapa.nome}}</option>
           </select>
@@ -35,9 +35,9 @@
     </div>
     <div class="form-group">
       <div class="form-row">
-        <div *ngIf="setorShow" class="col-md-4">
+        <div  class="col-md-4">
           <label for="peca">Peça</label>
-          <select required="required" id="peca" class="form-control">
+          <select [disabled]="!setorShow" required="required" id="peca" class="form-control">
             <option selected>Selecione..</option>
             <option *ngFor="let peca of gerente.pecas">{{peca.descricao}}</option>
           </select>

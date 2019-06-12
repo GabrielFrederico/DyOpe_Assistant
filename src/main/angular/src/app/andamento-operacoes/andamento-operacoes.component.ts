@@ -37,6 +37,7 @@ export class AndamentoOperacoesComponent implements OnInit, OnDestroy {
   private cadastrado: boolean;
 
   isReadonly = true;
+  operacaoEscolhida: any;
 
   ngOnInit() {
     this.etapasproducao();
@@ -56,12 +57,8 @@ export class AndamentoOperacoesComponent implements OnInit, OnDestroy {
 
   }
 
-  openCadastro(cadastro) {
-    this.modalService.open(cadastro, {size: 'lg', ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
+  selectOperacao(operacao: any) {
+    this.operacaoEscolhida = operacao;
   }
 
   openInformacoes(content) {

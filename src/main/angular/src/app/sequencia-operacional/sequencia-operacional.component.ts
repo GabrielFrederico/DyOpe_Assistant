@@ -163,21 +163,31 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
   cadastrar() {
 
     this.listasuboperacoes.forEach((item, index) => {
+      item.id = null;
+      item.idEtapa = 0;
       item.operacao_id = this.operacaoEscolhida.id;
-      this.operacaoEscolhida.suboperacoes.push(item);
+      item.gerente_id = this.gerente.id;
     }, error => {
       console.log(error.error);
     });
-
+    this.operacaoEscolhida.suboperacoes = this.listasuboperacoes;
     this.operacaoEscolhida.etapa_producao_id = this.etapaproducao.id;
     this.operacaoEscolhida.peca_id = this.peca.id;
+
     this.peca.operacoes.push(this.operacaoEscolhida);
     /** this.peca.operacoes = this.peca.operacoes.filter(ope => {
      *  return ope.etapa_producao_id === this.etapaproducao.id;
      * });
      */
+    const date: Date = new Date();
     this.gerenteService.atualizarPeca(this.peca).pipe(first()).subscribe(data => {
       this.atualizar();
+      if (this.operacaoEscolhida.dataInicio === date || this.operacaoEscolhida.dataInicio >= date) {
+        this.gerente.operacoesAndamento.push(this.operacaoEscolhida);
+      }
+      if (this.operacaoEscolhida.dataInicio >= date) {
+        this.gerente.operacoesFazer.push(this.operacaoEscolhida);
+      }
     }, error => {
       console.log(error.error);
     });
@@ -217,8 +227,9 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
     return operacao.id;
   }
 
-  subopeEscolhida(subope: any) {
+  subopeEscolhida(subope: any, tempo: any) {
     this.suboperacaoEscolhida = subope;
+    this.suboperacaoEscolhida.tempoNesc = tempo;
 
   }
 
@@ -228,9 +239,8 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
 
 
     this.suboperacoes.forEach((item, index) => {
-      this.subope = item;
-      this.subope.id = null;
-      this.listasuboperacoes.push(this.subope);
+
+      this.listasuboperacoes.push(item);
 
 
     });

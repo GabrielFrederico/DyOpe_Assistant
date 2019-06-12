@@ -35,7 +35,7 @@
       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
         <a class="dropdown-item" href="javascript:void(0)" *ngFor="let peca of this.gerente.pecas"
            (click)="selectsPeca(peca)">{{peca.descricao}}</a>
-        <a class="dropdown-item" href="javascript:void(0)" *ngIf="gerente.pecas.length <= 0">Cadastre uma Peça</a>
+        <a class="dropdown-item" *ngIf="gerente.pecas.length <= 0">Cadastre uma Peça</a>
       </div>
     </div>
   </div>
@@ -76,12 +76,15 @@
                     <div class="form-label-group">
                       <input type="number" name="tempoOpe"
                              id="tempoOpe" value="{{suboperacao.tempoNesc}}"
-                             class="form-control" minlength="3"
+                             class="form-control" minlength="3" #tempo
                              autofocus="autofocus"
                              placeholder="Tempo" required="required">
                       <label for="tempoOpe">Tempo </label>
                     </div>
                   </div>
+                </div>
+                <div class="col-md-2">
+                  <a class="btn btn-info" href="javascript:void(0)" (click)="subopeEscolhida(suboperacao,tempo.value)">Editar</a>
                 </div>
                 <div class="col-md-1">
                   <a class="btn btn-danger" href="javascript:void(0)" (click)="listasuboperacoes.splice(i, 1)">-</a>
@@ -91,8 +94,8 @@
           </div>
           <a class="btn btn-info col-md-1" href="javascript:void(0)" (click)="openCadastro(cadastro)">+</a>
           <div class="card-footer bg-transparent border-info">
-              <input id="e" type="submit" class="btn btn-outline-success" href="javascript:void(0)" [disabled]="ope2"
-                 (click)="subopes()" value="Salvar">
+            <input id="e" type="submit" class="btn btn-outline-success" href="javascript:void(0)" [disabled]="ope2"
+                   (click)="subopes()" value="Salvar">
 
           </div>
         </div>
@@ -153,21 +156,38 @@
         <div class="card border-success mb-3 lista">
           <div class="card-body text-success">
             <div class="form-group">
-              <div class="form-row">
 
-                <div class="col-md-6">
-                  <div class="form-label-group">
-                    <input type="date" id="prazo" name="prazo" class="form-control"
-                           placeholder="Prazo:" [(ngModel)]="operacao.prazo"
-                    >
-                    <label for="prazo">Prazo:</label>
-                  </div>
+
+              <div class="col-md-6">
+                <div class="form-label-group">
+                  <input type="date" id="prazo" name="prazo" class="form-control"
+                         placeholder="Prazo:" [(ngModel)]="operacao.prazo">
+                  <label for="prazo">Prazo:</label>
                 </div>
               </div>
+              <div class="col-md-auto">
+                <div class="form-label-group">
+                  <input [readonly]="isReadonly" type="text" id="numFunNesc"
+                         class="form-control" value="{{operacaoEscolhida.numFuncionarios}}"
+                         placeholder="Funcionários necessários:" name="numFuncionarios"
+                         required="required">
+                  <label for="numFunNesc" class="fonterisco">Funcionários necessários:</label>
+                </div>
+              </div>
+              <div class="col-md-auto">
+                <div class="form-label-group">
+                  <input [readonly]="isReadonly" type="number" id="QtdPecasOpe"
+                         class="form-control" value="{{operacaoEscolhida.qtdPecasOpe}}"
+                         placeholder="Quantidade de peças por funcionário:" name="qtdPecasOpe"
+                         required="required">
+                  <label for="QtdPecasOpe" class="fonterisco">Quantidade de peças por funcionário:</label>
+                </div>
+              </div>
+
             </div>
             <a class="btn btn-outline-success list-group-item list-group-item-action"
-               (click)="openInformacoes(content)">
-              Ver dados
+            >
+              Abrir Planilha
             </a>
           </div>
         </div>
@@ -190,61 +210,6 @@
   <i class="fas fa-angle-up"></i>
 </a>
 
-
-<!--Modal Informações: -->
-<ng-template #content let-modal class="modal fade informations modal-dialog">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h4 class="modal-title" id="myLargeModalLabel">Informações da Operações:</h4>
-      <button type="button" (click)="modal.close('Save click')" class="close" data-dismiss="modal" aria-label="Close">
-        <span aria-hidden="true">×</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      <div class="card-body">
-        <form [noValidate]="$any(false)">
-          <div class="form-group">
-            <div class="form-row">
-              <div class="col-md-6">
-                <div class="form-label-group">
-                  <input [readonly]="isReadonly" type="text" id="custosOpe"
-                         class="form-control fa-credit-card"
-                         placeholder="Custos" name="custosOpe"
-                         required="required">
-                  <label for="custosOpe" class="fonterisco">Custos:</label>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <div class="form-row">
-              <div class="col-md-6">
-                <div class="form-label-group">
-                  <input [readonly]="isReadonly" type="text" id="FuncNesc"
-                         class="form-control" value="{{operacaoEscolhida.numFuncionarios}}"
-                         placeholder="Funcionários necessários:" name="numFuncionarios"
-                         required="required">
-                  <label for="FuncNesc" class="fonterisco">Funcionários necessários:</label>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-label-group">
-                  <input [readonly]="isReadonly" type="number" id="QtdPecasFunc"
-                         class="form-control" value="{{operacaoEscolhida.qtdPecasOpe}}"
-                         placeholder="Quantidade de peças por funcionário:" name="qtdPecasOpe"
-                         required="required">
-                  <label for="QtdPecasFunc" class="fonterisco">Quantidade de peças por funcionário:</label>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </form>
-      </div>
-    </div>
-  </div>
-</ng-template>
 
 <!--Modal Cadastro operações: -->
 
