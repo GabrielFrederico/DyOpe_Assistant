@@ -166,10 +166,11 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
       item.id = null;
       item.idEtapa = 0;
       item.operacao_id = this.operacaoEscolhida.id;
-      item.gerente_id = this.gerente.id;
+
     }, error => {
       console.log(error.error);
     });
+    this.operacaoEscolhida.gerente_id = this.gerente.id;
     this.operacaoEscolhida.suboperacoes = this.listasuboperacoes;
     this.operacaoEscolhida.etapa_producao_id = this.etapaproducao.id;
     this.operacaoEscolhida.peca_id = this.peca.id;
@@ -182,7 +183,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
     const date: Date = new Date();
     this.gerenteService.atualizarPeca(this.peca).pipe(first()).subscribe(data => {
       this.atualizar();
-      if (this.operacaoEscolhida.dataInicio === date || this.operacaoEscolhida.dataInicio >= date) {
+      if (this.operacaoEscolhida.dataInicio === date || this.operacaoEscolhida.dataInicio <= date) {
         this.gerente.operacoesAndamento.push(this.operacaoEscolhida);
       }
       if (this.operacaoEscolhida.dataInicio >= date) {
