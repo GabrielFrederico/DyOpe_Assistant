@@ -115,6 +115,12 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
             this.etapaproducao = etapaproducao;
             this.etapa = this.etapaproducao.id.toString();
             console.clear();
+            this.operacaoService.getOperacoesSub().subscribe(data => {
+              this.suboperacoes = data;
+
+            }, error => {
+              console.log(error.error);
+            });
           }
         });
       } else {
@@ -130,16 +136,9 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
     }, error => {
       console.log(error.error);
     });
-    if (this.etapaproducao.id === 5) {
 
-    }
-    this.operacaoService.getOperacoesSub().subscribe(data => {
-      this.suboperacoes = data;
 
-    }, error => {
-      console.log(error.error);
-    });
-   // alert(this.suboperacoes);
+    // alert(this.suboperacoes);
     this.carregado = true;
 
   }
@@ -228,12 +227,13 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
     this.escolheu = true;
 
 
-    for (const sub of this.suboperacoes) {
-        this.subope.descricao = sub.descricao;
-        this.listasuboperacoes.push(this.subope);
-      }
+    this.suboperacoes.forEach((item, index) => {
+      this.subope = item;
+      this.subope.id = null;
+      this.listasuboperacoes.push(this.subope);
 
 
+    });
 
   }
 
