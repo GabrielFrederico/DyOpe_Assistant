@@ -1,6 +1,6 @@
 package com.projeto.models;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -25,7 +25,7 @@ public class Operacao {
 	private Set<SubOperacao> suboperacoes = new HashSet<>();
 
 	
-	private java.sql.Date dataInicio;
+	private Date dataInicio;
 	private float numFuncionarios;
 	public float getNumFuncionarios() {
 		return numFuncionarios;
@@ -109,7 +109,7 @@ public class Operacao {
 		return dataInicio;
 	}
 
-	public void setDataInicio(java.sql.Date dataInicio) {
+	public void setDataInicio(Date dataInicio) {
 		this.dataInicio = dataInicio;
 	}
 

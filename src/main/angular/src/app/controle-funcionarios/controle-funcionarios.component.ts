@@ -23,12 +23,19 @@ export class ControleFuncionariosComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.info = {
+      token: this.token.getToken(),
+      username: this.token.getUsername(),
+      authorities: this.token.getAuthorities(),
+      senha: this.token.getPassword()
+    };
     this.naoAutenticado();
     this.setorEscolhido();
+
   }
 
   ngOnDestroy() {
-    this.sub.unsubscribe();
+    // this.sub.unsubscribe();
   }
 
   naoAutenticado() {

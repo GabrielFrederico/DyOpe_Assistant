@@ -170,8 +170,9 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
     }, error => {
       console.log(error.error);
     });
-    this.operacaoEscolhida.gerente_id = this.gerente.id;
+
     this.operacaoEscolhida.suboperacoes = this.listasuboperacoes;
+
     this.operacaoEscolhida.etapa_producao_id = this.etapaproducao.id;
     this.operacaoEscolhida.peca_id = this.peca.id;
 
@@ -180,24 +181,27 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
      *  return ope.etapa_producao_id === this.etapaproducao.id;
      * });
      */
+    this.atualizar();
     const date: Date = new Date();
-    this.gerenteService.atualizarPeca(this.peca).pipe(first()).subscribe(data => {
-      this.atualizar();
-      if (this.operacaoEscolhida.dataInicio === date || this.operacaoEscolhida.dataInicio <= date) {
-        this.gerente.operacoesAndamento.push(this.operacaoEscolhida);
-      }
-      if (this.operacaoEscolhida.dataInicio >= date) {
-        this.gerente.operacoesFazer.push(this.operacaoEscolhida);
-      }
-    }, error => {
-      console.log(error.error);
-    });
-    this.ope3 = true;
+    /**  this.gerenteService.atualizarPeca(this.peca).pipe(first()).subscribe(data => {
+     * this.atualizar();
+     * this.operacaoEscolhida.gerente_id = this.gerente.id;
+     * if (this.operacaoEscolhida.dataInicio === date || this.operacaoEscolhida.dataInicio <= date) {
+     * this.gerente.operacoesAndamento.push(this.operacaoEscolhida);
+     * }
+     * if (this.operacaoEscolhida.dataInicio >= date) {
+     * this.gerente.operacoesFazer.push(this.operacaoEscolhida);
+     * }
+     * }, error => {
+     * console.log(error.error);
+     * });
+     */
+
   }
 
   atualizar() {
     this.operacaoService.updateOperacao(this.operacaoEscolhida).pipe(first()).subscribe(data => {
-
+      this.ope3 = true;
       // this.router.navigate(['/gerenteindex/andamentooperacoes/', this.etapaproducao.etapaProducao]);
     }, error => {
       console.log(error.error);
@@ -208,7 +212,9 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
     this.listasuboperacoes.push(this.newsuboperacao);
   }
 
-  deletarSubOperacao() {
+  deletarSubOperacao(subope: any) {
+    this.suboperacaoEscolhida = subope;
+
   }
 
   cadastrarPeca() {
@@ -217,8 +223,10 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
     this.gerente.pecas.push(this.newpeca);
     this.gerenteService.cadastrarAlgo(this.gerente).pipe(first()).subscribe(data => {
       alert('Peça cadastrada com sucesso!');
-      this.modal = 'modal fade cadastrar-peca';
-      this.modalOpen = true;
+      this.router.navigateByUrl('/gerenteindex/homegerente', {skipLocationChange: true}).then(() =>
+        this.router.navigate(['/gerenteindex/operacoes/', this.etapaproducao.etapaProducao]));
+
+
     }, error => {
       alert(error);
     });
@@ -236,15 +244,15 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
 
   selectsPeca(peca: any) {
     this.peca = peca;
+
+    if (this.listasuboperacoes.length <= 0 && !this.escolheu) {
+
+      this.suboperacoes.forEach((item, index) => {
+        this.listasuboperacoes.push(item);
+
+      });
+    }
     this.escolheu = true;
-
-
-    this.suboperacoes.forEach((item, index) => {
-
-      this.listasuboperacoes.push(item);
-
-
-    });
 
   }
 

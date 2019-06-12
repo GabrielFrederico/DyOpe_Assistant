@@ -26,7 +26,8 @@
   <div class="col-md-3">
     <h3>{{etapaproducao.etapaProducao}}</h3>
   </div>
-  <div class="col-md-1">
+  <div class="col-md-2">
+
     <div class="dropdown">
       <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
               aria-haspopup="true" aria-expanded="false">
@@ -35,7 +36,7 @@
       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
         <a class="dropdown-item" href="javascript:void(0)" *ngFor="let peca of this.gerente.pecas"
            (click)="selectsPeca(peca)">{{peca.descricao}}</a>
-        <a class="dropdown-item" *ngIf="gerente.pecas.length <= 0">Cadastre uma Peça</a>
+        <span class="dropdown-item" *ngIf="gerente.pecas.length <= 0">Cadastre uma Peça</span>
       </div>
     </div>
   </div>
@@ -58,12 +59,12 @@
           <div class="card-header border-info">Operações</div>
           <div class="card-body text-secondary">
             <div class="form-group">
-              <div *ngFor="let suboperacao of listasuboperacoes; let i = index" class="row">
-                <div class="col-md-4">
+              <div *ngFor="let suboperacao of listasuboperacoes" class="row">
+                <div class="col-md-5">
                   <div class="form-group">
                     <div class="form-label-group">
                       <input type="text" name="escricao"
-                             id="dataescricao" value="{{suboperacao.descricao}}"
+                             id="dataescricao" value="{{suboperacao.descricao}}" [readonly]="isReadonly"
                              class="form-control" minlength="3"
                              autofocus="autofocus"
                              placeholder="Descricao" required="required">
@@ -71,28 +72,27 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-5">
                   <div class="form-group">
                     <div class="form-label-group">
                       <input type="number" name="tempoOpe"
                              id="tempoOpe" value="{{suboperacao.tempoNesc}}"
                              class="form-control" minlength="3" #tempo
                              autofocus="autofocus"
-                             placeholder="Tempo" required="required">
+                             placeholder="Tempo" required="required" (keypress)="subopeEscolhida(suboperacao,tempo.value)">
                       <label for="tempoOpe">Tempo </label>
                     </div>
                   </div>
                 </div>
-                <div class="col-md-2">
-                  <a class="btn btn-info" href="javascript:void(0)" (click)="subopeEscolhida(suboperacao,tempo.value)">Editar</a>
-                </div>
                 <div class="col-md-1">
-                  <a class="btn btn-danger" href="javascript:void(0)" (click)="listasuboperacoes.splice(i, 1)">-</a>
+                  <a class="btn btn-danger" href="javascript:void(0)" (click)="deletarSubOperacao(suboperacao)" >-</a>
                 </div>
               </div>
             </div>
           </div>
-          <a class="btn btn-info col-md-1" href="javascript:void(0)" (click)="openCadastro(cadastro)">+</a>
+          <div class="col-md-1">
+          <a class="btn btn-info" href="javascript:void(0)" (click)="openCadastro(cadastro)">+</a>
+          </div>
           <div class="card-footer bg-transparent border-info">
             <input id="e" type="submit" class="btn btn-outline-success" href="javascript:void(0)" [disabled]="ope2"
                    (click)="subopes()" value="Salvar">
@@ -158,10 +158,10 @@
             <div class="form-group">
 
 
-              <div class="col-md-6">
+              <div class="col-md-auto">
                 <div class="form-label-group">
-                  <input type="date" id="prazo" name="prazo" class="form-control"
-                         placeholder="Prazo:" [(ngModel)]="operacao.prazo">
+                  <input [readonly]="isReadonly" type="date" id="prazo" name="prazo" class="form-control"
+                         placeholder="Prazo:" [(ngModel)]="operacaoEscolhida.prazo">
                   <label for="prazo">Prazo:</label>
                 </div>
               </div>
@@ -274,7 +274,7 @@
       </div>
       <div class="modal-body">
         <div class="card-body">
-          <form (ngSubmit)="cadastrarPeca()" [noValidate]="$any(false)">
+          <form  [noValidate]="$any(false)">
             <div class="form-group">
               <div class="col-md-auto">
                 <div class="form-label-group">
@@ -287,7 +287,7 @@
             </div>
             <div class="modal-footer col-md-12">
               <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-              <input class="btn btn-primary" type="submit" value="Cadastrar">
+              <input class="btn btn-primary" type="submit"  (click)="cadastrarPeca()" data-dismiss="modal" value="Cadastrar">
             </div>
           </form>
         </div>
