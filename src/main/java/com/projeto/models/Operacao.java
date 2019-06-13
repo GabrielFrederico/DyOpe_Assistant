@@ -27,56 +27,73 @@ public class Operacao {
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "operacao_suboperacoes", joinColumns = @JoinColumn(name = "operacao_id"), inverseJoinColumns = @JoinColumn(name = "suboperacao_id"))
 	private Set<SubOperacao> suboperacoes = new HashSet<>();
-
-	
+	private String descricao;
 	private Date dataInicio;
-	private float numFuncionarios;
-	public float getNumFuncionarios() {
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+	private int numFuncionarios;
+
+	public int getNumFuncionarios() {
 		return numFuncionarios;
 	}
 
-	public void setNumFuncionarios(float numFuncionarios) {
+	public void setNumFuncionarios(int numFuncionarios) {
 		this.numFuncionarios = numFuncionarios;
 	}
-	
-public static Operacao calcular(@RequestBody Operacao operacao) {
-	Calendar inicio = Calendar.getInstance();
-	java.util.Date fim = new java.util.Date();
-	inicio.setTime(operacao.getDataInicio());
-	
-	int diaSemana = 0;
-    ArrayList<Integer> feriados= new ArrayList<>();
-    
-	int tempos = 0,diasNece = 0;
-	for (SubOperacao subope : operacao.getSuboperacoes()) {
-		tempos = subope.getTempoNesc();
-		tempos += tempos;
-	}
-	
-	do {
-		inicio.add(Calendar.DAY_OF_MONTH, 1);
-		if(inicio.get(Calendar.DAY_OF_WEEK) != Calendar.SATURDAY && inicio.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY
-				&& !feriados.contains((Integer) inicio.get(Calendar.DAY_OF_YEAR))) {
-			++diaSemana;
-		}
-		
-	} while (inicio.get(Calendar.DAY_OF_WEEK) != Calendar.SATURDAY && inicio.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY
-			&& !feriados.contains((Integer) inicio.get(Calendar.DAY_OF_YEAR))) ;
-	
 
-	float result, funcCalc, funcionariosNecessários;
-	result = tempos * operacao.getLoteProducao();
-	diasNece = Math.round(result/operacao.getTempoTrab());
-	inicio.add(Calendar.DAY_OF_MONTH, diasNece + diaSemana );
-	fim = inicio.getTime();
-	funcCalc = operacao.getNumFuncionariosDisponiveis() * operacao.getTempoTrab();
-	funcionariosNecessários = result / funcCalc;
-	operacao.setNumFuncionarios(funcionariosNecessários);
-    Date prazo = new Date(fim.getTime());
-    operacao.setPrazo(prazo);
-	return operacao;
-	
-}
+	public static Operacao calcular(@RequestBody Operacao operacao) {
+		Calendar inicio = Calendar.getInstance();
+		java.util.Date fim = new java.util.Date();
+		inicio.setTime(operacao.getDataInicio());
+
+		int diaSemana = 0;
+		ArrayList<Integer> feriados = new ArrayList<>();
+		feriados.add(20);
+
+		int tempos = 0, diasNece = 0, funcionariosNecessários = 0;
+		for (SubOperacao subope : operacao.getSuboperacoes()) {
+			tempos = subope.getTempoNesc();
+			tempos += tempos;
+		}
+
+		float result, funcCalc, prodHora, calcProHora;
+		result = tempos * operacao.getLoteProducao();
+		diasNece = Math.round(result / operacao.getTempoTrab());
+
+		do {
+			inicio.add(Calendar.DAY_OF_MONTH, 1);
+			if (inicio.get(Calendar.DAY_OF_WEEK) != Calendar.SATURDAY
+					&& inicio.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY
+					&& !feriados.contains((Integer) inicio.get(Calendar.DAY_OF_YEAR))) {
+				++diaSemana;
+			}
+
+		} while (inicio.get(Calendar.DAY_OF_WEEK) != Calendar.SATURDAY
+				&& inicio.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY
+				&& !feriados.contains((Integer) inicio.get(Calendar.DAY_OF_YEAR)));
+
+		inicio.add(Calendar.DAY_OF_MONTH, diasNece + diaSemana);
+       
+		fim = inicio.getTime();
+		
+		funcCalc = operacao.getNumFuncionariosDisponiveis() * operacao.getTempoTrab();
+		funcionariosNecessários = Math.round(result / funcCalc);
+		calcProHora = funcionariosNecessários* operacao.getTempoTrab();
+		prodHora = calcProHora/funcionariosNecessários/(operacao.getTempoTrab()/60);
+		operacao.setNumFuncionarios(funcionariosNecessários);
+		Date prazo = new Date(fim.getTime());
+		operacao.setPrazo(prazo);
+		operacao.setProducaoHora(prodHora);
+		return operacao;
+
+	}
 
 	public Set<SubOperacao> getSuboperacoes() {
 		return suboperacoes;
@@ -86,18 +103,12 @@ public static Operacao calcular(@RequestBody Operacao operacao) {
 		this.suboperacoes = suboperacoes;
 	}
 
-	
-
-
-
 	private java.sql.Date prazo;
 
 	private float custosOpe;
 
 	private int loteProducao;
 	private int tempoTrab;
-
-	
 
 	public int getTempoTrab() {
 		return tempoTrab;

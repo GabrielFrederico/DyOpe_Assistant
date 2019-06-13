@@ -50,6 +50,8 @@ public class OperacaoController {
 	@RequestMapping(method = RequestMethod.PUT, path = "atualizar")
 	@PreAuthorize("hasRole('GERENTE')")
 	public Operacao update(@RequestBody Operacao operacao) {
+
+		Operacao.calcular(operacao);
 		operacaoRepository.save(operacao);
 		return operacao;
 	}
