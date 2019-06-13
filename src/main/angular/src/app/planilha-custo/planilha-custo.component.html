@@ -2,16 +2,30 @@
 
 <title>Operações</title>
 
- <!--<nav aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item active" aria-current="page"><a
-      [routerLink]="['/gerenteindex/operacoes', etapaproducao.etapaProducao]">Sequência Operacional</a>
-    </li>
-    <li class="breadcrumb-item active" aria-current="page"><a
-      [routerLink]="['/gerenteindex/andamentooperacoes', etapaproducao.etapaProducao]">Andamento</a>
-    </li>
-  </ol>
+<!--<nav aria-label="breadcrumb">
+ <ol class="breadcrumb">
+   <li class="breadcrumb-item active" aria-current="page"><a
+     [routerLink]="['/gerenteindex/operacoes', etapaproducao.etapaProducao]">Sequência Operacional</a>
+   </li>
+   <li class="breadcrumb-item active" aria-current="page"><a
+     [routerLink]="['/gerenteindex/andamentooperacoes', etapaproducao.etapaProducao]">Andamento</a>
+   </li>
+ </ol>
 </nav> -->
+
+<form class="planilhateste" [noValidate]="$any(false)" (ngSubmit)="f.form.valid" #f="ngForm">
+
+  <div class="form-group">
+    <div class="form-label-group">
+      <input type="text" id="inputEmail" name="nomeUsuario" class="form-control col-sm-3" [autofocus]="true"
+             placeholder="Usuario" required="required">
+      <label for="inputEmail">Chave de Acesso</label>
+    </div>
+  </div>
+
+  <input class="btn btn-info btn-block col-sm-3" type="submit" value="Acessar">
+
+</form>
 
 <hr>
 

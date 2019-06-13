@@ -2,10 +2,11 @@
   max-width: 24rem;
 }
 
-.operacoes{
-max-width: 28rem;
+.operacoes {
+  max-width: 28rem;
 
 }
+
 .menudrop {
   position: absolute;
   display: none;
@@ -20,11 +21,11 @@ max-width: 28rem;
   font-weight: 500;
 }
 
-.inputsenha{
+.inputsenha {
   width: 85%;
 }
 
-.separa{
+.separa {
   margin-top: 5%;
 }
 
@@ -35,9 +36,11 @@ max-width: 28rem;
 h1 {
   color: #00dcff;
 }
-h3{
+
+h3 {
   color: #00dcff;
 }
+
 .pos {
 
   right: -3.9rem;
@@ -81,13 +84,18 @@ div.menu_index span {
 
 .testando123 {
   display: inline-block;
-  width: 100% ;
+  width: 100%;
+}
+
+.planilhateste {
+  text-align: -webkit-center;
 }
 
 @media screen and (max-width: 570px) {
   .tam {
     font-size: 140%;
   }
+
   .alertas {
     width: 700%;
     left: -554%;
@@ -138,6 +146,7 @@ div.menu_index span {
     justify-content: center;
     padding-bottom: 5%;
   }
+
   .container {
     margin-left: 15%;
   }
