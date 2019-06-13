@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.projeto.models.Operacao;
 import com.projeto.models.Peca;
+import com.projeto.repository.OperacaoRepository;
 import com.projeto.repository.PecaRepository;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -22,6 +24,8 @@ public class PecaController {
 
 	@Autowired
 	PecaRepository pecaRepository;
+	@Autowired
+	OperacaoRepository operacaoRepository;
 
 	@RequestMapping(method = RequestMethod.POST, value = "/cadastrarpeca")
 	public Peca save(@Valid @RequestBody Peca peca) {
@@ -48,6 +52,14 @@ public class PecaController {
 
 	@RequestMapping(method = RequestMethod.PUT)
 	public Peca update(@RequestBody Peca peca) {
+		
+		Operacao operacao = null;
+
+		for (Operacao element : peca.getOperacoes()) {
+			operacao = element;
+		}
+		Operacao.calcular(operacao);
+		// operacaoRepository.save(operacao);
 		pecaRepository.save(peca);
 		return peca;
 	}

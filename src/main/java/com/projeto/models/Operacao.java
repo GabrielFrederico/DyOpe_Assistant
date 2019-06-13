@@ -1,6 +1,8 @@
 package com.projeto.models;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,6 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
+
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Entity
 public class Operacao {
@@ -35,7 +39,44 @@ public class Operacao {
 		this.numFuncionarios = numFuncionarios;
 	}
 	
+public static Operacao calcular(@RequestBody Operacao operacao) {
+	Calendar inicio = Calendar.getInstance();
+	java.util.Date fim = new java.util.Date();
+	inicio.setTime(operacao.getDataInicio());
+	
+	int diaSemana = 0;
+    ArrayList<Integer> feriados= new ArrayList<>();
+    
+	int tempos = 0,diasNece = 0;
+	for (SubOperacao subope : operacao.getSuboperacoes()) {
+		tempos = subope.getTempoNesc();
+		tempos += tempos;
+	}
+	
+	do {
+		inicio.add(Calendar.DAY_OF_MONTH, 1);
+		if(inicio.get(Calendar.DAY_OF_WEEK) != Calendar.SATURDAY && inicio.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY
+				&& !feriados.contains((Integer) inicio.get(Calendar.DAY_OF_YEAR))) {
+			++diaSemana;
+		}
+		
+	} while (inicio.get(Calendar.DAY_OF_WEEK) != Calendar.SATURDAY && inicio.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY
+			&& !feriados.contains((Integer) inicio.get(Calendar.DAY_OF_YEAR))) ;
+	
 
+	float result, funcCalc, funcionariosNecessários;
+	result = tempos * operacao.getLoteProducao();
+	diasNece = Math.round(result/operacao.getTempoTrab());
+	inicio.add(Calendar.DAY_OF_MONTH, diasNece + diaSemana );
+	fim = inicio.getTime();
+	funcCalc = operacao.getNumFuncionariosDisponiveis() * operacao.getTempoTrab();
+	funcionariosNecessários = result / funcCalc;
+	operacao.setNumFuncionarios(funcionariosNecessários);
+    Date prazo = new Date(fim.getTime());
+    operacao.setPrazo(prazo);
+	return operacao;
+	
+}
 
 	public Set<SubOperacao> getSuboperacoes() {
 		return suboperacoes;

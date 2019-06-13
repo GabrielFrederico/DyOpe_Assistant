@@ -181,21 +181,21 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
      *  return ope.etapa_producao_id === this.etapaproducao.id;
      * });
      */
-    this.atualizar();
+
     const date: Date = new Date();
-    /**  this.gerenteService.atualizarPeca(this.peca).pipe(first()).subscribe(data => {
-     * this.atualizar();
-     * this.operacaoEscolhida.gerente_id = this.gerente.id;
-     * if (this.operacaoEscolhida.dataInicio === date || this.operacaoEscolhida.dataInicio <= date) {
-     * this.gerente.operacoesAndamento.push(this.operacaoEscolhida);
-     * }
-     * if (this.operacaoEscolhida.dataInicio >= date) {
-     * this.gerente.operacoesFazer.push(this.operacaoEscolhida);
-     * }
-     * }, error => {
-     * console.log(error.error);
-     * });
-     */
+    this.gerenteService.atualizarPeca(this.peca).pipe(first()).subscribe(data => {
+     // this.atualizar();
+      this.operacaoEscolhida.gerente_id = this.gerente.id;
+      if (this.operacaoEscolhida.dataInicio === date || this.operacaoEscolhida.dataInicio <= date) {
+        this.gerente.operacoesAndamento.push(this.operacaoEscolhida);
+      }
+      if (this.operacaoEscolhida.dataInicio >= date) {
+        this.gerente.operacoesFazer.push(this.operacaoEscolhida);
+      }
+    }, error => {
+      console.log(error.error);
+    });
+
 
   }
 

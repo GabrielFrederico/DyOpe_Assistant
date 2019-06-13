@@ -9,6 +9,7 @@ import com.projeto.models.Operacao;
 public interface OperacaoRepository extends CrudRepository<Operacao, Serializable>{
 
 	Operacao findById(long id);
+     
 
 	
 }
