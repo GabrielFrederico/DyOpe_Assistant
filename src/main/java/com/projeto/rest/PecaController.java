@@ -52,14 +52,7 @@ public class PecaController {
 
 	@RequestMapping(method = RequestMethod.PUT)
 	public Peca update(@RequestBody Peca peca) {
-		
-		Operacao operacao = null;
 
-		for (Operacao element : peca.getOperacoes()) {
-			operacao = element;
-		}
-		Operacao.calcular(operacao);
-		// operacaoRepository.save(operacao);
 		pecaRepository.save(peca);
 		return peca;
 	}

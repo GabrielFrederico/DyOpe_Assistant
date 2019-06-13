@@ -10,16 +10,16 @@
        aria-controls="nav-home" aria-selected="true">Andamento</a>
   </div>
 </nav>
-<hr>
+
 <h3>{{etapaproducao.etapaProducao}}</h3>
-<hr>
+
 <div class="row">
   <div class="col-sm-4">
     <div class="card border-info mb-3 lista">
       <div class="card-header border-info">Operações a fazer</div>
       <div class="card-body text-secondary">
         <a *ngFor="let operacao of gerente.operacoesFazer"
-           class="btn btn-outline-info list-group-item list-group-item-action" (click)="openInformacoes(content)">{{operacao.id}}</a>
+           class="btn btn-outline-info list-group-item list-group-item-action" (click)="openInformacoes(content)">{{operacao.descricao}}</a>
         <a *ngIf="gerente.operacoesFazer.length <= 0"
            class="btn btn-outline-info list-group-item list-group-item-action">Nenhuma Operação a fazer</a>
       </div>
@@ -32,7 +32,7 @@
       <div class="card-header border-primary">Operações em andamento</div>
       <div class="card-body text-primary">
         <a class="btn btn-outline-primary list-group-item list-group-item-action" (click)="openInformacoes(content)" *ngFor="let operacao of gerente.operacoesAndamento">
-          {{operacao.id}}
+          {{operacao.descricao}}
         </a>
         <a *ngIf="gerente.operacoesAndamento.length <= 0"
            class="btn btn-outline-primary list-group-item list-group-item-action">Nenhuma Operação em andamento</a>
@@ -46,7 +46,7 @@
       <div class="card-header border-warning">Operações no Prazo</div>
       <div class="card-body text-warning">
         <a class="btn btn-outline-warning list-group-item list-group-item-action " (click)="openInformacoes(content)" *ngFor="let operacao of gerente.operacoesPrazo">
-          {{operacao.id}}
+          {{operacao.descricao}}
         </a>
 
         <a *ngIf="gerente.operacoesAndamento.length <= 0"
@@ -68,45 +68,156 @@
     </div>
     <div class="modal-body">
       <div class="card-body">
-        <form [noValidate]="$any(false)">
-          <div class="form-group">
-            <div class="form-row">
-              <div class="col-md-6">
-                <div class="form-label-group">
-                  <input [readonly]="isReadonly" type="text" id="custosOpe"
-                         class="form-control fa-credit-card"
-                         placeholder="Custos" name="custosOpe"
-                         required="required">
-                  <label for="custosOpe" class="fonterisco">Custos:</label>
+        <div class="card-header">Sequencia Operacional</div>
+        <div class="card-body border-info">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="card border-info mb-3 operacoes">
+                <div class="card-header border-info">Operações</div>
+                <div class="card-body text-secondary">
+                  <div class="form-group">
+                    <div *ngFor="let suboperacao of operacaoEscolhida.suboperacoes" class="row">
+                      <div class="col-md-5">
+                        <div class="form-group">
+                          <div class="form-label-group">
+                            <input type="text" name="escricao"
+                                   id="dataescricao" value="{{suboperacao.descricao}}" [readonly]="isReadonly"
+                                   class="form-control" minlength="3"
+                                   autofocus="autofocus"
+                                   placeholder="Descricao" required="required">
+                            <label for="dataescricao">Descrição</label>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-5">
+                        <div class="form-group">
+                          <div class="form-label-group">
+                            <input type="number" name="tempoOpe"
+                                   id="tempoOpe" [(ngModel)]="suboperacao.tempoNesc"
+                                   class="form-control" minlength="3" #tempo
+                                   autofocus="autofocus"
+                                   placeholder="Tempo" required="required">
+                            <label for="tempoOpe">Tempo </label>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-1">
+                        <a class="btn btn-danger" href="javascript:void(0)">-</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-1">
+                  <a class="btn btn-info" href="#" data-toggle="modal"
+                     data-target=".cadastro-operacoes" >+</a>
+                </div>
+                <div class="card-footer bg-transparent border-info">
+
+
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <div class="card border-warning mb-3 operacoes">
+                <div class="card-body text-warning">
+                  <div class="form-group">
+                    <div class="col-md-auto">
+                      <div class="form-label-group">
+                        <input type="number" id="LoteProdu"
+                               class="form-control"
+                               placeholder="Lote de Produção" name="loteProducao" [(ngModel)]="operacaoEscolhida.loteProducao"
+                               required="required">
+                        <label for="LoteProdu" class="fonterisco">Lote de Produção:</label>
+                      </div>
+                    </div>
+                    <div class="col-md-auto">
+                      <div class="form-label-group">
+                        <input type="number" id="numFun"
+                               class="form-control" [(ngModel)]="operacaoEscolhida.numFuncionariosDisponiveis"
+                               placeholder="N° de Funcionários" name="numFun"
+                               required="required">
+                        <label for="numFun" class="fonterisco">N° de Funcionários</label>
+                      </div>
+                    </div>
+                    <div class="col-md-auto">
+                      <div class="form-group">
+                        <div class="form-label-group">
+                          <input type="number" name="tempoTrab"
+                                 id="tempoTrab"
+                                 class="form-control" minlength="3"
+                                 autofocus="autofocus" [(ngModel)]="operacaoEscolhida.tempoTrab"
+                                 placeholder="Tempo Trabalho" required="required">
+                          <label for="tempoTrab">Tempo trabalhado</label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-auto">
+                      <div class="form-label-group">
+                        <input type="date" id="datainici" name="dataInicio" class="form-control"
+                               placeholder="Data Inicio:" [(ngModel)]="operacaoEscolhida.dataInicio"
+                               required="required">
+                        <label for="datainici">Data Inicio:</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-5" >
+
+              <div class="card border-success mb-3 lista">
+                <div class="card-body text-success">
+                  <div class="form-group">
+
+
+                    <div class="col-md-auto">
+                      <div class="form-label-group">
+                        <input [readonly]="isReadonly" type="date" id="prazo" name="prazo" class="form-control"
+                               placeholder="Prazo:" [(ngModel)]="operacaoEscolhida.prazo">
+                        <label for="prazo">Prazo:</label>
+                      </div>
+                    </div>
+                    <div class="col-md-auto">
+                      <div class="form-label-group">
+                        <input [readonly]="isReadonly" type="text" id="numFunNesc"
+                               class="form-control" value="{{operacaoEscolhida.numFuncionarios}}"
+                               placeholder="Funcionários necessários:" name="numFuncionarios"
+                               required="required">
+                        <label for="numFunNesc" class="fonterisco">Funcionários necessários:</label>
+                      </div>
+                    </div>
+                    <div class="col-md-auto">
+                      <div class="form-label-group">
+                        <input [readonly]="isReadonly" type="text" id="QtdPecasOpe"
+                               class="form-control" value="{{operacaoEscolhida.qtdPecasOpe}} Peças"
+                               placeholder="Peças por funcionário:" name="qtdPecasOpe"
+                               required="required">
+                        <label for="QtdPecasOpe" class="fonterisco">Peças por funcionário:</label>
+                      </div>
+                    </div>
+                    <div class="col-md-auto">
+                      <div class="form-label-group">
+                        <input [readonly]="isReadonly" type="text" id="producaoHora"
+                               class="form-control" value="{{operacaoEscolhida.producaoHora}} Peças"
+                               placeholder="Quantidade de peças por funcionário:" name="producaoHora"
+                               required="required">
+                        <label for="producaoHora" class="fonterisco">Produção por hora:</label>
+                      </div>
+                    </div>
+
+
+                  </div>
+                  <a class="btn btn-outline-success list-group-item list-group-item-action"
+                  >
+                    Abrir Planilha
+                  </a>
                 </div>
               </div>
             </div>
           </div>
-
-          <div class="form-group">
-            <div class="form-row">
-              <div class="col-md-6">
-                <div class="form-label-group">
-                  <input [readonly]="isReadonly" type="text" id="FuncNesc"
-                         class="form-control" value="{{operacaoEscolhida.numFuncionarios}}"
-                         placeholder="Funcionários necessários:" name="numFuncionarios"
-                         required="required">
-                  <label for="FuncNesc" class="fonterisco">Funcionários necessários:</label>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-label-group">
-                  <input [readonly]="isReadonly" type="number" id="QtdPecasFunc"
-                         class="form-control" value="{{operacaoEscolhida.qtdPecasOpe}}"
-                         placeholder="Quantidade de peças por funcionário:" name="qtdPecasOpe"
-                         required="required">
-                  <label for="QtdPecasFunc" class="fonterisco">Quantidade de peças por funcionário:</label>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </form>
+        </div>
       </div>
     </div>
   </div>

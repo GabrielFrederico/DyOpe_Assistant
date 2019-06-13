@@ -20,7 +20,6 @@
    </li>
  </ol>
 </nav> -->
-<hr>
 
 <div class="row" *ngIf="gerente.pecas">
   <div class="col-md-3">
@@ -79,19 +78,20 @@
                              id="tempoOpe" [(ngModel)]="suboperacao.tempoNesc"
                              class="form-control" minlength="3" #tempo
                              autofocus="autofocus"
-                             placeholder="Tempo" required="required" >
+                             placeholder="Tempo" required="required">
                       <label for="tempoOpe">Tempo </label>
                     </div>
                   </div>
                 </div>
                 <div class="col-md-1">
-                  <a class="btn btn-danger" href="javascript:void(0)" (click)="deletarSubOperacao(suboperacao)" >-</a>
+                  <a class="btn btn-danger" href="javascript:void(0)" (click)="deletarSubOperacao(suboperacao)">-</a>
                 </div>
               </div>
             </div>
           </div>
           <div class="col-md-1">
-          <a class="btn btn-info" href="javascript:void(0)" (click)="openCadastro(cadastro)">+</a>
+            <a class="btn btn-info" href="#" data-toggle="modal"
+               data-target=".cadastro-operacoes" >+</a>
           </div>
           <div class="card-footer bg-transparent border-info">
             <input id="e" type="submit" class="btn btn-outline-success" href="javascript:void(0)" [disabled]="ope2"
@@ -161,14 +161,14 @@
               <div class="col-md-auto">
                 <div class="form-label-group">
                   <input [readonly]="isReadonly" type="date" id="prazo" name="prazo" class="form-control"
-                         placeholder="Prazo:" [(ngModel)]="operacaoEscolhida.prazo">
+                         placeholder="Prazo:" [(ngModel)]="resultadoOpe.prazo">
                   <label for="prazo">Prazo:</label>
                 </div>
               </div>
               <div class="col-md-auto">
                 <div class="form-label-group">
                   <input [readonly]="isReadonly" type="text" id="numFunNesc"
-                         class="form-control" value="{{operacaoEscolhida.numFuncionarios}}"
+                         class="form-control" value="{{resultadoOpe.numFuncionarios}}"
                          placeholder="Funcionários necessários:" name="numFuncionarios"
                          required="required">
                   <label for="numFunNesc" class="fonterisco">Funcionários necessários:</label>
@@ -177,12 +177,22 @@
               <div class="col-md-auto">
                 <div class="form-label-group">
                   <input [readonly]="isReadonly" type="number" id="QtdPecasOpe"
-                         class="form-control" value="{{operacaoEscolhida.qtdPecasOpe}}"
-                         placeholder="Quantidade de peças por funcionário:" name="qtdPecasOpe"
+                         class="form-control" value="{{resultadoOpe.qtdPecasOpe}} Peças"
+                         placeholder="Peças por funcionário:" name="qtdPecasOpe"
                          required="required">
-                  <label for="QtdPecasOpe" class="fonterisco">Quantidade de peças por funcionário:</label>
+                  <label for="QtdPecasOpe" class="fonterisco">Peças por funcionário:</label>
                 </div>
               </div>
+              <div class="col-md-auto">
+                <div class="form-label-group">
+                  <input [readonly]="isReadonly" type="number" id="producaoHora"
+                         class="form-control" value="{{resultadoOpe.producaoHora}} Peças"
+                         placeholder="Quantidade de peças por funcionário:" name="producaoHora"
+                         required="required">
+                  <label for="producaoHora" class="fonterisco">Produção por hora:</label>
+                </div>
+              </div>
+
 
             </div>
             <a class="btn btn-outline-success list-group-item list-group-item-action"
@@ -213,52 +223,57 @@
 
 <!--Modal Cadastro operações: -->
 
-<ng-template let-modal #cadastro class="modal fade cadastro-operacoes modal-dialog modal-lg">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h4 class="modal-title" id="cadastrooperacoes">Cadastro de Operações:</h4>
-      <button type="button" (click)="modal.close()" #closeModal class="close" data-dismiss="modal" aria-label="Close">
-        <span aria-hidden="true">×</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      <div class="card-body">
-        <form #cadastrarOperacao="ngForm" [noValidate]="$any(false)" (ngSubmit)="cadastrarSubOperacao()">
-          <div class="form-group">
-            <div class="form-row">
-              <div class="col-md-6">
-                <div class="form-label-group">
-                  <input type="text" required="required" name="descricao" [(ngModel)]="newsuboperacao.descricao"
-                         class="form-control"
-                         id="DescricaoOp">
-                  <label for="DescricaoOp">Descrição da operação:</label>
-                </div>
-              </div>
+<div class="modal fade cadastro-operacoes" tabindex="-1" role="dialog" aria-labelledby="modalpeca"
+     aria-hidden="true">
+  <div class="modal-dialog modal-body">
 
-              <div class="col-md-6">
-                <div class="form-label-group">
-                  <input type="number" id="tempo" name="tempo" class="form-control"
-                         placeholder="Tempo" [(ngModel)]="newsuboperacao.tempoNesc"
-                         required="required">
-                  <label for="tempo">Tempo:</label>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="cadastrooperacoes">Cadastro de Operações:</h4>
+        <button type="button" #closeModal class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="card-body">
+          <form #cadastrarOperacao="ngForm" [noValidate]="$any(false)">
+            <div class="form-group">
+              <div class="form-row">
+                <div class="col-md-6">
+                  <div class="form-label-group">
+                    <input type="text" required="required" name="descricao" [(ngModel)]="newsuboperacao.descricao"
+                           class="form-control"
+                           id="DescricaoOp">
+                    <label for="DescricaoOp">Descrição da operação:</label>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-label-group">
+                    <input type="number" id="tempo" name="tempo" class="form-control"
+                           placeholder="Tempo" [(ngModel)]="newsuboperacao.tempoNesc"
+                           required="required">
+                    <label for="tempo">Tempo:</label>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          <div class="modal-footer col-md-12">
-            <button class="btn btn-secondary" (click)="modal.close()" type="button" data-dismiss="modal">Cancelar
-            </button>
-            <input class="btn btn-primary" type="submit" value="Cadastrar">
-          </div>
-          <div *ngIf="cadastrarOperacao.submitted && erro" class="alert alert-warning separa">
-            Cadastro Falhou!<br/>{{errorMessage}}
-          </div>
-        </form>
+            <div class="modal-footer col-md-12">
+              <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar
+              </button>
+              <input class="btn btn-primary" type="submit" (click)="cadastrarSubOperacao()" data-dismiss="modal"
+                     value="Cadastrar">
+            </div>
+            <div *ngIf="cadastrarOperacao.submitted && erro" class="alert alert-warning separa">
+              Cadastro Falhou!<br/>{{errorMessage}}
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   </div>
-</ng-template>
+</div>
 
 <!-- cadastro de peça -->
 <div class="modal fade cadastrar-peca" tabindex="-1" role="dialog" aria-labelledby="modalpeca"
@@ -274,7 +289,7 @@
       </div>
       <div class="modal-body">
         <div class="card-body">
-          <form  [noValidate]="$any(false)">
+          <form [noValidate]="$any(false)">
             <div class="form-group">
               <div class="col-md-auto">
                 <div class="form-label-group">
@@ -287,7 +302,8 @@
             </div>
             <div class="modal-footer col-md-12">
               <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-              <input class="btn btn-primary" type="submit"  (click)="cadastrarPeca()" data-dismiss="modal" value="Cadastrar">
+              <input class="btn btn-primary" type="submit" (click)="cadastrarPeca()" data-dismiss="modal"
+                     value="Cadastrar">
             </div>
           </form>
         </div>

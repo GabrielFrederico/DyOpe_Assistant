@@ -24,13 +24,17 @@ export class InformacoesSetorComponent implements OnInit {
   form: any = {};
   funcionario: any;
   gerente: any;
-  setor: any;
+  setor: any = {};
   public isCollapsed = false;
   gerentes: any;
+  peca: any ;
+  subope: any;
+  ope: any;
+  showOpe = false;
   etapas: any;
   closeResult: string;
   informacao: any = {};
-
+  showsubope = false;
   public validado: boolean;
   setorShow = false;
   etapa: AnimationPlayState;
@@ -62,13 +66,30 @@ export class InformacoesSetorComponent implements OnInit {
 
   selectSetor(setor: any) {
     this.setor = setor;
+    this.funcionario.setor_id = this.setor.id;
+    this.setor.funcionarios.push(this.funcionario);
   }
 
   selectEtapa(etapa: any) {
     this.etapa = etapa;
   }
 
+  selectPeca(peca: any) {
+    this.peca = peca;
+    this.showOpe = true;
+  }
+
+  selectSubOpe(sub: any) {
+    this.subope = sub;
+  }
+
+  selectOpe(ope: any) {
+    this.ope = ope;
+    this.showsubope = true;
+  }
+
   save() {
+
     this.informacao.funcionario_id = this.funcionario.id;
     this.informacao.setor_id = this.setor.id;
     this.informacao.gerente_id = this.gerente.id;

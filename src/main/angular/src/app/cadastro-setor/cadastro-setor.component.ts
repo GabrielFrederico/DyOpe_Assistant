@@ -21,7 +21,7 @@ export class CadastroSetorComponent implements OnInit {
   public validado: boolean;
   public etapas: any;
   // tslint:disable-next-line:variable-name
-  public etapa_id: number;
+  public etapa: any;
 
   ngOnInit() {
     this.etapaService.getTiposOperacoes().subscribe(data => {
@@ -43,13 +43,13 @@ export class CadastroSetorComponent implements OnInit {
               private router: Router, private etapaService: CadastroOperacaoService, private gerenteService: GerenteService, private setorservice: CadastroSetorService, private token: TokenStorageService) {
   }
 
-  selectEtapa(etapa: number) {
-    this.etapa_id = etapa;
+  selectEtapa(etapa: any) {
+    this.etapa = etapa;
   }
 
   save() {
     this.setor.gerente_id = this.gerente.id;
-    this.setor.etapaproducao_id = this.etapa_id;
+    this.setor.etapaproducao_id = this.etapa.id;
     this.gerente.setores.push(this.setor);
     this.gerenteService.cadastrarAlgo(this.gerente).pipe(first()).subscribe(data => {
       alert('Setor cadastrado com sucesso!');

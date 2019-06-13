@@ -40,12 +40,12 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
   etapa: string;
   idope: string;
   sub: Subscription;
-  public opeEscolida = false;
+  public opeCadastrada = false;
   public validado: boolean;
   public carregado: boolean;
   public modal = 'modal fade cadastrar-peca';
   public modalOpen = false;
-
+  resultadoOpe: any;
   isReadonly = true;
 
   public escolheu = false;
@@ -124,7 +124,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
           }
         });
       } else {
-        this.router.navigate(['/**']);
+        this.router.navigate(['**']);
       }
     });
   }
@@ -138,7 +138,6 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
     });
 
 
-    // alert(this.suboperacoes);
     this.carregado = true;
 
   }
@@ -161,11 +160,11 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
   }
 
   cadastrar() {
-
+    this.opeCadastrada = true;
     this.listasuboperacoes.forEach((item, index) => {
       item.id = null;
       item.idEtapa = 0;
-      item.operacao_id = this.operacaoEscolhida.id;
+      // item.operacao_id = this.operacaoEscolhida.id;
 
     }, error => {
       console.log(error.error);
@@ -175,37 +174,44 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
 
     this.operacaoEscolhida.etapa_producao_id = this.etapaproducao.id;
     this.operacaoEscolhida.peca_id = this.peca.id;
-
+    this.operacaoEscolhida.descricao = this.etapaproducao.etapaProducao + ' : ' + this.peca.descricao;
     this.peca.operacoes.push(this.operacaoEscolhida);
     /** this.peca.operacoes = this.peca.operacoes.filter(ope => {
      *  return ope.etapa_producao_id === this.etapaproducao.id;
      * });
      */
 
-    const date: Date = new Date();
-    this.gerenteService.atualizarPeca(this.peca).pipe(first()).subscribe(data => {
-     // this.atualizar();
-      this.operacaoEscolhida.gerente_id = this.gerente.id;
-      if (this.operacaoEscolhida.dataInicio === date || this.operacaoEscolhida.dataInicio <= date) {
-        this.gerente.operacoesAndamento.push(this.operacaoEscolhida);
-      }
-      if (this.operacaoEscolhida.dataInicio >= date) {
-        this.gerente.operacoesFazer.push(this.operacaoEscolhida);
-      }
-    }, error => {
-      console.log(error.error);
-    });
+    this.atualizar();
 
 
   }
 
   atualizar() {
-    this.operacaoService.updateOperacao(this.operacaoEscolhida).pipe(first()).subscribe(data => {
-      this.ope3 = true;
-      // this.router.navigate(['/gerenteindex/andamentooperacoes/', this.etapaproducao.etapaProducao]);
+    this.gerenteService.atualizarPeca(this.peca).pipe(first()).subscribe(peca => {
+      const hoje: Date = new Date();
+      const inicio: Date = new Date(this.operacaoEscolhida.dataInicio);
+      const prazo: Date = new Date(this.operacaoEscolhida.prazo);
+      this.operacaoService.updateOperacao(this.operacaoEscolhida).pipe(first()).subscribe(data => {
+        this.resultadoOpe = data;
+
+        // this.router.navigate(['/gerenteindex/andamentooperacoes/', this.etapaproducao.etapaProducao]);
+      }, error => {
+        console.log(error.error);
+      });
+
+      this.resultadoOpe.gerente_id = this.gerente.id;
+      if (inicio === hoje || inicio < hoje) {
+        this.gerente.operacoesAndamento.push(this.resultadoOpe);
+
+      } else if (inicio > hoje) {
+        this.gerente.operacoesFazer.push(this.resultadoOpe);
+      }
     }, error => {
       console.log(error.error);
     });
+    this.ope3 = true;
+
+
   }
 
   cadastrarSubOperacao() {

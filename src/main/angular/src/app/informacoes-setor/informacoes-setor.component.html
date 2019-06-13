@@ -10,24 +10,25 @@
       <div class="form-row">
         <div class="col-md-4">
           <label for="gerente">Gerente</label>
-          <select required="required" id="gerente" class="form-control">
-            <option selected>Selecione..</option>
-            <option *ngFor="let gerente of gerentes" (click)="selectGerente(gerente)">{{gerente.nome}}</option>
+          <select required="required"  (change)="selectGerente($event.target)" id="gerente" class="form-control">
+            <option value="null" disabled>Selecione..</option>
+            <option *ngFor="let gerente of gerentes" [value]="gerente">{{gerente.nome}}</option>
           </select>
         </div>
-        <div  class="col-md-4">
+        <div class="col-md-4" *ngIf="setorShow">
           <label for="setor">Setor</label>
-          <select [disabled]="!setorShow" required="required" id="setor" class="form-control">
+          <select [disabled]="!setorShow" (change)="selectSetor($event.target)"  required="required" id="setor" class="form-control">
             <option selected>Selecione..</option>
-            <option *ngFor="let setor of gerente.setores" (click)="selectSetor(setor)">{{setor.nome}}</option>
+            <option *ngFor="let setor of gerente.setores" [value]="setor">{{setor.nome}}</option>
           </select>
 
         </div>
-        <div  class="col-md-4">
+
+        <div class="col-md-4" *ngIf="setorShow">
           <label for="etapa">Etapa da Produção</label>
-          <select [disabled]="!setorShow" required="required" id="etapa" class="form-control">
+          <select [disabled]="!setorShow" (change)="selectEtapa($event.target)" required="required" id="etapa" class="form-control">
             <option selected>Selecione..</option>
-            <option *ngFor="let etapa of etapas" (click)="selectEtapa(etapa)">{{etapa.nome}}</option>
+            <option *ngFor="let etapa of etapas" [value]="etapa">{{etapa.etapaProducao}}</option>
           </select>
         </div>
 
@@ -35,30 +36,40 @@
     </div>
     <div class="form-group">
       <div class="form-row">
-        <div  class="col-md-4">
+        <div class="col-md-4" *ngIf="setorShow">
           <label for="peca">Peça</label>
-          <select [disabled]="!setorShow" required="required" id="peca" class="form-control">
+          <select [disabled]="!setorShow" (change)="selectPeca($event.target)" required="required" id="peca" class="form-control">
             <option selected>Selecione..</option>
-            <option *ngFor="let peca of gerente.pecas">{{peca.descricao}}</option>
+            <option *ngFor="let peca of gerente.pecas"  [value]="peca">{{peca.descricao}}</option>
           </select>
         </div>
-        <div class="col-md-4">
-          <div class="form-label-group">
-            <input type="number" [(ngModel)]="informacao.qtdPecasOpe" name="qtdPecasOpe" id="qtdPecasOpe"
-                   class="form-control"
-                   placeholder="Quantidade de peças da operação:"
-                   required="required">
-            <label for="qtdPecasOpe">Peças produzidas:</label>
-          </div>
+        <div class="col-md-4" *ngIf="showOpe">
+          <label for="operacao">Operacao</label>
+          <select [disabled]="!showOpe" (change)="selectOpe($event.target)" required="required" id="operacao" class="form-control">
+            <option selected>Selecione..</option>
+            <option *ngFor="let operacao of peca.operacoes"  [value]="operacao">{{operacao.id}}</option>
+          </select>
         </div>
-        <div class="col-md-4">
-          <div class="form-label-group">
-            <input type="time" [(ngModel)]="informacao.tempoNecessario" name="tempoNecessario" id="tempoNecessari"
-                   class="form-control"
-                   placeholder="Tempo necessário:"
-                   required="required">
-            <label for="tempoNecessari">Tempo necessário:</label>
-          </div>
+        <div class="col-md-4" *ngIf="showsubope">
+          <label for="suboperacao">Operacao</label>
+          <select [disabled]="!showOpe" (change)="selectSubOpe($event.target)" required="required" id="suboperacao" class="form-control">
+            <option selected>Selecione..</option>
+            <option *ngFor="let suboperacao of ope.suboperacoes"  [value]="suboperacao">{{suboperacao.descricao}}</option>
+          </select>
+        </div>
+        <div class="col-md-4" *ngIf="showsubope" >
+          <label for="qtdPecasOpe">Peças produzidas:</label>
+          <input type="number" [(ngModel)]="informacao.qtdPecasOpe" name="qtdPecasOpe" id="qtdPecasOpe"
+                 class="form-control"
+                 placeholder="Peças produzidas:"
+                 required="required">
+        </div>
+        <div class="col-md-4" *ngIf="showsubope">
+          <label for="tempoNecessari">Tempo Unidade:</label>
+          <input type="time" [(ngModel)]="informacao.tempoNecessario" name="tempoNecessario" id="tempoNecessari"
+                 class="form-control"
+                 placeholder="Tempo necessário:"
+                 required="required">
         </div>
       </div>
     </div>
