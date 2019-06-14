@@ -20,7 +20,7 @@
     </div>
     <div class="form-group">
       <label for="etapaProducao">Etapa da Produção:</label>
-      <select class="form-control" id="etapaProducao" (change)="selectEtapa($event.target)">
+      <select class="form-control" id="etapaProducao" (change)="selectEtapa($event.target.valueOf())">
         <option>Selecione..</option>
         <option *ngFor="let etapa of etapas" [value]="etapa">{{etapa.etapaProducao}}</option>
 

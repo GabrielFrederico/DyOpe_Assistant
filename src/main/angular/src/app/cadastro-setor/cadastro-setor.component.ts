@@ -14,9 +14,8 @@ import {first} from 'rxjs/operators';
 
 
 export class CadastroSetorComponent implements OnInit {
-  setor: Setor = new Setor();
+  setor: any = {};
   gerente: any;
-  public setores: Observable<Setor[]>;
   public info: any;
   public validado: boolean;
   public etapas: any;
@@ -49,7 +48,7 @@ export class CadastroSetorComponent implements OnInit {
 
   save() {
     this.setor.gerente_id = this.gerente.id;
-    this.setor.etapaproducao_id = this.etapa.id;
+    this.setor.etapaproducao = this.etapa;
     this.gerente.setores.push(this.setor);
     this.gerenteService.cadastrarAlgo(this.gerente).pipe(first()).subscribe(data => {
       alert('Setor cadastrado com sucesso!');

@@ -115,18 +115,22 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
             this.etapaproducao = etapaproducao;
             this.etapa = this.etapaproducao.id.toString();
             console.clear();
-            this.operacaoService.getOperacoesSub().subscribe(data => {
-              this.suboperacoes = data;
+            if (this.etapaproducao.id === 5) {
+              this.operacaoService.getOperacoesSub().subscribe(data => {
+                this.suboperacoes = data;
 
-            }, error => {
-              console.log(error.error);
-            });
+              }, error => {
+                console.log(error.error);
+              });
+            }
+
           }
         });
       } else {
         this.router.navigate(['**']);
       }
     });
+
   }
 
   datareload() {

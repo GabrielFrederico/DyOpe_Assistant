@@ -57,15 +57,15 @@ public class Operacao {
 		ArrayList<Integer> feriados = new ArrayList<>();
 		feriados.add(20);
 
-		int tempos = 0, diasNece = 0, funcionariosNecessários = 0;
+		int tempos = 0, diasNece = 0, funcionariosNecessários = 0 , prodHora = 0;
 		for (SubOperacao subope : operacao.getSuboperacoes()) {
 			tempos = subope.getTempoNesc();
 			tempos += tempos;
 		}
 
-		float result, funcCalc, prodHora, calcProHora;
+		float result, funcCalc, calcProHora;
 		result = tempos * operacao.getLoteProducao();
-		diasNece = Math.round(result / operacao.getTempoTrab());
+		diasNece = Math.round(result / (operacao.getTempoTrab()*operacao.numFuncionariosDisponiveis));
 
 		do {
 			inicio.add(Calendar.DAY_OF_MONTH, 1);
@@ -86,7 +86,7 @@ public class Operacao {
 		funcCalc = operacao.getNumFuncionariosDisponiveis() * operacao.getTempoTrab();
 		funcionariosNecessários = Math.round(result / funcCalc);
 		calcProHora = funcionariosNecessários* operacao.getTempoTrab();
-		prodHora = calcProHora/funcionariosNecessários/(operacao.getTempoTrab()/60);
+		prodHora = Math.round(operacao.getTempoTrab()/(operacao.getTempoTrab()/60));
 		operacao.setNumFuncionarios(funcionariosNecessários);
 		Date prazo = new Date(fim.getTime());
 		operacao.setPrazo(prazo);
@@ -120,13 +120,13 @@ public class Operacao {
 
 	private int numFuncionariosDisponiveis;
 
-	private float producaoHora;
+	private int producaoHora;
 
-	public float getProducaoHora() {
+	public int getProducaoHora() {
 		return producaoHora;
 	}
 
-	public void setProducaoHora(float producaoHora) {
+	public void setProducaoHora(int producaoHora) {
 		this.producaoHora = producaoHora;
 	}
 
