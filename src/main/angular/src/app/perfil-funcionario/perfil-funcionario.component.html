@@ -67,13 +67,15 @@
 
       </div>
 
-      <input [disabled]="!f.form.valid" class="btn btn-success" type="submit" value="Salvar">
-      <a class="btn btn-info" href="#" data-toggle="modal"
-         data-target=".redefinir-senha">Redefinir
-        senha</a>
-      <input class="btn btn-info" type="button" (click)="toggleReadonly()" value="Editar">
-      <div *ngIf="f.submitted && updateFailed" class="alert alert-warning separa">
-        Atualização Falhou!<br/>{{errorMessage}}
+      <div class="modal-footer">
+        <input [disabled]="!f.form.valid" class="btn btn-success" type="submit" value="Salvar">
+        <a class="btn btn-info" href="#" data-toggle="modal"
+           data-target=".redefinir-senha">Redefinir
+          senha</a>
+        <input class="btn btn-info" type="button" (click)="toggleReadonly()" value="Editar">
+        <div *ngIf="f.submitted && updateFailed" class="alert alert-warning separa">
+          Atualização Falhou!<br/>{{errorMessage}}
+        </div>
       </div>
 
       <!-- /.container-fluid -->
