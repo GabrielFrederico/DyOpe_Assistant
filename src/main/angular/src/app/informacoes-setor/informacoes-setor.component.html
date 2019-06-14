@@ -10,7 +10,7 @@
       <div class="form-row">
         <div class="col-md-4">
           <label for="gerente">Gerente</label>
-          <select required="required"  name="gerente" [(ngModel)]="gerente" id="gerente" class="form-control">
+          <select required="required"  name="gerente" [(ngModel)]="gerente" (change)="selectGerente()" id="gerente" class="form-control">
             <option value="null" disabled>Selecione..</option>
             <option *ngFor="let gerente of gerentes" [value]="gerente">{{gerente.nome}}</option>
           </select>
@@ -38,14 +38,14 @@
       <div class="form-row">
         <div class="col-md-4" *ngIf="setorShow">
           <label for="peca">Peça</label>
-          <select [disabled]="!setorShow" name="peca" [(ngModel)]="peca" required="required" id="peca" class="form-control">
+          <select [disabled]="!setorShow" name="peca" (change)="selectPeca()" [(ngModel)]="peca" required="required" id="peca" class="form-control">
             <option selected>Selecione..</option>
             <option *ngFor="let peca of gerente.pecas"  [value]="peca">{{peca.descricao}}</option>
           </select>
         </div>
         <div class="col-md-4" *ngIf="showOpe">
           <label for="operacao">Operacao</label>
-          <select [disabled]="!showOpe" name="ope" [(ngModel)]="ope" required="required" id="operacao" class="form-control">
+          <select [disabled]="!showOpe" name="ope" [(ngModel)]="ope" (change)="selectOpe()" required="required" id="operacao" class="form-control">
             <option selected>Selecione..</option>
             <option *ngFor="let operacao of peca.operacoes"  [value]="operacao">{{operacao.id}}</option>
           </select>

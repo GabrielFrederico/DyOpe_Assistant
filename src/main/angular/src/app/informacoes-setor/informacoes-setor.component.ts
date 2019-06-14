@@ -27,7 +27,7 @@ export class InformacoesSetorComponent implements OnInit {
   setor: any = {};
   public isCollapsed = false;
   gerentes: any;
-  peca: any ;
+  peca: any;
   subope: any;
   ope: any;
   showOpe = false;
@@ -59,37 +59,21 @@ export class InformacoesSetorComponent implements OnInit {
     this.naoAutenticado();
   }
 
-  selectGerente(gerente: any) {
-    this.gerente = gerente;
+  selectGerente() {
     this.setorShow = true;
   }
 
-  selectSetor(setor: any) {
-    this.setor = setor;
-    this.funcionario.setor_id = this.setor.id;
-    this.setor.funcionarios.push(this.funcionario);
-  }
-
-  selectEtapa(etapa: any) {
-    this.etapa = etapa;
-  }
-
-  selectPeca(peca: any) {
-    this.peca = peca;
+  selectPeca() {
     this.showOpe = true;
   }
 
-  selectSubOpe(sub: any) {
-    this.subope = sub;
-  }
-
-  selectOpe(ope: any) {
-    this.ope = ope;
+  selectOpe() {
     this.showsubope = true;
   }
 
   save() {
-
+    this.funcionario.setor_id = this.setor.id;
+    this.setor.funcionarios.push(this.funcionario);
     this.informacao.funcionario_id = this.funcionario.id;
     this.informacao.setor_id = this.setor.id;
     this.informacao.gerente_id = this.gerente.id;
