@@ -5,8 +5,10 @@ import java.util.Optional;
 import com.projeto.repository.RoleRepository;
 import com.projeto.seguranca.JwtResponse;
 import com.projeto.seguranca.LoginForm;
+import com.projeto.seguranca.ResponseMessage;
 import com.projeto.seguranca.jwt.JwtProvider;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -84,7 +86,15 @@ public class UsuarioController {
         usuarioRepository.save(usuario);
         return usuario;
     }
-
+   
+    @RequestMapping(method = RequestMethod.POST, path="/enviaremailsenha")
+    public ResponseEntity<?> emailRedefinirSenha(@RequestBody String email) {
+    	if(!usuarioRepository.existsByEmail(email)) {
+    		return new ResponseEntity<>(new ResponseMessage("Erro -> Email não registrado!"), HttpStatus.BAD_REQUEST);
+    	}
+    	
+    	return new ResponseEntity<>(new ResponseMessage("Email enviado com sucesso!"), HttpStatus.OK);
+    }
     
     @RequestMapping(method = RequestMethod.DELETE, path = "/{id}")
     @PreAuthorize("hasRole('ADMIN')")

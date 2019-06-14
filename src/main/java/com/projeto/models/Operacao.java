@@ -15,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 
+import org.apache.el.parser.SimpleCharStream;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @Entity
@@ -57,15 +58,16 @@ public class Operacao {
 		ArrayList<Integer> feriados = new ArrayList<>();
 		feriados.add(20);
 
-		int tempos = 0, diasNece = 0, funcionariosNecessários = 0 , prodHora = 0;
+		int tempos = 0, diasNece = 0, funcionariosNecessários = 0, prodHora = 0;
 		for (SubOperacao subope : operacao.getSuboperacoes()) {
 			tempos = subope.getTempoNesc();
 			tempos += tempos;
 		}
 
-		float result, funcCalc, calcProHora;
+		float result, funcCalc, calcProHora, tempoFun;
 		result = tempos * operacao.getLoteProducao();
-		diasNece = Math.round(result / (operacao.getTempoTrab()*operacao.numFuncionariosDisponiveis));
+		tempoFun = operacao.getTempoTrab() * operacao.getNumFuncionariosDisponiveis();
+		diasNece = Math.round(result / tempoFun);
 
 		do {
 			inicio.add(Calendar.DAY_OF_MONTH, 1);
@@ -78,13 +80,13 @@ public class Operacao {
 		} while (diasAdded < diasNece);
 
 		// inicio.add(Calendar.DAY_OF_MONTH, diasNece + diasAdded);
-       
+		System.out.println(diasNece+ " . "+ tempoFun +". "+ result+".");
 		fim = inicio.getTime();
-		
+
 		funcCalc = operacao.getNumFuncionariosDisponiveis() * operacao.getTempoTrab();
 		funcionariosNecessários = Math.round(result / funcCalc);
-		calcProHora = funcionariosNecessários* operacao.getTempoTrab();
-		prodHora = Math.round(operacao.getTempoTrab()/(operacao.getTempoTrab()/60));
+		calcProHora = funcionariosNecessários * operacao.getTempoTrab();
+		prodHora = Math.round(operacao.getTempoTrab() / (operacao.getTempoTrab() / 60));
 		operacao.setNumFuncionarios(funcionariosNecessários);
 		Date prazo = new Date(fim.getTime());
 		operacao.setPrazo(prazo);

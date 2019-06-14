@@ -14,7 +14,7 @@ import {first} from 'rxjs/operators';
 
 export class CadastroSetorComponent implements OnInit {
   setor: any = {};
-  etapa: string;
+  etapa: any;
   gerente: any;
   public info: any;
   public validado: boolean;
@@ -43,7 +43,7 @@ export class CadastroSetorComponent implements OnInit {
 
   save() {
     this.etapaService.getEtapaProducaoNome(this.etapa).subscribe(data => {
-      this.setor.etapa = data;
+      this.setor.etapaproducao = data;
     }, error => {
       console.log(error.error);
     });

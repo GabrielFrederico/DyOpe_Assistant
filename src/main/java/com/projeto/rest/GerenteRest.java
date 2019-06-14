@@ -133,7 +133,17 @@ public class GerenteRest {
 		gerenteRepository.save(gerente);
 		return new ResponseEntity<>(new ResponseMessage("Dados Atualizados com sucesso!"), HttpStatus.OK);
 	}
+	
+	@RequestMapping(method = RequestMethod.POST, value = "acessarpla")
+	@PreAuthorize("hasRole('GERENTE')")
+	public ResponseEntity<?> acessarPlanilha(@RequestBody String chaveAcesso) {
+		if (!gerenteRepository.existsByChaveAcesso(chaveAcesso)) {
+			return new ResponseEntity<>(new ResponseMessage("Erro -> Acesso inválido!"), HttpStatus.BAD_REQUEST);
+		}
 
+		return new ResponseEntity<>(new ResponseMessage("Acesso Válido!"), HttpStatus.OK);
+	}
+	
 	@RequestMapping(method = RequestMethod.PUT, value = "cadastraralgo")
 	@PreAuthorize("hasRole('GERENTE')")
 	public ResponseEntity<?> cadastrarAlgo(@RequestBody Gerente gerente) {

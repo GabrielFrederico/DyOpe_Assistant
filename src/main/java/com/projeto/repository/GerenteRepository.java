@@ -17,6 +17,8 @@ public interface GerenteRepository extends CrudRepository<Gerente, Serializable>
 	Boolean existsByCpf(String cpf);
 
 	Boolean existsByRg(String rg);
+	
+	Boolean existsByChaveAcesso(String chaveAcesso);
 
 	Boolean existsBySenha(String senha);
 

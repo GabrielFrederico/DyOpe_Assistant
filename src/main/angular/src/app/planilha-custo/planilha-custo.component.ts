@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { GerenteService } from '../service/gerente.service';
-import { TokenStorageService } from '../auth/token-storage.service';
+import {Component, OnInit} from '@angular/core';
+import {GerenteService} from '../service/gerente.service';
+import {TokenStorageService} from '../auth/token-storage.service';
+import {CadastroOperacaoService} from '../service/cadastro-operacao.service';
 
 @Component({
   selector: 'app-planilha-custo',
@@ -8,9 +9,16 @@ import { TokenStorageService } from '../auth/token-storage.service';
 })
 export class PlanilhaCustoComponent implements OnInit {
 
-  constructor(private gerente: GerenteService, private token: TokenStorageService) {
+  constructor(private gerenteService: GerenteService, private etapaService: CadastroOperacaoService, private token: TokenStorageService) {
   }
+
   public info: any;
+  gerente: any;
+  etapas: any;
+  acessovalido = false;
+  invalido = false;
+  chaveAcesso: string;
+  mensagemErro: string;
 
   ngOnInit() {
     this.info = {
@@ -19,6 +27,20 @@ export class PlanilhaCustoComponent implements OnInit {
       authorities: this.token.getAuthorities(),
       senha: this.token.getPassword()
     };
+    this.gerenteService.getGerenteLogado(this.info.username).subscribe(data => {
+      this.gerente = data;
+    }, error => {
+      console.log(error.error);
+    });
+  }
+
+  acessar() {
+    this.gerenteService.acessarPlanilha(this.chaveAcesso).subscribe(data => {
+      this.acessovalido = true;
+    }, error => {
+      this.invalido = true;
+      this.mensagemErro = error.error;
+    });
   }
 
   cadastrarPlanilha() {

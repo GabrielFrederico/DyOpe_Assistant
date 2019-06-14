@@ -203,7 +203,10 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
 
   atualizar() {
     if (this.atualizarOpe) {
+
       this.update();
+      console.log('OPE ATUALIZADA');
+
     } else {
       this.gerenteService.atualizarPeca(this.peca).pipe(first()).subscribe(peca => {
 
