@@ -79,7 +79,7 @@ public class Operacao {
 		} while (diasAdded < diasNece);
 
 		// inicio.add(Calendar.DAY_OF_MONTH, diasNece + diasAdded);
-		System.out.println(diasNece+ " . "+ tempoFun +". "+ result+".");
+		System.out.println(diasNece+ " . "+ tempoFun +". "+ result+".tempos "+tempos);
 		fim = inicio.getTime();
 
 		funcCalc = operacao.getNumFuncionariosDisponiveis() * operacao.getTempoTrab();

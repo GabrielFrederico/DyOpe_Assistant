@@ -171,7 +171,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
       this.listasuboperacoes.forEach((item, index) => {
         item.id = null;
         item.idEtapa = 0;
-        // item.operacao_id = this.operacaoEscolhida.id;
+        item.operacao_id = this.operacaoEscolhida.id;
 
       }, error => {
         console.log(error.error);
@@ -194,7 +194,6 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
   }
 
   update() {
-    this.resultadoOpe.suboperacoes = this.listasuboperacoes;
     this.operacaoService.updateOperacao(this.resultadoOpe).pipe(first()).subscribe(data => {
       this.resultadoOpe = data;
       this.ope3 = false;
