@@ -48,17 +48,18 @@
   </div>
 
 </div>
-<form *ngIf="escolheu; else naoescolheu" (ngSubmit)="cadastrar()" class="card" [noValidate]="$any(false)">
+<form *ngIf="escolheu; else naoescolheu" #f="ngForm" (ngSubmit)="cadastrar()"
+      class="card" [noValidate]="$any(false)">
 
   <div class="card-header">Sequencia Operacional</div>
   <div class="card-body border-info">
     <div class="row">
       <div class="col-md-4">
         <div class="card border-info mb-3 operacoes lista">
-          <div class="card-header border-info">Operações</div>
+          <div class="card-header border-info">Sub-Operações</div>
           <div class="card-body text-secondary">
             <div class="form-group">
-              <div *ngFor="let suboperacao of listasuboperacoes" class="row">
+              <div *ngFor="let suboperacao of listasuboperacoes; let i = index" class="row">
                 <div class="col-md-5">
                   <div class="form-group">
                     <div class="form-label-group">
@@ -84,7 +85,8 @@
                   </div>
                 </div>
                 <div class="col-md-1">
-                  <a class="btn btn-danger" href="javascript:void(0)" (click)="deletarSubOperacao(suboperacao)">-</a>
+                  <a class="btn btn-danger" href="javascript:void(0)" data-toggle="modal"
+                     data-target=".deletar-subope" (click)="subopeEscolhida(suboperacao)">-</a>
                 </div>
               </div>
             </div>
@@ -109,15 +111,15 @@
               <div class="col-md-auto">
                 <div class="form-label-group">
                   <input type="number" id="LoteProdu" [maxLength]="6"
-                         class="form-control"
-                         placeholder="Lote de Produção" name="loteProducao" [(ngModel)]="operacaoEscolhida.loteProducao"
+                         class="form-control" #lote [(ngModel)]="operacaoEscolhida.loteProducao"
+                         placeholder="Lote de Produção" name="loteProducao"
                          required="required">
                   <label for="LoteProdu" class="fonterisco">Lote de Produção:</label>
                 </div>
               </div>
               <div class="col-md-auto">
                 <div class="form-label-group">
-                  <input type="number" id="numFun" [maxLength]="4"
+                  <input type="number" id="numFun" [maxLength]="4" #numFun
                          class="form-control" [(ngModel)]="operacaoEscolhida.numFuncionariosDisponiveis"
                          placeholder="N° de Funcionários" name="numFun"
                          required="required">
@@ -128,9 +130,9 @@
                 <div class="form-group">
                   <div class="form-label-group">
                     <input type="number" name="tempoTrab"
-                           id="tempoTrab" [maxLength]="4"
+                           id="tempoTrab" [maxLength]="4" #tempoTrab
                            class="form-control" minlength="3"
-                           autofocus="autofocus" [(ngModel)]="operacaoEscolhida.tempoTrab"
+                           autofocus="autofocus"  [(ngModel)]="operacaoEscolhida.tempoTrab"
                            placeholder="Tempo Trabalho" required="required">
                     <label for="tempoTrab">Tempo trabalhado</label>
                   </div>
@@ -148,7 +150,6 @@
           </div>
           <div class="card-footer bg-transparent border-info">
             <input class="btn btn-primary" type="submit" *ngIf="!ope3" value="Cadastrar">
-
             <input class="btn btn-primary" type="submit" *ngIf="atualizarOpe" value="Atualizar">
           </div>
         </div>
@@ -207,7 +208,11 @@
         </div>
       </div>
     </div>
+    <div *ngIf="f.submitted && erro" class="alert alert-warning separa">
+      Cadastro Falhou!<br/>{{errorMessage}}
+    </div>
   </div>
+
 </form>
 <!-- Sticky Footer -->
 <footer class="sticky-footer">
@@ -225,7 +230,7 @@
 </a>
 
 
-<!--Modal Cadastro operações: -->
+<!--Modal Cadastro suboperações: -->
 
 <div class="modal fade cadastro-operacoes" tabindex="-1" role="dialog" aria-labelledby="modalpeca"
      aria-hidden="true">
@@ -233,7 +238,7 @@
 
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="cadastrooperacoes">Cadastro de Operações:</h4>
+        <h4 class="modal-title" id="cadastrooperacoes">Cadastro de Sub-operações:</h4>
         <button type="button" #closeModal class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">×</span>
         </button>
@@ -241,32 +246,22 @@
       <div class="modal-body">
         <div class="card-body">
           <form #cadastrarOperacao="ngForm" [noValidate]="$any(false)">
-            <div class="form-group">
-              <div class="form-row">
-                <div class="col-md-6">
-                  <div class="form-label-group">
-                    <input type="text" required="required" name="descricao" [(ngModel)]="newsuboperacao.descricao"
-                           class="form-control"
-                           id="DescricaoOp">
-                    <label for="DescricaoOp">Descrição da operação:</label>
-                  </div>
-                </div>
 
-                <div class="col-md-6">
-                  <div class="form-label-group">
-                    <input type="number" id="tempo" name="tempo" class="form-control"
-                           placeholder="Tempo" [(ngModel)]="newsuboperacao.tempoNesc"
-                           required="required">
-                    <label for="tempo">Tempo:</label>
-                  </div>
-                </div>
+            <div class="col-md-auto">
+              <div class="form-label-group">
+                <input type="text" required="required" name="descricao" [(ngModel)]="newsuboperacao.descricao"
+                       class="form-control" minlength="6"
+                       id="DescricaoOp">
+                <label for="DescricaoOp">Descrição da operação:</label>
               </div>
             </div>
+
 
             <div class="modal-footer col-md-12">
               <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar
               </button>
-              <input class="btn btn-primary" type="submit" (click)="cadastrarSubOperacao()" data-dismiss="modal"
+              <input class="btn btn-primary" type="submit" (click)="cadastrarSubOperacao()"
+                     [disabled]="!cadastrarOperacao.valid" data-dismiss="modal"
                      value="Cadastrar">
             </div>
             <div *ngIf="cadastrarOperacao.submitted && erro" class="alert alert-warning separa">
@@ -293,7 +288,7 @@
       </div>
       <div class="modal-body">
         <div class="card-body">
-          <form [noValidate]="$any(false)">
+          <form [noValidate]="$any(false)" #pecaForm="ngForm">
             <div class="form-group">
               <div class="col-md-auto">
                 <div class="form-label-group">
@@ -306,7 +301,8 @@
             </div>
             <div class="modal-footer col-md-12">
               <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-              <input class="btn btn-primary" type="submit" (click)="cadastrarPeca()" data-dismiss="modal"
+              <input class="btn btn-primary" type="submit" (click)="cadastrarPeca()" [disabled]="pecaForm.invalid"
+                     data-dismiss="modal"
                      value="Cadastrar">
             </div>
           </form>
@@ -316,7 +312,36 @@
   </div>
 </div>
 
+<!-- modal excluir sub ope -->
+<div class="modal  fade deletar-subope" tabindex="-1" role="dialog" aria-labelledby="modalpeca"
+     aria-hidden="true">
+  <div class="modal-dialog modal-body">
 
-<ng-template #naoescolheu>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="modalExcluirSubope">Deletar Sub-Operação</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="card-body">
+          <div class="text-center mb-4">
+            <h4>Deseja Excluir?</h4>
+          </div>
+          <div class="modal-footer col-md-12">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+            <input class="btn btn-primary" type="submit" (click)="deletarSubOperacao(suboperacaoEscolhida)"
+                   data-dismiss="modal"
+                   value="Confirmar">
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #naoescolheu class="separa">
   Escolha uma Peça!
 </ng-template>

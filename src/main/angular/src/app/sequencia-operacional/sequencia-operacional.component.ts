@@ -124,6 +124,8 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
               }, error => {
                 console.log(error.error);
               });
+            } else {
+              this.suboperacoes = [];
             }
 
           }
@@ -194,13 +196,15 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
   }
 
   update() {
-    this.resultadoOpe.suboperacoes =  this.operacaoEscolhida.suboperacoes;
-    this.operacaoService.updateOperacao(this.resultadoOpe).pipe(first()).subscribe(data => {
+    // this.resultadoOpe.suboperacoes =  this.operacaoEscolhida.suboperacoes;
+    this.operacaoService.updateOperacao(this.operacaoEscolhida).pipe(first()).subscribe(data => {
       this.resultadoOpe = data;
       this.ope3 = false;
       this.ope3 = true;
       // this.router.navigate(['/gerenteindex/andamentooperacoes/', this.etapaproducao.etapaProducao]);
     }, error => {
+      this.erro = true;
+      this.errorMessage = error.error;
       console.log(error.error);
     });
     const hoje: Date = new Date();
@@ -231,6 +235,8 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
         this.gerente.operacoesFazer.push(this.resultadoOpe);
         this.gerenteService.cadastrarAlgo(this.gerente).pipe(first()).subscribe(data => {
         }, error => {
+          this.erro = true;
+          this.errorMessage = error.error;
           console.log(error.error);
         });
       }
@@ -244,10 +250,14 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
 
   cadastrarSubOperacao() {
     this.listasuboperacoes.push(this.newsuboperacao);
+    alert('Informe os tempos!');
   }
 
   deletarSubOperacao(subope: any) {
+
     this.suboperacaoEscolhida = subope;
+    const index = this.listasuboperacoes.indexOf(this.suboperacaoEscolhida);
+    this.listasuboperacoes.splice(index, 1);
 
   }
 
@@ -260,9 +270,10 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
       this.router.navigateByUrl('/gerenteindex/homegerente', {skipLocationChange: true}).then(() =>
         this.router.navigate(['/gerenteindex/operacoes/', this.etapaproducao.etapaProducao]));
 
-
     }, error => {
-      alert(error);
+      this.erro = true;
+      this.errorMessage = error.error;
+      console.log(error.error);
     });
   }
 
@@ -270,9 +281,8 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
     return operacao.id;
   }
 
-  subopeEscolhida(subope: any, tempo: any) {
+  subopeEscolhida(subope: any) {
     this.suboperacaoEscolhida = subope;
-    this.suboperacaoEscolhida.tempoNesc = tempo;
 
   }
 
@@ -291,6 +301,8 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
         this.operacaoEscolhida = data;
         this.ope2 = true;
       }, error => {
+        this.erro = true;
+        this.errorMessage = error.error;
         console.log(error.error);
       });
     }

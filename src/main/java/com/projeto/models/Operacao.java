@@ -15,7 +15,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
+
+import com.projeto.seguranca.ResponseMessage;
 
 @Entity
 public class Operacao {
@@ -48,7 +52,12 @@ public class Operacao {
 		this.numFuncionarios = numFuncionarios;
 	}
 
-	public static Operacao calcular(@RequestBody Operacao operacao) {
+	public static Operacao calculosPlanilha(@RequestBody Operacao operacao) {
+
+		return operacao;
+	}
+
+	public static ResponseEntity<?> calcular(@RequestBody Operacao operacao) {
 		Calendar inicio = Calendar.getInstance();
 		java.util.Date fim = new java.util.Date();
 		inicio.setTime(operacao.getDataInicio());
@@ -57,10 +66,10 @@ public class Operacao {
 		ArrayList<Integer> feriados = new ArrayList<>();
 		feriados.add(20);
 
-		int tempos = 0, diasNece = 0, funcionariosNecessários = 0, prodHora = 0;
+		int tempos = 0, diasNece = 0, funcionariosNecessários = 0, prodHora = 0, qtdPecasOpe = 0;
 		for (SubOperacao subope : operacao.getSuboperacoes()) {
-			tempos = subope.getTempoNesc();
-			tempos += tempos;
+			tempos += subope.getTempoNesc();
+
 		}
 
 		float result, funcCalc, calcProHora, tempoFun;
@@ -68,29 +77,39 @@ public class Operacao {
 		tempoFun = operacao.getTempoTrab() * operacao.getNumFuncionariosDisponiveis();
 		diasNece = Math.round(result / tempoFun);
 
-		do {
+		for (int i = 1; i < diasNece; i++) {
+
 			inicio.add(Calendar.DAY_OF_MONTH, 1);
-			if (inicio.get(Calendar.DAY_OF_WEEK) != Calendar.SATURDAY
-					|| inicio.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY
-					|| !feriados.contains((Integer) inicio.get(Calendar.DAY_OF_YEAR))) {
-				++diasAdded;
+			if (inicio.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY) {
+				inicio.add(Calendar.DAY_OF_MONTH, 1);
+			}
+			if (inicio.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
+				inicio.add(Calendar.DAY_OF_MONTH, 1);
+			}
+			if (feriados.contains((Integer) inicio.get(Calendar.DAY_OF_YEAR))) {
+				inicio.add(Calendar.DAY_OF_MONTH, 1);
 			}
 
-		} while (diasAdded < diasNece);
+		}
+		try {
+			// inicio.add(Calendar.DAY_OF_MONTH, diasNece + diasAdded);
+			System.out.println(diasNece + " . " + tempoFun + ". " + result + ".tempos " + tempos);
+			fim = inicio.getTime();
 
-		// inicio.add(Calendar.DAY_OF_MONTH, diasNece + diasAdded);
-		System.out.println(diasNece+ " . "+ tempoFun +". "+ result+".tempos "+tempos);
-		fim = inicio.getTime();
-
-		funcCalc = operacao.getNumFuncionariosDisponiveis() * operacao.getTempoTrab();
-		funcionariosNecessários = Math.round(result / funcCalc);
-		calcProHora = funcionariosNecessários * operacao.getTempoTrab();
-		prodHora = Math.round(operacao.getTempoTrab() / (operacao.getTempoTrab() / 60));
-		operacao.setNumFuncionarios(funcionariosNecessários);
-		Date prazo = new Date(fim.getTime());
-		operacao.setPrazo(prazo);
-		operacao.setProducaoHora(prodHora);
-		return operacao;
+			funcionariosNecessários = Math.round(operacao.getLoteProducao() / operacao.getTempoTrab());
+			qtdPecasOpe = Math.round(operacao.getLoteProducao() / funcionariosNecessários);
+			calcProHora = funcionariosNecessários * operacao.getTempoTrab();
+			prodHora = Math.round(operacao.getTempoTrab() / (operacao.getTempoTrab() / 60));
+			operacao.setNumFuncionarios(funcionariosNecessários);
+			Date prazo = new Date(fim.getTime());
+			operacao.setPrazo(prazo);
+			operacao.setQtdPecasOpe(qtdPecasOpe);
+			operacao.setProducaoHora(prodHora);
+		} catch (ArithmeticException e) {
+			return new ResponseEntity<>(new ResponseMessage("Erro -> Não é possível dividir por zero!" +e), HttpStatus.INTERNAL_SERVER_ERROR);
+			
+		}
+		return new ResponseEntity<>(new ResponseMessage("Dados Atualizados com sucesso!"), HttpStatus.OK);
 
 	}
 

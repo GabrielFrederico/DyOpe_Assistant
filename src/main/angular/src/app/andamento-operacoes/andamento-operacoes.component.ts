@@ -25,7 +25,6 @@ export class AndamentoOperacoesComponent implements OnInit, OnDestroy {
   operacoesFazer: any;
   operacoesEmAndamento: any;
   operacoesNoPrazo: any;
-  @Input() operacoes: List<Operacao>;
   etapaproducao: any;
   public erro: boolean;
   public errorMessage = '';
@@ -108,15 +107,11 @@ export class AndamentoOperacoesComponent implements OnInit, OnDestroy {
 
   datareload() {
     this.gerenteService.getGerente(this.info.username).subscribe(data => this.gerente = data);
-    for (const peca of  this.gerente.pecas) {
 
-      this.gerenteService.getPecaNome(peca.descricao).subscribe(data => {
-        this.peca = data;
-      });
-      this.peca.operacoes = this.peca.operacoes.filter(ope => {
-        return ope.etapa_producao_id === this.etapaproducao.id;
-      });
-    }
+    this.gerente.operacoesFazer = this.gerente.operacoesFazer.filter(ope => {
+      return ope.etapa_producao_id === this.etapaproducao.id;
+    });
+
     console.clear();
 
   }
