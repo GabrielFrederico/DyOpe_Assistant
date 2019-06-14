@@ -68,7 +68,7 @@ public class Operacao {
 		diasNece = Math.round(result / (operacao.getTempoTrab()*operacao.numFuncionariosDisponiveis));
 
 		do {
-			inicio.add(Calendar.DAY_OF_MONTH, 1);
+			inicio.add(Calendar.DAY_OF_MONTH, diasNece);
 			if (inicio.get(Calendar.DAY_OF_WEEK) != Calendar.SATURDAY
 					&& inicio.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY
 					&& !feriados.contains((Integer) inicio.get(Calendar.DAY_OF_YEAR))) {
@@ -79,7 +79,7 @@ public class Operacao {
 				&& inicio.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY
 				&& !feriados.contains((Integer) inicio.get(Calendar.DAY_OF_YEAR)));
 
-		inicio.add(Calendar.DAY_OF_MONTH, diasNece + diaSemana);
+		inicio.add(Calendar.DAY_OF_MONTH, diaSemana);
        
 		fim = inicio.getTime();
 		

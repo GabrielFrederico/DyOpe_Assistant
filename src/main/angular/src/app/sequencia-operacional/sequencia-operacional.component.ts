@@ -154,12 +154,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
   }
 
   subopes() {
-    this.operacaoService.addOperacao(this.operacao).subscribe(data => {
-      this.operacaoEscolhida = data;
-      this.ope2 = true;
-    }, error => {
-      console.log(error.error);
-    });
+
 
   }
 
@@ -206,9 +201,12 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
       this.resultadoOpe.gerente_id = this.gerente.id;
       if (inicio === hoje || inicio < hoje) {
         this.gerente.operacoesAndamento.push(this.resultadoOpe);
-
       } else if (inicio > hoje) {
         this.gerente.operacoesFazer.push(this.resultadoOpe);
+        this.gerenteService.cadastrarAlgo(this.gerente).pipe(first()).subscribe(data => {
+        }, error => {
+          console.log(error.error);
+        });
       }
     }, error => {
       console.log(error.error);
@@ -262,6 +260,15 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
 
       });
     }
+    if (!this.ope2) {
+      this.operacaoService.addOperacao(this.operacao).subscribe(data => {
+        this.operacaoEscolhida = data;
+        this.ope2 = true;
+      }, error => {
+        console.log(error.error);
+      });
+    }
+
     this.escolheu = true;
 
   }
