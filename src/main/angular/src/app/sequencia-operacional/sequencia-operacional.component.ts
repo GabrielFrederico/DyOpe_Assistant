@@ -187,9 +187,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
 
   atualizar() {
     this.gerenteService.atualizarPeca(this.peca).pipe(first()).subscribe(peca => {
-      const hoje: Date = new Date();
-      const inicio: Date = new Date(this.operacaoEscolhida.dataInicio);
-      const prazo: Date = new Date(this.operacaoEscolhida.prazo);
+
       this.operacaoService.updateOperacao(this.operacaoEscolhida).pipe(first()).subscribe(data => {
         this.resultadoOpe = data;
 
@@ -197,7 +195,9 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
       }, error => {
         console.log(error.error);
       });
-      alert(this.resultadoOpe.producaoHora);
+      const hoje: Date = new Date();
+      const inicio: Date = new Date(this.resultadoOpe.dataInicio);
+      const prazo: Date = new Date(this.resultadoOpe.prazo);
       this.resultadoOpe.gerente_id = this.gerente.id;
       if (inicio === hoje || inicio < hoje) {
         this.gerente.operacoesAndamento.push(this.resultadoOpe);
