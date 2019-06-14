@@ -52,6 +52,8 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
   ope2 = false;
   ope3 = false;
 
+  atualizarOpe = false;
+
   ngOnInit() {
     this.etapasproducao();
     this.info = {
@@ -185,35 +187,53 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
 
   }
 
-  atualizar() {
-    this.gerenteService.atualizarPeca(this.peca).pipe(first()).subscribe(peca => {
+  update() {
+    this.operacaoService.updateOperacao(this.operacaoEscolhida).pipe(first()).subscribe(data => {
+      this.resultadoOpe = data;
 
-      this.operacaoService.updateOperacao(this.operacaoEscolhida).pipe(first()).subscribe(data => {
-        this.resultadoOpe = data;
-
-        // this.router.navigate(['/gerenteindex/andamentooperacoes/', this.etapaproducao.etapaProducao]);
-      }, error => {
-        console.log(error.error);
-      });
-      const hoje: Date = new Date();
-      const inicio: Date = new Date(this.resultadoOpe.dataInicio);
-      const prazo: Date = new Date(this.resultadoOpe.prazo);
-      this.resultadoOpe.gerente_id = this.gerente.id;
-      if (inicio === hoje || inicio < hoje) {
-        this.gerente.operacoesAndamento.push(this.resultadoOpe);
-      } else if (inicio > hoje) {
-        this.gerente.operacoesFazer.push(this.resultadoOpe);
-        this.gerenteService.cadastrarAlgo(this.gerente).pipe(first()).subscribe(data => {
-        }, error => {
-          console.log(error.error);
-        });
-      }
+      // this.router.navigate(['/gerenteindex/andamentooperacoes/', this.etapaproducao.etapaProducao]);
     }, error => {
       console.log(error.error);
     });
-    this.ope3 = true;
+    const hoje: Date = new Date();
+    const inicio: Date = new Date(this.resultadoOpe.dataInicio);
+    const prazo: Date = new Date(this.resultadoOpe.prazo);
 
+  }
 
+  atualizar() {
+    if (this.atualizarOpe) {
+      this.update();
+    } else {
+      this.gerenteService.atualizarPeca(this.peca).pipe(first()).subscribe(peca => {
+
+        this.operacaoService.updateOperacao(this.operacaoEscolhida).pipe(first()).subscribe(data => {
+          this.resultadoOpe = data;
+
+          // this.router.navigate(['/gerenteindex/andamentooperacoes/', this.etapaproducao.etapaProducao]);
+        }, error => {
+          console.log(error.error);
+        });
+        const hoje: Date = new Date();
+        const inicio: Date = new Date(this.resultadoOpe.dataInicio);
+        const prazo: Date = new Date(this.resultadoOpe.prazo);
+        this.resultadoOpe.gerente_id = this.gerente.id;
+        if (inicio === hoje || inicio < hoje) {
+          this.gerente.operacoesAndamento.push(this.resultadoOpe);
+        } else if (inicio > hoje) {
+          this.gerente.operacoesFazer.push(this.resultadoOpe);
+          this.gerenteService.cadastrarAlgo(this.gerente).pipe(first()).subscribe(data => {
+          }, error => {
+            console.log(error.error);
+          });
+        }
+      }, error => {
+        console.log(error.error);
+      });
+      this.ope3 = true;
+      this.atualizarOpe = true;
+
+    }
   }
 
   cadastrarSubOperacao() {
