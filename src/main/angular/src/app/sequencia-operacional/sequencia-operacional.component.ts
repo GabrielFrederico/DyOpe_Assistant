@@ -194,6 +194,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
   }
 
   update() {
+    this.resultadoOpe.suboperacoes =  this.operacaoEscolhida.suboperacoes;
     this.operacaoService.updateOperacao(this.resultadoOpe).pipe(first()).subscribe(data => {
       this.resultadoOpe = data;
       this.ope3 = false;
