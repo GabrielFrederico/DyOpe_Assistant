@@ -197,7 +197,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
       }, error => {
         console.log(error.error);
       });
-
+      alert(this.resultadoOpe.producaoHora);
       this.resultadoOpe.gerente_id = this.gerente.id;
       if (inicio === hoje || inicio < hoje) {
         this.gerente.operacoesAndamento.push(this.resultadoOpe);

@@ -1,9 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {CadastroSetorService, Setor} from '../service/cadastro-setor.service';
+import {CadastroSetorService} from '../service/cadastro-setor.service';
 import {Router} from '@angular/router';
 import {TokenStorageService} from '../auth/token-storage.service';
-import {Observable} from 'rxjs';
-import {CadastroOperacaoService, EtapaProducao} from '../service/cadastro-operacao.service';
+import {CadastroOperacaoService} from '../service/cadastro-operacao.service';
 import {GerenteService} from '../service/gerente.service';
 import {first} from 'rxjs/operators';
 
@@ -15,12 +14,11 @@ import {first} from 'rxjs/operators';
 
 export class CadastroSetorComponent implements OnInit {
   setor: any = {};
+  etapa: string;
   gerente: any;
   public info: any;
   public validado: boolean;
   public etapas: any;
-  // tslint:disable-next-line:variable-name
-  public etapa: any;
 
   ngOnInit() {
     this.etapaService.getTiposOperacoes().subscribe(data => {
@@ -42,13 +40,14 @@ export class CadastroSetorComponent implements OnInit {
               private router: Router, private etapaService: CadastroOperacaoService, private gerenteService: GerenteService, private setorservice: CadastroSetorService, private token: TokenStorageService) {
   }
 
-  selectEtapa(etapa: any) {
-    this.etapa = etapa;
-  }
 
   save() {
+    this.etapaService.getEtapaProducaoNome(this.etapa).subscribe(data => {
+      this.setor.etapa = data;
+    }, error => {
+      console.log(error.error);
+    });
     this.setor.gerente_id = this.gerente.id;
-    this.setor.etapaproducao = this.etapa;
     this.gerente.setores.push(this.setor);
     this.gerenteService.cadastrarAlgo(this.gerente).pipe(first()).subscribe(data => {
       alert('Setor cadastrado com sucesso!');

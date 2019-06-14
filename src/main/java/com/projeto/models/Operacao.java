@@ -53,7 +53,7 @@ public class Operacao {
 		java.util.Date fim = new java.util.Date();
 		inicio.setTime(operacao.getDataInicio());
 
-		int diaSemana = 0;
+		int diasAdded = 0;
 		ArrayList<Integer> feriados = new ArrayList<>();
 		feriados.add(20);
 
@@ -68,18 +68,16 @@ public class Operacao {
 		diasNece = Math.round(result / (operacao.getTempoTrab()*operacao.numFuncionariosDisponiveis));
 
 		do {
-			inicio.add(Calendar.DAY_OF_MONTH, diasNece);
+			inicio.add(Calendar.DAY_OF_MONTH, 1);
 			if (inicio.get(Calendar.DAY_OF_WEEK) != Calendar.SATURDAY
-					&& inicio.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY
-					&& !feriados.contains((Integer) inicio.get(Calendar.DAY_OF_YEAR))) {
-				++diaSemana;
+					|| inicio.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY
+					|| !feriados.contains((Integer) inicio.get(Calendar.DAY_OF_YEAR))) {
+				++diasAdded;
 			}
 
-		} while (inicio.get(Calendar.DAY_OF_WEEK) != Calendar.SATURDAY
-				&& inicio.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY
-				&& !feriados.contains((Integer) inicio.get(Calendar.DAY_OF_YEAR)));
+		} while (diasAdded < diasNece);
 
-		inicio.add(Calendar.DAY_OF_MONTH, diaSemana);
+		// inicio.add(Calendar.DAY_OF_MONTH, diasNece + diasAdded);
        
 		fim = inicio.getTime();
 		

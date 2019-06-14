@@ -10,14 +10,14 @@
       <div class="form-row">
         <div class="col-md-4">
           <label for="gerente">Gerente</label>
-          <select required="required"  (change)="selectGerente($event.target)" id="gerente" class="form-control">
+          <select required="required"  name="gerente" [(ngModel)]="gerente" id="gerente" class="form-control">
             <option value="null" disabled>Selecione..</option>
             <option *ngFor="let gerente of gerentes" [value]="gerente">{{gerente.nome}}</option>
           </select>
         </div>
         <div class="col-md-4" *ngIf="setorShow">
           <label for="setor">Setor</label>
-          <select [disabled]="!setorShow" (change)="selectSetor($event.target)"  required="required" id="setor" class="form-control">
+          <select [disabled]="!setorShow" name="setor" [(ngModel)]="setor"  required="required" id="setor" class="form-control">
             <option selected>Selecione..</option>
             <option *ngFor="let setor of gerente.setores" [value]="setor">{{setor.nome}}</option>
           </select>
@@ -26,7 +26,7 @@
 
         <div class="col-md-4" *ngIf="setorShow">
           <label for="etapa">Etapa da Produção</label>
-          <select [disabled]="!setorShow" (change)="selectEtapa($event.target)" required="required" id="etapa" class="form-control">
+          <select [disabled]="!setorShow" name="etapa" [(ngModel)]="etapa" required="required" id="etapa" class="form-control">
             <option selected>Selecione..</option>
             <option *ngFor="let etapa of etapas" [value]="etapa">{{etapa.etapaProducao}}</option>
           </select>
@@ -38,21 +38,21 @@
       <div class="form-row">
         <div class="col-md-4" *ngIf="setorShow">
           <label for="peca">Peça</label>
-          <select [disabled]="!setorShow" (change)="selectPeca($event.target)" required="required" id="peca" class="form-control">
+          <select [disabled]="!setorShow" name="peca" [(ngModel)]="peca" required="required" id="peca" class="form-control">
             <option selected>Selecione..</option>
             <option *ngFor="let peca of gerente.pecas"  [value]="peca">{{peca.descricao}}</option>
           </select>
         </div>
         <div class="col-md-4" *ngIf="showOpe">
           <label for="operacao">Operacao</label>
-          <select [disabled]="!showOpe" (change)="selectOpe($event.target)" required="required" id="operacao" class="form-control">
+          <select [disabled]="!showOpe" name="ope" [(ngModel)]="ope" required="required" id="operacao" class="form-control">
             <option selected>Selecione..</option>
             <option *ngFor="let operacao of peca.operacoes"  [value]="operacao">{{operacao.id}}</option>
           </select>
         </div>
         <div class="col-md-4" *ngIf="showsubope">
           <label for="suboperacao">Operacao</label>
-          <select [disabled]="!showOpe" (change)="selectSubOpe($event.target)" required="required" id="suboperacao" class="form-control">
+          <select [disabled]="!showOpe" name="subope" [(ngModel)]="subope" required="required" id="suboperacao" class="form-control">
             <option selected>Selecione..</option>
             <option *ngFor="let suboperacao of ope.suboperacoes"  [value]="suboperacao">{{suboperacao.descricao}}</option>
           </select>

@@ -54,7 +54,7 @@
   <div class="card-body border-info">
     <div class="row">
       <div class="col-md-4">
-        <div class="card border-info mb-3 operacoes">
+        <div class="card border-info mb-3 operacoes lista">
           <div class="card-header border-info">Operações</div>
           <div class="card-body text-secondary">
             <div class="form-group">
@@ -102,12 +102,13 @@
       </div>
 
       <div class="col-md-3" *ngIf="ope2">
-        <div class="card border-warning mb-3 operacoes">
+        <div class="card border-warning mb-3 operacoes lista">
+          <div class="card-header border-info">Dados:</div>
           <div class="card-body text-warning">
             <div class="form-group">
               <div class="col-md-auto">
                 <div class="form-label-group">
-                  <input type="number" id="LoteProdu"
+                  <input type="number" id="LoteProdu" [maxLength]="6"
                          class="form-control"
                          placeholder="Lote de Produção" name="loteProducao" [(ngModel)]="operacaoEscolhida.loteProducao"
                          required="required">
@@ -116,7 +117,7 @@
               </div>
               <div class="col-md-auto">
                 <div class="form-label-group">
-                  <input type="number" id="numFun"
+                  <input type="number" id="numFun" [maxLength]="4"
                          class="form-control" [(ngModel)]="operacaoEscolhida.numFuncionariosDisponiveis"
                          placeholder="N° de Funcionários" name="numFun"
                          required="required">
@@ -127,7 +128,7 @@
                 <div class="form-group">
                   <div class="form-label-group">
                     <input type="number" name="tempoTrab"
-                           id="tempoTrab"
+                           id="tempoTrab" [maxLength]="4"
                            class="form-control" minlength="3"
                            autofocus="autofocus" [(ngModel)]="operacaoEscolhida.tempoTrab"
                            placeholder="Tempo Trabalho" required="required">
@@ -154,9 +155,10 @@
       <div class="col-sm-5" *ngIf="ope3">
 
         <div class="card border-success mb-3 lista">
+
+          <div class="card-header border-info">Resultado Final:</div>
           <div class="card-body text-success">
             <div class="form-group">
-
 
               <div class="col-md-auto">
                 <div class="form-label-group">
@@ -176,7 +178,7 @@
               </div>
               <div class="col-md-auto">
                 <div class="form-label-group">
-                  <input [readonly]="isReadonly" type="number" id="QtdPecasOpe"
+                  <input [readonly]="isReadonly" type="text" id="QtdPecasOpe"
                          class="form-control" value="{{resultadoOpe.qtdPecasOpe}} Peças"
                          placeholder="Peças por funcionário:" name="qtdPecasOpe"
                          required="required">
@@ -185,7 +187,7 @@
               </div>
               <div class="col-md-auto">
                 <div class="form-label-group">
-                  <input [readonly]="isReadonly" type="number" id="producaoHora"
+                  <input [readonly]="isReadonly" type="text" id="producaoHora"
                          class="form-control" value="{{resultadoOpe.producaoHora}} Peças"
                          placeholder="Quantidade de peças por funcionário:" name="producaoHora"
                          required="required">
