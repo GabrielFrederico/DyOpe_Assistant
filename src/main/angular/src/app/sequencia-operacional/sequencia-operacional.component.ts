@@ -1,18 +1,17 @@
-import {ChangeDetectionStrategy, Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {TokenStorageService} from '../auth/token-storage.service';
-import {ActivatedRoute, Router} from '@angular/router';
-import {CadastroOperacaoService} from '../service/cadastro-operacao.service';
-import {Subscription} from 'rxjs';
-import {GerenteService} from '../service/gerente.service';
-import {first} from 'rxjs/operators';
+import { ChangeDetectionStrategy, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { TokenStorageService } from '../auth/token-storage.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CadastroOperacaoService } from '../service/cadastro-operacao.service';
+import { Subscription } from 'rxjs';
+import { GerenteService } from '../service/gerente.service';
+import { first } from 'rxjs/operators';
 
 
 @Component({
   selector: 'app-sequencia-operacional',
   templateUrl: './sequencia-operacional.component.html',
-  preserveWhitespaces: false,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  preserveWhitespaces: false
 })
 export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
 
@@ -77,7 +76,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
   }
 
   openCadastro(cadastro) {
-    this.modalService.open(cadastro, {size: 'lg', ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+    this.modalService.open(cadastro, { size: 'lg', ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
@@ -85,7 +84,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
   }
 
   openInformacoes(content) {
-    this.modalService.open(content, {size: 'lg', ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+    this.modalService.open(content, { size: 'lg', ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
@@ -206,7 +205,19 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
        * });
        */
 
-      this.atualizar();
+
+      this.gerenteService.atualizarPeca(this.peca).pipe(first()).subscribe(peca => {
+        this.operacaoService.updateOperacao(this.operacaoEscolhida).pipe(first()).subscribe(data => {
+          this.resultadoOpe = data;
+          this.atualizar();
+          // this.router.navigate(['/gerenteindex/andamentooperacoes/', this.etapaproducao.etapaProducao]);
+        }, error => {
+          console.log(error.error);
+        });
+      }, error => {
+        console.log(error.error);
+      });
+
 
     }
   }
@@ -231,42 +242,36 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
     const inicio: Date = new Date(this.resultadoOpe.dataInicio);
     const prazo: Date = new Date(this.resultadoOpe.prazo);
 
-
   }
 
   atualizar() {
 
-    this.gerenteService.atualizarPeca(this.peca).pipe(first()).subscribe(peca => {
+    const hoje: Date = new Date();
+    const inicio: Date = new Date(this.resultadoOpe.dataInicio);
+    const prazo: Date = new Date(this.resultadoOpe.prazo);
 
-      this.operacaoService.updateOperacao(this.operacaoEscolhida).pipe(first()).subscribe(data => {
-        this.resultadoOpe = data;
-        console.clear();
-        // this.router.navigate(['/gerenteindex/andamentooperacoes/', this.etapaproducao.etapaProducao]);
+
+
+    if (inicio.getTime() === hoje.getTime()) {
+      this.operacaoEscolhida.gerente_id = this.gerente.id;
+      alert(1);
+      this.gerente.operacoesAndamento.push(this.resultadoOpe);
+      this.gerenteService.cadastrarAlgo(this.gerente).pipe(first()).subscribe(data => {
       }, error => {
+        this.erro = true;
+        this.errorMessage = error.error;
         console.log(error.error);
       });
-      this.numFun1 = this.resultadoOpe.numFuncionarios - 2;
-      this.numFun2 = this.resultadoOpe.numFuncionarios + 2;
-      this.qtdPeca1 = this.resultadoOpe.qtdPecasOpe - 2;
-      this.qtdPeca2 = this.resultadoOpe.qtdPecasOpe + 2;
-      const hoje: Date = new Date();
-      const inicio: Date = new Date(this.resultadoOpe.dataInicio);
-      const prazo: Date = new Date(this.resultadoOpe.prazo);
-      this.resultadoOpe.gerente_id = this.gerente.id;
-      if (inicio === hoje || inicio < hoje) {
-        this.gerente.operacoesAndamento.push(this.resultadoOpe);
-      } else if (inicio > hoje) {
-        this.gerente.operacoesFazer.push(this.resultadoOpe);
-        this.gerenteService.cadastrarAlgo(this.gerente).pipe(first()).subscribe(data => {
-        }, error => {
-          this.erro = true;
-          this.errorMessage = error.error;
-          console.log(error.error);
-        });
-      }
-    }, error => {
-      console.log(error.error);
-    });
+    } else if (inicio > hoje) {
+      this.gerente.operacoesFazer.push(this.resultadoOpe);
+      this.gerenteService.cadastrarAlgo(this.gerente).pipe(first()).subscribe(data => {
+      }, error => {
+        this.erro = true;
+        this.errorMessage = error.error;
+        console.log(error.error);
+      });
+    }
+
     this.ope3 = true;
     this.atualizarOpe = true;
 
@@ -291,7 +296,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
     this.gerente.pecas.push(this.newpeca);
     this.gerenteService.cadastrarAlgo(this.gerente).pipe(first()).subscribe(data => {
       alert('Peça cadastrada com sucesso!');
-      this.router.navigateByUrl('/gerenteindex/homegerente', {skipLocationChange: true}).then(() =>
+      this.router.navigateByUrl('/gerenteindex/homegerente', { skipLocationChange: true }).then(() =>
         this.router.navigate(['/gerenteindex/operacoes/', this.etapaproducao.etapaProducao]));
 
     }, error => {

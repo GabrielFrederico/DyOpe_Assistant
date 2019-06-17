@@ -2,12 +2,13 @@
 <title>Operações</title>
 <nav class="espacamentosequenciaoperacional">
   <div class="nav nav-tabs" id="nav-tab" role="tablist">
-    <a class="nav-item nav-link " id="nav-profile-tab" data-toggle="tab"
-       [routerLink]="['/gerenteindex/operacoes', etapaproducao.etapaProducao]" role="tab" aria-controls="nav-profile"
-       aria-selected="false">Sequência Operacional</a>
+
     <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab"
        [routerLink]="['/gerenteindex/andamentooperacoes', etapaproducao.etapaProducao]" role="tab"
        aria-controls="nav-home" aria-selected="true">Andamento</a>
+       <a class="nav-item nav-link " id="nav-profile-tab" data-toggle="tab"
+          [routerLink]="['/gerenteindex/operacoes', etapaproducao.etapaProducao]" role="tab" aria-controls="nav-profile"
+          aria-selected="false">Cadastro</a>
   </div>
 </nav>
 
@@ -241,5 +242,3 @@
 <a class="scroll-to-top rounded" href="#page-top">
   <i class="fas fa-angle-up"></i>
 </a>
-
-

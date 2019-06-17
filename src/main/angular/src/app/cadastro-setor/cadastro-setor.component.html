@@ -10,22 +10,20 @@
   <form [noValidate]="$any(false)" (ngSubmit)="save()">
     <div class="form-group">
       <div class="form-group">
-
-        <label for="nomeSetor">Nome do setor:</label>
-        <input type="text" name="nomeSetor" id="nomeSetor" class="form-control"
+        <label for="nomeSetor">Nome do setor:
+         <input type="text" name="nomeSetor" id="nomeSetor" class="form-control"
                autofocus="autofocus" [(ngModel)]="setor.nomeSetor"
                placeholder="Nome Setor" required="required">
-
+        </label>
       </div>
     </div>
     <div class="form-group">
-      <label for="etapaProducao">Etapa da Produção:</label>
+      <label for="etapaProducao">Etapa da Produção:
       <select class="form-control" id="etapaProducao" required="required" name="etapa" [(ngModel)]="etapa">
-        <option selected>Selecione..</option>
+        <option selected value="">Selecione..</option>
         <option *ngFor="let etapa of etapas" [value]="etapa.etapaProducao">{{etapa.etapaProducao}}</option>
-
       </select>
-
+      </label>
     </div>
     <input class="btn btn-success" type="submit" value="Cadastrar">
 
@@ -45,13 +43,7 @@
 </div>
 <!-- /.content-wrapper -->
 
-
 <!-- Scroll to Top Button-->
 <a class="scroll-to-top rounded" href="#page-top">
   <i class="fas fa-angle-up"></i>
 </a>
-
-<ng-template #loggedOut class="">
-  Não tem autorização! <br>
-  Faça o <a routerLink="/logingerente">login.</a>
-</ng-template>
