@@ -63,8 +63,8 @@ public class Operacao {
 		inicio.setTime(operacao.getDataInicio());
 
 		int diasAdded = 0;
-		ArrayList<Integer> feriados = new ArrayList<>();
-		feriados.add(20);
+		ArrayList<Date> feriados = new ArrayList<>();
+		
 
 		int tempos = 0, diasNece = 0, funcionariosNecessários = 0, prodHora = 0, qtdPecasOpe = 0;
 		for (SubOperacao subope : operacao.getSuboperacoes()) {

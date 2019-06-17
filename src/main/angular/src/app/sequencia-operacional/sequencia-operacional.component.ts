@@ -33,6 +33,10 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
   listasuboperacoes: any = [];
   suboperacoes: any;
   etapaproducao: any;
+  numFun1: number;
+  numFun2: number;
+  qtdPeca1: number;
+  qtdPeca2: number;
   public erro: boolean;
   public errorMessage = '';
   closeResult: string;
@@ -116,6 +120,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
           if (etapaproducao) {
             this.etapaproducao = etapaproducao;
             this.etapa = this.etapaproducao.id.toString();
+            this.escolheu = false;
             console.clear();
             if (this.etapaproducao.id === 5) {
               this.operacaoService.getOperacoesSub().subscribe(data => {
@@ -161,6 +166,8 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
   }
 
   cadastrar() {
+
+
     if (this.atualizarOpe) {
 
       this.update();
@@ -205,6 +212,10 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
       this.errorMessage = error.error;
       console.log(error.error);
     });
+    this.numFun1 = this.resultadoOpe.numFuncionarios - 2;
+    this.numFun2 = this.resultadoOpe.numFuncionarios + 2;
+    this.qtdPeca1 = this.resultadoOpe.qtdPecasOpe - 2;
+    this.qtdPeca2 = this.resultadoOpe.qtdPecasOpe + 2;
     const hoje: Date = new Date();
     const inicio: Date = new Date(this.resultadoOpe.dataInicio);
     const prazo: Date = new Date(this.resultadoOpe.prazo);
@@ -223,6 +234,10 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
       }, error => {
         console.log(error.error);
       });
+      this.numFun1 = this.resultadoOpe.numFuncionarios - 2;
+      this.numFun2 = this.resultadoOpe.numFuncionarios + 2;
+      this.qtdPeca1 = this.resultadoOpe.qtdPecasOpe - 2;
+      this.qtdPeca2 = this.resultadoOpe.qtdPecasOpe + 2;
       const hoje: Date = new Date();
       const inicio: Date = new Date(this.resultadoOpe.dataInicio);
       const prazo: Date = new Date(this.resultadoOpe.prazo);

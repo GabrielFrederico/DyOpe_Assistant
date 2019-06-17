@@ -18,7 +18,7 @@ export class OperacaoBeneficiamentoComponent implements OnInit {
       authorities: this.token.getAuthorities(),
       senha: this.token.getPassword()
     };
-    this.naoAutenticado()
+    this.naoAutenticado();
   }
 
   constructor(private modalService: NgbModal, private token: TokenStorageService, private router: Router) {
