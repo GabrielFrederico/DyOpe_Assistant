@@ -76,9 +76,9 @@
                   <div class="form-group">
                     <div class="form-label-group">
                       <input type="number" name="tempoOpe"
-                             id="tempoOpe" [(ngModel)]="suboperacao.tempoNesc"
+                             id="tempoOpe" value="{{suboperacao.tempoNesc}}"
                              class="form-control" minlength="3" #tempo
-                             autofocus="autofocus"
+                             autofocus="autofocus" (blur)="atualizarSubOpe(suboperacao,tempo.value)"
                              placeholder="Tempo" required="required">
                       <label for="tempoOpe">Tempo </label>
                     </div>
@@ -110,7 +110,7 @@
             <div class="form-group">
               <div class="col-md-auto">
                 <div class="form-label-group">
-                  <input type="number" id="LoteProdu" [maxLength]="6"
+                  <input type="number" id="LoteProdu" maxlength="6"
                          class="form-control" #lote [(ngModel)]="operacaoEscolhida.loteProducao"
                          placeholder="Lote de Produção" name="loteProducao"
                          required="required">
@@ -119,7 +119,7 @@
               </div>
               <div class="col-md-auto">
                 <div class="form-label-group">
-                  <input type="number" id="numFun" [maxLength]="4" #numFun
+                  <input type="number" id="numFun" maxlength="4" #numFun
                          class="form-control" [(ngModel)]="operacaoEscolhida.numFuncionariosDisponiveis"
                          placeholder="N° de Funcionários" name="numFun"
                          required="required">
@@ -131,8 +131,8 @@
                   <div class="form-label-group">
                     <input type="number" name="tempoTrab"
                            id="tempoTrab" [maxLength]="4" #tempoTrab
-                           class="form-control" minlength="3"
-                           autofocus="autofocus"  [(ngModel)]="operacaoEscolhida.tempoTrab"
+                           class="form-control" maxlength="4"
+                           autofocus="autofocus" [(ngModel)]="operacaoEscolhida.tempoTrab"
                            placeholder="Tempo Trabalho" required="required">
                     <label for="tempoTrab">Tempo trabalhado</label>
                   </div>
@@ -253,6 +253,14 @@
                        class="form-control" minlength="6"
                        id="DescricaoOp">
                 <label for="DescricaoOp">Descrição da operação:</label>
+              </div>
+            </div>
+            <div class="col-md-auto">
+              <div class="form-label-group">
+                <input type="number" required="required" name="tempoNesc" [(ngModel)]="newsuboperacao.tempoNesc"
+                       class="form-control" maxlength="4"
+                       id="tempoNescop">
+                <label for="tempoNescop">Tempo:</label>
               </div>
             </div>
 
