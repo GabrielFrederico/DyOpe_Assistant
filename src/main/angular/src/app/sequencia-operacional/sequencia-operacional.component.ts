@@ -122,6 +122,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
             this.etapa = this.etapaproducao.id.toString();
             this.escolheu = false;
             console.clear();
+            this.suboperacoes = [];
             if (this.etapaproducao.id === 5) {
               this.operacaoService.getOperacoesSub().subscribe(data => {
                 this.suboperacoes = data;
