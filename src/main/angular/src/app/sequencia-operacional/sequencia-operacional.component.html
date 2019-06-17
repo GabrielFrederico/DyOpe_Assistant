@@ -59,7 +59,7 @@
           <div class="card-header border-info">Sub-Operações</div>
           <div class="card-body text-secondary">
             <div class="form-group">
-              <div *ngFor="let suboperacao of listasuboperacoes; let i = index" class="row">
+              <div *ngFor="let suboperacao of listasuboperacoes; trackBy: trackByFn" class="row">
                 <div class="col-md-5">
                   <div class="form-group">
                     <div class="form-label-group">
@@ -76,7 +76,7 @@
                   <div class="form-group">
                     <div class="form-label-group">
                       <input type="number" name="tempoOpe"
-                             id="tempoOpe" value="{{suboperacao.tempoNesc}}"
+                             id="tempoOpe"
                              class="form-control" minlength="3" #tempo
                              autofocus="autofocus" (blur)="atualizarSubOpe(suboperacao,tempo.value)"
                              placeholder="Tempo" required="required">
@@ -165,15 +165,15 @@
 
               <div class="col-md-auto">
                 <div class="form-label-group">
-                  <input [readonly]="isReadonly" type="date" id="prazo" name="prazo" class="form-control"
+                  <input  type="date" id="prazo" name="prazo" class="form-control-plaintext" [readonly]="isReadonly"
                          placeholder="Prazo:" [(ngModel)]="resultadoOpe.prazo">
                   <label for="prazo">Prazo:</label>
                 </div>
               </div>
               <div class="col-md-auto">
                 <div class="form-label-group">
-                  <input [readonly]="isReadonly" type="text" id="numFunNesc"
-                         class="form-control" value="{{resultadoOpe.numFuncionarios}}"
+                  <input  type="text" id="numFunNesc"
+                         class="form-control-plaintext" value="{{resultadoOpe.numFuncionarios}}" [readonly]="isReadonly"
                          placeholder="Funcionários necessários:" name="numFuncionarios"
                          required="required">
                   <label for="numFunNesc" class="fonterisco">Funcionários necessários:</label>
@@ -181,8 +181,8 @@
               </div>
               <div class="col-md-auto">
                 <div class="form-label-group">
-                  <input [readonly]="isReadonly" type="text" id="QtdPecasOpe"
-                         class="form-control" value="{{resultadoOpe.qtdPecasOpe}} Peças"
+                  <input  type="text" id="QtdPecasOpe"
+                         class="form-control-plaintext" value="{{resultadoOpe.qtdPecasOpe}} Peças" [readonly]="isReadonly"
                          placeholder="Peças por funcionário:" name="qtdPecasOpe"
                          required="required">
                   <label for="QtdPecasOpe" class="fonterisco">Peças por funcionário:</label>
@@ -190,8 +190,8 @@
               </div>
               <div class="col-md-auto">
                 <div class="form-label-group">
-                  <input [readonly]="isReadonly" type="text" id="producaoHora"
-                         class="form-control" value="{{resultadoOpe.producaoHora}} Peças"
+                  <input  type="text" id="producaoHora"
+                         class="form-control-plaintext" value="{{resultadoOpe.producaoHora}} Peças" [readonly]="isReadonly"
                          placeholder="Quantidade de peças por funcionário:" name="producaoHora"
                          required="required">
                   <label for="producaoHora" class="fonterisco">Produção por hora:</label>
@@ -200,7 +200,7 @@
 
 
             </div>
-            <a class="btn btn-outline-success list-group-item list-group-item-action"
+            <a class="btn btn-outline-success list-group-item list-group-item-action" routerLink="/gerenteindex/planilhadecusto"
             >
               Abrir Planilha
             </a>
