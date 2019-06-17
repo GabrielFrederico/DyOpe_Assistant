@@ -91,6 +91,10 @@ div.menu_index span {
   text-align: -webkit-center;
 }
 
+.espacamentosequenciaoperacional {
+  padding-bottom: 2%;
+}
+
 @media screen and (max-width: 570px) {
   .tam {
     font-size: 140%;
