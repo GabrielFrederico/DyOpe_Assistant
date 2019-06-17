@@ -56,32 +56,30 @@
     <div class="row">
       <div class="col-md-4">
         <div class="card border-info mb-3 operacoes lista">
-          <div class="card-header border-info">Sub-Operações</div>
+          <div class="card-header border-primary">Sub-Operações</div>
           <div class="card-body text-secondary">
             <div class="form-group">
               <div *ngFor="let suboperacao of listasuboperacoes; trackBy: trackByFn" class="row">
                 <div class="col-md-5">
                   <div class="form-group">
-                    <div class="form-label-group">
-                      <input type="text" name="escricao"
-                             id="dataescricao" value="{{suboperacao.descricao}}" [readonly]="isReadonly"
+                    <label for="descricao">Descrição
+                      <input type="text" name="descricao"
+                             id="descricao" value="{{suboperacao.descricao}}" [readonly]="isReadonly"
                              class="form-control" minlength="3"
-                             autofocus="autofocus"
-                             placeholder="Descricao" required="required">
-                      <label for="dataescricao">Descrição</label>
-                    </div>
+                             placeholder="" required="required">
+                    </label>
                   </div>
                 </div>
-                <div class="col-md-5">
+                <div class="col-md-4">
                   <div class="form-group">
-                    <div class="form-label-group">
+                    <label for="tempoOpe" class="col">Tempo
                       <input type="number" name="tempoOpe"
                              id="tempoOpe"
-                             class="form-control" minlength="3" #tempo
-                             autofocus="autofocus" (blur)="atualizarSubOpe(suboperacao,tempo.value)"
-                             placeholder="Tempo" required="required">
-                      <label for="tempoOpe">Tempo </label>
-                    </div>
+                             class="form-control " minlength="3" #tempo
+                             (blur)="atualizarSubOpe(suboperacao,tempo.value)"
+                             placeholder="Minutos" required="required">
+                    </label>
+
                   </div>
                 </div>
                 <div class="col-md-1">
@@ -104,53 +102,56 @@
       </div>
 
       <div class="col-md-3" *ngIf="ope2">
-        <div class="card border-warning mb-3 operacoes lista">
+        <div class="card border-info mb-3 operacoes lista">
           <div class="card-header border-info">Dados:</div>
-          <div class="card-body text-warning">
+          <div class="card-body text-secondary">
             <div class="form-group">
               <div class="col-md-auto">
-                <div class="form-label-group">
-                  <input type="number" id="LoteProdu" maxlength="6"
-                         class="form-control" #lote [(ngModel)]="operacaoEscolhida.loteProducao"
-                         placeholder="Lote de Produção" name="loteProducao"
-                         required="required">
+                <div class="form-group">
                   <label for="LoteProdu" class="fonterisco">Lote de Produção:</label>
-                </div>
-              </div>
-              <div class="col-md-auto">
-                <div class="form-label-group">
-                  <input type="number" id="numFun" maxlength="4" #numFun
-                         class="form-control" [(ngModel)]="operacaoEscolhida.numFuncionariosDisponiveis"
-                         placeholder="N° de Funcionários" name="numFun"
+                  <input type="number" id="LoteProdu" maxlength="6"
+                         class="form-control" #lote (blur)="loteOpe(lote.value)"
+                         placeholder="Lote" name="loteProducao"
                          required="required">
-                  <label for="numFun" class="fonterisco">N° de Funcionários</label>
                 </div>
               </div>
               <div class="col-md-auto">
                 <div class="form-group">
-                  <div class="form-label-group">
-                    <input type="number" name="tempoTrab"
-                           id="tempoTrab" [maxLength]="4" #tempoTrab
-                           class="form-control" maxlength="4"
-                           autofocus="autofocus" [(ngModel)]="operacaoEscolhida.tempoTrab"
-                           placeholder="Tempo Trabalho" required="required">
-                    <label for="tempoTrab">Tempo trabalhado</label>
-                  </div>
+                  <label for="numFun" class="fonterisco">N° de Funcionários
+                    <input type="number" id="numFun" maxlength="4" #numFun
+                           class="form-control" (blur)="numfunOpe(numFun.value)"
+                           placeholder="(disponíveis)" name="numFun"
+                           required="required">
+                  </label>
                 </div>
               </div>
               <div class="col-md-auto">
-                <div class="form-label-group">
-                  <input type="date" id="datainici" name="dataInicio" class="form-control"
-                         placeholder="Data Inicio:" [(ngModel)]="operacaoEscolhida.dataInicio"
-                         required="required">
-                  <label for="datainici">Data Inicio:</label>
+                <div class="form-group">
+
+                  <label for="tempoTrab">Tempo trabalhado
+                    <input type="number" name="tempoTrab"
+                           id="tempoTrab" [maxLength]="4" #tempoTrab
+                           class="form-control" maxlength="4"
+                           (blur)="tempoOpe(tempoTrab.value)"
+                           placeholder="(Min)" required="required">
+                  </label>
+                </div>
+              </div>
+              <div class="col-md-auto">
+                <div class="form-group">
+                  <label for="datainici">Data Inicio:
+                    <input type="date" id="datainici" name="dataInicio" class="form-control" min="2019-05-01"
+                           max="2020-12-30"
+                           placeholder="Data Inicio:" [(ngModel)]="operacaoEscolhida.dataInicio"
+                           required="required">
+                  </label>
                 </div>
               </div>
             </div>
           </div>
           <div class="card-footer bg-transparent border-info">
-            <input class="btn btn-primary" type="submit" *ngIf="!ope3" value="Cadastrar">
-            <input class="btn btn-primary" type="submit" *ngIf="atualizarOpe" value="Atualizar">
+            <input class="btn btn-primary" type="submit" [disabled]="!valido" *ngIf="!ope3" value="Cadastrar">
+            <input class="btn btn-primary" type="submit" [disabled]="!valido" *ngIf="atualizarOpe" value="Atualizar">
           </div>
         </div>
       </div>
@@ -164,44 +165,50 @@
             <div class="form-group">
 
               <div class="col-md-auto">
-                <div class="form-label-group">
-                  <input  type="date" id="prazo" name="prazo" class="form-control-plaintext" [readonly]="isReadonly"
+                <label for="prazo">Prazo:
+                  <input type="date" id="prazo" name="prazo" class="form-control-plaintext" [readonly]="isReadonly"
                          placeholder="Prazo:" [(ngModel)]="resultadoOpe.prazo">
-                  <label for="prazo">Prazo:</label>
+                </label>
+
+              </div>
+              <div class="col-md-auto">
+                <div class="form-group">
+                  <label for="numFunNesc" class="fonterisco">Funcionários necessários:
+                    <input type="text" id="numFunNesc"
+                           class="form-control-plaintext" value="{{resultadoOpe.numFuncionarios}}"
+                           [readonly]="isReadonly"
+                           placeholder="Funcionários necessários:" name="numFuncionarios"
+                           required="required">
+                  </label>
                 </div>
               </div>
               <div class="col-md-auto">
-                <div class="form-label-group">
-                  <input  type="text" id="numFunNesc"
-                         class="form-control-plaintext" value="{{resultadoOpe.numFuncionarios}}" [readonly]="isReadonly"
-                         placeholder="Funcionários necessários:" name="numFuncionarios"
-                         required="required">
-                  <label for="numFunNesc" class="fonterisco">Funcionários necessários:</label>
+                <div class="form-group">
+                  <label for="QtdPecasOpe" class="fonterisco">Peças por funcionário:
+                    <input type="text" id="QtdPecasOpe"
+                           class="form-control-plaintext" value="{{resultadoOpe.qtdPecasOpe}} Peças"
+                           [readonly]="isReadonly"
+                           placeholder="Peças por funcionário:" name="qtdPecasOpe"
+                           required="required">
+                  </label>
                 </div>
               </div>
               <div class="col-md-auto">
-                <div class="form-label-group">
-                  <input  type="text" id="QtdPecasOpe"
-                         class="form-control-plaintext" value="{{resultadoOpe.qtdPecasOpe}} Peças" [readonly]="isReadonly"
-                         placeholder="Peças por funcionário:" name="qtdPecasOpe"
-                         required="required">
-                  <label for="QtdPecasOpe" class="fonterisco">Peças por funcionário:</label>
-                </div>
-              </div>
-              <div class="col-md-auto">
-                <div class="form-label-group">
-                  <input  type="text" id="producaoHora"
-                         class="form-control-plaintext" value="{{resultadoOpe.producaoHora}} Peças" [readonly]="isReadonly"
-                         placeholder="Quantidade de peças por funcionário:" name="producaoHora"
-                         required="required">
-                  <label for="producaoHora" class="fonterisco">Produção por hora:</label>
+                <div class="form-group">
+                  <label for="producaoHora" class="fonterisco">Produção por hora:
+                    <input type="text" id="producaoHora"
+                           class="form-control-plaintext" value="{{resultadoOpe.producaoHora}} Peças"
+                           [readonly]="isReadonly"
+                           placeholder="Quantidade de peças por funcionário:" name="producaoHora"
+                           required="required">
+                  </label>
                 </div>
               </div>
 
 
             </div>
-            <a class="btn btn-outline-success list-group-item list-group-item-action" routerLink="/gerenteindex/planilhadecusto"
-            >
+            <a class="btn btn-outline-success list-group-item list-group-item-action"
+               routerLink="/gerenteindex/planilhadecusto">
               Abrir Planilha
             </a>
           </div>
@@ -248,19 +255,23 @@
           <form #cadastrarOperacao="ngForm" [noValidate]="$any(false)">
 
             <div class="col-md-auto">
-              <div class="form-label-group">
-                <input type="text" required="required" name="descricao" [(ngModel)]="newsuboperacao.descricao"
-                       class="form-control" minlength="6"
-                       id="DescricaoOp">
-                <label for="DescricaoOp">Descrição da operação:</label>
+              <div class="form-group">
+                <div class="form-label-group">
+                  <input type="text" required="required" name="descricao" [(ngModel)]="newsuboperacao.descricao"
+                         class="form-control" minlength="6"
+                         id="DescricaoOp">
+                  <label for="DescricaoOp">Descrição da operação:</label>
+                </div>
               </div>
             </div>
             <div class="col-md-auto">
-              <div class="form-label-group">
-                <input type="number" required="required" name="tempoNesc" [(ngModel)]="newsuboperacao.tempoNesc"
-                       class="form-control" maxlength="4"
-                       id="tempoNescop">
-                <label for="tempoNescop">Tempo:</label>
+              <div class="form-group">
+                <div class="form-label-group">
+                  <input type="number" required="required" name="tempoNesc" [(ngModel)]="newsuboperacao.tempoNesc"
+                         class="form-control" maxlength="4"
+                         id="tempoNescop">
+                  <label for="tempoNescop">Tempo:</label>
+                </div>
               </div>
             </div>
 
@@ -300,10 +311,10 @@
             <div class="form-group">
               <div class="col-md-auto">
                 <div class="form-label-group">
-                  <input type="text" #nomePeca id="nomePeca" class="form-control" name="descricaop"
-                         placeholder="Nome da peça:" [(ngModel)]="newpeca.descricao" required="required"
-                         required="required">
-                  <label for="nomePeca">Nome da peça:</label>
+                  <label for="nomePeca">Nome da peça:
+                    <input type="text" #nomePeca id="nomePeca" class="form-control" name="descricaop"
+                           placeholder="Nome da peça:" [(ngModel)]="newpeca.descricao" required="required">
+                  </label>
                 </div>
               </div>
             </div>

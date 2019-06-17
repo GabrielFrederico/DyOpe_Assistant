@@ -30,8 +30,9 @@ const rotas: Routes = [
       {path: 'operacoes/:etapaProducao', component: SequenciaOperacionalComponent},
       {path: 'homegerente', component: HomeGerenteComponent},
       {path: 'planilhadecusto', component: PlanilhaCustoComponent},
-      {path: '**', component: ErroComponent},
-      {path: '', redirectTo: 'homegerente'}
+      {path: '', redirectTo: 'homegerente'},
+      {path: '**', component: ErroComponent}
+
     ]
   }];
 

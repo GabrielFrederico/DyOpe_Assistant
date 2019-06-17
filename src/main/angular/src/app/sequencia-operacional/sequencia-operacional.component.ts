@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {ChangeDetectionStrategy, Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {TokenStorageService} from '../auth/token-storage.service';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -11,8 +11,8 @@ import {first} from 'rxjs/operators';
 @Component({
   selector: 'app-sequencia-operacional',
   templateUrl: './sequencia-operacional.component.html',
-  preserveWhitespaces: false
-
+  preserveWhitespaces: false,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
 
@@ -57,6 +57,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
   ope3 = false;
 
   atualizarOpe = false;
+  valido = true;
 
   ngOnInit() {
     this.etapasproducao();
@@ -163,11 +164,21 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
 
   subopes() {
 
+  }
 
+  loteOpe(lote: any) {
+    this.operacaoEscolhida.loteProducao = lote;
+  }
+
+  numfunOpe(numfun: any) {
+    this.operacaoEscolhida.numFuncionariosDisponiveis = numfun;
+  }
+
+  tempoOpe(tempo: any) {
+    this.operacaoEscolhida.tempoTrab = tempo;
   }
 
   cadastrar() {
-
 
     if (this.atualizarOpe) {
 
@@ -186,7 +197,6 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
       });
 
       this.operacaoEscolhida.suboperacoes = this.listasuboperacoes;
-
       this.operacaoEscolhida.etapa_producao_id = this.etapaproducao.id;
       this.operacaoEscolhida.peca_id = this.peca.id;
       this.operacaoEscolhida.descricao = this.etapaproducao.etapaProducao + ' : ' + this.peca.descricao;
@@ -307,8 +317,8 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
 
       this.suboperacoes.forEach((item, index) => {
         this.listasuboperacoes.push(item);
-
       });
+      this.suboperacoes = [];
     }
     if (!this.ope2) {
       this.operacaoService.addOperacao(this.operacao).subscribe(data => {
@@ -320,11 +330,8 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
         console.log(error.error);
       });
     }
-
     this.escolheu = true;
-
   }
-
 
   toggleReadonly() {
     this.isReadonly = !this.isReadonly;
