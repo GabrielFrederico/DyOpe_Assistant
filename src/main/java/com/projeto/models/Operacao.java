@@ -97,7 +97,7 @@ public class Operacao {
 		}
 		try {
 			// inicio.add(Calendar.DAY_OF_MONTH, diasNece + diasAdded);
-			System.out.println(diasNece + " . " + tempoFun + ". " + result + ".tempos " + tempos);
+			System.out.println(diasNeceteste + " . " + tempoFun + ". " + resultdias + ".tempos " + tempos);
 			fim = inicio.getTime();
 
 			funcionariosNecessários = Math.round(operacao.getLoteProducao() / operacao.getTempoTrab());

@@ -207,10 +207,11 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
         item.id = null;
         item.idEtapa = 0;
         item.operacao_id = this.operacaoEscolhida.id;
-        this.operacaoEscolhida.suboperacoes.push(item);
+
       }, error => {
         console.log(error.error);
       });
+      this.operacaoEscolhida.suboperacoes = this.listasuboperacoes;
       this.operacaoEscolhida.tempoTrab = 450;
       this.operacaoEscolhida.etapa_producao_id = this.etapaproducao.id;
       this.operacaoEscolhida.peca_id = this.peca.id;
