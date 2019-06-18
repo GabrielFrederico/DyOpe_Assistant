@@ -24,22 +24,22 @@
 
   <div *ngIf="acessovalido">
 
-  <div class="form-group">
+    <div class="form-group">
 
-    <div class="form-label-group">
+      <div class="form-label-group">
 
-      <input type="text" id="chaveAcesso" [(ngModel)]="chaveAcesso" name="chaveAcesso" class="form-control col-sm-3"
-             [autofocus]="true" placeholder="Chave de Acesso" required="required">
-      <label for="chaveAcesso">Chave de Acesso</label>
+        <input type="text" id="chaveAcesso" [(ngModel)]="chaveAcesso" name="chaveAcesso" class="form-control col-sm-3"
+               [autofocus]="true" placeholder="Chave de Acesso" required="required">
+        <label for="chaveAcesso">Chave de Acesso</label>
+      </div>
+
     </div>
 
-  </div>
+    <input class="btn btn-info btn-block col-sm-3" type="submit" value="Acessar">
 
-  <input class="btn btn-info btn-block col-sm-3" type="submit" value="Acessar">
-
-  <div class="alert alert-dismissible alert-danger separa" *ngIf="invalido">
-    {{mensagemErro}}
-  </div>
+    <div class="alert alert-dismissible alert-danger separa" *ngIf="invalido">
+      {{mensagemErro}}
+    </div>
 
   </div>
 
