@@ -1,6 +1,7 @@
 package com.projeto.models;
 
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -24,13 +25,14 @@ public class Peca {
 	@JoinTable(name = "peca_operacoes",
     joinColumns = @JoinColumn(name = "peca_id"),
     inverseJoinColumns = @JoinColumn(name = "operacao_id"))
-	private Set<Operacao> operacoes = new HashSet<>();
+	private List<Operacao> operacoes = new ArrayList<>();
 
-	public Set<Operacao> getOperacoes() {
+	
+	public List<Operacao> getOperacoes() {
 		return operacoes;
 	}
 
-	public void setOperacoes(Set<Operacao> operacoes) {
+	public void setOperacoes(List<Operacao> operacoes) {
 		this.operacoes = operacoes;
 	}
 

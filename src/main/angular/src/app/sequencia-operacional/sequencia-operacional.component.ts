@@ -1,11 +1,11 @@
-import { ChangeDetectionStrategy, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { TokenStorageService } from '../auth/token-storage.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { CadastroOperacaoService } from '../service/cadastro-operacao.service';
-import { Subscription } from 'rxjs';
-import { GerenteService } from '../service/gerente.service';
-import { first } from 'rxjs/operators';
+import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {TokenStorageService} from '../auth/token-storage.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {CadastroOperacaoService} from '../service/cadastro-operacao.service';
+import {Subscription} from 'rxjs';
+import {GerenteService} from '../service/gerente.service';
+import {first} from 'rxjs/operators';
 
 
 @Component({
@@ -24,7 +24,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
   operacao: any = {};
   newsuboperacao: any = {};
   suboperacaoEscolhida: any;
-  subope: any = {};
+  listsubope: [];
   gerente: any;
   operacaoEscolhida: any;
   newpeca: any = {};
@@ -58,6 +58,10 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
   atualizarOpe = false;
   valido = true;
 
+  hoje: Date;
+  inicio: Date;
+  prazo: Date;
+
   ngOnInit() {
     this.etapasproducao();
     this.info = {
@@ -76,7 +80,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
   }
 
   openCadastro(cadastro) {
-    this.modalService.open(cadastro, { size: 'lg', ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+    this.modalService.open(cadastro, {size: 'lg', ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
@@ -84,7 +88,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
   }
 
   openInformacoes(content) {
-    this.modalService.open(content, { size: 'lg', ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+    this.modalService.open(content, {size: 'lg', ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
@@ -162,7 +166,16 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
   }
 
   subopes() {
-
+    if (!this.ope2) {
+      this.operacaoService.addOperacao(this.operacao).subscribe(data => {
+        this.operacaoEscolhida = data;
+        this.ope2 = true;
+      }, error => {
+        this.erro = true;
+        this.errorMessage = error.error;
+        console.log(error.error);
+      });
+    }
   }
 
   loteOpe(lote: any) {
@@ -190,40 +203,49 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
         item.id = null;
         item.idEtapa = 0;
         item.operacao_id = this.operacaoEscolhida.id;
-
+        this.operacaoEscolhida.suboperacoes.push(item);
       }, error => {
         console.log(error.error);
       });
-
-      this.operacaoEscolhida.suboperacoes = this.listasuboperacoes;
+      this.operacaoEscolhida.tempoTrab = 450;
       this.operacaoEscolhida.etapa_producao_id = this.etapaproducao.id;
       this.operacaoEscolhida.peca_id = this.peca.id;
       this.operacaoEscolhida.descricao = this.etapaproducao.etapaProducao + ' : ' + this.peca.descricao;
       this.peca.operacoes.push(this.operacaoEscolhida);
-      /** this.peca.operacoes = this.peca.operacoes.filter(ope => {
-       *  return ope.etapa_producao_id === this.etapaproducao.id;
-       * });
+
+      /** this.operacaoService.updateOperacao(this.operacaoEscolhida).pipe(first()).subscribe(data => {
+       *   this.resultadoOpe = data;
+       *   this.atualizar();
+       *    // this.router.navigate(['/gerenteindex/andamentooperacoes/', this.etapaproducao.etapaProducao]);
+       *   }, error => {
+       *    console.log(error.error);
+       *   });
        */
 
+      // this.operacaoEscolhida.gerente_id = this.gerente.id;
 
+      // this.gerente.operacoes.push(this.operacaoEscolhida);
       this.gerenteService.atualizarPeca(this.peca).pipe(first()).subscribe(peca => {
-        this.operacaoService.updateOperacao(this.operacaoEscolhida).pipe(first()).subscribe(data => {
+        this.operacaoService.getOperacaoId(this.operacaoEscolhida.id).subscribe(data => {
           this.resultadoOpe = data;
           this.atualizar();
-          // this.router.navigate(['/gerenteindex/andamentooperacoes/', this.etapaproducao.etapaProducao]);
         }, error => {
+          this.erro = true;
+          this.errorMessage = error.error;
           console.log(error.error);
         });
       }, error => {
+        this.erro = true;
+        this.errorMessage = error.error;
         console.log(error.error);
       });
-
 
     }
   }
 
   update() {
-    // this.resultadoOpe.suboperacoes =  this.operacaoEscolhida.suboperacoes;
+
+
     this.operacaoService.updateOperacao(this.operacaoEscolhida).pipe(first()).subscribe(data => {
       this.resultadoOpe = data;
       this.ope3 = false;
@@ -238,31 +260,21 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
     this.numFun2 = this.resultadoOpe.numFuncionarios + 2;
     this.qtdPeca1 = this.resultadoOpe.qtdPecasOpe - 2;
     this.qtdPeca2 = this.resultadoOpe.qtdPecasOpe + 2;
-    const hoje: Date = new Date();
-    const inicio: Date = new Date(this.resultadoOpe.dataInicio);
-    const prazo: Date = new Date(this.resultadoOpe.prazo);
 
   }
 
   atualizar() {
-
-    const hoje: Date = new Date();
-    const inicio: Date = new Date(this.resultadoOpe.dataInicio);
-    const prazo: Date = new Date(this.resultadoOpe.prazo);
-
-
-
-    if (inicio.getTime() === hoje.getTime()) {
-      this.operacaoEscolhida.gerente_id = this.gerente.id;
-      alert(1);
-      this.gerente.operacoesAndamento.push(this.resultadoOpe);
+    this.hoje = new Date();
+    this.inicio = new Date(this.resultadoOpe.dataInicio);
+    this.prazo = new Date(this.resultadoOpe.prazo);
+    if (this.inicio.getTime() === this.hoje.getTime()) {
       this.gerenteService.cadastrarAlgo(this.gerente).pipe(first()).subscribe(data => {
       }, error => {
         this.erro = true;
         this.errorMessage = error.error;
         console.log(error.error);
       });
-    } else if (inicio > hoje) {
+    } else if (this.inicio > this.hoje) {
       this.gerente.operacoesFazer.push(this.resultadoOpe);
       this.gerenteService.cadastrarAlgo(this.gerente).pipe(first()).subscribe(data => {
       }, error => {
@@ -296,7 +308,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
     this.gerente.pecas.push(this.newpeca);
     this.gerenteService.cadastrarAlgo(this.gerente).pipe(first()).subscribe(data => {
       alert('Peça cadastrada com sucesso!');
-      this.router.navigateByUrl('/gerenteindex/homegerente', { skipLocationChange: true }).then(() =>
+      this.router.navigateByUrl('/gerenteindex/homegerente', {skipLocationChange: true}).then(() =>
         this.router.navigate(['/gerenteindex/operacoes/', this.etapaproducao.etapaProducao]));
 
     }, error => {
@@ -325,16 +337,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
       });
       this.suboperacoes = [];
     }
-    if (!this.ope2) {
-      this.operacaoService.addOperacao(this.operacao).subscribe(data => {
-        this.operacaoEscolhida = data;
-        this.ope2 = true;
-      }, error => {
-        this.erro = true;
-        this.errorMessage = error.error;
-        console.log(error.error);
-      });
-    }
+
     this.escolheu = true;
   }
 
