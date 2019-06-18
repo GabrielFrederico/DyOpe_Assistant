@@ -66,7 +66,7 @@ public class Operacao {
 		ArrayList<Date> feriados = new ArrayList<>();
 		
 
-		int tempos = 0, diasNece = 0, funcionariosNecessários = 0, prodHora = 0, qtdPecasOpe = 0;
+		int tempos = 0, diasNece = 0, funcionariosNecessários = 0, prodHora = 0, producaoHora, prodhoraresult, qtdPecasOpe = 0;
 		for (SubOperacao subope : operacao.getSuboperacoes()) {
 			tempos += subope.getTempoNesc();
 
@@ -97,14 +97,17 @@ public class Operacao {
 			fim = inicio.getTime();
 
 			funcionariosNecessários = Math.round(operacao.getLoteProducao() / operacao.getTempoTrab());
-			qtdPecasOpe = Math.round(operacao.getLoteProducao() / funcionariosNecessários);
+			
+			qtdPecasOpe = Math.round(operacao.getLoteProducao() / operacao.getNumFuncionarios());
 			calcProHora = funcionariosNecessários * operacao.getTempoTrab();
 			prodHora = Math.round(operacao.getTempoTrab() / (operacao.getTempoTrab() / 60));
+			prodhoraresult =60*operacao.getNumFuncionarios();
+			producaoHora = Math.round(prodhoraresult/tempos);
 			operacao.setNumFuncionarios(funcionariosNecessários);
 			Date prazo = new Date(fim.getTime());
 			operacao.setPrazo(prazo);
 			operacao.setQtdPecasOpe(qtdPecasOpe);
-			operacao.setProducaoHora(prodHora);
+			operacao.setProducaoHora(producaoHora);
 		} catch (ArithmeticException e) {
 			return new ResponseEntity<>(new ResponseMessage("Erro -> Não é possível dividir por zero!" +e), HttpStatus.INTERNAL_SERVER_ERROR);
 			

@@ -24,7 +24,10 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
   operacao: any = {};
   newsuboperacao: any = {};
   suboperacaoEscolhida: any;
-  listsubope: [];
+  listsubope = 'let suboperacao of listasuboperacoes; trackBy: trackByFn';
+  listsubopedb: string;
+  subopesa = true;
+  subopesdb = false;
   gerente: any;
   operacaoEscolhida: any;
   newpeca: any = {};
