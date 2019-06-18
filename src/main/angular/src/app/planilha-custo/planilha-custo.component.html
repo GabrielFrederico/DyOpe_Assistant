@@ -2,6 +2,13 @@
 
 <title>Operações</title>
 
+<div class="container-fluid">
+
+  <!-- Page Content -->
+  <h3>Planilha de custo</h3>
+  <hr>
+</div>
+
 <!--<nav aria-label="breadcrumb">
  <ol class="breadcrumb">
    <li class="breadcrumb-item active" aria-current="page"><a
@@ -15,22 +22,28 @@
 
 <form class="planilhateste" [noValidate]="$any(false)" *ngIf="!acessovalido" (ngSubmit)="acessar()" #f="ngForm">
 
+  <div *ngIf="acessovalido">
+
   <div class="form-group">
+
     <div class="form-label-group">
+
       <input type="text" id="chaveAcesso" [(ngModel)]="chaveAcesso" name="chaveAcesso" class="form-control col-sm-3"
-             [autofocus]="true"
-             placeholder="Chave de Acesso" required="required">
+             [autofocus]="true" placeholder="Chave de Acesso" required="required">
       <label for="chaveAcesso">Chave de Acesso</label>
     </div>
+
   </div>
 
   <input class="btn btn-info btn-block col-sm-3" type="submit" value="Acessar">
+
   <div class="alert alert-dismissible alert-danger separa" *ngIf="invalido">
     {{mensagemErro}}
   </div>
-</form>
 
-<hr>
+  </div>
+
+</form>
 
 <!-- Sticky Footer -->
 <footer class="sticky-footer">
