@@ -28,6 +28,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
   listsubopedb: string;
   subopesa = true;
   subopesdb = false;
+  numfumok = false;
   gerente: any;
   operacaoEscolhida: any;
   newpeca: any = {};
@@ -231,6 +232,9 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
       this.gerenteService.atualizarPeca(this.peca).pipe(first()).subscribe(peca => {
         this.operacaoService.getOperacaoId(this.operacaoEscolhida.id).subscribe(data => {
           this.resultadoOpe = data;
+          if (this.resultadoOpe.numFuncionariosDisponiveis >= this.resultadoOpe.numFuncionarios) {
+            this.numfumok = true;
+          }
           this.atualizar();
         }, error => {
           this.erro = true;

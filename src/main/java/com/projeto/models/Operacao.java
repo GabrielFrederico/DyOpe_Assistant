@@ -66,18 +66,22 @@ public class Operacao {
 		ArrayList<Date> feriados = new ArrayList<>();
 		
 
-		int tempos = 0, diasNece = 0, funcionariosNecessários = 0, prodHora = 0, producaoHora, prodhoraresult, qtdPecasOpe = 0;
+		int tempos = 0, diasNece = 0,diasNeceteste =0 , funcionariosNecessários = 0, prodHora = 0, producaoHora, prodhoraresult, qtdPecasOpe = 0;
 		for (SubOperacao subope : operacao.getSuboperacoes()) {
 			tempos += subope.getTempoNesc();
 
 		}
 
-		float result, funcCalc, calcProHora, tempoFun;
-		result = tempos * operacao.getLoteProducao();
+		float result, funcCalc, calcProHora, tempoFun, resultdias;
 		tempoFun = operacao.getTempoTrab() * operacao.getNumFuncionariosDisponiveis();
+		
+		result = tempos * operacao.getLoteProducao();
 		diasNece = Math.round(result / tempoFun);
+		
+		resultdias = result/operacao.getNumFuncionariosDisponiveis();
+		diasNeceteste = Math.round(resultdias / tempoFun);
 
-		for (int i = 1; i < diasNece; i++) {
+		for (int i = 1; i < diasNeceteste; i++) {
 
 			inicio.add(Calendar.DAY_OF_MONTH, 1);
 			if (inicio.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY) {
