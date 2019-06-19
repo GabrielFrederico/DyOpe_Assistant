@@ -169,14 +169,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
 
   subopes() {
     if (!this.ope2) {
-      this.operacaoService.addOperacao(this.operacao).subscribe(data => {
-        this.operacaoEscolhida = data;
-        this.ope2 = true;
-      }, error => {
-        this.erro = true;
-        this.errorMessage = error.error;
-        console.log(error.error);
-      });
+      this.ope2 = true;
     }
   }
 
@@ -354,7 +347,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
   selectsPeca(peca: any) {
     this.peca = peca;
 
-    if (!this.escolheu) {
+    if (!this.escolheu && this.suboperacoes.length <= 0) {
       this.operacaoService.addOperacao(this.operacao).subscribe(data => {
         this.operacaoEscolhida = data;
         this.suboperacoes.forEach((item, index) => {
