@@ -347,7 +347,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
   selectsPeca(peca: any) {
     this.peca = peca;
 
-    if (!this.escolheu && this.suboperacoes === []) {
+    if (!this.escolheu) {
       this.operacaoService.addOperacao(this.operacao).subscribe(data => {
         this.operacaoEscolhida = data;
         this.suboperacoes.forEach((item, index) => {
