@@ -74,24 +74,13 @@
                     </div>
                     <div class="col-md-5">
                       <div class="form-group">
-                        <label for="tempoOpe">Tempo </label>
-                        <div class="col-md-2">
+                        <label for="tempoOpe">Tempo
                           <input type="number" name="tempoOpe"
                                  id="tempoOpe" max="59" [brmasker]="{mask:'00', len:2}"
                                  class="form-control" #tempo (change)="atualizarSubOpe(suboperacao,tempo.value)"
                                  (blur)="atualizarSubOpe(suboperacao,tempo.value)"
-                                 placeholder="Min" required="required">
-                        </div>
-                        :
-                        <div class="col-md-2">
-                          <input type="number" name="tempoOpe2"
-                                 id="tempoOpe2" max="59" [brmasker]="{mask:'00', len:2}"
-                                 class="form-control" #tempo (change)="atualizarSubOpe(suboperacao,tempo.value)"
-                                 (blur)="atualizarSubOpe(suboperacao,tempo.value)"
-                                 placeholder="Min" required="required">
-                        </div>
-
-
+                                 placeholder="Seg" required="required">
+                        </label>
                       </div>
                     </div>
                     <div class="col-md-1 align-self-center">
