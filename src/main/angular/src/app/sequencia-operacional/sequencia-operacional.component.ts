@@ -31,6 +31,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
   newpeca: any = {};
   peca: any;
   listasuboperacoes: any = [];
+  listasuboperacoes2 = [];
   suboperacoes: any;
   etapaproducao: any;
   numFun1: number;
@@ -204,11 +205,11 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
         item.id = null;
         item.idEtapa = 0;
         item.operacao_id = this.operacaoEscolhida.id;
-
+        this.operacaoEscolhida.suboperacoes.push(item);
       }, error => {
         console.log(error.error);
       });
-      this.operacaoEscolhida.suboperacoes = this.listasuboperacoes;
+      // this.operacaoEscolhida.suboperacoes = this.listasuboperacoes;
       this.operacaoEscolhida.tempoTrab = 450;
       this.operacaoEscolhida.etapa_producao_id = this.etapaproducao.id;
       this.operacaoEscolhida.descricao = this.etapaproducao.etapaProducao + ' : ' + this.peca.descricao;
@@ -216,36 +217,46 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
 
       this.hoje = new Date();
       this.inicio = new Date(this.operacaoEscolhida.dataInicio);
-      this.peca.operacoes.push(this.operacaoEscolhida);
+      // this.peca.operacoes.push(this.operacaoEscolhida);
 
       if (this.inicio.getTime() === this.hoje.getTime() || this.inicio < this.hoje) {
-        // this.peca.operacoesAndamento.push(this.operacaoEscolhida);
+        this.peca.operacoesFazer.push(this.operacaoEscolhida);
+        this.gerenteService.pecaOpesFazer(this.peca).pipe(first()).subscribe(peca => {
+        }, error => {
+          this.getOpe();
+          this.erro = true;
+          this.errorMessage = error.error;
+          console.log(error.error);
+        });
       } else if (this.inicio > this.hoje) {
-       // this.peca.operacoesFazer.push(this.operacaoEscolhida);
-      }
-
-
-      this.gerenteService.atualizarPeca(this.peca).pipe(first()).subscribe(peca => {
-        this.operacaoService.getOperacaoId(this.operacaoEscolhida.id).subscribe(data => {
-          this.resultadoOpe = data;
-          this.ope3 = true;
-          this.atualizarOpe = true;
-          this.prazo = new Date(this.resultadoOpe.prazo);
-          if (this.resultadoOpe.numFuncionariosDisponiveis >= this.resultadoOpe.numFuncionarios) {
-            this.numfumok = true;
-          }
+        this.peca.operacoesAndamento.push(this.operacaoEscolhida);
+        this.gerenteService.pecaOpesAndamento(this.peca).pipe(first()).subscribe(peca => {
+          this.getOpe();
         }, error => {
           this.erro = true;
           this.errorMessage = error.error;
           console.log(error.error);
         });
-      }, error => {
-        this.erro = true;
-        this.errorMessage = error.error;
-        console.log(error.error);
-      });
+      }
 
     }
+  }
+
+  getOpe() {
+    this.operacaoService.getOperacaoId(this.operacaoEscolhida.id).subscribe(data => {
+      this.resultadoOpe = data;
+      this.ope3 = true;
+      this.atualizarOpe = true;
+      this.prazo = new Date(this.resultadoOpe.prazo);
+      if (this.resultadoOpe.numFuncionariosDisponiveis >= this.resultadoOpe.numFuncionarios) {
+        this.numfumok = true;
+      }
+    }, error => {
+      this.erro = true;
+      this.errorMessage = error.error;
+      console.log(error.error);
+    });
+
   }
 
 
@@ -343,14 +354,20 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
   selectsPeca(peca: any) {
     this.peca = peca;
 
-    if (this.listasuboperacoes.length <= 0 && !this.escolheu) {
-
-      this.suboperacoes.forEach((item, index) => {
-        this.listasuboperacoes.push(item);
+    if (!this.escolheu) {
+      this.operacaoService.addOperacao(this.operacao).subscribe(data => {
+        this.operacaoEscolhida = data;
+        this.suboperacoes.forEach((item, index) => {
+          this.operacaoEscolhida.suboperacoes.push(item);
+        });
+        this.suboperacoes = [];
+      }, error => {
+        this.erro = true;
+        this.errorMessage = error.error;
+        console.log(error.error);
       });
-      this.suboperacoes = [];
-    }
 
+    }
     this.escolheu = true;
   }
 

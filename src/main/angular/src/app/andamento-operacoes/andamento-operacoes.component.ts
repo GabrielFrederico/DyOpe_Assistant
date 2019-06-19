@@ -1,9 +1,8 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {TokenStorageService} from '../auth/token-storage.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CadastroOperacaoService, Operacao} from '../service/cadastro-operacao.service';
-import {Subscription} from 'rxjs';
 import {GerenteService} from '../service/gerente.service';
 import {first} from 'rxjs/operators';
 
@@ -13,10 +12,11 @@ import {first} from 'rxjs/operators';
   templateUrl: './andamento-operacoes.component.html',
   preserveWhitespaces: false
 })
-export class AndamentoOperacoesComponent implements OnInit, OnDestroy {
+export class AndamentoOperacoesComponent implements OnInit {
 
   // tslint:disable-next-line:max-line-length
-  constructor(private route: ActivatedRoute, private gerenteService: GerenteService, private modalService: NgbModal, private operacaoService: CadastroOperacaoService, private token: TokenStorageService, private router: Router) {
+  constructor(private route: ActivatedRoute, private gerenteService: GerenteService, private modalService: NgbModal,
+              private operacaoService: CadastroOperacaoService, private token: TokenStorageService, private router: Router) {
   }
 
   hoje: Date;
@@ -35,7 +35,6 @@ export class AndamentoOperacoesComponent implements OnInit, OnDestroy {
   public errorMessage = '';
   closeResult: string;
   public info: any;
-  sub: Subscription;
   peca: any;
   public validado: boolean;
   private cadastrado: boolean;
@@ -62,15 +61,11 @@ export class AndamentoOperacoesComponent implements OnInit, OnDestroy {
 
   }
 
-  ngOnDestroy() {
-    this.sub.unsubscribe();
-
-  }
-
   atualizarSubOpe(subope: any, tempo: any) {
     this.suboperacaoEscolhida = subope;
     this.suboperacaoEscolhida.tempoNesc = tempo;
   }
+
   update() {
     this.operacaoService.updateOperacao(this.operacaoEscolhida).pipe(first()).subscribe(data => {
       this.resultadoOpe = data;
@@ -117,6 +112,7 @@ export class AndamentoOperacoesComponent implements OnInit, OnDestroy {
 
   selectOperacao(operacao: any) {
     this.operacaoEscolhida = operacao;
+    this.ope3 = true;
   }
 
   naoAutenticado() {
@@ -142,11 +138,6 @@ export class AndamentoOperacoesComponent implements OnInit, OnDestroy {
 
   datareload() {
     this.gerenteService.getGerente(this.info.username).subscribe(data => this.gerente = data);
-
-    this.gerente.operacoesFazer = this.gerente.operacoesFazer.filter(ope => {
-      return ope.etapa_producao_id === this.etapaproducao.id;
-    });
-
     console.clear();
 
   }

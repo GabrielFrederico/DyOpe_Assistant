@@ -59,12 +59,22 @@ public class PecaController {
 		return peca;
 	}
 
-	@RequestMapping(method = RequestMethod.PUT, value = "operacao")
-	public Peca updateOpe(@RequestBody Peca peca) {
-
+	@RequestMapping(method = RequestMethod.PUT, value = "operacaoFazer")
+	public Peca opesFazer(@RequestBody Peca peca) {
+		Operacao ultima = peca.getOperacoesFazer().get(peca.getOperacoesFazer().size() - 1);
+		Operacao.calcular(ultima);
 		pecaRepository.save(peca);
 		return peca;
 	}
+	
+	@RequestMapping(method = RequestMethod.PUT, value = "operacaoAndamento")
+	public Peca opesAndamento(@RequestBody Peca peca) {
+		Operacao ultima = peca.getOperacoesAndamento().get(peca.getOperacoesAndamento().size() - 1);
+		Operacao.calcular(ultima);
+		pecaRepository.save(peca);
+		return peca;
+	}
+	
 
 	@RequestMapping(method = RequestMethod.DELETE, path = "/{id}")
 	public Peca deletePecaById(@PathVariable("id") long id) {

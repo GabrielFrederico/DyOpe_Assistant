@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import org.springframework.web.bind.annotation.RequestBody;
+
 @Entity
 public class PlanilhaCusto {
 	
@@ -53,6 +55,12 @@ public class PlanilhaCusto {
 	}
 	public void setPrecoOpe(float precoOpe) {
 		this.precoOpe = precoOpe;
+	}
+	
+	public static PlanilhaCusto calcularCusto(@RequestBody PlanilhaCusto planilha) {
+		
+		return planilha;
+		
 	}
 	
 

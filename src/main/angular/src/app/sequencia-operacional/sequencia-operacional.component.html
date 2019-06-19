@@ -2,14 +2,12 @@
 <title>Operações</title>
 <nav class="espacamentosequenciaoperacional">
   <div class="nav nav-tabs" id="nav-tab" role="tablist">
-    <a class="nav-item nav-link active" id="nav-profile-tab" data-toggle="tab"
-       [routerLink]="['/gerenteindex/operacoes', etapaproducao.etapaProducao]" role="tab" aria-controls="nav-profile"
-       aria-selected="false">Cadastro</a>
-    <a class="nav-item nav-link " id="nav-home-tab" data-toggle="tab"
-       routerLink="/gerenteindex/andamentooperacoes" role="tab"
-       aria-controls="nav-home" aria-selected="true">Andamento</a>
-
-
+    <a class="nav-item nav-link active" id="nav-operacoes-tab" data-toggle="tab"
+       href="#nav-operacoes" role="tab" aria-controls="nav-operacoes"
+       aria-selected="true">Cadastro</a>
+    <a class="nav-item nav-link " id="nav-andamento-tab" data-toggle="tab"
+       href="#nav-andamento" role="tab"
+       aria-controls="nav-home" aria-selected="false">Andamento</a>
   </div>
 </nav>
 <!--<nav aria-label="breadcrumb">
@@ -22,378 +20,399 @@
    </li>
  </ol>
 </nav> -->
+<div class="tab-content">
+  <div class="tab-pane fade show active" id="nav-operacoes" role="tabpanel" aria-labelledby="nav-operacoes-tab">
 
-<div class="row espacamentosequenciaoperacional" *ngIf="gerente.pecas">
-  <div class="col-md-3">
-    <h3>{{etapaproducao.etapaProducao}}</h3>
-  </div>
-  <div class="form-group">
-    <div class="col-md-2 align-self-center">
-      <mat-form-field>
-        <mat-label class="text-dark">Peças:</mat-label>
-        <mat-select required="required" name="etapa" [(ngModel)]="peca">
-          <mat-option *ngFor="let peca of this.gerente.pecas" [value]="peca"
-                      (click)="selectsPeca(peca)">{{peca.descricao}}</mat-option>
-          <mat-option *ngIf="gerente.pecas.length <= 0">Cadastre uma Peça</mat-option>
-        </mat-select>
-      </mat-form-field>
+    <div class="row espacamentosequenciaoperacional" *ngIf="gerente.pecas">
+      <div class="col-md-3">
+        <h3>{{etapaproducao.etapaProducao}}</h3>
+      </div>
+      <div class="form-group">
+        <div class="col-md-2 align-self-center">
+          <mat-form-field>
+            <mat-label class="text-dark">Peças:</mat-label>
+            <mat-select required="required" name="etapa" [(ngModel)]="peca">
+              <mat-option *ngFor="let peca of this.gerente.pecas" [value]="peca"
+                          (click)="selectsPeca(peca)">{{peca.descricao}}</mat-option>
+              <mat-option *ngIf="gerente.pecas.length <= 0">Cadastre uma Peça</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="col-md-2">
+        <a class="btn btn-info" href="#" data-toggle="modal"
+           data-target=".cadastrar-peca">Cadastrar Peça</a>
+      </div>
+      <div *ngIf="escolheu" class="col-md-2">
+        <h3>{{peca.descricao}}</h3>
+      </div>
+
     </div>
-  </div>
+    <form *ngIf="escolheu; else naoescolheu" #f="ngForm" (ngSubmit)="cadastrar()"
+          class="card" [noValidate]="$any(false)">
 
-  <div class="col-md-2">
-    <a class="btn btn-info" href="#" data-toggle="modal"
-       data-target=".cadastrar-peca">Cadastrar Peça</a>
+      <div class="card-header">Sequencia Operacional</div>
+      <div class="card-body border-info">
+        <div class="row">
+          <!--*ngIf="subopesa" -->
+          <div class="col-md-4">
+            <div class="card border-info mb-3 operacoes lista">
+              <div class="card-header border-primary">Sub-Operações (Unidade)</div>
+              <div class="card-body text-secondary">
+                <div class="form-group">
+                  <div *ngFor="let suboperacao of operacaoEscolhida.suboperacoes; trackBy: trackByFn" class="row">
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="descricao">Descrição
+                          <input type="text" name="descricao"
+                                 id="descricao" value="{{suboperacao.descricao}}" [readonly]="isReadonly"
+                                 class="form-control" minlength="3"
+                                 placeholder="" required="required">
+                        </label>
+                      </div>
+                    </div>
+                    <div class="col-md-5">
+                      <div class="form-group">
+                        <label for="tempoOpe">Tempo </label>
+                        <div class="col-md-2">
+                          <input type="number" name="tempoOpe"
+                                 id="tempoOpe" max="59" [brmasker]="{mask:'00', len:2}"
+                                 class="form-control" #tempo (change)="atualizarSubOpe(suboperacao,tempo.value)"
+                                 (blur)="atualizarSubOpe(suboperacao,tempo.value)"
+                                 placeholder="Min" required="required">
+                        </div>
+                        :
+                        <div class="col-md-2">
+                          <input type="number" name="tempoOpe2"
+                                 id="tempoOpe2" max="59" [brmasker]="{mask:'00', len:2}"
+                                 class="form-control" #tempo (change)="atualizarSubOpe(suboperacao,tempo.value)"
+                                 (blur)="atualizarSubOpe(suboperacao,tempo.value)"
+                                 placeholder="Min" required="required">
+                        </div>
+
+
+                      </div>
+                    </div>
+                    <div class="col-md-1 align-self-center">
+                      <a class="btn btn-danger" href="javascript:void(0)" data-toggle="modal"
+                         data-target=".deletar-subope" (click)="subopeEscolhida(suboperacao)">-</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card-footer bg-transparent border-info modal-footer">
+                <input type="submit" class="btn btn-outline-success" href="javascript:void(0)" [disabled]="ope2"
+                       (click)="subopes()" value="Salvar">
+
+                <a class="btn btn-info" href="#" data-toggle="modal"
+                   data-target=".cadastro-operacoes">+</a>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- <div class="col-md-4" *ngIf="!subopesa">
+             <div class="card border-info mb-3 operacoes lista">
+               <div class="card-header border-primary">Sub-Operações</div>
+               <div class="card-body text-secondary">
+                 <div class="form-group">
+                   <div *ngFor="let suboperacao of listasuboperacoes; trackBy: trackByFn" class="row">
+                     <div class="col-md-4">
+                       <div class="form-group">
+                         <label for="descricao">Descrição
+                           <input type="text" name="descricao"
+                                  id="descricao" value="{{suboperacao.descricao}}" [readonly]="isReadonly"
+                                  class="form-control" minlength="3"
+                                  placeholder="" required="required">
+                         </label>
+                       </div>
+                     </div>
+                     <div class="col-md-4">
+                       <div class="form-group">
+                         <label for="tempoOpe">Tempo
+                           <input type="number" name="tempoOpe"
+                                  id="tempoOpe"
+                                  class="form-control" #tempo (change)="atualizarSubOpe(suboperacao,tempo.value)"
+                                  (blur)="atualizarSubOpe(suboperacao,tempo.value)"
+                                  placeholder="Min" required="required">
+                         </label>
+
+                       </div>
+                     </div>
+                     <div class="col-md-1 align-self-center">
+                       <a class="btn btn-danger" href="javascript:void(0)" data-toggle="modal"
+                          data-target=".deletar-subope" (click)="subopeEscolhida(suboperacao)">-</a>
+                     </div>
+                   </div>
+                 </div>
+               </div>
+
+               <div class="card-footer bg-transparent border-info modal-footer">
+                 <input id="e" type="submit" class="btn btn-outline-success" href="javascript:void(0)" [disabled]="ope2"
+                        (click)="subopes()" value="Salvar">
+
+                 <a class="btn btn-info" href="#" data-toggle="modal"
+                    data-target=".cadastro-operacoes">+</a>
+
+               </div>
+             </div>
+           </div> -->
+
+          <div class="col-md-3" *ngIf="ope2">
+            <div class="card border-info mb-3 operacoes lista">
+              <div class="card-header border-info">Dados:</div>
+              <div class="card-body text-secondary">
+                <div class="form-group">
+                  <div class="col-md-auto">
+                    <div class="form-group">
+                      <label for="LoteProdu" class="fonterisco">Lote de Produção:</label>
+                      <input type="number" id="LoteProdu" min="1" max="999999" (change)="loteOpe(lote.value)"
+                             class="form-control" #lote (blur)="loteOpe(lote.value)"
+                             placeholder="Lote" name="loteProducao"
+                             required="required">
+                    </div>
+                  </div>
+                  <div class="col-md-auto">
+                    <div class="form-group">
+                      <label for="numFun" class="fonterisco">N° de Funcionários
+                        <input type="number" id="numFun" min="1" max="9999" #numFun (change)="numfunOpe(numFun.value)"
+                               class="form-control" (blur)="numfunOpe(numFun.value)"
+                               placeholder="(disponíveis)" name="numFun"
+                               required="required">
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-md-auto">
+                    <div class="form-group">
+                      <label for="datainici">Data Inicio:
+                        <input type="date" id="datainici" name="dataInicio" class="form-control" min="2019-05-01"
+                               max="2020-12-30"
+                               placeholder="Data Inicio:" [(ngModel)]="operacaoEscolhida.dataInicio"
+                               required="required">
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer bg-transparent border-info">
+                <input class="btn btn-primary" type="submit" [disabled]="!valido" *ngIf="!ope3" value="Cadastrar">
+                <input class="btn btn-primary" type="submit" [disabled]="!valido" *ngIf="atualizarOpe"
+                       value="Atualizar">
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-5" *ngIf="ope3">
+
+            <div class="card border-success mb-3 lista">
+
+              <div class="card-header border-info">Resultado Final:</div>
+              <div class="card-body text-success">
+                <div class="form-group">
+                  <div class="col-md-auto">
+                    <div class="form-group">
+                      <label for="prazo">Prazo:
+                        <input type="date" id="prazo" name="prazo" class="form-control-plaintext"
+                               [readonly]="isReadonly"
+                               placeholder="Prazo:" [(ngModel)]="resultadoOpe.prazo">
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-md-auto" *ngIf="numfumok">
+                    <div class="form-group">
+                      <label for="numFunNesc" class="fonterisco">Funcionários necessários:
+                        <input type="text" id="numFunNesc"
+                               class="form-control-plaintext" value="{{resultadoOpe.numFuncionarios}}"
+                               [readonly]="isReadonly"
+                               placeholder="Funcionários necessários:" name="numFuncionarios">
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-md-auto">
+                    <div class="form-group">
+                      <label for="QtdPecasOpe" class="fonterisco">Peças por funcionário:
+                        <input type="text" id="QtdPecasOpe"
+                               class="form-control-plaintext" value="{{resultadoOpe.qtdPecasOpe}} Peças"
+                               [readonly]="isReadonly"
+                               placeholder="Peças por funcionário:" name="qtdPecasOpe">
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-md-auto">
+                    <div class="form-group">
+                      <label for="producaoHora" class="fonterisco">Produção por hora:
+                        <input type="text" id="producaoHora"
+                               class="form-control-plaintext" value="{{resultadoOpe.producaoHora}} Peças"
+                               [readonly]="isReadonly"
+                               placeholder="Quantidade de peças por funcionário:" name="producaoHora">
+                      </label>
+                    </div>
+                  </div>
+
+
+                </div>
+                <a class="btn btn-outline-success list-group-item list-group-item-action"
+                   routerLink="/gerenteindex/planilhadecusto">
+                  Abrir Planilha
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="f.submitted && erro" class="alert alert-warning separa">
+          Cadastro Falhou!<br/>{{errorMessage}}
+        </div>
+      </div>
+
+    </form>
+    <!-- Sticky Footer -->
+    <footer class="sticky-footer">
+      <div class="container my-auto">
+        <div class="copyright text-center my-auto">
+          <span>Copyright © DyOpe Assistant 2019</span>
+        </div>
+      </div>
+    </footer>
+
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fas fa-angle-up"></i>
+    </a>
+
+
+    <!--Modal Cadastro suboperações: -->
+
+    <div class="modal fade cadastro-operacoes" tabindex="-1" role="dialog" aria-labelledby="modalpeca"
+         aria-hidden="true">
+      <div class="modal-dialog modal-body">
+
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title" id="cadastrooperacoes">Cadastro de Sub-operações:</h4>
+            <button type="button" #closeModal class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="card-body">
+              <form #cadastrarOperacao="ngForm" [noValidate]="$any(false)">
+
+                <div class="col-md-auto">
+                  <div class="form-group">
+                    <div class="form-label-group">
+                      <input type="text" required="required" name="descricao" [(ngModel)]="newsuboperacao.descricao"
+                             class="form-control" minlength="6"
+                             id="DescricaoOp">
+                      <label for="DescricaoOp">Descrição da operação:</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-auto">
+                  <div class="form-group">
+                    <div class="form-label-group">
+                      <input type="number" required="required" name="tempoNesc" [(ngModel)]="newsuboperacao.tempoNesc"
+                             class="form-control" maxlength="4"
+                             id="tempoNescop">
+                      <label for="tempoNescop">Tempo:</label>
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="modal-footer col-md-12">
+                  <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar
+                  </button>
+                  <input class="btn btn-primary" type="submit" (click)="cadastrarSubOperacao()"
+                         [disabled]="!cadastrarOperacao.valid" data-dismiss="modal"
+                         value="Cadastrar">
+                </div>
+                <div *ngIf="cadastrarOperacao.submitted && erro" class="alert alert-warning separa">
+                  Cadastro Falhou!<br/>{{errorMessage}}
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- cadastro de peça -->
+    <div class="modal fade cadastrar-peca" tabindex="-1" role="dialog" aria-labelledby="modalpeca"
+         aria-hidden="true">
+      <div class="modal-dialog modal-body">
+
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title" id="modalpeca">Cadastrar peça:</h4>
+            <button type="button" #closeModalPeca class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="card-body">
+              <form [noValidate]="$any(false)" #pecaForm="ngForm">
+
+                <div class="col-md-auto">
+                  <div class="form-group">
+
+                    <label for="nomePeca">Nome da peça: </label>
+                    <input type="text" #nomePeca id="nomePeca" class="form-control" name="descricaop"
+                           placeholder="Nome da peça:" [(ngModel)]="newpeca.descricao" required="required">
+                  </div>
+                </div>
+                <div class="modal-footer col-md-12">
+                  <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                  <input class="btn btn-primary" type="submit" (click)="cadastrarPeca()" [disabled]="pecaForm.invalid"
+                         data-dismiss="modal"
+                         value="Cadastrar">
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- modal excluir sub ope -->
+    <div class="modal  fade deletar-subope" tabindex="-1" role="dialog" aria-labelledby="modalpeca"
+         aria-hidden="true">
+      <div class="modal-dialog modal-body">
+
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title" id="modalExcluirSubope">Deletar Sub-Operação</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="card-body">
+              <div class="text-center mb-4">
+                <h4>Deseja Excluir?</h4>
+              </div>
+              <div class="modal-footer col-md-12">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                <input class="btn btn-primary" type="submit" (click)="deletarSubOperacao(suboperacaoEscolhida)"
+                       data-dismiss="modal"
+                       value="Confirmar">
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #naoescolheu class="separa">
+      Escolha uma Peça!
+    </ng-template>
   </div>
-  <div *ngIf="escolheu" class="col-md-2">
-    <h3>{{peca.descricao}}</h3>
+  <div class="tab-pane fade show" id="nav-andamento" role="tabpanel" aria-labelledby="nav-andamento-tab">
+    <app-andamento-operacoes></app-andamento-operacoes>
   </div>
 
 </div>
-<form *ngIf="escolheu; else naoescolheu" #f="ngForm" (ngSubmit)="cadastrar()"
-      class="card" [noValidate]="$any(false)">
 
-  <div class="card-header">Sequencia Operacional</div>
-  <div class="card-body border-info">
-    <div class="row">
-
-      <div class="col-md-4" *ngIf="!subopesa">
-        <div class="card border-info mb-3 operacoes lista">
-          <div class="card-header border-primary">Sub-Operações (Unidade)</div>
-          <div class="card-body text-secondary">
-            <div class="form-group">
-              <div *ngFor="let suboperacao of operacaoEscolhida.suboperacoes; trackBy: trackByFn" class="row">
-                <div class="col-md-4">
-                  <div class="form-group">
-                    <label for="descricao">Descrição
-                      <input type="text" name="descricaodb"
-                             id="descricaodb" value="{{suboperacao.descricao}}" [readonly]="isReadonly"
-                             class="form-control" minlength="3"
-                             placeholder="" required="required">
-                    </label>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                    <label for="tempoOpe">Tempo
-                      <input type="number" name="tempoOpedb"
-                             id="tempoOpedb"
-                             class="form-control" #tempo (change)="atualizarSubOpe(suboperacao,tempo.value)"
-                             (blur)="atualizarSubOpe(suboperacao,tempo.value)"
-                             placeholder="Min" required="required">
-                    </label>
-
-                  </div>
-                </div>
-                <div class="col-md-1 align-self-center">
-                  <a class="btn btn-danger" href="javascript:void(0)" data-toggle="modal"
-                     data-target=".deletar-subope" (click)="subopeEscolhida(suboperacao)">-</a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="card-footer bg-transparent border-info modal-footer">
-            <input type="submit" class="btn btn-outline-success" href="javascript:void(0)" [disabled]="ope2"
-                   (click)="subopes()" value="Salvar">
-
-            <a class="btn btn-info" href="#" data-toggle="modal"
-               data-target=".cadastro-operacoes">+</a>
-
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-4" *ngIf="subopesa">
-        <div class="card border-info mb-3 operacoes lista">
-          <div class="card-header border-primary">Sub-Operações</div>
-          <div class="card-body text-secondary">
-            <div class="form-group">
-              <div *ngFor="let suboperacao of listasuboperacoes; trackBy: trackByFn" class="row">
-                <div class="col-md-4">
-                  <div class="form-group">
-                    <label for="descricao">Descrição
-                      <input type="text" name="descricao"
-                             id="descricao" value="{{suboperacao.descricao}}" [readonly]="isReadonly"
-                             class="form-control" minlength="3"
-                             placeholder="" required="required">
-                    </label>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                    <label for="tempoOpe">Tempo
-                      <input type="number" name="tempoOpe"
-                             id="tempoOpe"
-                             class="form-control" #tempo (change)="atualizarSubOpe(suboperacao,tempo.value)"
-                             (blur)="atualizarSubOpe(suboperacao,tempo.value)"
-                             placeholder="Min" required="required">
-                    </label>
-
-                  </div>
-                </div>
-                <div class="col-md-1 align-self-center">
-                  <a class="btn btn-danger" href="javascript:void(0)" data-toggle="modal"
-                     data-target=".deletar-subope" (click)="subopeEscolhida(suboperacao)">-</a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="card-footer bg-transparent border-info modal-footer">
-            <input id="e" type="submit" class="btn btn-outline-success" href="javascript:void(0)" [disabled]="ope2"
-                   (click)="subopes()" value="Salvar">
-
-            <a class="btn btn-info" href="#" data-toggle="modal"
-               data-target=".cadastro-operacoes">+</a>
-
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-3" *ngIf="ope2">
-        <div class="card border-info mb-3 operacoes lista">
-          <div class="card-header border-info">Dados:</div>
-          <div class="card-body text-secondary">
-            <div class="form-group">
-              <div class="col-md-auto">
-                <div class="form-group">
-                  <label for="LoteProdu" class="fonterisco">Lote de Produção:</label>
-                  <input type="number" id="LoteProdu" min="1" max="999999" (change)="loteOpe(lote.value)"
-                         class="form-control" #lote (blur)="loteOpe(lote.value)"
-                         placeholder="Lote" name="loteProducao"
-                         required="required">
-                </div>
-              </div>
-              <div class="col-md-auto">
-                <div class="form-group">
-                  <label for="numFun" class="fonterisco">N° de Funcionários
-                    <input type="number" id="numFun" min="1" max="9999" #numFun (change)="numfunOpe(numFun.value)"
-                           class="form-control" (blur)="numfunOpe(numFun.value)"
-                           placeholder="(disponíveis)" name="numFun"
-                           required="required">
-                  </label>
-                </div>
-              </div>
-              <div class="col-md-auto">
-                <div class="form-group">
-                  <label for="datainici">Data Inicio:
-                    <input type="date" id="datainici" name="dataInicio" class="form-control" min="2019-05-01"
-                           max="2020-12-30"
-                           placeholder="Data Inicio:" [(ngModel)]="operacaoEscolhida.dataInicio"
-                           required="required">
-                  </label>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="card-footer bg-transparent border-info">
-            <input class="btn btn-primary" type="submit" [disabled]="!valido" *ngIf="!ope3" value="Cadastrar">
-            <input class="btn btn-primary" type="submit" [disabled]="!valido" *ngIf="atualizarOpe" value="Atualizar">
-          </div>
-        </div>
-      </div>
-
-      <div class="col-sm-5" *ngIf="ope3">
-
-        <div class="card border-success mb-3 lista">
-
-          <div class="card-header border-info">Resultado Final:</div>
-          <div class="card-body text-success">
-            <div class="form-group">
-              <div class="col-md-auto">
-                <div class="form-group">
-                  <label for="prazo">Prazo:
-                    <input type="date" id="prazo" name="prazo" class="form-control-plaintext" [readonly]="isReadonly"
-                           placeholder="Prazo:" [(ngModel)]="resultadoOpe.prazo">
-                  </label>
-                </div>
-              </div>
-              <div class="col-md-auto" *ngIf="numfumok">
-                <div class="form-group">
-                  <label for="numFunNesc" class="fonterisco">Funcionários necessários:
-                    <input type="text" id="numFunNesc"
-                           class="form-control-plaintext" value="{{resultadoOpe.numFuncionarios}}"
-                           [readonly]="isReadonly"
-                           placeholder="Funcionários necessários:" name="numFuncionarios">
-                  </label>
-                </div>
-              </div>
-              <div class="col-md-auto">
-                <div class="form-group">
-                  <label for="QtdPecasOpe" class="fonterisco">Peças por funcionário:
-                    <input type="text" id="QtdPecasOpe"
-                           class="form-control-plaintext" value="{{resultadoOpe.qtdPecasOpe}} Peças"
-                           [readonly]="isReadonly"
-                           placeholder="Peças por funcionário:" name="qtdPecasOpe">
-                  </label>
-                </div>
-              </div>
-              <div class="col-md-auto">
-                <div class="form-group">
-                  <label for="producaoHora" class="fonterisco">Produção por hora:
-                    <input type="text" id="producaoHora"
-                           class="form-control-plaintext" value="{{resultadoOpe.producaoHora}} Peças"
-                           [readonly]="isReadonly"
-                           placeholder="Quantidade de peças por funcionário:" name="producaoHora">
-                  </label>
-                </div>
-              </div>
-
-
-            </div>
-            <a class="btn btn-outline-success list-group-item list-group-item-action"
-               routerLink="/gerenteindex/planilhadecusto">
-              Abrir Planilha
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div *ngIf="f.submitted && erro" class="alert alert-warning separa">
-      Cadastro Falhou!<br/>{{errorMessage}}
-    </div>
-  </div>
-
-</form>
-<!-- Sticky Footer -->
-<footer class="sticky-footer">
-  <div class="container my-auto">
-    <div class="copyright text-center my-auto">
-      <span>Copyright © DyOpe Assistant 2019</span>
-    </div>
-  </div>
-</footer>
-
-
-<!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded" href="#page-top">
-  <i class="fas fa-angle-up"></i>
-</a>
-
-
-<!--Modal Cadastro suboperações: -->
-
-<div class="modal fade cadastro-operacoes" tabindex="-1" role="dialog" aria-labelledby="modalpeca"
-     aria-hidden="true">
-  <div class="modal-dialog modal-body">
-
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title" id="cadastrooperacoes">Cadastro de Sub-operações:</h4>
-        <button type="button" #closeModal class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">×</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="card-body">
-          <form #cadastrarOperacao="ngForm" [noValidate]="$any(false)">
-
-            <div class="col-md-auto">
-              <div class="form-group">
-                <div class="form-label-group">
-                  <input type="text" required="required" name="descricao" [(ngModel)]="newsuboperacao.descricao"
-                         class="form-control" minlength="6"
-                         id="DescricaoOp">
-                  <label for="DescricaoOp">Descrição da operação:</label>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-auto">
-              <div class="form-group">
-                <div class="form-label-group">
-                  <input type="number" required="required" name="tempoNesc" [(ngModel)]="newsuboperacao.tempoNesc"
-                         class="form-control" maxlength="4"
-                         id="tempoNescop">
-                  <label for="tempoNescop">Tempo:</label>
-                </div>
-              </div>
-            </div>
-
-
-            <div class="modal-footer col-md-12">
-              <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar
-              </button>
-              <input class="btn btn-primary" type="submit" (click)="cadastrarSubOperacao()"
-                     [disabled]="!cadastrarOperacao.valid" data-dismiss="modal"
-                     value="Cadastrar">
-            </div>
-            <div *ngIf="cadastrarOperacao.submitted && erro" class="alert alert-warning separa">
-              Cadastro Falhou!<br/>{{errorMessage}}
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- cadastro de peça -->
-<div class="modal fade cadastrar-peca" tabindex="-1" role="dialog" aria-labelledby="modalpeca"
-     aria-hidden="true">
-  <div class="modal-dialog modal-body">
-
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title" id="modalpeca">Cadastrar peça:</h4>
-        <button type="button" #closeModalPeca class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">×</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="card-body">
-          <form [noValidate]="$any(false)" #pecaForm="ngForm">
-
-            <div class="col-md-auto">
-              <div class="form-group">
-
-                <label for="nomePeca">Nome da peça: </label>
-                <input type="text" #nomePeca id="nomePeca" class="form-control" name="descricaop"
-                       placeholder="Nome da peça:" [(ngModel)]="newpeca.descricao" required="required">
-              </div>
-            </div>
-            <div class="modal-footer col-md-12">
-              <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-              <input class="btn btn-primary" type="submit" (click)="cadastrarPeca()" [disabled]="pecaForm.invalid"
-                     data-dismiss="modal"
-                     value="Cadastrar">
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- modal excluir sub ope -->
-<div class="modal  fade deletar-subope" tabindex="-1" role="dialog" aria-labelledby="modalpeca"
-     aria-hidden="true">
-  <div class="modal-dialog modal-body">
-
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title" id="modalExcluirSubope">Deletar Sub-Operação</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">×</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="card-body">
-          <div class="text-center mb-4">
-            <h4>Deseja Excluir?</h4>
-          </div>
-          <div class="modal-footer col-md-12">
-            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-            <input class="btn btn-primary" type="submit" (click)="deletarSubOperacao(suboperacaoEscolhida)"
-                   data-dismiss="modal"
-                   value="Confirmar">
-          </div>
-
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<ng-template #naoescolheu class="separa">
-  Escolha uma Peça!
-</ng-template>
