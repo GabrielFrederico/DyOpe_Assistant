@@ -1,6 +1,6 @@
 import {Directive, Input, NgModule} from '@angular/core';
 import {coerceBooleanProperty} from '@angular/cdk/coercion';
-import {ErroComponent} from "../erro/erro.component";
+import {ErroComponent} from '../erro/erro.component';
 
 
 @Directive({
@@ -20,7 +20,7 @@ export class ReadonlyDirective {
   }
 
   // tslint:disable-next-line:use-life-cycle-interface
-  //C:\Users\juan.159417\Documents\NODE_PATH; pasta node
+  // C:\Users\juan.159417\Documents\NODE_PATH; pasta node
 }
 
 @NgModule({

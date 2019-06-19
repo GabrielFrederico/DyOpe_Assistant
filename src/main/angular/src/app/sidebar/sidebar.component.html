@@ -15,7 +15,7 @@
 
 <li ngbDropdown class="nav-item dropdown">
   <a ngbDropdownToggle class="nav-link text-light" id="setores" href="javascript:void(0)"
-     role="button"
+     role="button" (click)="informacoes()"
      aria-haspopup="false" aria-expanded="false">
     <i class="fas fa-fw fa-table">
     </i>
@@ -26,6 +26,6 @@
     <a *ngFor="let setor of gerente.setores" href="javascript:void(0)"
        [routerLink]="['/gerenteindex/controlefuncionarios', setor.nomeSetor]"
        class="dropdown-item">{{setor.nomeSetor}}</a>
-    <a *ngIf="!gerente.setores">Cadastre um setor..</a>
+    <a *ngIf="gerente.setores.length < 0">Cadastre um setor..</a>
   </div>
 </li>

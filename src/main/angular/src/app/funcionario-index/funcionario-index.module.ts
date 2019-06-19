@@ -12,6 +12,7 @@ import {NavegacaoComponent} from '../navegacao/navegacao.component';
 import {FuncionarioIndexRoutingModule} from './funcionario-index.routing.module';
 import {InformacoesSetorComponent} from '../informacoes-setor/informacoes-setor.component';
 import {HomeFuncionarioComponent} from '../home-funcionario/home-funcionario.component';
+import {MatSelectModule} from '@angular/material';
 
 @NgModule({
   schemas: [
@@ -33,7 +34,8 @@ import {HomeFuncionarioComponent} from '../home-funcionario/home-funcionario.com
     FormsModule,
     SharedModule,
     ShowHidePasswordModule,
-    BrMaskerModule
+    BrMaskerModule,
+    MatSelectModule
   ],
 })
 export class FuncionarioIndexModule {

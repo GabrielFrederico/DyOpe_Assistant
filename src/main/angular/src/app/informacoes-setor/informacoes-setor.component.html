@@ -8,82 +8,96 @@
   <form (ngSubmit)="save()" [noValidate]="$any(false)">
     <div class="form-group">
       <div class="form-row">
-        <div class="col-md-4">
-          <label for="gerente">Gerente
-          <select required="required"  name="gerente" [(ngModel)]="gerente" (change)="selectGerente()" id="gerente" class="form-control">
-            <option value="null" disabled>Selecione..</option>
-            <option *ngFor="let gerente of gerentes" [value]="gerente">{{gerente.nome}}</option>
-          </select>
-          </label>
+        <div class="form-group">
+          <div class="col-md-4">
+            <mat-form-field>
+              <mat-label class="text-dark">Gerente</mat-label>
+              <mat-select required="required" name="gerente" (selectionChange)="selectGerente()" [(ngModel)]="gerente">
+                <mat-option *ngFor="let gerente of gerentes" (click)="selectGerente()"
+                            [value]="gerente"> {{gerente.nome}}</mat-option>
+                <mat-option *ngIf="gerentes.length <=0">Nenhum gerente Cadastrado</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
         </div>
-        <div class="col-md-4" *ngIf="setorShow">
-          <label for="setor">Setor
-          <select [disabled]="!setorShow" name="setor" [(ngModel)]="setor"  required="required" id="setor" class="form-control">
-            <option selected>Selecione..</option>
-            <option *ngFor="let setor of gerente.setores" [value]="setor">{{setor.nome}}</option>
-          </select>
-       </label>
+        <div class="form-group">
+          <div class="col-md-4" *ngIf="setorShow">
+            <mat-form-field>
+              <mat-label class="text-dark">Setor</mat-label>
+              <mat-select required="required" name="setor" [(ngModel)]="setor">
+                <mat-option *ngFor="let setor of gerente.setores" [value]="setor">{{setor.nomeSetor}}</mat-option>
+                <mat-option *ngIf="gerente.setores.length <=0">Nenhum Setor Cadastrado</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
         </div>
-
-        <div class="col-md-4" *ngIf="setorShow">
-          <label for="etapa">Etapa da Produção
-          <select [disabled]="!setorShow" name="etapa" [(ngModel)]="etapa" required="required" id="etapa" class="form-control">
-            <option selected>Selecione..</option>
-            <option *ngFor="let etapa of etapas" [value]="etapa">{{etapa.etapaProducao}}</option>
-          </select>
-          </label>
+        <div class="form-group">
+          <div class="col-md-4" *ngIf="setorShow">
+            <mat-form-field>
+              <mat-label class="text-dark">Etapa da Produção</mat-label>
+              <mat-select required="required" name="etapa" [(ngModel)]="etapa">
+                <mat-option *ngFor="let etapa of etapas" [value]="etapa">{{etapa.etapaProducao}}</mat-option>
+                <mat-option *ngIf="etapas.length <=0">Nenhuma etapa Cadastrado</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
         </div>
-
       </div>
     </div>
     <div class="form-group">
       <div class="form-row">
-        <div class="col-md-4" *ngIf="setorShow">
-          <label for="peca">Peça
-          <select [disabled]="!setorShow" name="peca" (change)="selectPeca()" [(ngModel)]="peca" required="required" id="peca" class="form-control">
-            <option selected>Selecione..</option>
-            <option *ngFor="let peca of gerente.pecas"  [value]="peca">{{peca.descricao}}</option>
-          </select>
-          </label>
+        <div class="form-group">
+          <div class="col-md-4" *ngIf="setorShow">
+            <mat-form-field>
+              <mat-label class="text-dark">Peça</mat-label>
+              <mat-select required="required" name="peca" (selectionChange)="selectPeca()" [(ngModel)]="peca">
+                <mat-option *ngFor="let peca of gerente.pecas" [value]="peca">{{peca.descricao}}</mat-option>
+                <mat-option *ngIf="gerente.pecas.length <=0">Nenhuma Peça Cadastrado</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
         </div>
-        <div class="col-md-4" *ngIf="showOpe">
-          <label for="operacao">Operacao
-          <select [disabled]="!showOpe" name="ope" [(ngModel)]="ope" (change)="selectOpe()" required="required" id="operacao" class="form-control">
-            <option selected>Selecione..</option>
-            <option *ngFor="let operacao of peca.operacoes"  [value]="operacao">{{operacao.id}}</option>
-          </select>
-          </label>
+        <div class="form-group">
+          <div class="col-md-4" *ngIf="showOpe">
+
+            <mat-form-field>
+              <mat-label class="text-dark">Operacao</mat-label>
+              <mat-select required="required" name="ope" [(ngModel)]="ope" (change)="selectOpe()">
+                <mat-option *ngFor="let operacao of peca.operacoes"
+                            [value]="operacao">{{operacao.descricao}}</mat-option>
+                <mat-option *ngIf="peca.operacoes.length <=0">Nenhuma Operacao Cadastrado</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
         </div>
-        <div class="col-md-4" *ngIf="showsubope">
-          <label for="suboperacao">Operacao
-          <select [disabled]="!showOpe" name="subope" [(ngModel)]="subope" required="required" id="suboperacao" class="form-control">
-            <option selected>Selecione..</option>
-            <option *ngFor="let suboperacao of ope.suboperacoes"  [value]="suboperacao">{{suboperacao.descricao}}</option>
-          </select>
-          </label>
-        </div>
-        <div class="col-md-4" *ngIf="showsubope" >
-          <label for="qtdPecasOpe">Peças produzidas:
-          <input type="number" [(ngModel)]="informacao.qtdPecasOpe" name="qtdPecasOpe" id="qtdPecasOpe"
-                 class="form-control"
-                 placeholder="Peças produzidas:"
-                 required="required">
-           </label>
-        </div>
-        <div class="col-md-4" *ngIf="showsubope">
-          <label for="tempoNecessari">Tempo Unidade:
-          <input type="time" [(ngModel)]="informacao.tempoNecessario" name="tempoNecessario" id="tempoNecessari"
-                 class="form-control"
-                 placeholder="Tempo necessário:"
-                 required="required">
+        <div class="form-group">
+          <div class="col-md-5" *ngIf="showOpe">
+            <label for="qtdPecasOpe">Peças produzidas:
+              <input type="number" [(ngModel)]="informacao.qtdPecasOpe" name="qtdPecasOpe" id="qtdPecasOpe"
+                     class="form-control"
+                     placeholder="Peças produzidas:"
+                     required="required">
             </label>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-5" *ngIf="showOpe">
+            <label for="tempoNecessari">Tempo Unidade:
+              <input type="time" [(ngModel)]="informacao.tempoNecessario" name="tempoNecessario" id="tempoNecessari"
+                     class="form-control"
+                     placeholder="Tempo necessário:"
+                     required="required">
+            </label>
+          </div>
         </div>
       </div>
     </div>
 
     <input class="btn btn-success" type="submit" value="Enviar">
+  </form>
 
-    <!-- /.container-fluid -->
+
+  <!-- /.container-fluid -->
 
     <!-- Sticky Footer -->
     <footer class="sticky-footer">
@@ -93,7 +107,6 @@
         </div>
       </div>
     </footer>
-  </form>
 </div>
 <!-- /.content-wrapper -->
 

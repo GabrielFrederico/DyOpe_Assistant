@@ -24,10 +24,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
   operacao: any = {};
   newsuboperacao: any = {};
   suboperacaoEscolhida: any;
-  listsubope = 'let suboperacao of listasuboperacoes; trackBy: trackByFn';
-  listsubopedb: string;
   subopesa = true;
-  subopesdb = false;
   numfumok = false;
   gerente: any;
   operacaoEscolhida: any;
@@ -214,29 +211,29 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
       this.operacaoEscolhida.suboperacoes = this.listasuboperacoes;
       this.operacaoEscolhida.tempoTrab = 450;
       this.operacaoEscolhida.etapa_producao_id = this.etapaproducao.id;
-      this.operacaoEscolhida.peca_id = this.peca.id;
       this.operacaoEscolhida.descricao = this.etapaproducao.etapaProducao + ' : ' + this.peca.descricao;
+      this.operacaoEscolhida.gerente_id = this.gerente.id;
+
+      this.hoje = new Date();
+      this.inicio = new Date(this.operacaoEscolhida.dataInicio);
       this.peca.operacoes.push(this.operacaoEscolhida);
 
-      /** this.operacaoService.updateOperacao(this.operacaoEscolhida).pipe(first()).subscribe(data => {
-       *   this.resultadoOpe = data;
-       *   this.atualizar();
-       *    // this.router.navigate(['/gerenteindex/andamentooperacoes/', this.etapaproducao.etapaProducao]);
-       *   }, error => {
-       *    console.log(error.error);
-       *   });
-       */
+      if (this.inicio.getTime() === this.hoje.getTime()) {
+        this.gerente.operacoesFazer.push(this.operacaoEscolhida);
+      } else if (this.inicio > this.hoje) {
+        this.gerente.operacoesFazer.push(this.operacaoEscolhida);
+      }
 
-      // this.operacaoEscolhida.gerente_id = this.gerente.id;
 
-      // this.gerente.operacoes.push(this.operacaoEscolhida);
       this.gerenteService.atualizarPeca(this.peca).pipe(first()).subscribe(peca => {
         this.operacaoService.getOperacaoId(this.operacaoEscolhida.id).subscribe(data => {
           this.resultadoOpe = data;
+          this.ope3 = true;
+          this.atualizarOpe = true;
+          this.prazo = new Date(this.resultadoOpe.prazo);
           if (this.resultadoOpe.numFuncionariosDisponiveis >= this.resultadoOpe.numFuncionarios) {
             this.numfumok = true;
           }
-          this.atualizar();
         }, error => {
           this.erro = true;
           this.errorMessage = error.error;
@@ -251,9 +248,37 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
     }
   }
 
+
+  atualizar() {
+    this.hoje = new Date();
+    this.inicio = new Date(this.resultadoOpe.dataInicio);
+    this.prazo = new Date(this.resultadoOpe.prazo);
+    if (this.inicio.getTime() === this.hoje.getTime()) {
+      this.gerenteService.cadastrarAlgo(this.gerente).pipe(first()).subscribe(data => {
+      }, error => {
+        this.erro = true;
+        this.errorMessage = error.error;
+        console.log(error.error);
+      });
+    } else if (this.inicio > this.hoje) {
+      this.resultadoOpe.gerente_id = this.gerente.id;
+      this.gerente.operacoesFazer.push(this.resultadoOpe);
+      this.gerenteService.cadastrarAlgo(this.gerente).pipe(first()).subscribe(data => {
+      }, error => {
+        this.erro = true;
+        this.errorMessage = error.error;
+        console.log(error.error);
+      });
+    }
+
+    this.ope3 = true;
+    this.atualizarOpe = true;
+    this.subopesa = false;
+    this.listasuboperacoes = [];
+  }
+
+
   update() {
-
-
     this.operacaoService.updateOperacao(this.operacaoEscolhida).pipe(first()).subscribe(data => {
       this.resultadoOpe = data;
       this.ope3 = false;
@@ -271,43 +296,23 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
 
   }
 
-  atualizar() {
-    this.hoje = new Date();
-    this.inicio = new Date(this.resultadoOpe.dataInicio);
-    this.prazo = new Date(this.resultadoOpe.prazo);
-    if (this.inicio.getTime() === this.hoje.getTime()) {
-      this.gerenteService.cadastrarAlgo(this.gerente).pipe(first()).subscribe(data => {
-      }, error => {
-        this.erro = true;
-        this.errorMessage = error.error;
-        console.log(error.error);
-      });
-    } else if (this.inicio > this.hoje) {
-      this.gerente.operacoesFazer.push(this.resultadoOpe);
-      this.gerenteService.cadastrarAlgo(this.gerente).pipe(first()).subscribe(data => {
-      }, error => {
-        this.erro = true;
-        this.errorMessage = error.error;
-        console.log(error.error);
-      });
-    }
-
-    this.ope3 = true;
-    this.atualizarOpe = true;
-
-  }
-
   cadastrarSubOperacao() {
-    this.listasuboperacoes.push(this.newsuboperacao);
-    alert('Informe os tempos!');
+    if (this.subopesa) {
+      this.listasuboperacoes.push(this.newsuboperacao);
+    } else {
+      this.operacaoEscolhida.suboperacoes.push(this.newsuboperacao);
+    }
   }
 
   deletarSubOperacao(subope: any) {
-
     this.suboperacaoEscolhida = subope;
-    const index = this.listasuboperacoes.indexOf(this.suboperacaoEscolhida);
-    this.listasuboperacoes.splice(index, 1);
-
+    if (this.subopesa) {
+      const index = this.listasuboperacoes.indexOf(this.suboperacaoEscolhida);
+      this.listasuboperacoes.splice(index, 1);
+    } else {
+      const index = this.operacaoEscolhida.suboperacoes.indexOf(this.suboperacaoEscolhida);
+      this.operacaoEscolhida.suboperacoes.splice(index, 1);
+    }
   }
 
   cadastrarPeca() {

@@ -57,7 +57,7 @@ public class Operacao {
 		return operacao;
 	}
 
-	public static ResponseEntity<?> calcular(@RequestBody Operacao operacao) {
+	public static Operacao calcular(@RequestBody Operacao operacao) {
 		Calendar inicio = Calendar.getInstance();
 		java.util.Date fim = new java.util.Date();
 		inicio.setTime(operacao.getDataInicio());
@@ -95,28 +95,34 @@ public class Operacao {
 			}
 
 		}
-		try {
+		
 			// inicio.add(Calendar.DAY_OF_MONTH, diasNece + diasAdded);
-			System.out.println(diasNeceteste + " . " + tempoFun + ". " + resultdias + ".tempos " + tempos);
 			fim = inicio.getTime();
 
 			funcionariosNecessários = Math.round(operacao.getLoteProducao() / operacao.getTempoTrab());
+			if(funcionariosNecessários <1) {
+				funcionariosNecessários = 1;
+			}
+			if(diasNeceteste <1) {
+				diasNeceteste = 1;
+			}
 			
-			qtdPecasOpe = Math.round(operacao.getLoteProducao() / operacao.getNumFuncionarios());
+			
+			qtdPecasOpe = Math.round(operacao.getLoteProducao() / operacao.getNumFuncionariosDisponiveis());
+			System.out.println("dias: "+diasNeceteste + "  " + tempoFun + ". " + resultdias + ".tempos " + tempos +" "+qtdPecasOpe);
 			calcProHora = funcionariosNecessários * operacao.getTempoTrab();
 			prodHora = Math.round(operacao.getTempoTrab() / (operacao.getTempoTrab() / 60));
-			prodhoraresult =60*operacao.getNumFuncionarios();
+			prodhoraresult =60*operacao.getNumFuncionariosDisponiveis();
 			producaoHora = Math.round(prodhoraresult/tempos);
 			operacao.setNumFuncionarios(funcionariosNecessários);
 			Date prazo = new Date(fim.getTime());
 			operacao.setPrazo(prazo);
 			operacao.setQtdPecasOpe(qtdPecasOpe);
 			operacao.setProducaoHora(producaoHora);
-		} catch (ArithmeticException e) {
-			return new ResponseEntity<>(new ResponseMessage("Erro -> Não é possível dividir por zero!" +e), HttpStatus.INTERNAL_SERVER_ERROR);
+			System.out.println(" Teste prod: "+operacao.getProducaoHora());
 			
-		}
-		return new ResponseEntity<>(new ResponseMessage("Dados Atualizados com sucesso!"), HttpStatus.OK);
+		
+		return operacao;
 
 	}
 

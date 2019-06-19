@@ -69,6 +69,8 @@
         <a class="btn btn-info" href="#" data-toggle="modal"
            data-target=".redefinir-senha">Redefinir
           senha</a>
+        <a class="btn btn-info" href="#" data-toggle="modal"
+           data-target=".chave-acesso">Chave Acesso</a>
         <input class="btn btn-info" type="button" (click)="toggleReadonly()" value="Editar">
         <div *ngIf="gerenteForm.submitted && updateFailed" class="alert alert-warning separa">
           Atualização Falhou!<br/>{{errorMessage}}
@@ -176,7 +178,7 @@
 
 <!-- modal chave de acesso-->
 
-<div class="modal fade redefinir-senha" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+<div class="modal fade chave-acesso" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
      aria-hidden="true">
   <div class="modal-dialog modal-body">
 

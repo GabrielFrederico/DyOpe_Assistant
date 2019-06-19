@@ -22,6 +22,18 @@ export class SidebarComponent implements OnInit {
 
   public info: any;
 
+  informacoes() {
+
+    this.gerenteService.getGerenteLogado(this.info.username).subscribe(data => {
+      if (this.gerente.setores.length < data.setores.length) {
+        this.gerente = data;
+      }
+    }, error => {
+      console.log(error.error);
+    });
+  }
+
+
   ngOnInit() {
     this.info = {
       token: this.token.getToken(),

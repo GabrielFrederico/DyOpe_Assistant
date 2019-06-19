@@ -1,6 +1,8 @@
 package com.projeto.models;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -37,11 +39,11 @@ public class Gerente extends Usuario {
 		this.chaveAcesso = chaveAcesso;
 	}
 
-	public Set<Operacao> getOperacoes() {
+	public List<Operacao> getOperacoes() {
 		return operacoes;
 	}
 
-	public void setOperacoes(Set<Operacao> operacoes) {
+	public void setOperacoes(List<Operacao> operacoes) {
 		this.operacoes = operacoes;
 	}
 
@@ -52,75 +54,75 @@ public class Gerente extends Usuario {
 	@JoinTable(name = "gerente_operacoesAndamento ",
     joinColumns = @JoinColumn(name = "gerente_id"),
     inverseJoinColumns = @JoinColumn(name = "operacao_id"))
-	private Set<Operacao> operacoesAndamento = new HashSet<>();
+	private List<Operacao> operacoesAndamento = new ArrayList<>();
     
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "gerente_operacoesFazer",
     joinColumns = @JoinColumn(name = "gerente_id"),
     inverseJoinColumns = @JoinColumn(name = "operacao_id"))
-	private Set<Operacao> operacoesFazer = new HashSet<>();
+	private List<Operacao> operacoesFazer = new ArrayList<>();
 	
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "gerente_operacoes",
     joinColumns = @JoinColumn(name = "gerente_id"),
     inverseJoinColumns = @JoinColumn(name = "operacao_id"))
-	private Set<Operacao> operacoes = new HashSet<>();
+	private List<Operacao> operacoes = new ArrayList<>();
 
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "gerente_operacoesPrazo",
     joinColumns = @JoinColumn(name = "gerente_id"),
     inverseJoinColumns = @JoinColumn(name = "operacao_id"))
-	private Set<Operacao> operacoesPrazo = new HashSet<>();
+	private List<Operacao> operacoesPrazo = new ArrayList<>();
 
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "gerente_pecas",
     joinColumns = @JoinColumn(name = "gerente_id"),
     inverseJoinColumns = @JoinColumn(name = "peca_id"))
-	private Set<Peca> pecas = new HashSet<>();
+	private List<Peca> pecas = new ArrayList<>();
 
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "gerente_setores",
     joinColumns = @JoinColumn(name = "gerente_id"),
     inverseJoinColumns = @JoinColumn(name = "setor_id"))
-	private Set<Setor> setores = new HashSet<>();
+	private List<Setor> setores = new ArrayList<>();
 
-	public Set<Operacao> getOperacoesAndamento() {
+	public List<Operacao> getOperacoesAndamento() {
 		return operacoesAndamento;
 	}
 
-	public void setOperacoesAndamento(Set<Operacao> operacoesAndamento) {
+	public void setOperacoesAndamento(List<Operacao> operacoesAndamento) {
 		this.operacoesAndamento = operacoesAndamento;
 	}
 
-	public Set<Operacao> getOperacoesFazer() {
+	public List<Operacao> getOperacoesFazer() {
 		return operacoesFazer;
 	}
 
-	public void setOperacoesFazer(Set<Operacao> operacoesFazer) {
+	public void setOperacoesFazer(List<Operacao> operacoesFazer) {
 		this.operacoesFazer = operacoesFazer;
 	}
 
-	public Set<Operacao> getOperacoesPrazo() {
+	public List<Operacao> getOperacoesPrazo() {
 		return operacoesPrazo;
 	}
 
-	public void setOperacoesPrazo(Set<Operacao> operacoesPrazo) {
+	public void setOperacoesPrazo(List<Operacao> operacoesPrazo) {
 		this.operacoesPrazo = operacoesPrazo;
 	}
 
-	public Set<Peca> getPecas() {
+	public List<Peca> getPecas() {
 		return pecas;
 	}
 
-	public void setPecas(Set<Peca> pecas) {
+	public void setPecas(List<Peca> pecas) {
 		this.pecas = pecas;
 	}
 
-	public Set<Setor> getSetores() {
+	public List<Setor> getSetores() {
 		return setores;
 	}
 
-	public void setSetores(Set<Setor> setores) {
+	public void setSetores(List<Setor> setores) {
 		this.setores = setores;
 	}
 

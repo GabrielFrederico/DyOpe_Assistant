@@ -22,6 +22,7 @@ import {Ng2SearchPipeModule} from 'ng2-search-filter';
 import {SequenciaOperacionalComponent} from '../sequencia-operacional/sequencia-operacional.component';
 import {HomeGerenteComponent} from '../home-gerente/home-gerente.component';
 import {PlanilhaCustoComponent} from '../planilha-custo/planilha-custo.component';
+import {MatOptionModule, MatSelectModule} from '@angular/material';
 
 @NgModule({
   schemas: [
@@ -53,6 +54,8 @@ import {PlanilhaCustoComponent} from '../planilha-custo/planilha-custo.component
     ShowHidePasswordModule,
     BrMaskerModule,
     Ng2SearchPipeModule,
+    MatOptionModule,
+    MatSelectModule,
 
   ],
 })
