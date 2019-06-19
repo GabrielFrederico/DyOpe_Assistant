@@ -52,7 +52,7 @@ public class PecaController {
 
 	@RequestMapping(method = RequestMethod.PUT)
 	public Peca update(@RequestBody Peca peca) {
-		if (peca.getOperacoes().size() == 1) {
+		if (peca.getOperacoesAndamento().size() == 1) {
 			pecaRepository.save(peca);
 	
 		}
