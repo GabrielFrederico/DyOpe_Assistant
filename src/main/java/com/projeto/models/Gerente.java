@@ -1,10 +1,7 @@
 package com.projeto.models;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -50,29 +47,18 @@ public class Gerente extends Usuario {
 	@Column(name = "cpf_gerente")
 	private String cpf;
 
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "gerente_operacoesAndamento ",
-    joinColumns = @JoinColumn(name = "gerente_id"),
-    inverseJoinColumns = @JoinColumn(name = "operacao_id"))
-	private List<Operacao> operacoesAndamento = new ArrayList<>();
-    
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "gerente_operacoesFazer",
-    joinColumns = @JoinColumn(name = "gerente_id"),
-    inverseJoinColumns = @JoinColumn(name = "operacao_id"))
-	private List<Operacao> operacoesFazer = new ArrayList<>();
-	
+
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "gerente_operacoes",
     joinColumns = @JoinColumn(name = "gerente_id"),
     inverseJoinColumns = @JoinColumn(name = "operacao_id"))
 	private List<Operacao> operacoes = new ArrayList<>();
-
+	
 	@OneToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "gerente_operacoesPrazo",
+	@JoinTable(name = "gerente_planilhascusto",
     joinColumns = @JoinColumn(name = "gerente_id"),
-    inverseJoinColumns = @JoinColumn(name = "operacao_id"))
-	private List<Operacao> operacoesPrazo = new ArrayList<>();
+    inverseJoinColumns = @JoinColumn(name = "planilhacusto_id"))
+	private List<PlanilhaCusto> planilhascusto = new ArrayList<>();
 
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "gerente_pecas",
@@ -86,29 +72,7 @@ public class Gerente extends Usuario {
     inverseJoinColumns = @JoinColumn(name = "setor_id"))
 	private List<Setor> setores = new ArrayList<>();
 
-	public List<Operacao> getOperacoesAndamento() {
-		return operacoesAndamento;
-	}
 
-	public void setOperacoesAndamento(List<Operacao> operacoesAndamento) {
-		this.operacoesAndamento = operacoesAndamento;
-	}
-
-	public List<Operacao> getOperacoesFazer() {
-		return operacoesFazer;
-	}
-
-	public void setOperacoesFazer(List<Operacao> operacoesFazer) {
-		this.operacoesFazer = operacoesFazer;
-	}
-
-	public List<Operacao> getOperacoesPrazo() {
-		return operacoesPrazo;
-	}
-
-	public void setOperacoesPrazo(List<Operacao> operacoesPrazo) {
-		this.operacoesPrazo = operacoesPrazo;
-	}
 
 	public List<Peca> getPecas() {
 		return pecas;

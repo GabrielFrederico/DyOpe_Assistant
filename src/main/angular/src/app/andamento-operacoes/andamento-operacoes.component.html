@@ -2,27 +2,39 @@
 <title>Operações</title>
 <nav class="espacamentosequenciaoperacional">
   <div class="nav nav-tabs" id="nav-tab" role="tablist">
-
+    <a class="nav-item nav-link " id="nav-profile-tab" data-toggle="tab"
+       [routerLink]="['/gerenteindex/operacoes', etapaproducao.etapaProducao]" role="tab" aria-controls="nav-profile"
+       aria-selected="false">Cadastro</a>
     <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab"
        [routerLink]="['/gerenteindex/andamentooperacoes', etapaproducao.etapaProducao]" role="tab"
        aria-controls="nav-home" aria-selected="true">Andamento</a>
-       <a class="nav-item nav-link " id="nav-profile-tab" data-toggle="tab"
-          [routerLink]="['/gerenteindex/operacoes', etapaproducao.etapaProducao]" role="tab" aria-controls="nav-profile"
-          aria-selected="false">Cadastro</a>
+
   </div>
 </nav>
 
-<h3>{{etapaproducao.etapaProducao}}</h3>
+<div class="form-group">
+  <div class="col-md-2 align-self-center">
+    <mat-form-field>
+      <mat-label class="text-dark">Peças:</mat-label>
+      <mat-select required="required" name="etapa" [(ngModel)]="peca">
+        <mat-option *ngFor="let peca of this.gerente.pecas" [value]="peca"
+                    (click)="selectsPeca(peca)">{{peca.descricao}}</mat-option>
+        <mat-option *ngIf="gerente.pecas.length <= 0">Cadastre uma Peça</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</div>
 
-<div class="row">
+<div class="row" *ngIf="escolheu; else naoescolheu">
   <div class="col-sm-4">
     <div class="card border-info mb-3 lista">
       <div class="card-header border-info">Operações a fazer</div>
       <div class="card-body text-secondary">
-        <a *ngFor="let operacao of gerente.operacoesFazer"
+        <a *ngFor="let operacao of peca.operacoesFazer"
            class="btn btn-outline-info list-group-item list-group-item-action"
-           (click)="openInformacoes(content)">{{operacao.descricao}}</a>
-        <a *ngIf="gerente.operacoesFazer.length <= 0"
+           href="#" data-toggle="modal"
+           data-target=".info-ope">{{operacao.descricao}}</a>
+        <a *ngIf="peca.operacoesFazer.length <= 0"
            class="btn btn-outline-info list-group-item list-group-item-action">Nenhuma Operação a fazer</a>
       </div>
     </div>
@@ -33,11 +45,12 @@
     <div class="card border-primary mb-3 lista">
       <div class="card-header border-primary">Operações em andamento</div>
       <div class="card-body text-primary">
-        <a class="btn btn-outline-primary list-group-item list-group-item-action" (click)="openInformacoes(content)"
-           *ngFor="let operacao of gerente.operacoesAndamento">
+        <a class="btn btn-outline-primary list-group-item list-group-item-action" href="#" data-toggle="modal"
+           data-target=".info-ope"
+           *ngFor="let operacao of peca.operacoesAndamento">
           {{operacao.descricao}}
         </a>
-        <a *ngIf="gerente.operacoesAndamento.length <= 0"
+        <a *ngIf="peca.operacoesAndamento.length <= 0"
            class="btn btn-outline-primary list-group-item list-group-item-action">Nenhuma Operação em andamento</a>
       </div>
 
@@ -48,12 +61,13 @@
     <div class="card border-warning mb-3 lista">
       <div class="card-header border-warning">Operações no Prazo</div>
       <div class="card-body text-warning">
-        <a class="btn btn-outline-warning list-group-item list-group-item-action " (click)="openInformacoes(content)"
-           *ngFor="let operacao of gerente.operacoesPrazo">
+        <a class="btn btn-outline-warning list-group-item list-group-item-action " href="#" data-toggle="modal"
+           data-target=".info-ope"
+           *ngFor="let operacao of peca.operacoesPrazo">
           {{operacao.descricao}}
         </a>
 
-        <a *ngIf="gerente.operacoesAndamento.length <= 0"
+        <a *ngIf="peca.operacoesPrazo.length <= 0"
            class="btn btn-outline-warning list-group-item list-group-item-action">Nenhuma Operação no prazo</a>
       </div>
     </div>
@@ -62,162 +76,195 @@
 </div>
 
 <!--Modal Informações: -->
-<ng-template #content let-modal class="modal fade informations modal-dialog">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h4 class="modal-title" id="myLargeModalLabel">Informações da Operações:</h4>
-      <button type="button" (click)="modal.close('Save click')" class="close" data-dismiss="modal" aria-label="Close">
-        <span aria-hidden="true">×</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      <div class="card-body">
-        <div class="card-header">Sequencia Operacional</div>
-        <div class="card-body border-info">
-          <div class="row">
-            <div class="col-md-4">
-              <div class="card border-info mb-3 operacoes">
-                <div class="card-header border-info">Operações</div>
-                <div class="card-body text-secondary">
-                  <div class="form-group">
-                    <div *ngFor="let suboperacao of operacaoEscolhida.suboperacoes" class="row">
-                      <div class="col-md-5">
-                        <div class="form-group">
-                          <div class="form-label-group">
-                            <input type="text" name="escricao"
-                                   id="dataescricao" value="{{suboperacao.descricao}}" [readonly]="isReadonly"
-                                   class="form-control" minlength="3"
-                                   autofocus="autofocus"
-                                   placeholder="Descricao" required="required">
-                            <label for="dataescricao">Descrição</label>
+
+<div class="modal fade info-ope" tabindex="-1" role="dialog" aria-labelledby="modalpeca"
+     aria-hidden="true">
+  <div class="modal-dialog modal-body">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myLargeModalLabel">Informações da Operações:</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="card-body">
+          <div class="card-header">Sequencia Operacional</div>
+          <div class="card-body border-info">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="card border-info mb-3 operacoes">
+                  <div class="card-header border-info">Operações</div>
+                  <div class="card-body text-secondary">
+                    <form *ngIf="escolheu; else naoescolheu" #f="ngForm" (ngSubmit)="update()"
+                          class="card" [noValidate]="$any(false)">
+
+                      <div class="card-header">Sequencia Operacional</div>
+                      <div class="card-body border-info">
+                        <div class="row">
+
+                          <div class="col-md-4">
+                            <div class="card border-info mb-3 operacoes lista">
+                              <div class="card-header border-primary">Sub-Operações</div>
+                              <div class="card-body text-secondary">
+                                <div class="form-group">
+                                  <div *ngFor="let suboperacao of operacaoEscolhida.suboperacoes; trackBy: trackByFn"
+                                       class="row">
+                                    <div class="col-md-4">
+                                      <div class="form-group">
+                                        <label for="descricao">Descrição
+                                          <input type="text" name="descricaodb"
+                                                 id="descricao" value="{{suboperacao.descricao}}"
+                                                 [readonly]="isReadonly"
+                                                 class="form-control" minlength="3"
+                                                 placeholder="" required="required">
+                                        </label>
+                                      </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                      <div class="form-group">
+                                        <label for="tempoOpe">Tempo
+                                          <input type="number" name="tempoOpedb"
+                                                 id="tempoOpe"
+                                                 class="form-control" #tempo
+                                                 (change)="atualizarSubOpe(suboperacao,tempo.value)"
+                                                 (blur)="atualizarSubOpe(suboperacao,tempo.value)"
+                                                 placeholder="Min" required="required">
+                                        </label>
+
+                                      </div>
+                                    </div>
+                                    <div class="col-md-1 align-self-center">
+                                      <a class="btn btn-danger" href="javascript:void(0)" data-toggle="modal"
+                                         data-target=".deletar-subope" (click)="subopeEscolhida(suboperacao)">-</a>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="card-footer bg-transparent border-info modal-footer">
+                                <input type="submit" class="btn btn-outline-success" href="javascript:void(0)"
+                                       value="Salvar">
+
+                                <a class="btn btn-info" href="#" data-toggle="modal"
+                                   data-target=".cadastro-operacoes">+</a>
+
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="col-md-3">
+                            <div class="card border-info mb-3 operacoes lista">
+                              <div class="card-header border-info">Dados:</div>
+                              <div class="card-body text-secondary">
+                                <div class="form-group">
+                                  <div class="col-md-auto">
+                                    <div class="form-group">
+                                      <label for="LoteProdu" class="fonterisco">Lote de Produção:</label>
+                                      <input type="number" id="LoteProdu" min="1" max="999999"
+                                             (change)="loteOpe(lote.value)"
+                                             class="form-control" #lote (blur)="loteOpe(lote.value)"
+                                             placeholder="Lote" name="loteProducao"
+                                             required="required">
+                                    </div>
+                                  </div>
+                                  <div class="col-md-auto">
+                                    <div class="form-group">
+                                      <label for="numFun" class="fonterisco">N° de Funcionários
+                                        <input type="number" id="numFun" min="1" max="9999" #numFun
+                                               (change)="numfunOpe(numFun.value)"
+                                               class="form-control" (blur)="numfunOpe(numFun.value)"
+                                               placeholder="(disponíveis)" name="numFun"
+                                               required="required">
+                                      </label>
+                                    </div>
+                                  </div>
+                                  <div class="col-md-auto">
+                                    <div class="form-group">
+                                      <label for="datainici">Data Inicio:
+                                        <input type="date" id="datainici" name="dataInicio" class="form-control"
+                                               min="2019-05-01"
+                                               max="2020-12-30"
+                                               placeholder="Data Inicio:" [(ngModel)]="operacaoEscolhida.dataInicio"
+                                               required="required">
+                                      </label>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="card-footer bg-transparent border-info">
+
+                                <input class="btn btn-primary" type="submit" [disabled]="!valido"
+                                       value="Atualizar">
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="col-sm-5" *ngIf="ope3">
+
+                            <div class="card border-success mb-3 lista">
+
+                              <div class="card-header border-info">Resultado Final:</div>
+                              <div class="card-body text-success">
+                                <div class="form-group">
+                                  <div class="col-md-auto">
+                                    <div class="form-group">
+                                      <label for="prazo">Prazo:
+                                        <input type="date" id="prazo" name="prazo" class="form-control-plaintext"
+                                               [readonly]="isReadonly"
+                                               placeholder="Prazo:" [(ngModel)]="resultadoOpe.prazo">
+                                      </label>
+                                    </div>
+                                  </div>
+                                  <div class="col-md-auto" *ngIf="numfumok">
+                                    <div class="form-group">
+                                      <label for="numFunNesc" class="fonterisco">Funcionários necessários:
+                                        <input type="text" id="numFunNesc"
+                                               class="form-control-plaintext" value="{{resultadoOpe.numFuncionarios}}"
+                                               [readonly]="isReadonly"
+                                               placeholder="Funcionários necessários:" name="numFuncionarios">
+                                      </label>
+                                    </div>
+                                  </div>
+                                  <div class="col-md-auto">
+                                    <div class="form-group">
+                                      <label for="QtdPecasOpe" class="fonterisco">Peças por funcionário:
+                                        <input type="text" id="QtdPecasOpe"
+                                               class="form-control-plaintext" value="{{resultadoOpe.qtdPecasOpe}} Peças"
+                                               [readonly]="isReadonly"
+                                               placeholder="Peças por funcionário:" name="qtdPecasOpe">
+                                      </label>
+                                    </div>
+                                  </div>
+                                  <div class="col-md-auto">
+                                    <div class="form-group">
+                                      <label for="producaoHora" class="fonterisco">Produção por hora:
+                                        <input type="text" id="producaoHora"
+                                               class="form-control-plaintext"
+                                               value="{{resultadoOpe.producaoHora}} Peças"
+                                               [readonly]="isReadonly"
+                                               placeholder="Quantidade de peças por funcionário:" name="producaoHora">
+                                      </label>
+                                    </div>
+                                  </div>
+
+
+                                </div>
+                                <a class="btn btn-outline-success list-group-item list-group-item-action"
+                                   routerLink="/gerenteindex/planilhadecusto">
+                                  Abrir Planilha
+                                </a>
+                              </div>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                      <div class="col-md-5">
-                        <div class="form-group">
-                          <div class="form-label-group">
-                            <input type="number" name="tempoOpe"
-                                   id="tempoOpe" [(ngModel)]="suboperacao.tempoNesc"
-                                   class="form-control" minlength="3" #tempo
-                                   autofocus="autofocus"
-                                   placeholder="Tempo" required="required">
-                            <label for="tempoOpe">Tempo </label>
-                          </div>
+                        <div *ngIf="f.submitted && erro" class="alert alert-warning separa">
+                          Cadastro Falhou!<br/>{{errorMessage}}
                         </div>
                       </div>
-                      <div class="col-md-1">
-                        <a class="btn btn-danger" href="javascript:void(0)">-</a>
-                      </div>
-                    </div>
+
+                    </form>
                   </div>
-                </div>
-                <div class="col-md-1">
-                  <a class="btn btn-info" href="#" data-toggle="modal"
-                     data-target=".cadastro-operacoes">+</a>
-                </div>
-                <div class="card-footer bg-transparent border-info">
-
-
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-3">
-              <div class="card border-warning mb-3 operacoes">
-                <div class="card-body text-warning">
-                  <div class="form-group">
-                    <div class="col-md-auto">
-                      <div class="form-label-group">
-                        <input type="number" id="LoteProdu"
-                               class="form-control"
-                               placeholder="Lote de Produção" name="loteProducao"
-                               [(ngModel)]="operacaoEscolhida.loteProducao"
-                               required="required">
-                        <label for="LoteProdu" class="fonterisco">Lote de Produção:</label>
-                      </div>
-                    </div>
-                    <div class="col-md-auto">
-                      <div class="form-label-group">
-                        <input type="number" id="numFun"
-                               class="form-control" [(ngModel)]="operacaoEscolhida.numFuncionariosDisponiveis"
-                               placeholder="N° de Funcionários" name="numFun"
-                               required="required">
-                        <label for="numFun" class="fonterisco">N° de Funcionários</label>
-                      </div>
-                    </div>
-                    <div class="col-md-auto">
-                      <div class="form-group">
-                        <div class="form-label-group">
-                          <input type="number" name="tempoTrab"
-                                 id="tempoTrab"
-                                 class="form-control" minlength="3"
-                                 autofocus="autofocus" [(ngModel)]="operacaoEscolhida.tempoTrab"
-                                 placeholder="Tempo Trabalho" required="required">
-                          <label for="tempoTrab">Tempo trabalhado</label>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-auto">
-                      <div class="form-label-group">
-                        <input type="date" id="datainici" name="dataInicio" class="form-control"
-                               placeholder="Data Inicio:" [(ngModel)]="operacaoEscolhida.dataInicio"
-                               required="required">
-                        <label for="datainici">Data Inicio:</label>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-sm-5">
-
-              <div class="card border-success mb-3 lista">
-                <div class="card-body text-success">
-                  <div class="form-group">
-
-
-                    <div class="col-md-auto">
-                      <div class="form-label-group">
-                        <input [readonly]="isReadonly" type="date" id="prazo" name="prazo" class="form-control"
-                               placeholder="Prazo:" [(ngModel)]="operacaoEscolhida.prazo">
-                        <label for="prazo">Prazo:</label>
-                      </div>
-                    </div>
-                    <div class="col-md-auto">
-                      <div class="form-label-group">
-                        <input [readonly]="isReadonly" type="text" id="numFunNesc"
-                               class="form-control" value="{{operacaoEscolhida.numFuncionarios}}"
-                               placeholder="Funcionários necessários:" name="numFuncionarios"
-                               required="required">
-                        <label for="numFunNesc" class="fonterisco">Funcionários necessários:</label>
-                      </div>
-                    </div>
-                    <div class="col-md-auto">
-                      <div class="form-label-group">
-                        <input [readonly]="isReadonly" type="text" id="QtdPecasOpe"
-                               class="form-control" value="{{operacaoEscolhida.qtdPecasOpe}} Peças"
-                               placeholder="Peças por funcionário:" name="qtdPecasOpe"
-                               required="required">
-                        <label for="QtdPecasOpe" class="fonterisco">Peças por funcionário:</label>
-                      </div>
-                    </div>
-                    <div class="col-md-auto">
-                      <div class="form-label-group">
-                        <input [readonly]="isReadonly" type="text" id="producaoHora"
-                               class="form-control" value="{{operacaoEscolhida.producaoHora}} Peças"
-                               placeholder="Quantidade de peças por funcionário:" name="producaoHora"
-                               required="required">
-                        <label for="producaoHora" class="fonterisco">Produção por hora:</label>
-                      </div>
-                    </div>
-
-
-                  </div>
-                  <a class="btn btn-outline-success list-group-item list-group-item-action"
-                  >
-                    Abrir Planilha
-                  </a>
                 </div>
               </div>
             </div>
@@ -226,6 +273,96 @@
       </div>
     </div>
   </div>
+</div>
+
+<!--cadastro ope-->
+<div class="modal fade cadastro-operacoes" tabindex="-1" role="dialog" aria-labelledby="modalpeca"
+     aria-hidden="true">
+  <div class="modal-dialog modal-body">
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="cadastrooperacoes">Cadastro de Sub-operações:</h4>
+        <button type="button" #closeModal class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="card-body">
+          <form #cadastrarOperacao="ngForm" [noValidate]="$any(false)">
+
+            <div class="col-md-auto">
+              <div class="form-group">
+                <div class="form-label-group">
+                  <input type="text" required="required" name="descricao" [(ngModel)]="newsuboperacao.descricao"
+                         class="form-control" minlength="6"
+                         id="DescricaoOp">
+                  <label for="DescricaoOp">Descrição da operação:</label>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-auto">
+              <div class="form-group">
+                <div class="form-label-group">
+                  <input type="number" required="required" name="tempoNesc"
+                         [(ngModel)]="newsuboperacao.tempoNesc"
+                         class="form-control" maxlength="4"
+                         id="tempoNescop">
+                  <label for="tempoNescop">Tempo:</label>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="modal-footer col-md-12">
+              <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar
+              </button>
+              <input class="btn btn-primary" type="submit" (click)="cadastrarSubOperacao()"
+                     [disabled]="!cadastrarOperacao.valid" data-dismiss="modal"
+                     value="Cadastrar">
+            </div>
+            <div *ngIf="cadastrarOperacao.submitted && erro" class="alert alert-warning separa">
+              Cadastro Falhou!<br/>{{errorMessage}}
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- modal excluir sub ope -->
+<div class="modal  fade deletar-subope" tabindex="-1" role="dialog" aria-labelledby="modalpeca"
+     aria-hidden="true">
+  <div class="modal-dialog modal-body">
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="modalExcluirSubope">Deletar Sub-Operação</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="card-body">
+          <div class="text-center mb-4">
+            <h4>Deseja Excluir?</h4>
+          </div>
+          <div class="modal-footer col-md-12">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+            <input class="btn btn-primary" type="submit" (click)="deletarSubOperacao(suboperacaoEscolhida)"
+                   data-dismiss="modal"
+                   value="Confirmar">
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #naoescolheu class="separa">
+  Escolha uma Peça!
 </ng-template>
 
 <!-- Sticky Footer -->

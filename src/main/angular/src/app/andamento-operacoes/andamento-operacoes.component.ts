@@ -1,11 +1,11 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {TokenStorageService} from '../auth/token-storage.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CadastroOperacaoService, Operacao} from '../service/cadastro-operacao.service';
 import {Subscription} from 'rxjs';
 import {GerenteService} from '../service/gerente.service';
-import {List} from 'immutable';
+import {first} from 'rxjs/operators';
 
 
 @Component({
@@ -19,6 +19,11 @@ export class AndamentoOperacoesComponent implements OnInit, OnDestroy {
   constructor(private route: ActivatedRoute, private gerenteService: GerenteService, private modalService: NgbModal, private operacaoService: CadastroOperacaoService, private token: TokenStorageService, private router: Router) {
   }
 
+  hoje: Date;
+  inicio: Date;
+  prazo: Date;
+
+  escolheu = false;
   operacao: any = {};
   gerente: any;
   ope: Operacao;
@@ -35,8 +40,15 @@ export class AndamentoOperacoesComponent implements OnInit, OnDestroy {
   public validado: boolean;
   private cadastrado: boolean;
 
+  resultadoOpe: any;
   isReadonly = true;
   operacaoEscolhida: any;
+
+  newsuboperacao: any = {};
+  suboperacaoEscolhida: any;
+  ope3 = false;
+  valido = true;
+  numfumok = false;
 
   ngOnInit() {
     this.etapasproducao();
@@ -56,26 +68,56 @@ export class AndamentoOperacoesComponent implements OnInit, OnDestroy {
 
   }
 
+  atualizarSubOpe(subope: any, tempo: any) {
+    this.suboperacaoEscolhida = subope;
+    this.suboperacaoEscolhida.tempoNesc = tempo;
+  }
+  update() {
+    this.operacaoService.updateOperacao(this.operacaoEscolhida).pipe(first()).subscribe(data => {
+      this.resultadoOpe = data;
+      this.ope3 = false;
+      this.ope3 = true;
+      if (this.resultadoOpe.numFuncionariosDisponiveis >= this.resultadoOpe.numFuncionarios) {
+        this.numfumok = true;
+      }
+    }, error => {
+      this.erro = true;
+      this.errorMessage = error.error;
+      console.log(error.error);
+    });
+
+  }
+
+  tualizarSubOpe(subope: any, tempo: any) {
+    this.suboperacaoEscolhida = subope;
+    this.suboperacaoEscolhida.tempoNesc = tempo;
+  }
+
+  subopeEscolhida(subope: any) {
+    this.suboperacaoEscolhida = subope;
+
+  }
+
+  loteOpe(lote: any) {
+    this.operacaoEscolhida.loteProducao = lote;
+  }
+
+  numfunOpe(numfun: any) {
+    this.operacaoEscolhida.numFuncionariosDisponiveis = numfun;
+  }
+
+  tempoOpe(tempo: any) {
+    this.operacaoEscolhida.tempoTrab = tempo;
+  }
+
+  selectsPeca(peca: any) {
+    this.peca = peca;
+
+    this.escolheu = true;
+  }
+
   selectOperacao(operacao: any) {
     this.operacaoEscolhida = operacao;
-  }
-
-  openInformacoes(content) {
-    this.modalService.open(content, {size: 'lg', ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
-  }
-
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return `with: ${reason}`;
-    }
   }
 
   naoAutenticado() {
@@ -87,6 +129,16 @@ export class AndamentoOperacoesComponent implements OnInit, OnDestroy {
     } else {
       this.validado = true;
     }
+  }
+
+  deletarSubOperacao(subope: any) {
+    this.suboperacaoEscolhida = subope;
+    const index = this.operacaoEscolhida.suboperacoes.indexOf(this.suboperacaoEscolhida);
+    this.operacaoEscolhida.suboperacoes.splice(index, 1);
+  }
+
+  cadastrarSubOperacao() {
+    this.operacaoEscolhida.suboperacoes.push(this.newsuboperacao);
   }
 
   etapasproducao() {

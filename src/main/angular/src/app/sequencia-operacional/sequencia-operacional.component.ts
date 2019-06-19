@@ -218,10 +218,10 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
       this.inicio = new Date(this.operacaoEscolhida.dataInicio);
       this.peca.operacoes.push(this.operacaoEscolhida);
 
-      if (this.inicio.getTime() === this.hoje.getTime()) {
-        this.gerente.operacoesFazer.push(this.operacaoEscolhida);
+      if (this.inicio.getTime() === this.hoje.getTime() || this.inicio < this.hoje) {
+        this.peca.operacoesAndamento.push(this.operacaoEscolhida);
       } else if (this.inicio > this.hoje) {
-        this.gerente.operacoesFazer.push(this.operacaoEscolhida);
+        this.peca.operacoesFazer.push(this.operacaoEscolhida);
       }
 
 

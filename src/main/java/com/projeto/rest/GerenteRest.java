@@ -26,9 +26,11 @@ import com.projeto.models.Gerente;
 import com.projeto.models.Operacao;
 import com.projeto.models.Role;
 import com.projeto.models.RoleName;
+import com.projeto.models.Setor;
 import com.projeto.repository.FuncionarioRepository;
 import com.projeto.repository.GerenteRepository;
 import com.projeto.repository.RoleRepository;
+import com.projeto.repository.SetorRepository;
 import com.projeto.repository.UsuarioRepository;
 import com.projeto.seguranca.CadastroFormGerente;
 import com.projeto.seguranca.JwtResponse;
@@ -46,6 +48,9 @@ public class GerenteRest {
 
 	@Autowired
 	FuncionarioRepository funcionarioRepository;
+	
+	@Autowired
+	SetorRepository setorRepository;
 
 	@Autowired
 	AuthenticationManager authenticationManager;
@@ -75,7 +80,6 @@ public class GerenteRest {
 		return gerenteRepository.findAll();
 	}
 
-	
 	@RequestMapping(method = RequestMethod.GET, path = "gerente/{id}")
 	@PreAuthorize("hasRole('GERENTE')")
 	public Gerente getGerenteById(@PathVariable("id") long id) {
@@ -129,12 +133,12 @@ public class GerenteRest {
 	@RequestMapping(method = RequestMethod.PUT, value = "chaveAcesso")
 	@PreAuthorize("hasRole('GERENTE')")
 	public ResponseEntity<?> chaveAcesso(@RequestBody Gerente gerente) {
-		
+
 		gerente.setChaveAcesso(encoder.encode(gerente.getChaveAcesso()));
 		gerenteRepository.save(gerente);
 		return new ResponseEntity<>(new ResponseMessage("Dados Atualizados com sucesso!"), HttpStatus.OK);
 	}
-	
+
 	@RequestMapping(method = RequestMethod.POST, value = "acessarpla")
 	@PreAuthorize("hasRole('GERENTE')")
 	public ResponseEntity<?> acessarPlanilha(@RequestBody String chaveAcesso) {
@@ -144,7 +148,7 @@ public class GerenteRest {
 
 		return new ResponseEntity<>(new ResponseMessage("Acesso Válido!"), HttpStatus.OK);
 	}
-	
+
 	@RequestMapping(method = RequestMethod.PUT, value = "cadastraralgo")
 	@PreAuthorize("hasRole('GERENTE')")
 	public ResponseEntity<?> cadastrarAlgo(@RequestBody Gerente gerente) {
@@ -153,18 +157,27 @@ public class GerenteRest {
 		return new ResponseEntity<>(new ResponseMessage("Dados Atualizados com sucesso!"), HttpStatus.OK);
 	}
 
-	@RequestMapping(method = RequestMethod.PUT, value = "cadastrarope")
+	@RequestMapping(method = RequestMethod.PUT, value = "cadastrarsetor")
 	@PreAuthorize("hasRole('GERENTE')")
-	public ResponseEntity<?> cadastrarOpe(@RequestBody Gerente gerente) {
-		 Operacao ultima =  gerente.getOperacoes().get(gerente.getOperacoes().size()-1);
-	     Operacao.calcular(ultima);
+	public ResponseEntity<?> cadastrarSetor(@RequestBody Gerente gerente) {
+		 Setor setor =  gerente.getSetores().get(gerente.getSetores().size()-1);
+		 
+		 if(gerente.getSetores().contains(setorRepository.findByNomeSetor(setor.getNomeSetor()))) {
+			 return new ResponseEntity<>(new ResponseMessage("Erro -> Nome de setor já utilizado!"), HttpStatus.BAD_REQUEST);
+		 }
 		gerenteRepository.save(gerente);
 		return new ResponseEntity<>(new ResponseMessage("Dados Atualizados com sucesso!"), HttpStatus.OK);
 	}
-	
-	 
-     
-     
+
+	@RequestMapping(method = RequestMethod.PUT, value = "cadastrarope")
+	@PreAuthorize("hasRole('GERENTE')")
+	public ResponseEntity<?> cadastrarOpe(@RequestBody Gerente gerente) {
+		Operacao ultima = gerente.getOperacoes().get(gerente.getOperacoes().size() - 1);
+		Operacao.calcular(ultima);
+		gerenteRepository.save(gerente);
+		return new ResponseEntity<>(new ResponseMessage("Dados Atualizados com sucesso!"), HttpStatus.OK);
+	}
+
 	@RequestMapping(method = RequestMethod.DELETE, path = "/{id}")
 	@PreAuthorize("hasRole('GERENTE')")
 	public Gerente deleteGerenteById(@PathVariable("id") long id) {
