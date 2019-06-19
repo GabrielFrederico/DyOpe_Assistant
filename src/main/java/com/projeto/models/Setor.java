@@ -29,7 +29,6 @@ public class Setor {
 	private Set<Funcionario> funcionarios = new HashSet<>();
 
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinTable(name = "setor_etapaproducao", joinColumns = @JoinColumn(name = "setor_id"), inverseJoinColumns = @JoinColumn(name = "etapaproducao_id"))
 	private EtapaProducao etapaproducao;
 
 	@OneToMany(cascade = CascadeType.ALL)

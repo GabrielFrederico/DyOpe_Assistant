@@ -51,7 +51,6 @@ export class AndamentoOperacoesComponent implements OnInit, OnDestroy {
   numfumok = false;
 
   ngOnInit() {
-    this.etapasproducao();
     this.info = {
       token: this.token.getToken(),
       username: this.token.getUsername(),
@@ -139,22 +138,6 @@ export class AndamentoOperacoesComponent implements OnInit, OnDestroy {
 
   cadastrarSubOperacao() {
     this.operacaoEscolhida.suboperacoes.push(this.newsuboperacao);
-  }
-
-  etapasproducao() {
-    this.sub = this.route.params.subscribe(params => {
-      const etapaProducao = params.etapaProducao;
-      if (etapaProducao) {
-        this.operacaoService.getEtapaProducaoNome(etapaProducao).subscribe((etapaproducao: any) => {
-            if (etapaproducao) {
-              this.etapaproducao = etapaproducao;
-              console.clear();
-            }
-          }
-        )
-        ;
-      }
-    });
   }
 
   datareload() {

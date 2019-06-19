@@ -6,7 +6,7 @@
        [routerLink]="['/gerenteindex/operacoes', etapaproducao.etapaProducao]" role="tab" aria-controls="nav-profile"
        aria-selected="false">Cadastro</a>
     <a class="nav-item nav-link " id="nav-home-tab" data-toggle="tab"
-       [routerLink]="['/gerenteindex/andamentooperacoes', etapaproducao.etapaProducao]" role="tab"
+       routerLink="/gerenteindex/andamentooperacoes" role="tab"
        aria-controls="nav-home" aria-selected="true">Andamento</a>
 
 
@@ -58,7 +58,7 @@
 
       <div class="col-md-4" *ngIf="!subopesa">
         <div class="card border-info mb-3 operacoes lista">
-          <div class="card-header border-primary">Sub-Operações</div>
+          <div class="card-header border-primary">Sub-Operações (Unidade)</div>
           <div class="card-body text-secondary">
             <div class="form-group">
               <div *ngFor="let suboperacao of operacaoEscolhida.suboperacoes; trackBy: trackByFn" class="row">

@@ -52,18 +52,23 @@ public class PecaController {
 
 	@RequestMapping(method = RequestMethod.PUT)
 	public Peca update(@RequestBody Peca peca) {
-		Operacao ultima =  peca.getOperacoes().get(peca.getOperacoes().size()-1);
-	     Operacao.calcular(ultima);
-		pecaRepository.save(peca);
-		return peca;
-	}
+		if (peca.getOperacoes().size() == 1) {
+			pecaRepository.save(peca);
 	
-	@RequestMapping(method = RequestMethod.PUT, value="operacao")
-	public Peca updateOpe(@RequestBody Peca peca) {
-        
+		}
+		Operacao ultima = peca.getOperacoes().get(peca.getOperacoes().size() - 1);
+		Operacao.calcular(ultima);
 		pecaRepository.save(peca);
 		return peca;
 	}
+
+	@RequestMapping(method = RequestMethod.PUT, value = "operacao")
+	public Peca updateOpe(@RequestBody Peca peca) {
+
+		pecaRepository.save(peca);
+		return peca;
+	}
+
 	@RequestMapping(method = RequestMethod.DELETE, path = "/{id}")
 	public Peca deletePecaById(@PathVariable("id") long id) {
 		Peca peca = pecaRepository.findById(id);

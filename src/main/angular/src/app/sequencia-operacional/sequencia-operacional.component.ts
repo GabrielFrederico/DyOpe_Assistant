@@ -212,7 +212,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
       this.operacaoEscolhida.tempoTrab = 450;
       this.operacaoEscolhida.etapa_producao_id = this.etapaproducao.id;
       this.operacaoEscolhida.descricao = this.etapaproducao.etapaProducao + ' : ' + this.peca.descricao;
-      this.operacaoEscolhida.gerente_id = this.gerente.id;
+      this.operacaoEscolhida.peca_id = this.peca.id;
 
       this.hoje = new Date();
       this.inicio = new Date(this.operacaoEscolhida.dataInicio);

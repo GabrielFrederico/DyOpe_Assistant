@@ -5,7 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class PlanilhaCusto {
@@ -15,7 +15,7 @@ public class PlanilhaCusto {
 	private long id;
 	private float preocoMinuto, lucro, gastosOpe, gastos, precoOpe;
 	
-	@OneToMany(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.ALL)
 	private Operacao operacao;
 	
 	public long getId() {
