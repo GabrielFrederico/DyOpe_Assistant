@@ -217,6 +217,9 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
         }, error => {
           this.getOpe();
           this.erro = true;
+          this.ope3 = true;
+          this.atualizarOpe = true;
+          this.subopesa = false;
           this.errorMessage = error.error;
           console.log(error.error);
         });
@@ -346,7 +349,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
         this.suboperacoes.forEach((item, index) => {
           this.listasuboperacoes.push(item);
         });
-        this.suboperacoes = [];
+        this.suboperacoes = null;
       }, error => {
         this.erro = true;
         this.errorMessage = error.error;
