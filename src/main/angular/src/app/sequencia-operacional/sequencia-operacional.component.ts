@@ -214,12 +214,11 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
       if (this.inicio > this.hoje) {
         this.peca.operacoesFazer.push(this.operacaoEscolhida);
         this.gerenteService.pecaOpesFazer(this.peca).pipe(first()).subscribe(peca => {
-        }, error => {
           this.getOpe();
-          this.erro = true;
-          this.ope3 = true;
-          this.atualizarOpe = true;
           this.subopesa = false;
+        }, error => {
+
+          this.erro = true;
           this.errorMessage = error.error;
           console.log(error.error);
         });

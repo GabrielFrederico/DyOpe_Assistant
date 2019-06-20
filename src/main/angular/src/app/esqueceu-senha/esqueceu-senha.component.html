@@ -13,7 +13,7 @@
         <form [noValidate]="$any(false)" (ngSubmit)="onSubmit()">
           <div class="form-group">
             <div class="form-label-group">
-              <input type="email" id="inputEmail" class="form-control" [(ngModel)]="email" placeholder="Insira seu e-mail"
+              <input type="email" id="inputEmail" class="form-control" name="email" [(ngModel)]="email" placeholder="Insira seu e-mail"
                      required="required" [autofocus]="true">
               <label for="inputEmail">Insira seu e-mail</label>
             </div>

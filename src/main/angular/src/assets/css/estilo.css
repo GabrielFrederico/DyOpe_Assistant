@@ -6,9 +6,12 @@
   max-width: 28rem;
 
 }
-.modal-xl{
-  width: 86%;
+
+.modal-xl {
+  max-width: 80%;
+  margin: 1.75rem auto;
 }
+
 .menudrop {
   position: absolute;
   display: none;

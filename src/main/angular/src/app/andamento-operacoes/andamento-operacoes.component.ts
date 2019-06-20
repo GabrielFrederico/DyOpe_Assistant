@@ -112,6 +112,7 @@ export class AndamentoOperacoesComponent implements OnInit {
 
   selectOperacao(operacao: any) {
     this.operacaoEscolhida = operacao;
+    this.resultadoOpe = operacao;
     this.ope3 = true;
   }
 

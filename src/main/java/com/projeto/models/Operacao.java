@@ -33,6 +33,14 @@ public class Operacao {
 	private Set<SubOperacao> suboperacoes = new HashSet<>();
 	private String descricao;
 	private Date dataInicio;
+    private float tempos;
+	public float getTempos() {
+		return tempos;
+	}
+
+	public void setTempos(float tempos) {
+		this.tempos = tempos;
+	}
 
 	public String getDescricao() {
 		return descricao;
@@ -81,6 +89,7 @@ public class Operacao {
 		resultdias = result/operacao.getNumFuncionariosDisponiveis();
 		diasNeceteste = Math.round(resultdias / tempoFun);
 
+		inicio.add(Calendar.DAY_OF_MONTH, 2);
 		for (int i = 1; i < diasNeceteste; i++) {
 
 			inicio.add(Calendar.DAY_OF_MONTH, 1);
@@ -117,10 +126,11 @@ public class Operacao {
 			Date prazo = new Date(fim.getTime());
 			operacao.setPrazo(prazo);
 
-			System.out.println("dias: "+diasNeceteste + "  " + tempoFun + ". " + resultdias + ".tempos " + tempos +" "+qtdPecasOpe +" INICIO:"+operacao.getPrazo());
+			System.out.println("dias: "+diasNeceteste + "  " + tempoFun + ". " + resultdias + ".tempos " + tempos +" "+qtdPecasOpe +" INICIO:"+operacao.getDataInicio());
 			operacao.setQtdPecasOpe(qtdPecasOpe);
 			operacao.setProducaoHora(producaoHora);
 			System.out.println(" Teste prod: "+operacao.getProducaoHora());
+			operacao.setTempos(tempos);
 			
 		
 		return operacao;
