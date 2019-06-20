@@ -1,6 +1,8 @@
 package com.projeto.models;
 
 import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashSet;
@@ -33,7 +35,8 @@ public class Operacao {
 	private Set<SubOperacao> suboperacoes = new HashSet<>();
 	private String descricao;
 	private Date dataInicio;
-    private float tempos;
+	private float tempos;
+
 	public float getTempos() {
 		return tempos;
 	}
@@ -65,31 +68,44 @@ public class Operacao {
 		return operacao;
 	}
 
-	public static Operacao calcular(@RequestBody Operacao operacao) {
+	public static Operacao calcular(@RequestBody Operacao operacao) throws ParseException {
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		String dateString = sdf.format(operacao.getDataInicio());
+		java.util.Date inic = sdf.parse(dateString);
+		Date ini = new Date(inic.getTime());
+		// operacao.setDataInicio(ini);
+
 		Calendar inicio = Calendar.getInstance();
 		java.util.Date fim = new java.util.Date();
+		java.util.Date dataini = new java.util.Date();
 		inicio.setTime(operacao.getDataInicio());
+		System.out.println("inicio" + inicio.get(Calendar.DAY_OF_MONTH));
+		System.out.println("inicio2" + inic);
 
 		int diasAdded = 0;
 		ArrayList<Date> feriados = new ArrayList<>();
-		
 
-		int tempos = 0, diasNece = 0,diasNeceteste =0 , funcionariosNecessários = 0, prodHora = 0, producaoHora, prodhoraresult, qtdPecasOpe = 0;
+		int tempos = 0, diasNece = 0, diasNeceteste = 0, funcionariosNecessários = 0, prodHora = 0, producaoHora,
+				prodhoraresult, qtdPecasOpe = 0;
 		for (SubOperacao subope : operacao.getSuboperacoes()) {
 			tempos += subope.getTempoNesc();
 
-		}
+		}   
 
 		float result, funcCalc, calcProHora, tempoFun, resultdias;
 		tempoFun = operacao.getTempoTrab() * operacao.getNumFuncionariosDisponiveis();
-		
+
 		result = tempos * operacao.getLoteProducao();
 		diasNece = Math.round(result / tempoFun);
-		
-		resultdias = result/operacao.getNumFuncionariosDisponiveis();
+
+		resultdias = result / operacao.getNumFuncionariosDisponiveis();
 		diasNeceteste = Math.round(resultdias / tempoFun);
 
-		inicio.add(Calendar.DAY_OF_MONTH, 2);
+		inicio.add(Calendar.DAY_OF_MONTH, 1);
+		dataini = inicio.getTime();
+		inicio.add(Calendar.DAY_OF_MONTH, 1);
+		Date iniciodata = new Date(dataini.getTime());
+		operacao.setDataInicio(iniciodata);
 		for (int i = 1; i < diasNeceteste; i++) {
 
 			inicio.add(Calendar.DAY_OF_MONTH, 1);
@@ -104,35 +120,34 @@ public class Operacao {
 			}
 
 		}
-		
-			// inicio.add(Calendar.DAY_OF_MONTH, diasNece + diasAdded);
-			fim = inicio.getTime();
 
-			funcionariosNecessários = Math.round(operacao.getLoteProducao() / operacao.getTempoTrab());
-			if(funcionariosNecessários <1) {
-				funcionariosNecessários = 1;
-			}
-			if(diasNeceteste <1) {
-				diasNeceteste = 1;
-			}
-			
-			
-			qtdPecasOpe = Math.round(operacao.getLoteProducao() / operacao.getNumFuncionariosDisponiveis());
-			calcProHora = funcionariosNecessários * operacao.getTempoTrab();
-			prodHora = Math.round(operacao.getTempoTrab() / (operacao.getTempoTrab() / 60));
-			prodhoraresult =60*operacao.getNumFuncionariosDisponiveis();
-			producaoHora = Math.round(prodhoraresult/tempos);
-			operacao.setNumFuncionarios(funcionariosNecessários);
-			Date prazo = new Date(fim.getTime());
-			operacao.setPrazo(prazo);
+		// inicio.add(Calendar.DAY_OF_MONTH, diasNece + diasAdded);
+		fim = inicio.getTime();
 
-			System.out.println("dias: "+diasNeceteste + "  " + tempoFun + ". " + resultdias + ".tempos " + tempos +" "+qtdPecasOpe +" INICIO:"+operacao.getDataInicio());
-			operacao.setQtdPecasOpe(qtdPecasOpe);
-			operacao.setProducaoHora(producaoHora);
-			System.out.println(" Teste prod: "+operacao.getProducaoHora());
-			operacao.setTempos(tempos);
-			
-		
+		funcionariosNecessários = Math.round(operacao.getLoteProducao() / operacao.getTempoTrab());
+		if (funcionariosNecessários < 1) {
+			funcionariosNecessários = 1;
+		}
+		if (diasNeceteste < 1) {
+			diasNeceteste = 1;
+		}
+
+		qtdPecasOpe = Math.round(operacao.getLoteProducao() / operacao.getNumFuncionariosDisponiveis());
+		calcProHora = funcionariosNecessários * operacao.getTempoTrab();
+		prodHora = Math.round(operacao.getTempoTrab() / (operacao.getTempoTrab() / 60));
+		prodhoraresult = 60 * operacao.getNumFuncionariosDisponiveis();
+		producaoHora = Math.round(prodhoraresult / tempos);
+		operacao.setNumFuncionarios(funcionariosNecessários);
+		Date prazo = new Date(fim.getTime());
+		operacao.setPrazo(prazo);
+
+		System.out.println("dias: " + diasNeceteste + "  " + tempoFun + ". " + resultdias + ".tempos " + tempos + " "
+				+ qtdPecasOpe + " INICIO:" + operacao.getDataInicio());
+		operacao.setQtdPecasOpe(qtdPecasOpe);
+		operacao.setProducaoHora(producaoHora);
+		System.out.println(" Teste prod: " + operacao.getProducaoHora());
+		operacao.setTempos(tempos);
+
 		return operacao;
 
 	}

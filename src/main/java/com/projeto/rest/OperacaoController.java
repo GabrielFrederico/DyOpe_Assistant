@@ -1,5 +1,7 @@
 package com.projeto.rest;
 
+import java.text.ParseException;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +51,7 @@ public class OperacaoController {
 
 	@RequestMapping(method = RequestMethod.PUT, path = "atualizar")
 	@PreAuthorize("hasRole('GERENTE')")
-	public Operacao update(@RequestBody Operacao operacao) {
+	public Operacao update(@RequestBody Operacao operacao) throws ParseException {
 		Operacao.calcular(operacao);
 		operacaoRepository.save(operacao);
 		return operacao;

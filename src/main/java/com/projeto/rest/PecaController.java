@@ -1,5 +1,7 @@
 package com.projeto.rest;
 
+import java.text.ParseException;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,7 +56,12 @@ public class PecaController {
 	public Peca update(@RequestBody Peca peca) {
 
 		Operacao ultima = peca.getOperacoes().get(peca.getOperacoes().size() - 1);
-		Operacao.calcular(ultima);
+		try {
+			Operacao.calcular(ultima);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		pecaRepository.save(peca);
 		return peca;
 	}
@@ -62,7 +69,12 @@ public class PecaController {
 	@RequestMapping(method = RequestMethod.PUT, value = "operacaoFazer")
 	public Peca opesFazer(@RequestBody Peca peca) {
 		Operacao ultima = peca.getOperacoesFazer().get(peca.getOperacoesFazer().size() - 1);
-		Operacao.calcular(ultima);
+		try {
+			Operacao.calcular(ultima);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		pecaRepository.save(peca);
 		return peca;
 	}
@@ -70,7 +82,12 @@ public class PecaController {
 	@RequestMapping(method = RequestMethod.PUT, value = "operacaoAndamento")
 	public Peca opesAndamento(@RequestBody Peca peca) {
 		Operacao ultima = peca.getOperacoesAndamento().get(peca.getOperacoesAndamento().size() - 1);
-		Operacao.calcular(ultima);
+		try {
+			Operacao.calcular(ultima);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		pecaRepository.save(peca);
 		return peca;
 	}

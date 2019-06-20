@@ -130,6 +130,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
             console.clear();
             this.suboperacoes = [];
             if (this.etapaproducao.id === 5) {
+              this.suboperacoes = [];
               this.operacaoService.getOperacoesSub().subscribe(data => {
                 this.suboperacoes = data;
 
@@ -169,6 +170,13 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
 
   subopes() {
     if (!this.ope2) {
+      this.operacaoService.addOperacao(this.operacao).subscribe(data => {
+        this.operacaoEscolhida = data;
+      }, error => {
+        this.erro = true;
+        this.errorMessage = error.error;
+        console.log(error.error);
+      });
       this.ope2 = true;
     }
   }
@@ -255,6 +263,18 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
 
 
   atualizar() {
+    // update
+    this.operacaoService.updateOperacao(this.operacaoEscolhida).pipe(first()).subscribe(data => {
+      this.resultadoOpe = data;
+      this.ope3 = false;
+      this.ope3 = true;
+      // this.router.navigate(['/gerenteindex/andamentooperacoes/', this.etapaproducao.etapaProducao]);
+    }, error => {
+      this.erro = true;
+      this.errorMessage = error.error;
+      console.log(error.error);
+    });
+
     this.hoje = new Date();
     this.inicio = new Date(this.resultadoOpe.dataInicio);
     this.prazo = new Date(this.resultadoOpe.prazo);
@@ -284,20 +304,53 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
 
 
   update() {
-    this.operacaoService.updateOperacao(this.operacaoEscolhida).pipe(first()).subscribe(data => {
-      this.resultadoOpe = data;
-      this.ope3 = false;
-      this.ope3 = true;
-      // this.router.navigate(['/gerenteindex/andamentooperacoes/', this.etapaproducao.etapaProducao]);
-    }, error => {
-      this.erro = true;
-      this.errorMessage = error.error;
-      console.log(error.error);
-    });
+
+
     this.numFun1 = this.resultadoOpe.numFuncionarios - 2;
     this.numFun2 = this.resultadoOpe.numFuncionarios + 2;
     this.qtdPeca1 = this.resultadoOpe.qtdPecasOpe - 2;
     this.qtdPeca2 = this.resultadoOpe.qtdPecasOpe + 2;
+    this.hoje = new Date();
+    this.inicio = new Date(this.operacaoEscolhida.dataInicio);
+    this.prazo = new Date(this.operacaoEscolhida.prazo);
+
+    if (this.inicio > this.hoje) {
+      this.peca.operacoesFazer.forEach((data, index) => {
+        if (this.operacaoEscolhida !== data) {
+          this.peca.operacoesFazer.push(this.operacaoEscolhida);
+          this.gerenteService.pecaOpesFazer(this.peca).pipe(first()).subscribe(peca => {
+            this.getOpe();
+            this.ope3 = false;
+            this.ope3 = true;
+            this.subopesa = false;
+          }, error => {
+
+            this.erro = true;
+            this.errorMessage = error.error;
+            console.log(error.error);
+          });
+        }
+
+      });
+
+    } else if (this.inicio.getTime() === this.hoje.getTime() || this.inicio < this.hoje) {
+      this.peca.operacoesAndamento.forEach((data, index) => {
+        if (this.operacaoEscolhida !== data) {
+          this.peca.operacoesAndamento.push(this.operacaoEscolhida);
+          this.gerenteService.pecaOpesAndamento(this.peca).pipe(first()).subscribe(peca => {
+            this.getOpe();
+            this.ope3 = false;
+            this.ope3 = true;
+          }, error => {
+            this.erro = true;
+            this.errorMessage = error.error;
+            console.log(error.error);
+          });
+        }
+      });
+
+    }
+
 
   }
 
@@ -343,18 +396,11 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
     this.peca = peca;
 
     if (!this.escolheu) {
-      this.operacaoService.addOperacao(this.operacao).subscribe(data => {
-        this.operacaoEscolhida = data;
-        this.suboperacoes.forEach((item, index) => {
-          this.listasuboperacoes.push(item);
-        });
-        this.suboperacoes = null;
-      }, error => {
-        this.erro = true;
-        this.errorMessage = error.error;
-        console.log(error.error);
-      });
 
+      this.suboperacoes.forEach((item, index) => {
+        this.listasuboperacoes.push(item);
+      });
+      this.suboperacoes = null;
     }
     this.escolheu = true;
   }

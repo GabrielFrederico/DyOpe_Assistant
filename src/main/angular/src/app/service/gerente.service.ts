@@ -92,6 +92,11 @@ export class GerenteService {
   getPecaNome(nome: string) {
     return this.httpClient.get('http://localhost:8080/pecas/getByNome/' + nome);
   }
+  getPecaId(id: number) {
+    return this.httpClient.get('http://localhost:8080/pecas/' + id);
+
+  }
+
 
   getGerenteLogado(nomeUsuario: string): Observable<Gerente> {
 

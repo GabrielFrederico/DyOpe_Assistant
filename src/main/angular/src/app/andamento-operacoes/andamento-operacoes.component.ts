@@ -48,6 +48,7 @@ export class AndamentoOperacoesComponent implements OnInit {
   ope3 = false;
   valido = true;
   numfumok = false;
+  pecarefresh: any;
 
   ngOnInit() {
     this.info = {
@@ -108,6 +109,20 @@ export class AndamentoOperacoesComponent implements OnInit {
     this.peca = peca;
 
     this.escolheu = true;
+  }
+
+  refresh(peca: any) {
+    this.peca = peca;
+    this.gerenteService.getPecaId(this.peca.id).subscribe(data => {
+      this.pecarefresh = data;
+      if (this.peca.operacoesFazer.length < this.pecarefresh.operacoesFazer.length
+        || this.peca.operacoesAndamento.length < this.pecarefresh.operacoesAndamento.length
+        || this.peca.operacoesPrazo.length < this.pecarefresh.operacoesPrazo.length) {
+        this.peca = this.pecarefresh;
+      }
+    }, error => {
+      console.log(error.error);
+    });
   }
 
   selectOperacao(operacao: any) {

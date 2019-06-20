@@ -8,7 +8,7 @@
   </a>
   <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="pagesDropdown" x-placement="bottom-start">
     <h6 class="dropdown-header">Etapas da produção</h6>
-    <a *ngFor="let etapa of etapas" href="javascript:void(0)"
+    <a *ngFor="let etapa of etapas" href="#"
        [routerLink]="['/gerenteindex/operacoes', etapa.etapaProducao]" class="dropdown-item">{{etapa.etapaProducao}}</a>
   </div>
 </li>

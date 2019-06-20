@@ -1,5 +1,6 @@
 package com.projeto.rest;
 
+import java.text.ParseException;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -173,7 +174,12 @@ public class GerenteRest {
 	@PreAuthorize("hasRole('GERENTE')")
 	public ResponseEntity<?> cadastrarOpe(@RequestBody Gerente gerente) {
 		Operacao ultima = gerente.getOperacoes().get(gerente.getOperacoes().size() - 1);
-		Operacao.calcular(ultima);
+		try {
+			Operacao.calcular(ultima);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		gerenteRepository.save(gerente);
 		return new ResponseEntity<>(new ResponseMessage("Dados Atualizados com sucesso!"), HttpStatus.OK);
 	}
