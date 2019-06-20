@@ -15,7 +15,7 @@ public class PlanilhaCusto {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	private float preocoMinuto, lucro, gastosOpe, gastos, precoOpe;
+	private float precoMinuto, lucro, gastosOpe, gastos, precoOpe;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Operacao operacao;
@@ -27,10 +27,10 @@ public class PlanilhaCusto {
 		this.id = id;
 	}
 	public float getPreocoMinuto() {
-		return preocoMinuto;
+		return precoMinuto;
 	}
 	public void setPreocoMinuto(float preocoMinuto) {
-		this.preocoMinuto = preocoMinuto;
+		this.precoMinuto = preocoMinuto;
 	}
 	public float getLucro() {
 		return lucro;

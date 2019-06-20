@@ -24,7 +24,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
   operacao: any = {};
   newsuboperacao: any = {};
   suboperacaoEscolhida: any;
-  subopesa = true;
+  subopesa = false;
   numfumok = false;
   gerente: any;
   operacaoEscolhida: any;
@@ -198,11 +198,10 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
         item.id = null;
         item.idEtapa = 0;
         item.operacao_id = this.operacaoEscolhida.id;
-        this.operacaoEscolhida.suboperacoes.push(item);
       }, error => {
         console.log(error.error);
       });
-      // this.operacaoEscolhida.suboperacoes = this.listasuboperacoes;
+      this.operacaoEscolhida.suboperacoes = this.listasuboperacoes;
       this.operacaoEscolhida.tempoTrab = 450;
       this.operacaoEscolhida.etapa_producao_id = this.etapaproducao.id;
       this.operacaoEscolhida.descricao = this.etapaproducao.etapaProducao + ' : ' + this.peca.descricao;
@@ -212,7 +211,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
       this.inicio = new Date(this.operacaoEscolhida.dataInicio);
       // this.peca.operacoes.push(this.operacaoEscolhida);
 
-      if (this.inicio.getTime() === this.hoje.getTime() || this.inicio < this.hoje) {
+      if (this.inicio > this.hoje) {
         this.peca.operacoesFazer.push(this.operacaoEscolhida);
         this.gerenteService.pecaOpesFazer(this.peca).pipe(first()).subscribe(peca => {
         }, error => {
@@ -221,7 +220,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
           this.errorMessage = error.error;
           console.log(error.error);
         });
-      } else if (this.inicio > this.hoje) {
+      } else if (this.inicio.getTime() === this.hoje.getTime() || this.inicio < this.hoje) {
         this.peca.operacoesAndamento.push(this.operacaoEscolhida);
         this.gerenteService.pecaOpesAndamento(this.peca).pipe(first()).subscribe(peca => {
           this.getOpe();
@@ -301,22 +300,16 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
   }
 
   cadastrarSubOperacao() {
-    if (this.subopesa) {
-      this.listasuboperacoes.push(this.newsuboperacao);
-    } else {
-      this.operacaoEscolhida.suboperacoes.push(this.newsuboperacao);
-    }
+    this.listasuboperacoes.push(this.newsuboperacao);
+
   }
 
   deletarSubOperacao(subope: any) {
     this.suboperacaoEscolhida = subope;
-    if (this.subopesa) {
-      const index = this.listasuboperacoes.indexOf(this.suboperacaoEscolhida);
-      this.listasuboperacoes.splice(index, 1);
-    } else {
-      const index = this.operacaoEscolhida.suboperacoes.indexOf(this.suboperacaoEscolhida);
-      this.operacaoEscolhida.suboperacoes.splice(index, 1);
-    }
+
+    const index = this.listasuboperacoes.indexOf(this.suboperacaoEscolhida);
+    this.listasuboperacoes.splice(index, 1);
+
   }
 
   cadastrarPeca() {
@@ -351,7 +344,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
       this.operacaoService.addOperacao(this.operacao).subscribe(data => {
         this.operacaoEscolhida = data;
         this.suboperacoes.forEach((item, index) => {
-          this.operacaoEscolhida.suboperacoes.push(item);
+          this.listasuboperacoes.push(item);
         });
         this.suboperacoes = [];
       }, error => {
