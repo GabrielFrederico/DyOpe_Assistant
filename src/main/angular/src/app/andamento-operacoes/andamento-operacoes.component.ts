@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {TokenStorageService} from '../auth/token-storage.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {CadastroOperacaoService, Operacao} from '../service/cadastro-operacao.service';
+import {CadastroOperacaoService} from '../service/cadastro-operacao.service';
 import {GerenteService} from '../service/gerente.service';
 import {first} from 'rxjs/operators';
 
@@ -22,14 +22,10 @@ export class AndamentoOperacoesComponent implements OnInit {
   hoje: Date;
   inicio: Date;
   prazo: Date;
-
+  editarOpe = false;
   escolheu = false;
   operacao: any = {};
   gerente: any;
-  ope: Operacao;
-  operacoesFazer: any;
-  operacoesEmAndamento: any;
-  operacoesNoPrazo: any;
   etapaproducao: any;
   public erro: boolean;
   public errorMessage = '';
@@ -51,6 +47,8 @@ export class AndamentoOperacoesComponent implements OnInit {
   pecarefresh: any;
   operacoesSeparadas = false;
 
+  refreshed = false;
+
   ngOnInit() {
     this.info = {
       token: this.token.getToken(),
@@ -62,6 +60,10 @@ export class AndamentoOperacoesComponent implements OnInit {
     this.separarOperacoes();
     this.naoAutenticado();
 
+  }
+
+  editar() {
+    this.editarOpe = true;
   }
 
   atualizarSubOpe(subope: any, tempo: any) {
@@ -83,11 +85,6 @@ export class AndamentoOperacoesComponent implements OnInit {
       console.log(error.error);
     });
 
-  }
-
-  tualizarSubOpe(subope: any, tempo: any) {
-    this.suboperacaoEscolhida = subope;
-    this.suboperacaoEscolhida.tempoNesc = tempo;
   }
 
   subopeEscolhida(subope: any) {
@@ -114,6 +111,7 @@ export class AndamentoOperacoesComponent implements OnInit {
   }
 
   refresh(peca: any) {
+
     this.peca = peca;
     this.gerenteService.getPecaId(this.peca.id).subscribe(data => {
       this.pecarefresh = data;
@@ -122,10 +120,12 @@ export class AndamentoOperacoesComponent implements OnInit {
         || this.peca.operacoesPrazo.length < this.pecarefresh.operacoesPrazo.length) {
         this.peca = this.pecarefresh;
       }
-      this.separarOperacoes();
+
+      this.refreshed = true;
     }, error => {
       console.log(error.error);
     });
+    this.separarOperacoes();
   }
 
   selectOperacao(operacao: any) {
@@ -158,11 +158,12 @@ export class AndamentoOperacoesComponent implements OnInit {
   datareload() {
     this.gerenteService.getGerente(this.info.username).subscribe(data => this.gerente = data);
     console.clear();
-
+    this.separarOperacoes();
   }
 
   separarOperacoes() {
     if (!this.operacoesSeparadas) {
+
       this.hoje = new Date();
       this.peca.operacoesFazer.forEach((data, index) => {
         this.inicio = new Date(data.dataInicio);
@@ -188,7 +189,13 @@ export class AndamentoOperacoesComponent implements OnInit {
           this.peca.operacoesAndamento.splice(i, 1);
         }
       });
+      this.gerenteService.cadastrarAlgo(this.gerente).pipe(first()).subscribe(data => {
+      }, error => {
+        this.errorMessage = error.error;
+        this.erro = true;
+      });
       this.operacoesSeparadas = true;
+      console.log('opesseparadas');
     }
 
 
