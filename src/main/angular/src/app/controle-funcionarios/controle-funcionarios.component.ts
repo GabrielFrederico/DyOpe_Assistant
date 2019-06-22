@@ -6,6 +6,7 @@ import {Subscription} from 'rxjs';
 import {CadastroSetorService} from '../service/cadastro-setor.service';
 import {InfosetorService} from '../service/infosetor.service';
 import {GerenteService} from '../service/gerente.service';
+import {FuncionarioService} from '../service/funcionario.service';
 
 @Component({
   selector: 'app-controle-funcionarios',
@@ -19,7 +20,7 @@ export class ControleFuncionariosComponent implements OnInit, OnDestroy {
   sub: Subscription;
 
   // tslint:disable-next-line:max-line-length
-  constructor(private gerenteService: GerenteService, private modalService: NgbModal, private setorservice: CadastroSetorService, private route: ActivatedRoute, private token: TokenStorageService, private router: Router, private infosetorService: InfosetorService) {
+  constructor(private gerenteService: GerenteService, private funcionarioService: FuncionarioService, private modalService: NgbModal, private setorservice: CadastroSetorService, private route: ActivatedRoute, private token: TokenStorageService, private router: Router, private infosetorService: InfosetorService) {
   }
 
   ngOnInit() {

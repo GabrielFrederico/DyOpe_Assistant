@@ -93,6 +93,11 @@ export class InformacoesSetorComponent implements OnInit {
       this.errorMessage = error.error;
       console.log(error.error);
     });
+    this.funcionarioService.atualizarFuncionario(this.funcionario).pipe(first()).subscribe(data => {
+    }, error => {
+      this.errorMessage = error.error;
+      this.erro = true;
+    });
 
   }
 

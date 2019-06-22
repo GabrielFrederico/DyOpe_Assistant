@@ -125,7 +125,7 @@ export class AndamentoOperacoesComponent implements OnInit {
     }, error => {
       console.log(error.error);
     });
-    this.separarOperacoes();
+    // this.separarOperacoes();
   }
 
   selectOperacao(operacao: any) {

@@ -173,7 +173,7 @@
                   <div class="card-footer bg-transparent border-info modal-footer">
 
                     <input class="btn btn-info" type="submit" [disabled]="!valido" *ngIf="editarOpe" value="Atualizar">
-                    <input class="btn btn-primary" (click)="editar()" *ngIf="!editarOpe" [disabled]="!valido"
+                    <input class="btn btn-primary"  type="button"(click)="editar()" *ngIf="!editarOpe" [disabled]="!valido"
                            value="Editar">
                   </div>
                 </div>
