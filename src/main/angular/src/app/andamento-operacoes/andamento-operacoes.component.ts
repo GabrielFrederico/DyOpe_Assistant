@@ -58,6 +58,7 @@ export class AndamentoOperacoesComponent implements OnInit {
       senha: this.token.getPassword()
     };
     this.datareload();
+    this.separarOperacoes();
     this.naoAutenticado();
 
   }
@@ -120,6 +121,7 @@ export class AndamentoOperacoesComponent implements OnInit {
         || this.peca.operacoesPrazo.length < this.pecarefresh.operacoesPrazo.length) {
         this.peca = this.pecarefresh;
       }
+      this.separarOperacoes();
     }, error => {
       console.log(error.error);
     });
@@ -155,6 +157,35 @@ export class AndamentoOperacoesComponent implements OnInit {
   datareload() {
     this.gerenteService.getGerente(this.info.username).subscribe(data => this.gerente = data);
     console.clear();
+
+  }
+
+  separarOperacoes() {
+    this.hoje = new Date();
+    this.peca.operacoesFazer.forEach((data, index) => {
+      this.inicio = new Date(data.dataInicio);
+      this.prazo = new Date(data.prazo);
+      // tslint:disable-next-line:no-shadowed-variable
+      const i = this.peca.operacoesFazer.indexOf(data);
+      if (this.inicio.getTime() === this.hoje.getTime() || this.inicio < this.hoje) {
+        this.peca.operacoesAndamento.push(data);
+        this.peca.operacoesFazer.splice(i, 1);
+      } else if (this.hoje.getTime() === this.prazo.getTime()) {
+        this.peca.operacoesPrazo.push(data);
+        this.peca.operacoesFazer.splice(i, 1);
+      }
+
+    });
+    this.peca.operacoesAndamento.forEach((data, index) => {
+      this.inicio = new Date(data.dataInicio);
+      this.prazo = new Date(data.prazo);
+      // tslint:disable-next-line:no-shadowed-variable
+      const i = this.peca.operacoesAndamento.indexOf(data);
+      if (this.hoje.getTime() === this.prazo.getTime()) {
+        this.peca.operacoesPrazo.push(data);
+        this.peca.operacoesAndamento.splice(i, 1);
+      }
+    });
 
   }
 

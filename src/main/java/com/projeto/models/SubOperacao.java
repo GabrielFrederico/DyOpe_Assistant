@@ -12,7 +12,7 @@ public class SubOperacao {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
-	private String descricao;
+	private String descricao, tempo;
 	long idEtapa;
 	public long getIdEtapa() {
 		return idEtapa;
@@ -21,11 +21,20 @@ public class SubOperacao {
 	public void setIdEtapa(long idEtapa) {
 		this.idEtapa = idEtapa;
 	}
-
+   
 	private int tempoNesc;
+	private int segundos;
 	
 	public String getDescricao() {
 		return descricao;
+	}
+
+	public int getSegundos() {
+		return segundos;
+	}
+
+	public void setSegundos(int segundos) {
+		this.segundos = segundos;
 	}
 
 	public void setDescricao(String descricao) {

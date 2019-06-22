@@ -74,7 +74,6 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
     };
     this.datareload();
     this.naoAutenticado();
-
   }
 
   ngOnDestroy() {
@@ -163,9 +162,13 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
 
   }
 
-  atualizarSubOpe(subope: any, tempo: any) {
+  atualizarSubOpe(subope: any, tempo: string) {
     this.suboperacaoEscolhida = subope;
-    this.suboperacaoEscolhida.tempoNesc = tempo;
+    this.suboperacaoEscolhida.tempoNesc = +tempo;
+  }
+  segundosSubOpe(subope: any, segundos: string) {
+    this.suboperacaoEscolhida = subope;
+    this.suboperacaoEscolhida.segundos = +segundos;
   }
 
   subopes() {
@@ -300,19 +303,6 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
     this.atualizarOpe = true;
     this.subopesa = false;
     this.listasuboperacoes = [];
-  }
-
-
-  update() {
-
-
-    this.numFun1 = this.resultadoOpe.numFuncionarios - 2;
-    this.numFun2 = this.resultadoOpe.numFuncionarios + 2;
-    this.qtdPeca1 = this.resultadoOpe.qtdPecasOpe - 2;
-    this.qtdPeca2 = this.resultadoOpe.qtdPecasOpe + 2;
-    this.hoje = new Date();
-    this.inicio = new Date(this.operacaoEscolhida.dataInicio);
-    this.prazo = new Date(this.operacaoEscolhida.prazo);
 
     if (this.inicio > this.hoje) {
       this.peca.operacoesFazer.forEach((data, index) => {
@@ -350,6 +340,26 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
       });
 
     }
+  }
+
+
+  update() {
+
+    this.operacaoService.updateOperacao(this.operacaoEscolhida).pipe(first()).subscribe(data => {
+      this.resultadoOpe = data;
+    }, error => {
+      this.erro = true;
+      this.errorMessage = error.error;
+      console.log(error.error);
+    });
+
+    this.numFun1 = this.resultadoOpe.numFuncionarios - 2;
+    this.numFun2 = this.resultadoOpe.numFuncionarios + 2;
+    this.qtdPeca1 = this.resultadoOpe.qtdPecasOpe - 2;
+    this.qtdPeca2 = this.resultadoOpe.qtdPecasOpe + 2;
+    this.hoje = new Date();
+    this.inicio = new Date(this.operacaoEscolhida.dataInicio);
+    this.prazo = new Date(this.operacaoEscolhida.prazo);
 
 
   }

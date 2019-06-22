@@ -71,14 +71,21 @@
                         </label>
                       </div>
                     </div>
-                    <div class="col-md-5">
+                    <div class="col-md-4">
                       <div class="form-group">
-                        <label for="tempoOpe">Tempo
-                          <input type="number" name="tempoOpe"
+                        <label for="tempoOpe" >Tempo
+                          <div class="row">
+                          <input type="text" name="tempoOpe"
                                  id="tempoOpe" max="59" [brmasker]="{mask:'00', len:2}"
-                                 class="form-control" #tempo (change)="atualizarSubOpe(suboperacao,tempo.value)"
+                                 class="form-control col-md-4" #tempo (change)="atualizarSubOpe(suboperacao,tempo.value)"
                                  (blur)="atualizarSubOpe(suboperacao,tempo.value)"
+                                 placeholder="Min" required="required">:
+                          <input type="text" name="segundosOpe"
+                                 id="segundosOpe" max="59" [brmasker]="{mask:'00', len:2}"
+                                 class="form-control col-md-4" #segundos (change)="segundosSubOpe(suboperacao,segundos.value)"
+                                 (blur)="segundosSubOpe(suboperacao,segundos.value)"
                                  placeholder="Seg" required="required">
+                          </div>
                         </label>
                       </div>
                     </div>
@@ -100,53 +107,6 @@
               </div>
             </div>
           </div>
-
-          <!-- <div class="col-md-4" *ngIf="!subopesa">
-             <div class="card border-info mb-3 operacoes lista">
-               <div class="card-header border-primary">Sub-Operações</div>
-               <div class="card-body text-secondary">
-                 <div class="form-group">
-                   <div *ngFor="let suboperacao of listasuboperacoes; trackBy: trackByFn" class="row">
-                     <div class="col-md-4">
-                       <div class="form-group">
-                         <label for="descricao">Descrição
-                           <input type="text" name="descricao"
-                                  id="descricao" value="{{suboperacao.descricao}}" [readonly]="isReadonly"
-                                  class="form-control" minlength="3"
-                                  placeholder="" required="required">
-                         </label>
-                       </div>
-                     </div>
-                     <div class="col-md-4">
-                       <div class="form-group">
-                         <label for="tempoOpe">Tempo
-                           <input type="number" name="tempoOpe"
-                                  id="tempoOpe"
-                                  class="form-control" #tempo (change)="atualizarSubOpe(suboperacao,tempo.value)"
-                                  (blur)="atualizarSubOpe(suboperacao,tempo.value)"
-                                  placeholder="Min" required="required">
-                         </label>
-
-                       </div>
-                     </div>
-                     <div class="col-md-1 align-self-center">
-                       <a class="btn btn-danger" href="javascript:void(0)" data-toggle="modal"
-                          data-target=".deletar-subope" (click)="subopeEscolhida(suboperacao)">-</a>
-                     </div>
-                   </div>
-                 </div>
-               </div>
-
-               <div class="card-footer bg-transparent border-info modal-footer">
-                 <input id="e" type="submit" class="btn btn-outline-success" href="javascript:void(0)" [disabled]="ope2"
-                        (click)="subopes()" value="Salvar">
-
-                 <a class="btn btn-info" href="#" data-toggle="modal"
-                    data-target=".cadastro-operacoes">+</a>
-
-               </div>
-             </div>
-           </div> -->
 
           <div class="col-md-3" *ngIf="ope2">
             <div class="card border-info mb-3 operacoes lista">
@@ -248,10 +208,11 @@
               </div>
             </div>
           </div>
+          <div *ngIf="f.submitted && erro" class="alert alert-warning">
+            Cadastro Falhou!<br/>{{errorMessage}}
+          </div>
         </div>
-        <div *ngIf="f.submitted && erro" class="alert alert-warning separa">
-          Cadastro Falhou!<br/>{{errorMessage}}
-        </div>
+
       </div>
 
     </form>
