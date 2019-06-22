@@ -49,6 +49,7 @@ export class AndamentoOperacoesComponent implements OnInit {
   valido = true;
   numfumok = false;
   pecarefresh: any;
+  operacoesSeparadas = false;
 
   ngOnInit() {
     this.info = {
@@ -161,31 +162,35 @@ export class AndamentoOperacoesComponent implements OnInit {
   }
 
   separarOperacoes() {
-    this.hoje = new Date();
-    this.peca.operacoesFazer.forEach((data, index) => {
-      this.inicio = new Date(data.dataInicio);
-      this.prazo = new Date(data.prazo);
-      // tslint:disable-next-line:no-shadowed-variable
-      const i = this.peca.operacoesFazer.indexOf(data);
-      if (this.inicio.getTime() === this.hoje.getTime() || this.inicio < this.hoje) {
-        this.peca.operacoesAndamento.push(data);
-        this.peca.operacoesFazer.splice(i, 1);
-      } else if (this.hoje.getTime() === this.prazo.getTime()) {
-        this.peca.operacoesPrazo.push(data);
-        this.peca.operacoesFazer.splice(i, 1);
-      }
+    if (!this.operacoesSeparadas) {
+      this.hoje = new Date();
+      this.peca.operacoesFazer.forEach((data, index) => {
+        this.inicio = new Date(data.dataInicio);
+        this.prazo = new Date(data.prazo);
+        // tslint:disable-next-line:no-shadowed-variable
+        const i = this.peca.operacoesFazer.indexOf(data);
+        if (this.inicio.getTime() === this.hoje.getTime() || this.inicio < this.hoje) {
+          this.peca.operacoesAndamento.push(data);
+          this.peca.operacoesFazer.splice(i, 1);
+        } else if (this.hoje.getTime() === this.prazo.getTime()) {
+          this.peca.operacoesPrazo.push(data);
+          this.peca.operacoesFazer.splice(i, 1);
+        }
 
-    });
-    this.peca.operacoesAndamento.forEach((data, index) => {
-      this.inicio = new Date(data.dataInicio);
-      this.prazo = new Date(data.prazo);
-      // tslint:disable-next-line:no-shadowed-variable
-      const i = this.peca.operacoesAndamento.indexOf(data);
-      if (this.hoje.getTime() === this.prazo.getTime()) {
-        this.peca.operacoesPrazo.push(data);
-        this.peca.operacoesAndamento.splice(i, 1);
-      }
-    });
+      });
+      this.peca.operacoesAndamento.forEach((data, index) => {
+        this.inicio = new Date(data.dataInicio);
+        this.prazo = new Date(data.prazo);
+        // tslint:disable-next-line:no-shadowed-variable
+        const i = this.peca.operacoesAndamento.indexOf(data);
+        if (this.hoje.getTime() === this.prazo.getTime()) {
+          this.peca.operacoesPrazo.push(data);
+          this.peca.operacoesAndamento.splice(i, 1);
+        }
+      });
+      this.operacoesSeparadas = true;
+    }
+
 
   }
 

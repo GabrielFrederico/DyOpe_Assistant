@@ -12,8 +12,8 @@ public class InfoSetor {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long idInfosetor;
 
-	private char statusSYS;
-	private int loteProducao;
+	private boolean statusSYS;
+	private int qtdPecasOpe;
 	private String tempoNecessario;
 
 	public long getIdInfosetor() {
@@ -24,20 +24,20 @@ public class InfoSetor {
 		this.idInfosetor = idInfosetor;
 	}
 
-	public char getStatusSYS() {
+	public boolean getStatusSYS() {
 		return statusSYS;
 	}
 
-	public void setStatusSYS(char statusSYS) {
+	public void setStatusSYS(boolean statusSYS) {
 		this.statusSYS = statusSYS;
 	}
 
-	public int getLoteProducao() {
-		return loteProducao;
+	public int getQtdPecasOpe() {
+		return qtdPecasOpe;
 	}
 
-	public void setLoteProducao(int loteProducao) {
-		this.loteProducao = loteProducao;
+	public void setQtdPecasOpe(int qtdPecasOpe) {
+		this.qtdPecasOpe = qtdPecasOpe;
 	}
 
 	public String getTempoNecessario() {

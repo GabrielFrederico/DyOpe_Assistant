@@ -108,11 +108,10 @@ public class Operacao {
 
 		inicio.add(Calendar.DAY_OF_MONTH, 1);
 		dataini = inicio.getTime();
-		inicio.add(Calendar.DAY_OF_MONTH, 1);
 		Date iniciodata = new Date(dataini.getTime());
 		operacao.setDataInicio(iniciodata);
-		
-		for (int i = 0; i < diasNeceteste; i++) {
+
+		for (int i = 1; i <= diasNeceteste; i++) {
 
 			inicio.add(Calendar.DAY_OF_MONTH, 1);
 			if (inicio.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY) {
@@ -137,7 +136,7 @@ public class Operacao {
 		if (diasNeceteste < 1) {
 			diasNeceteste = 1;
 		}
-
+		System.out.println("fundispo" + operacao.getNumFuncionariosDisponiveis());
 		qtdPecasOpe = Math.round(operacao.getLoteProducao() / operacao.getNumFuncionariosDisponiveis());
 		calcProHora = funcionariosNecessários * operacao.getTempoTrab();
 		prodHora = Math.round(operacao.getTempoTrab() / (operacao.getTempoTrab() / 60));

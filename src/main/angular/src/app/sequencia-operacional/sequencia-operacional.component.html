@@ -73,18 +73,28 @@
                     </div>
                     <div class="col-md-4">
                       <div class="form-group">
-                        <label for="tempoOpe" >Tempo
+                        <label for="tempoOpe">Tempo
                           <div class="row">
-                          <input type="text" name="tempoOpe"
-                                 id="tempoOpe" max="59" [brmasker]="{mask:'00', len:2}"
-                                 class="form-control col-md-4" #tempo (change)="atualizarSubOpe(suboperacao,tempo.value)"
-                                 (blur)="atualizarSubOpe(suboperacao,tempo.value)"
-                                 placeholder="Min" required="required">:
-                          <input type="text" name="segundosOpe"
-                                 id="segundosOpe" max="59" [brmasker]="{mask:'00', len:2}"
-                                 class="form-control col-md-4" #segundos (change)="segundosSubOpe(suboperacao,segundos.value)"
-                                 (blur)="segundosSubOpe(suboperacao,segundos.value)"
-                                 placeholder="Seg" required="required">
+                            <!--  <mat-form-field class="col-md-4">
+                                <input matInput type="text">
+                              </mat-form-field>
+                              :
+                              <mat-form-field class="col-md-4">
+                                <input matInput type="text">
+                              </mat-form-field> -->
+
+                            <input type="text" name="tempoOpe"
+                                   id="tempoOpe" max="59" [brmasker]="{mask:'00', len:2}"
+                                   class="form-control col-md-4" #tempo
+                                   (change)="atualizarSubOpe(suboperacao,tempo.value)"
+                                   (blur)="atualizarSubOpe(suboperacao,tempo.value)"
+                                   placeholder="Min" required="required">:
+                            <input type="text" name="segundosOpe"
+                                   id="segundosOpe" max="59" [brmasker]="{mask:'00', len:2}"
+                                   class="form-control col-md-4" #segundos
+                                   (change)="segundosSubOpe(suboperacao,segundos.value)"
+                                   (blur)="segundosSubOpe(suboperacao,segundos.value)"
+                                   placeholder="Seg" required="required">
                           </div>
                         </label>
                       </div>

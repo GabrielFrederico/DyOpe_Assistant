@@ -63,9 +63,13 @@
             <mat-form-field>
               <mat-label class="text-dark">Operacao</mat-label>
               <mat-select required="required" name="ope" [(ngModel)]="ope" (change)="selectOpe()">
-                <mat-option *ngFor="let operacao of peca.operacoes"
-                            [value]="operacao">{{operacao.descricao}}</mat-option>
-                <mat-option *ngIf="peca.operacoes.length <=0">Nenhuma Operacao Cadastrado</mat-option>
+                <mat-option *ngFor="let operacao of peca.operacoesFazer"
+                            [value]="operacao">{{operacao.descricao}} / {{operacao.id}}</mat-option>
+                <mat-option *ngFor="let operacao of peca.operacoesAndamento"
+                            [value]="operacao">{{operacao.descricao}} / {{operacao.id}}</mat-option>
+                <mat-option *ngFor="let operacao of peca.operacoesPrazo"
+                            [value]="operacao">{{operacao.descricao}} / {{operacao.id}}</mat-option>
+                <mat-option *ngIf="peca.operacoesFazer.length <=0 || peca.operacoesAndamento.length <=0">Nenhuma Operacao Cadastrado</mat-option>
               </mat-select>
             </mat-form-field>
           </div>

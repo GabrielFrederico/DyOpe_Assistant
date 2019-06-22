@@ -151,7 +151,7 @@ public class GerenteRest {
 	}
 
 	@RequestMapping(method = RequestMethod.PUT, value = "cadastraralgo")
-	@PreAuthorize("hasRole('GERENTE')")
+	@PreAuthorize("hasRole('GERENTE') or hasRole('FUNCIONARIO') or hasRole('ADMIN')")
 	public ResponseEntity<?> cadastrarAlgo(@RequestBody Gerente gerente) {
 
 		gerenteRepository.save(gerente);

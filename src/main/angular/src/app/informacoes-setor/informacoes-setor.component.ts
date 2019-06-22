@@ -7,6 +7,7 @@ import {CadastroSetorService} from '../service/cadastro-setor.service';
 import {FuncionarioService} from '../service/funcionario.service';
 import {GerenteService} from '../service/gerente.service';
 import {CadastroOperacaoService} from '../service/cadastro-operacao.service';
+import {first} from 'rxjs/operators';
 
 @Component({
   selector: 'app-informacoes-setor',
@@ -38,6 +39,9 @@ export class InformacoesSetorComponent implements OnInit {
   public validado: boolean;
   setorShow = false;
   etapa: AnimationPlayState;
+
+  erro = false;
+  errorMessage = '';
 
   ngOnInit() {
     this.info = {
@@ -79,12 +83,17 @@ export class InformacoesSetorComponent implements OnInit {
     this.informacao.gerente_id = this.gerente.id;
     this.funcionario.infosetores.push(this.informacao);
     this.setor.infosetores.push(this.informacao);
+    this.gerenteService.cadastrarAlgo(this.gerente).pipe(first()).subscribe(data => {
+      alert('Cadastrado com sucesso!');
+      this.router.navigateByUrl('/funcionarioindex/homefuncionario', {skipLocationChange: true}).then(() =>
+        this.router.navigate(['/funcionarioindex/informacoessetor']));
 
-    this.http.cadastrarInfosetor(
-      this.informacao)
-      .subscribe(value => console.log(value), error => console.log(error));
-    this.router.navigate(['/funcionarioindex']);
-    alert('Cadastrado com sucesso!');
+    }, error => {
+      this.erro = true;
+      this.errorMessage = error.error;
+      console.log(error.error);
+    });
+
   }
 
   naoAutenticado() {

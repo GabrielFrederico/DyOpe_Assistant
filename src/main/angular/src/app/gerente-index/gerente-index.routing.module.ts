@@ -31,7 +31,6 @@ const rotas: Routes = [
       {path: 'homegerente', component: HomeGerenteComponent},
       {path: 'planilhadecusto', component: PlanilhaCustoComponent},
       {path: '', redirectTo: 'homegerente'},
-      {path: '**', component: ErroComponent}
 
     ]
   }];

@@ -48,11 +48,14 @@ export class CadastroSetorComponent implements OnInit {
     }, error => {
       console.log(error.error);
     });
-    this.setor.etapaproducao_id = this.etapaprod.id;
+    this.setor.etapaproducao = this.etapaprod;
     this.setor.gerente_id = this.gerente.id;
     this.gerente.setores.push(this.setor);
     this.gerenteService.cadastrarAlgo(this.gerente).pipe(first()).subscribe(data => {
       alert('Setor cadastrado com sucesso!');
+      this.router.navigateByUrl('/gerenteindex/homegerente', {skipLocationChange: true}).then(() =>
+        this.router.navigate(['/gerenteindex/cadastrosetor']));
+
     }, error => {
       alert(error);
     });
