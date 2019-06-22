@@ -14,14 +14,19 @@ import {FuncionarioService} from '../service/funcionario.service';
   preserveWhitespaces: false
 })
 export class ControleFuncionariosComponent implements OnInit, OnDestroy {
+
+  // tslint:disable-next-line:max-line-length
+  constructor(private gerenteService: GerenteService, private funcionarioService: FuncionarioService, private modalService: NgbModal, private setorservice: CadastroSetorService, private route: ActivatedRoute, private token: TokenStorageService, private router: Router, private infosetorService: InfosetorService) {
+  }
+
   public info: any;
   public validado: boolean;
   public setor: any;
   sub: Subscription;
 
-  // tslint:disable-next-line:max-line-length
-  constructor(private gerenteService: GerenteService, private funcionarioService: FuncionarioService, private modalService: NgbModal, private setorservice: CadastroSetorService, private route: ActivatedRoute, private token: TokenStorageService, private router: Router, private infosetorService: InfosetorService) {
-  }
+  funcionario: any;
+
+  infosetor: any;
 
   ngOnInit() {
     this.info = {
@@ -57,6 +62,7 @@ export class ControleFuncionariosComponent implements OnInit, OnDestroy {
         this.setorservice.getSetorNome(nomeSetor).subscribe((setor: any) => {
           if (setor) {
             this.setor = setor;
+
             console.clear();
           }
         });

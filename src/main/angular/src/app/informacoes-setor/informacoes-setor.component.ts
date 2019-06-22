@@ -79,6 +79,8 @@ export class InformacoesSetorComponent implements OnInit {
     this.funcionario.setor_id = this.setor.id;
     this.setor.funcionarios.push(this.funcionario);
     this.informacao.funcionario_id = this.funcionario.id;
+    this.informacao.nomeFuncionario = this.funcionario.nome;
+    this.informacao.nomeOperacao = this.ope.descricao + '/' + this.ope.id;
     this.informacao.setor_id = this.setor.id;
     this.informacao.gerente_id = this.gerente.id;
     this.funcionario.infosetores.push(this.informacao);
