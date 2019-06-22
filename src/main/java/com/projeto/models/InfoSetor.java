@@ -11,6 +11,24 @@ public class InfoSetor {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long idInfosetor;
+	private String nomeFuncionario;
+	private String nomeOperacao;
+
+	public String getNomeOperacao() {
+		return nomeOperacao;
+	}
+
+	public void setNomeOperacao(String nomeOperacao) {
+		this.nomeOperacao = nomeOperacao;
+	}
+
+	public String getNomeFuncionario() {
+		return nomeFuncionario;
+	}
+
+	public void setNomeFuncionario(String nomeFuncionario) {
+		this.nomeFuncionario = nomeFuncionario;
+	}
 
 	private boolean statusSYS;
 	private int qtdPecasOpe;

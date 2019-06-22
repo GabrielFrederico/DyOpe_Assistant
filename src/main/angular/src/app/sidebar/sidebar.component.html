@@ -24,7 +24,7 @@
   <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="setores" x-placement="bottom-start">
     <h6 class="dropdown-header">Setores</h6>
     <a *ngFor="let setor of gerente.setores" href="javascript:void(0)"
-       [routerLink]="['/gerenteindex/controlefuncionarios', setor.nomeSetor]"
+       [routerLink]="['/gerenteindex/controlefuncionarios', setor.id]"
        class="dropdown-item">{{setor.nomeSetor}}</a>
     <a class="dropdown-item" *ngIf="gerente.setores.length <= 0">Cadastre um setor..</a>
   </div>

@@ -57,9 +57,9 @@ export class ControleFuncionariosComponent implements OnInit, OnDestroy {
 
   setorEscolhido() {
     this.sub = this.route.params.subscribe(params => {
-      const nomeSetor = params.nomeSetor;
-      if (nomeSetor) {
-        this.setorservice.getSetorNome(nomeSetor).subscribe((setor: any) => {
+      const id = params.id;
+      if (id) {
+        this.setorservice.getSetorId(id).subscribe((setor: any) => {
           if (setor) {
             this.setor = setor;
 

@@ -24,7 +24,7 @@ const rotas: Routes = [
       {path: 'operacaobeneficiamento', component: OperacaoBeneficiamentoComponent},
       {path: 'andamentooperacoes', component: AndamentoOperacoesComponent},
       {path: 'cadastrosetor', component: CadastroSetorComponent},
-      {path: 'controlefuncionarios/:nomeSetor', component: ControleFuncionariosComponent},
+      {path: 'controlefuncionarios/:id', component: ControleFuncionariosComponent},
       {path: 'cadastrosetor', component: CadastroSetorComponent},
       {path: 'perfilgerente', component: PerfilGerenteComponent},
       {path: 'operacoes/:etapaProducao', component: SequenciaOperacionalComponent},
