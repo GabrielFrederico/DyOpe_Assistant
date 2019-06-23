@@ -127,7 +127,6 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
             this.etapa = this.etapaproducao.id.toString();
             this.escolheu = false;
             console.clear();
-            this.suboperacoes = [];
             if (this.etapaproducao.id === 5) {
               this.suboperacoes = [];
               this.operacaoService.getOperacoesSub().subscribe(data => {
@@ -136,6 +135,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
                 console.log(error.error);
               });
             } else {
+              this.listasuboperacoes = [];
               this.suboperacoes = [];
             }
 
@@ -156,7 +156,6 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
       console.log(error.error);
     });
 
-
     this.carregado = true;
 
   }
@@ -165,6 +164,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
     this.suboperacaoEscolhida = subope;
     this.suboperacaoEscolhida.tempoNesc = +tempo;
   }
+
   segundosSubOpe(subope: any, segundos: string) {
     this.suboperacaoEscolhida = subope;
     this.suboperacaoEscolhida.segundos = +segundos;

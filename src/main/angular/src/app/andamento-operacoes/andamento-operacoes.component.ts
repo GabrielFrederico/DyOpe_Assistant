@@ -24,7 +24,7 @@ export class AndamentoOperacoesComponent implements OnInit {
   prazo: Date;
   editarOpe = false;
   escolheu = false;
-  operacao: any = {};
+  operacao: any;
   gerente: any;
   etapaproducao: any;
   public erro: boolean;
@@ -106,26 +106,26 @@ export class AndamentoOperacoesComponent implements OnInit {
 
   selectsPeca(peca: any) {
     this.peca = peca;
-
+    this.refresh(this.peca);
     this.escolheu = true;
   }
 
   refresh(peca: any) {
-
-    this.peca = peca;
-    this.gerenteService.getPecaId(this.peca.id).subscribe(data => {
-      this.pecarefresh = data;
-      if (this.peca.operacoesFazer.length < this.pecarefresh.operacoesFazer.length
-        || this.peca.operacoesAndamento.length < this.pecarefresh.operacoesAndamento.length
-        || this.peca.operacoesPrazo.length < this.pecarefresh.operacoesPrazo.length) {
-        this.peca = this.pecarefresh;
-      }
-
-      this.refreshed = true;
-    }, error => {
-      console.log(error.error);
-    });
-    // this.separarOperacoes();
+    if (!this.refreshed) {
+      this.peca = peca;
+      this.gerenteService.getPecaId(this.peca.id).subscribe(data => {
+        this.pecarefresh = data;
+        if (this.peca.operacoesFazer.length < this.pecarefresh.operacoesFazer.length
+          || this.peca.operacoesAndamento.length < this.pecarefresh.operacoesAndamento.length
+          || this.peca.operacoesPrazo.length < this.pecarefresh.operacoesPrazo.length) {
+          this.peca = this.pecarefresh;
+        }
+        this.separarOperacoes();
+        this.refreshed = true;
+      }, error => {
+        console.log(error.error);
+      });
+    }
   }
 
   selectOperacao(operacao: any) {
@@ -158,7 +158,6 @@ export class AndamentoOperacoesComponent implements OnInit {
   datareload() {
     this.gerenteService.getGerente(this.info.username).subscribe(data => this.gerente = data);
     console.clear();
-    this.separarOperacoes();
   }
 
   separarOperacoes() {
@@ -166,39 +165,48 @@ export class AndamentoOperacoesComponent implements OnInit {
 
       this.hoje = new Date();
       this.peca.operacoesFazer.forEach((data, index) => {
-        this.inicio = new Date(data.dataInicio);
-        this.prazo = new Date(data.prazo);
+        this.operacao = data;
+        this.inicio = new Date(this.operacao.dataInicio);
+        this.prazo = new Date(this.operacao.prazo);
         // tslint:disable-next-line:no-shadowed-variable
-        const i = this.peca.operacoesFazer.indexOf(data);
+        const i = this.peca.operacoesFazer.indexOf(this.operacao);
         if (this.inicio.getTime() === this.hoje.getTime() || this.inicio < this.hoje) {
-          this.peca.operacoesAndamento.push(data);
+          this.peca.operacoesAndamento.push(this.operacao);
           this.peca.operacoesFazer.splice(i, 1);
+          this.updateOpes();
         } else if (this.hoje.getTime() === this.prazo.getTime()) {
-          this.peca.operacoesPrazo.push(data);
+          this.peca.operacoesPrazo.push(this.operacao);
           this.peca.operacoesFazer.splice(i, 1);
+          this.updateOpes();
         }
 
       });
       this.peca.operacoesAndamento.forEach((data, index) => {
-        this.inicio = new Date(data.dataInicio);
-        this.prazo = new Date(data.prazo);
+        this.operacao = data;
+        this.inicio = new Date(this.operacao.dataInicio);
+        this.prazo = new Date(this.operacao.prazo);
         // tslint:disable-next-line:no-shadowed-variable
-        const i = this.peca.operacoesAndamento.indexOf(data);
+        const i = this.peca.operacoesAndamento.indexOf(this.operacao);
         if (this.hoje.getTime() === this.prazo.getTime()) {
-          this.peca.operacoesPrazo.push(data);
+          this.peca.operacoesPrazo.push(this.operacao);
           this.peca.operacoesAndamento.splice(i, 1);
+          this.updateOpes();
         }
       });
-      this.gerenteService.cadastrarAlgo(this.gerente).pipe(first()).subscribe(data => {
-      }, error => {
-        this.errorMessage = error.error;
-        this.erro = true;
-      });
+
       this.operacoesSeparadas = true;
       console.log('opesseparadas');
     }
 
 
+  }
+
+  updateOpes() {
+    this.gerenteService.pecaOpesAndamento(this.peca).pipe(first()).subscribe(data => {
+    }, error => {
+      this.errorMessage = error.error;
+      this.erro = true;
+    });
   }
 
 
