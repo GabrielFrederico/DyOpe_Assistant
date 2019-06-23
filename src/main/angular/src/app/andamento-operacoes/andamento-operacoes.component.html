@@ -173,7 +173,8 @@
                   <div class="card-footer bg-transparent border-info modal-footer">
 
                     <input class="btn btn-info" type="submit" [disabled]="!valido" *ngIf="editarOpe" value="Atualizar">
-                    <input class="btn btn-primary"  type="button"(click)="editar()" *ngIf="!editarOpe" [disabled]="!valido"
+                    <input class="btn btn-primary" type="button" (click)="editar()" *ngIf="!editarOpe"
+                           [disabled]="!valido"
                            value="Editar">
                   </div>
                 </div>
@@ -264,8 +265,7 @@
               <div class="form-group">
                 <div class="form-label-group">
                   <input type="text" required="required" name="descricao" [(ngModel)]="newsuboperacao.descricao"
-                         class="form-control" minlength="6"
-                         id="DescricaoOp">
+                         class="form-control" minlength="4" id="DescricaoOp">
                   <label for="DescricaoOp">Descrição da operação:</label>
                 </div>
               </div>
@@ -273,10 +273,8 @@
             <div class="col-md-auto">
               <div class="form-group">
                 <div class="form-label-group">
-                  <input type="number" required="required" name="tempoNesc"
-                         [(ngModel)]="newsuboperacao.tempoNesc"
-                         class="form-control" maxlength="4"
-                         id="tempoNescop">
+                  <input type="number" required="required" name="tempoNesc" [(ngModel)]="newsuboperacao.tempoNesc"
+                         class="form-control" maxlength="4" id="tempoNescop">
                   <label for="tempoNescop">Tempo:</label>
                 </div>
               </div>
