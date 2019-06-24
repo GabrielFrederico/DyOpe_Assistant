@@ -27,6 +27,23 @@ public class Gerente extends Usuario {
 	private String rg;
     
 	private String chaveAcesso;
+	private String verificarChaveAcesso;
+
+	public String getVerificarChaveAcesso() {
+		return verificarChaveAcesso;
+	}
+
+	public void setVerificarChaveAcesso(String verificarChaveAcesso) {
+		this.verificarChaveAcesso = verificarChaveAcesso;
+	}
+
+	public List<PlanilhaCusto> getPlanilhascusto() {
+		return planilhascusto;
+	}
+
+	public void setPlanilhascusto(List<PlanilhaCusto> planilhascusto) {
+		this.planilhascusto = planilhascusto;
+	}
 
 	public String getChaveAcesso() {
 		return chaveAcesso;

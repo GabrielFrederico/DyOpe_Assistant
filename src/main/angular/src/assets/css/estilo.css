@@ -12,6 +12,9 @@
   margin: 1.75rem auto;
 }
 
+.tempo{
+  margin-left: 0px;
+}
 .menudrop {
   position: absolute;
   display: none;

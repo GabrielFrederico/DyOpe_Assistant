@@ -41,7 +41,7 @@ export class PlanilhaCustoComponent implements OnInit {
   }
 
   acessar() {
-    this.gerenteService.acessarPlanilha(this.chaveAcesso).subscribe(data => {
+    this.gerenteService.acessarPlanilha(this.gerente).subscribe(data => {
       this.acessovalido = true;
     }, error => {
       this.invalido = true;

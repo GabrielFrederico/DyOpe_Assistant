@@ -111,21 +111,21 @@ export class AndamentoOperacoesComponent implements OnInit {
   }
 
   refresh(peca: any) {
-    if (!this.refreshed) {
-      this.peca = peca;
-      this.gerenteService.getPecaId(this.peca.id).subscribe(data => {
-        this.pecarefresh = data;
-        if (this.peca.operacoesFazer.length < this.pecarefresh.operacoesFazer.length
-          || this.peca.operacoesAndamento.length < this.pecarefresh.operacoesAndamento.length
-          || this.peca.operacoesPrazo.length < this.pecarefresh.operacoesPrazo.length) {
-          this.peca = this.pecarefresh;
-        }
-        this.separarOperacoes();
-        this.refreshed = true;
-      }, error => {
-        console.log(error.error);
-      });
-    }
+
+    this.peca = peca;
+    this.gerenteService.getPecaId(this.peca.id).subscribe(data => {
+      this.pecarefresh = data;
+      if (this.peca.operacoesFazer.length < this.pecarefresh.operacoesFazer.length
+        || this.peca.operacoesAndamento.length < this.pecarefresh.operacoesAndamento.length
+        || this.peca.operacoesPrazo.length < this.pecarefresh.operacoesPrazo.length) {
+        this.peca = this.pecarefresh;
+      }
+      this.separarOperacoes();
+      this.refreshed = true;
+    }, error => {
+      console.log(error.error);
+    });
+
   }
 
   selectOperacao(operacao: any) {
@@ -174,7 +174,7 @@ export class AndamentoOperacoesComponent implements OnInit {
           this.peca.operacoesAndamento.push(this.operacao);
           this.peca.operacoesFazer.splice(i, 1);
           this.updateOpes();
-        } else if (this.hoje.getTime() === this.prazo.getTime()) {
+        } else if (this.hoje.getTime() === this.prazo.getTime() || this.prazo < this.hoje) {
           this.peca.operacoesPrazo.push(this.operacao);
           this.peca.operacoesFazer.splice(i, 1);
           this.updateOpes();

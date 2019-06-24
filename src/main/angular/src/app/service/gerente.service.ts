@@ -126,8 +126,8 @@ export class GerenteService {
     return this.httpClient.get<Gerente[]>('http://localhost:8080/gerentes');
   }
 
-  acessarPlanilha(chave: string) {
-    return this.httpClient.post('http://localhost:8080/gerentes/acessarplanilha', chave);
+  acessarPlanilha(gerente: any) {
+    return this.httpClient.post('http://localhost:8080/gerentes/acessarplanilha', gerente);
 
   }
 

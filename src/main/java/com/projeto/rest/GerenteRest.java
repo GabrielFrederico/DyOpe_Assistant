@@ -140,14 +140,17 @@ public class GerenteRest {
 		return new ResponseEntity<>(new ResponseMessage("Dados Atualizados com sucesso!"), HttpStatus.OK);
 	}
 
-	@RequestMapping(method = RequestMethod.POST, value = "acessarpla")
+	@RequestMapping(method = RequestMethod.POST, value = "acessarplanilha")
 	@PreAuthorize("hasRole('GERENTE')")
-	public ResponseEntity<?> acessarPlanilha(@RequestBody String chaveAcesso) {
-		if (!gerenteRepository.existsByChaveAcesso(chaveAcesso)) {
+	public ResponseEntity<?> acessarPlanilha(@RequestBody Gerente gerente) {
+		if (!encoder.matches(gerente.getVerificarChaveAcesso(), gerente.getChaveAcesso())) {
+			
 			return new ResponseEntity<>(new ResponseMessage("Erro -> Acesso inválido!"), HttpStatus.BAD_REQUEST);
+		}else {
+			gerente.setVerificarChaveAcesso("");
+			return new ResponseEntity<>(new ResponseMessage("Acesso Válido!"), HttpStatus.OK);
 		}
 
-		return new ResponseEntity<>(new ResponseMessage("Acesso Válido!"), HttpStatus.OK);
 	}
 
 	@RequestMapping(method = RequestMethod.PUT, value = "cadastraralgo")
@@ -206,19 +209,6 @@ public class GerenteRest {
 		return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getUsername(), userDetails.getAuthorities()));
 	}
 
-	@RequestMapping(method = RequestMethod.POST, path = "/acessarplanilha")
-	public ResponseEntity<?> acessarPlanilha(@Valid @RequestBody LoginForm loginRequest) {
-
-		Authentication authentication = authenticationManager.authenticate(
-				new UsernamePasswordAuthenticationToken(loginRequest.getNomeUsuario(), loginRequest.getSenha()));
-
-		SecurityContextHolder.getContext().setAuthentication(authentication);
-
-		String jwt = jwtProvider.generateJwtToken(authentication);
-		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-
-		return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getUsername(), userDetails.getAuthorities()));
-	}
 
 	@RequestMapping(method = RequestMethod.POST, path = "/cadastrar")
 	public ResponseEntity<?> registerUser(@Valid @RequestBody CadastroFormGerente signUpRequest) {

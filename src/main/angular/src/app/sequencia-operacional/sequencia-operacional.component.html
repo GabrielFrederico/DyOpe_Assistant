@@ -74,15 +74,15 @@
                     <div class="col-md-4">
                       <div class="form-group">
                         <label for="tempoOpe">Tempo
-                          <div class="row">
-                            <!--  <mat-form-field class="col-md-4">
-                                <input matInput type="text">
+                          <div class="row justify-content-center tempo">
+                            <!-- <mat-form-field class="col-md-4">
+                                <input matInput type="number" [brmasker]="{mask:'00', len:2}" id="tempoOpe">
                               </mat-form-field>
                               :
                               <mat-form-field class="col-md-4">
-                                <input matInput type="text">
-                              </mat-form-field> -->
-
+                                <input matInput [brmasker]="{mask:'00', len:2}" type="number">
+                              </mat-form-field>
+                               -->
                             <input type="text" name="tempoOpe"
                                    id="tempoOpe" max="59" [brmasker]="{mask:'00', len:2}"
                                    class="form-control col-md-4" #tempo
@@ -95,6 +95,7 @@
                                    (change)="segundosSubOpe(suboperacao,segundos.value)"
                                    (blur)="segundosSubOpe(suboperacao,segundos.value)"
                                    placeholder="Seg" required="required">
+
                           </div>
                         </label>
                       </div>
@@ -235,13 +236,6 @@
       </div>
     </footer>
 
-
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-      <i class="fas fa-angle-up"></i>
-    </a>
-
-
     <!--Modal Cadastro suboperações: -->
 
     <div class="modal fade cadastro-operacoes" tabindex="-1" role="dialog" aria-labelledby="modalpeca"
@@ -262,21 +256,14 @@
                 <div class="col-md-auto">
                   <div class="form-group">
                     <div class="form-label-group">
+                      <label for="DescricaoOp">Descrição da operação:
                       <input type="text" required="required" name="descricao" [(ngModel)]="newsuboperacao.descricao"
                              class="form-control" minlength="4" id="DescricaoOp">
-                      <label for="DescricaoOp">Descrição da operação:</label>
+                      </label>
                     </div>
                   </div>
                 </div>
-                <div class="col-md-auto">
-                  <div class="form-group">
-                    <div class="form-label-group">
-                      <input type="number" required="required" name="tempoNesc" [(ngModel)]="newsuboperacao.tempoNesc"
-                             class="form-control" maxlength="4" id="tempoNescop">
-                      <label for="tempoNescop">Tempo:</label>
-                    </div>
-                  </div>
-                </div>
+
 
 
                 <div class="modal-footer col-md-12">
