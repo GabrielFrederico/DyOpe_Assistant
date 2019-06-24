@@ -13,8 +13,8 @@
   </div>
 </div>
 <div *ngIf="opeSelected">
-  <input  href="javascript:void(0)" (click)="voltar()" type="button"
-     class="btn btn-primary" value="Voltar para a lista">
+  <input href="javascript:void(0)" (click)="voltar()" type="button"
+         class="btn btn-primary" value="Voltar para a lista">
 
 </div>
 <div class="row" *ngIf="escolheu; else naoescolheu">
@@ -35,7 +35,8 @@
     <div class="card border-primary mb-3 lista">
       <div class="card-header border-primary">Operações em andamento</div>
       <div class="card-body text-primary">
-        <a class="btn-outline-primary list-group-item list-group-item-action" href="javascript:void(0)" (click)="selectOperacao(operacao)"
+        <a class="btn-outline-primary list-group-item list-group-item-action" href="javascript:void(0)"
+           (click)="selectOperacao(operacao)"
            *ngFor="let operacao of peca.operacoesAndamento">
           {{operacao.descricao}} / {{operacao.id}}
         </a>
@@ -50,7 +51,8 @@
     <div class="card border-warning mb-3 lista">
       <div class="card-header border-warning">Operações no Prazo</div>
       <div class="card-body text-warning">
-        <a class="btn-ou/tline-warning list-group-item list-group-item-action " href="javascript:void(0)"  (click)="selectOperacao(operacao)"
+        <a class="btn-ou/tline-warning list-group-item list-group-item-action " href="javascript:void(0)"
+           (click)="selectOperacao(operacao)"
            *ngFor="let operacao of peca.operacoesPrazo">
           {{operacao.descricao}} / {{operacao.id}}
         </a>
@@ -63,8 +65,9 @@
 
 </div>
 
-<form #f="ngForm" (ngSubmit)="update()" [noValidate]="$any(false)" *ngIf="opeSelected">
-
+<form #f="ngForm" class="espacamentosequenciaoperacional" (ngSubmit)="update()" [noValidate]="$any(false)" *ngIf="opeSelected">
+  <h3>Informações da Operação: {{operacaoEscolhida.descricao}}
+    \ {{operacaoEscolhida.id}}</h3>
   <div class="card-body border-info">
     <div class="row">
       <div class="col-md-4">
@@ -88,12 +91,12 @@
                   <div class="form-group">
                     <label for="tempoOpe">Tempo
                       <div class="row justify-content-center tempo">
-                      <input type="number" name="tempoOpedb"
-                             id="tempoOpet" value="{{suboperacao.tempoNesc}}"
-                             class="form-control" #tempo
-                             (change)="atualizarSubOpe(suboperacao,tempo.value)" [readonly]="!editarOpe"
-                             (blur)="atualizarSubOpe(suboperacao,tempo.value)"
-                             placeholder="Min" required="required">
+                        <input type="number" name="tempoOpedb"
+                               id="tempoOpet" value="{{suboperacao.tempoNesc}}"
+                               class="form-control" #tempo
+                               (change)="atualizarSubOpe(suboperacao,tempo.value)" [readonly]="!editarOpe"
+                               (blur)="atualizarSubOpe(suboperacao,tempo.value)"
+                               placeholder="Min" required="required">
                       </div>
                     </label>
 

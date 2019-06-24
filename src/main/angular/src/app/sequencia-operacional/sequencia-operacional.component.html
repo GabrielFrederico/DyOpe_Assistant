@@ -10,16 +10,7 @@
        aria-controls="nav-home" aria-selected="false">Andamento</a>
   </div>
 </nav>
-<!--<nav aria-label="breadcrumb">
- <ol class="breadcrumb">
-   <li class="breadcrumb-item active" aria-current="page"><a
-     [routerLink]="['/gerenteindex/operacoes', etapaproducao.etapaProducao]">Sequência Operacional</a>
-   </li>
-   <li class="breadcrumb-item active" aria-current="page"><a
-     [routerLink]="['/gerenteindex/andamentooperacoes', etapaproducao.etapaProducao]">Andamento</a>
-   </li>
- </ol>
-</nav> -->
+
 <div class="tab-content">
   <div class="tab-pane fade show active" id="nav-operacoes" role="tabpanel" aria-labelledby="nav-operacoes-tab">
 
@@ -27,11 +18,12 @@
       <div class="col-md-3">
         <h3>{{etapaproducao.etapaProducao}}</h3>
       </div>
+
       <div class="form-group">
         <div class="col-md-2 align-self-center">
           <mat-form-field>
             <mat-label class="text-dark">Peças:</mat-label>
-            <mat-select required="required" name="etapa" [(ngModel)]="peca">
+            <mat-select required="required" name="peca" [(ngModel)]="peca">
               <mat-option *ngFor="let peca of this.gerente.pecas" [value]="peca"
                           (click)="selectsPeca(peca)">{{peca.descricao}}</mat-option>
               <mat-option *ngIf="gerente.pecas.length <= 0">Cadastre uma Peça</mat-option>
