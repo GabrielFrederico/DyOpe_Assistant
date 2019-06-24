@@ -56,7 +56,8 @@
       <div class="card-body border-info">
         <div class="row">
           <div class="col-md-4">
-            <div class="card border-info mb-3 operacoes lista">
+            <form class="card border-info mb-3 operacoes lista" #suboperacoes="ngForm" (ngSubmit)="subopes()"
+                  [noValidate]="$any(false)">
               <div class="card-header border-primary">Sub-Operações (Unidade)</div>
               <div class="card-body text-secondary">
                 <div class="form-group">
@@ -110,13 +111,13 @@
 
               <div class="card-footer bg-transparent border-info modal-footer">
                 <input type="submit" class="btn btn-outline-success" href="javascript:void(0)" [disabled]="ope2"
-                       (click)="subopes()" value="Salvar">
+                       value="Salvar">
 
                 <a class="btn btn-info" href="#" data-toggle="modal"
                    data-target=".cadastro-operacoes">+</a>
 
               </div>
-            </div>
+            </form>
           </div>
 
           <div class="col-md-3" *ngIf="ope2">
@@ -255,16 +256,12 @@
 
                 <div class="col-md-auto">
                   <div class="form-group">
-                    <div class="form-label-group">
-                      <label for="DescricaoOp">Descrição da operação:
-                      <input type="text" required="required" name="descricao" [(ngModel)]="newsuboperacao.descricao"
-                             class="form-control" minlength="4" id="DescricaoOp">
-                      </label>
-                    </div>
+                    <label for="DescricaoOp">Descrição da operação:</label>
+                    <input type="text" required="required" name="descricao" [(ngModel)]="newsuboperacao.descricao"
+                           class="form-control" minlength="4" id="DescricaoOp">
+
                   </div>
                 </div>
-
-
 
                 <div class="modal-footer col-md-12">
                   <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar

@@ -46,7 +46,7 @@ export class AndamentoOperacoesComponent implements OnInit {
   numfumok = false;
   pecarefresh: any;
   operacoesSeparadas = false;
-
+  opeSelected = false;
   refreshed = false;
 
   ngOnInit() {
@@ -79,6 +79,7 @@ export class AndamentoOperacoesComponent implements OnInit {
       if (this.resultadoOpe.numFuncionariosDisponiveis >= this.resultadoOpe.numFuncionarios) {
         this.numfumok = true;
       }
+      this.editarOpe = false;
     }, error => {
       this.erro = true;
       this.errorMessage = error.error;
@@ -132,6 +133,13 @@ export class AndamentoOperacoesComponent implements OnInit {
     this.operacaoEscolhida = operacao;
     this.resultadoOpe = operacao;
     this.ope3 = true;
+    this.opeSelected = true;
+    this.escolheu = false;
+  }
+
+  voltar() {
+    this.opeSelected = false;
+    this.escolheu = true;
   }
 
   naoAutenticado() {
