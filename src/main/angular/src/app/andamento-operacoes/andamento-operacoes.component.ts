@@ -139,7 +139,6 @@ export class AndamentoOperacoesComponent implements OnInit {
 
   voltar() {
     this.opeSelected = false;
-    this.escolheu = true;
   }
 
   naoAutenticado() {
@@ -161,11 +160,8 @@ export class AndamentoOperacoesComponent implements OnInit {
 
   deletarOperacao(ope: any) {
     this.operacaoEscolhida = ope;
-    this.operacaoService.deletarOperacao(this.operacaoEscolhida.id).subscribe(data => {
-      alert('Operação Excluida com sucesso!');
-    }, error => {
-      this.errorMessage = error.error;
-    });
+    // const index = this.peca.operacoesFazer.indexOf(this.operacaoEscolhida);
+    // this.peca.operacoesFazer.splice(index, 1);
   }
 
   cadastrarSubOperacao() {
