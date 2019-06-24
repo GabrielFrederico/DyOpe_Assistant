@@ -1,7 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Gerente} from './gerente.service';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable} from 'rxjs';
 
 export class EtapaProducao {
   public id: number;
@@ -60,9 +58,11 @@ export class CadastroOperacaoService {
   getOperacao(operacao: any) {
     return this.httpClient.get('http://localhost:8080/operacoes/', operacao);
   }
+
   getOperacaoId(id: number) {
     return this.httpClient.get('http://localhost:8080/operacoes/' + id);
   }
+
   getOperacoesSub() {
     return this.httpClient.get('http://localhost:8080/suboperacoes/acabamento', httpOptions);
   }
@@ -71,6 +71,7 @@ export class CadastroOperacaoService {
     return this.httpClient.put('http://localhost:8080/operacoes/atualizar', operacao);
 
   }
+
   addOperacao(operacao: any) {
     return this.httpClient.post('http://localhost:8080/operacoes/cadastraroperacao', operacao);
 
@@ -84,6 +85,10 @@ export class CadastroOperacaoService {
     return this.httpClient.post('http://localhost:8080/suboperacoes/cadastrarsubOperacao', operacao);
   }
 
+  deletarOperacao(id: number) {
+
+    return this.httpClient.delete('http://localhost:8080/operacoes/' + id);
+  }
 
   getEtapaProducaoNome(etapa: string) {
     return this.httpClient.get('http://localhost:8080/etapaProducao/getByNome/' + etapa);

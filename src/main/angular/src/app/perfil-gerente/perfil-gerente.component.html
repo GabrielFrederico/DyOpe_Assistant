@@ -5,7 +5,7 @@
 <hr>
 
 
-<div class="container" style="float: left; max-width: 70%; padding-left: 5%">
+<div class="container espacamentosequenciaoperacional" style=" max-width: 80%; padding-left: 5%">
   <form #gerenteForm="ngForm" [noValidate]="$any(false)" (ngSubmit)="onSubmit(cpf.value,rg.value)">
     <div class="form-group">
       <div class="form-row">
@@ -66,15 +66,17 @@
       <div class="modal-footer">
         <input class="btn btn-success" type="submit" [disabled]="isReadonly"
                value="Salvar">
-        <a class="btn btn-info" href="#" data-toggle="modal"
-           data-target=".redefinir-senha">Redefinir
-          senha</a>
-        <a class="btn btn-info" href="#" data-toggle="modal"
-           data-target=".chave-acesso">Chave Acesso</a>
-        <input class="btn btn-info" type="button" (click)="toggleReadonly()" value="Editar">
+        <input class="btn btn-outline-warning" href="#" data-toggle="modal" type="button" [disabled]="isReadonly"
+               data-target=".redefinir-senha" value="Redefinir
+          senha">
+        <input class="btn btn-outline-info" href="#" data-toggle="modal" type="button" [disabled]="isReadonly"
+               data-target=".chave-acesso" value="Chave Acesso">
+        <input class="btn btn-primary" type="button" (click)="toggleReadonly()" value="Editar">
+
         <div *ngIf="gerenteForm.submitted && updateFailed" class="alert alert-warning separa">
           Atualização Falhou!<br/>{{errorMessage}}
         </div>
+
       </div>
 
       <!-- /.container-fluid -->
@@ -115,7 +117,7 @@
       </div>
       <div class="modal-body">
         <div class="card-body">
-          <form #f="ngForm" [noValidate]="$any(false)" (ngSubmit)="redefinirSenha()">
+          <form #f="ngForm" [noValidate]="$any(false)">
             <div class="form-group">
 
               <div class="form-group">
@@ -124,7 +126,7 @@
                   <show-hide-password (click)="focosenhaatual()" btnStyle="primary">
                     <div class="form-label-group showredefinir">
                       <input type="password" #inputPassword id="current-password" name="current-password"
-                             class="form-control"
+                             class="form-control" minlength="6"
                              placeholder="Senha atual:"
                              required="required">
                       <label for="current-password">Senha atual:</label>
@@ -138,7 +140,7 @@
                 <div class="col-md-auto">
                   <show-hide-password (click)="foconovasenha()" btnStyle="primary">
                     <div class="form-label-group showredefinir">
-                      <input type="password" #inputNewPassword id="new-password" name="new-password"
+                      <input type="password" #inputNewPassword id="new-password" name="new-password" minlength="6"
                              class="form-control" placeholder="Nova senha:" required="required">
                       <label for="new-password">Nova senha:</label>
                     </div>
@@ -152,6 +154,7 @@
                   <show-hide-password (click)="fococonfirmarsenha()" btnStyle="primary">
                     <div class="form-label-group showredefinir">
                       <input type="password" #inputPasswordConfirm id="new-passwordconfirm" name="new-password"
+                             minlength="6"
                              class="form-control" placeholder="Confirmar senha:" required="required">
                       <label for="new-passwordconfirm">Confirmar senha:</label>
                     </div>
@@ -164,7 +167,8 @@
 
             <div class="modal-footer col-md-12">
               <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-              <input class="btn btn-primary" type="submit" value="Confirmar">
+              <input class="btn btn-primary" [disabled]="f.form.invalid" type="submit" (click)="redefinirSenha()"
+                     data-dismiss="modal" value="Confirmar">
               <div *ngIf="f.submitted && senhaerrada" class="alert alert-warning separa">
                 As novas senhas não coincidem!
               </div>
@@ -184,22 +188,22 @@
 
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="chave acesso">Redefinir senha:</h4>
+        <h4 class="modal-title" id="chave acesso">Chave de acesso:</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">×</span>
         </button>
       </div>
       <div class="modal-body">
         <div class="card-body">
-          <form #f="ngForm" [noValidate]="$any(false)" (ngSubmit)="cadastrarChaveAcesso()">
+          <form #f="ngForm" [noValidate]="$any(false)">
             <div class="form-group">
 
               <div class="col-md-auto">
                 <show-hide-password btnStyle="primary">
                   <div class="form-label-group showredefinir">
-                    <input type="password" #inputPassword id="chaveAcesso" name="chaveAcesso"
-                           class="form-control" [(ngModel)]="gerente.chaveAcesso"
-                           placeholder="Chave de Acesso:"
+                    <input type="password" #chave id="chaveAcesso" name="chaveAcesso"
+                           class="form-control" (blur)="chaveAcesso(chave.value)"
+                           placeholder="Chave de Acesso:" minlength="3"
                            required="required">
                     <label for="chaveAcesso">Chave de Acesso:</label>
                   </div>
@@ -209,7 +213,11 @@
 
             <div class="modal-footer col-md-12">
               <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-              <input class="btn btn-primary" type="submit" value="Confirmar">
+              <input class="btn btn-success" type="submit" *ngIf="!chaveCadastrada" [disabled]="!f.form.valid"
+                     (click)="cadastrarChaveAcesso()" data-dismiss="modal" value="Cadastrar">
+              <input class="btn btn-primary" type="submit" *ngIf="chaveCadastrada" [disabled]="!f.form.valid"
+                     (click)="cadastrarChaveAcesso()" data-dismiss="modal" value="Atualizar">
+
             </div>
           </form>
         </div>
@@ -217,8 +225,3 @@
     </div>
   </div>
 </div>
-
-
-<ng-template #loading>
-
-</ng-template>

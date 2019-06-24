@@ -4,57 +4,46 @@
 
 <div class="container-fluid">
 
-  <!-- Page Content -->
-  <h3>Planilha de custo</h3>
-  <hr>
+
+  <!--<nav aria-label="breadcrumb">
+   <ol class="breadcrumb">
+     <li class="breadcrumb-item active" aria-current="page"><a
+       [routerLink]="['/gerenteindex/operacoes', etapaproducao.etapaProducao]">Sequência Operacional</a>
+     </li>
+     <li class="breadcrumb-item active" aria-current="page"><a
+       [routerLink]="['/gerenteindex/andamentooperacoes', etapaproducao.etapaProducao]">Andamento</a>
+     </li>
+   </ol>
+  </nav> -->
+
+  <form class="card  planilhateste1" [noValidate]="$any(false)" *ngIf="!acessovalido" (ngSubmit)="acessar()" #f="ngForm">
+    <div class="card-header">Acessar Planilha de Custo</div>
+    <div class="card-body border-info mb-3 ">
+      <div class="form-group">
+
+          <label for="chaveAcesso">Chave de Acesso
+          <input type="text" id="chaveAcesso" [(ngModel)]="gerente.verificarChaveAcesso" name="chaveAcesso"
+                 class="form-control"
+                 [autofocus]="true" placeholder="Chave de Acesso" required="required">
+          </label>
+      </div>
+
+      <input class="btn btn-info btn-block col-sm-5" type="submit" value="Acessar">
+      <div class="alert alert-dismissible alert-danger separa" *ngIf="invalido">
+        Chave de acesso Inválida!
+      </div>
+    </div>
+  </form>
+  <div *ngIf="acessovalido">
+    <!-- Page Content -->
+    <h3>Planilha de custo</h3>
+    <hr>
+
+    <!-- AQUI VAI AS PÁGINAS -->
+
+  </div>
 </div>
 
-<!--<nav aria-label="breadcrumb">
- <ol class="breadcrumb">
-   <li class="breadcrumb-item active" aria-current="page"><a
-     [routerLink]="['/gerenteindex/operacoes', etapaproducao.etapaProducao]">Sequência Operacional</a>
-   </li>
-   <li class="breadcrumb-item active" aria-current="page"><a
-     [routerLink]="['/gerenteindex/andamentooperacoes', etapaproducao.etapaProducao]">Andamento</a>
-   </li>
- </ol>
-</nav> -->
-
-<form class="planilhateste" [noValidate]="$any(false)" *ngIf="!acessovalido" (ngSubmit)="acessar()" #f="ngForm">
-
-  <div class="form-group">
-
-    <div class="form-label-group">
-
-      <input type="text" id="chaveAcesso" [(ngModel)]="gerente.verificarChaveAcesso" name="chaveAcesso"
-             class="form-control col-sm-3"
-             [autofocus]="true" placeholder="Chave de Acesso" required="required">
-      <label for="chaveAcesso">Chave de Acesso</label>
-    </div>
-
-  </div>
-
-  <input class="btn btn-info btn-block col-sm-3" type="submit" value="Acessar">
-  <div class="alert alert-dismissible alert-danger separa col-sm-3" *ngIf="invalido">
-    Chave de acesso Inválida!
-  </div>
-
-</form>
-
-<!-- Sticky Footer -->
-<footer class="sticky-footer">
-  <div class="container my-auto">
-    <div class="copyright text-center my-auto">
-      <span>Copyright © DyOpe Assistant 2019</span>
-    </div>
-  </div>
-</footer>
-
-
-<!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded" href="#page-top">
-  <i class="fas fa-angle-up"></i>
-</a>
 
 <!-- cadastro de planilha de custo -->
 <div class="modal fade cadastrar-peca" tabindex="-1" role="dialog" aria-labelledby="modalpeca"
@@ -74,7 +63,7 @@
               <div class="col-md-auto">
                 <div class="form-label-group">
                   <input type="text" #nomePeca id="nomePeca" class="form-control" name="descricaop"
-                         placeholder="Nome da peça:" required="required"
+                         placeholder="Nome da peça:"
                          required="required">
                   <label for="nomePeca">Nome da peça:</label>
                 </div>

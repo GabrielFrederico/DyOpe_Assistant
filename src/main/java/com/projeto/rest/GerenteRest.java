@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.projeto.models.Gerente;
 import com.projeto.models.Operacao;
+import com.projeto.models.PlanilhaCusto;
 import com.projeto.models.Role;
 import com.projeto.models.RoleName;
 import com.projeto.models.Setor;
@@ -183,6 +184,15 @@ public class GerenteRest {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		gerenteRepository.save(gerente);
+		return new ResponseEntity<>(new ResponseMessage("Dados Atualizados com sucesso!"), HttpStatus.OK);
+	}
+	
+	@RequestMapping(method = RequestMethod.PUT, value = "cadastrarplanilha")
+	@PreAuthorize("hasRole('GERENTE')")
+	public ResponseEntity<?> cadastrarPlanilha(@RequestBody Gerente gerente) throws ParseException {
+		PlanilhaCusto ultima = gerente.getPlanilhascusto().get(gerente.getPlanilhascusto().size() - 1);
+		PlanilhaCusto.calcularCusto(ultima);
 		gerenteRepository.save(gerente);
 		return new ResponseEntity<>(new ResponseMessage("Dados Atualizados com sucesso!"), HttpStatus.OK);
 	}

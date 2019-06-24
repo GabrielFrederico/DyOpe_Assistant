@@ -34,21 +34,6 @@
         <div class="form-group">
           <div class="col-md-4" *ngIf="setorShow">
             <mat-form-field>
-              <mat-label class="text-dark">Etapa da Produção</mat-label>
-              <mat-select required="required" name="etapa" [(ngModel)]="etapa">
-                <mat-option *ngFor="let etapa of etapas" [value]="etapa">{{etapa.etapaProducao}}</mat-option>
-                <mat-option *ngIf="etapas.length <=0">Nenhuma etapa Cadastrado</mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="form-group">
-      <div class="form-row">
-        <div class="form-group">
-          <div class="col-md-4" *ngIf="setorShow">
-            <mat-form-field>
               <mat-label class="text-dark">Peça</mat-label>
               <mat-select required="required" name="peca" (selectionChange)="selectPeca()" [(ngModel)]="peca">
                 <mat-option *ngFor="let peca of gerente.pecas" [value]="peca">{{peca.descricao}}</mat-option>
@@ -57,6 +42,25 @@
             </mat-form-field>
           </div>
         </div>
+        <!--
+        <div class="form-group">
+          <div class="col-md-4" *ngIf="setorShow">
+            <mat-form-field>
+              <mat-label class="text-dark">Etapa da Produção</mat-label>
+              <mat-select required="required" name="etapa" [(ngModel)]="etapa">
+                <mat-option *ngFor="let etapa of etapas" [value]="etapa">{{etapa.etapaProducao}}</mat-option>
+                <mat-option *ngIf="etapas.length <=0">Nenhuma etapa Cadastrado</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        -->
+      </div>
+
+    </div>
+    <div class="form-group">
+      <div class="form-row">
+
         <div class="form-group">
           <div class="col-md-4" *ngIf="showOpe">
 

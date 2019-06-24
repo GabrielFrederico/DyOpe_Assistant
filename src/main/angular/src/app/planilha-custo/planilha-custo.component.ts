@@ -3,6 +3,7 @@ import {GerenteService} from '../service/gerente.service';
 import {TokenStorageService} from '../auth/token-storage.service';
 import {CadastroOperacaoService} from '../service/cadastro-operacao.service';
 import {Router} from '@angular/router';
+import {first} from 'rxjs/operators';
 
 @Component({
   selector: 'app-planilha-custo',
@@ -22,8 +23,13 @@ export class PlanilhaCustoComponent implements OnInit {
   invalido = false;
   chaveAcesso: string;
   mensagemErro: string;
+  planilha: any = {};
+  planilhaEscolhida: any;
+  resultadoPlanilha: any;
 
   validado: boolean;
+
+  atualizarPlanilha = false;
 
   ngOnInit() {
     this.info = {
@@ -37,6 +43,37 @@ export class PlanilhaCustoComponent implements OnInit {
       this.gerente = data;
     }, error => {
       console.log(error.error);
+    });
+  }
+
+  cadastrar() {
+    if (this.atualizarPlanilha) {
+      this.atualizar();
+      console.log('planilha ATUALIZADA');
+    } else {
+      this.planilha.gerente_id = this.gerente.id;
+      this.gerente.planilhascusto.push(this.planilha);
+      this.gerenteService.cadastrarPlanilha(this.gerente).pipe(first()).subscribe(data => {
+        this.getdadosCustos();
+      }, error => {
+        this.mensagemErro = error.error;
+      });
+    }
+  }
+
+  getdadosCustos() {
+    this.gerenteService.getPlanilhaId(this.planilhaEscolhida.id).subscribe(data => {
+      this.resultadoPlanilha = data;
+    }, error => {
+      this.mensagemErro = error.error;
+    });
+  }
+
+  atualizar() {
+    this.gerenteService.atualizarPlanilha(this.planilhaEscolhida).pipe(first()).subscribe(data => {
+      this.resultadoPlanilha = data;
+    }, error => {
+      this.mensagemErro = error.error;
     });
   }
 

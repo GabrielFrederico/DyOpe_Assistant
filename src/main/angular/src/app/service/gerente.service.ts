@@ -81,6 +81,20 @@ export class GerenteService {
     return this.httpClient.put<Gerente>('http://localhost:8080/gerentes/atualizargerente', gerente);
   }
 
+  getGerenteLogado(nomeUsuario: string): Observable<Gerente> {
+
+    return this.httpClient.get<Gerente>('http://localhost:8080/gerentes/getByNomeUsuario/' + nomeUsuario, httpOptions);
+  }
+
+
+  getGerente(nomeUsuario: string) {
+    return this.httpClient.get('http://localhost:8080/gerentes/getByNomeUsuario/' + nomeUsuario);
+  }
+
+  enviarEmail(email: string) {
+    return this.httpClient.post('http://localhost:8080/usuarios/enviaremailsenha', email);
+  }
+
   cadastrarAlgo(gerente: any) {
     return this.httpClient.put('http://localhost:8080/gerentes/cadastraralgo', gerente);
   }
@@ -89,34 +103,6 @@ export class GerenteService {
     return this.httpClient.put('http://localhost:8080/gerentes/cadastrarope', gerente);
   }
 
-  getPecaNome(nome: string) {
-    return this.httpClient.get('http://localhost:8080/pecas/getByNome/' + nome);
-  }
-  getPecaId(id: number) {
-    return this.httpClient.get('http://localhost:8080/pecas/' + id);
-
-  }
-
-
-  getGerenteLogado(nomeUsuario: string): Observable<Gerente> {
-
-    return this.httpClient.get<Gerente>('http://localhost:8080/gerentes/getByNomeUsuario/' + nomeUsuario, httpOptions);
-  }
-
-  atualizarPeca(peca: any) {
-    return this.httpClient.put('http://localhost:8080/pecas', peca);
-  }
-  pecaOpesFazer(peca: any) {
-    return this.httpClient.put('http://localhost:8080/pecas/operacaoFazer', peca);
-  }
-
-  pecaOpesAndamento(peca: any) {
-    return this.httpClient.put('http://localhost:8080/pecas/operacaoAndamento', peca);
-  }
-
-  getGerente(nomeUsuario: string) {
-    return this.httpClient.get('http://localhost:8080/gerentes/getByNomeUsuario/' + nomeUsuario);
-  }
 
   chaveAcesso(gerente: any) {
     return this.httpClient.put('http://localhost:8080/gerentes/chaveAcesso', gerente);
@@ -131,9 +117,41 @@ export class GerenteService {
 
   }
 
+  getPecaNome(nome: string) {
+    return this.httpClient.get('http://localhost:8080/pecas/getByNome/' + nome);
+  }
 
-  enviarEmail(email: string) {
-    return this.httpClient.post('http://localhost:8080/usuarios/enviaremailsenha', email);
+  getPecaId(id: number) {
+    return this.httpClient.get('http://localhost:8080/pecas/' + id);
+
+  }
+
+  // peça
+  atualizarPeca(peca: any) {
+    return this.httpClient.put('http://localhost:8080/pecas', peca);
+  }
+
+  pecaOpesFazer(peca: any) {
+    return this.httpClient.put('http://localhost:8080/pecas/operacaoFazer', peca);
+  }
+
+  pecaOpesAndamento(peca: any) {
+    return this.httpClient.put('http://localhost:8080/pecas/operacaoAndamento', peca);
+  }
+
+  // planilha
+
+  cadastrarPlanilha(gerente: any) {
+    return this.httpClient.put('http://localhost:8080/gerentes/cadastrarplanilha', gerente);
+  }
+
+  atualizarPlanilha(planilha: any) {
+    return this.httpClient.put('http://localhost:8080/planilhascusto', planilha);
+  }
+
+  getPlanilhaId(id: number) {
+    return this.httpClient.get('http://localhost:8080/planilhascusto/' + id);
+
   }
 
 }

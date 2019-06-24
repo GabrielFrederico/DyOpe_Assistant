@@ -222,14 +222,7 @@
 </div>
 
 </form>
-<!-- Sticky Footer -->
-<footer class="sticky-footer">
-  <div class="container my-auto">
-    <div class="copyright text-center my-auto">
-      <span>Copyright © DyOpe Assistant 2019</span>
-    </div>
-  </div>
-</footer>
+
 
 <!--Modal Cadastro suboperações: -->
 
@@ -292,12 +285,12 @@
 
             <div class="col-md-auto">
               <div class="form-group">
-
                 <label for="nomePeca">Nome da peça: </label>
                 <input type="text" #nomePeca id="nomePeca" class="form-control" name="descricaop"
                        placeholder="Nome da peça:" [(ngModel)]="newpeca.descricao" required="required">
               </div>
             </div>
+
             <div class="modal-footer col-md-12">
               <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
               <input class="btn btn-primary" type="submit" (click)="cadastrarPeca()" [disabled]="pecaForm.invalid"

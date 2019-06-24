@@ -12,16 +12,17 @@ import {first} from 'rxjs/operators';
 
 })
 export class PerfilGerenteComponent implements OnInit {
+
+  // tslint:disable-next-line:max-line-length
+  constructor(private modalService: NgbModal, private token: TokenStorageService, private gerenteService: GerenteService, private router: Router) {
+  }
+
   title: 'Perfil Gerente';
   @ViewChild('inputPassword') senhainput: ElementRef;
   @ViewChild('inputNewPassword') newsenhainput: ElementRef;
   @ViewChild('inputPasswordConfirm') confirmasenhainput: ElementRef;
   @ViewChild('cpf') cpf: ElementRef;
   @ViewChild('rg') rg: ElementRef;
-
-  // tslint:disable-next-line:max-line-length
-  constructor(private modalService: NgbModal, private token: TokenStorageService, private gerenteService: GerenteService, private router: Router) {
-  }
 
   gerente: any;
   public gerenteLogado: boolean;
@@ -35,6 +36,10 @@ export class PerfilGerenteComponent implements OnInit {
   closeResult: string;
 
   isReadonly = true;
+
+  chaveCadastrada = false;
+
+  editar = false;
 
   private static getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
@@ -54,6 +59,9 @@ export class PerfilGerenteComponent implements OnInit {
     });
   }
 
+  edicao() {
+    this.editar = true;
+  }
 
   ngOnInit() {
     this.info = {
@@ -63,7 +71,11 @@ export class PerfilGerenteComponent implements OnInit {
     };
     this.gerenteService.getGerente(this.info.username).subscribe(data => {
       this.gerente = data;
+      if (this.gerente.chaveAcesso !== '') {
+        this.chaveCadastrada = true;
+      }
     });
+
     this.datareload();
     this.naoAutenticado();
 
@@ -85,6 +97,10 @@ export class PerfilGerenteComponent implements OnInit {
 
     console.clear();
 
+  }
+
+  chaveAcesso(chave: string) {
+    this.gerente.chaveAcesso = chave;
   }
 
   redefinirSenha() {
@@ -161,5 +177,6 @@ export class PerfilGerenteComponent implements OnInit {
 
   toggleReadonly() {
     this.isReadonly = !this.isReadonly;
+    this.edicao();
   }
 }

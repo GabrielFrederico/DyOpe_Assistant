@@ -158,8 +158,14 @@ export class AndamentoOperacoesComponent implements OnInit {
     const index = this.operacaoEscolhida.suboperacoes.indexOf(this.suboperacaoEscolhida);
     this.operacaoEscolhida.suboperacoes.splice(index, 1);
   }
+
   deletarOperacao(ope: any) {
     this.operacaoEscolhida = ope;
+    this.operacaoService.deletarOperacao(this.operacaoEscolhida.id).subscribe(data => {
+      alert('Operação Excluida com sucesso!');
+    }, error => {
+      this.errorMessage = error.error;
+    });
   }
 
   cadastrarSubOperacao() {
@@ -208,7 +214,6 @@ export class AndamentoOperacoesComponent implements OnInit {
       this.operacoesSeparadas = true;
       console.log('opesseparadas');
     }
-
 
 
   }
