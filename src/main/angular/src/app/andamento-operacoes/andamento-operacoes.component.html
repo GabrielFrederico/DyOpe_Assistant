@@ -221,6 +221,9 @@
             </div>
           </div>
         </div>
+        <input class="btn btn-danger" type="button" (click)="selectOperacao(operacao)" href="#" data-toggle="modal"
+               data-target=".excluir-operacao"
+               value="Excluir" >
       </div>
     </div>
   </div>
@@ -466,6 +469,36 @@
           <div class="modal-footer col-md-12">
             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
             <input class="btn btn-primary" type="submit" (click)="deletarSubOperacao(suboperacaoEscolhida)"
+                   data-dismiss="modal"
+                   value="Confirmar">
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- modal excluir  operacao -->
+<div class="modal  fade deletar-subope2" tabindex="-1" role="dialog" aria-labelledby="modalExcluirOpe"
+     aria-hidden="true">
+  <div class="modal-dialog modal-body">
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="modalExcluirOpe">Deletar Operação</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="card-body">
+          <div class="text-center mb-4">
+            <h4>Deseja Excluir?</h4>
+          </div>
+          <div class="modal-footer col-md-12">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+            <input class="btn btn-primary" type="submit" (click)="deletarOperacao(operacaoEscolhida)"
                    data-dismiss="modal"
                    value="Confirmar">
           </div>
