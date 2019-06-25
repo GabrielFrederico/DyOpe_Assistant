@@ -85,6 +85,10 @@ div.menu_index span {
 .titulo {
   padding: 3.3%;
   text-align: center;
+  font-style: italic;
+  font-family: initial;
+  color: #38ff72;
+  text-shadow: 2px 3px 3px #69000b;
 }
 
 .bg-lightblue {
