@@ -223,7 +223,7 @@ export class AndamentoOperacoesComponent implements OnInit {
         this.prazo = new Date(this.operacao.prazo);
         // tslint:disable-next-line:no-shadowed-variable
         const i = this.peca.operacoesAndamento.indexOf(this.operacao);
-        if (this.hoje.getTime() === this.prazo.getTime()) {
+        if (this.hoje.getTime() === this.prazo.getTime()  || this.prazo < this.hoje) {
           this.peca.operacoesPrazo.push(this.operacao);
           this.peca.operacoesAndamento.splice(i, 1);
           this.updateOpes();
@@ -238,7 +238,7 @@ export class AndamentoOperacoesComponent implements OnInit {
   }
 
   updateOpes() {
-    this.gerenteService.pecaOpesAndamento(this.peca).pipe(first()).subscribe(data => {
+    this.gerenteService.atualizarPeca(this.peca).pipe(first()).subscribe(data => {
     }, error => {
       this.errorMessage = error.error;
       this.erro = true;

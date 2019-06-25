@@ -128,7 +128,7 @@ export class GerenteService {
 
   // peça
   atualizarPeca(peca: any) {
-    return this.httpClient.put('http://localhost:8080/pecas', peca);
+    return this.httpClient.put('http://localhost:8080/pecas/updatepeca', peca);
   }
 
   pecaOpesFazer(peca: any) {
