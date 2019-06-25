@@ -205,13 +205,13 @@ operacaoFazer: any;
         this.prazo = new Date(this.operacaoFazer.prazo);
         // tslint:disable-next-line:no-shadowed-variable
         const i = this.peca.operacoesFazer.indexOf(this.operacaoFazer);
-        if (this.inicio.getTime() === this.hoje.getTime() || this.inicio < this.hoje) {
+        if (this.inicio.getTime() === this.hoje.getTime() || this.inicio < this.hoje && this.inicio < this.prazo) {
           this.peca.operacoesAndamento.push(this.operacaoFazer);
-          this.peca.operacoesFazer.splice(i, 1);
+          this.peca.operacoesFazer.splice(index, 1);
           this.updateOpes();
         } else if (this.hoje.getTime() === this.prazo.getTime() || this.prazo < this.hoje && this.inicio < this.hoje) {
           this.peca.operacoesPrazo.push(this.operacaoFazer);
-          this.peca.operacoesFazer.splice(i, 1);
+          this.peca.operacoesFazer.splice(index, 1);
           this.updateOpes();
         }
 
