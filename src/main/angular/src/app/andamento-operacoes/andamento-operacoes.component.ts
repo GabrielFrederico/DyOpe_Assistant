@@ -196,7 +196,10 @@ export class AndamentoOperacoesComponent implements OnInit {
     this.gerenteService.getGerente(this.info.username).subscribe(data => this.gerente = data);
     // console.clear();
   }
-
+  segundosSubOpe(subope: any, segundos: string) {
+    this.suboperacaoEscolhida = subope;
+    this.suboperacaoEscolhida.segundos = +segundos;
+  }
   separarOperacoes() {
     this.hoje = new Date();
     this.peca.operacoesFazer.forEach((data, index) => {

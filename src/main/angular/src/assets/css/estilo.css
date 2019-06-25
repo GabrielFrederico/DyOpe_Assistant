@@ -20,7 +20,10 @@
   font-size: 199%;
   margin: 3.6%;
 }
-
+.formsequencia{
+  padding-right: 3px;
+  padding-left: 3px;
+}
 .menudrop {
   position: absolute;
   display: none;

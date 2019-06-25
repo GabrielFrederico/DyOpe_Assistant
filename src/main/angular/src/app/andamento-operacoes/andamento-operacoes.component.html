@@ -70,7 +70,7 @@
     \ {{operacaoEscolhida.id}}</div>
   <div class="card-body border-info">
     <div class="row">
-      <div class="col-md-4">
+      <div class="col-md-4 formsequencia">
         <div class="card border-info mb-3 operacoes lista">
           <div class="card-header border-primary">Sub-Operações</div>
           <div class="card-body text-secondary">
@@ -89,22 +89,30 @@
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
-                    <label for="tempoOpet">Tempo
+                    <label for="tempoOpe">Tempo
                       <div class="row justify-content-center tempo">
-                        <input type="number" name="tempoOpedb"
-                               id="tempoOpet" value="{{suboperacao.tempoNesc}}"
-                               class="form-control" #tempo
-                               (change)="atualizarSubOpe(suboperacao,tempo.value)" [readonly]="!editarOpe"
+                        <input type="number" name="tempoOpe"
+                               id="tempoOpe" max="59" [brmasker]="{mask:'00', len:2}" min="00"
+                               class="form-control-plaintext fontTempo form-control-sm col-md-5" #tempo size="2"
+                               (change)="atualizarSubOpe(suboperacao,tempo.value)"
                                (blur)="atualizarSubOpe(suboperacao,tempo.value)"
-                               placeholder="Min" required="required">
+                               placeholder="mm" required="required">:
+                        <input type="number" name="segundosOpe"
+                               id="segundosOpe" max="59" min="00" [brmasker]="{mask:'00', len:2}"
+                               class="form-control-plaintext  form-control-sm col-md-5" #segundos size="2"
+                               (change)="segundosSubOpe(suboperacao,segundos.value)"
+                               (blur)="segundosSubOpe(suboperacao,segundos.value)"
+                               placeholder="ss" required="required">
                       </div>
                     </label>
-
                   </div>
                 </div>
                 <div class="col-md-1 align-self-center">
-                  <input class="btn btn-danger" type="button" href="javascript:void(0)" data-toggle="modal" [disabled]="!editarOpe"
-                     data-target=".deletar-subope2" (click)="subopeEscolhida(suboperacao)" value="-">
+                  <i class="fas fa-fw fa-trash-alt">
+                  </i>
+                  <input class="btn btn-danger" type="button" href="javascript:void(0)" data-toggle="modal"
+                         [disabled]="!editarOpe"
+                         data-target=".deletar-subope2" (click)="subopeEscolhida(suboperacao)" value="-">
                 </div>
               </div>
             </div>
@@ -113,13 +121,13 @@
           <div class="card-footer bg-transparent border-info modal-footer">
 
             <input class="btn btn-info" type="button" href="#" data-toggle="modal"
-               data-target=".cadastro-operacoes2" [disabled]="!editarOpe" value="+">
+                   data-target=".cadastro-operacoes2" [disabled]="!editarOpe" value="+">
 
           </div>
         </div>
       </div>
 
-      <div class="col-md-4">
+      <div class="col-md-4 formsequencia">
         <div class="card border-info mb-3 operacoes lista">
           <div class="card-header border-info">Dados:</div>
           <div class="card-body text-secondary">
@@ -171,7 +179,7 @@
         </div>
       </div>
 
-      <div class="col-sm-4">
+      <div class="col-sm-4 formsequencia">
 
         <div class="card border-success mb-3 lista">
 
@@ -223,7 +231,7 @@
         </div>
         <input class="btn btn-danger" type="button" (click)="selectOperacao(resultadoOpe)" href="#" data-toggle="modal"
                data-target=".excluir-operacao"
-               value="Excluir" >
+               value="Excluir">
       </div>
     </div>
   </div>
@@ -426,7 +434,8 @@
             <div class="col-md-auto">
               <div class="form-group">
                 <label for="DescricaoOp">Descrição da operação:</label>
-                <input type="text" required="required" name="descricao" [(ngModel)]="newsuboperacao.descricao" placeholder="Descrição:"
+                <input type="text" required="required" name="descricao" [(ngModel)]="newsuboperacao.descricao"
+                       placeholder="Descrição:"
                        class="form-control" minlength="4" id="DescricaoOp">
               </div>
             </div>

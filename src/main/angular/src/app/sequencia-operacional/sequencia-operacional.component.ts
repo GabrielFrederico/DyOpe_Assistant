@@ -42,7 +42,6 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
   public errorMessage = '';
   closeResult: string;
   public info: any;
-  etapa: string;
   idope: string;
   sub: Subscription;
   public opeCadastrada = false;
@@ -66,8 +65,11 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
 
   andamento = false;
 
+  etapas: any;
+  etapa: any;
+
   ngOnInit() {
-    this.etapasproducao();
+    // this.etapasproducao();
     this.info = {
       token: this.token.getToken(),
       username: this.token.getUsername(),
@@ -79,19 +81,11 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.sub.unsubscribe();
+    // this.sub.unsubscribe();
   }
 
   openCadastro(cadastro) {
     this.modalService.open(cadastro, {size: 'lg', ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
-  }
-
-  openInformacoes(content) {
-    this.modalService.open(content, {size: 'lg', ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
@@ -150,6 +144,24 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
 
   }
 
+  selectEtapa(etapa: any) {
+    this.etapa = etapa;
+    if (this.etapa.id === 5) {
+      this.escolheu = false;
+      this.escolheu = true;
+      this.suboperacoes = [];
+      this.operacaoService.getOperacoesSub().subscribe(data => {
+        this.suboperacoes = data;
+      }, error => {
+        console.log(error.error);
+      });
+    } else {
+      this.listasuboperacoes = [];
+      this.suboperacoes = [];
+    }
+    console.clear();
+  }
+
   datareload() {
     this.gerenteService.getGerente(this.info.username).subscribe(data => {
       this.gerente = data;
@@ -157,7 +169,9 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
     }, error => {
       console.log(error.error);
     });
-
+    this.operacaoService.getTiposOperacoes().subscribe(data => {
+      this.etapas = data;
+    });
     this.carregado = true;
 
   }
@@ -215,8 +229,10 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
       });
       this.operacaoEscolhida.suboperacoes = this.listasuboperacoes;
       this.operacaoEscolhida.tempoTrab = 450;
-      this.operacaoEscolhida.etapa_producao_id = this.etapaproducao.id;
-      this.operacaoEscolhida.descricao = this.etapaproducao.etapaProducao + ' : ' + this.peca.descricao;
+      // this.operacaoEscolhida.etapa_producao_id = this.etapaproducao.id;
+      this.operacaoEscolhida.etapa_producao_id = this.etapa.id;
+      // this.operacaoEscolhida.descricao = this.etapaproducao.etapaProducao + ' : ' + this.peca.descricao;
+      this.operacaoEscolhida.descricao = this.etapa.etapaProducao + ' : ' + this.peca.descricao + ' #' + this.operacaoEscolhida.id;
       this.operacaoEscolhida.peca_id = this.peca.id;
 
       this.hoje = new Date();
@@ -255,7 +271,9 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
   concluirOpe() {
     alert('Operação cadastrada com sucesso!');
     this.router.navigateByUrl('/gerenteindex/homegerente', {skipLocationChange: true}).then(() =>
-      this.router.navigate(['/gerenteindex/operacoes/', this.etapaproducao.etapaProducao]));
+      this.router.navigate(['/gerenteindex/operacoes/']));
+    // this.router.navigate(['/gerenteindex/operacoes/', this.etapaproducao.etapaProducao]));
+
   }
 
   andamentoClosed() {
@@ -393,13 +411,15 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
   }
 
   cadastrarPeca() {
-    this.newpeca.etapa_producao_id = this.etapaproducao.id;
+    // this.newpeca.etapa_producao_id = this.etapaproducao.id;
+    this.newpeca.etapa_producao_id = this.etapa.id;
     this.newpeca.gerente_id = this.gerente.id;
     this.gerente.pecas.push(this.newpeca);
     this.gerenteService.cadastrarAlgo(this.gerente).pipe(first()).subscribe(data => {
       alert('Peça cadastrada com sucesso!');
       this.router.navigateByUrl('/gerenteindex/homegerente', {skipLocationChange: true}).then(() =>
-        this.router.navigate(['/gerenteindex/operacoes/', this.etapaproducao.etapaProducao]));
+        this.router.navigate(['/gerenteindex/operacoes/']));
+      // this.router.navigate(['/gerenteindex/operacoes/', this.etapaproducao.etapaProducao]));
 
     }, error => {
       this.erro = true;

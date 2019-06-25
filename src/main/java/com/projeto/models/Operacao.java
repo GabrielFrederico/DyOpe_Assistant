@@ -89,14 +89,14 @@ public class Operacao {
 			segundos += subope.getSegundos();
 
 		}
-		// calcseg = segundos*1;
+		 calcseg = segundos*1;
 		segundoscalc = segundos / 60;
 		min = minutos + segundoscalc;
 
 		float result, funcCalc, calcProHora, tempoFun, resultdias;
 		tempoFun = operacao.getTempoTrab() * operacao.getNumFuncionariosDisponiveis();
 
-		result = minutos * operacao.getLoteProducao();
+		result = min * operacao.getLoteProducao();
 		diasNece = Math.round(result / tempoFun);
 
 		resultdias = result / operacao.getNumFuncionariosDisponiveis();

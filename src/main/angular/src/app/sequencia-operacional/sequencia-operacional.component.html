@@ -14,9 +14,22 @@
 <div class="tab-content">
   <div class="tab-pane fade show active" id="nav-operacoes" role="tabpanel" aria-labelledby="nav-operacoes-tab">
 
-    <div class="row espacamentosequenciaoperacional" *ngIf="gerente.pecas">
-      <div class="col-md-3">
+    <div class="row espacamentosequenciaoperacional">
+      <!-- <div class="col-md-3">
         <h3>{{etapaproducao.etapaProducao}}</h3>
+
+      </div> -->
+
+      <div class="form-group">
+        <div class="col-md-2 align-self-center">
+          <mat-form-field>
+            <mat-label class="text-dark">Etapas da produção:</mat-label>
+            <mat-select required="required" name="peca" [(ngModel)]="etapa">
+              <mat-option *ngFor="let etapa of etapas" [value]="etapa"
+                          (click)="selectEtapa(etapa)">{{etapa.etapaProducao}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
       </div>
 
       <div class="form-group">
@@ -24,7 +37,7 @@
           <mat-form-field>
             <mat-label class="text-dark">Peças:</mat-label>
             <mat-select required="required" name="peca" [(ngModel)]="peca">
-              <mat-option *ngFor="let peca of this.gerente.pecas" [value]="peca"
+              <mat-option *ngFor="let peca of gerente.pecas" [value]="peca"
                           (click)="selectsPeca(peca)">{{peca.descricao}}</mat-option>
               <mat-option *ngIf="gerente.pecas.length <= 0">Cadastre uma Peça</mat-option>
             </mat-select>
@@ -47,7 +60,7 @@
       <div class="card-header">Sequencia Operacional</div>
       <div class="card-body border-info">
         <div class="row">
-          <div class="col-md-4">
+          <div class="col-md-4 formsequencia">
             <form class="card border-info mb-3 operacoes lista" #suboperacoes="ngForm" (ngSubmit)="subopes()"
                   [noValidate]="$any(false)">
               <div class="card-header border-primary">Sub-Operações (Unidade)</div>
@@ -114,18 +127,19 @@
             </form>
           </div>
 
-          <div class="col-md-3" *ngIf="ope2">
+          <div class="col-md-4 formsequencia" *ngIf="ope2">
             <div class="card border-info mb-3 operacoes lista">
               <div class="card-header border-info">Dados:</div>
               <div class="card-body text-secondary">
                 <div class="form-group">
                   <div class="col-md-auto">
                     <div class="form-group">
-                      <label for="LoteProdu" class="fonterisco">Lote de Produção:</label>
+                      <label for="LoteProdu" class="fonterisco">Lote de Produção:
                       <input type="number" id="LoteProdu" min="1" max="999999" (change)="loteOpe(lote.value)"
                              class="form-control" #lote (blur)="loteOpe(lote.value)"
                              placeholder="Lote" name="loteProducao"
                              required="required">
+                      </label>
                     </div>
                   </div>
                   <div class="col-md-auto">
@@ -160,7 +174,7 @@
             </div>
           </div>
 
-          <div class="col-sm-5" *ngIf="ope3">
+          <div class="col-md-4 formsequencia" *ngIf="ope3">
             <div class="card border-success mb-3 lista">
               <div class="card-header border-info">Resultado Final:</div>
               <div class="card-body text-success">
@@ -205,10 +219,6 @@
                     </div>
                   </div>
                 </div>
-                <a class="btn btn-outline-success list-group-item list-group-item-action"
-                   routerLink="/gerenteindex/planilhadecusto">
-                  Abrir Planilha
-                </a>
               </div>
             </div>
           </div>
@@ -333,7 +343,7 @@
     </div>
 
     <ng-template #naoescolheu class="separa">
-      Escolha uma Peça!
+      Escolha uma Etapa e uma Peça!
     </ng-template>
   </div>
   <div class="tab-pane fade show" id="nav-andamento" role="tabpanel" aria-labelledby="nav-andamento-tab">

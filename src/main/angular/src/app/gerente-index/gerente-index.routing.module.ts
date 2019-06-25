@@ -27,7 +27,7 @@ const rotas: Routes = [
       {path: 'controlefuncionarios/:id', component: ControleFuncionariosComponent},
       {path: 'cadastrosetor', component: CadastroSetorComponent},
       {path: 'perfilgerente', component: PerfilGerenteComponent},
-      {path: 'operacoes/:etapaProducao', component: SequenciaOperacionalComponent},
+      {path: 'operacoes', component: SequenciaOperacionalComponent},
       {path: 'homegerente', component: HomeGerenteComponent},
       {path: 'planilhadecusto', component: PlanilhaCustoComponent},
       {path: '', redirectTo: 'homegerente'},

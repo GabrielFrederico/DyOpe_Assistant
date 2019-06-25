@@ -1,3 +1,5 @@
+<!-- teste
+
 <li ngbDropdown class="nav-item dropdown">
   <a ngbDropdownToggle class="nav-link text-light" id="pagesDropdown" href="javascript:void(0)"
      role="button"
@@ -11,6 +13,14 @@
     <a *ngFor="let etapa of etapas" href="#"
        [routerLink]="['/gerenteindex/operacoes', etapa.etapaProducao]" class="dropdown-item">{{etapa.etapaProducao}}</a>
   </div>
+</li>  -->
+
+<li class="nav-item text-light">
+  <a class="nav-link text-light" routerLink="/gerenteindex/operacoes">
+    <i class="fas fa-fw fa-tachometer-alt">
+    </i> &nbsp;
+    <span>Operações</span>
+  </a>
 </li>
 
 <li ngbDropdown class="nav-item dropdown">
@@ -18,7 +28,7 @@
      role="button" (click)="informacoes()"
      aria-haspopup="false" aria-expanded="false">
     <i class="fas fa-fw fa-table">
-    </i>
+    </i>&nbsp;
     <span>Informações</span>
   </a>
   <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="setores" x-placement="bottom-start">
