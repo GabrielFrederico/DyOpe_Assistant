@@ -65,7 +65,13 @@ public class PecaController {
 		pecaRepository.save(peca);
 		return peca;
 	}
-
+	
+	@RequestMapping(method = RequestMethod.PUT, value="updatepeca")
+	public Peca updatePeca(@RequestBody Peca peca) {
+		pecaRepository.save(peca);
+		return peca;
+	}
+	
 	@RequestMapping(method = RequestMethod.PUT, value = "operacaoFazer")
 	public Peca opesFazer(@RequestBody Peca peca) {
 		Operacao ultima = peca.getOperacoesFazer().get(peca.getOperacoesFazer().size() - 1);
