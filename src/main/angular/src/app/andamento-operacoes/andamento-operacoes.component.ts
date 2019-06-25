@@ -139,6 +139,7 @@ export class AndamentoOperacoesComponent implements OnInit {
 
   voltar() {
     this.opeSelected = false;
+    this.escolheu = true;
   }
 
   naoAutenticado() {
@@ -197,7 +198,6 @@ export class AndamentoOperacoesComponent implements OnInit {
   }
 
   separarOperacoes() {
-    if (!this.operacoesSeparadas) {
 
       this.hoje = new Date();
       this.peca.operacoesFazer.forEach((data, index) => {
@@ -229,11 +229,8 @@ export class AndamentoOperacoesComponent implements OnInit {
           this.updateOpes();
         }
       });
-
       this.operacoesSeparadas = true;
       console.log('opesseparadas');
-    }
-
 
   }
 

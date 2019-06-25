@@ -16,6 +16,10 @@
   margin-left: 0px;
   color: #000000;
 }
+.textoinicial{
+  font-size: 199%;
+  margin: 7.6%;
+}
 
 .menudrop {
   position: absolute;
@@ -91,7 +95,7 @@ div.menu_index span {
   text-align: center;
   font-style: italic;
   font-family: initial;
-  color: #38ff72;
+  color: #35f574;
   text-shadow: 2px 3px 3px #69000b;
 }
 
