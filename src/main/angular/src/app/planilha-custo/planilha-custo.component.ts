@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {GerenteService} from '../service/gerente.service';
 import {TokenStorageService} from '../auth/token-storage.service';
 import {CadastroOperacaoService} from '../service/cadastro-operacao.service';
@@ -16,6 +16,8 @@ export class PlanilhaCustoComponent implements OnInit {
               private etapaService: CadastroOperacaoService, private token: TokenStorageService) {
   }
 
+  @ViewChild('closeModal') closeOpeModal: ElementRef;
+  @ViewChild('modal') closeModalPeca: ElementRef;
   public info: any;
   gerente: any;
   etapas: any;
@@ -26,6 +28,12 @@ export class PlanilhaCustoComponent implements OnInit {
   planilha: any = {};
   planilhaEscolhida: any;
   resultadoPlanilha: any;
+  operacaoEscolhida: any;
+  resultadoOpe: any;
+  isReadonly = true;
+  numfumok = false;
+
+  valido = true;
 
   validado: boolean;
 
@@ -44,6 +52,14 @@ export class PlanilhaCustoComponent implements OnInit {
     }, error => {
       console.log(error.error);
     });
+  }
+
+  loteOpe(lote: any) {
+    this.operacaoEscolhida.loteProducao = lote;
+  }
+
+  numfunOpe(numfun: any) {
+    this.operacaoEscolhida.numFuncionariosDisponiveis = numfun;
   }
 
   cadastrar() {
@@ -99,6 +115,11 @@ export class PlanilhaCustoComponent implements OnInit {
 
   cadastrarPlanilha() {
 
+  }
+
+
+  toggleReadonly() {
+    this.isReadonly = !this.isReadonly;
   }
 
 }

@@ -154,16 +154,14 @@
                 <input class="btn btn-success" type="submit" [disabled]="!valido" *ngIf="!ope3" value="Cadastrar">
                 <input class="btn btn-outline-info" type="submit" [disabled]="!valido" *ngIf="atualizarOpe"
                        value="Atualizar">
-                <input class="btn btn-primary" type="button" (click)="concluirOpe()"  *ngIf="atualizarOpe"
+                <input class="btn btn-primary" type="button" (click)="concluirOpe()" *ngIf="atualizarOpe"
                        value="Concluir">
               </div>
             </div>
           </div>
 
           <div class="col-sm-5" *ngIf="ope3">
-
             <div class="card border-success mb-3 lista">
-
               <div class="card-header border-info">Resultado Final:</div>
               <div class="card-body text-success">
                 <div class="form-group">
@@ -206,8 +204,6 @@
                       </label>
                     </div>
                   </div>
-
-
                 </div>
                 <a class="btn btn-outline-success list-group-item list-group-item-action"
                    routerLink="/gerenteindex/planilhadecusto">
