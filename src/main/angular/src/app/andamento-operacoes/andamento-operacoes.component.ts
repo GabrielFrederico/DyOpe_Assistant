@@ -160,6 +160,26 @@ export class AndamentoOperacoesComponent implements OnInit {
 
   deletarOperacao(ope: any) {
     this.operacaoEscolhida = ope;
+    this.hoje = new Date();
+    this.inicio = new Date(this.operacaoEscolhida.dataInicio);
+    this.prazo = new Date(this.operacaoEscolhida.prazo);
+    // tslint:disable-next-line:no-shadowed-variable
+    if (this.inicio > this.hoje) {
+      const i = this.peca.operacoesFazer.indexOf(this.operacaoEscolhida);
+      this.peca.operacoesFazer.splice(i, 1);
+      this.updateOpes();
+    } else if (this.inicio.getTime() === this.hoje.getTime() || this.inicio < this.hoje) {
+      const i = this.peca.operacoesAndamento.indexOf(this.operacaoEscolhida);
+      this.peca.operacoesAndamento.splice(i, 1);
+      this.updateOpes();
+
+    } else if (this.hoje.getTime() === this.prazo.getTime() || this.prazo < this.hoje) {
+      const i = this.peca.operacoesPrazo.indexOf(this.operacaoEscolhida);
+      this.peca.operacoesPrazo.splice(i, 1);
+      this.updateOpes();
+    }
+
+
     // const index = this.peca.operacoesFazer.indexOf(this.operacaoEscolhida);
     // this.peca.operacoesFazer.splice(index, 1);
   }
