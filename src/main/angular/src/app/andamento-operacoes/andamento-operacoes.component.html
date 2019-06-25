@@ -103,8 +103,8 @@
                   </div>
                 </div>
                 <div class="col-md-1 align-self-center">
-                  <a class="btn btn-danger" href="javascript:void(0)" data-toggle="modal"
-                     data-target=".deletar-subope2" (click)="subopeEscolhida(suboperacao)">-</a>
+                  <input class="btn btn-danger" type="button" href="javascript:void(0)" data-toggle="modal" [disabled]="!editarOpe"
+                     data-target=".deletar-subope2" (click)="subopeEscolhida(suboperacao)" value="-">
                 </div>
               </div>
             </div>
@@ -112,8 +112,8 @@
 
           <div class="card-footer bg-transparent border-info modal-footer">
 
-            <a class="btn btn-info" href="#" data-toggle="modal"
-               data-target=".cadastro-operacoes2">+</a>
+            <input class="btn btn-info" type="button" href="#" data-toggle="modal"
+               data-target=".cadastro-operacoes2" [disabled]="!editarOpe" value="+">
 
           </div>
         </div>
@@ -221,7 +221,7 @@
             </div>
           </div>
         </div>
-        <input class="btn btn-danger" type="button" (click)="selectOperacao(operacao)" href="#" data-toggle="modal"
+        <input class="btn btn-danger" type="button" (click)="selectOperacao(resultadoOpe)" href="#" data-toggle="modal"
                data-target=".excluir-operacao"
                value="Excluir" >
       </div>
@@ -497,7 +497,7 @@
           </div>
           <div class="modal-footer col-md-12">
             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-            <input class="btn btn-primary" type="submit" (click)="deletarOperacao(operacaoEscolhida)"
+            <input class="btn btn-primary" type="submit" (click)="deletarOperacao(resultadoOpe)"
                    data-dismiss="modal"
                    value="Confirmar">
           </div>
