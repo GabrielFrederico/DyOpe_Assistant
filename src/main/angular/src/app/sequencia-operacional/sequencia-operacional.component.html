@@ -81,13 +81,13 @@
                          -->
                             <input type="number" name="tempoOpe"
                                    id="tempoOpe" max="59" [brmasker]="{mask:'00', len:2}" min="00"
-                                   class="form-control-plaintext form-control-sm col-md-5" #tempo size="2"
+                                   class="form-control-plaintext fontTempo form-control-sm col-md-5" #tempo size="2"
                                    (change)="atualizarSubOpe(suboperacao,tempo.value)"
                                    (blur)="atualizarSubOpe(suboperacao,tempo.value)"
                                    placeholder="mm" required="required">:
                             <input type="number" name="segundosOpe"
                                    id="segundosOpe" max="59" min="00" [brmasker]="{mask:'00', len:2}"
-                                   class="form-control-plaintext form-control-sm col-md-5" #segundos size="2"
+                                   class="form-control-plaintext  form-control-sm col-md-5" #segundos size="2"
                                    (change)="segundosSubOpe(suboperacao,segundos.value)"
                                    (blur)="segundosSubOpe(suboperacao,segundos.value)"
                                    placeholder="ss" required="required">
