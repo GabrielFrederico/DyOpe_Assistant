@@ -65,12 +65,13 @@
 
       <div class="modal-footer">
 
-        <input class="btn btn-outline-warning" href="#" data-toggle="modal" type="button" *ngIf="!isReadonly"
+        <input class="btn btn-outline-warning" href="#" data-toggle="modal" type="button" *ngIf="isReadonly"
                data-target=".redefinir-senha" value="Redefinir
           senha">
-        <input class="btn btn-outline-info" href="#" data-toggle="modal" type="button" *ngIf="!isReadonly"
+        <input class="btn btn-outline-info" href="#" data-toggle="modal" type="button" *ngIf="isReadonly"
                data-target=".chave-acesso" value="Chave Acesso">
         <input class="btn btn-primary" type="button" (click)="toggleReadonly()" *ngIf="isReadonly" value="Editar">
+        <input class="btn btn-primary" type="button" (click)="toggleReadonly()" *ngIf="!isReadonly" value="Cancelar">
         <input class="btn btn-success" type="submit" *ngIf="!isReadonly"
                value="Salvar">
 
