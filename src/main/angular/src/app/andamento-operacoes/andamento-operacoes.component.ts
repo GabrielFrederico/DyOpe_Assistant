@@ -48,6 +48,7 @@ export class AndamentoOperacoesComponent implements OnInit {
   operacoesSeparadas = false;
   opeSelected = false;
   refreshed = false;
+operacaoFazer: any;
 
   ngOnInit() {
     this.info = {
@@ -196,22 +197,20 @@ export class AndamentoOperacoesComponent implements OnInit {
     this.gerenteService.getGerente(this.info.username).subscribe(data => this.gerente = data);
     console.clear();
   }
-
   separarOperacoes() {
-
       this.hoje = new Date();
       this.peca.operacoesFazer.forEach((data, index) => {
-        this.operacao = data;
-        this.inicio = new Date(this.operacao.dataInicio);
-        this.prazo = new Date(this.operacao.prazo);
+        this.operacaoFazer = data;
+        this.inicio = new Date(this.operacaoFazer.dataInicio);
+        this.prazo = new Date(this.operacaoFazer.prazo);
         // tslint:disable-next-line:no-shadowed-variable
-        const i = this.peca.operacoesFazer.indexOf(this.operacao);
+        const i = this.peca.operacoesFazer.indexOf(this.operacaoFazer);
         if (this.inicio.getTime() === this.hoje.getTime() || this.inicio < this.hoje) {
-          this.peca.operacoesAndamento.push(this.operacao);
+          this.peca.operacoesAndamento.push(this.operacaoFazer);
           this.peca.operacoesFazer.splice(i, 1);
           this.updateOpes();
-        } else if (this.hoje.getTime() === this.prazo.getTime() || this.prazo < this.hoje) {
-          this.peca.operacoesPrazo.push(this.operacao);
+        } else if (this.hoje.getTime() === this.prazo.getTime() || this.prazo < this.hoje && this.inicio < this.hoje) {
+          this.peca.operacoesPrazo.push(this.operacaoFazer);
           this.peca.operacoesFazer.splice(i, 1);
           this.updateOpes();
         }
@@ -223,7 +222,7 @@ export class AndamentoOperacoesComponent implements OnInit {
         this.prazo = new Date(this.operacao.prazo);
         // tslint:disable-next-line:no-shadowed-variable
         const i = this.peca.operacoesAndamento.indexOf(this.operacao);
-        if (this.hoje.getTime() === this.prazo.getTime()  || this.prazo < this.hoje) {
+        if (this.hoje.getTime() === this.prazo.getTime()  || this.prazo < this.hoje && this.inicio < this.hoje) {
           this.peca.operacoesPrazo.push(this.operacao);
           this.peca.operacoesAndamento.splice(i, 1);
           this.updateOpes();
