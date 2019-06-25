@@ -65,6 +65,9 @@ export class AndamentoOperacoesComponent implements OnInit {
   editar() {
     this.editarOpe = true;
   }
+  cancelar() {
+    this.editarOpe = false;
+  }
 
   atualizarSubOpe(subope: any, tempo: any) {
     this.suboperacaoEscolhida = subope;

@@ -15,6 +15,8 @@
 .tempo {
   margin-left: 0px;
   color: #000000;
+  flex-wrap: nowrap;
+  width: 143%;
 }
 .textoinicial{
   font-size: 199%;

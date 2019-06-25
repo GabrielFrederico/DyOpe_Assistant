@@ -66,7 +66,8 @@
               <div class="card-header border-primary">Sub-Operações (Unidade)</div>
               <div class="card-body text-secondary">
                 <div class="form-group">
-                  <div *ngFor="let suboperacao of listasuboperacoes; trackBy: trackByFn" class="row">
+                  <div *ngFor="let suboperacao of listasuboperacoes; trackBy: trackByFn"
+                       class="row  justify-content-around">
                     <div class="col-md-4">
                       <div class="form-group">
                         <label for="descricao">Descrição
@@ -81,7 +82,7 @@
                       <div class="form-group">
                         <label for="tempoOpe">Tempo
 
-                          <div class="row justify-content-center tempo">
+                          <div class="row justify-content-center  tempo">
                             <!--
                          <mat-form-field class="col-md-2">
                            <input matInput type="number" [brmasker]="{mask:'00', len:2}" id="tempoOpe">
@@ -94,13 +95,13 @@
                          -->
                             <input type="number" name="tempoOpe"
                                    id="tempoOpe" max="59" [brmasker]="{mask:'00', len:2}" min="00"
-                                   class="form-control-plaintext fontTempo form-control-sm col-md-5" #tempo size="2"
+                                   class="form-control-plaintext fontTempo form-control-sm col-md-7" #tempo size="2"
                                    (change)="atualizarSubOpe(suboperacao,tempo.value)"
                                    (blur)="atualizarSubOpe(suboperacao,tempo.value)"
                                    placeholder="mm" required="required">:
                             <input type="number" name="segundosOpe"
                                    id="segundosOpe" max="59" min="00" [brmasker]="{mask:'00', len:2}"
-                                   class="form-control-plaintext  form-control-sm col-md-5" #segundos size="2"
+                                   class="form-control-plaintext  form-control-sm col-md-6" #segundos size="2"
                                    (change)="segundosSubOpe(suboperacao,segundos.value)"
                                    (blur)="segundosSubOpe(suboperacao,segundos.value)"
                                    placeholder="ss" required="required">
@@ -108,7 +109,7 @@
                         </label>
                       </div>
                     </div>
-                    <div class="col-md-1 align-self-center">
+                    <div class="col-md-1 align-self-center " style="margin-right: 9%; padding: 3%;">
                       <a class="btn btn-danger" href="javascript:void(0)" data-toggle="modal"
                          data-target=".deletar-subope" (click)="subopeEscolhida(suboperacao)">-</a>
                     </div>
@@ -117,14 +118,23 @@
               </div>
 
               <div class="card-footer bg-transparent border-info modal-footer">
-                <input type="submit" class="btn btn-outline-success" href="javascript:void(0)" [disabled]="ope2"
-                       value="Salvar">
-
+                <a href="javascript:void(0)" (mouseover)="hintSubOpes()" data-toggle="tooltip"
+                   title="Some tooltip text!" data-placement="bottom">
+                  <input type="submit" class="btn btn-outline-success" href="javascript:void(0)"
+                         data-toggle="tooltip" data-placement="bottom" [disabled]="ope2 || cadastreSubOpe"
+                         value="Salvar">
+                </a>
                 <a class="btn btn-info" href="#" data-toggle="modal"
                    data-target=".cadastro-operacoes">+</a>
 
               </div>
             </form>
+            <div class="tooltip bs-tooltip-top" role="tooltip" *ngIf="cadastrarSubOpe">
+              <div class="arrow"></div>
+              <div class="tooltip-inner">
+                Cadastre uma SubOperação
+              </div>
+            </div>
           </div>
 
           <div class="col-md-4 formsequencia" *ngIf="ope2">
@@ -135,10 +145,10 @@
                   <div class="col-md-auto">
                     <div class="form-group">
                       <label for="LoteProdu" class="fonterisco">Lote de Produção:
-                      <input type="number" id="LoteProdu" min="1" max="999999" (change)="loteOpe(lote.value)"
-                             class="form-control" #lote (blur)="loteOpe(lote.value)"
-                             placeholder="Lote" name="loteProducao"
-                             required="required">
+                        <input type="number" id="LoteProdu" min="1" max="999999" (change)="loteOpe(lote.value)"
+                               class="form-control" #lote (blur)="loteOpe(lote.value)"
+                               placeholder="Lote" name="loteProducao"
+                               required="required">
                       </label>
                     </div>
                   </div>

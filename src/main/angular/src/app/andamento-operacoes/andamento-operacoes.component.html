@@ -23,7 +23,7 @@
       <div class="card-header border-info">Operações a fazer</div>
       <div class="card-body text-secondary">
         <a *ngFor="let operacao of peca.operacoesFazer" (click)="selectOperacao(operacao)" href="javascript:void(0)"
-           class="btn-outline-info list-group-item list-group-item-action">{{operacao.descricao}} / {{operacao.id}}</a>
+           class="btn-outline-info list-group-item list-group-item-action">{{operacao.descricao}}</a>
         <a *ngIf="peca.operacoesFazer.length <= 0"
            class="list-group-item list-group-item-action">Nenhuma Operação a fazer</a>
       </div>
@@ -38,7 +38,7 @@
         <a class="btn-outline-primary list-group-item list-group-item-action" href="javascript:void(0)"
            (click)="selectOperacao(operacao)"
            *ngFor="let operacao of peca.operacoesAndamento">
-          {{operacao.descricao}} / {{operacao.id}}
+          {{operacao.descricao}}
         </a>
         <a *ngIf="peca.operacoesAndamento.length <= 0"
            class=" list-group-item list-group-item-action">Nenhuma Operação em andamento</a>
@@ -54,7 +54,7 @@
         <a class="btn-ou/tline-warning list-group-item list-group-item-action " href="javascript:void(0)"
            (click)="selectOperacao(operacao)"
            *ngFor="let operacao of peca.operacoesPrazo">
-          {{operacao.descricao}} / {{operacao.id}}
+          {{operacao.descricao}}
         </a>
 
         <a *ngIf="peca.operacoesPrazo.length <= 0"
@@ -66,8 +66,7 @@
 </div>
 
 <form #f="ngForm" class="card" (ngSubmit)="update()" [noValidate]="$any(false)" *ngIf="opeSelected">
-  <div class="card-header">Informações da Operação: {{operacaoEscolhida.descricao}}
-    \ {{operacaoEscolhida.id}}</div>
+  <div class="card-header">Informações da Operação: {{operacaoEscolhida.descricao}}</div>
   <div class="card-body border-info">
     <div class="row">
       <div class="col-md-4 formsequencia">
@@ -92,23 +91,24 @@
                     <label for="tempoOpe">Tempo
                       <div class="row justify-content-center tempo">
                         <input type="number" name="tempoOpe"
-                               id="tempoOpe" max="59" [brmasker]="{mask:'00', len:2}" min="00"
+                               id="tempoOpe" max="59" [brmasker]="{mask:'00', len:2}" min="00" [disabled]="!editarOpe"
                                class="form-control-plaintext fontTempo form-control-sm col-md-5" #tempo size="2"
-                               (change)="atualizarSubOpe(suboperacao,tempo.value)"
-                               (blur)="atualizarSubOpe(suboperacao,tempo.value)"
+                               [(ngModel)]="suboperacao.tempoNesc"
                                placeholder="mm" required="required">:
-                        <input type="number" name="segundosOpe"
+                        <input type="number" name="segundosOpe" [disabled]="!editarOpe"
                                id="segundosOpe" max="59" min="00" [brmasker]="{mask:'00', len:2}"
                                class="form-control-plaintext  form-control-sm col-md-5" #segundos size="2"
-                               (change)="segundosSubOpe(suboperacao,segundos.value)"
-                               (blur)="segundosSubOpe(suboperacao,segundos.value)"
+                             [(ngModel)]="suboperacao.segundos"
                                placeholder="ss" required="required">
                       </div>
                     </label>
                   </div>
                 </div>
                 <div class="col-md-1 align-self-center">
-                  <i class="fas fa-fw fa-trash-alt">
+                  <i href="javascript:void(0)" class="fas fa-fw fa-trash-alt">
+                    <input class="fas fa-fw fa-trash-alt" type="button" href="javascript:void(0)" data-toggle="modal"
+                           [disabled]="!editarOpe"
+                           data-target=".deletar-subope2" (click)="subopeEscolhida(suboperacao)" value="-">
                   </i>
                   <input class="btn btn-danger" type="button" href="javascript:void(0)" data-toggle="modal"
                          [disabled]="!editarOpe"
@@ -170,8 +170,11 @@
             </div>
           </div>
           <div class="card-footer bg-transparent border-info modal-footer">
-
+            <input class="btn btn-warning" type="button" (click)="cancelar()" *ngIf="editarOpe"
+                   [disabled]="!valido"
+                   value="Cancelar">
             <input class="btn btn-info" type="submit" [disabled]="!valido" *ngIf="editarOpe" value="Atualizar">
+
             <input class="btn btn-primary" type="button" (click)="editar()" *ngIf="!editarOpe"
                    [disabled]="!valido"
                    value="Editar">

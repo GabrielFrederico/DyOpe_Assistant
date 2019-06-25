@@ -137,17 +137,17 @@ public class Operacao {
 		calcProHora = funcionariosNecessários * operacao.getTempoTrab();
 		prodHora = Math.round(operacao.getTempoTrab() / (operacao.getTempoTrab() / 60));
 		prodhoraresult = 60 * operacao.getNumFuncionariosDisponiveis();
-		producaoHora = Math.round(prodhoraresult / minutos);
+		producaoHora = Math.round(prodhoraresult / min);
 		operacao.setNumFuncionarios(funcionariosNecessários);
 		Date prazo = new Date(fim.getTime());
 		operacao.setPrazo(prazo);
 
-		System.out.println("dias: " + diasNeceteste + "  " + tempoFun + ". " + resultdias + ".minutos " + minutos + " "
+		System.out.println("dias: " + diasNeceteste + "  " + tempoFun + ". " + resultdias + ".minutos " + min + " "
 				+ qtdPecasOpe + " INICIO:" + operacao.getDataInicio());
 		operacao.setQtdPecasOpe(qtdPecasOpe);
 		operacao.setProducaoHora(producaoHora);
 		System.out.println(" Teste prod: " + operacao.getProducaoHora());
-		operacao.setTempos(minutos);
+		operacao.setTempos(min);
 
 		return operacao;
 

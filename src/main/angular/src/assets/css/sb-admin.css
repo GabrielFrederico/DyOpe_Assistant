@@ -137,7 +137,7 @@ body.fixed-nav.sidebar-toggled #content-wrapper {
 }
 
 .sidebar {
-  width: 90px !important;
+  width: 87px !important;
   background-color: #212529;
   min-height: calc(100vh - 56px);
 }
@@ -189,7 +189,7 @@ body.fixed-nav.sidebar-toggled #content-wrapper {
 
 @media (min-width: 768px) {
   .sidebar {
-    width: 200px !important;
+    width: 171px !important;
   }
 
   .sidebar .nav-item .nav-link {
@@ -197,7 +197,7 @@ body.fixed-nav.sidebar-toggled #content-wrapper {
     width: 100%;
     text-align: left;
     padding: 1rem;
-    width: 200px;
+    width: 184px;
   }
 
   .sidebar .nav-item .nav-link span {
