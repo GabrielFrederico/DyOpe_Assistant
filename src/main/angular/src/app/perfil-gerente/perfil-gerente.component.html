@@ -64,14 +64,15 @@
       </div>
 
       <div class="modal-footer">
-        <input class="btn btn-success" type="submit" [disabled]="isReadonly"
-               value="Salvar">
-        <input class="btn btn-outline-warning" href="#" data-toggle="modal" type="button" [disabled]="isReadonly"
+
+        <input class="btn btn-outline-warning" href="#" data-toggle="modal" type="button" *ngIf="!isReadonly"
                data-target=".redefinir-senha" value="Redefinir
           senha">
-        <input class="btn btn-outline-info" href="#" data-toggle="modal" type="button" [disabled]="isReadonly"
+        <input class="btn btn-outline-info" href="#" data-toggle="modal" type="button" *ngIf="!isReadonly"
                data-target=".chave-acesso" value="Chave Acesso">
-        <input class="btn btn-primary" type="button" (click)="toggleReadonly()" value="Editar">
+        <input class="btn btn-primary" type="button" (click)="toggleReadonly()" *ngIf="isReadonly" value="Editar">
+        <input class="btn btn-success" type="submit" *ngIf="!isReadonly"
+               value="Salvar">
 
         <div *ngIf="gerenteForm.submitted && updateFailed" class="alert alert-warning separa">
           Atualização Falhou!<br/>{{errorMessage}}

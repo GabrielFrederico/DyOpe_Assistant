@@ -64,6 +64,8 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
   inicio: Date;
   prazo: Date;
 
+  andamento = false;
+
   ngOnInit() {
     this.etapasproducao();
     this.info = {
@@ -244,6 +246,20 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
       }
 
     }
+  }
+
+  andamentoOpen() {
+    this.andamento = true;
+  }
+
+  concluirOpe() {
+    alert('Operação cadastrada com sucesso!');
+    this.router.navigateByUrl('/gerenteindex/homegerente', {skipLocationChange: true}).then(() =>
+      this.router.navigate(['/gerenteindex/operacoes/', this.etapaproducao.etapaProducao]));
+  }
+
+  andamentoClosed() {
+    this.andamento = false;
   }
 
   getOpe() {
