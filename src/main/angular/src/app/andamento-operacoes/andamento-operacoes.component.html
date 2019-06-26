@@ -91,14 +91,17 @@
                     <label for="tempoOpe">Tempo
                       <div class="row justify-content-center tempo">
                         <input type="number" name="tempoOpe"
-                               id="tempoOpe" max="59" [brmasker]="{mask:'00', len:2}" min="00" [disabled]="!editarOpe"
+                               id="tempoOpe" max="59" [brmasker]="{mask:'00', len:2}" min="00" [readonly]="!editarOpe"
                                class="form-control-plaintext fontTempo form-control-sm col-md-7" #tempo size="2"
-                               [(ngModel)]="suboperacao.tempoNesc"
+                               value="{{suboperacao.tempoNesc}}" (change)="atualizarSubOpe(suboperacao,tempo.value)"
+                               (blur)="atualizarSubOpe(suboperacao,tempo.value)"
                                placeholder="mm" required="required">:
-                        <input type="number" name="segundosOpe" [disabled]="!editarOpe"
+                        <input type="number" name="segundosOpe" [readonly]="!editarOpe"
                                id="segundosOpe" max="59" min="00" [brmasker]="{mask:'00', len:2}"
                                class="form-control-plaintext  form-control-sm col-md-6" #segundos size="2"
-                               [(ngModel)]="suboperacao.segundos"
+                               value="{{suboperacao.segundos}}"
+                               (change)="segundosSubOpe(suboperacao,segundos.value)"
+                               (blur)="segundosSubOpe(suboperacao,segundos.value)"
                                placeholder="ss" required="required">
                       </div>
                     </label>
@@ -106,7 +109,7 @@
                 </div>
                 <div class="col-md-1 align-self-center botaoexcluirsubope">
                   <button class="btn btn-danger btn-padding" [disabled]="!editarOpe" href="#" role="button"
-                          (click)="subopeEscolhida(suboperacao)"
+                          (click)="subopeEscolhida(suboperacao)" type="button"
                           data-toggle="modal"
                           data-target=".deletar-subope2">
                     <i class="fas fa-fw fa-trash-alt">

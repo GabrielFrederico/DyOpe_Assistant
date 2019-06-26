@@ -16,6 +16,14 @@ public class PlanilhaCusto {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	private float custoMinuto, lucro, gastosOpe, gastos, custoOpe;
+	private int numFunOpe;
+	public int getNumFunOpe() {
+		return numFunOpe;
+	}
+
+	public void setNumFunOpe(int numFunOpe) {
+		this.numFunOpe = numFunOpe;
+	}
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Operacao operacao;
@@ -94,18 +102,18 @@ public class PlanilhaCusto {
 
 	public static PlanilhaCusto calcularCusto(@RequestBody PlanilhaCusto planilha) {
 		Operacao operacao = planilha.getOperacao();
-		float custoMinuto, custo,lucro, ganho, gastos;
+		float custoMinuto, custo, lucro, ganho, gastos;
 		// 20 é dias, mudar pra dias
-		custoMinuto = planilha.getGastos()/operacao.getNumFuncionariosDisponiveis()/20/450;
+		custoMinuto = planilha.getGastos() / planilha.getNumFunOpe() / 20 / 450;
 		planilha.setCustoMinuto(custoMinuto);
 		custo = custoMinuto * operacao.getTempos();
-		ganho = custo*operacao.getLoteProducao();
+		ganho = custo * operacao.getLoteProducao();
 		gastos = planilha.getGastos() + planilha.getGastosOpe();
 		lucro = ganho - gastos;
 		planilha.setLucro(lucro);
-		
+
 		return planilha;
-		
+
 	}
 
 }

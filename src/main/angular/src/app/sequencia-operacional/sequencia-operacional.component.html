@@ -45,7 +45,7 @@
         </div>
       </div>
 
-      <div class="col-md-3">
+      <div class="col-md-3" *ngIf="etapaSelected">
         <a class="btn btn-info" href="#" data-toggle="modal"
            data-target=".cadastrar-peca">Cadastrar Peça</a>
       </div>
@@ -110,8 +110,14 @@
                       </div>
                     </div>
                     <div class="col-md-1 align-self-center botaoexcluirsubope">
-                      <a class="btn btn-danger" href="javascript:void(0)" data-toggle="modal"
-                         data-target=".deletar-subope" (click)="subopeEscolhida(suboperacao)">-</a>
+                      <button class="btn btn-danger btn-padding" href="#" role="button"
+                              (click)="subopeEscolhida(suboperacao)" type="button"
+                              data-toggle="modal"    data-target=".deletar-subope">
+                        <i class="fas fa-fw fa-trash-alt">
+                        </i>
+                      </button>
+                      <!--       <a class="btn btn-danger" href="javascript:void(0)" data-toggle="modal"
+                           data-target=".deletar-subope" (click)="subopeEscolhida(suboperacao)">-</a> -->
                     </div>
                   </div>
                 </div>
@@ -262,7 +268,7 @@
                 <div class="col-md-auto">
                   <div class="form-group">
                     <label for="DescricaoOp">Descrição da operação:</label>
-                    <input type="text" required="required" name="descricao" [(ngModel)]="newsuboperacao.descricao"
+                    <input type="text" required="required" name="descricao" [(ngModel)]="newsuboperacao.descricao" placeholder="Descrição"
                            class="form-control" minlength="4" id="DescricaoOp">
 
                   </div>

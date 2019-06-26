@@ -79,9 +79,13 @@ public class Operacao {
 		System.out.println("inicio2" + inic);
 
 		int diasAdded = 0;
-		ArrayList<Date> feriados = new ArrayList<>();
-		int segundos = 0;
-		float segundoscalc = 0, calcseg, min;
+		ArrayList<Integer> feriados = new ArrayList<>();
+		feriados.add(319);
+		feriados.add(359);
+		feriados.add(171);
+
+		float segundos = 0;
+		float segundoscalc, calcseg, min;
 		int minutos = 0, diasNece = 0, diasNeceteste = 0, funcionariosNecessários = 0, prodHora = 0, producaoHora,
 				prodhoraresult, qtdPecasOpe = 0;
 		for (SubOperacao subope : operacao.getSuboperacoes()) {
@@ -89,10 +93,11 @@ public class Operacao {
 			segundos += subope.getSegundos();
 
 		}
+		System.out.println("segundos"+segundos);
 		 calcseg = segundos*1;
 		segundoscalc = segundos / 60;
 		min = minutos + segundoscalc;
-
+		System.out.println(minutos+"segundos em min"+segundoscalc);
 		float result, funcCalc, calcProHora, tempoFun, resultdias;
 		tempoFun = operacao.getTempoTrab() * operacao.getNumFuncionariosDisponiveis();
 

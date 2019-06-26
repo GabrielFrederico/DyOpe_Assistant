@@ -71,10 +71,12 @@ export class PlanilhaCustoComponent implements OnInit {
   }
 
   cadastrar() {
+    this.planilha2 = true;
     if (this.atualizarPlanilha) {
       this.atualizar();
       console.log('planilha ATUALIZADA');
     } else {
+      this.planilha.numFunOpe = this.operacaoEscolhida.numFuncionariosDisponiveis;
       this.planilha.gerente_id = this.gerente.id;
       this.gerente.planilhascusto.push(this.planilha);
       this.gerenteService.cadastrarPlanilha(this.gerente).pipe(first()).subscribe(data => {
