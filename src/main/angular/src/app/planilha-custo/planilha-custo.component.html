@@ -24,8 +24,7 @@
 
         <label for="chaveAcesso">Chave de Acesso
           <input type="text" id="chaveAcesso" [(ngModel)]="gerente.verificarChaveAcesso" name="chaveAcesso"
-                 class="form-control"
-                 [autofocus]="true" placeholder="Chave de Acesso" required="required">
+                 class="form-control text-center" [autofocus]="true" placeholder="Chave de Acesso" required="required">
         </label>
       </div>
 
@@ -42,144 +41,164 @@
 
     <!-- AQUI VAI AS PÁGINAS -->
 
-    <div class="col-md-3" *ngIf="ope2">
-      <div class="card border-info mb-3 operacoes lista">
-        <div class="card-header border-info">Dados:</div>
-        <div class="card-body text-secondary">
-          <div class="form-group">
-            <div class="col-md-auto">
-              <div class="form-group">
-                <label for="LoteProdu" class="fonterisco">Lote de Produção:</label>
-                <input type="number" id="LoteProdu" min="1" max="999999" (change)="loteOpe(lote.value)"
-                       class="form-control" #lote (blur)="loteOpe(lote.value)"
-                       placeholder="Lote" name="loteProducao"
-                       required="required">
+    <nav class="espacamentosequenciaoperacional">
+      <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <a class="nav-item nav-link active" id="nav-operacoes-tab" data-toggle="tab" href="#nav-operacoes" role="tab"
+           aria-controls="nav-operacoes" aria-selected="true">Cadastro</a>
+        <a class="nav-item nav-link " id="nav-andamento-tab" data-toggle="tab" href="#nav-andamento" role="tab"
+           aria-controls="nav-home" aria-selected="false">Custos</a>
+      </div>
+    </nav>
+
+    <div class="tab-content">
+      <div class="tab-pane fade show active" id="nav-cadastro" role="tabpanel" aria-labelledby="nav-cadastro-tab">
+
+        <div class="row espacamentosequenciaoperacional">
+
+          <div class="col-md-4 formsequencia">
+            <div class="card border-info mb-3 operacoes lista">
+              <div class="card-header border-info text-center">Dados:</div>
+              <div class="card-body text-secondary">
+                <div class="form-group">
+                  <div class="form-row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <div class="form-label-group">
+                          <label for="pecas">Peças:</label>
+                          <input type="number" id="pecas" min="1" max="999999" class="form-control"
+                                 placeholder="Peças:" name="pecas" required="required">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <div class="form-label-group">
+                          <label for="operacoes">Operações:</label>
+                          <input type="number" id="operacoes" min="1" max="9999" class="form-control"
+                                 placeholder="Operações:" name="operacoes:" required="required">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <div class="form-label-group">
+                          <label for="gastos">Gastos:</label>
+                          <input type="number" id="gastos" name="gastos" class="form-control"
+                                 placeholder="Gastos:" required="required">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <div class="form-label-group">
+                          <label for="gastosoperacionais">Gastos Ope:</label>
+                          <input type="number" id="gastosoperacionais" name="gastosoperacionais" class="form-control"
+                                 placeholder="Gastos Operacionais:" required="required">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
-            <div class="col-md-auto">
-              <div class="form-group">
-                <label for="numFun" class="fonterisco">N° de Funcionários
-                  <input type="number" id="numFun" min="1" max="9999" #numFun (change)="numfunOpe(numFun.value)"
-                         class="form-control" (blur)="numfunOpe(numFun.value)"
-                         placeholder="(disponíveis)" name="numFun"
-                         required="required">
-                </label>
-              </div>
-            </div>
-            <div class="col-md-auto">
-              <div class="form-group">
-                <label for="datainici">Data Inicio:
-                  <input type="date" id="datainici" name="dataInicio" class="form-control" min="2019-05-01"
-                         max="2020-12-30"
-                         placeholder="Data Inicio:" [(ngModel)]="operacaoEscolhida.dataInicio"
-                         required="required">
-                </label>
+              <div class="card-footer bg-transparent border-info">
+                <input class="btn btn-success" type="submit" [disabled]="!valido" *ngIf="!planilha2"
+                       value="Cadastrar">
+                <input class="btn btn-outline-info" type="submit" [disabled]="!valido"
+                       value="Atualizar">
+                <input class="btn btn-primary" type="button" (click)="concluirOpe()"
+                       value="Concluir">
               </div>
             </div>
           </div>
-        </div>
-        <div class="card-footer bg-transparent border-info">
-          <input class="btn btn-success" type="submit" [disabled]="!valido" *ngIf="!ope3" value="Cadastrar">
-          <input class="btn btn-outline-info" type="submit" [disabled]="!valido" *ngIf="atualizarOpe"
-                 value="Atualizar">
-          <input class="btn btn-primary" type="button" (click)="concluirOpe()" *ngIf="atualizarOpe"
-                 value="Concluir">
-        </div>
-      </div>
-    </div>
 
-    <div class="col-sm-5" *ngIf="ope3">
-      <div class="card border-success mb-3 lista">
-        <div class="card-header border-info">Resultado Final:</div>
-        <div class="card-body text-success">
-          <div class="form-group">
-            <div class="col-md-auto">
-              <div class="form-group">
-                <label for="prazo">Prazo:
-                  <input type="date" id="prazo" name="prazo" class="form-control-plaintext"
-                         [readonly]="isReadonly"
-                         placeholder="Prazo:" [(ngModel)]="resultadoOpe.prazo">
-                </label>
-              </div>
-            </div>
-            <div class="col-md-auto" *ngIf="numfumok">
-              <div class="form-group">
-                <label for="numFunNesc" class="fonterisco">Funcionários necessários:
-                  <input type="text" id="numFunNesc"
-                         class="form-control-plaintext" value="{{resultadoOpe.numFuncionarios}}"
-                         [readonly]="isReadonly"
-                         placeholder="Funcionários necessários:" name="numFuncionarios">
-                </label>
-              </div>
-            </div>
-            <div class="col-md-auto">
-              <div class="form-group">
-                <label for="QtdPecasOpe" class="fonterisco">Peças por funcionário:
-                  <input type="text" id="QtdPecasOpe"
-                         class="form-control-plaintext" value="{{resultadoOpe.qtdPecasOpe}} Peças"
-                         [readonly]="isReadonly"
-                         placeholder="Peças por funcionário:" name="qtdPecasOpe">
-                </label>
-              </div>
-            </div>
-            <div class="col-md-auto">
-              <div class="form-group">
-                <label for="producaoHora" class="fonterisco">Produção por hora:
-                  <input type="text" id="producaoHora"
-                         class="form-control-plaintext" value="{{resultadoOpe.producaoHora}} Peças"
-                         [readonly]="isReadonly"
-                         placeholder="Quantidade de peças por funcionário:" name="producaoHora">
-                </label>
-              </div>
-            </div>
-          </div>
-          <a class="btn btn-outline-success list-group-item list-group-item-action"
-             routerLink="/gerenteindex/planilhadecusto">
-            Abrir Planilha
-          </a>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-</div>
-
-<!-- cadastro de planilha de custo -->
-<div class="modal fade cadastrar-peca" tabindex="-1" role="dialog" aria-labelledby="modalpeca"
-     aria-hidden="true">
-  <div class="modal-dialog modal-body">
-
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">×</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="card-body">
-          <form (ngSubmit)="cadastrarPlanilha()" [noValidate]="$any(false)">
-            <div class="form-group">
-              <div class="col-md-auto">
-                <div class="form-label-group">
-                  <input type="text" #nomePeca id="nomePeca" class="form-control" name="descricaop"
-                         placeholder="Nome da peça:"
-                         required="required">
-                  <label for="nomePeca">Nome da peça:</label>
+          <div class="col-md-4 formsequencia" *ngIf="planilha2">
+            <div class="card border-success mb-3 lista">
+              <div class="card-header border-info text-center">Resultado Final:</div>
+              <div class="card-body text-success">
+                <div class="form-group">
+                  <div class="col-md-auto">
+                    <div class="form-group">
+                      <label for="precoporminuto">Preço por minuto:
+                        <input type="number" id="precoporminuto" name="precoporminuto" class="form-control-plaintext"
+                               [readonly]="isReadonly" [(ngModel)]="resultadoPlanilha.custo_minuto">
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-md-auto">
+                    <div class="form-group">
+                      <label for="precodapeca" class="fonterisco">Preço da peça:
+                        <input type="number" id="precodapeca"
+                               class="form-control-plaintext" value="{{resultadoPlanilha.custo_ope}}"
+                               [readonly]="isReadonly" name="precodapeca">
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-md-auto">
+                    <div class="form-group">
+                      <label for="lucro" class="fonterisco">Lucro:
+                        <input type="number" id="lucro"
+                               class="form-control-plaintext" value="{{resultadoPlanilha.lucro}}"
+                               [readonly]="isReadonly" name="lucro">
+                      </label>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="modal-footer col-md-12">
-              <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-              <input class="btn btn-primary" type="submit" value="Confirmar">
-            </div>
-          </form>
+          </div>
+
         </div>
+
+        <ng-template #naoescolheu>
+          Escolha uma Peça!
+        </ng-template>
+
+      </div>
+      <div class="tab-pane fade show" id="nav-custos" role="tabpanel" aria-labelledby="nav-custos-tab">
+
+        ...
+
       </div>
     </div>
+
+
   </div>
+
 </div>
 
-<ng-template #naoescolheu>
-  Escolha uma Peça!
-</ng-template>
+<!--&lt;!&ndash; cadastro de planilha de custo &ndash;&gt;-->
+<!--<div class="modal fade cadastrar-peca" tabindex="-1" role="dialog" aria-labelledby="modalpeca"-->
+<!--     aria-hidden="true">-->
+<!--  <div class="modal-dialog modal-body">-->
+
+<!--    <div class="modal-content">-->
+<!--      <div class="modal-header">-->
+<!--        <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--          <span aria-hidden="true">×</span>-->
+<!--        </button>-->
+<!--      </div>-->
+<!--      <div class="modal-body">-->
+<!--        <div class="card-body">-->
+<!--          <form (ngSubmit)="cadastrarPlanilha()" [noValidate]="$any(false)">-->
+<!--            <div class="form-group">-->
+<!--              <div class="col-md-auto">-->
+<!--                <div class="form-label-group">-->
+<!--                  <input type="text" #nomePeca id="nomePeca" class="form-control" name="descricaop"-->
+<!--                         placeholder="Nome da peça:"-->
+<!--                         required="required">-->
+<!--                  <label for="nomePeca">Nome da peça:</label>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="modal-footer col-md-12">-->
+<!--              <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>-->
+<!--              <input class="btn btn-primary" type="submit" value="Confirmar">-->
+<!--            </div>-->
+<!--          </form>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
