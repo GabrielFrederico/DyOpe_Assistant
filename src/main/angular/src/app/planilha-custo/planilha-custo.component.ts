@@ -14,6 +14,7 @@ export class PlanilhaCustoComponent implements OnInit {
   // tslint:disable-next-line:max-line-length
   constructor(private router: Router, private gerenteService: GerenteService,
               private etapaService: CadastroOperacaoService, private token: TokenStorageService) {
+
   }
 
   @ViewChild('closeModal') closeOpeModal: ElementRef;
@@ -31,8 +32,9 @@ export class PlanilhaCustoComponent implements OnInit {
   operacaoEscolhida: any;
   resultadoOpe: any;
   isReadonly = true;
-  numfumok = false;
+  planilha2 = false;
 
+  atualizarOpe = false;
   valido = true;
 
   validado: boolean;
@@ -52,6 +54,12 @@ export class PlanilhaCustoComponent implements OnInit {
     }, error => {
       console.log(error.error);
     });
+  }
+
+  concluirOpe() {
+    alert('Operação cadastrada com sucesso!');
+    this.router.navigateByUrl('/gerenteindex/homegerente', {skipLocationChange: true}).then(() =>
+      this.router.navigate(['/gerenteindex/planilhadecusto/']));
   }
 
   loteOpe(lote: any) {

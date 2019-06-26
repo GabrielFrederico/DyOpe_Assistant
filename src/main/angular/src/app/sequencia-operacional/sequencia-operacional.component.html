@@ -34,7 +34,7 @@
 
       <div class="form-group" *ngIf="etapaSelected; else naoescolheuetapa">
         <div class="col-md-2 align-self-center">
-          <mat-form-field >
+          <mat-form-field>
             <mat-label class="text-dark">Peças:</mat-label>
             <mat-select required="required" name="peca" [(ngModel)]="peca">
               <mat-option *ngFor="let peca of gerente.pecas" [value]="peca"
@@ -359,7 +359,7 @@
       Escolha uma Etapa e uma Peça!
     </ng-template>
     <ng-template #naoescolheupeca class="separa">
-      Escolha  uma Peça!
+      Escolha uma Peça!
     </ng-template>
   </div>
   <div class="tab-pane fade show" id="nav-andamento" role="tabpanel" aria-labelledby="nav-andamento-tab">
