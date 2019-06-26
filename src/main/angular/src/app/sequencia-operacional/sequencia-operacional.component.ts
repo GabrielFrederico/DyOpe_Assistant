@@ -51,7 +51,8 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
   public modalOpen = false;
   resultadoOpe: any;
   isReadonly = true;
-
+  pecaSelected = false;
+  etapaSelected = false;
   public escolheu = false;
   ope2 = false;
   ope3 = false;
@@ -154,10 +155,12 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
 
       this.operacaoService.getOperacoesSub().subscribe(data => {
         this.suboperacoes = data;
+        this.etapaSelected = true;
         if (this.escolheu) {
           this.suboperacoes.forEach((item, index) => {
             this.listasuboperacoes.push(item);
           });
+
           this.cadastreSubOpe = false;
         }
       }, error => {
@@ -452,7 +455,6 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
     this.suboperacaoEscolhida = subope;
 
   }
-
   selectsPeca(peca: any) {
     this.peca = peca;
 
@@ -460,9 +462,11 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
       this.suboperacoes.forEach((item, index) => {
         this.listasuboperacoes.push(item);
       });
+      this.escolheu = true;
       this.suboperacoes = null;
     }
-    this.escolheu = true;
+
+
   }
 
   toggleReadonly() {
