@@ -65,6 +65,7 @@ export class AndamentoOperacoesComponent implements OnInit {
   editar() {
     this.editarOpe = true;
   }
+
   cancelar() {
     this.editarOpe = false;
   }
@@ -199,10 +200,12 @@ export class AndamentoOperacoesComponent implements OnInit {
     this.gerenteService.getGerente(this.info.username).subscribe(data => this.gerente = data);
     // console.clear();
   }
+
   segundosSubOpe(subope: any, segundos: string) {
     this.suboperacaoEscolhida = subope;
     this.suboperacaoEscolhida.segundos = +segundos;
   }
+
   separarOperacoes() {
     this.hoje = new Date();
     this.peca.operacoesFazer.forEach((data, index) => {
@@ -217,26 +220,28 @@ export class AndamentoOperacoesComponent implements OnInit {
         this.updateOpes();
         alert('opesseparadasa' + this.operacaoFazer.id + 'inicio' + this.operacaoFazer.dataInicio);
       } else if (this.hoje.getTime() === this.prazo.getTime() || this.prazo < this.hoje && this.inicio < this.hoje) {
-        this.peca.operacoesFazer.splice(i, 1);
+        this.peca.operacoesFazer.splice(index, 1);
         this.peca.operacoesPrazo.push(this.operacaoFazer);
         this.updateOpes();
         alert('opesseparadasfp' + this.operacaoFazer.id + 'inicio' + this.operacaoFazer.dataInicio);
       }
 
     });
-    this.peca.operacoesAndamento.forEach((data, index) => {
-      this.operacao = data;
+    this.peca.operacoesAndamento.map(item => {
+      this.operacao = item;
       this.inicio = new Date(this.operacao.dataInicio);
       this.prazo = new Date(this.operacao.prazo);
       // tslint:disable-next-line:no-shadowed-variable
-      const i = this.peca.operacoesAndamento.indexOf(this.operacao);
       if (this.hoje.getTime() === this.prazo.getTime() || this.prazo < this.hoje && this.inicio < this.hoje) {
-        this.peca.operacoesAndamento.splice(i, 1);
+        delete this.operacao;
         this.peca.operacoesPrazo.push(this.operacao);
         this.updateOpes();
-        alert('opesseparadasfp');
+        alert('opesseparadasap');
       }
     });
+
+    // this.peca.operacoesAndamento.forEach((data, index) => {
+    // });
     this.operacoesSeparadas = true;
 
 

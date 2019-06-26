@@ -68,12 +68,12 @@
               <mat-label class="text-dark">Operacao</mat-label>
               <mat-select required="required" name="ope" [(ngModel)]="ope" (change)="selectOpe()">
                 <mat-option *ngFor="let operacao of peca.operacoesFazer"
-                            [value]="operacao">{{operacao.descricao}} / {{operacao.id}}</mat-option>
+                            [value]="operacao">{{operacao.descricao}}</mat-option>
                 <mat-option *ngFor="let operacao of peca.operacoesAndamento"
-                            [value]="operacao">{{operacao.descricao}} / {{operacao.id}}</mat-option>
+                            [value]="operacao">{{operacao.descricao}}</mat-option>
                 <mat-option *ngFor="let operacao of peca.operacoesPrazo"
-                            [value]="operacao">{{operacao.descricao}} / {{operacao.id}}</mat-option>
-                <mat-option *ngIf="peca.operacoesFazer.length <=0 || peca.operacoesAndamento.length <=0">Nenhuma Operacao Cadastrado</mat-option>
+                            [value]="operacao">{{operacao.descricao}}</mat-option>
+                <!-- <mat-option *ngIf="peca.operacoesFazer.length <=0 || peca.operacoesAndamento.length <=0">Nenhuma Operacao Cadastrado</mat-option> -->
               </mat-select>
             </mat-form-field>
           </div>
@@ -107,14 +107,14 @@
 
   <!-- /.container-fluid -->
 
-    <!-- Sticky Footer -->
-    <footer class="sticky-footer">
-      <div class="container my-auto ">
-        <div class="copyright text-center my-auto ">
-          <span>Copyright © DyOpe Assistant 2019</span>
-        </div>
+  <!-- Sticky Footer -->
+  <footer class="sticky-footer">
+    <div class="container my-auto ">
+      <div class="copyright text-center my-auto ">
+        <span>Copyright © DyOpe Assistant 2019</span>
       </div>
-    </footer>
+    </div>
+  </footer>
 </div>
 <!-- /.content-wrapper -->
 
