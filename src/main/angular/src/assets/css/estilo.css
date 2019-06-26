@@ -9,6 +9,10 @@
 .desc{
    padding: 0%;
 }
+.btn-padding{
+ padding: 1%;
+}
+
 .modal-xl {
   max-width: 80%;
   margin: 1.75rem auto;
@@ -20,6 +24,11 @@
   flex-wrap: nowrap;
   width: 143%;
 }
+
+.botaoexcluirsubope{
+  margin-right: 9%; padding: 3%;
+}
+
 .textoinicial{
   font-size: 199%;
   margin: 3.6%;

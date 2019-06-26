@@ -79,6 +79,7 @@ export class PlanilhaCustoComponent implements OnInit {
       this.gerente.planilhascusto.push(this.planilha);
       this.gerenteService.cadastrarPlanilha(this.gerente).pipe(first()).subscribe(data => {
         this.getdadosCustos();
+        this.planilha2 = true;
       }, error => {
         this.mensagemErro = error.error;
       });

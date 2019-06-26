@@ -163,6 +163,15 @@ export class AndamentoOperacoesComponent implements OnInit {
     this.operacaoEscolhida.suboperacoes.splice(index, 1);
   }
 
+  excluirOpe() {
+    this.operacaoService.deletarOperacao(this.operacaoEscolhida.id).subscribe(data => {
+      alert('Operação excluída!');
+    }, error => {
+      this.errorMessage = error.error;
+      this.erro = true;
+    });
+  }
+
   deletarOperacao(ope: any) {
     this.operacaoEscolhida = ope;
     this.hoje = new Date();
@@ -172,21 +181,26 @@ export class AndamentoOperacoesComponent implements OnInit {
     if (this.inicio > this.hoje) {
       const i = this.peca.operacoesFazer.indexOf(this.operacaoEscolhida);
       this.peca.operacoesFazer.splice(i, 1);
-      this.updateOpes();
-      alert('Operação excluída!');
+      this.operacaoEscolhida.peca_id = null;
+      this.excluirOpe();
+      // this.updateOpes();
       this.opeSelected = false;
     } else if (this.inicio.getTime() === this.hoje.getTime() || this.inicio < this.hoje) {
       const i = this.peca.operacoesAndamento.indexOf(this.operacaoEscolhida);
       this.peca.operacoesAndamento.splice(i, 1);
-      this.updateOpes();
-      alert('Operação excluída!');
+      this.operacaoEscolhida.peca_id = null;
+      this.excluirOpe();
+      // this.updateOpes();
       this.opeSelected = false;
     } else if (this.hoje.getTime() === this.prazo.getTime() || this.prazo < this.hoje) {
       const i = this.peca.operacoesPrazo.indexOf(this.operacaoEscolhida);
       this.peca.operacoesPrazo.splice(i, 1);
-      this.updateOpes();
-      alert('Operação excluída!');
-
+      this.operacaoEscolhida.peca_id = null;
+      if (this.peca.operacao_id === this.operacaoEscolhida.id) {
+        this.peca.operacao_id = null;
+      }
+      this.excluirOpe();
+      // this.updateOpes();
       this.opeSelected = false;
     }
 
@@ -208,25 +222,42 @@ export class AndamentoOperacoesComponent implements OnInit {
 
   separarOperacoes() {
     this.hoje = new Date();
-    this.peca.operacoesFazer.forEach((data, index) => {
-      this.operacaoFazer = data;
+
+    this.peca.operacoesFazer.map(item => {
+      this.operacaoFazer = item;
       this.inicio = new Date(this.operacaoFazer.dataInicio);
       this.prazo = new Date(this.operacaoFazer.prazo);
-      // tslint:disable-next-line:no-shadowed-variable
-      const i = this.peca.operacoesFazer.indexOf(this.operacaoFazer);
       if (this.inicio.getTime() === this.hoje.getTime() || this.inicio < this.hoje && this.inicio < this.prazo) {
-        this.peca.operacoesFazer.splice(index, 1);
         this.peca.operacoesAndamento.push(this.operacaoFazer);
+        delete this.operacaoFazer;
         this.updateOpes();
         alert('opesseparadasa' + this.operacaoFazer.id + 'inicio' + this.operacaoFazer.dataInicio);
       } else if (this.hoje.getTime() === this.prazo.getTime() || this.prazo < this.hoje && this.inicio < this.hoje) {
-        this.peca.operacoesFazer.splice(index, 1);
         this.peca.operacoesPrazo.push(this.operacaoFazer);
+        delete this.operacaoFazer;
         this.updateOpes();
         alert('opesseparadasfp' + this.operacaoFazer.id + 'inicio' + this.operacaoFazer.dataInicio);
       }
-
     });
+
+    // this.peca.operacoesFazer.forEach((data, index) => {
+    //   this.operacaoFazer = data;
+    //   this.inicio = new Date(this.operacaoFazer.dataInicio);
+    //   this.prazo = new Date(this.operacaoFazer.prazo);
+    //   // tslint:disable-next-line:no-shadowed-variable
+    //   const i = this.peca.operacoesFazer.indexOf(this.operacaoFazer);
+    //   if (this.inicio.getTime() === this.hoje.getTime() || this.inicio < this.hoje && this.inicio < this.prazo) {
+    //     this.peca.operacoesFazer.splice(index, 1);
+    //     this.peca.operacoesAndamento.push(this.operacaoFazer);
+    //     this.updateOpes();
+    //     alert('opesseparadasa' + this.operacaoFazer.id + 'inicio' + this.operacaoFazer.dataInicio);
+    //   } else if (this.hoje.getTime() === this.prazo.getTime() || this.prazo < this.hoje && this.inicio < this.hoje) {
+    //     this.peca.operacoesFazer.splice(index, 1);
+    //     this.peca.operacoesPrazo.push(this.operacaoFazer);
+    //     this.updateOpes();
+    //     alert('opesseparadasfp' + this.operacaoFazer.id + 'inicio' + this.operacaoFazer.dataInicio);
+    //   }
+    // });
     this.peca.operacoesAndamento.map(item => {
       this.operacao = item;
       this.inicio = new Date(this.operacao.dataInicio);

@@ -150,12 +150,10 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
 
   selectEtapa(etapa: any) {
     this.etapa = etapa;
-
     if (this.etapa.id === 5) {
 
       this.operacaoService.getOperacoesSub().subscribe(data => {
         this.suboperacoes = data;
-        this.etapaSelected = true;
         if (this.escolheu) {
           this.suboperacoes.forEach((item, index) => {
             this.listasuboperacoes.push(item);
@@ -171,6 +169,8 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
       this.suboperacoes = [];
       this.cadastreSubOpe = true;
     }
+
+    this.etapaSelected = true;
     console.clear();
   }
 
@@ -455,6 +455,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
     this.suboperacaoEscolhida = subope;
 
   }
+
   selectsPeca(peca: any) {
     this.peca = peca;
 

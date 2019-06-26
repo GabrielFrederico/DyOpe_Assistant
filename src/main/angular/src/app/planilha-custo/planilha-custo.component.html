@@ -43,7 +43,7 @@
 
     <nav class="espacamentosequenciaoperacional">
       <div class="nav nav-tabs" id="nav-tab" role="tablist">
-        <a class="nav-item nav-link active" id="nav-operacoes-tab" data-toggle="tab" href="#nav-operacoes" role="tab"
+        <a class="nav-item nav-link active" id="nav-cadastro-tab" data-toggle="tab" href="#nav-cadastro" role="tab"
            aria-controls="nav-operacoes" aria-selected="true">Cadastro</a>
         <a class="nav-item nav-link " id="nav-andamento-tab" data-toggle="tab" href="#nav-andamento" role="tab"
            aria-controls="nav-home" aria-selected="false">Custos</a>
@@ -56,7 +56,8 @@
         <div class="row espacamentosequenciaoperacional">
 
           <div class="col-md-4 formsequencia">
-            <div class="card border-info mb-3 operacoes lista">
+            <form class="card border-info mb-3 operacoes lista" (ngSubmit)="cadastrar()"
+                  [noValidate]="$any(false)">
               <div class="card-header border-info text-center">Dados:</div>
               <div class="card-body text-secondary">
                 <div class="form-group">
@@ -105,12 +106,12 @@
               <div class="card-footer bg-transparent border-info">
                 <input class="btn btn-success" type="submit" [disabled]="!valido" *ngIf="!planilha2"
                        value="Cadastrar">
-                <input class="btn btn-outline-info" type="submit" [disabled]="!valido"
+                <input class="btn btn-outline-info" type="submit" [disabled]="!valido" *ngIf="planilha2"
                        value="Atualizar">
-                <input class="btn btn-primary" type="button" (click)="concluirOpe()"
+                <input class="btn btn-primary" type="button" (click)="concluirOpe()" *ngIf="planilha2"
                        value="Concluir">
               </div>
-            </div>
+            </form>
           </div>
 
           <div class="col-md-4 formsequencia" *ngIf="planilha2">

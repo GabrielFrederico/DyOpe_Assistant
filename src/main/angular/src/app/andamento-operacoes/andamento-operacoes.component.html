@@ -75,44 +75,46 @@
           <div class="card-body text-secondary">
             <div class="form-group">
               <div *ngFor="let suboperacao of operacaoEscolhida.suboperacoes; trackBy: trackByFn"
-                   class="row">
-                <div class="col-md-4">
+                   class="row justify-content-around">
+                <div class="col-md-3 desc">
                   <div class="form-group">
                     <label for="descricaot">Descrição
                       <input type="text" name="descricaodb"
                              id="descricaot" value="{{suboperacao.descricao}}" [readonly]="!editarOpe"
-                             class="form-control" minlength="3"
+                             class="form-control-plaintext" minlength="3"
                              placeholder="" required="required">
                     </label>
                   </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                   <div class="form-group">
                     <label for="tempoOpe">Tempo
                       <div class="row justify-content-center tempo">
                         <input type="number" name="tempoOpe"
                                id="tempoOpe" max="59" [brmasker]="{mask:'00', len:2}" min="00" [disabled]="!editarOpe"
-                               class="form-control-plaintext fontTempo form-control-sm col-md-5" #tempo size="2"
+                               class="form-control-plaintext fontTempo form-control-sm col-md-7" #tempo size="2"
                                [(ngModel)]="suboperacao.tempoNesc"
                                placeholder="mm" required="required">:
                         <input type="number" name="segundosOpe" [disabled]="!editarOpe"
                                id="segundosOpe" max="59" min="00" [brmasker]="{mask:'00', len:2}"
-                               class="form-control-plaintext  form-control-sm col-md-5" #segundos size="2"
-                             [(ngModel)]="suboperacao.segundos"
+                               class="form-control-plaintext  form-control-sm col-md-6" #segundos size="2"
+                               [(ngModel)]="suboperacao.segundos"
                                placeholder="ss" required="required">
                       </div>
                     </label>
                   </div>
                 </div>
-                <div class="col-md-1 align-self-center">
-                  <i href="javascript:void(0)" class="fas fa-fw fa-trash-alt">
-                    <input class="fas fa-fw fa-trash-alt" type="button" href="javascript:void(0)" data-toggle="modal"
-                           [disabled]="!editarOpe"
-                           data-target=".deletar-subope2" (click)="subopeEscolhida(suboperacao)" value="-">
-                  </i>
-                  <input class="btn btn-danger" type="button" href="javascript:void(0)" data-toggle="modal"
-                         [disabled]="!editarOpe"
-                         data-target=".deletar-subope2" (click)="subopeEscolhida(suboperacao)" value="-">
+                <div class="col-md-1 align-self-center botaoexcluirsubope">
+                  <button class="btn btn-danger btn-padding" [disabled]="!editarOpe" href="#" role="button"
+                          (click)="subopeEscolhida(suboperacao)"
+                          data-toggle="modal"
+                          data-target=".deletar-subope2">
+                    <i class="fas fa-fw fa-trash-alt">
+                    </i>
+                  </button>
+                  <!-- <input class="btn btn-danger" type="button" href="javascript:void(0)" data-toggle="modal"
+                          [disabled]="!editarOpe"
+                          data-target=".deletar-subope2" (click)="subopeEscolhida(suboperacao)" value="-"> -->
                 </div>
               </div>
             </div>
