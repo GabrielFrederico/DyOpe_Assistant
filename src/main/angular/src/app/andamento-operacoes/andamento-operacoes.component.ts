@@ -145,6 +145,7 @@ export class AndamentoOperacoesComponent implements OnInit {
 
   voltar() {
     this.opeSelected = false;
+    this.escolheu = false;
     this.escolheu = true;
   }
 
