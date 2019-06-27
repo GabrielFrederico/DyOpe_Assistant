@@ -44,9 +44,9 @@
     <nav class="espacamentosequenciaoperacional">
       <div class="nav nav-tabs" id="nav-tab" role="tablist">
         <a class="nav-item nav-link active" id="nav-cadastro-tab" data-toggle="tab" href="#nav-cadastro" role="tab"
-           aria-controls="nav-operacoes" aria-selected="true">Cadastro</a>
-        <a class="nav-item nav-link " id="nav-andamento-tab" data-toggle="tab" href="#nav-andamento" role="tab"
-           aria-controls="nav-home" aria-selected="false">Custos</a>
+           aria-controls="nav-cadastro" aria-selected="true">Cadastro</a>
+        <a class="nav-item nav-link " id="nav-custos-tab" data-toggle="tab" href="#nav-custos" role="tab"
+           aria-controls="nav-custos" aria-selected="false">Custos</a>
       </div>
     </nav>
 
@@ -79,7 +79,8 @@
                       <div class="form-group">
                         <mat-form-field>
                           <mat-label class="text-dark">Operacao</mat-label>
-                          <mat-select required="required" name="operacaoEscolhida" [(ngModel)]="operacaoEscolhida" (change)="selectOpe()">
+                          <mat-select required="required" name="operacaoEscolhida" [(ngModel)]="operacaoEscolhida"
+                                      (change)="selectOpe()">
                             <mat-option *ngFor="let operacao of peca.operacoesFazer"
                                         [value]="operacao">{{operacao.descricao}}</mat-option>
                             <mat-option *ngFor="let operacao of peca.operacoesAndamento"
@@ -166,9 +167,36 @@
         </ng-template>
 
       </div>
-      <div class="tab-pane fade show" id="nav-custos" role="tabpanel" aria-labelledby="nav-custos-tab">
+      <div class="tab-pane fade" id="nav-custos" role="tabpanel" aria-labelledby="nav-custos-tab">
 
-        ...
+        <div class="card border-info mb-3">
+          <div class="card-header border-info">Lista de Custos</div>
+          <table class="table table table-bordered dataTable">
+            <thead>
+            <tr>
+              <th>ID</th>
+              <th>Operação</th>
+              <th>Gastos</th>
+              <th>Gastos Operacionais</th>
+              <th>Custo Minuto</th>
+              <th>Custo</th>
+              <th>Lucro</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let planilhas of gerente.planilhascusto">
+              <td>{{planilhas.id}}</td>
+              <td>{{planilhas.operacao}}</td>
+              <td>{{planilhas.gastos}}</td>
+              <td>{{planilhas.gastosOpe}}</td>
+              <td>{{planilhas.custoMinuto}}</td>
+              <td>{{planilhas.custoOpe}}</td>
+              <td>{{planilhas.lucro}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
 
       </div>
     </div>

@@ -38,11 +38,11 @@ public class PlanilhaCusto {
 		this.id = id;
 	}
 
-	public float getPreocoMinuto() {
+	public float getPrecoMinuto() {
 		return custoMinuto;
 	}
 
-	public void setPreocoMinuto(float preocoMinuto) {
+	public void setPrecoMinuto(float preocoMinuto) {
 		this.custoMinuto = preocoMinuto;
 	}
 
