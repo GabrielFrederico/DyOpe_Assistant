@@ -113,7 +113,7 @@ export class AndamentoOperacoesComponent implements OnInit {
 
   selectsPeca(peca: any) {
     this.peca = peca;
-    this.separarOperacoes();
+    this.refresh(this.peca);
     this.escolheu = true;
   }
 
@@ -127,7 +127,7 @@ export class AndamentoOperacoesComponent implements OnInit {
         || this.peca.operacoesPrazo.length < this.pecarefresh.operacoesPrazo.length) {
         this.peca = this.pecarefresh;
       }
-     // this.separarOperacoes();
+      this.separarOperacoes();
       this.refreshed = true;
     }, error => {
       console.log(error.error);
@@ -145,6 +145,7 @@ export class AndamentoOperacoesComponent implements OnInit {
 
   voltar() {
     this.opeSelected = false;
+    this.refresh(this.peca);
     this.escolheu = false;
     this.escolheu = true;
   }
