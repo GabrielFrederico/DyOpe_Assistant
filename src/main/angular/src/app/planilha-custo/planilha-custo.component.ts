@@ -39,6 +39,7 @@ export class PlanilhaCustoComponent implements OnInit {
   ope: any;
   opeShow = false;
   showPlanilha = false;
+  planilhas: any;
 
   ngOnInit() {
     this.info = {
