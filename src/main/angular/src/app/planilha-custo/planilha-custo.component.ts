@@ -30,16 +30,15 @@ export class PlanilhaCustoComponent implements OnInit {
   planilhaEscolhida: any;
   resultadoPlanilha: any;
   operacaoEscolhida: any;
-  resultadoOpe: any;
   isReadonly = true;
   planilha2 = false;
-
-  atualizarOpe = false;
   valido = true;
-
   validado: boolean;
-
   atualizarPlanilha = false;
+  peca: any;
+  ope: any;
+  opeShow = false;
+  showPlanilha = false;
 
   ngOnInit() {
     this.info = {
@@ -56,18 +55,17 @@ export class PlanilhaCustoComponent implements OnInit {
     });
   }
 
+  selectPeca() {
+    this.showPlanilha = true;
+  }
+
+  selectOpe() {
+  }
+
   concluirOpe() {
     alert('Operação cadastrada com sucesso!');
     this.router.navigateByUrl('/gerenteindex/homegerente', {skipLocationChange: true}).then(() =>
       this.router.navigate(['/gerenteindex/planilhadecusto/']));
-  }
-
-  loteOpe(lote: any) {
-    this.operacaoEscolhida.loteProducao = lote;
-  }
-
-  numfunOpe(numfun: any) {
-    this.operacaoEscolhida.numFuncionariosDisponiveis = numfun;
   }
 
   cadastrar() {
@@ -123,11 +121,6 @@ export class PlanilhaCustoComponent implements OnInit {
       this.validado = true;
     }
   }
-
-  cadastrarPlanilha() {
-
-  }
-
 
   toggleReadonly() {
     this.isReadonly = !this.isReadonly;
