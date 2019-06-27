@@ -113,7 +113,7 @@ export class AndamentoOperacoesComponent implements OnInit {
 
   selectsPeca(peca: any) {
     this.peca = peca;
-    this.refresh(this.peca);
+    this.separarOperacoes();
     this.escolheu = true;
   }
 
@@ -223,27 +223,26 @@ export class AndamentoOperacoesComponent implements OnInit {
     if (!this.operacoesSeparadas) {
       this.hoje = new Date();
       console.log('operacoes Separadas');
-      this.fazerToAndamento();
-      // this.peca.operacoesFazer.forEach((data, index) => {
-      //   this.operacaoFazer = data;
-      //   this.inicio = new Date(this.operacaoFazer.dataInicio);
-      //   this.prazo = new Date(this.operacaoFazer.prazo);
-      //   this.inicio.setDate(this.inicio.getDate() + 1);
-      //   this.prazo.setDate(this.prazo.getDate() + 1);
-      //   if (this.inicio.getTime() === this.hoje.getTime() || this.inicio < this.hoje && this.inicio < this.prazo) {
-      //    // const i = this.peca.operacoesFazer.indexOf(this.operacaoFazer);
-      //  //   this.peca.operacoesAndamento.push(this.operacaoFazer);
-      //    // this.peca.operacoesFazer.splice(i, 1);
-      //
-      //     alert('opesseparadasa' + this.operacaoFazer.id + 'inicio' + this.operacaoFazer.dataInicio);
-      //   } else if (this.hoje.getTime() === this.prazo.getTime() || this.prazo < this.hoje && this.inicio < this.hoje) {
-      //     const i = this.peca.operacoesFazer.indexOf(this.operacaoFazer);
-      //     this.peca.operacoesPrazo.push(this.operacaoFazer);
-      //     this.peca.operacoesFazer.splice(i, 1);
-      //     this.updateOpes();
-      //     alert('opesseparadasfp' + this.operacaoFazer.id + 'inicio' + this.operacaoFazer.dataInicio);
-      //   }
-      // });
+      this.peca.operacoesFazer.forEach((data, index) => {
+        this.operacaoFazer = data;
+        this.inicio = new Date(this.operacaoFazer.dataInicio);
+        this.prazo = new Date(this.operacaoFazer.prazo);
+        this.inicio.setDate(this.inicio.getDate() + 1);
+        this.prazo.setDate(this.prazo.getDate() + 1);
+        if (this.inicio.getTime() === this.hoje.getTime() || this.inicio < this.hoje && this.inicio < this.prazo) {
+          const i = this.peca.operacoesFazer.indexOf(this.operacaoFazer);
+          this.peca.operacoesAndamento.push(this.operacaoFazer);
+          this.peca.operacoesFazer.splice(i, 1);
+          this.updateOpes();
+          alert('opesseparadasa' + this.operacaoFazer.id + 'inicio' + this.operacaoFazer.dataInicio);
+        } else if (this.hoje.getTime() === this.prazo.getTime() || this.prazo < this.hoje && this.inicio < this.hoje) {
+          const i = this.peca.operacoesFazer.indexOf(this.operacaoFazer);
+          this.peca.operacoesPrazo.push(this.operacaoFazer);
+          this.peca.operacoesFazer.splice(i, 1);
+          this.updateOpes();
+          alert('opesseparadasfp' + this.operacaoFazer.id + 'inicio' + this.operacaoFazer.dataInicio);
+        }
+      });
 
       // for (const operacoes of this.peca.operacoesFazer) {
       //   this.operacaoFazer = operacoes;
@@ -295,21 +294,20 @@ export class AndamentoOperacoesComponent implements OnInit {
 
       // andamento para prazo
 
-      // this.peca.operacoesAndamento.forEach((item, index) => {
-      //   this.operacao = item;
-      //   this.inicioAndamento = new Date(this.operacao.dataInicio);
-      //   this.prazoAndamento = new Date(this.operacao.prazo);
-      //   this.inicioAndamento.setDate(this.inicioAndamento.getDate() + 1);
-      //   this.prazoAndamento.setDate(this.prazoAndamento.getDate() + 1);
-      // tslint:disable-next-line:max-line-length
-      //   if (this.hoje.getTime() === this.prazoAndamento.getTime() || this.prazoAndamento < this.hoje && this.inicioAndamento < this.hoje) {
-      //     const i = this.peca.operacoesAndamento.indexOf(this.operacao);
-      //     this.peca.operacoesAndamento.splice(i, 1);
-      //     this.peca.operacoesPrazo.push(this.operacao);
-      //     this.updateOpes();
-      //     alert('opesseparadasap');
-      //   }
-      // });
+      this.peca.operacoesAndamento.forEach((item, index) => {
+        this.operacao = item;
+        this.inicioAndamento = new Date(this.operacao.dataInicio);
+        this.prazoAndamento = new Date(this.operacao.prazo);
+        this.inicioAndamento.setDate(this.inicioAndamento.getDate() + 1);
+        this.prazoAndamento.setDate(this.prazoAndamento.getDate() + 1);
+        if (this.hoje.getTime() === this.prazoAndamento.getTime() || this.prazoAndamento < this.hoje && this.inicioAndamento < this.hoje) {
+          const i = this.peca.operacoesAndamento.indexOf(this.operacao);
+          this.peca.operacoesAndamento.splice(i, 1);
+          this.peca.operacoesPrazo.push(this.operacao);
+          this.updateOpes();
+          alert('opesseparadasap');
+        }
+      });
 
       // this.peca.operacoesAndamento.forEach((data, index) => {
       //   this.operacao = data;

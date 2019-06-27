@@ -2,11 +2,13 @@ package com.projeto.rest;
 
 import java.sql.Date;
 import java.text.ParseException;
+import java.util.Calendar;
 import java.util.ConcurrentModificationException;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -59,21 +61,33 @@ public class PecaController {
 		long millis = System.currentTimeMillis();
 		Date hoje = new Date(millis);
 		System.out.println(hoje);
-		if (peca.getOperacoesFazer().size() >= 0) {
+		Operacao operacao = null;
+		boolean opeAndamento = false;
+		if (!peca.getOperacoesFazer().isEmpty()) {
 			for (Operacao operacaoFazer : peca.getOperacoesFazer()) {
 				if (hoje.compareTo(operacaoFazer.getDataInicio()) >= 0) {
+					operacao = operacaoFazer;
+					opeAndamento = true;
 					try {
 						System.out.println(hoje.compareTo(operacaoFazer.getDataInicio()));
 						System.out.println("inicio" + operacaoFazer.getDataInicio());
-						peca.getOperacoesAndamento().add(operacaoFazer);
+
 						peca.getOperacoesFazer().remove(operacaoFazer);
-						pecaRepository.save(peca);
+						peca.getOperacoesAndamento().add(operacaoFazer);
+
 					} catch (ConcurrentModificationException concurrentModificationException) {
-						break;
+						concurrentModificationException.getStackTrace();
 					}
 
 				}
 			}
+		}
+
+		if (opeAndamento) {
+			peca.getOperacoesFazer().remove(operacao);
+			peca.getOperacoesAndamento().add(operacao);
+
+			pecaRepository.save(peca);
 		}
 		return peca;
 	}
@@ -92,15 +106,74 @@ public class PecaController {
 		return peca;
 	}
 
+	@Modifying(flushAutomatically = true)
 	@RequestMapping(method = RequestMethod.PUT, value = "updatepeca")
 	public Peca updatePeca(@RequestBody Peca peca) {
+		Calendar inicio = Calendar.getInstance();
+		java.util.Date dataini = new java.util.Date();
+		for (Operacao operacaoFazer : peca.getOperacoesFazer()) {
+			System.out.println("opesAndamento gerente" + operacaoFazer.getDataInicio());
+			inicio.setTime(operacaoFazer.getDataInicio());
+			inicio.add(Calendar.DAY_OF_MONTH, 1);
+			dataini = inicio.getTime();
+			Date iniciodata = new Date(dataini.getTime());
+			operacaoFazer.setDataInicio(iniciodata);
+		}
+		for (Operacao operacaoAndamento : peca.getOperacoesAndamento()) {
+			System.out.println("opesAndamento gerente" + operacaoAndamento.getDataInicio());
+			inicio.setTime(operacaoAndamento.getDataInicio());
+			inicio.add(Calendar.DAY_OF_MONTH, 1);
+			dataini = inicio.getTime();
+			Date iniciodata = new Date(dataini.getTime());
+			operacaoAndamento.setDataInicio(iniciodata);
+		}
+		for (Operacao operacaoPrazo : peca.getOperacoesPrazo()) {
+			System.out.println("opesAndamento gerente" + operacaoPrazo.getDataInicio());
+			inicio.setTime(operacaoPrazo.getDataInicio());
+			inicio.add(Calendar.DAY_OF_MONTH, 1);
+			dataini = inicio.getTime();
+			Date iniciodata = new Date(dataini.getTime());
+			operacaoPrazo.setDataInicio(iniciodata);
+		}
 		pecaRepository.save(peca);
 		return peca;
 	}
 
 	@RequestMapping(method = RequestMethod.PUT, value = "operacaoFazer")
 	public Peca opesFazer(@RequestBody Peca peca) {
+
+		Calendar inicio = Calendar.getInstance();
+		java.util.Date dataini = new java.util.Date();
+		for (Operacao operacaoFazer : peca.getOperacoesFazer()) {
+			System.out.println("opesAndamento gerente" + operacaoFazer.getDataInicio());
+			inicio.setTime(operacaoFazer.getDataInicio());
+			inicio.add(Calendar.DAY_OF_MONTH, 1);
+			dataini = inicio.getTime();
+			Date iniciodata = new Date(dataini.getTime());
+			operacaoFazer.setDataInicio(iniciodata);
+		}
+		for (Operacao operacaoAndamento : peca.getOperacoesAndamento()) {
+			System.out.println("opesAndamento gerente" + operacaoAndamento.getDataInicio());
+			inicio.setTime(operacaoAndamento.getDataInicio());
+			inicio.add(Calendar.DAY_OF_MONTH, 1);
+			dataini = inicio.getTime();
+			Date iniciodata = new Date(dataini.getTime());
+			operacaoAndamento.setDataInicio(iniciodata);
+		}
+		for (Operacao operacaoPrazo : peca.getOperacoesPrazo()) {
+			System.out.println("opesAndamento gerente" + operacaoPrazo.getDataInicio());
+			inicio.setTime(operacaoPrazo.getDataInicio());
+			inicio.add(Calendar.DAY_OF_MONTH, -1);
+			dataini = inicio.getTime();
+			Date iniciodata = new Date(dataini.getTime());
+			operacaoPrazo.setDataInicio(iniciodata);
+		}
 		Operacao ultima = peca.getOperacoesFazer().get(peca.getOperacoesFazer().size() - 1);
+		inicio.setTime(ultima.getDataInicio());
+		inicio.add(Calendar.DAY_OF_MONTH, -1);
+		Date iniciodata = new Date(dataini.getTime());
+		ultima.setDataInicio(iniciodata);
+		System.out.println("teste ope" + ultima.getDescricao());
 		try {
 			Operacao.calcular(ultima);
 		} catch (ParseException e) {
@@ -113,7 +186,38 @@ public class PecaController {
 
 	@RequestMapping(method = RequestMethod.PUT, value = "operacaoAndamento")
 	public Peca opesAndamento(@RequestBody Peca peca) {
+		Calendar inicio = Calendar.getInstance();
+		java.util.Date dataini = new java.util.Date();
+		for (Operacao operacaoFazer : peca.getOperacoesFazer()) {
+
+			System.out.println("opesAndamento gerente" + operacaoFazer.getDataInicio());
+			inicio.setTime(operacaoFazer.getDataInicio());
+			inicio.add(Calendar.DAY_OF_MONTH, 1);
+			dataini = inicio.getTime();
+			Date iniciodata = new Date(dataini.getTime());
+			operacaoFazer.setDataInicio(iniciodata);
+		}
+		for (Operacao operacaoAndamento : peca.getOperacoesAndamento()) {
+			System.out.println("opesAndamento gerente" + operacaoAndamento.getDataInicio());
+			inicio.setTime(operacaoAndamento.getDataInicio());
+			inicio.add(Calendar.DAY_OF_MONTH, 1);
+			dataini = inicio.getTime();
+			Date iniciodata = new Date(dataini.getTime());
+			operacaoAndamento.setDataInicio(iniciodata);
+		}
+		for (Operacao operacaoPrazo : peca.getOperacoesPrazo()) {
+			System.out.println("opesAndamento gerente" + operacaoPrazo.getDataInicio());
+			inicio.setTime(operacaoPrazo.getDataInicio());
+			inicio.add(Calendar.DAY_OF_MONTH, 1);
+			dataini = inicio.getTime();
+			Date iniciodata = new Date(dataini.getTime());
+			operacaoPrazo.setDataInicio(iniciodata);
+		}
 		Operacao ultima = peca.getOperacoesAndamento().get(peca.getOperacoesAndamento().size() - 1);
+		inicio.setTime(ultima.getDataInicio());
+		inicio.add(Calendar.DAY_OF_MONTH, -1);
+		Date iniciodata = new Date(dataini.getTime());
+		ultima.setDataInicio(iniciodata);
 		try {
 			Operacao.calcular(ultima);
 		} catch (ParseException e) {
