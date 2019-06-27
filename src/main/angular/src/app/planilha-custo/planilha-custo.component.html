@@ -64,46 +64,38 @@
                   <div class="form-row">
                     <div class="col-md-6">
                       <div class="form-group">
-                        <div class="form-label-group">
                           <label for="pecas">Peças:</label>
                           <input type="number" id="pecas" min="1" max="999999" class="form-control"
                                  placeholder="Peças:" name="pecas" required="required">
-                        </div>
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
-                        <div class="form-label-group">
                           <label for="operacoes">Operações:</label>
                           <input type="number" id="operacoes" min="1" max="9999" class="form-control"
                                  placeholder="Operações:" name="operacoes:" required="required">
-                        </div>
                       </div>
                     </div>
                   </div>
                   <div class="form-row">
                     <div class="col-md-6">
                       <div class="form-group">
-                        <div class="form-label-group">
                           <label for="gastos">Gastos:</label>
                           <input type="number" id="gastos" name="gastos" class="form-control" [(ngModel)]="planilha.gastos"
                                  placeholder="Gastos:" required="required">
-                        </div>
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
-                        <div class="form-label-group">
-                          <label for="gastosoperacionais">Gastos Ope:</label>
+                          <label for="gastosoperacionais">Gastos Operacionais:</label>
                           <input type="number" id="gastosoperacionais" name="gastosoperacionais" class="form-control" [(ngModel)]="planilha.gastosOpe"
                                  placeholder="Gastos Operacionais:" required="required">
-                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="card-footer bg-transparent border-info">
+              <div class="card-footer bg-transparent border-info modal-footer">
                 <input class="btn btn-success" type="submit" [disabled]="!valido" *ngIf="!planilha2"
                        value="Cadastrar">
                 <input class="btn btn-outline-info" type="submit" [disabled]="!valido" *ngIf="planilha2"
