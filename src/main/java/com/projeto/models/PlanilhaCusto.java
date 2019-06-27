@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,6 +27,7 @@ public class PlanilhaCusto {
 	}
 
 	@ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="operacao_id", nullable=false)
 	private Operacao operacao;
 
 	public long getId() {

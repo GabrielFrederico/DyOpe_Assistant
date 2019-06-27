@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -29,6 +30,11 @@ public class Operacao {
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "operacao_suboperacoes", joinColumns = @JoinColumn(name = "operacao_id"), inverseJoinColumns = @JoinColumn(name = "suboperacao_id"))
 	private Set<SubOperacao> suboperacoes = new HashSet<>();
+
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "operacao_planilhascusto", joinColumns = @JoinColumn(name = "operacao_id"), inverseJoinColumns = @JoinColumn(name = "planilhacusto_id"))
+	private List<PlanilhaCusto> planilhascusto = new ArrayList<>();
+	
 	private String descricao;
 	private Date dataInicio;
 	private float minutos, segundos;
@@ -93,11 +99,11 @@ public class Operacao {
 			segundos += subope.getSegundos();
 
 		}
-		System.out.println("segundos"+segundos);
-		 calcseg = segundos*1;
+		System.out.println("segundos" + segundos);
+		calcseg = segundos * 1;
 		segundoscalc = segundos / 60;
 		min = minutos + segundoscalc;
-		System.out.println(minutos+"segundos em min"+segundoscalc);
+		System.out.println(minutos + "segundos em min" + segundoscalc);
 		float result, funcCalc, calcProHora, tempoFun, resultdias;
 		tempoFun = operacao.getTempoTrab() * operacao.getNumFuncionariosDisponiveis();
 

@@ -185,21 +185,18 @@ export class AndamentoOperacoesComponent implements OnInit {
       this.operacaoEscolhida.peca_id = null;
       this.peca.operacoesFazer.splice(i, 1);
       this.updateOpes();
-      // this.updateOpes();
       this.opeSelected = false;
     } else if (this.inicio.getTime() === this.hoje.getTime() || this.inicio < this.hoje) {
       const i = this.peca.operacoesAndamento.indexOf(this.operacaoEscolhida);
       this.operacaoEscolhida.peca_id = null;
       this.peca.operacoesAndamento.splice(i, 1);
       this.updateOpes();
-      // this.updateOpes();
       this.opeSelected = false;
     } else if (this.hoje.getTime() === this.prazo.getTime() || this.prazo < this.hoje) {
       const i = this.peca.operacoesPrazo.indexOf(this.operacaoEscolhida);
       this.operacaoEscolhida.peca_id = null;
       this.peca.operacoesPrazo.splice(i, 1);
       this.updateOpes();
-      // this.updateOpes();
       this.opeSelected = false;
     }
 

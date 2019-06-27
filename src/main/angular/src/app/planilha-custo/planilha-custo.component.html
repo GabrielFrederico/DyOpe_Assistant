@@ -79,7 +79,7 @@
                       <div class="form-group">
                         <mat-form-field>
                           <mat-label class="text-dark">Operacao</mat-label>
-                          <mat-select required="required" name="ope" [(ngModel)]="operacaoEscolhida" (change)="selectOpe()">
+                          <mat-select required="required" name="operacaoEscolhida" [(ngModel)]="operacaoEscolhida" (change)="selectOpe()">
                             <mat-option *ngFor="let operacao of peca.operacoesFazer"
                                         [value]="operacao">{{operacao.descricao}}</mat-option>
                             <mat-option *ngFor="let operacao of peca.operacoesAndamento"
