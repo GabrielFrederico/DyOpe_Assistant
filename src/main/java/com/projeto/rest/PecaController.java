@@ -1,6 +1,8 @@
 package com.projeto.rest;
 
+import java.sql.Date;
 import java.text.ParseException;
+import java.util.ConcurrentModificationException;
 
 import javax.validation.Valid;
 
@@ -52,6 +54,30 @@ public class PecaController {
 		return peca;
 	}
 
+	@RequestMapping(method = RequestMethod.PUT, value = "addAndamento")
+	public Peca addAndamento(@RequestBody Peca peca) {
+		long millis = System.currentTimeMillis();
+		Date hoje = new Date(millis);
+		System.out.println(hoje);
+		if (peca.getOperacoesFazer().size() >= 0) {
+			for (Operacao operacaoFazer : peca.getOperacoesFazer()) {
+				if (hoje.compareTo(operacaoFazer.getDataInicio()) >= 0) {
+					try {
+						System.out.println(hoje.compareTo(operacaoFazer.getDataInicio()));
+						System.out.println("inicio" + operacaoFazer.getDataInicio());
+						peca.getOperacoesAndamento().add(operacaoFazer);
+						peca.getOperacoesFazer().remove(operacaoFazer);
+						pecaRepository.save(peca);
+					} catch (ConcurrentModificationException concurrentModificationException) {
+						break;
+					}
+
+				}
+			}
+		}
+		return peca;
+	}
+
 	@RequestMapping(method = RequestMethod.PUT)
 	public Peca update(@RequestBody Peca peca) {
 
@@ -65,13 +91,13 @@ public class PecaController {
 		pecaRepository.save(peca);
 		return peca;
 	}
-	
-	@RequestMapping(method = RequestMethod.PUT, value="updatepeca")
+
+	@RequestMapping(method = RequestMethod.PUT, value = "updatepeca")
 	public Peca updatePeca(@RequestBody Peca peca) {
 		pecaRepository.save(peca);
 		return peca;
 	}
-	
+
 	@RequestMapping(method = RequestMethod.PUT, value = "operacaoFazer")
 	public Peca opesFazer(@RequestBody Peca peca) {
 		Operacao ultima = peca.getOperacoesFazer().get(peca.getOperacoesFazer().size() - 1);
@@ -84,7 +110,7 @@ public class PecaController {
 		pecaRepository.save(peca);
 		return peca;
 	}
-	
+
 	@RequestMapping(method = RequestMethod.PUT, value = "operacaoAndamento")
 	public Peca opesAndamento(@RequestBody Peca peca) {
 		Operacao ultima = peca.getOperacoesAndamento().get(peca.getOperacoesAndamento().size() - 1);
@@ -97,7 +123,6 @@ public class PecaController {
 		pecaRepository.save(peca);
 		return peca;
 	}
-	
 
 	@RequestMapping(method = RequestMethod.DELETE, path = "/{id}")
 	public Peca deletePecaById(@PathVariable("id") long id) {

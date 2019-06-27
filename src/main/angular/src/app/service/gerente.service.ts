@@ -127,6 +127,11 @@ export class GerenteService {
   }
 
   // peça
+
+  addAndamento(peca: any) {
+    return this.httpClient.put('http://localhost:8080/pecas/addAndamento', peca);
+  }
+
   atualizarPeca(peca: any) {
     return this.httpClient.put('http://localhost:8080/pecas/updatepeca', peca);
   }

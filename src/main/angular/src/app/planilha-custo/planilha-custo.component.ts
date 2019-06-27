@@ -73,7 +73,7 @@ export class PlanilhaCustoComponent implements OnInit {
       this.atualizar();
       console.log('planilha ATUALIZADA');
     } else {
-      this.planilha.operacao = this.operacaoEscolhida;
+      this.planilha.operacao_id = this.operacaoEscolhida.id;
       this.planilha.tempos = this.operacaoEscolhida.tempos;
       this.planilha.lote = this.operacaoEscolhida.loteProducao;
       this.planilha.numFunOpe = this.operacaoEscolhida.numFuncionariosDisponiveis;
@@ -89,7 +89,7 @@ export class PlanilhaCustoComponent implements OnInit {
   }
 
   getdadosCustos() {
-    this.gerenteService.getPlanilhaId(this.planilhaEscolhida.id).subscribe(data => {
+    this.gerenteService.getPlanilhaId(this.planilha.id).subscribe(data => {
       this.resultadoPlanilha = data;
     }, error => {
       this.mensagemErro = error.error;
@@ -97,7 +97,7 @@ export class PlanilhaCustoComponent implements OnInit {
   }
 
   atualizar() {
-    this.gerenteService.atualizarPlanilha(this.planilhaEscolhida).pipe(first()).subscribe(data => {
+    this.gerenteService.atualizarPlanilha(this.planilha).pipe(first()).subscribe(data => {
       this.resultadoPlanilha = data;
     }, error => {
       this.mensagemErro = error.error;

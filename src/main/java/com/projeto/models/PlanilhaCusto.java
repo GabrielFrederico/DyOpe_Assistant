@@ -27,7 +27,7 @@ public class PlanilhaCusto {
 	}
 
 	@ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="operacao_id")
+    @JoinColumn(name="operacao_id", nullable =false)
 	private Operacao operacao;
 
 	public long getId() {
@@ -102,14 +102,34 @@ public class PlanilhaCusto {
 		this.custoOpe = custoOpe;
 	}
 
+	public float getTempos() {
+		return tempos;
+	}
+
+	public void setTempos(float tempos) {
+		this.tempos = tempos;
+	}
+
+	public float getLote() {
+		return lote;
+	}
+
+	public void setLote(float lote) {
+		this.lote = lote;
+	}
+
 	public static PlanilhaCusto calcularCusto(@RequestBody PlanilhaCusto planilha) {
-		Operacao operacao = planilha.getOperacao();
+
 		float custoMinuto, custo, lucro, ganho, gastos;
 		// 20 é dias, mudar pra dias
 		custoMinuto = planilha.getGastos() / planilha.getNumFunOpe() / 20 / 450;
 		planilha.setCustoMinuto(custoMinuto);
-		custo = custoMinuto * operacao.getTempos();
-		ganho = custo * operacao.getLoteProducao();
+		// custo = custoMinuto * planilha.getOperacao().getTempos();
+		// ganho = custo * planilha.getOperacao().getLoteProducao();
+		custo = custoMinuto * planilha.getTempos();
+		System.out.println("custo ope"+ custo);
+		planilha.setCustoOpe(custo);
+	    ganho = custo * planilha.getLote();
 		gastos = planilha.getGastos() + planilha.getGastosOpe();
 		lucro = ganho - gastos;
 		planilha.setLucro(lucro);
