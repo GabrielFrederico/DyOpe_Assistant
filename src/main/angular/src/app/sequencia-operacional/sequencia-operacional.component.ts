@@ -255,6 +255,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
 
       this.hoje = new Date();
       this.inicio = new Date(this.operacaoEscolhida.dataInicio);
+      this.inicio.setDate(this.inicio.getDate() + 1);
       // this.peca.operacoes.push(this.operacaoEscolhida);
 
       if (this.inicio > this.hoje) {
@@ -304,6 +305,7 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
       this.ope3 = true;
       this.atualizarOpe = true;
       this.prazo = new Date(this.resultadoOpe.prazo);
+      this.prazo.setDate(this.prazo.getDate() + 1);
       if (this.resultadoOpe.numFuncionariosDisponiveis >= this.resultadoOpe.numFuncionarios) {
         this.numfumok = true;
       }
@@ -393,7 +395,6 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
   //   }
   // }
 
-
   update() {
     this.operacaoService.updateOperacao(this.operacaoEscolhida).pipe(first()).subscribe(data => {
       this.resultadoOpe = data;
@@ -407,9 +408,6 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
     this.numFun2 = this.resultadoOpe.numFuncionarios + 2;
     this.qtdPeca1 = this.resultadoOpe.qtdPecasOpe - 2;
     this.qtdPeca2 = this.resultadoOpe.qtdPecasOpe + 2;
-    this.hoje = new Date();
-    this.inicio = new Date(this.operacaoEscolhida.dataInicio);
-    this.prazo = new Date(this.operacaoEscolhida.prazo);
   }
 
   cadastrarSubOperacao() {
@@ -436,8 +434,8 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
     this.gerente.pecas.push(this.newpeca);
     this.gerenteService.cadastrarAlgo(this.gerente).pipe(first()).subscribe(data => {
       alert('Peça cadastrada com sucesso!');
-      this.router.navigateByUrl('/gerenteindex/homegerente', {skipLocationChange: true}).then(() =>
-        this.router.navigate(['/gerenteindex/operacoes/']));
+    //  this.router.navigateByUrl('/gerenteindex/homegerente', {skipLocationChange: true}).then(() =>
+      //  this.router.navigate(['/gerenteindex/operacoes/']));
       // this.router.navigate(['/gerenteindex/operacoes/', this.etapaproducao.etapaProducao]));
 
     }, error => {

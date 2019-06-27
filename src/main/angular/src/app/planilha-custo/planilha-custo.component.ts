@@ -73,8 +73,9 @@ export class PlanilhaCustoComponent implements OnInit {
       this.atualizar();
       console.log('planilha ATUALIZADA');
     } else {
-      this.planilha.operacao_id = this.operacaoEscolhida.id;
-      this.operacaoEscolhida.planilhascusto.push(this.planilha);
+      this.planilha.operacao = this.operacaoEscolhida;
+      this.planilha.tempos = this.operacaoEscolhida.tempos;
+      this.planilha.lote = this.operacaoEscolhida.loteProducao;
       this.planilha.numFunOpe = this.operacaoEscolhida.numFuncionariosDisponiveis;
       this.planilha.gerente_id = this.gerente.id;
       this.gerente.planilhascusto.push(this.planilha);

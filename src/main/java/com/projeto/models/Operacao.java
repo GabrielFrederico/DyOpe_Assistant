@@ -31,8 +31,8 @@ public class Operacao {
 	@JoinTable(name = "operacao_suboperacoes", joinColumns = @JoinColumn(name = "operacao_id"), inverseJoinColumns = @JoinColumn(name = "suboperacao_id"))
 	private Set<SubOperacao> suboperacoes = new HashSet<>();
 
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "operacao_planilhascusto", joinColumns = @JoinColumn(name = "operacao_id"), inverseJoinColumns = @JoinColumn(name = "planilhacusto_id"))
+	@OneToMany(cascade = CascadeType.ALL ,mappedBy="operacao")
+	// @JoinTable(name = "operacao_planilhascusto", joinColumns = @JoinColumn(name = "operacao_id"), inverseJoinColumns = @JoinColumn(name = "planilhacusto_id"))
 	private List<PlanilhaCusto> planilhascusto = new ArrayList<>();
 	
 	private String descricao;

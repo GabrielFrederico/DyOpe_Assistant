@@ -16,7 +16,7 @@ public class PlanilhaCusto {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	private float custoMinuto, lucro, gastosOpe, gastos, custoOpe;
+	private float custoMinuto, lucro, gastosOpe, gastos, custoOpe, tempos, lote;
 	private int numFunOpe;
 	public int getNumFunOpe() {
 		return numFunOpe;
@@ -27,7 +27,7 @@ public class PlanilhaCusto {
 	}
 
 	@ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="operacao_id", nullable=false)
+    @JoinColumn(name="operacao_id")
 	private Operacao operacao;
 
 	public long getId() {
