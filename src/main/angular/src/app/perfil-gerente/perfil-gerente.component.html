@@ -169,7 +169,7 @@
 
             <div class="modal-footer col-md-12">
               <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-              <input class="btn btn-primary" [disabled]="f.form.invalid" type="submit" (click)="redefinirSenha()"
+              <input class="btn btn-primary" [disabled]="!f.form.valid" type="submit" (click)="redefinirSenha()"
                      data-dismiss="modal" value="Confirmar">
               <div *ngIf="f.submitted && senhaerrada" class="alert alert-warning separa">
                 As novas senhas não coincidem!
@@ -197,7 +197,7 @@
       </div>
       <div class="modal-body">
         <div class="card-body">
-          <form #f="ngForm" [noValidate]="$any(false)">
+          <form #fa="ngForm" [noValidate]="$any(false)">
             <div class="form-group">
 
               <div class="col-md-auto">
@@ -215,9 +215,9 @@
 
             <div class="modal-footer col-md-12">
               <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-              <input class="btn btn-success" type="submit" *ngIf="!chaveCadastrada" [disabled]="!f.form.valid"
+              <input class="btn btn-success" type="submit" *ngIf="!chaveCadastrada" [disabled]="!fa.form.valid"
                      (click)="cadastrarChaveAcesso()" data-dismiss="modal" value="Cadastrar">
-              <input class="btn btn-primary" type="submit" *ngIf="chaveCadastrada" [disabled]="!f.form.valid"
+              <input class="btn btn-primary" type="submit" *ngIf="chaveCadastrada" [disabled]="!fa.form.valid"
                      (click)="cadastrarChaveAcesso()" data-dismiss="modal" value="Atualizar">
 
             </div>
