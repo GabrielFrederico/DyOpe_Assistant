@@ -231,13 +231,13 @@ export class AndamentoOperacoesComponent implements OnInit {
       this.prazo.setDate(this.prazo.getDate() + 1);
       alert('prazo' + this.prazo);
       if (this.inicio.getTime() === this.hoje.getTime() || this.inicio < this.hoje && this.inicio < this.prazo) {
-        const i = this.peca.operacaoFazer.indexOf(this.operacaoEscolhida, 0);
+        const i = this.peca.operacaoFazer.indexOf(this.operacaoFazer, 0);
         this.peca.operacoesAndamento.push(this.operacaoFazer);
         this.peca.operacaoFazer.splice(i, 1);
         this.updateOpes();
         alert('opesseparadasa' + this.operacaoFazer.id + 'inicio' + this.operacaoFazer.dataInicio);
       } else if (this.hoje.getTime() === this.prazo.getTime() || this.prazo < this.hoje && this.inicio < this.hoje) {
-        const i = this.peca.operacaoFazer.indexOf(this.operacaoEscolhida, 0);
+        const i = this.peca.operacaoFazer.indexOf(this.operacaoFazer, 0);
         this.peca.operacoesPrazo.push(this.operacaoFazer);
         this.peca.operacaoFazer.splice(i, 1);
         this.updateOpes();
@@ -306,7 +306,7 @@ export class AndamentoOperacoesComponent implements OnInit {
       this.prazoAndamento.setDate(this.prazoAndamento.getDate() + 1);
       alert('prazo' + this.prazoAndamento);
       if (this.hoje.getTime() === this.prazoAndamento.getTime() || this.prazoAndamento < this.hoje && this.inicioAndamento < this.hoje) {
-        const i = this.peca.operacoesAndamento.indexOf(this.operacaoEscolhida);
+        const i = this.peca.operacoesAndamento.indexOf(this.operacao, 0);
         this.peca.operacoesAndamento.splice(i, 1);
         this.peca.operacoesPrazo.push(this.operacao);
         this.updateOpes();
