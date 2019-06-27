@@ -218,7 +218,7 @@ export class AndamentoOperacoesComponent implements OnInit {
   separarOperacoes() {
     this.hoje = new Date();
 
-    this.peca.operacoesFazer.map(item => {
+    this.peca.operacoesFazer.forEach((item, index) => {
       this.operacaoFazer = item;
       this.inicio = new Date(this.operacaoFazer.dataInicio);
       this.prazo = new Date(this.operacaoFazer.prazo);
@@ -293,7 +293,7 @@ export class AndamentoOperacoesComponent implements OnInit {
     //   }
     // });
 
-    this.peca.operacoesAndamento.map(item => {
+    this.peca.operacoesAndamento.forEach((item , index) => {
       this.operacao = item;
       this.inicioAndamento = new Date(this.operacao.dataInicio);
       this.prazoAndamento = new Date(this.operacao.prazo);
