@@ -69,7 +69,6 @@ export class PlanilhaCustoComponent implements OnInit {
   }
 
   cadastrar() {
-    this.planilha2 = true;
     if (this.atualizarPlanilha) {
       this.atualizar();
       console.log('planilha ATUALIZADA');
