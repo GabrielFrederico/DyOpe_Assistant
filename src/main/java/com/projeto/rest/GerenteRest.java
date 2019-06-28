@@ -112,6 +112,10 @@ public class GerenteRest {
 		Gerente gerente = gerenteRepository.findByNome(nome);
 		return gerente;
 	}
+	
+
+	Calendar prazo = Calendar.getInstance();
+	java.util.Date dataprazo = new java.util.Date();
 
 	@RequestMapping(method = RequestMethod.PUT, value = "atualizarsenha")
 	@PreAuthorize("hasRole('GERENTE')")
@@ -126,6 +130,12 @@ public class GerenteRest {
 				dataini = inicio.getTime();
 				Date iniciodata = new Date(dataini.getTime());
 				operacaoFazer.setDataInicio(iniciodata);
+				
+				prazo.setTime(operacaoFazer.getPrazo());
+				prazo.add(Calendar.DAY_OF_MONTH,  1);
+				dataprazo = prazo.getTime();
+				Date prazodate = new Date(dataprazo.getTime());
+				operacaoFazer.setPrazo(prazodate);
 			}
 			for (Operacao operacaoAndamento : peca.getOperacoesAndamento()) {
 				System.out.println("opesAndamento gerente" + operacaoAndamento.getDataInicio());
@@ -134,6 +144,12 @@ public class GerenteRest {
 				dataini = inicio.getTime();
 				Date iniciodata = new Date(dataini.getTime());
 				operacaoAndamento.setDataInicio(iniciodata);
+				
+				prazo.setTime(operacaoAndamento.getPrazo());
+				prazo.add(Calendar.DAY_OF_MONTH,  1);
+				dataprazo = prazo.getTime();
+				Date prazodate = new Date(dataprazo.getTime());
+				operacaoAndamento.setPrazo(prazodate);
 			}
 			for (Operacao operacaoPrazo : peca.getOperacoesPrazo()) {
 				System.out.println("opesAndamento gerente" + operacaoPrazo.getDataInicio());
@@ -142,6 +158,12 @@ public class GerenteRest {
 				dataini = inicio.getTime();
 				Date iniciodata = new Date(dataini.getTime());
 				operacaoPrazo.setDataInicio(iniciodata);
+				
+				prazo.setTime(operacaoPrazo.getPrazo());
+				prazo.add(Calendar.DAY_OF_MONTH,  1);
+				dataprazo = prazo.getTime();
+				Date prazodate = new Date(dataprazo.getTime());
+				operacaoPrazo.setPrazo(prazodate);
 			}
 		}
 		gerente.setSenha(encoder.encode(gerente.getSenha()));
@@ -201,6 +223,12 @@ public class GerenteRest {
 				dataini = inicio.getTime();
 				Date iniciodata = new Date(dataini.getTime());
 				operacaoFazer.setDataInicio(iniciodata);
+				
+				prazo.setTime(operacaoFazer.getPrazo());
+				prazo.add(Calendar.DAY_OF_MONTH,  1);
+				dataprazo = prazo.getTime();
+				Date prazodate = new Date(dataprazo.getTime());
+				operacaoFazer.setPrazo(prazodate);
 			}
 			for (Operacao operacaoAndamento : peca.getOperacoesAndamento()) {
 				System.out.println("opesAndamento gerente" + operacaoAndamento.getDataInicio());
@@ -209,6 +237,12 @@ public class GerenteRest {
 				dataini = inicio.getTime();
 				Date iniciodata = new Date(dataini.getTime());
 				operacaoAndamento.setDataInicio(iniciodata);
+				
+				prazo.setTime(operacaoAndamento.getPrazo());
+				prazo.add(Calendar.DAY_OF_MONTH,  1);
+				dataprazo = prazo.getTime();
+				Date prazodate = new Date(dataprazo.getTime());
+				operacaoAndamento.setPrazo(prazodate);
 			}
 			for (Operacao operacaoPrazo : peca.getOperacoesPrazo()) {
 				System.out.println("opesAndamento gerente" + operacaoPrazo.getDataInicio());
@@ -217,6 +251,12 @@ public class GerenteRest {
 				dataini = inicio.getTime();
 				Date iniciodata = new Date(dataini.getTime());
 				operacaoPrazo.setDataInicio(iniciodata);
+				
+				prazo.setTime(operacaoPrazo.getPrazo());
+				prazo.add(Calendar.DAY_OF_MONTH,  1);
+				dataprazo = prazo.getTime();
+				Date prazodate = new Date(dataprazo.getTime());
+				operacaoPrazo.setPrazo(prazodate);
 			}
 		}
 
@@ -243,6 +283,12 @@ public class GerenteRest {
 				dataini = inicio.getTime();
 				Date iniciodata = new Date(dataini.getTime());
 				operacaoFazer.setDataInicio(iniciodata);
+				
+				prazo.setTime(operacaoFazer.getPrazo());
+				prazo.add(Calendar.DAY_OF_MONTH,  1);
+				dataprazo = prazo.getTime();
+				Date prazodate = new Date(dataprazo.getTime());
+				operacaoFazer.setPrazo(prazodate);
 			}
 			for (Operacao operacaoAndamento : peca.getOperacoesAndamento()) {
 				System.out.println("opesAndamento gerente" + operacaoAndamento.getDataInicio());
@@ -251,6 +297,12 @@ public class GerenteRest {
 				dataini = inicio.getTime();
 				Date iniciodata = new Date(dataini.getTime());
 				operacaoAndamento.setDataInicio(iniciodata);
+				
+				prazo.setTime(operacaoAndamento.getPrazo());
+				prazo.add(Calendar.DAY_OF_MONTH,  1);
+				dataprazo = prazo.getTime();
+				Date prazodate = new Date(dataprazo.getTime());
+				operacaoAndamento.setPrazo(prazodate);
 			}
 			for (Operacao operacaoPrazo : peca.getOperacoesPrazo()) {
 				System.out.println("opesAndamento gerente" + operacaoPrazo.getDataInicio());
@@ -259,6 +311,12 @@ public class GerenteRest {
 				dataini = inicio.getTime();
 				Date iniciodata = new Date(dataini.getTime());
 				operacaoPrazo.setDataInicio(iniciodata);
+				
+				prazo.setTime(operacaoPrazo.getPrazo());
+				prazo.add(Calendar.DAY_OF_MONTH,  1);
+				dataprazo = prazo.getTime();
+				Date prazodate = new Date(dataprazo.getTime());
+				operacaoPrazo.setPrazo(prazodate);
 			}
 		}
 		Setor setor = gerente.getSetores().get(gerente.getSetores().size() - 1);
@@ -298,6 +356,12 @@ public class GerenteRest {
 				dataini = inicio.getTime();
 				Date iniciodata = new Date(dataini.getTime());
 				operacaoFazer.setDataInicio(iniciodata);
+				
+				prazo.setTime(operacaoFazer.getPrazo());
+				prazo.add(Calendar.DAY_OF_MONTH,  1);
+				dataprazo = prazo.getTime();
+				Date prazodate = new Date(dataprazo.getTime());
+				operacaoFazer.setPrazo(prazodate);
 			}
 			for (Operacao operacaoAndamento : peca.getOperacoesAndamento()) {
 				System.out.println("opesAndamento gerente" + operacaoAndamento.getDataInicio());
@@ -306,6 +370,12 @@ public class GerenteRest {
 				dataini = inicio.getTime();
 				Date iniciodata = new Date(dataini.getTime());
 				operacaoAndamento.setDataInicio(iniciodata);
+				
+				prazo.setTime(operacaoAndamento.getPrazo());
+				prazo.add(Calendar.DAY_OF_MONTH,  1);
+				dataprazo = prazo.getTime();
+				Date prazodate = new Date(dataprazo.getTime());
+				operacaoAndamento.setPrazo(prazodate);
 			}
 			for (Operacao operacaoPrazo : peca.getOperacoesPrazo()) {
 				System.out.println("opesAndamento gerente" + operacaoPrazo.getDataInicio());
@@ -314,6 +384,12 @@ public class GerenteRest {
 				dataini = inicio.getTime();
 				Date iniciodata = new Date(dataini.getTime());
 				operacaoPrazo.setDataInicio(iniciodata);
+				
+				prazo.setTime(operacaoPrazo.getPrazo());
+				prazo.add(Calendar.DAY_OF_MONTH,  1);
+				dataprazo = prazo.getTime();
+				Date prazodate = new Date(dataprazo.getTime());
+				operacaoPrazo.setPrazo(prazodate);
 			}
 		}
 		PlanilhaCusto ultima = gerente.getPlanilhascusto().get(gerente.getPlanilhascusto().size() - 1);

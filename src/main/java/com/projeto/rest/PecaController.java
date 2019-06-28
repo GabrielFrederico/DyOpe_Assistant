@@ -111,6 +111,8 @@ public class PecaController {
 	public Peca updatePeca(@RequestBody Peca peca) {
 		Calendar inicio = Calendar.getInstance();
 		java.util.Date dataini = new java.util.Date();
+		Calendar prazo = Calendar.getInstance();
+		java.util.Date dataprazo = new java.util.Date();
 		for (Operacao operacaoFazer : peca.getOperacoesFazer()) {
 			System.out.println("opesAndamento gerente" + operacaoFazer.getDataInicio());
 			inicio.setTime(operacaoFazer.getDataInicio());
@@ -118,6 +120,12 @@ public class PecaController {
 			dataini = inicio.getTime();
 			Date iniciodata = new Date(dataini.getTime());
 			operacaoFazer.setDataInicio(iniciodata);
+			
+			prazo.setTime(operacaoFazer.getPrazo());
+			prazo.add(Calendar.DAY_OF_MONTH,  1);
+			dataprazo = prazo.getTime();
+			Date prazodate = new Date(dataprazo.getTime());
+			operacaoFazer.setPrazo(prazodate);
 		}
 		for (Operacao operacaoAndamento : peca.getOperacoesAndamento()) {
 			System.out.println("opesAndamento gerente" + operacaoAndamento.getDataInicio());
@@ -126,6 +134,12 @@ public class PecaController {
 			dataini = inicio.getTime();
 			Date iniciodata = new Date(dataini.getTime());
 			operacaoAndamento.setDataInicio(iniciodata);
+			
+			prazo.setTime(operacaoAndamento.getPrazo());
+			prazo.add(Calendar.DAY_OF_MONTH,  1);
+			dataprazo = prazo.getTime();
+			Date prazodate = new Date(dataprazo.getTime());
+			operacaoAndamento.setPrazo(prazodate);
 		}
 		for (Operacao operacaoPrazo : peca.getOperacoesPrazo()) {
 			System.out.println("opesAndamento gerente" + operacaoPrazo.getDataInicio());
@@ -134,6 +148,12 @@ public class PecaController {
 			dataini = inicio.getTime();
 			Date iniciodata = new Date(dataini.getTime());
 			operacaoPrazo.setDataInicio(iniciodata);
+			
+			prazo.setTime(operacaoPrazo.getPrazo());
+			prazo.add(Calendar.DAY_OF_MONTH,  1);
+			dataprazo = prazo.getTime();
+			Date prazodate = new Date(dataprazo.getTime());
+			operacaoPrazo.setPrazo(prazodate);
 		}
 		pecaRepository.save(peca);
 		return peca;
@@ -144,6 +164,8 @@ public class PecaController {
 
 		Calendar inicio = Calendar.getInstance();
 		java.util.Date dataini = new java.util.Date();
+		Calendar prazo = Calendar.getInstance();
+		java.util.Date dataprazo = new java.util.Date();
 		for (Operacao operacaoFazer : peca.getOperacoesFazer()) {
 			System.out.println("opesAndamento gerente" + operacaoFazer.getDataInicio());
 			inicio.setTime(operacaoFazer.getDataInicio());
@@ -151,6 +173,12 @@ public class PecaController {
 			dataini = inicio.getTime();
 			Date iniciodata = new Date(dataini.getTime());
 			operacaoFazer.setDataInicio(iniciodata);
+			
+			prazo.setTime(operacaoFazer.getPrazo());
+			prazo.add(Calendar.DAY_OF_MONTH,  1);
+			dataprazo = prazo.getTime();
+			Date prazodate = new Date(dataprazo.getTime());
+			operacaoFazer.setPrazo(prazodate);
 		}
 		for (Operacao operacaoAndamento : peca.getOperacoesAndamento()) {
 			System.out.println("opesAndamento gerente" + operacaoAndamento.getDataInicio());
@@ -159,6 +187,12 @@ public class PecaController {
 			dataini = inicio.getTime();
 			Date iniciodata = new Date(dataini.getTime());
 			operacaoAndamento.setDataInicio(iniciodata);
+			
+			prazo.setTime(operacaoAndamento.getPrazo());
+			prazo.add(Calendar.DAY_OF_MONTH,  1);
+			dataprazo = prazo.getTime();
+			Date prazodate = new Date(dataprazo.getTime());
+			operacaoAndamento.setPrazo(prazodate);
 		}
 		for (Operacao operacaoPrazo : peca.getOperacoesPrazo()) {
 			System.out.println("opesAndamento gerente" + operacaoPrazo.getDataInicio());
@@ -167,12 +201,14 @@ public class PecaController {
 			dataini = inicio.getTime();
 			Date iniciodata = new Date(dataini.getTime());
 			operacaoPrazo.setDataInicio(iniciodata);
+			
+			prazo.setTime(operacaoPrazo.getPrazo());
+			prazo.add(Calendar.DAY_OF_MONTH,  1);
+			dataprazo = prazo.getTime();
+			Date prazodate = new Date(dataprazo.getTime());
+			operacaoPrazo.setPrazo(prazodate);
 		}
 		Operacao ultima = peca.getOperacoesFazer().get(peca.getOperacoesFazer().size() - 1);
-		inicio.setTime(ultima.getDataInicio());
-		inicio.add(Calendar.DAY_OF_MONTH, -1);
-		Date iniciodata = new Date(dataini.getTime());
-		ultima.setDataInicio(iniciodata);
 		System.out.println("teste ope" + ultima.getDescricao());
 		try {
 			Operacao.calcular(ultima);
@@ -188,6 +224,9 @@ public class PecaController {
 	public Peca opesAndamento(@RequestBody Peca peca) {
 		Calendar inicio = Calendar.getInstance();
 		java.util.Date dataini = new java.util.Date();
+
+		Calendar prazo = Calendar.getInstance();
+		java.util.Date dataprazo = new java.util.Date();
 		for (Operacao operacaoFazer : peca.getOperacoesFazer()) {
 
 			System.out.println("opesAndamento gerente" + operacaoFazer.getDataInicio());
@@ -196,6 +235,12 @@ public class PecaController {
 			dataini = inicio.getTime();
 			Date iniciodata = new Date(dataini.getTime());
 			operacaoFazer.setDataInicio(iniciodata);
+			
+			prazo.setTime(operacaoFazer.getPrazo());
+			prazo.add(Calendar.DAY_OF_MONTH,  1);
+			dataprazo = prazo.getTime();
+			Date prazodate = new Date(dataprazo.getTime());
+			operacaoFazer.setPrazo(prazodate);
 		}
 		for (Operacao operacaoAndamento : peca.getOperacoesAndamento()) {
 			System.out.println("opesAndamento gerente" + operacaoAndamento.getDataInicio());
@@ -204,6 +249,12 @@ public class PecaController {
 			dataini = inicio.getTime();
 			Date iniciodata = new Date(dataini.getTime());
 			operacaoAndamento.setDataInicio(iniciodata);
+			
+			prazo.setTime(operacaoAndamento.getPrazo());
+			prazo.add(Calendar.DAY_OF_MONTH,  1);
+			dataprazo = prazo.getTime();
+			Date prazodate = new Date(dataprazo.getTime());
+			operacaoAndamento.setPrazo(prazodate);
 		}
 		for (Operacao operacaoPrazo : peca.getOperacoesPrazo()) {
 			System.out.println("opesAndamento gerente" + operacaoPrazo.getDataInicio());
@@ -212,12 +263,15 @@ public class PecaController {
 			dataini = inicio.getTime();
 			Date iniciodata = new Date(dataini.getTime());
 			operacaoPrazo.setDataInicio(iniciodata);
+			
+			prazo.setTime(operacaoPrazo.getPrazo());
+			prazo.add(Calendar.DAY_OF_MONTH,  1);
+			dataprazo = prazo.getTime();
+			Date prazodate = new Date(dataprazo.getTime());
+			operacaoPrazo.setPrazo(prazodate);
 		}
 		Operacao ultima = peca.getOperacoesAndamento().get(peca.getOperacoesAndamento().size() - 1);
-		inicio.setTime(ultima.getDataInicio());
-		inicio.add(Calendar.DAY_OF_MONTH, -1);
-		Date iniciodata = new Date(dataini.getTime());
-		ultima.setDataInicio(iniciodata);
+		
 		try {
 			Operacao.calcular(ultima);
 		} catch (ParseException e) {

@@ -113,10 +113,10 @@ public class Operacao {
 		resultdias = result / operacao.getNumFuncionariosDisponiveis();
 		diasNeceteste = Math.round(resultdias / tempoFun);
 
-		inicio.add(Calendar.DAY_OF_MONTH, 1);
-		dataini = inicio.getTime();
-		Date iniciodata = new Date(dataini.getTime());
-		operacao.setDataInicio(iniciodata);
+		// inicio.add(Calendar.DAY_OF_MONTH, 1);
+		// dataini = inicio.getTime();
+		// Date iniciodata = new Date(dataini.getTime());
+		// operacao.setDataInicio(iniciodata);
 
 		for (int i = 1; i <= diasNeceteste; i++) {
 
