@@ -18,8 +18,19 @@ public class PlanilhaCusto {
 	private long id;
 	private float custoMinuto, lucro, gastosOpe, gastos, custoOpe, tempos, lote;
 	private int numFunOpe;
+
 	public int getNumFunOpe() {
 		return numFunOpe;
+	}
+
+	public String descricaoOpe;
+
+	public String getDescricaoOpe() {
+		return descricaoOpe;
+	}
+
+	public void setDescricaoOpe(String descricaoOpe) {
+		this.descricaoOpe = descricaoOpe;
 	}
 
 	public void setNumFunOpe(int numFunOpe) {
@@ -27,7 +38,7 @@ public class PlanilhaCusto {
 	}
 
 	@ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="operacao_id", nullable =false)
+	// @JoinColumn(name = "operacao_id")
 	private Operacao operacao;
 
 	public long getId() {
@@ -127,9 +138,9 @@ public class PlanilhaCusto {
 		// custo = custoMinuto * planilha.getOperacao().getTempos();
 		// ganho = custo * planilha.getOperacao().getLoteProducao();
 		custo = custoMinuto * planilha.getTempos();
-		System.out.println("custo ope"+ custo);
+		System.out.println("custo ope" + custo);
 		planilha.setCustoOpe(custo);
-	    ganho = custo * planilha.getLote();
+		ganho = custo * planilha.getLote();
 		gastos = planilha.getGastos() + planilha.getGastosOpe();
 		lucro = ganho - gastos;
 		planilha.setLucro(lucro);

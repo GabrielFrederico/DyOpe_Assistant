@@ -42,6 +42,8 @@ export class PlanilhaCustoComponent implements OnInit {
   planilhas: any;
   editarPlanilha = false;
 
+  listacustos = false;
+
   ngOnInit() {
     this.info = {
       token: this.token.getToken(),
@@ -62,7 +64,16 @@ export class PlanilhaCustoComponent implements OnInit {
   }
 
   selectPeca() {
-    this.showPlanilha = true;
+    this.planilha.operacao_id = 0;
+    if (!this.showPlanilha) {
+      this.gerenteService.addPlanilha(this.planilha).subscribe(data => {
+        this.planilhaEscolhida = data;
+      }, error => {
+        this.mensagemErro = error.error;
+      });
+      this.showPlanilha = true;
+    }
+
   }
 
   selectOpe() {
@@ -72,6 +83,7 @@ export class PlanilhaCustoComponent implements OnInit {
     alert('Operação cadastrada com sucesso!');
     this.router.navigateByUrl('/gerenteindex/homegerente', {skipLocationChange: true}).then(() =>
       this.router.navigate(['/gerenteindex/planilhadecusto/']));
+    this.acessovalido = true;
   }
 
   cadastrar() {
@@ -79,12 +91,13 @@ export class PlanilhaCustoComponent implements OnInit {
       this.atualizar();
       console.log('planilha ATUALIZADA');
     } else {
-      this.planilha.operacao_id = this.operacaoEscolhida.id;
-      this.planilha.tempos = this.operacaoEscolhida.tempos;
-      this.planilha.lote = this.operacaoEscolhida.loteProducao;
-      this.planilha.numFunOpe = this.operacaoEscolhida.numFuncionariosDisponiveis;
-      this.planilha.gerente_id = this.gerente.id;
-      this.gerente.planilhascusto.push(this.planilha);
+      this.planilhaEscolhida.operacao_id = this.operacaoEscolhida.id;
+      this.planilhaEscolhida.descricaoOpe = this.operacaoEscolhida.descricao;
+      this.planilhaEscolhida.tempos = this.operacaoEscolhida.tempos;
+      this.planilhaEscolhida.lote = this.operacaoEscolhida.loteProducao;
+      this.planilhaEscolhida.numFunOpe = this.operacaoEscolhida.numFuncionariosDisponiveis;
+      this.planilhaEscolhida.gerente_id = this.gerente.id;
+      this.gerente.planilhascusto.push(this.planilhaEscolhida);
       this.gerenteService.cadastrarPlanilha(this.gerente).pipe(first()).subscribe(data => {
         this.getdadosCustos();
         this.planilha2 = true;
@@ -95,15 +108,42 @@ export class PlanilhaCustoComponent implements OnInit {
   }
 
   getdadosCustos() {
-    this.gerenteService.getPlanilhaId(this.planilha.id).subscribe(data => {
+    this.gerenteService.getPlanilhaId(this.planilhaEscolhida.id).subscribe(data => {
       this.resultadoPlanilha = data;
     }, error => {
       this.mensagemErro = error.error;
     });
   }
 
+  listaClosed() {
+    this.listacustos = false;
+  }
+
+  openLista() {
+    this.listacustos = true;
+  }
+
+  deletarPlanilha(planilha: any) {
+    this.planilhaEscolhida = planilha;
+    const i = this.gerente.planilhascusto.indexOf(this.planilhaEscolhida);
+    this.planilhaEscolhida.gerente_id = 0;
+    this.gerente.planilhascusto.splice(i, 1);
+    this.gerenteService.cadastrarAlgo(this.gerente).pipe(first()).subscribe(data => {
+    }, error => {
+      this.mensagemErro = error.error;
+    });
+    // this.gerenteService.deletePlanilha(this.planilhaEscolhida.id).subscribe(data => {
+    // }, error => {
+    //   this.mensagemErro = error.error;
+    // });
+  }
+
+  selectPlanilha(planilha: any) {
+    this.planilhaEscolhida = planilha;
+  }
+
   atualizar() {
-    this.gerenteService.atualizarPlanilha(this.planilha).pipe(first()).subscribe(data => {
+    this.gerenteService.atualizarPlanilha(this.planilhaEscolhida).pipe(first()).subscribe(data => {
       this.resultadoPlanilha = data;
     }, error => {
       this.mensagemErro = error.error;

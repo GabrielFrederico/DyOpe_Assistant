@@ -434,9 +434,8 @@ export class SequenciaOperacionalComponent implements OnInit, OnDestroy {
     this.gerente.pecas.push(this.newpeca);
     this.gerenteService.cadastrarAlgo(this.gerente).pipe(first()).subscribe(data => {
       alert('Peça cadastrada com sucesso!');
-    //  this.router.navigateByUrl('/gerenteindex/homegerente', {skipLocationChange: true}).then(() =>
-      //  this.router.navigate(['/gerenteindex/operacoes/']));
-      // this.router.navigate(['/gerenteindex/operacoes/', this.etapaproducao.etapaProducao]));
+      this.router.navigateByUrl('/gerenteindex/homegerente', {skipLocationChange: true}).then(() =>
+        this.router.navigate(['/gerenteindex/operacoes/']));
 
     }, error => {
       this.erro = true;

@@ -235,13 +235,11 @@ export class AndamentoOperacoesComponent implements OnInit {
           this.peca.operacoesAndamento.push(this.operacaoFazer);
           this.peca.operacoesFazer.splice(i, 1);
           this.updateOpes();
-          alert('opesseparadasa' + this.operacaoFazer.id + 'inicio' + this.operacaoFazer.dataInicio);
         } else if (this.hoje.getTime() === this.prazo.getTime() || this.prazo < this.hoje && this.inicio < this.hoje) {
           const i = this.peca.operacoesFazer.indexOf(this.operacaoFazer);
           this.peca.operacoesPrazo.push(this.operacaoFazer);
           this.peca.operacoesFazer.splice(i, 1);
           this.updateOpes();
-          alert('opesseparadasfp' + this.operacaoFazer.id + 'inicio' + this.operacaoFazer.dataInicio);
         }
       });
 
@@ -306,7 +304,6 @@ export class AndamentoOperacoesComponent implements OnInit {
           this.peca.operacoesAndamento.splice(i, 1);
           this.peca.operacoesPrazo.push(this.operacao);
           this.updateOpes();
-          alert('opesseparadasap');
         }
       });
 

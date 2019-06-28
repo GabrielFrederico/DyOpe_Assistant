@@ -43,6 +43,13 @@ public class PlanilhaCustoController {
     }
     
     @PreAuthorize("hasRole('GERENTE') or hasRole('admin')")
+    @RequestMapping(method = RequestMethod.POST)
+    public PlanilhaCusto save(@RequestBody PlanilhaCusto planilhaCusto) {
+        planilhaCustoRepository.save(planilhaCusto);
+        return planilhaCusto;
+    }
+    
+    @PreAuthorize("hasRole('GERENTE') or hasRole('admin')")
     @RequestMapping(method = RequestMethod.DELETE, path = "/{id}")
     public PlanilhaCusto deletePlanilhaCustoById(@PathVariable("id") long id) {
         PlanilhaCusto planilhaCusto = planilhaCustoRepository.findById(id);

@@ -31,10 +31,11 @@ public class Operacao {
 	@JoinTable(name = "operacao_suboperacoes", joinColumns = @JoinColumn(name = "operacao_id"), inverseJoinColumns = @JoinColumn(name = "suboperacao_id"))
 	private Set<SubOperacao> suboperacoes = new HashSet<>();
 
-	@OneToMany(cascade = CascadeType.ALL ,mappedBy="operacao")
-	// @JoinTable(name = "operacao_planilhascusto", joinColumns = @JoinColumn(name = "operacao_id"), inverseJoinColumns = @JoinColumn(name = "planilhacusto_id"))
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "operacao")
+	// @JoinTable(name = "operacao_planilhascusto", joinColumns = @JoinColumn(name =
+	// "operacao_id"), inverseJoinColumns = @JoinColumn(name = "planilhacusto_id"))
 	private List<PlanilhaCusto> planilhascusto = new ArrayList<>();
-	
+
 	private String descricao;
 	private Date dataInicio;
 	private float minutos, segundos;
@@ -113,10 +114,10 @@ public class Operacao {
 		resultdias = result / operacao.getNumFuncionariosDisponiveis();
 		diasNeceteste = Math.round(resultdias / tempoFun);
 
-		// inicio.add(Calendar.DAY_OF_MONTH, 1);
-		// dataini = inicio.getTime();
-		// Date iniciodata = new Date(dataini.getTime());
-		// operacao.setDataInicio(iniciodata);
+//		inicio.add(Calendar.DAY_OF_MONTH, 1);
+//		dataini = inicio.getTime();
+//		Date iniciodata = new Date(dataini.getTime());
+//		operacao.setDataInicio(iniciodata);
 
 		for (int i = 1; i <= diasNeceteste; i++) {
 
@@ -143,6 +144,7 @@ public class Operacao {
 		if (diasNeceteste < 1) {
 			diasNeceteste = 1;
 		}
+
 		System.out.println("fundispo" + operacao.getNumFuncionariosDisponiveis());
 		qtdPecasOpe = Math.round(operacao.getLoteProducao() / operacao.getNumFuncionariosDisponiveis());
 		calcProHora = funcionariosNecessários * operacao.getTempoTrab();
@@ -155,6 +157,9 @@ public class Operacao {
 
 		System.out.println("dias: " + diasNeceteste + "  " + tempoFun + ". " + resultdias + ".minutos " + min + " "
 				+ qtdPecasOpe + " INICIO:" + operacao.getDataInicio());
+		if (qtdPecasOpe < 1) {
+			qtdPecasOpe = 1;
+		}
 		operacao.setQtdPecasOpe(qtdPecasOpe);
 		operacao.setProducaoHora(producaoHora);
 		System.out.println(" Teste prod: " + operacao.getProducaoHora());

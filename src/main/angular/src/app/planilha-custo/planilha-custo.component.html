@@ -43,9 +43,9 @@
 
     <nav class="espacamentosequenciaoperacional">
       <div class="nav nav-tabs" id="nav-tab" role="tablist">
-        <a class="nav-item nav-link active" id="nav-cadastro-tab" data-toggle="tab" href="#nav-cadastro" role="tab"
+        <a class="nav-item nav-link active" id="nav-cadastro-tab" data-toggle="tab" href="#nav-cadastro" role="tab" (click)="listaClosed()"
            aria-controls="nav-cadastro" aria-selected="true">Cadastro</a>
-        <a class="nav-item nav-link " id="nav-custos-tab" data-toggle="tab" href="#nav-custos" role="tab"
+        <a class="nav-item nav-link " id="nav-custos-tab" data-toggle="tab" href="#nav-custos" role="tab" (click)="openLista()"
            aria-controls="nav-custos" aria-selected="false">Custos</a>
       </div>
     </nav>
@@ -66,10 +66,9 @@
                       <div class="form-group">
                         <mat-form-field>
                           <mat-label class="text-dark">Peça</mat-label>
-                          <mat-select required="required" name="peca" (selectionChange)="selectPeca()"
-                                      [(ngModel)]="peca">
+                          <mat-select required="required" name="peca" [(ngModel)]="peca">
                             <mat-option *ngFor="let peca of gerente.pecas"
-                                        [value]="peca">{{peca.descricao}}</mat-option>
+                                        [value]="peca" (click)="selectPeca()">{{peca.descricao}}</mat-option>
                             <mat-option *ngIf="gerente.pecas.length <=0">Nenhuma Peça Cadastrado</mat-option>
                           </mat-select>
                         </mat-form-field>
@@ -93,12 +92,12 @@
                       </div>
                     </div>
                   </div>
-                  <div class="form-row">
+                  <div class="form-row" *ngIf="showPlanilha">
                     <div class="col-md-6">
                       <div class="form-group">
                         <label for="gasto">Gasto:</label>
                         <input type="number" id="gasto" name="gasto" class="form-control"
-                               [(ngModel)]="planilha.gastos"
+                               [(ngModel)]="planilhaEscolhida.gastos"
                                required="required">
                       </div>
                     </div>
@@ -106,7 +105,7 @@
                       <div class="form-group">
                         <label for="gastooperacional">Gasto Operacional:</label>
                         <input type="number" id="gastooperacional" name="gastooperacional" class="form-control"
-                               [(ngModel)]="planilha.gastosOpe"
+                               [(ngModel)]="planilhaEscolhida.gastosOpe"
                                required="required">
                       </div>
                     </div>
@@ -169,7 +168,7 @@
       </div>
       <div class="tab-pane fade" id="nav-custos" role="tabpanel" aria-labelledby="nav-custos-tab">
 
-        <div class="card border-info mb-3">
+        <div class="card border-info mb-3" *ngIf="listacustos">
           <div class="card-header border-info">Lista de Custos</div>
           <table class="table table table-bordered dataTable">
             <thead>
@@ -200,8 +199,8 @@
 
                 <div>
                   <button class="btn btn-danger btn-padding" href="#" role="button"
-                          (click)="subopeEscolhida(suboperacao)" type="button"
-                          data-toggle="modal" data-target=".deletar-subope">
+                          (click)="selectPlanilha(planilhas)" type="button"
+                          data-toggle="modal" data-target=".deletar-planilha">
                     <i class="fas fa-fw fa-trash-alt">
                     </i>
                   </button>
@@ -222,6 +221,35 @@
 
   </div>
 
+</div>
+<!-- deletar planilha -->
+<div class="modal  fade deletar-planilha" tabindex="-1" role="dialog" aria-labelledby="modalpeca"
+     aria-hidden="true">
+  <div class="modal-dialog modal-body">
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="modalExcluirSubope">Deletar Planilha</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="card-body">
+          <div class="text-center mb-4">
+            <h4>Deseja Deletar?</h4>
+          </div>
+          <div class="modal-footer col-md-12">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+            <input class="btn btn-primary" type="submit" (click)="deletarPlanilha(planilhaEscolhida)"
+                   data-dismiss="modal"
+                   value="Confirmar">
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!--&lt;!&ndash; cadastro de planilha de custo &ndash;&gt;-->

@@ -145,6 +145,10 @@ export class GerenteService {
   }
 
   // planilha
+  deletePlanilha(id: number) {
+
+    return this.httpClient.delete('http://localhost:8080/planilhascusto/' + id);
+  }
 
   cadastrarPlanilha(gerente: any) {
     return this.httpClient.put('http://localhost:8080/gerentes/cadastrarplanilha', gerente);
@@ -152,6 +156,10 @@ export class GerenteService {
 
   atualizarPlanilha(planilha: any) {
     return this.httpClient.put('http://localhost:8080/planilhascusto', planilha);
+  }
+
+  addPlanilha(planilha: any) {
+    return this.httpClient.post('http://localhost:8080/planilhascusto', planilha);
   }
 
   getPlanilhaId(id: number) {
