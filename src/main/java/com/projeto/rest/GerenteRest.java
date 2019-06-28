@@ -189,6 +189,54 @@ public class GerenteRest {
 	@RequestMapping(method = RequestMethod.PUT, value = "chaveAcesso")
 	@PreAuthorize("hasRole('GERENTE')")
 	public ResponseEntity<?> chaveAcesso(@RequestBody Gerente gerente) {
+		Calendar inicio = Calendar.getInstance();
+		java.util.Date dataini = new java.util.Date();
+		for (Peca peca : gerente.getPecas()) {
+			System.out.println("pecas gerente" + peca.getOperacoesFazer());
+			for (Operacao operacaoFazer : peca.getOperacoesFazer()) {
+				System.out.println("opesAndamento gerente" + operacaoFazer.getDataInicio());
+				inicio.setTime(operacaoFazer.getDataInicio());
+				inicio.add(Calendar.DAY_OF_MONTH, 1);
+				dataini = inicio.getTime();
+				Date iniciodata = new Date(dataini.getTime());
+				operacaoFazer.setDataInicio(iniciodata);
+				
+				prazo.setTime(operacaoFazer.getPrazo());
+				prazo.add(Calendar.DAY_OF_MONTH,  1);
+				dataprazo = prazo.getTime();
+				Date prazodate = new Date(dataprazo.getTime());
+				operacaoFazer.setPrazo(prazodate);
+			}
+			for (Operacao operacaoAndamento : peca.getOperacoesAndamento()) {
+				System.out.println("opesAndamento gerente" + operacaoAndamento.getDataInicio());
+				inicio.setTime(operacaoAndamento.getDataInicio());
+				inicio.add(Calendar.DAY_OF_MONTH, 1);
+				dataini = inicio.getTime();
+				Date iniciodata = new Date(dataini.getTime());
+				operacaoAndamento.setDataInicio(iniciodata);
+				
+				prazo.setTime(operacaoAndamento.getPrazo());
+				prazo.add(Calendar.DAY_OF_MONTH,  1);
+				dataprazo = prazo.getTime();
+				Date prazodate = new Date(dataprazo.getTime());
+				operacaoAndamento.setPrazo(prazodate);
+			}
+			for (Operacao operacaoPrazo : peca.getOperacoesPrazo()) {
+				System.out.println("opesAndamento gerente" + operacaoPrazo.getDataInicio());
+				inicio.setTime(operacaoPrazo.getDataInicio());
+				inicio.add(Calendar.DAY_OF_MONTH, 1);
+				dataini = inicio.getTime();
+				Date iniciodata = new Date(dataini.getTime());
+				operacaoPrazo.setDataInicio(iniciodata);
+				
+				prazo.setTime(operacaoPrazo.getPrazo());
+				prazo.add(Calendar.DAY_OF_MONTH,  1);
+				dataprazo = prazo.getTime();
+				Date prazodate = new Date(dataprazo.getTime());
+				operacaoPrazo.setPrazo(prazodate);
+			}
+		}
+
 
 		gerente.setChaveAcesso(encoder.encode(gerente.getChaveAcesso()));
 		gerenteRepository.save(gerente);

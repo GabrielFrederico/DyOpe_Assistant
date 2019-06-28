@@ -40,6 +40,7 @@ export class PerfilGerenteComponent implements OnInit {
   chaveCadastrada = false;
 
   editar = false;
+  chaveValida = false;
 
   private static getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
@@ -100,7 +101,13 @@ export class PerfilGerenteComponent implements OnInit {
   }
 
   chaveAcesso(chave: string) {
-    this.gerente.chaveAcesso = chave;
+    if (chave !== '' || chave.length >= 3) {
+      this.chaveValida = true;
+      this.gerente.chaveAcesso = chave;
+    } else {
+      this.chaveValida = false;
+    }
+
   }
 
   redefinirSenha() {
@@ -152,6 +159,7 @@ export class PerfilGerenteComponent implements OnInit {
   }
 
   cadastrarChaveAcesso() {
+
     this.gerenteService.chaveAcesso(
       this.gerente)
       .pipe(first())

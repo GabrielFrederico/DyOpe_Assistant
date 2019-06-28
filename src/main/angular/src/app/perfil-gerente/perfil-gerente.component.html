@@ -204,7 +204,8 @@
                 <show-hide-password btnStyle="primary">
                   <div class="form-label-group showredefinir">
                     <input type="password" #chave id="chaveAcesso" name="chaveAcesso"
-                           class="form-control" (blur)="chaveAcesso(chave.value)"
+                           class="form-control" (blur)="chaveAcesso(chave.value)" (focus)="chaveAcesso(chave.value)"
+                           (keypress)="chaveAcesso(chave.value)" (change)="chaveAcesso(chave.value)"
                            placeholder="Chave de Acesso:" minlength="3"
                            required="required">
                     <label for="chaveAcesso">Chave de Acesso:</label>
@@ -215,10 +216,10 @@
 
             <div class="modal-footer col-md-12">
               <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-              <input class="btn btn-success" type="submit" *ngIf="!chaveCadastrada" [disabled]="!fa.valid"
-                     (click)="cadastrarChaveAcesso()" data-dismiss="modal" value="Cadastrar">
-              <input class="btn btn-primary" type="submit" *ngIf="chaveCadastrada" [disabled]="!fa.valid"
-                     (click)="cadastrarChaveAcesso()" data-dismiss="modal" value="Atualizar">
+              <input class="btn btn-success" type="submit" *ngIf="!chaveCadastrada"
+                     (click)="cadastrarChaveAcesso()" [disabled]="!chaveValida" data-dismiss="modal" value="Cadastrar">
+              <input class="btn btn-primary" type="submit" *ngIf="chaveCadastrada"
+                     (click)="cadastrarChaveAcesso()" [disabled]="!chaveValida" data-dismiss="modal" value="Atualizar">
 
             </div>
           </form>
