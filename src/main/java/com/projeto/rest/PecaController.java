@@ -163,7 +163,7 @@ public class PecaController {
 		for (Operacao operacaoPrazo : peca.getOperacoesPrazo()) {
 			System.out.println("opesAndamento gerente" + operacaoPrazo.getDataInicio());
 			inicio.setTime(operacaoPrazo.getDataInicio());
-			inicio.add(Calendar.DAY_OF_MONTH, -1);
+			inicio.add(Calendar.DAY_OF_MONTH, 1);
 			dataini = inicio.getTime();
 			Date iniciodata = new Date(dataini.getTime());
 			operacaoPrazo.setDataInicio(iniciodata);
