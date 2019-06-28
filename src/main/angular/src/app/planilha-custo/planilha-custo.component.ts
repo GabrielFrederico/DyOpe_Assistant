@@ -40,6 +40,7 @@ export class PlanilhaCustoComponent implements OnInit {
   opeShow = false;
   showPlanilha = false;
   planilhas: any;
+  editarPlanilha = false;
 
   ngOnInit() {
     this.info = {
@@ -54,6 +55,10 @@ export class PlanilhaCustoComponent implements OnInit {
     }, error => {
       console.log(error.error);
     });
+  }
+
+  editar() {
+    this.editarPlanilha = true;
   }
 
   selectPeca() {

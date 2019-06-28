@@ -6,11 +6,13 @@
   max-width: 28rem;
 
 }
-.desc{
-   padding: 0%;
+
+.desc {
+  padding: 0%;
 }
-.btn-padding{
- padding: 1%;
+
+.btn-padding {
+  padding: 1%;
 }
 
 .modal-xl {
@@ -25,18 +27,25 @@
   width: 143%;
 }
 
-.botaoexcluirsubope{
-  margin-right: 9%; padding: 3%;
+.botaoexcluirsubope {
+  margin-right: 9%;
+  padding: 3%;
 }
 
-.textoinicial{
+.botaoexcluirplanilha {
+  padding: 3%;
+}
+
+.textoinicial {
   font-size: 199%;
   margin: 3.6%;
 }
-.formsequencia{
+
+.formsequencia {
   padding-right: 3px;
   padding-left: 3px;
 }
+
 .menudrop {
   position: absolute;
   display: none;
@@ -102,7 +111,8 @@ div.menu_index span {
 .tam {
   font-size: 160%;
 }
-.fontTempo{
+
+.fontTempo {
   text-align: right;
 }
 
