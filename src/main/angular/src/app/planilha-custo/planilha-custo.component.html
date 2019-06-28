@@ -193,6 +193,24 @@
               <td>{{planilhas.custoMinuto}}</td>
               <td>{{planilhas.custoOpe}}</td>
               <td>{{planilhas.lucro}}</td>
+
+              <div class="card-footer bg-transparent align-self-center botaoexcluirplanilha border-info modal-footer">
+                <input class="btn btn-primary" type="button" [disabled]="!valido" *ngIf="!planilha2"
+                       value="Editar" (click)="editar()">
+
+                <div>
+                  <button class="btn btn-danger btn-padding" href="#" role="button"
+                          (click)="subopeEscolhida(suboperacao)" type="button"
+                          data-toggle="modal" data-target=".deletar-subope">
+                    <i class="fas fa-fw fa-trash-alt">
+                    </i>
+                  </button>
+                  <!--       <a class="btn btn-danger" href="javascript:void(0)" data-toggle="modal"
+                       data-target=".deletar-subope" (click)="subopeEscolhida(suboperacao)">-</a> -->
+                </div>
+
+              </div>
+
             </tr>
             </tbody>
           </table>
