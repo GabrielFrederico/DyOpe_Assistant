@@ -1,12 +1,15 @@
 package com.projeto.rest;
 
+import java.sql.Date;
 import java.text.ParseException;
+import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Set;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -25,6 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.projeto.models.Gerente;
 import com.projeto.models.Operacao;
+import com.projeto.models.Peca;
 import com.projeto.models.PlanilhaCusto;
 import com.projeto.models.Role;
 import com.projeto.models.RoleName;
@@ -50,7 +54,7 @@ public class GerenteRest {
 
 	@Autowired
 	FuncionarioRepository funcionarioRepository;
-	
+
 	@Autowired
 	SetorRepository setorRepository;
 
@@ -112,7 +116,34 @@ public class GerenteRest {
 	@RequestMapping(method = RequestMethod.PUT, value = "atualizarsenha")
 	@PreAuthorize("hasRole('GERENTE')")
 	public ResponseEntity<?> update(@RequestBody Gerente gerente) {
-
+		Calendar inicio = Calendar.getInstance();
+		java.util.Date dataini = new java.util.Date();
+		for (Peca peca : gerente.getPecas()) {
+			for (Operacao operacaoFazer : peca.getOperacoesFazer()) {
+				System.out.println("opesAndamento gerente" + operacaoFazer.getDataInicio());
+				inicio.setTime(operacaoFazer.getDataInicio());
+				inicio.add(Calendar.DAY_OF_MONTH, 1);
+				dataini = inicio.getTime();
+				Date iniciodata = new Date(dataini.getTime());
+				operacaoFazer.setDataInicio(iniciodata);
+			}
+			for (Operacao operacaoAndamento : peca.getOperacoesAndamento()) {
+				System.out.println("opesAndamento gerente" + operacaoAndamento.getDataInicio());
+				inicio.setTime(operacaoAndamento.getDataInicio());
+				inicio.add(Calendar.DAY_OF_MONTH, 1);
+				dataini = inicio.getTime();
+				Date iniciodata = new Date(dataini.getTime());
+				operacaoAndamento.setDataInicio(iniciodata);
+			}
+			for (Operacao operacaoPrazo : peca.getOperacoesPrazo()) {
+				System.out.println("opesAndamento gerente" + operacaoPrazo.getDataInicio());
+				inicio.setTime(operacaoPrazo.getDataInicio());
+				inicio.add(Calendar.DAY_OF_MONTH, 1);
+				dataini = inicio.getTime();
+				Date iniciodata = new Date(dataini.getTime());
+				operacaoPrazo.setDataInicio(iniciodata);
+			}
+		}
 		gerente.setSenha(encoder.encode(gerente.getSenha()));
 		gerente.setSenhaConfirm(encoder.encode(gerente.getSenha()));
 
@@ -120,6 +151,7 @@ public class GerenteRest {
 		return new ResponseEntity<>(new ResponseMessage("Dados Atualizados com sucesso!"), HttpStatus.OK);
 	}
 
+	@Modifying(flushAutomatically = true)
 	@RequestMapping(method = RequestMethod.PUT, value = "atualizargerente")
 	@PreAuthorize("hasRole('GERENTE')")
 	public ResponseEntity<?> update2(@RequestBody Gerente gerente) {
@@ -145,31 +177,96 @@ public class GerenteRest {
 	@PreAuthorize("hasRole('GERENTE')")
 	public ResponseEntity<?> acessarPlanilha(@RequestBody Gerente gerente) {
 		if (!encoder.matches(gerente.getVerificarChaveAcesso(), gerente.getChaveAcesso())) {
-			
+
 			return new ResponseEntity<>(new ResponseMessage("Erro -> Acesso inválido!"), HttpStatus.BAD_REQUEST);
-		}else {
+		} else {
 			gerente.setVerificarChaveAcesso("");
 			return new ResponseEntity<>(new ResponseMessage("Acesso Válido!"), HttpStatus.OK);
 		}
 
 	}
 
+	@Modifying(clearAutomatically = true)
 	@RequestMapping(method = RequestMethod.PUT, value = "cadastraralgo")
 	@PreAuthorize("hasRole('GERENTE') or hasRole('FUNCIONARIO') or hasRole('ADMIN')")
 	public ResponseEntity<?> cadastrarAlgo(@RequestBody Gerente gerente) {
+		Calendar inicio = Calendar.getInstance();
+		java.util.Date dataini = new java.util.Date();
+		for (Peca peca : gerente.getPecas()) {
+			System.out.println("pecas gerente" + peca.getOperacoesFazer());
+			for (Operacao operacaoFazer : peca.getOperacoesFazer()) {
+				System.out.println("opesAndamento gerente" + operacaoFazer.getDataInicio());
+				inicio.setTime(operacaoFazer.getDataInicio());
+				inicio.add(Calendar.DAY_OF_MONTH, 1);
+				dataini = inicio.getTime();
+				Date iniciodata = new Date(dataini.getTime());
+				operacaoFazer.setDataInicio(iniciodata);
+			}
+			for (Operacao operacaoAndamento : peca.getOperacoesAndamento()) {
+				System.out.println("opesAndamento gerente" + operacaoAndamento.getDataInicio());
+				inicio.setTime(operacaoAndamento.getDataInicio());
+				inicio.add(Calendar.DAY_OF_MONTH, 1);
+				dataini = inicio.getTime();
+				Date iniciodata = new Date(dataini.getTime());
+				operacaoAndamento.setDataInicio(iniciodata);
+			}
+			for (Operacao operacaoPrazo : peca.getOperacoesPrazo()) {
+				System.out.println("opesAndamento gerente" + operacaoPrazo.getDataInicio());
+				inicio.setTime(operacaoPrazo.getDataInicio());
+				inicio.add(Calendar.DAY_OF_MONTH, 1);
+				dataini = inicio.getTime();
+				Date iniciodata = new Date(dataini.getTime());
+				operacaoPrazo.setDataInicio(iniciodata);
+			}
+		}
 
 		gerenteRepository.save(gerente);
+		for (Peca peca : gerente.getPecas()) {
+			System.out.println("pecas gerente" + peca.getOperacoesFazer());
+			for (Operacao operacaoAndamento : peca.getOperacoesAndamento()) {
+				System.out.println("opesAndamento gerente" + operacaoAndamento.getDataInicio());
+			}
+		}
 		return new ResponseEntity<>(new ResponseMessage("Dados Atualizados com sucesso!"), HttpStatus.OK);
 	}
 
 	@RequestMapping(method = RequestMethod.PUT, value = "cadastrarsetor")
 	@PreAuthorize("hasRole('GERENTE')")
 	public ResponseEntity<?> cadastrarSetor(@RequestBody Gerente gerente) {
-		 Setor setor =  gerente.getSetores().get(gerente.getSetores().size()-1);
-		 
-		 if(gerente.getSetores().contains(setorRepository.findByNomeSetor(setor.getNomeSetor()))) {
-			 return new ResponseEntity<>(new ResponseMessage("Erro -> Nome de setor já utilizado!"), HttpStatus.BAD_REQUEST);
-		 }
+		Calendar inicio = Calendar.getInstance();
+		java.util.Date dataini = new java.util.Date();
+		for (Peca peca : gerente.getPecas()) {
+			for (Operacao operacaoFazer : peca.getOperacoesFazer()) {
+				System.out.println("opesAndamento gerente" + operacaoFazer.getDataInicio());
+				inicio.setTime(operacaoFazer.getDataInicio());
+				inicio.add(Calendar.DAY_OF_MONTH, 1);
+				dataini = inicio.getTime();
+				Date iniciodata = new Date(dataini.getTime());
+				operacaoFazer.setDataInicio(iniciodata);
+			}
+			for (Operacao operacaoAndamento : peca.getOperacoesAndamento()) {
+				System.out.println("opesAndamento gerente" + operacaoAndamento.getDataInicio());
+				inicio.setTime(operacaoAndamento.getDataInicio());
+				inicio.add(Calendar.DAY_OF_MONTH, 1);
+				dataini = inicio.getTime();
+				Date iniciodata = new Date(dataini.getTime());
+				operacaoAndamento.setDataInicio(iniciodata);
+			}
+			for (Operacao operacaoPrazo : peca.getOperacoesPrazo()) {
+				System.out.println("opesAndamento gerente" + operacaoPrazo.getDataInicio());
+				inicio.setTime(operacaoPrazo.getDataInicio());
+				inicio.add(Calendar.DAY_OF_MONTH, 1);
+				dataini = inicio.getTime();
+				Date iniciodata = new Date(dataini.getTime());
+				operacaoPrazo.setDataInicio(iniciodata);
+			}
+		}
+		Setor setor = gerente.getSetores().get(gerente.getSetores().size() - 1);
+
+		if (gerente.getSetores().contains(setorRepository.findByNomeSetor(setor.getNomeSetor()))) {
+			return new ResponseEntity<>(new ResponseMessage("Erro -> Nome de setor já utilizado!"),
+					HttpStatus.BAD_REQUEST);
+		}
 		gerenteRepository.save(gerente);
 		return new ResponseEntity<>(new ResponseMessage("Dados Atualizados com sucesso!"), HttpStatus.OK);
 	}
@@ -187,10 +284,38 @@ public class GerenteRest {
 		gerenteRepository.save(gerente);
 		return new ResponseEntity<>(new ResponseMessage("Dados Atualizados com sucesso!"), HttpStatus.OK);
 	}
-	
+
 	@RequestMapping(method = RequestMethod.PUT, value = "cadastrarplanilha")
 	@PreAuthorize("hasRole('GERENTE')")
 	public ResponseEntity<?> cadastrarPlanilha(@RequestBody Gerente gerente) throws ParseException {
+		Calendar inicio = Calendar.getInstance();
+		java.util.Date dataini = new java.util.Date();
+		for (Peca peca : gerente.getPecas()) {
+			for (Operacao operacaoFazer : peca.getOperacoesFazer()) {
+				System.out.println("opesAndamento gerente" + operacaoFazer.getDataInicio());
+				inicio.setTime(operacaoFazer.getDataInicio());
+				inicio.add(Calendar.DAY_OF_MONTH, 1);
+				dataini = inicio.getTime();
+				Date iniciodata = new Date(dataini.getTime());
+				operacaoFazer.setDataInicio(iniciodata);
+			}
+			for (Operacao operacaoAndamento : peca.getOperacoesAndamento()) {
+				System.out.println("opesAndamento gerente" + operacaoAndamento.getDataInicio());
+				inicio.setTime(operacaoAndamento.getDataInicio());
+				inicio.add(Calendar.DAY_OF_MONTH, 1);
+				dataini = inicio.getTime();
+				Date iniciodata = new Date(dataini.getTime());
+				operacaoAndamento.setDataInicio(iniciodata);
+			}
+			for (Operacao operacaoPrazo : peca.getOperacoesPrazo()) {
+				System.out.println("opesAndamento gerente" + operacaoPrazo.getDataInicio());
+				inicio.setTime(operacaoPrazo.getDataInicio());
+				inicio.add(Calendar.DAY_OF_MONTH, 1);
+				dataini = inicio.getTime();
+				Date iniciodata = new Date(dataini.getTime());
+				operacaoPrazo.setDataInicio(iniciodata);
+			}
+		}
 		PlanilhaCusto ultima = gerente.getPlanilhascusto().get(gerente.getPlanilhascusto().size() - 1);
 		PlanilhaCusto.calcularCusto(ultima);
 		gerenteRepository.save(gerente);
@@ -218,7 +343,6 @@ public class GerenteRest {
 
 		return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getUsername(), userDetails.getAuthorities()));
 	}
-
 
 	@RequestMapping(method = RequestMethod.POST, path = "/cadastrar")
 	public ResponseEntity<?> registerUser(@Valid @RequestBody CadastroFormGerente signUpRequest) {
