@@ -150,19 +150,29 @@ export class PlanilhaCustoComponent implements OnInit {
     }, error => {
       this.mensagemErro = error.error;
     });
-    // this.gerenteService.deletePlanilha(this.planilhaEscolhida.id).subscribe(data => {
-    // }, error => {
-    //   this.mensagemErro = error.error;
-    // });
   }
 
   selectPlanilha(planilha: any) {
     this.planilhaEscolhida = planilha;
   }
 
+  gastoOpe(gasto: any) {
+    this.planilhaEscolhida.gastosOpe = gasto;
+  }
+
   atualizar() {
     this.gerenteService.atualizarPlanilha(this.planilhaEscolhida).pipe(first()).subscribe(data => {
       this.resultadoPlanilha = data;
+    }, error => {
+      this.mensagemErro = error.error;
+    });
+  }
+
+  atualizardalista(planilha: any) {
+    this.gerenteService.atualizarPlanilha(planilha).pipe(first()).subscribe(data => {
+      planilha = data;
+      console.log('planilhaupdated');
+      this.cancelar();
     }, error => {
       this.mensagemErro = error.error;
     });

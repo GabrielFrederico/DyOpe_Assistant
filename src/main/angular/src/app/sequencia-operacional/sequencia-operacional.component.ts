@@ -96,8 +96,7 @@ export class SequenciaOperacionalComponent implements OnInit {
 
   selectEtapa(etapa: any) {
     this.etapa = etapa;
-    if (this.etapa.id === 5) {
-
+    if (this.etapa.etapaProducao === 'Acabamento' && this.listasuboperacoes.length <= 0) {
       this.operacaoService.getOperacoesSub().subscribe(data => {
         this.suboperacoes = data;
         if (this.escolheu) {

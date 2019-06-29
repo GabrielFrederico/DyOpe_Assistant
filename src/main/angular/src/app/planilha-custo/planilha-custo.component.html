@@ -55,7 +55,18 @@
     <div class="tab-content">
       <div class="tab-pane fade show active" id="nav-cadastro" role="tabpanel" aria-labelledby="nav-cadastro-tab">
 
-        <div class="row espacamentosequenciaoperacional">
+        <div class="form-group">
+          <mat-form-field>
+            <mat-label class="text-dark">Peça</mat-label>
+            <mat-select required="required" name="peca" [(ngModel)]="peca">
+              <mat-option *ngFor="let peca of gerente.pecas"
+                          [value]="peca" (click)="selectPeca()">{{peca.descricao}}</mat-option>
+              <mat-option *ngIf="gerente.pecas.length <=0">Nenhuma Peça Cadastrado</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="row espacamentosequenciaoperacional" *ngIf="showPlanilha; else naoescolheu">
 
           <div class="col-md-auto formsequencia">
             <form class="card border-info mb-3 operacoes lista" (ngSubmit)="cadastrar()"
@@ -63,18 +74,17 @@
               <div class="card-header border-info text-center">Dados:</div>
               <div class="card-body text-secondary">
                 <div class="form-group">
-                  <div class="form-row justify-content-around">
                     <div class="col-md-auto">
-                      <div class="form-group">
-                        <mat-form-field>
-                          <mat-label class="text-dark">Peça</mat-label>
-                          <mat-select required="required" name="peca" [(ngModel)]="peca">
-                            <mat-option *ngFor="let peca of gerente.pecas"
-                                        [value]="peca" (click)="selectPeca()">{{peca.descricao}}</mat-option>
-                            <mat-option *ngIf="gerente.pecas.length <=0">Nenhuma Peça Cadastrado</mat-option>
-                          </mat-select>
-                        </mat-form-field>
-                      </div>
+                      <!--                      <div class="form-group">-->
+                      <!--                        <mat-form-field>-->
+                      <!--                          <mat-label class="text-dark">Peça</mat-label>-->
+                      <!--                          <mat-select required="required" name="peca" [(ngModel)]="peca">-->
+                      <!--                            <mat-option *ngFor="let peca of gerente.pecas"-->
+                      <!--                                        [value]="peca" (click)="selectPeca()">{{peca.descricao}}</mat-option>-->
+                      <!--                            <mat-option *ngIf="gerente.pecas.length <=0">Nenhuma Peça Cadastrado</mat-option>-->
+                      <!--                          </mat-select>-->
+                      <!--                        </mat-form-field>-->
+                      <!--                      </div>-->
                     </div>
                     <div class="col-md-auto" *ngIf="showPlanilha">
                       <div class="form-group">
@@ -93,13 +103,13 @@
                         </mat-form-field>
                       </div>
                     </div>
-                  </div>
+
                   <div class="form-row" *ngIf="showPlanilha">
-                    <div class="col-md-6">
+                    <div class="col-md-auto">
                       <div class="form-group">
                         <label for="gastooperacional">Gasto Operacional:</label>
                         <input type="number" id="gastooperacional" name="gastooperacional" class="form-control"
-                               [(ngModel)]="planilhaEscolhida.gastosOpe"
+                               #gastoOper (blur)="gastoOpe(gastoOper.value)"
                                required="required">
                       </div>
                     </div>
@@ -191,12 +201,13 @@
                          value="{{planilhas.gastosOpe}}" [readonly]="!editarPlanilha"
                          class="form-control-plaintext" required="required"/></td>
 
-              <td>{{planilhas.custoMinuto}}</td>
+              <td><input currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" readonly
+                         value="{{planilhas.custoMinuto}}"></td>
               <td>{{planilhas.custoOpe}}</td>
               <td>{{planilhas.lucro}}</td>
 
               <div class="card-footer bg-transparent align-self-center botaoexcluirplanilha border-info modal-footer">
-                <input class="btn btn-primary" type="button" [disabled]="!valido"
+                <input class="btn btn-primary btn-padding" type="button" [disabled]="!valido"
                        *ngIf="!editarPlanilha" value="Editar" (click)="editar()">
 
                 <button class="btn btn-warning btnplanilha-padding" type="button" href="#" (click)="cancelar()"
@@ -204,19 +215,18 @@
                   <i class="fas fa-ban"></i>
                 </button>
 
-                <button class="btn btn-info btnplanilha-padding" type="button" href="#" (click)="cancelar()"
+                <button class="btn btn-info btnplanilha-padding" type="button" href="#"
+                        (click)="atualizardalista(planilhas)"
                         *ngIf="editarPlanilha" [disabled]="!valido" data-toggle="modal" role="button">
                   <i class="fas fa-check"></i>
                 </button>
 
                 <div>
-                  <button class="btn btn-danger" href="#" role="button"
+                  <button class="btn btn-danger btn-padding" href="#" role="button"
                           (click)="selectPlanilha(planilhas)" type="button"
                           data-toggle="modal" data-target=".deletar-planilha">
                     <i class="fas fa-fw fa-trash-alt"></i>
                   </button>
-                  <!--       <a class="btn btn-danger" href="javascript:void(0)" data-toggle="modal"
-                       data-target=".deletar-subope" (click)="subopeEscolhida(suboperacao)">-</a> -->
                 </div>
 
               </div>
