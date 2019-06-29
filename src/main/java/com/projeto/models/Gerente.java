@@ -73,7 +73,11 @@ public class Gerente extends Usuario {
 	public void setGastosfixo(float gastosfixo) {
 		this.gastosfixo = gastosfixo;
 	}
-
+    
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "gerente_custos", joinColumns = @JoinColumn(name = "gerente_id"), inverseJoinColumns = @JoinColumn(name = "custos_id"))
+	private List<CustoFixo> custosfixo = new ArrayList<>();
+	
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "gerente_etapas", joinColumns = @JoinColumn(name = "gerente_id"), inverseJoinColumns = @JoinColumn(name = "etapa_id"))
 	private List<EtapaProducao> etapas = new ArrayList<>();

@@ -245,12 +245,13 @@ public class PecaController {
 		if (!peca.getOperacoesFazer().isEmpty()) {
 			for (Operacao operacaoFazer : peca.getOperacoesFazer()) {
 				System.out.println("opesAndamento gerente" + operacaoFazer.getDataInicio());
+				if (operacaoFazer != ultima) {
 				inicio.setTime(operacaoFazer.getDataInicio());
 				inicio.add(Calendar.DAY_OF_MONTH, 1);
 				dataini = inicio.getTime();
 				Date iniciodata = new Date(dataini.getTime());
 				operacaoFazer.setDataInicio(iniciodata);
-
+				}
 				prazo.setTime(operacaoFazer.getPrazo());
 				prazo.add(Calendar.DAY_OF_MONTH, 1);
 				dataprazo = prazo.getTime();
