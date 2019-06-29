@@ -52,6 +52,11 @@ export class PlanilhaCustoComponent implements OnInit {
       senha: this.token.getPassword()
     };
     this.naoAutenticado();
+    this.datareload();
+
+  }
+
+  datareload() {
     this.gerenteService.getGerenteLogado(this.info.username).subscribe(data => {
       this.gerente = data;
     }, error => {
@@ -64,7 +69,7 @@ export class PlanilhaCustoComponent implements OnInit {
   }
 
   cancelar() {
-    this.editarPlanlha = false;
+    this.editarPlanilha = false;
   }
 
   selectPeca() {
@@ -83,10 +88,17 @@ export class PlanilhaCustoComponent implements OnInit {
   selectOpe() {
   }
 
-  concluirOpe() {
-    alert('Operação cadastrada com sucesso!');
-    this.router.navigateByUrl('/gerenteindex/homegerente', {skipLocationChange: true}).then(() =>
-      this.router.navigate(['/gerenteindex/planilhadecusto/']));
+  concluirPla() {
+    alert('Planilha cadastrada com sucesso!');
+    this.atualizarPlanilha = false;
+    this.planilha = {};
+    this.peca = {};
+    this.operacaoEscolhida = {};
+    this.planilha2 = false;
+    this.resultadoPlanilha = {};
+    this.gerente = {};
+    this.showPlanilha = false;
+    this.datareload();
     this.acessovalido = true;
   }
 
@@ -101,10 +113,12 @@ export class PlanilhaCustoComponent implements OnInit {
       this.planilhaEscolhida.lote = this.operacaoEscolhida.loteProducao;
       this.planilhaEscolhida.numFunOpe = this.operacaoEscolhida.numFuncionariosDisponiveis;
       this.planilhaEscolhida.gerente_id = this.gerente.id;
+      this.planilhaEscolhida.gastos = this.gerente.gastosfixo;
       this.gerente.planilhascusto.push(this.planilhaEscolhida);
       this.gerenteService.cadastrarPlanilha(this.gerente).pipe(first()).subscribe(data => {
         this.getdadosCustos();
         this.planilha2 = true;
+        this.atualizarPlanilha = true;
       }, error => {
         this.mensagemErro = error.error;
       });
@@ -155,6 +169,7 @@ export class PlanilhaCustoComponent implements OnInit {
   }
 
   acessar() {
+    this.gerente.verificarChaveAcesso = this.chaveAcesso;
     this.gerenteService.acessarPlanilha(this.gerente).subscribe(data => {
       this.acessovalido = true;
     }, error => {

@@ -2,7 +2,7 @@
 <div class="container-fluid">
 
   <!-- Page Content -->
-  <h3>Cadastro de Setor</h3>
+  <h3>Cadastro de Etapa</h3>
   <hr>
 </div>
 
@@ -11,20 +11,11 @@
     <div class="form-group">
 
       <div class="form-group">
-        <label class="text-dark" for="nomeSetor">Nome do setor:
+        <label class="text-dark" for="nomeSetor">Descrição da etapa:
           <input type="text" name="nomeSetor" id="nomeSetor" class="form-control"
-                 autofocus="autofocus" [(ngModel)]="setor.nomeSetor"
-                 placeholder="Nome Setor" required="required">
+                 autofocus="autofocus" [(ngModel)]="this.etapa.etapaProducao"
+                 placeholder="Descrição" required="required">
         </label>
-      </div>
-
-      <div class="form-group">
-        <mat-form-field>
-          <mat-label class="text-dark">Etapa da Produção:</mat-label>
-          <mat-select  required="required" name="etapa" [(ngModel)]="etapa">
-            <mat-option *ngFor="let etapa of etapas" [value]="etapa.etapaProducao"> {{etapa.etapaProducao}}</mat-option>
-          </mat-select>
-        </mat-form-field>
       </div>
 
       <input class="btn btn-success" type="submit" value="Cadastrar">

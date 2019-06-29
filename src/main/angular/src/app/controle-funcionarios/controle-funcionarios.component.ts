@@ -7,6 +7,7 @@ import {CadastroSetorService} from '../service/cadastro-setor.service';
 import {InfosetorService} from '../service/infosetor.service';
 import {GerenteService} from '../service/gerente.service';
 import {FuncionarioService} from '../service/funcionario.service';
+import {CadastroOperacaoService} from '../service/cadastro-operacao.service';
 
 @Component({
   selector: 'app-controle-funcionarios',
@@ -16,7 +17,11 @@ import {FuncionarioService} from '../service/funcionario.service';
 export class ControleFuncionariosComponent implements OnInit, OnDestroy {
 
   // tslint:disable-next-line:max-line-length
-  constructor(private gerenteService: GerenteService, private funcionarioService: FuncionarioService, private modalService: NgbModal, private setorservice: CadastroSetorService, private route: ActivatedRoute, private token: TokenStorageService, private router: Router, private infosetorService: InfosetorService) {
+  constructor(private gerenteService: GerenteService, private etapasService: CadastroOperacaoService,
+              private funcionarioService: FuncionarioService,
+              private modalService: NgbModal, private setorservice: CadastroSetorService,
+              private route: ActivatedRoute, private token: TokenStorageService, private router: Router,
+              private infosetorService: InfosetorService) {
   }
 
   public info: any;
@@ -27,6 +32,8 @@ export class ControleFuncionariosComponent implements OnInit, OnDestroy {
   funcionario: any;
 
   infosetor: any;
+
+  etapa: any;
 
   ngOnInit() {
     this.info = {
@@ -59,12 +66,10 @@ export class ControleFuncionariosComponent implements OnInit, OnDestroy {
     this.sub = this.route.params.subscribe(params => {
       const id = params.id;
       if (id) {
-        this.setorservice.getSetorId(id).subscribe((setor: any) => {
-          if (setor) {
-            this.setor = setor;
-
-            console.clear();
-          }
+        this.etapasService.getEtapaId(id).subscribe(data => {
+          this.etapa = data;
+        }, error => {
+          console.log(error.error);
         });
       }
     });

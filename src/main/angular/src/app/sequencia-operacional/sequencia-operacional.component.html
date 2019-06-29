@@ -25,7 +25,7 @@
           <mat-form-field>
             <mat-label class="text-dark">Etapas da produção:</mat-label>
             <mat-select required="required" name="peca" [(ngModel)]="etapa">
-              <mat-option *ngFor="let etapa of etapas" [value]="etapa"
+              <mat-option *ngFor="let etapa of gerente.etapas" [value]="etapa"
                           (click)="selectEtapa(etapa)">{{etapa.etapaProducao}}</mat-option>
             </mat-select>
           </mat-form-field>
@@ -36,7 +36,7 @@
         <div class="col-md-2 align-self-center">
           <mat-form-field>
             <mat-label class="text-dark">Peças:</mat-label>
-            <mat-select required="required" name="peca" [(ngModel)]="peca">
+            <mat-select required="required" name="peca" [(ngModel)]="peca" (click)="pecasrefresh()">
               <mat-option *ngFor="let peca of gerente.pecas" [value]="peca"
                           (click)="selectsPeca(peca)">{{peca.descricao}}</mat-option>
               <mat-option *ngIf="gerente.pecas.length <= 0">Cadastre uma Peça</mat-option>
@@ -112,12 +112,10 @@
                     <div class="col-md-1 align-self-center botaoexcluirsubope">
                       <button class="btn btn-danger btn-padding" href="#" role="button"
                               (click)="subopeEscolhida(suboperacao)" type="button"
-                              data-toggle="modal"    data-target=".deletar-subope">
+                              data-toggle="modal" data-target=".deletar-subope">
                         <i class="fas fa-fw fa-trash-alt">
                         </i>
                       </button>
-                      <!--       <a class="btn btn-danger" href="javascript:void(0)" data-toggle="modal"
-                           data-target=".deletar-subope" (click)="subopeEscolhida(suboperacao)">-</a> -->
                     </div>
                   </div>
                 </div>
@@ -204,16 +202,6 @@
                       </label>
                     </div>
                   </div>
-                  <div class="col-md-auto" *ngIf="numfumok">
-                    <div class="form-group">
-                      <label for="numFunNesc" class="fonterisco">Funcionários necessários:
-                        <input type="text" id="numFunNesc"
-                               class="form-control-plaintext" value="{{resultadoOpe.numFuncionarios}}"
-                               [readonly]="isReadonly"
-                               placeholder="Funcionários necessários:" name="numFuncionarios">
-                      </label>
-                    </div>
-                  </div>
                   <div class="col-md-auto">
                     <div class="form-group">
                       <label for="QtdPecasOpe" class="fonterisco">Peças por funcionário:
@@ -268,7 +256,8 @@
                 <div class="col-md-auto">
                   <div class="form-group">
                     <label for="DescricaoOp">Descrição da operação:</label>
-                    <input type="text" required="required" name="descricao" [(ngModel)]="newsuboperacao.descricao" placeholder="Descrição"
+                    <input type="text" required="required" name="descricao" [(ngModel)]="newsuboperacao.descricao"
+                           placeholder="Descrição"
                            class="form-control" minlength="4" id="DescricaoOp">
 
                   </div>

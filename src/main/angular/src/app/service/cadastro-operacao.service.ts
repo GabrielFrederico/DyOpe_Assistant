@@ -94,6 +94,15 @@ export class CadastroOperacaoService {
     return this.httpClient.get('http://localhost:8080/etapaProducao/getByNome/' + etapa);
   }
 
+  getEtapaId(id: number) {
+    return this.httpClient.get('http://localhost:8080/etapaProducao/' + id);
+  }
+
+  getEtapasProducao() {
+    return this.httpClient.get('http://localhost:8080/etapaProducao/predefinidas');
+
+  }
+
   getTiposOperacoes() {
     return this.httpClient.get('http://localhost:8080/etapaProducao');
   }

@@ -7,7 +7,7 @@
   <hr>
 
   <div class="card border-info mb-3">
-    <div class="card-header border-info">{{setor.nomeSetor}}</div>
+    <div class="card-header border-info">{{etapa.etapaProducao}}</div>
     <table class="table table table-bordered dataTable">
       <thead>
       <tr>
@@ -18,7 +18,7 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let infosetor of setor.infosetores">
+      <tr *ngFor="let infosetor of etapa.infosetores">
         <td>{{infosetor.nomeFuncionario}}</td>
         <td>{{infosetor.nomeOperacao}}</td>
         <td>{{infosetor.qtdPecasOpe}}</td>

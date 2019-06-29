@@ -20,6 +20,7 @@ import {SequenciaOperacionalComponent} from '../sequencia-operacional/sequencia-
 import {HomeGerenteComponent} from '../home-gerente/home-gerente.component';
 import {PlanilhaCustoComponent} from '../planilha-custo/planilha-custo.component';
 import {MatInputModule, MatOptionModule, MatSelectModule} from '@angular/material';
+import {NgxCurrencyModule} from 'ngx-currency';
 
 @NgModule({
   schemas: [
@@ -41,6 +42,7 @@ import {MatInputModule, MatOptionModule, MatSelectModule} from '@angular/materia
   imports: [
     GerenteIndexRoutingModule,
     NgbModule,
+    NgxCurrencyModule,
     AngularFontAwesomeModule,
     CommonModule,
     FormsModule,

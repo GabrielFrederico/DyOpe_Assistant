@@ -10,17 +10,32 @@ public class EtapaProducao {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-
     private long id;
     
-    private String etapaProducao;
-    
+    private long predefinidas;
+    public long getPredefinidas() {
+		return predefinidas;
+	}
+
+	public void setPredefinidas(long predefinidas) {
+		this.predefinidas = predefinidas;
+	}
+
+	private String etapaProducao;
+	
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "etapa_funcionarios", joinColumns = @JoinColumn(name = "etapa_id"), inverseJoinColumns = @JoinColumn(name = "funcionario_id"))
+	private Set<Funcionario> funcionarios = new HashSet<>();
+	
     @OneToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "etapa_producao_operacoes",
     joinColumns = @JoinColumn(name = "etapa_producao_id"),
     inverseJoinColumns = @JoinColumn(name = "operacao_id"))
 	private Set<Operacao> operacoes = new HashSet<>();
 
+    @OneToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "etapa_infosetores", joinColumns = @JoinColumn(name = "etapa_id"), inverseJoinColumns = @JoinColumn(name = "infosetor_id"))
+	private Set<InfoSetor> infosetores = new HashSet<>();
     
     private char statusSYS;
 

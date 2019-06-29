@@ -23,8 +23,8 @@
       <div class="form-group">
 
         <label for="chaveAcesso">Chave de Acesso
-          <input type="text" id="chaveAcesso" [(ngModel)]="gerente.verificarChaveAcesso" name="chaveAcesso"
-                 class="form-control text-center" [autofocus]="true" placeholder="Chave de Acesso" required="required">
+          <input type="password" id="chaveAcesso" [(ngModel)]="chaveAcesso" name="chaveAcesso"
+                 class="form-control" [autofocus]="true" placeholder="Chave de Acesso" required="required">
         </label>
       </div>
 
@@ -97,14 +97,6 @@
                   <div class="form-row" *ngIf="showPlanilha">
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label for="gasto">Gasto:</label>
-                        <input type="number" id="gasto" name="gasto" class="form-control"
-                               [(ngModel)]="planilhaEscolhida.gastos"
-                               required="required">
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group">
                         <label for="gastooperacional">Gasto Operacional:</label>
                         <input type="number" id="gastooperacional" name="gastooperacional" class="form-control"
                                [(ngModel)]="planilhaEscolhida.gastosOpe"
@@ -119,7 +111,7 @@
                        value="Cadastrar">
                 <input class="btn btn-outline-info" type="submit" [disabled]="!valido" *ngIf="planilha2"
                        value="Atualizar">
-                <input class="btn btn-primary" type="button" (click)="concluirOpe()" *ngIf="planilha2"
+                <input class="btn btn-primary" type="button" (click)="concluirPla()" *ngIf="planilha2"
                        value="Concluir">
               </div>
             </form>
@@ -133,7 +125,8 @@
                   <div class="col-md-auto">
                     <div class="form-group">
                       <label for="precoporminuto">Preço por minuto:
-                        <input type="number" id="precoporminuto" name="precoporminuto" class="form-control-plaintext"
+                        <input currencyMask id="precoporminuto" name="precoporminuto" class="form-control-plaintext"
+                               [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
                                [readonly]="isReadonly" [(ngModel)]="resultadoPlanilha.custoMinuto">
                       </label>
                     </div>
@@ -141,8 +134,8 @@
                   <div class="col-md-auto">
                     <div class="form-group">
                       <label for="precodapeca" class="fonterisco">Preço da peça:
-                        <input type="number" id="precodapeca"
-                               class="form-control-plaintext" value="{{resultadoPlanilha.custoOpe}}"
+                        <input currencyMask id="precodapeca" [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+                               class="form-control-plaintext" [(ngModel)]="resultadoPlanilha.custoOpe"
                                [readonly]="isReadonly" name="precodapeca">
                       </label>
                     </div>
@@ -150,8 +143,9 @@
                   <div class="col-md-auto">
                     <div class="form-group">
                       <label for="lucro" class="fonterisco">Lucro:
-                        <input type="number" id="lucro"
-                               class="form-control-plaintext" value="{{resultadoPlanilha.lucro}}"
+                        <input id="lucro" currencyMask
+                               class="form-control-plaintext" [(ngModel)]="resultadoPlanilha.lucro"
+                               [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
                                [readonly]="isReadonly" name="lucro">
                       </label>
                     </div>
@@ -268,6 +262,7 @@
     </div>
   </div>
 </div>
+
 
 <!--&lt;!&ndash; cadastro de planilha de custo &ndash;&gt;-->
 <!--<div class="modal fade cadastrar-peca" tabindex="-1" role="dialog" aria-labelledby="modalpeca"-->

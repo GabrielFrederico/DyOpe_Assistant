@@ -97,22 +97,27 @@ public class ProjetoApplication {
 			risco.setId(1);
 			risco.setEtapaProducao("Risco");
 			risco.setStatusSYS('A');
+			risco.setPredefinidas(1);
 
 			corte.setId(2);
 			corte.setEtapaProducao("Corte");
 			corte.setStatusSYS('A');
+			corte.setPredefinidas(1);
 
 			costura.setId(3);
 			costura.setEtapaProducao("Costura");
 			costura.setStatusSYS('A');
+			costura.setPredefinidas(1);
 
 			beneficiamento.setId(4);
 			beneficiamento.setEtapaProducao("Beneficiamento");
 			beneficiamento.setStatusSYS('A');
+			beneficiamento.setPredefinidas(1);
 
 			acabamento.setId(5);
 			acabamento.setEtapaProducao("Acabamento");
 			acabamento.setStatusSYS('A');
+			acabamento.setPredefinidas(1);
 
 			etapaProducaoRepository.save(risco);
 			etapaProducaoRepository.save(corte);

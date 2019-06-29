@@ -24,6 +24,12 @@ public class EtapaProducaoController {
 		return etapaProducaoRepository.findAll();
 	}
 
+	@PreAuthorize("hasRole('GERENTE') or hasRole('FUNCIONARIO') or hasRole('ADMIN')")
+	@RequestMapping(method = RequestMethod.GET, path="predefinidas")
+	public Iterable<EtapaProducao> listarEtapasPredefinidas() {
+		return etapaProducaoRepository.listaEtapasPredefinidas();
+	}
+	
 	@PreAuthorize("hasRole('GERENTE')")
 	@RequestMapping(method = RequestMethod.GET, path = "/{id}")
 	public EtapaProducao getEtapaProducaoById(@PathVariable("id") long id) {

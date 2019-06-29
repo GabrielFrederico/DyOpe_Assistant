@@ -243,54 +243,6 @@ export class AndamentoOperacoesComponent implements OnInit {
         }
       });
 
-      // for (const operacoes of this.peca.operacoesFazer) {
-      //   this.operacaoFazer = operacoes;
-      //   this.inicio = new Date(this.operacaoFazer.dataInicio);
-      //   this.inicio.setDate(this.inicio.getDate() + 1);
-      //   this.prazo = new Date(this.operacaoFazer.prazo);
-      //   this.prazo.setDate(this.prazo.getDate() + 1);
-      //
-      //   // tslint:disable-next-line:no-shadowed-variable
-      //   const i = this.peca.operacoesFazer.indexOf(this.operacaoFazer);
-      //   if (this.inicio.getTime() === this.hoje.getTime() || this.inicio < this.hoje && this.inicio < this.prazo) {
-      //     this.peca.operacoesFazer.splice(i, 1);
-      //     this.peca.operacoesAndamento.push(this.operacaoFazer);
-      //     this.updateOpes();
-      //     alert('opesseparadasa' + this.operacaoFazer.id + 'inicio' + this.operacaoFazer.dataInicio);
-      //   } else if (this.hoje.getTime() === this.prazo.getTime() || this.prazo < this.hoje && this.inicio < this.hoje) {
-      //     this.peca.operacoesFazer.splice(i, 1);
-      //     this.peca.operacoesPrazo.push(this.operacaoFazer);
-      //     this.updateOpes();
-      //     alert('opesseparadasfp' + this.operacaoFazer.id + 'inicio' + this.operacaoFazer.dataInicio);
-      //   }
-      // }
-
-      // this.peca.operacoesFazer.forEach((data, index) => {
-      //   this.operacaoFazer = data;
-      //   this.inicio = new Date(this.operacaoFazer.dataInicio);
-      //   this.prazo = new Date(this.operacaoFazer.prazo);
-      //   alert('inicioope' + this.operacaoFazer.dataInicio);
-      //   alert('inicio' + this.inicio);
-      //   this.inicio.setDate(this.inicio.getDate() + 1 );
-      //   alert('inicio' + this.inicio);
-      //   alert('prazoope' + this.operacaoFazer.prazo);
-      //   alert('prazo' + this.prazo);
-      //   this.prazo.setDate(this.prazo.getDate() + 1 );
-      //   alert('prazo' + this.prazo);
-      //   const i = this.peca.operacoesFazer.indexOf(this.operacaoFazer);
-      //   if (this.inicio.getTime() === this.hoje.getTime() || this.inicio < this.hoje && this.inicio < this.prazo) {
-      //     this.peca.operacoesFazer.splice(i, 1);
-      //     this.peca.operacoesAndamento.push(this.operacaoFazer);
-      //     this.updateOpes();
-      //     alert('opesseparadasa' + this.operacaoFazer.id + 'inicio' + this.operacaoFazer.dataInicio);
-      //   } else if (this.hoje.getTime() === this.prazo.getTime() || this.prazo < this.hoje && this.inicio < this.hoje) {
-      //     this.peca.operacoesFazer.splice(i, 1);
-      //     this.peca.operacoesPrazo.push(this.operacaoFazer);
-      //     this.updateOpes();
-      //     alert('opesseparadasfp' + this.operacaoFazer.id + 'inicio' + this.operacaoFazer.dataInicio);
-      //   }
-      // });
-
       // andamento para prazo
 
       this.peca.operacoesAndamento.forEach((item, index) => {
@@ -307,27 +259,6 @@ export class AndamentoOperacoesComponent implements OnInit {
         }
       });
 
-      // this.peca.operacoesAndamento.forEach((data, index) => {
-      //   this.operacao = data;
-      //   this.inicio = new Date(this.operacao.dataInicio);
-      //   this.prazo = new Date(this.operacao.prazo);
-      //   alert('inicioope' + this.operacao.dataInicio);
-      //   alert('inicio' + this.inicio);
-      //   this.inicio.setDate(this.inicio.getDate() + 1);
-      //   alert('inicio' + this.inicio);
-      //   alert('prazoope' + this.operacao.prazo);
-      //   alert('prazo' + this.prazo);
-      //   this.prazo.setDate(this.prazo.getDate() + 1);
-      //   alert('prazo' + this.prazo);
-      //   // tslint:disable-next-line:no-shadowed-variable
-      //   if (this.hoje.getTime() === this.prazo.getTime() || this.prazo < this.hoje && this.inicio < this.hoje) {
-      //     const i = this.peca.operacoesAndamento.indexOf(this.operacao, 0);
-      //     this.peca.operacoesAndamento.splice(i, 1);
-      //     this.peca.operacoesPrazo.push(this.operacao);
-      //     this.updateOpes();
-      //     alert('opesseparadasap');
-      //   }
-      // });
       this.operacoesSeparadas = true;
 
     }

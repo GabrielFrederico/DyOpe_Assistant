@@ -13,9 +13,8 @@ import {first} from 'rxjs/operators';
 
 
 export class CadastroSetorComponent implements OnInit {
-  setor: any = {};
-  etapa: any;
-  etapaprod: any;
+
+  etapa: any = {};
   gerente: any;
   public info: any;
   public validado: boolean;
@@ -43,19 +42,12 @@ export class CadastroSetorComponent implements OnInit {
 
 
   save() {
-    this.etapaService.getEtapaProducaoNome(this.etapa).subscribe(data => {
-      this.etapaprod = data;
-    }, error => {
-      console.log(error.error);
-    });
-    this.setor.etapaproducao = this.etapaprod;
-    this.setor.gerente_id = this.gerente.id;
-    this.gerente.setores.push(this.setor);
+    this.etapa.gerente_id = this.gerente.id;
+    this.gerente.etapas.push(this.etapa);
     this.gerenteService.cadastrarAlgo(this.gerente).pipe(first()).subscribe(data => {
-      alert('Setor cadastrado com sucesso!');
+      alert('Etapa cadastrada com sucesso!');
       this.router.navigateByUrl('/gerenteindex/homegerente', {skipLocationChange: true}).then(() =>
         this.router.navigate(['/gerenteindex/cadastrosetor']));
-
     }, error => {
       alert(error);
     });

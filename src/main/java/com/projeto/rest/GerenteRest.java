@@ -408,13 +408,7 @@ public class GerenteRest {
 	@RequestMapping(method = RequestMethod.PUT, value = "cadastrarope")
 	@PreAuthorize("hasRole('GERENTE')")
 	public ResponseEntity<?> cadastrarOpe(@RequestBody Gerente gerente) {
-		Operacao ultima = gerente.getOperacoes().get(gerente.getOperacoes().size() - 1);
-		try {
-			Operacao.calcular(ultima);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	
 		gerenteRepository.save(gerente);
 		return new ResponseEntity<>(new ResponseMessage("Dados Atualizados com sucesso!"), HttpStatus.OK);
 	}

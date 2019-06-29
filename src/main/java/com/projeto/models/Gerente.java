@@ -25,7 +25,7 @@ public class Gerente extends Usuario {
 
 	@Column(name = "rg_gerente")
 	private String rg;
-    
+
 	private String chaveAcesso;
 	private String verificarChaveAcesso;
 
@@ -53,43 +53,42 @@ public class Gerente extends Usuario {
 		this.chaveAcesso = chaveAcesso;
 	}
 
-	public List<Operacao> getOperacoes() {
-		return operacoes;
+	public List<EtapaProducao> getEtapas() {
+		return etapas;
 	}
 
-	public void setOperacoes(List<Operacao> operacoes) {
-		this.operacoes = operacoes;
+	public void setEtapas(List<EtapaProducao> etapas) {
+		this.etapas = etapas;
 	}
 
 	@Column(name = "cpf_gerente")
 	private String cpf;
 
+	private float gastosfixo;
+
+	public float getGastosfixo() {
+		return gastosfixo;
+	}
+
+	public void setGastosfixo(float gastosfixo) {
+		this.gastosfixo = gastosfixo;
+	}
 
 	@OneToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "gerente_operacoes",
-    joinColumns = @JoinColumn(name = "gerente_id"),
-    inverseJoinColumns = @JoinColumn(name = "operacao_id"))
-	private List<Operacao> operacoes = new ArrayList<>();
-	
+	@JoinTable(name = "gerente_etapas", joinColumns = @JoinColumn(name = "gerente_id"), inverseJoinColumns = @JoinColumn(name = "etapa_id"))
+	private List<EtapaProducao> etapas = new ArrayList<>();
+
 	@OneToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "gerente_planilhascusto",
-    joinColumns = @JoinColumn(name = "gerente_id"),
-    inverseJoinColumns = @JoinColumn(name = "planilhacusto_id"))
+	@JoinTable(name = "gerente_planilhascusto", joinColumns = @JoinColumn(name = "gerente_id"), inverseJoinColumns = @JoinColumn(name = "planilhacusto_id"))
 	private List<PlanilhaCusto> planilhascusto = new ArrayList<>();
 
 	@OneToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "gerente_pecas",
-    joinColumns = @JoinColumn(name = "gerente_id"),
-    inverseJoinColumns = @JoinColumn(name = "peca_id"))
+	@JoinTable(name = "gerente_pecas", joinColumns = @JoinColumn(name = "gerente_id"), inverseJoinColumns = @JoinColumn(name = "peca_id"))
 	private List<Peca> pecas = new ArrayList<>();
 
 	@OneToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "gerente_setores",
-    joinColumns = @JoinColumn(name = "gerente_id"),
-    inverseJoinColumns = @JoinColumn(name = "setor_id"))
+	@JoinTable(name = "gerente_setores", joinColumns = @JoinColumn(name = "gerente_id"), inverseJoinColumns = @JoinColumn(name = "setor_id"))
 	private List<Setor> setores = new ArrayList<>();
-
-
 
 	public List<Peca> getPecas() {
 		return pecas;
