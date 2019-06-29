@@ -239,7 +239,7 @@ public class PecaController {
 	public Peca opesAndamento(@RequestBody Peca peca) {
 		Calendar inicio = Calendar.getInstance();
 		java.util.Date dataini = new java.util.Date();
-
+		Operacao ultima = peca.getOperacoesAndamento().get(peca.getOperacoesAndamento().size() - 1);
 		Calendar prazo = Calendar.getInstance();
 		java.util.Date dataprazo = new java.util.Date();
 		if (!peca.getOperacoesFazer().isEmpty()) {
@@ -267,12 +267,13 @@ public class PecaController {
 				dataini = inicio.getTime();
 				Date iniciodata = new Date(dataini.getTime());
 				operacaoAndamento.setDataInicio(iniciodata);
-
+				if (operacaoAndamento != ultima) {
 				prazo.setTime(operacaoAndamento.getPrazo());
 				prazo.add(Calendar.DAY_OF_MONTH, 1);
 				dataprazo = prazo.getTime();
 				Date prazodate = new Date(dataprazo.getTime());
 				operacaoAndamento.setPrazo(prazodate);
+				}
 			}
 		}
 		if (!peca.getOperacoesPrazo().isEmpty()) {
@@ -291,7 +292,6 @@ public class PecaController {
 				operacaoPrazo.setPrazo(prazodate);
 			}
 		}
-		Operacao ultima = peca.getOperacoesAndamento().get(peca.getOperacoesAndamento().size() - 1);
 
 		try {
 			Operacao.calcular(ultima);

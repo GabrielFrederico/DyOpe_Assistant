@@ -24,7 +24,7 @@
           <div class="col-md-4" *ngIf="setorShow">
             <mat-form-field>
               <mat-label class="text-dark">Etapa da Produção</mat-label>
-              <mat-select required="required" name="etapa" [(ngModel)]="etapa">
+              <mat-select required="required" name="etapa" [(ngModel)]="etapa" (selectionChange)="selectEtapa(etapa)">
                 <mat-option *ngFor="let etapa of gerente.etapas" [value]="etapa">{{etapa.etapaProducao}}</mat-option>
                 <mat-option *ngIf="gerente.etapas.length <=0">Nenhuma etapa Cadastrado</mat-option>
               </mat-select>
