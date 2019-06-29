@@ -15,6 +15,10 @@
   padding: 1%;
 }
 
+.btnplanilha-padding {
+  padding: 5%;
+}
+
 .modal-xl {
   max-width: 80%;
   margin: 1.75rem auto;
@@ -33,7 +37,8 @@
 }
 
 .botaoexcluirplanilha {
-  padding: 3%;
+  padding: 9% 0% 0% 0%;
+  justify-content: center;
 }
 
 .textoinicial {

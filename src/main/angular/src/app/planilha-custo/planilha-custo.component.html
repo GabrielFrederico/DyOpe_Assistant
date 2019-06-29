@@ -43,9 +43,11 @@
 
     <nav class="espacamentosequenciaoperacional">
       <div class="nav nav-tabs" id="nav-tab" role="tablist">
-        <a class="nav-item nav-link active" id="nav-cadastro-tab" data-toggle="tab" href="#nav-cadastro" role="tab" (click)="listaClosed()"
+        <a class="nav-item nav-link active" id="nav-cadastro-tab" data-toggle="tab" href="#nav-cadastro" role="tab"
+           (click)="listaClosed()"
            aria-controls="nav-cadastro" aria-selected="true">Cadastro</a>
-        <a class="nav-item nav-link " id="nav-custos-tab" data-toggle="tab" href="#nav-custos" role="tab" (click)="openLista()"
+        <a class="nav-item nav-link " id="nav-custos-tab" data-toggle="tab" href="#nav-custos" role="tab"
+           (click)="openLista()"
            aria-controls="nav-custos" aria-selected="false">Custos</a>
       </div>
     </nav>
@@ -174,7 +176,7 @@
             <thead>
             <tr>
               <th>ID</th>
-              <!--              <th>Operação</th>-->
+              <th>Descrição</th>
               <th>Gastos</th>
               <th>Gastos Operacionais</th>
               <th>Custo Minuto</th>
@@ -186,23 +188,38 @@
             <tbody>
             <tr *ngFor="let planilhas of gerente.planilhascusto">
               <td>{{planilhas.id}}</td>
-              <!--              <td>{{planilhas.operacao}}</td>-->
-              <td>{{planilhas.gastos}}</td>
-              <td>{{planilhas.gastosOpe}}</td>
+              <td>{{planilhas.descricaoOpe}}</td>
+
+              <td><input type="number" name="gastos" id="gastos" value="{{planilhas.gastos}}"
+                         [readonly]="!editarPlanilha" class="form-control-plaintext" required="required"/></td>
+
+              <td><input type="number" name="gastosoperacionais" id="gastosoperacionais"
+                         value="{{planilhas.gastosOpe}}" [readonly]="!editarPlanilha"
+                         class="form-control-plaintext" required="required"/></td>
+
               <td>{{planilhas.custoMinuto}}</td>
               <td>{{planilhas.custoOpe}}</td>
               <td>{{planilhas.lucro}}</td>
 
               <div class="card-footer bg-transparent align-self-center botaoexcluirplanilha border-info modal-footer">
-                <input class="btn btn-primary" type="button" [disabled]="!valido" *ngIf="!planilha2"
-                       value="Editar" (click)="editar()">
+                <input class="btn btn-primary" type="button" [disabled]="!valido"
+                       *ngIf="!editarPlanilha" value="Editar" (click)="editar()">
+
+                <button class="btn btn-warning btnplanilha-padding" type="button" href="#" (click)="cancelar()"
+                        *ngIf="editarPlanilha" [disabled]="!valido" data-toggle="modal" role="button">
+                  <i class="fas fa-ban"></i>
+                </button>
+
+                <button class="btn btn-info btnplanilha-padding" type="button" href="#" (click)="cancelar()"
+                        *ngIf="editarPlanilha" [disabled]="!valido" data-toggle="modal" role="button">
+                  <i class="fas fa-check"></i>
+                </button>
 
                 <div>
-                  <button class="btn btn-danger btn-padding" href="#" role="button"
+                  <button class="btn btn-danger" href="#" role="button"
                           (click)="selectPlanilha(planilhas)" type="button"
                           data-toggle="modal" data-target=".deletar-planilha">
-                    <i class="fas fa-fw fa-trash-alt">
-                    </i>
+                    <i class="fas fa-fw fa-trash-alt"></i>
                   </button>
                   <!--       <a class="btn btn-danger" href="javascript:void(0)" data-toggle="modal"
                        data-target=".deletar-subope" (click)="subopeEscolhida(suboperacao)">-</a> -->

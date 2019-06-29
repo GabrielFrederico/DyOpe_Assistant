@@ -63,6 +63,10 @@ export class PlanilhaCustoComponent implements OnInit {
     this.editarPlanilha = true;
   }
 
+  cancelar() {
+    this.editarPlanlha = false;
+  }
+
   selectPeca() {
     this.planilha.operacao_id = 0;
     if (!this.showPlanilha) {
