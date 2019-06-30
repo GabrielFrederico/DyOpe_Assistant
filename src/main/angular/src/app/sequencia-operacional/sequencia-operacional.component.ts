@@ -242,25 +242,20 @@ export class SequenciaOperacionalComponent implements OnInit {
       this.updatePlanilha();
       console.log('planilha ATUALIZADA');
     } else {
-      this.gerenteService.addPlanilha(this.novaplanilhacusto).subscribe(data => {
-        this.planilhacusto = data;
-        console.log('planilha cadastrada');
-        alert(this.operacaoEscolhida.id);
-        this.planilhacusto.operacao_id = this.operacaoEscolhida.id;
-        alert(this.planilhacusto.operacao_id);
-        this.operacaoEscolhida.planilhascusto.push(this.planilhacusto);
-        this.planilhacusto.descricaoOpe = this.operacaoEscolhida.descricao;
-        this.planilhacusto.tempos = this.operacaoEscolhida.tempos;
-        this.planilhacusto.lote = this.operacaoEscolhida.loteProducao;
-        this.planilhacusto.numFunOpe = this.operacaoEscolhida.numFuncionariosDisponiveis;
-        this.planilhacusto.gerente_id = this.gerente.id;
-        this.planilhacusto.gastos = this.gerente.gastosfixo;
-        this.gerente.planilhascusto.push(this.planilhacusto);
-        this.gerenteService.cadastrarPlanilha(this.gerente).pipe(first()).subscribe(gerente => {
-          this.atualizarPlanilha = true;
-        }, error => {
-          this.errorMessage = error.error;
-        });
+      console.log('planilha cadastrada');
+      alert(this.operacaoEscolhida.id);
+      this.novaplanilhacusto.operacao_id = this.operacaoEscolhida.id;
+      alert(this.novaplanilhacusto.operacao_id);
+      this.operacaoEscolhida.planilhascusto.push(this.novaplanilhacusto);
+      this.novaplanilhacusto.descricaoOpe = this.operacaoEscolhida.descricao;
+      this.novaplanilhacusto.tempos = this.operacaoEscolhida.tempos;
+      this.novaplanilhacusto.lote = this.operacaoEscolhida.loteProducao;
+      this.novaplanilhacusto.numFunOpe = this.operacaoEscolhida.numFuncionariosDisponiveis;
+      this.novaplanilhacusto.gerente_id = this.gerente.id;
+      this.novaplanilhacusto.gastos = this.gerente.gastosfixo;
+      this.gerente.planilhascusto.push(this.novaplanilhacusto);
+      this.gerenteService.cadastrarPlanilha(this.gerente).pipe(first()).subscribe(data => {
+        this.atualizarPlanilha = true;
       }, error => {
         this.errorMessage = error.error;
       });
