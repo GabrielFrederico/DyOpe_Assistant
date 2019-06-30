@@ -6,6 +6,7 @@ import {CadastroOperacaoService} from '../service/cadastro-operacao.service';
 import {Subscription} from 'rxjs';
 import {GerenteService} from '../service/gerente.service';
 import {first} from 'rxjs/operators';
+import {isUndefined} from 'util';
 
 
 @Component({
@@ -283,21 +284,23 @@ export class SequenciaOperacionalComponent implements OnInit {
   pecasrefresh() {
     this.gerenteService.getGerente(this.info.username).subscribe(data => {
       this.gerenteobj = data;
-      if (this.gerente.pecas.length < this.gerenteobj.pecas.length) {
-        this.gerente = this.gerenteobj;
-      }
+      this.gerente.pecas.forEach((peca, index) => {
+        if (isUndefined(peca.operacoesFazer) || isUndefined(peca.operacoesAndamento) || isUndefined(peca.operacoesPrazo)) {
+          this.gerente = this.gerenteobj;
+        }
+      });
     }, error => {
       console.log(error.error);
     });
   }
 
   cadastrarPeca() {
-    this.newpeca.etapa_producao_id = this.etapa.id;
+    // this.newpeca.etapa_producao_id = this.etapa.id;
     this.newpeca.gerente_id = this.gerente.id;
     this.gerente.pecas.push(this.newpeca);
     this.gerenteService.cadastrarAlgo(this.gerente).pipe(first()).subscribe(data => {
-      this.gerente = data;
       alert('Peça cadastrada com sucesso!');
+      this.pecasrefresh();
       // this.router.navigateByUrl('/gerenteindex/homegerente', {skipLocationChange: true}).then(() =>
       //   this.router.navigate(['/gerenteindex/operacoes/']));
 

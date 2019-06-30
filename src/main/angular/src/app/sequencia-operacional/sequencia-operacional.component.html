@@ -36,7 +36,7 @@
         <div class="col-md-2 align-self-center">
           <mat-form-field>
             <mat-label class="text-dark">Peças:</mat-label>
-            <mat-select required="required" name="peca" [(ngModel)]="peca" (click)="pecasrefresh()">
+            <mat-select required="required" name="peca" [(ngModel)]="peca">
               <mat-option *ngFor="let peca of gerente.pecas" [value]="peca"
                           (click)="selectsPeca(peca)">{{peca.descricao}}</mat-option>
               <mat-option *ngIf="gerente.pecas.length <= 0">Cadastre uma Peça</mat-option>
