@@ -72,9 +72,6 @@ export class InformacoesSetorComponent implements OnInit {
   }
   selectEtapa(etapa: any) {
     this.etapa = etapa;
-    alert(this.etapa.etapaProducao);
-    this.informacao.etapa_id = this.etapa.id;
-    this.etapa.infosetores.push(this.informacao);
   }
   selectOpe() {
     this.showsubope = true;
@@ -87,6 +84,9 @@ export class InformacoesSetorComponent implements OnInit {
     this.informacao.nomeFuncionario = this.funcionario.nome;
     this.informacao.nomeOperacao = this.ope.descricao;
     this.informacao.gerente_id = this.gerente.id;
+    this.informacao.etapaproducao_id = this.etapa.id;
+    alert(this.etapa.id);
+    this.etapa.infosetores.push(this.informacao);
     this.funcionario.infosetores.push(this.informacao);
     this.gerenteService.cadastrarAlgo(this.gerente).pipe(first()).subscribe(data => {
       alert('Enviado com sucesso!');

@@ -177,12 +177,12 @@ public class PecaController {
 		if (!peca.getOperacoesFazer().isEmpty()) {
 			for (Operacao operacaoFazer : peca.getOperacoesFazer()) {
 				System.out.println("opesAndamento gerente" + operacaoFazer.getDataInicio());
-				inicio.setTime(operacaoFazer.getDataInicio());
-				inicio.add(Calendar.DAY_OF_MONTH, 1);
-				dataini = inicio.getTime();
-				Date iniciodata = new Date(dataini.getTime());
-				operacaoFazer.setDataInicio(iniciodata);
 				if (operacaoFazer != ultima) {
+					inicio.setTime(operacaoFazer.getDataInicio());
+					inicio.add(Calendar.DAY_OF_MONTH, 1);
+					dataini = inicio.getTime();
+					Date iniciodata = new Date(dataini.getTime());
+					operacaoFazer.setDataInicio(iniciodata);
 					prazo.setTime(operacaoFazer.getPrazo());
 					prazo.add(Calendar.DAY_OF_MONTH, 1);
 					dataprazo = prazo.getTime();
@@ -246,11 +246,11 @@ public class PecaController {
 			for (Operacao operacaoFazer : peca.getOperacoesFazer()) {
 				System.out.println("opesAndamento gerente" + operacaoFazer.getDataInicio());
 				if (operacaoFazer != ultima) {
-				inicio.setTime(operacaoFazer.getDataInicio());
-				inicio.add(Calendar.DAY_OF_MONTH, 1);
-				dataini = inicio.getTime();
-				Date iniciodata = new Date(dataini.getTime());
-				operacaoFazer.setDataInicio(iniciodata);
+					inicio.setTime(operacaoFazer.getDataInicio());
+					inicio.add(Calendar.DAY_OF_MONTH, 1);
+					dataini = inicio.getTime();
+					Date iniciodata = new Date(dataini.getTime());
+					operacaoFazer.setDataInicio(iniciodata);
 				}
 				prazo.setTime(operacaoFazer.getPrazo());
 				prazo.add(Calendar.DAY_OF_MONTH, 1);
@@ -269,11 +269,11 @@ public class PecaController {
 				Date iniciodata = new Date(dataini.getTime());
 				operacaoAndamento.setDataInicio(iniciodata);
 				if (operacaoAndamento != ultima) {
-				prazo.setTime(operacaoAndamento.getPrazo());
-				prazo.add(Calendar.DAY_OF_MONTH, 1);
-				dataprazo = prazo.getTime();
-				Date prazodate = new Date(dataprazo.getTime());
-				operacaoAndamento.setPrazo(prazodate);
+					prazo.setTime(operacaoAndamento.getPrazo());
+					prazo.add(Calendar.DAY_OF_MONTH, 1);
+					dataprazo = prazo.getTime();
+					Date prazodate = new Date(dataprazo.getTime());
+					operacaoAndamento.setPrazo(prazodate);
 				}
 			}
 		}
