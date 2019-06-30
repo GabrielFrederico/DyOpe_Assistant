@@ -111,7 +111,6 @@ public class GerenteRest {
 		Gerente gerente = gerenteRepository.findByNome(nome);
 		return gerente;
 	}
-	
 
 	Calendar prazo = Calendar.getInstance();
 	java.util.Date dataprazo = new java.util.Date();
@@ -249,7 +248,6 @@ public class GerenteRest {
 				}
 			}
 		}
-
 
 		gerente.setChaveAcesso(encoder.encode(gerente.getChaveAcesso()));
 		gerenteRepository.save(gerente);
@@ -407,7 +405,7 @@ public class GerenteRest {
 	@RequestMapping(method = RequestMethod.PUT, value = "cadastrarope")
 	@PreAuthorize("hasRole('GERENTE')")
 	public ResponseEntity<?> cadastrarOpe(@RequestBody Gerente gerente) {
-	
+
 		gerenteRepository.save(gerente);
 		return new ResponseEntity<>(new ResponseMessage("Dados Atualizados com sucesso!"), HttpStatus.OK);
 	}
@@ -417,25 +415,29 @@ public class GerenteRest {
 	public ResponseEntity<?> cadastrarPlanilha(@RequestBody Gerente gerente) throws ParseException {
 		Calendar inicio = Calendar.getInstance();
 		java.util.Date dataini = new java.util.Date();
-		for (Peca peca : gerente.getPecas()) {
-			if (!peca.getOperacoesFazer().isEmpty()) {
-				for (Operacao operacaoFazer : peca.getOperacoesFazer()) {
-					System.out.println("opesAndamento gerente" + operacaoFazer.getDataInicio());
-					inicio.setTime(operacaoFazer.getDataInicio());
-					inicio.add(Calendar.DAY_OF_MONTH, 1);
-					dataini = inicio.getTime();
-					Date iniciodata = new Date(dataini.getTime());
-					operacaoFazer.setDataInicio(iniciodata);
 
-					prazo.setTime(operacaoFazer.getPrazo());
-					prazo.add(Calendar.DAY_OF_MONTH, 1);
-					dataprazo = prazo.getTime();
-					Date prazodate = new Date(dataprazo.getTime());
-					operacaoFazer.setPrazo(prazodate);
+		PlanilhaCusto ultima = gerente.getPlanilhascusto().get(gerente.getPlanilhascusto().size() - 1);
+		for (Peca peca : gerente.getPecas()) {
+			if (peca.getOperacoesFazer().size() <1) {
+				for (Operacao operacaoFazer : peca.getOperacoesFazer()) {
+			          
+						System.out.println("opesAndamento gerente" + operacaoFazer.getDataInicio());
+						inicio.setTime(operacaoFazer.getDataInicio());
+						inicio.add(Calendar.DAY_OF_MONTH, 1);
+						dataini = inicio.getTime();
+						Date iniciodata = new Date(dataini.getTime());
+						operacaoFazer.setDataInicio(iniciodata);
+
+						prazo.setTime(operacaoFazer.getPrazo());
+						prazo.add(Calendar.DAY_OF_MONTH, 1);
+						dataprazo = prazo.getTime();
+						Date prazodate = new Date(dataprazo.getTime());
+						operacaoFazer.setPrazo(prazodate);
+					
 				}
 			}
 
-			if (!peca.getOperacoesAndamento().isEmpty()) {
+			if (peca.getOperacoesAndamento().size() <1) {
 				for (Operacao operacaoAndamento : peca.getOperacoesAndamento()) {
 					System.out.println("opesAndamento gerente" + operacaoAndamento.getDataInicio());
 					inicio.setTime(operacaoAndamento.getDataInicio());
@@ -468,7 +470,6 @@ public class GerenteRest {
 				}
 			}
 		}
-		PlanilhaCusto ultima = gerente.getPlanilhascusto().get(gerente.getPlanilhascusto().size() - 1);
 		PlanilhaCusto.calcularCusto(ultima);
 		gerenteRepository.save(gerente);
 		return new ResponseEntity<>(new ResponseMessage("Dados Atualizados com sucesso!"), HttpStatus.OK);

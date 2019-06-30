@@ -5,6 +5,7 @@ import {CadastroSetorService} from '../service/cadastro-setor.service';
 import {TokenStorageService} from '../auth/token-storage.service';
 import {GerenteService} from '../service/gerente.service';
 import {first} from 'rxjs/operators';
+import {isUndefined} from 'util';
 
 @Component({
   selector: 'app-sidebar',
@@ -54,10 +55,13 @@ export class SidebarComponent implements OnInit {
             this.gerente.etapas.push(item);
           });
           this.gerenteService.cadastrarAlgo(this.gerente).pipe(first()).subscribe(ger => {
-
+            this.gerenteobj = data;
           }, error => {
             alert(error);
           });
+          if (isUndefined(this.gerente)) {
+            this.gerente = this.gerenteobj;
+          }
         }
       });
     });

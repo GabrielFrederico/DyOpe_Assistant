@@ -4,6 +4,7 @@ import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {GerenteService} from '../service/gerente.service';
 import {Router} from '@angular/router';
 import {first} from 'rxjs/operators';
+import {isUndefined} from 'util';
 
 @Component({
   selector: 'app-perfil-gerente',
@@ -46,6 +47,8 @@ export class PerfilGerenteComponent implements OnInit {
 
   formredefinirsenha = false;
 
+  gerenteobj: any;
+
   private static getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';
@@ -75,12 +78,17 @@ export class PerfilGerenteComponent implements OnInit {
       authorities: this.token.getAuthorities()
     };
     this.gerenteService.getGerente(this.info.username).subscribe(data => {
-      this.gerente = data;
-      if (this.gerente.chaveAcesso !== '') {
-        this.chaveCadastrada = true;
-      }
-    });
+        this.gerenteobj = data;
+        this.gerente = data;
 
+        if (this.gerente.chaveAcesso !== '') {
+          this.chaveCadastrada = true;
+        }
+      }
+    );
+    if (isUndefined(this.gerente)) {
+      this.gerente = this.gerenteobj;
+    }
     this.datareload();
     this.naoAutenticado();
 

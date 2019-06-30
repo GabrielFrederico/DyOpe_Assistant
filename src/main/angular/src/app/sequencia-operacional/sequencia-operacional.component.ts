@@ -23,6 +23,8 @@ export class SequenciaOperacionalComponent implements OnInit {
   @ViewChild('closeModal') closeOpeModal: ElementRef;
   @ViewChild('modal') closeModalPeca: ElementRef;
   operacao: any = {};
+  novaplanilhacusto: any = {};
+  planilhacusto: any;
   newsuboperacao: any = {};
   suboperacaoEscolhida: any;
   subopesa = false;
@@ -32,24 +34,18 @@ export class SequenciaOperacionalComponent implements OnInit {
   newpeca: any = {};
   peca: any;
   listasuboperacoes: any = [];
-  listasuboperacoes2 = [];
   suboperacoes: any;
-  etapaproducao: any;
   numFun1: number;
   numFun2: number;
   qtdPeca1: number;
   qtdPeca2: number;
   public erro: boolean;
   public errorMessage = '';
-  closeResult: string;
   public info: any;
-  idope: string;
   sub: Subscription;
   public opeCadastrada = false;
   public validado: boolean;
   public carregado: boolean;
-  public modal = 'modal fade cadastrar-peca';
-  public modalOpen = false;
   resultadoOpe: any;
   isReadonly = true;
   pecaSelected = false;
@@ -73,6 +69,7 @@ export class SequenciaOperacionalComponent implements OnInit {
 
   cadastrarSubOpe = false;
   gerenteobj: any;
+  atualizarPlanilha = false;
 
   ngOnInit() {
     this.info = {
@@ -233,7 +230,45 @@ export class SequenciaOperacionalComponent implements OnInit {
     this.andamento = false;
   }
 
+  updatePlanilha() {
+    this.gerenteService.atualizarPlanilha(this.planilhacusto).pipe(first()).subscribe(data => {
+    }, error => {
+      this.errorMessage = error.error;
+    });
+  }
+
+  cadastrarPlanilha() {
+    if (this.atualizarPlanilha) {
+      this.updatePlanilha();
+      console.log('planilha ATUALIZADA');
+    } else {
+      this.gerenteService.addPlanilha(this.novaplanilhacusto).subscribe(data => {
+        this.planilhacusto = data;
+        console.log('planilha cadastrada');
+        alert(this.operacaoEscolhida.id);
+        this.planilhacusto.operacao_id = this.operacaoEscolhida.id;
+        alert(this.planilhacusto.operacao_id);
+        this.operacaoEscolhida.planilhascusto.push(this.planilhacusto);
+        this.planilhacusto.descricaoOpe = this.operacaoEscolhida.descricao;
+        this.planilhacusto.tempos = this.operacaoEscolhida.tempos;
+        this.planilhacusto.lote = this.operacaoEscolhida.loteProducao;
+        this.planilhacusto.numFunOpe = this.operacaoEscolhida.numFuncionariosDisponiveis;
+        this.planilhacusto.gerente_id = this.gerente.id;
+        this.planilhacusto.gastos = this.gerente.gastosfixo;
+        this.gerente.planilhascusto.push(this.planilhacusto);
+        this.gerenteService.cadastrarPlanilha(this.gerente).pipe(first()).subscribe(gerente => {
+          this.atualizarPlanilha = true;
+        }, error => {
+          this.errorMessage = error.error;
+        });
+      }, error => {
+        this.errorMessage = error.error;
+      });
+    }
+  }
+
   getOpe() {
+    this.cadastrarPlanilha();
     this.operacaoService.getOperacaoId(this.operacaoEscolhida.id).subscribe(data => {
       this.resultadoOpe = data;
       this.ope3 = true;

@@ -30,18 +30,54 @@ public class Operacao {
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "operacao_suboperacoes", joinColumns = @JoinColumn(name = "operacao_id"), inverseJoinColumns = @JoinColumn(name = "suboperacao_id"))
 	private Set<SubOperacao> suboperacoes = new HashSet<>();
-
+//
+//	@OneToMany(cascade = CascadeType.ALL, mappedBy = "operacao")
+//	// @JoinTable(name = "operacao_planilhascusto", joinColumns = @JoinColumn(name =
+//	// "operacao_id"), inverseJoinColumns = @JoinColumn(name = "planilhacusto_id"))
+//	private List<PlanilhaCusto> planilhascusto = new ArrayList<>();
+	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "operacao")
-	// @JoinTable(name = "operacao_planilhascusto", joinColumns = @JoinColumn(name =
-	// "operacao_id"), inverseJoinColumns = @JoinColumn(name = "planilhacusto_id"))
-	private List<PlanilhaCusto> planilhascusto = new ArrayList<>();
+	private List<PlanilhaCusto> planilhascusto;
+	
+	public List<PlanilhaCusto> getPlanilhascusto() {
+		return planilhascusto;
+	}
+
+	public void setPlanilhascusto(List<PlanilhaCusto> planilhascusto) {
+		this.planilhascusto = planilhascusto;
+	}
 
 	private String descricao;
 	private Date dataInicio;
 	private float minutos, segundos;
+	private int diasUtesNecessarios;
 
 	public float getTempos() {
 		return minutos;
+	}
+
+	public float getMinutos() {
+		return minutos;
+	}
+
+	public void setMinutos(float minutos) {
+		this.minutos = minutos;
+	}
+
+	public float getSegundos() {
+		return segundos;
+	}
+
+	public void setSegundos(float segundos) {
+		this.segundos = segundos;
+	}
+
+	public int getDiasUtesNecessarios() {
+		return diasUtesNecessarios;
+	}
+
+	public void setDiasUtesNecessarios(int diasUtesNecessarios) {
+		this.diasUtesNecessarios = diasUtesNecessarios;
 	}
 
 	public void setTempos(float minutos) {
