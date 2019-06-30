@@ -23,7 +23,7 @@
           Link para redefinir a senha foi enviado para seu e-mail
         </div>
         <div class="alert alert-dismissible alert-danger separa" *ngIf="emailInvalido">
-          E-mail inválido!
+          {{errorMessage}}
         </div>
         </form>
         <div class="text-center">

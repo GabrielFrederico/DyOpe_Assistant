@@ -92,7 +92,7 @@ export class GerenteService {
   }
 
   enviarEmail(email: string) {
-    return this.httpClient.post('http://localhost:8080/usuarios/enviaremailsenha', email);
+    return this.httpClient.post('http://localhost:8080/usuarios/enviaremailsenha', email, httpOptions);
   }
 
   cadastrarAlgo(gerente: any) {

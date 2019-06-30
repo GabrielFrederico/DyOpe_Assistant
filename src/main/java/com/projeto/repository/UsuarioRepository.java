@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.data.repository.CrudRepository;
 
+import com.projeto.models.PasswordResetToken;
 import com.projeto.models.Usuario;
 
 public interface UsuarioRepository extends CrudRepository<Usuario, Serializable> {
@@ -20,4 +21,8 @@ public interface UsuarioRepository extends CrudRepository<Usuario, Serializable>
     Boolean existsBySenha(String senha);
     
     Usuario findBySenha(String senha);
+    
+    Usuario findByEmail(String email);
+    
+    
 }
