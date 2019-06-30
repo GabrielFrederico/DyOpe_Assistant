@@ -42,6 +42,10 @@ export class PerfilGerenteComponent implements OnInit {
   editar = false;
   chaveValida = false;
 
+  senhavalida = true;
+
+  formredefinirsenha = false;
+
   private static getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';
@@ -110,25 +114,39 @@ export class PerfilGerenteComponent implements OnInit {
 
   }
 
+  openRedefinir() {
+    this.formredefinirsenha = true;
+  }
+
+  voltarperfil() {
+    this.formredefinirsenha = false;
+  }
+
   redefinirSenha() {
     if (this.newsenhainput.nativeElement.value === this.confirmasenhainput.nativeElement.value) {
-      this.gerente.senha = this.newsenhainput.nativeElement.value;
-      this.gerenteService.atualizarSenhaGerente(this.gerente)
-        .pipe(first())
-        .subscribe(
-          data => {
-            this.router.navigate(['/logingerente']);
-            this.token.logOut();
-            alert('Senha atualizada! Faça o login denovo!');
-          },
-          error => {
-            console.log(error);
-            this.errorMessage = error.error.message;
-            this.updateFailed = true;
-          });
-    } else {
-      this.senhaerrada = true;
+      if (this.newsenhainput.nativeElement.value !== '' || this.newsenhainput.nativeElement.value.length >= 6) {
+        this.senhavalida = true;
 
+        this.gerente.senha = this.newsenhainput.nativeElement.value;
+        this.gerenteService.atualizarSenhaGerente(this.gerente)
+          .pipe(first())
+          .subscribe(
+            data => {
+              this.router.navigate(['/logingerente']);
+              this.token.logOut();
+              alert('Senha atualizada! Faça o login denovo!');
+            },
+            error => {
+              console.log(error);
+              this.errorMessage = error.error.message;
+              this.updateFailed = true;
+            });
+      } else {
+        this.senhaerrada = true;
+
+      }
+    } else {
+      this.senhavalida = false;
     }
   }
 

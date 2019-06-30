@@ -298,8 +298,8 @@ export class SequenciaOperacionalComponent implements OnInit {
     this.gerenteService.cadastrarAlgo(this.gerente).pipe(first()).subscribe(data => {
       this.gerente = data;
       alert('Peça cadastrada com sucesso!');
-      this.router.navigateByUrl('/gerenteindex/homegerente', {skipLocationChange: true}).then(() =>
-        this.router.navigate(['/gerenteindex/operacoes/']));
+      // this.router.navigateByUrl('/gerenteindex/homegerente', {skipLocationChange: true}).then(() =>
+      //   this.router.navigate(['/gerenteindex/operacoes/']));
 
     }, error => {
       this.erro = true;

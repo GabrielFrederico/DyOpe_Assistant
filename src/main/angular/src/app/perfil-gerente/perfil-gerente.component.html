@@ -6,7 +6,8 @@
 
 
 <div class="container espacamentosequenciaoperacional" style=" max-width: 80%; padding-left: 5%">
-  <form #gerenteForm="ngForm" [noValidate]="$any(false)" (ngSubmit)="onSubmit(cpf.value,rg.value)">
+  <form #gerenteForm="ngForm" [noValidate]="$any(false)" (ngSubmit)="onSubmit(cpf.value,rg.value)"
+        *ngIf="!formredefinirsenha">
     <div class="form-group">
       <div class="form-row">
         <div class="col-md-6">
@@ -64,10 +65,11 @@
       </div>
 
       <div class="modal-footer">
-
-        <input class="btn btn-outline-warning" href="#" data-toggle="modal" type="button" *ngIf="isReadonly"
-               data-target=".redefinir-senha" value="Redefinir
-          senha">
+        <!--               data-toggle="modal" -->
+        <!--               data-target=".redefinir-senha" -->
+        <input class="btn btn-outline-warning" href="javascript:void(0)" type="button"
+               (click)="openRedefinir()" *ngIf="isReadonly"
+               value="Redefinir senha">
         <input class="btn btn-outline-info" href="#" data-toggle="modal" type="button" *ngIf="isReadonly"
                data-target=".chave-acesso" value="Chave Acesso">
         <input class="btn btn-primary" type="button" (click)="toggleReadonly()" *ngIf="isReadonly" value="Editar">
@@ -92,6 +94,70 @@
         </div>
       </footer>
 
+    </div>
+  </form>
+
+  <form #f="ngForm" class="card espacamentosequenciaoperacional" [noValidate]="$any(false)" *ngIf="formredefinirsenha">
+    <div class="card-header">Redefinir Senha</div>
+    <div class="card-body border-info">
+      <div class="form-group">
+
+        <div class="form-group">
+
+          <div class="col-md-auto">
+            <show-hide-password (click)="focosenhaatual()" btnStyle="primary">
+              <div class="form-label-group showredefinir">
+                <input type="password" #inputPassword id="current-passwordf" name="current-password"
+                       class="form-control" minlength="6"
+                       placeholder="Senha atual:"
+                       required="required">
+                <label for="current-passwordf">Senha atual:</label>
+              </div>
+            </show-hide-password>
+          </div>
+        </div>
+
+        <div class="form-group">
+
+          <div class="col-md-auto">
+            <show-hide-password (click)="foconovasenha()" btnStyle="primary">
+              <div class="form-label-group showredefinir">
+                <input type="password" #inputNewPassword id="new-passwordf" name="new-password" minlength="6"
+                       class="form-control" placeholder="Nova senha:" required="required">
+                <label for="new-passwordf">Nova senha:</label>
+              </div>
+            </show-hide-password>
+          </div>
+        </div>
+
+        <div class="form-group">
+
+          <div class="col-md-auto">
+            <show-hide-password (click)="fococonfirmarsenha()" btnStyle="primary">
+              <div class="form-label-group showredefinir">
+                <input type="password" #inputPasswordConfirm id="new-passwordconfirmf" name="new-password"
+                       minlength="6"
+                       class="form-control" placeholder="Confirmar senha:" required="required">
+                <label for="new-passwordconfirmf">Confirmar senha:</label>
+              </div>
+            </show-hide-password>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="card-footer bg-transparent border-info">
+        <button class="btn btn-secondary" href="javascript:void(0)" type="button"
+                (click)="voltarperfil()">Cancelar
+        </button>
+        <input class="btn btn-primary"  type="submit" (click)="redefinirSenha()"
+               value="Confirmar">
+
+      </div>
+      <div *ngIf="f.submitted && senhaerrada" class="alert alert-warning separa">
+        As novas senhas não coincidem!
+      </div>
     </div>
   </form>
   <!-- /.content-wrapper -->
@@ -169,7 +235,7 @@
 
             <div class="modal-footer col-md-12">
               <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-              <input class="btn btn-primary" [disabled]="!f.form.valid" type="submit" (click)="redefinirSenha()"
+              <input class="btn btn-primary" [disabled]="!senhavalida" type="submit" (click)="redefinirSenha()"
                      data-dismiss="modal" value="Confirmar">
               <div *ngIf="f.submitted && senhaerrada" class="alert alert-warning separa">
                 As novas senhas não coincidem!
