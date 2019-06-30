@@ -16,7 +16,15 @@ public class PlanilhaCusto {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	private float custoMinuto, lucro, gastosOpe, gastos, custoOpe, tempos, lote;
+	private float custoMinuto, lucro, gastosOpe, gastos, custoOpe, tempos, lote, precoPecaOpe;
+	public float getPrecoPecaOpe() {
+		return precoPecaOpe;
+	}
+
+	public void setPrecoPecaOpe(float precoPecaOpe) {
+		this.precoPecaOpe = precoPecaOpe;
+	}
+
 	private int numFunOpe;
 
 	public int getNumFunOpe() {
@@ -37,7 +45,7 @@ public class PlanilhaCusto {
 		this.numFunOpe = numFunOpe;
 	}
 
-	@ManyToOne(cascade = CascadeType.ALL)
+//	@ManyToOne(cascade = CascadeType.ALL)
 	// @JoinColumn(name = "operacao_id")
 	private Operacao operacao;
 
@@ -140,7 +148,8 @@ public class PlanilhaCusto {
 		custo = custoMinuto * planilha.getTempos();
 		System.out.println("custo ope" + custo);
 		planilha.setCustoOpe(custo);
-		ganho = custo * planilha.getLote();
+		ganho = planilha.getPrecoPecaOpe() * planilha.getLote();
+		// gasto = getgastos/20*diasneceope;
 		gastos = planilha.getGastos() + planilha.getGastosOpe();
 		lucro = ganho - gastos;
 		planilha.setLucro(lucro);

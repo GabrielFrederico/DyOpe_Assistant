@@ -64,7 +64,23 @@ public class Gerente extends Usuario {
 	@Column(name = "cpf_gerente")
 	private String cpf;
 
-	private float gastosfixo;
+	private float gastosfixo, gastoOperacional;
+
+	public float getGastoOperacional() {
+		return gastoOperacional;
+	}
+
+	public void setGastoOperacional(float gastoOperacional) {
+		this.gastoOperacional = gastoOperacional;
+	}
+
+	public List<CustoFixo> getCustosfixo() {
+		return custosfixo;
+	}
+
+	public void setCustosfixo(List<CustoFixo> custosfixo) {
+		this.custosfixo = custosfixo;
+	}
 
 	public float getGastosfixo() {
 		return gastosfixo;

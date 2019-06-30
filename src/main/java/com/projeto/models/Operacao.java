@@ -115,6 +115,15 @@ public class Operacao {
 		diasNeceteste = Math.round(resultdias / tempoFun);
 
 		inicio.add(Calendar.DAY_OF_MONTH, 1);
+		if (inicio.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY) {
+			inicio.add(Calendar.DAY_OF_MONTH, 1);
+		}
+		if (inicio.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
+			inicio.add(Calendar.DAY_OF_MONTH, 1);
+		}
+		if (feriados.contains((Integer) inicio.get(Calendar.DAY_OF_YEAR))) {
+			inicio.add(Calendar.DAY_OF_MONTH, 1);
+		}
 		dataini = inicio.getTime();
 		Date iniciodata = new Date(dataini.getTime());
 		operacao.setDataInicio(iniciodata);
