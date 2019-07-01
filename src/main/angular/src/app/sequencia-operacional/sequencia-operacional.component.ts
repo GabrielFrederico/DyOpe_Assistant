@@ -250,14 +250,26 @@ export class SequenciaOperacionalComponent implements OnInit {
       this.novaplanilhacusto.lote = this.operacaoEscolhida.loteProducao;
       this.novaplanilhacusto.numFunOpe = this.operacaoEscolhida.numFuncionariosDisponiveis;
       this.novaplanilhacusto.gerente_id = this.gerente.id;
-      this.novaplanilhacusto.gastos = this.gerente.gastosfixo;
+      // this.novaplanilhacusto.gastos = this.gerente.gastosfixo;
+      // teste:
+
+      this.novaplanilhacusto.gastos = 30000;
       this.gerente.planilhascusto.push(this.novaplanilhacusto);
       this.gerenteService.cadastrarPlanilha(this.gerente).pipe(first()).subscribe(data => {
+        this.getdadosCustos();
         this.atualizarPlanilha = true;
       }, error => {
         this.errorMessage = error.error;
       });
     }
+  }
+
+  getdadosCustos() {
+    this.gerenteService.getPlanilhaId(this.novaplanilhacusto.id).subscribe(data => {
+      this.planilhacusto = data;
+    }, error => {
+      this.errorMessage = error.error;
+    });
   }
 
   getOpe() {

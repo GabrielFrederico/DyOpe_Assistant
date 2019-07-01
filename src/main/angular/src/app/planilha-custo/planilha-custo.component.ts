@@ -45,6 +45,8 @@ export class PlanilhaCustoComponent implements OnInit {
   listacustos = false;
   erro = false;
 
+  precocadastrado = false;
+
   ngOnInit() {
     this.info = {
       token: this.token.getToken(),
@@ -101,6 +103,8 @@ export class PlanilhaCustoComponent implements OnInit {
 
   cadastrarPrecoOpePeca() {
     this.gerenteService.atualizarPlanilha(this.planilhaEscolhida).pipe(first()).subscribe(data => {
+      this.precocadastrado = true;
+      this.voltarLista();
     }, error => {
       this.erro = true;
       this.mensagemErro = error.error;

@@ -316,12 +316,13 @@ public class GerenteRest {
 					dataini = inicio.getTime();
 					Date iniciodata = new Date(dataini.getTime());
 					operacaoPrazo.setDataInicio(iniciodata);
-
-					prazo.setTime(operacaoPrazo.getPrazo());
-					prazo.add(Calendar.DAY_OF_MONTH, 1);
-					dataprazo = prazo.getTime();
-					Date prazodate = new Date(dataprazo.getTime());
-					operacaoPrazo.setPrazo(prazodate);
+					if (!(operacaoPrazo.getPrazo() == null)) {
+						prazo.setTime(operacaoPrazo.getPrazo());
+						prazo.add(Calendar.DAY_OF_MONTH, 1);
+						dataprazo = prazo.getTime();
+						Date prazodate = new Date(dataprazo.getTime());
+						operacaoPrazo.setPrazo(prazodate);
+					}
 				}
 			}
 		}
@@ -418,39 +419,45 @@ public class GerenteRest {
 
 		PlanilhaCusto ultima = gerente.getPlanilhascusto().get(gerente.getPlanilhascusto().size() - 1);
 		for (Peca peca : gerente.getPecas()) {
-			if (peca.getOperacoesFazer().size() >1) {
+			if (peca.getOperacoesFazer().size() >= 1) {
 				for (Operacao operacaoFazer : peca.getOperacoesFazer()) {
-			          
-						System.out.println("opesAndamento gerente" + operacaoFazer.getDataInicio());
-						inicio.setTime(operacaoFazer.getDataInicio());
-						inicio.add(Calendar.DAY_OF_MONTH, 1);
-						dataini = inicio.getTime();
-						Date iniciodata = new Date(dataini.getTime());
-						operacaoFazer.setDataInicio(iniciodata);
 
+					System.out.println("opesAndamento gerente" + operacaoFazer.getDataInicio());
+					inicio.setTime(operacaoFazer.getDataInicio());
+					inicio.add(Calendar.DAY_OF_MONTH, 1);
+					dataini = inicio.getTime();
+					Date iniciodata = new Date(dataini.getTime());
+					operacaoFazer.setDataInicio(iniciodata);
+					if (!(operacaoFazer.getPrazo() == null)) {
 						prazo.setTime(operacaoFazer.getPrazo());
 						prazo.add(Calendar.DAY_OF_MONTH, 1);
 						dataprazo = prazo.getTime();
 						Date prazodate = new Date(dataprazo.getTime());
 						operacaoFazer.setPrazo(prazodate);
-					
+
+					}
 				}
 			}
 
-			if (peca.getOperacoesAndamento().size() >1) {
+			if (peca.getOperacoesAndamento().size() >= 1) {
 				for (Operacao operacaoAndamento : peca.getOperacoesAndamento()) {
-					System.out.println("opesAndamento gerente" + operacaoAndamento.getDataInicio());
-					inicio.setTime(operacaoAndamento.getDataInicio());
-					inicio.add(Calendar.DAY_OF_MONTH, 1);
-					dataini = inicio.getTime();
-					Date iniciodata = new Date(dataini.getTime());
-					operacaoAndamento.setDataInicio(iniciodata);
+					try {
+						System.out.println("opesAndamento gerente" + operacaoAndamento.getDataInicio());
+						inicio.setTime(operacaoAndamento.getDataInicio());
+						inicio.add(Calendar.DAY_OF_MONTH, 1);
+						dataini = inicio.getTime();
+						Date iniciodata = new Date(dataini.getTime());
+						operacaoAndamento.setDataInicio(iniciodata);
 
-					prazo.setTime(operacaoAndamento.getPrazo());
-					prazo.add(Calendar.DAY_OF_MONTH, 1);
-					dataprazo = prazo.getTime();
-					Date prazodate = new Date(dataprazo.getTime());
-					operacaoAndamento.setPrazo(prazodate);
+						prazo.setTime(operacaoAndamento.getPrazo());
+						prazo.add(Calendar.DAY_OF_MONTH, 1);
+						dataprazo = prazo.getTime();
+						Date prazodate = new Date(dataprazo.getTime());
+						operacaoAndamento.setPrazo(prazodate);
+					} catch (NullPointerException e) {
+						e.getStackTrace();
+					}
+
 				}
 			}
 			if (!peca.getOperacoesPrazo().isEmpty()) {

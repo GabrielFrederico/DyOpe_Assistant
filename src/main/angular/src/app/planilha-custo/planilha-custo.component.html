@@ -173,15 +173,23 @@
 
       </div>
       <div class="tab-pane fade" id="nav-custos" role="tabpanel" aria-labelledby="nav-custos-tab">
-        <form #f="ngForm" class="card espacamentosequenciaoperacional" [noValidate]="$any(false)" (ngSubmit)="cadastrarPrecoOpePeca()" *ngIf="addPrecoPeca">
+        <form #f="ngForm" class="card espacamentosequenciaoperacional" [noValidate]="$any(false)"
+              (ngSubmit)="cadastrarPrecoOpePeca()" *ngIf="addPrecoPeca">
           <div class="card-header">Cadastrar Preço definitivo da Operação</div>
           <div class="card-body border-info">
             <div class="col-md-auto">
               <div class="form-group">
+
                 <label for="precoPecaOpe">Preço da Operação:</label>
-                <input type="number" id="precoPecaOpe" name="precoPecaOpe" class="form-control"
-                       #precoPecaOpe (blur)="addPrecoPecaOpe(precoPecaOpe.value)"
-                       required="required">
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">R$</span>
+                  </div>
+                  <input type="number" id="precoPecaOpe" name="precoPecaOpe" class="form-control"
+                         [brmasker]="{money: true,  decimalCaracter: '.', decimal: '2'}"
+                         #precoPecaOpe (blur)="addPrecoPecaOpe(precoPecaOpe.value)"
+                         required="required">
+                </div>
               </div>
             </div>
 
@@ -190,10 +198,9 @@
               </button>
               <input class="btn btn-primary" type="submit"
                      value="Cadastrar">
-
             </div>
-            <div class="alert alert-warning separa">
-
+            <div class="alert alert-warning" *ngIf="erro">
+              {{mensagemErro}}
             </div>
           </div>
         </form>
@@ -225,7 +232,8 @@
                            value="{{planilhas.gastosOpe}}" [readonly]="!editarPlanilha"
                            class="form-control-plaintext" required="required"/></td>
 
-                <td><input id="precominuto" name="precominuto" class="form-control-plaintext" [readonly]="isReadonly"currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" readonly
+                <td><input id="precominuto" name="precominuto" class="form-control-plaintext" [readonly]="isReadonly"
+                           currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" readonly
                            value="{{planilhas.custoMinuto}}"></td>
                 <td>{{planilhas.custoOpe}}</td>
                 <td>{{planilhas.lucro}}</td>
@@ -233,7 +241,7 @@
                 <div class="card-footer bg-transparent align-self-center botaoexcluirplanilha border-info modal-footer">
                   <input class="btn btn-primary btn-padding" type="button" [disabled]="!valido"
                          *ngIf="!editarPlanilha" value="Editar" (click)="editar()">
-                  <button class="btn btn-secondary" href="javascript:void(0)" type="button"
+                  <button class="btn btn-secondary" href="javascript:void(0)" type="button" *ngIf="planilhas.prePecaOpe == 0"
                           (click)="addPreco(planilhas)">Cadastrar Preço
                   </button>
                   <button class="btn btn-warning btnplanilha-padding" type="button" href="#" (click)="cancelar()"
