@@ -44,6 +44,7 @@ export class PlanilhaCustoComponent implements OnInit {
   erro = false;
 
   precocadastrado = false;
+  listacustofixo = false;
 
   ngOnInit() {
     this.info = {
@@ -63,6 +64,16 @@ export class PlanilhaCustoComponent implements OnInit {
     }, error => {
       console.log(error.error);
     });
+  }
+
+  openCustosFixos() {
+    this.listacustos = false;
+    this.listacustofixo = true;
+  }
+
+  sairCustosFixos() {
+    this.listacustos = true;
+    this.listacustofixo = false;
   }
 
   cancelar() {
@@ -189,6 +200,7 @@ export class PlanilhaCustoComponent implements OnInit {
     this.gerente.verificarChaveAcesso = this.chaveAcesso;
     this.gerenteService.acessarPlanilha(this.gerente).subscribe(data => {
       this.acessovalido = true;
+      this.listacustos = true;
     }, error => {
       this.invalido = true;
       this.mensagemErro = error.error;

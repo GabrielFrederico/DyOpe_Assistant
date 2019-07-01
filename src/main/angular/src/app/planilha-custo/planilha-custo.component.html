@@ -41,216 +41,95 @@
 
     <!-- AQUI VAI AS PÁGINAS -->
 
-    <nav class="espacamentosequenciaoperacional">
-      <div class="nav nav-tabs" id="nav-tab" role="tablist">
-        <a class="nav-item nav-link active" id="nav-cadastro-tab" data-toggle="tab" href="#nav-cadastro" role="tab"
-           (click)="listaClosed()"
-           aria-controls="nav-cadastro" aria-selected="true">Cadastro</a>
-        <a class="nav-item nav-link " id="nav-custos-tab" data-toggle="tab" href="#nav-custos" role="tab"
-           (click)="openLista()"
-           aria-controls="nav-custos" aria-selected="false">Custos</a>
-      </div>
-    </nav>
+    <!--    <nav class="espacamentosequenciaoperacional">-->
+    <!--      <div class="nav nav-tabs" id="nav-tab" role="tablist">-->
+    <!--        <a class="nav-item nav-link active" id="nav-cadastro-tab" data-toggle="tab" href="#nav-cadastro" role="tab"-->
+    <!--           (click)="listaClosed()"-->
+    <!--           aria-controls="nav-cadastro" aria-selected="true">Cadastro</a>-->
+    <!--        <a class="nav-item nav-link " id="nav-custos-tab" data-toggle="tab" href="#nav-custos" role="tab"-->
+    <!--           (click)="openLista()"-->
+    <!--           aria-controls="nav-custos" aria-selected="false">Custos</a>-->
+    <!--      </div>-->
+    <!--    </nav>-->
 
-    <div class="text-right">
-      <input class="btn btn-success" type="submit" value="Custos Fixos">
+    <div class="text-right" *ngIf="listacustos">
+      <input class="btn btn-success" type="button" (click)="openCustosFixos()" value="Custos Fixos">
+    </div>
+    <div class="text-left" *ngIf="listacustofixo">
+      <input class="btn btn-info" type="button" (click)="sairCustosFixos()" value="Voltar para Planilha de Custo">
     </div>
 
-    <div class="tab-content">
-      <div class="tab-pane fade show active" id="nav-cadastro" role="tabpanel" aria-labelledby="nav-cadastro-tab">
-
-        <div class="form-group">
-          <mat-form-field>
-            <mat-label class="text-dark">Peça</mat-label>
-            <mat-select required="required" name="peca" [(ngModel)]="peca">
-              <mat-option *ngFor="let peca of gerente.pecas"
-                          [value]="peca" (click)="selectPeca()">{{peca.descricao}}</mat-option>
-              <mat-option *ngIf="gerente.pecas.length <=0">Nenhuma Peça Cadastrado</mat-option>
-            </mat-select>
-          </mat-form-field>
+    <form #f="ngForm" class="card espacamentosequenciaoperacional" [noValidate]="$any(false)"
+          (ngSubmit)="cadastrarPrecoOpePeca()" *ngIf="addPrecoPeca">
+      <div class="card-header">Cadastrar Preço definitivo da Operação</div>
+      <div class="card-body border-info">
+        <div class="col-md-auto">
+          <div class="form-group">
+            <label for="precoPecaOpe">Preço da Operação:</label>
+            <input type="number" id="precoPecaOpe" name="precoPecaOpe" class="form-control"
+                   #precoPecaOpe (blur)="addPrecoPecaOpe(precoPecaOpe.value)"
+                   required="required">
+          </div>
         </div>
 
-        <div class="row espacamentosequenciaoperacional" *ngIf="showPlanilha; else naoescolheu">
-
-          <div class="col-md-auto formsequencia">
-            <form class="card border-info mb-3 operacoes lista" (ngSubmit)="cadastrar()"
-                  [noValidate]="$any(false)">
-              <div class="card-header border-info text-center">Dados:</div>
-              <div class="card-body text-secondary">
-                <div class="form-group">
-                  <div class="col-md-auto">
-                    <!--                      <div class="form-group">-->
-                    <!--                        <mat-form-field>-->
-                    <!--                          <mat-label class="text-dark">Peça</mat-label>-->
-                    <!--                          <mat-select required="required" name="peca" [(ngModel)]="peca">-->
-                    <!--                            <mat-option *ngFor="let peca of gerente.pecas"-->
-                    <!--                                        [value]="peca" (click)="selectPeca()">{{peca.descricao}}</mat-option>-->
-                    <!--                            <mat-option *ngIf="gerente.pecas.length <=0">Nenhuma Peça Cadastrado</mat-option>-->
-                    <!--                          </mat-select>-->
-                    <!--                        </mat-form-field>-->
-                    <!--                      </div>-->
-                  </div>
-                  <div class="col-md-auto" *ngIf="showPlanilha">
-                    <div class="form-group">
-                      <mat-form-field>
-                        <mat-label class="text-dark">Operacao</mat-label>
-                        <mat-select required="required" name="operacaoEscolhida" [(ngModel)]="operacaoEscolhida"
-                                    (change)="selectOpe()">
-                          <mat-option *ngFor="let operacao of peca.operacoesFazer"
-                                      [value]="operacao">{{operacao.descricao}}</mat-option>
-                          <mat-option *ngFor="let operacao of peca.operacoesAndamento"
-                                      [value]="operacao">{{operacao.descricao}}</mat-option>
-                          <mat-option *ngFor="let operacao of peca.operacoesPrazo"
-                                      [value]="operacao">{{operacao.descricao}}</mat-option>
-                          <!-- <mat-option *ngIf="peca.operacoesFazer.length <=0 || peca.operacoesAndamento.length <=0">Nenhuma Operacao Cadastrado</mat-option> -->
-                        </mat-select>
-                      </mat-form-field>
-                    </div>
-                  </div>
-
-                  <div class="form-row" *ngIf="showPlanilha">
-                    <div class="col-md-auto">
-                      <div class="form-group">
-                        <label for="gastooperacional">Gasto Operacional:</label>
-                        <input type="number" id="gastooperacional" name="gastooperacional" class="form-control"
-                               #gastoOper (blur)="gastoOpe(gastoOper.value)"
-                               required="required">
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="card-footer bg-transparent border-info modal-footer">
-                <input class="btn btn-success" type="submit" [disabled]="!valido" *ngIf="!planilha2"
-                       value="Cadastrar">
-                <input class="btn btn-outline-info" type="submit" [disabled]="!valido" *ngIf="planilha2"
-                       value="Atualizar">
-                <input class="btn btn-primary" type="button" (click)="concluirPla()" *ngIf="planilha2"
-                       value="Concluir">
-              </div>
-            </form>
-          </div>
-
-          <div class="col-md-auto formsequencia" *ngIf="planilha2">
-            <div class="card border-success mb-3 lista">
-              <div class="card-header border-info text-center">Resultado Final:</div>
-              <div class="card-body text-success">
-                <div class="form-group">
-                  <div class="col-md-auto">
-                    <div class="form-group">
-                      <label for="precoporminuto">Preço por minuto:
-                        <input currencyMask id="precoporminuto" name="precoporminuto" class="form-control-plaintext"
-                               [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
-                               [readonly]="isReadonly" [(ngModel)]="resultadoPlanilha.custoMinuto">
-                      </label>
-                    </div>
-                  </div>
-                  <div class="col-md-auto">
-                    <div class="form-group">
-                      <label for="precodapeca" class="fonterisco">Preço da peça na Operação:
-                        <input currencyMask id="precodapeca" [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
-                               class="form-control-plaintext" [(ngModel)]="resultadoPlanilha.custoOpe"
-                               [readonly]="isReadonly" name="precodapeca">
-                      </label>
-                    </div>
-                  </div>
-                  <div class="col-md-auto">
-                    <div class="form-group">
-                      <label for="lucro" class="fonterisco">Lucro:
-                        <input id="lucro" currencyMask
-                               class="form-control-plaintext" [(ngModel)]="resultadoPlanilha.lucro"
-                               [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
-                               [readonly]="isReadonly" name="lucro">
-                      </label>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div class="card-footer bg-transparent border-info">
+          <button class="btn btn-secondary" href="javascript:void(0)"
+                  (click)="voltarLista()" type="button">Cancelar
+          </button>
+          <input class="btn btn-primary" type="submit"
+                 value="Cadastrar">
 
         </div>
+        <div class="alert alert-warning separa">
 
-        <ng-template #naoescolheu>
-          Escolha uma Peça!
-        </ng-template>
-
+        </div>
       </div>
-      <div class="tab-pane fade" id="nav-custos" role="tabpanel" aria-labelledby="nav-custos-tab">
-        <form #f="ngForm" class="card espacamentosequenciaoperacional" [noValidate]="$any(false)"
-              (ngSubmit)="cadastrarPrecoOpePeca()" *ngIf="addPrecoPeca">
-          <div class="card-header">Cadastrar Preço definitivo da Operação</div>
-          <div class="card-body border-info">
-            <div class="col-md-auto">
-              <div class="form-group">
-                <label for="precoPecaOpe">Preço da Operação:</label>
-                <input type="number" id="precoPecaOpe" name="precoPecaOpe" class="form-control"
-                       #precoPecaOpe (blur)="addPrecoPecaOpe(precoPecaOpe.value)"
-                       required="required">
-              </div>
-            </div>
+    </form>
 
-            <div class="card-footer bg-transparent border-info">
-              <button class="btn btn-secondary" href="javascript:void(0)"
-                      (click)="voltarLista()" type="button">Cancelar
+    <div class="card border-info mb-3 " *ngIf="listacustos">
+      <div class="card-header border-info">Lista de Custos</div>
+      <div class="table-responsive">
+        <table class="table table table-bordered dataTable">
+          <thead>
+          <tr>
+            <th>ID</th>
+            <th>Descrição</th>
+            <th>Gastos</th>
+            <th>Gastos Operacionais</th>
+            <th>Custo Minuto</th>
+            <th>Custo</th>
+            <th>Lucro</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let planilhas of gerente.planilhascusto">
+            <td>{{planilhas.id}}</td>
+            <td>{{planilhas.descricaoOpe}}</td>
+            <td><input type="number" name="gastos" id="gastos" value="{{planilhas.gastos}}"
+                       class="form-control-plaintext" required="required"/></td>
+            <td><input type="number" name="gastosoperacionais" id="gastosoperacionais"
+                       value="{{planilhas.gastosOpe}}"
+                       class="form-control-plaintext" required="required"/></td>
+            <td><input id="precominuto" name="precominuto" class="form-control-plaintext" [readonly]="isReadonly"
+                       currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" readonly
+                       value="{{planilhas.custoMinuto}}"></td>
+            <td>{{planilhas.custoOpe}}</td>
+            <td>{{planilhas.lucro}}</td>
+
+            <div class="card-footer bg-transparent align-self-center botaoexcluirplanilha border-info modal-footer">
+              <button class="btn btn-secondary" href="javascript:void(0)" type="button"
+                      *ngIf="planilhas.precoPecaOpe == 0"
+                      (click)="addPreco(planilhas)">Cadastrar Preço
               </button>
-              <input class="btn btn-primary" type="submit"
-                     value="Cadastrar">
-
             </div>
-            <div class="alert alert-warning separa">
-
-            </div>
-          </div>
-        </form>
-        <div class="card border-info mb-3" *ngIf="listacustos">
-          <div class="card-header border-info">Lista de Custos</div>
-          <div class="table-responsive">
-            <table class="table table table-bordered dataTable">
-              <thead>
-              <tr>
-                <th>ID</th>
-                <th>Descrição</th>
-                <th>Gastos</th>
-                <th>Gastos Operacionais</th>
-                <th>Custo Minuto</th>
-                <th>Custo</th>
-                <th>Lucro</th>
-
-              </tr>
-              </thead>
-              <tbody>
-              <tr *ngFor="let planilhas of gerente.planilhascusto">
-                <td>{{planilhas.id}}</td>
-                <td>{{planilhas.descricaoOpe}}</td>
-
-                <td><input type="number" name="gastos" id="gastos" value="{{planilhas.gastos}}"
-                           class="form-control-plaintext" required="required"/></td>
-
-                <td><input type="number" name="gastosoperacionais" id="gastosoperacionais"
-                           value="{{planilhas.gastosOpe}}"
-                           class="form-control-plaintext" required="required"/></td>
-
-                <td><input id="precominuto" name="precominuto" class="form-control-plaintext" [readonly]="isReadonly"
-                           currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" readonly
-                           value="{{planilhas.custoMinuto}}"></td>
-                <td>{{planilhas.custoOpe}}</td>
-                <td>{{planilhas.lucro}}</td>
-
-                <div class="card-footer bg-transparent align-self-center botaoexcluirplanilha border-info modal-footer">
-                  <button class="btn btn-secondary" href="javascript:void(0)" type="button"
-                          (click)="addPreco(planilhas)">Cadastrar Preço
-                  </button>
-
-                </div>
-
-              </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
+          </tr>
+          </tbody>
+        </table>
       </div>
+    </div>
+
+    <div *ngIf="listacustofixo">
+      lista de custos fixos works!
     </div>
 
 
