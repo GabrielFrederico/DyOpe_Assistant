@@ -6,6 +6,7 @@ import {TokenStorageService} from '../auth/token-storage.service';
 import {GerenteService} from '../service/gerente.service';
 import {first} from 'rxjs/operators';
 import {isUndefined} from 'util';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
@@ -17,9 +18,8 @@ export class SidebarComponent implements OnInit {
   etapas: any;
   gerente: any;
 
-
   // tslint:disable-next-line:max-line-length
-  constructor(private gerenteService: GerenteService, private tipoOpeservice: CadastroOperacaoService, private token: TokenStorageService, private setorservice: CadastroSetorService) {
+  constructor(private router: Router, private gerenteService: GerenteService, private tipoOpeservice: CadastroOperacaoService, private token: TokenStorageService, private setorservice: CadastroSetorService) {
   }
 
   public info: any;
@@ -28,7 +28,7 @@ export class SidebarComponent implements OnInit {
   informacoes() {
     this.gerenteService.getGerente(this.info.username).subscribe(data => {
       this.gerenteobj = data;
-      if (this.gerente.etapas.length < this.gerenteobj.etapas.length) {
+      if (this.gerente.etapas.length < this.gerenteobj.etapas.length || isUndefined(this.gerente.etapas)) {
         this.gerente = this.gerenteobj;
       }
     }, error => {
@@ -60,17 +60,15 @@ export class SidebarComponent implements OnInit {
             }, error => {
               console.log(error.error);
             });
-            if (isUndefined(this.gerente.etapas)) {
-              this.gerente = this.gerenteobj;
-            }
+            this.router.navigateByUrl('/', {skipLocationChange: true}).then(() =>
+              this.router.navigate(['/gerenteindex/homegerente']));
+
           }
         });
       } catch (e) {
         console.log(e);
       }
     });
-
-
     console.clear();
   }
 

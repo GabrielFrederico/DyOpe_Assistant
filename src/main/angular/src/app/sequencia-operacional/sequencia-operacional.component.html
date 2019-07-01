@@ -11,7 +11,7 @@
   </div>
 </nav>
 
-<div class="tab-content">
+<div class="tab-content" *ngIf="gerente.gastosfixo > 0; else naocadastroucustofixo">
   <div class="tab-pane fade show active" id="nav-operacoes" role="tabpanel" aria-labelledby="nav-operacoes-tab">
 
     <div class="row espacamentosequenciaoperacional">
@@ -356,9 +356,13 @@
     <ng-template #naoescolheupeca class="separa">
       Escolha uma Peça!
     </ng-template>
+
   </div>
   <div class="tab-pane fade show" id="nav-andamento" role="tabpanel" aria-labelledby="nav-andamento-tab">
     <app-andamento-operacoes *ngIf="andamento"></app-andamento-operacoes>
   </div>
 
 </div>
+<ng-template #naocadastroucustofixo class="separa">
+  Primeiro cadastre um custo fixo na planilha de custos..
+</ng-template>
