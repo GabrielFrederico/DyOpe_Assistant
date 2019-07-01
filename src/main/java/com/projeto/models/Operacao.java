@@ -6,7 +6,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -16,7 +15,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -30,21 +31,26 @@ public class Operacao {
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "operacao_suboperacoes", joinColumns = @JoinColumn(name = "operacao_id"), inverseJoinColumns = @JoinColumn(name = "suboperacao_id"))
 	private Set<SubOperacao> suboperacoes = new HashSet<>();
-//
-//	@OneToMany(cascade = CascadeType.ALL, mappedBy = "operacao")
-//	// @JoinTable(name = "operacao_planilhascusto", joinColumns = @JoinColumn(name =
-//	// "operacao_id"), inverseJoinColumns = @JoinColumn(name = "planilhacusto_id"))
-//	private List<PlanilhaCusto> planilhascusto = new ArrayList<>();
+
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "operacao")
-	private List<PlanilhaCusto> planilhascusto;
+//	@OneToOne(cascade = CascadeType.ALL, mappedBy = "operacao")
+//	//@OneToOne(fetch = FetchType.LAZY)
+//    //@MapsId
+//	private PlanilhaCusto planilhacusto;
+//	
+
+	@OneToOne(cascade = CascadeType.ALL)
+    @JoinTable(name = "operacao_planilhacusto", 
+      joinColumns = { @JoinColumn(name = "operacao_id") },
+      inverseJoinColumns = { @JoinColumn(name = "planilhacusto_id") })
+    private PlanilhaCusto planilhacusto;
 	
-	public List<PlanilhaCusto> getPlanilhascusto() {
-		return planilhascusto;
+	public PlanilhaCusto getPlanilhacusto() {
+		return planilhacusto;
 	}
 
-	public void setPlanilhascusto(List<PlanilhaCusto> planilhascusto) {
-		this.planilhascusto = planilhascusto;
+	public void setPlanilhacusto(PlanilhaCusto planilhacusto) {
+		this.planilhacusto = planilhacusto;
 	}
 
 	private String descricao;

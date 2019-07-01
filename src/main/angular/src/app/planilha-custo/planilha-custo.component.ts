@@ -41,8 +41,9 @@ export class PlanilhaCustoComponent implements OnInit {
   showPlanilha = false;
   planilhas: any;
   editarPlanilha = false;
-
+  addPrecoPeca = false;
   listacustos = false;
+  erro = false;
 
   ngOnInit() {
     this.info = {
@@ -86,6 +87,29 @@ export class PlanilhaCustoComponent implements OnInit {
   }
 
   selectOpe() {
+  }
+
+  addPreco(planilha: any) {
+    this.planilhaEscolhida = planilha;
+    this.addPrecoPeca = true;
+    this.listacustos = false;
+  }
+
+  addPrecoPecaOpe(precoPeca: any) {
+    this.planilhaEscolhida.precoPecaOpe = precoPeca;
+  }
+
+  cadastrarPrecoOpePeca() {
+    this.gerenteService.atualizarPlanilha(this.planilhaEscolhida).pipe(first()).subscribe(data => {
+    }, error => {
+      this.erro = true;
+      this.mensagemErro = error.error;
+    });
+  }
+
+  voltarLista() {
+    this.addPrecoPeca = false;
+    this.listacustos = true;
   }
 
   concluirPla() {

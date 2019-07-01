@@ -418,7 +418,7 @@ public class GerenteRest {
 
 		PlanilhaCusto ultima = gerente.getPlanilhascusto().get(gerente.getPlanilhascusto().size() - 1);
 		for (Peca peca : gerente.getPecas()) {
-			if (peca.getOperacoesFazer().size() <1) {
+			if (peca.getOperacoesFazer().size() >1) {
 				for (Operacao operacaoFazer : peca.getOperacoesFazer()) {
 			          
 						System.out.println("opesAndamento gerente" + operacaoFazer.getDataInicio());
@@ -437,7 +437,7 @@ public class GerenteRest {
 				}
 			}
 
-			if (peca.getOperacoesAndamento().size() <1) {
+			if (peca.getOperacoesAndamento().size() >1) {
 				for (Operacao operacaoAndamento : peca.getOperacoesAndamento()) {
 					System.out.println("opesAndamento gerente" + operacaoAndamento.getDataInicio());
 					inicio.setTime(operacaoAndamento.getDataInicio());

@@ -1,12 +1,11 @@
 package com.projeto.models;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
+import javax.persistence.OneToOne;
 
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -17,6 +16,7 @@ public class PlanilhaCusto {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	private float custoMinuto, lucro, gastosOpe, gastos, custoOpe, tempos, lote, precoPecaOpe;
+
 	public float getPrecoPecaOpe() {
 		return precoPecaOpe;
 	}
@@ -44,10 +44,6 @@ public class PlanilhaCusto {
 	public void setNumFunOpe(int numFunOpe) {
 		this.numFunOpe = numFunOpe;
 	}
-
-	@ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "operacao_id")
-	private Operacao operacao;
 
 	public long getId() {
 		return id;
@@ -85,6 +81,9 @@ public class PlanilhaCusto {
 		return gastos;
 	}
 
+//	@OneToOne(mappedBy = "planilhacusto")
+//	private Operacao operacao;
+
 	public float getCustoMinuto() {
 		return custoMinuto;
 	}
@@ -99,14 +98,6 @@ public class PlanilhaCusto {
 
 	public void setCustoOpe(float custoOpe) {
 		this.custoOpe = custoOpe;
-	}
-
-	public Operacao getOperacao() {
-		return operacao;
-	}
-
-	public void setOperacao(Operacao operacao) {
-		this.operacao = operacao;
 	}
 
 	public void setGastos(float gastos) {
@@ -149,7 +140,7 @@ public class PlanilhaCusto {
 		System.out.println("custo ope" + custo);
 		planilha.setCustoOpe(custo);
 		ganho = planilha.getPrecoPecaOpe() * planilha.getLote();
-		
+
 		gastos = planilha.getGastos() + planilha.getGastosOpe();
 		// gasto = gastos/20*planilha.getOperacao().getDiasUteisNecessarios;
 		lucro = ganho - gastos;

@@ -45,25 +45,29 @@ export class SidebarComponent implements OnInit {
     };
     this.tipoOpeservice.getEtapasProducao().subscribe(data => {
       this.etapas = data;
-      this.gerenteService.getGerenteLogado(this.info.username).subscribe(gerente => {
-        this.gerente = gerente;
-        if (this.gerente.etapas.length <= 0) {
-          this.etapas.forEach((item, index) => {
-            item.id = null;
-            item.predefinidas = 0;
-            item.gerente_id = this.gerente.id;
-            this.gerente.etapas.push(item);
-          });
-          this.gerenteService.cadastrarAlgo(this.gerente).pipe(first()).subscribe(ger => {
-            this.gerenteobj = data;
-          }, error => {
-            alert(error);
-          });
-          if (isUndefined(this.gerente)) {
-            this.gerente = this.gerenteobj;
+      try {
+        this.gerenteService.getGerente(this.info.username).subscribe(gerente => {
+          this.gerente = gerente;
+          if (this.gerente.etapas.length <= 0) {
+            this.etapas.forEach((item, index) => {
+              item.id = null;
+              item.predefinidas = 0;
+              item.gerente_id = this.gerente.id;
+              this.gerente.etapas.push(item);
+            });
+            this.gerenteService.cadastrarAlgo(this.gerente).pipe(first()).subscribe(ger => {
+              this.gerenteobj = data;
+            }, error => {
+              console.log(error.error);
+            });
+            if (isUndefined(this.gerente.etapas)) {
+              this.gerente = this.gerenteobj;
+            }
           }
-        }
-      });
+        });
+      } catch (e) {
+        console.log(e);
+      }
     });
 
 
