@@ -36,8 +36,6 @@ export class PlanilhaCustoComponent implements OnInit {
   validado: boolean;
   atualizarPlanilha = false;
   peca: any;
-  ope: any;
-  opeShow = false;
   showPlanilha = false;
   planilhas: any;
   editarPlanilha = false;
@@ -63,10 +61,6 @@ export class PlanilhaCustoComponent implements OnInit {
     }, error => {
       console.log(error.error);
     });
-  }
-
-  editar() {
-    this.editarPlanilha = true;
   }
 
   cancelar() {
@@ -163,21 +157,6 @@ export class PlanilhaCustoComponent implements OnInit {
 
   openLista() {
     this.listacustos = true;
-  }
-
-  deletarPlanilha(planilha: any) {
-    this.planilhaEscolhida = planilha;
-    const i = this.gerente.planilhascusto.indexOf(this.planilhaEscolhida);
-    this.planilhaEscolhida.gerente_id = 0;
-    this.gerente.planilhascusto.splice(i, 1);
-    this.gerenteService.cadastrarAlgo(this.gerente).pipe(first()).subscribe(data => {
-    }, error => {
-      this.mensagemErro = error.error;
-    });
-  }
-
-  selectPlanilha(planilha: any) {
-    this.planilhaEscolhida = planilha;
   }
 
   gastoOpe(gasto: any) {

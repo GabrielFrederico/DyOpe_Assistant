@@ -24,7 +24,7 @@
 
         <label for="chaveAcesso">Chave de Acesso
           <input type="password" id="chaveAcesso" [(ngModel)]="chaveAcesso" name="chaveAcesso"
-                 class="form-control" [autofocus]="true" placeholder="Chave de Acesso" required="required">
+                 class="form-control text-center" [autofocus]="true" placeholder="Chave de Acesso" required="required">
         </label>
       </div>
 
@@ -51,6 +51,10 @@
            aria-controls="nav-custos" aria-selected="false">Custos</a>
       </div>
     </nav>
+
+    <div class="text-right">
+      <input class="btn btn-success" type="submit" value="Custos Fixos">
+    </div>
 
     <div class="tab-content">
       <div class="tab-pane fade show active" id="nav-cadastro" role="tabpanel" aria-labelledby="nav-cadastro-tab">
@@ -173,7 +177,8 @@
 
       </div>
       <div class="tab-pane fade" id="nav-custos" role="tabpanel" aria-labelledby="nav-custos-tab">
-        <form #f="ngForm" class="card espacamentosequenciaoperacional" [noValidate]="$any(false)" (ngSubmit)="cadastrarPrecoOpePeca()" *ngIf="addPrecoPeca">
+        <form #f="ngForm" class="card espacamentosequenciaoperacional" [noValidate]="$any(false)"
+              (ngSubmit)="cadastrarPrecoOpePeca()" *ngIf="addPrecoPeca">
           <div class="card-header">Cadastrar Preço definitivo da Operação</div>
           <div class="card-body border-info">
             <div class="col-md-auto">
@@ -186,7 +191,8 @@
             </div>
 
             <div class="card-footer bg-transparent border-info">
-              <button class="btn btn-secondary" href="javascript:void(0)" (click)="voltarLista()" type="button">Cancelar
+              <button class="btn btn-secondary" href="javascript:void(0)"
+                      (click)="voltarLista()" type="button">Cancelar
               </button>
               <input class="btn btn-primary" type="submit"
                      value="Cadastrar">
@@ -219,41 +225,22 @@
                 <td>{{planilhas.descricaoOpe}}</td>
 
                 <td><input type="number" name="gastos" id="gastos" value="{{planilhas.gastos}}"
-                           [readonly]="!editarPlanilha" class="form-control-plaintext" required="required"/></td>
-
-                <td><input type="number" name="gastosoperacionais" id="gastosoperacionais"
-                           value="{{planilhas.gastosOpe}}" [readonly]="!editarPlanilha"
                            class="form-control-plaintext" required="required"/></td>
 
-                <td><input id="precominuto" name="precominuto" class="form-control-plaintext" [readonly]="isReadonly"currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" readonly
+                <td><input type="number" name="gastosoperacionais" id="gastosoperacionais"
+                           value="{{planilhas.gastosOpe}}"
+                           class="form-control-plaintext" required="required"/></td>
+
+                <td><input id="precominuto" name="precominuto" class="form-control-plaintext" [readonly]="isReadonly"
+                           currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" readonly
                            value="{{planilhas.custoMinuto}}"></td>
                 <td>{{planilhas.custoOpe}}</td>
                 <td>{{planilhas.lucro}}</td>
 
                 <div class="card-footer bg-transparent align-self-center botaoexcluirplanilha border-info modal-footer">
-                  <input class="btn btn-primary btn-padding" type="button" [disabled]="!valido"
-                         *ngIf="!editarPlanilha" value="Editar" (click)="editar()">
                   <button class="btn btn-secondary" href="javascript:void(0)" type="button"
                           (click)="addPreco(planilhas)">Cadastrar Preço
                   </button>
-                  <button class="btn btn-warning btnplanilha-padding" type="button" href="#" (click)="cancelar()"
-                          *ngIf="editarPlanilha" [disabled]="!valido" data-toggle="modal" role="button">
-                    <i class="fas fa-ban"></i>
-                  </button>
-
-                  <button class="btn btn-info btnplanilha-padding" type="button" href="#"
-                          (click)="atualizardalista(planilhas)"
-                          *ngIf="editarPlanilha" [disabled]="!valido" data-toggle="modal" role="button">
-                    <i class="fas fa-check"></i>
-                  </button>
-
-                  <div>
-                    <button class="btn btn-danger btn-padding" href="#" role="button"
-                            (click)="selectPlanilha(planilhas)" type="button"
-                            data-toggle="modal" data-target=".deletar-planilha">
-                      <i class="fas fa-fw fa-trash-alt"></i>
-                    </button>
-                  </div>
 
                 </div>
 
@@ -270,36 +257,6 @@
   </div>
 
 </div>
-<!-- deletar planilha -->
-<div class="modal  fade deletar-planilha" tabindex="-1" role="dialog" aria-labelledby="modalpeca"
-     aria-hidden="true">
-  <div class="modal-dialog modal-body">
-
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title" id="modalExcluirSubope">Deletar Planilha</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">×</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="card-body">
-          <div class="text-center mb-4">
-            <h4>Deseja Deletar?</h4>
-          </div>
-          <div class="modal-footer col-md-12">
-            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-            <input class="btn btn-primary" type="submit" (click)="deletarPlanilha(planilhaEscolhida)"
-                   data-dismiss="modal"
-                   value="Confirmar">
-          </div>
-
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
 
 <!--&lt;!&ndash; cadastro de planilha de custo &ndash;&gt;-->
 <!--<div class="modal fade cadastrar-peca" tabindex="-1" role="dialog" aria-labelledby="modalpeca"-->
