@@ -159,6 +159,12 @@ div.menu_index span {
   padding-bottom: 1%;
 }
 
+.espacamentoplanilhadecusto {
+  display: flex;
+  padding-bottom: 1%;
+  justify-content: space-between;
+}
+
 
 @media screen and (max-width: 570px) {
   .tam {

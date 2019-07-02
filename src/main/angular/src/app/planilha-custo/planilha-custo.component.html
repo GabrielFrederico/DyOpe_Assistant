@@ -52,12 +52,19 @@
     <!--      </div>-->
     <!--    </nav>-->
 
-    <div class="text-right" *ngIf="listacustos">
+    <div class="espacamentosequenciaoperacional" *ngIf="listacustos">
       <input class="btn btn-success" type="button" (click)="openCustosFixos()" value="Custos Fixos">
     </div>
-    <div class="text-left" *ngIf="listacustofixo">
+
+    <div class="espacamentoplanilhadecusto" *ngIf="listacustofixo">
       <input class="btn btn-info" type="button" (click)="sairCustosFixos()" value="Voltar para Planilha de Custo">
+      <input class="btn btn-success" type="button" (click)="openCadCustoFixo()" value="Cadastrar Custo Fixo">
     </div>
+
+    <div class="espacamentoplanilhadecusto" *ngIf="listacadcustofixo">
+      <input class="btn btn-info" type="button" (click)="openCustosFixos()" value="Voltar para Custos Fixos">
+    </div>
+
 
     <form #f="ngForm" class="card espacamentosequenciaoperacional" [noValidate]="$any(false)"
           (ngSubmit)="cadastrarPrecoOpePeca()" *ngIf="addPrecoPeca">
@@ -86,16 +93,14 @@
       </div>
     </form>
 
-    <div class="card border-info mb-3 " *ngIf="listacustos">
+    <div class="card border-info mb-3" *ngIf="listacustos">
       <div class="card-header border-info">Lista de Custos</div>
       <div class="table-responsive">
-        <table class="table table table-bordered dataTable">
+        <table class="table table-bordered dataTable">
           <thead>
           <tr>
             <th>ID</th>
             <th>Descrição</th>
-            <th>Gastos</th>
-            <th>Gastos Operacionais</th>
             <th>Custo Minuto</th>
             <th>Custo</th>
             <th>Lucro</th>
@@ -105,13 +110,10 @@
           <tr *ngFor="let planilhas of gerente.planilhascusto">
             <td>{{planilhas.id}}</td>
             <td>{{planilhas.descricaoOpe}}</td>
-            <td><input type="number" name="gastos" id="gastos" value="{{planilhas.gastos}}"
-                       class="form-control-plaintext" required="required"/></td>
-            <td><input type="number" name="gastosoperacionais" id="gastosoperacionais"
-                       value="{{planilhas.gastosOpe}}"
-                       class="form-control-plaintext" required="required"/></td>
-            <td><input id="precominuto" name="precominuto" class="form-control-plaintext" [readonly]="isReadonly"
-                       currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" readonly
+
+            <td><input type="text" id="precominuto" name="precominuto" class="form-control-plaintext"
+                       [readonly]="isReadonly"
+                       currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
                        value="{{planilhas.custoMinuto}}"></td>
             <td>{{planilhas.custoOpe}}</td>
             <td>{{planilhas.lucro}}</td>
@@ -128,8 +130,64 @@
       </div>
     </div>
 
-    <div *ngIf="listacustofixo">
-      lista de custos fixos works!
+    <div class="card border-info mb-3" *ngIf="listacustofixo">
+      <div class="card-header border-info">Lista de Custos Fixos</div>
+      <div class="table-responsive">
+        <table class="table table table-bordered dataTable">
+          <thead>
+          <tr>
+            <th>ID</th>
+            <th>Descrição</th>
+            <th>Custo</th>
+            <th>Botões</th>
+            <th>Custo Total</th>
+          </tr>
+          </thead>
+
+          <tbody>
+          <tr *ngFor="let custos of gerente.custofixo">
+            <td>{{custos.id}}</td>
+            <td>{{custos.descricao}}</td>
+            <td>{{custos.custo}}</td>
+          </tr>
+
+          <!--          <tr>-->
+          <!--            <td colspan="2">ABC</td>-->
+          <!--          </tr>-->
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="col-md-4 formsequencia" *ngIf="listacadcustofixo">
+      <div class="card border-info mb-3 operacoes lista">
+        <div class="card-header border-info text-center">Cadastro de custo fixo:</div>
+        <div class="card-body text-secondary">
+          <div class="form-group">
+            <div class="col-md-auto">
+              <div class="form-group">
+                <label for="CustoFixo" class="fonterisco">Descrição:
+                  <input type="text" id="descricao_custofixo" min="1" max="999999" class="form-control"
+                         placeholder="Descrição:" name="descricao_custofixo" required="required">
+                </label>
+              </div>
+            </div>
+            <div class="col-md-auto">
+              <div class="form-group">
+                <label for="CustoFixo" class="fonterisco">Custo:
+                  <input type="number" id="custofixo" min="1" max="9999" class="form-control"
+                         placeholder="Custo:" name="custofixo" required="required">
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer bg-transparent border-info modal-footer">
+          <input class="btn btn-success" type="submit" (click)="cadastrarCustoFixo()"
+                 data-dismiss="modal" value="Cadastrar">
+        </div>
+      </div>
     </div>
 
 

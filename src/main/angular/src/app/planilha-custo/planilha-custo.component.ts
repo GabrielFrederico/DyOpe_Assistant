@@ -38,13 +38,16 @@ export class PlanilhaCustoComponent implements OnInit {
   peca: any;
   showPlanilha = false;
   planilhas: any;
+  custos: any;
   editarPlanilha = false;
   addPrecoPeca = false;
   listacustos = false;
   erro = false;
-
   precocadastrado = false;
   listacustofixo = false;
+  listacadcustofixo = false;
+
+  newcustofixo: any = {};
 
   ngOnInit() {
     this.info = {
@@ -58,6 +61,10 @@ export class PlanilhaCustoComponent implements OnInit {
 
   }
 
+  cadastrarCustoFixo() {
+    this.planilhaEscolhida.custosfixos.push(this.newcustofixo);
+  }
+
   datareload() {
     this.gerenteService.getGerenteLogado(this.info.username).subscribe(data => {
       this.gerente = data;
@@ -67,12 +74,20 @@ export class PlanilhaCustoComponent implements OnInit {
   }
 
   openCustosFixos() {
-    this.listacustos = false;
     this.listacustofixo = true;
+    this.listacustos = false;
+    this.listacadcustofixo = false;
   }
 
   sairCustosFixos() {
     this.listacustos = true;
+    this.listacustofixo = false;
+    this.listacadcustofixo = false;
+  }
+
+  openCadCustoFixo() {
+    this.listacadcustofixo = true;
+    this.listacustos = false;
     this.listacustofixo = false;
   }
 
@@ -91,9 +106,6 @@ export class PlanilhaCustoComponent implements OnInit {
       this.showPlanilha = true;
     }
 
-  }
-
-  selectOpe() {
   }
 
   addPreco(planilha: any) {
