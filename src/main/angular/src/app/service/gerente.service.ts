@@ -98,6 +98,10 @@ export class GerenteService {
   cadastrarAlgo(gerente: any) {
     return this.httpClient.put('http://localhost:8080/gerentes/cadastraralgo', gerente);
   }
+  cadastrarCustoFixo(gerente: any) {
+    return this.httpClient.put('http://localhost:8080/gerentes/cadastrarcustofixo', gerente);
+  }
+
 
   cadastrarOperacao(gerente: any) {
     return this.httpClient.put('http://localhost:8080/gerentes/cadastrarope', gerente);

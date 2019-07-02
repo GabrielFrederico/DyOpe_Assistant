@@ -134,10 +134,8 @@ public class PlanilhaCusto {
 		// 20 é dias, mudar pra dias
 		custoMinuto = planilha.getGastos() / planilha.getNumFunOpe() / 20 / 450;
 		planilha.setCustoMinuto(custoMinuto);
-		// custo = custoMinuto * planilha.getOperacao().getTempos();
-		// ganho = custo * planilha.getOperacao().getLoteProducao();
 		custo = custoMinuto * planilha.getTempos();
-		System.out.println("custo ope" + custo);
+		System.out.println("tempos"+planilha.getTempos()+"custo ope" + custo);
 		planilha.setCustoOpe(custo);
 		ganho = planilha.getPrecoPecaOpe() * planilha.getLote();
 

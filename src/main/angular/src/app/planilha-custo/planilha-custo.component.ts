@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {GerenteService} from '../service/gerente.service';
 import {TokenStorageService} from '../auth/token-storage.service';
 import {CadastroOperacaoService} from '../service/cadastro-operacao.service';
@@ -13,7 +13,8 @@ export class PlanilhaCustoComponent implements OnInit {
 
   // tslint:disable-next-line:max-line-length
   constructor(private router: Router, private gerenteService: GerenteService,
-              private etapaService: CadastroOperacaoService, private token: TokenStorageService) {
+              private etapaService: CadastroOperacaoService, private token: TokenStorageService,
+              private changeDetectorRefs: ChangeDetectorRef) {
 
   }
 
@@ -61,8 +62,26 @@ export class PlanilhaCustoComponent implements OnInit {
 
   }
 
+  custo(custo: any) {
+    this.newcustofixo.custo = custo;
+  }
+
+  descricaocusto(descricao: any) {
+    this.newcustofixo.descricao = descricao;
+  }
+
   cadastrarCustoFixo() {
-    this.planilhaEscolhida.custosfixos.push(this.newcustofixo);
+    this.newcustofixo.gerente_id = this.gerente.id;
+    this.gerente.custosfixo.push(this.newcustofixo);
+    this.gerenteService.cadastrarCustoFixo(this.gerente).pipe(first()).subscribe(ger => {
+      this.datareload();
+      this.changeDetectorRefs.detectChanges();
+    }, error => {
+      this.erro = true;
+      this.mensagemErro = error.error;
+    });
+
+    this.openCustosFixos();
   }
 
   datareload() {
@@ -121,6 +140,8 @@ export class PlanilhaCustoComponent implements OnInit {
   cadastrarPrecoOpePeca() {
     this.gerenteService.atualizarPlanilha(this.planilhaEscolhida).pipe(first()).subscribe(data => {
       this.precocadastrado = true;
+      this.datareload();
+      this.changeDetectorRefs.detectChanges();
       this.voltarLista();
     }, error => {
       this.erro = true;

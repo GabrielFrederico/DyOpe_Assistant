@@ -25,6 +25,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.projeto.models.CustoFixo;
 import com.projeto.models.Gerente;
 import com.projeto.models.Operacao;
 import com.projeto.models.Peca;
@@ -257,14 +259,133 @@ public class GerenteRest {
 	@RequestMapping(method = RequestMethod.POST, value = "acessarplanilha")
 	@PreAuthorize("hasRole('GERENTE')")
 	public ResponseEntity<?> acessarPlanilha(@RequestBody Gerente gerente) {
+		Calendar inicio = Calendar.getInstance();
+		java.util.Date dataini = new java.util.Date();
+		for (Peca peca : gerente.getPecas()) {
+			System.out.println("pecas gerente" + peca.getOperacoesFazer());
+			if (!peca.getOperacoesFazer().isEmpty()) {
+				for (Operacao operacaoFazer : peca.getOperacoesFazer()) {
+					System.out.println("opesAndamento gerente" + operacaoFazer.getDataInicio());
+					inicio.setTime(operacaoFazer.getDataInicio());
+					inicio.add(Calendar.DAY_OF_MONTH, 1);
+					dataini = inicio.getTime();
+					Date iniciodata = new Date(dataini.getTime());
+					operacaoFazer.setDataInicio(iniciodata);
+
+					prazo.setTime(operacaoFazer.getPrazo());
+					prazo.add(Calendar.DAY_OF_MONTH, 1);
+					dataprazo = prazo.getTime();
+					Date prazodate = new Date(dataprazo.getTime());
+					operacaoFazer.setPrazo(prazodate);
+				}
+			}
+
+			if (!peca.getOperacoesAndamento().isEmpty()) {
+				for (Operacao operacaoAndamento : peca.getOperacoesAndamento()) {
+					System.out.println("opesAndamento gerente" + operacaoAndamento.getDataInicio());
+					inicio.setTime(operacaoAndamento.getDataInicio());
+					inicio.add(Calendar.DAY_OF_MONTH, 1);
+					dataini = inicio.getTime();
+					Date iniciodata = new Date(dataini.getTime());
+					operacaoAndamento.setDataInicio(iniciodata);
+
+					prazo.setTime(operacaoAndamento.getPrazo());
+					prazo.add(Calendar.DAY_OF_MONTH, 1);
+					dataprazo = prazo.getTime();
+					Date prazodate = new Date(dataprazo.getTime());
+					operacaoAndamento.setPrazo(prazodate);
+				}
+			}
+			if (!peca.getOperacoesPrazo().isEmpty()) {
+				for (Operacao operacaoPrazo : peca.getOperacoesPrazo()) {
+					System.out.println("opesAndamento gerente" + operacaoPrazo.getDataInicio());
+					inicio.setTime(operacaoPrazo.getDataInicio());
+					inicio.add(Calendar.DAY_OF_MONTH, 1);
+					dataini = inicio.getTime();
+					Date iniciodata = new Date(dataini.getTime());
+					operacaoPrazo.setDataInicio(iniciodata);
+
+					prazo.setTime(operacaoPrazo.getPrazo());
+					prazo.add(Calendar.DAY_OF_MONTH, 1);
+					dataprazo = prazo.getTime();
+					Date prazodate = new Date(dataprazo.getTime());
+					operacaoPrazo.setPrazo(prazodate);
+				}
+			}
+		}
 		if (!encoder.matches(gerente.getVerificarChaveAcesso(), gerente.getChaveAcesso())) {
 
 			return new ResponseEntity<>(new ResponseMessage("Erro -> Acesso inválido!"), HttpStatus.BAD_REQUEST);
 		} else {
 			gerente.setVerificarChaveAcesso("");
+			gerenteRepository.save(gerente);
 			return new ResponseEntity<>(new ResponseMessage("Acesso Válido!"), HttpStatus.OK);
 		}
 
+	}
+
+	@Modifying(clearAutomatically = true)
+	@RequestMapping(method = RequestMethod.PUT, value = "cadastrarcustofixo")
+	@PreAuthorize("hasRole('GERENTE') or hasRole('ADMIN')")
+	public ResponseEntity<?> cadastrarCustoFixo(@RequestBody Gerente gerente) {
+		Calendar inicio = Calendar.getInstance();
+		java.util.Date dataini = new java.util.Date();
+		for (Peca peca : gerente.getPecas()) {
+			System.out.println("pecas gerente" + peca.getOperacoesFazer());
+			if (!peca.getOperacoesFazer().isEmpty()) {
+				for (Operacao operacaoFazer : peca.getOperacoesFazer()) {
+					System.out.println("opesAndamento gerente" + operacaoFazer.getDataInicio());
+					inicio.setTime(operacaoFazer.getDataInicio());
+					inicio.add(Calendar.DAY_OF_MONTH, 1);
+					dataini = inicio.getTime();
+					Date iniciodata = new Date(dataini.getTime());
+					operacaoFazer.setDataInicio(iniciodata);
+
+					prazo.setTime(operacaoFazer.getPrazo());
+					prazo.add(Calendar.DAY_OF_MONTH, 1);
+					dataprazo = prazo.getTime();
+					Date prazodate = new Date(dataprazo.getTime());
+					operacaoFazer.setPrazo(prazodate);
+				}
+			}
+
+			if (!peca.getOperacoesAndamento().isEmpty()) {
+				for (Operacao operacaoAndamento : peca.getOperacoesAndamento()) {
+					System.out.println("opesAndamento gerente" + operacaoAndamento.getDataInicio());
+					inicio.setTime(operacaoAndamento.getDataInicio());
+					inicio.add(Calendar.DAY_OF_MONTH, 1);
+					dataini = inicio.getTime();
+					Date iniciodata = new Date(dataini.getTime());
+					operacaoAndamento.setDataInicio(iniciodata);
+
+					prazo.setTime(operacaoAndamento.getPrazo());
+					prazo.add(Calendar.DAY_OF_MONTH, 1);
+					dataprazo = prazo.getTime();
+					Date prazodate = new Date(dataprazo.getTime());
+					operacaoAndamento.setPrazo(prazodate);
+				}
+			}
+			if (!peca.getOperacoesPrazo().isEmpty()) {
+				for (Operacao operacaoPrazo : peca.getOperacoesPrazo()) {
+					System.out.println("opesAndamento gerente" + operacaoPrazo.getDataInicio());
+					inicio.setTime(operacaoPrazo.getDataInicio());
+					inicio.add(Calendar.DAY_OF_MONTH, 1);
+					dataini = inicio.getTime();
+					Date iniciodata = new Date(dataini.getTime());
+					operacaoPrazo.setDataInicio(iniciodata);
+					if (!(operacaoPrazo.getPrazo() == null)) {
+						prazo.setTime(operacaoPrazo.getPrazo());
+						prazo.add(Calendar.DAY_OF_MONTH, 1);
+						dataprazo = prazo.getTime();
+						Date prazodate = new Date(dataprazo.getTime());
+						operacaoPrazo.setPrazo(prazodate);
+					}
+				}
+			}
+		}
+        CustoFixo.somarCustos(gerente);
+		gerenteRepository.save(gerente);
+		return new ResponseEntity<>(new ResponseMessage("Dados Atualizados com sucesso!"), HttpStatus.OK);
 	}
 
 	@Modifying(clearAutomatically = true)
@@ -530,7 +651,7 @@ public class GerenteRest {
 		// Creating user's account
 		Gerente user = new Gerente();
 		user.setNome(signUpRequest.getNome());
-		
+
 		user.setCpf(signUpRequest.getCpf());
 		user.setEmail(signUpRequest.getEmail());
 		user.setRg(signUpRequest.getRg());

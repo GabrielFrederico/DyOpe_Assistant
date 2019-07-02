@@ -1,7 +1,7 @@
 ﻿<base href="/src">
 <title>Operações</title>
-<!-- *ngIf="gerente.gastosfixo > 0" *ngIf="gerente.gastosfixo > 0; else naocadastroucustofixo"-->
-<nav class="espacamentosequenciaoperacional" >
+<!--  -->
+<nav class="espacamentosequenciaoperacional" *ngIf="gerente.gastosfixo > 0">
   <div class="nav nav-tabs" id="nav-tab" role="tablist">
     <a class="nav-item nav-link active" id="nav-operacoes-tab" data-toggle="tab"
        href="#nav-operacoes" role="tab" aria-controls="nav-operacoes" (click)="andamentoClosed()"
@@ -12,7 +12,7 @@
   </div>
 </nav>
 
-<div class="tab-content" >
+<div class="tab-content" *ngIf="gerente.gastosfixo > 0; else naocadastroucustofixo">
   <div class="tab-pane fade show active" id="nav-operacoes" role="tabpanel" aria-labelledby="nav-operacoes-tab">
 
     <div class="row espacamentosequenciaoperacional">
