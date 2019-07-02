@@ -413,7 +413,7 @@ public class GerenteRest {
 
 	@RequestMapping(method = RequestMethod.PUT, value = "cadastrarplanilha")
 	@PreAuthorize("hasRole('GERENTE')")
-	public ResponseEntity<?> cadastrarPlanilha(@RequestBody Gerente gerente) throws ParseException {
+	public ResponseEntity<?> cadastrarPlanilha(@RequestBody Gerente gerente) {
 		Calendar inicio = Calendar.getInstance();
 		java.util.Date dataini = new java.util.Date();
 
@@ -526,14 +526,11 @@ public class GerenteRest {
 				|| funcionarioRepository.existsByRg(signUpRequest.getRg())) {
 			return new ResponseEntity<>(new ResponseMessage("Erro -> RG Já está em uso !"), HttpStatus.BAD_REQUEST);
 		}
-		if (usuarioRepository.existsBySenha(signUpRequest.getSenha())
-				|| funcionarioRepository.existsBySenha(signUpRequest.getSenha())) {
-			return new ResponseEntity<>(new ResponseMessage("Erro -> Senha Já está em uso !"), HttpStatus.BAD_REQUEST);
-		}
 
 		// Creating user's account
 		Gerente user = new Gerente();
 		user.setNome(signUpRequest.getNome());
+		
 		user.setCpf(signUpRequest.getCpf());
 		user.setEmail(signUpRequest.getEmail());
 		user.setRg(signUpRequest.getRg());

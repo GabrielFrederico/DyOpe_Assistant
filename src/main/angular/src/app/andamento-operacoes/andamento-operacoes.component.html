@@ -107,7 +107,7 @@
                     </label>
                   </div>
                 </div>
-                <div class="col-md-1 align-self-center botaoexcluirsubope">
+                <div class="col-md-1 align-self-center botaodeletarsubope">
                   <button class="btn btn-danger btn-padding" [disabled]="!editarOpe" href="#" role="button"
                           (click)="subopeEscolhida(suboperacao)" type="button"
                           data-toggle="modal"
@@ -228,8 +228,8 @@
           </div>
         </div>
         <input class="btn btn-danger" type="button" (click)="selectOperacao(resultadoOpe)" href="#" data-toggle="modal"
-               data-target=".excluir-operacao"
-               value="Excluir">
+               data-target=".deletar-operacao"
+               value="Deletar">
       </div>
     </div>
   </div>
@@ -455,14 +455,14 @@
   </div>
 </div>
 
-<!-- modal excluir sub ope -->
-<div class="modal  fade deletar-subope2" tabindex="-1" role="dialog" aria-labelledby="modalExcluirSubope"
+<!-- modal deletar sub ope -->
+<div class="modal  fade deletar-subope2" tabindex="-1" role="dialog" aria-labelledby="modalDeletarSubope"
      aria-hidden="true">
   <div class="modal-dialog modal-body">
 
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="modalExcluirSubope">Deletar Sub-Operação</h4>
+        <h4 class="modal-title" id="modalDeletarSubope">Deletar Sub-Operação</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">×</span>
         </button>
@@ -470,7 +470,7 @@
       <div class="modal-body">
         <div class="card-body">
           <div class="text-center mb-4">
-            <h4>Deseja Excluir?</h4>
+            <h4>Deseja Deletar?</h4>
           </div>
           <div class="modal-footer col-md-12">
             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
@@ -485,14 +485,14 @@
   </div>
 </div>
 
-<!-- modal excluir  operacao -->
-<div class="modal  fade excluir-operacao" tabindex="-1" role="dialog" aria-labelledby="modalExcluirOpe"
+<!-- modal deletar  operacao -->
+<div class="modal  fade deletar-operacao" tabindex="-1" role="dialog" aria-labelledby="modalDeletarOpe"
      aria-hidden="true">
   <div class="modal-dialog modal-body">
 
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="modalExcluirOpe">Deletar Operação</h4>
+        <h4 class="modal-title" id="modalDeletarOpe">Deletar Operação</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">×</span>
         </button>
@@ -500,7 +500,7 @@
       <div class="modal-body">
         <div class="card-body">
           <div class="text-center mb-4">
-            <h4>Deseja Excluir?</h4>
+            <h4>Deseja Deletar?</h4>
           </div>
           <div class="modal-footer col-md-12">
             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>

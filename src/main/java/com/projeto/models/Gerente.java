@@ -2,6 +2,7 @@ package com.projeto.models;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
+
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Entity
 public class Gerente extends Usuario {
@@ -110,6 +113,19 @@ public class Gerente extends Usuario {
 	@JoinTable(name = "gerente_setores", joinColumns = @JoinColumn(name = "gerente_id"), inverseJoinColumns = @JoinColumn(name = "setor_id"))
 	private List<Setor> setores = new ArrayList<>();
 
+	public static void validaCpf(@RequestBody String cpf){
+		cpf = cpf.replace('.',' ');
+		cpf = cpf.replace('-',' ');
+		cpf = cpf.replaceAll(" ","");
+		float iRestoDivisao;
+		int iDigito1Aux = 0, iDigitoCPF, iDigito2Aux = 0;
+		 for (int iCont = 1; iCont < cpf.length() -1; iCont++) {
+	            iDigitoCPF = Integer.valueOf(cpf.substring(iCont -1, iCont)).intValue();
+	            iDigito1Aux = iDigito1Aux + (11 - iCont) * iDigitoCPF;
+	            iDigito2Aux = iDigito2Aux + (12 - iCont) * iDigitoCPF;
+	        }
+
+	}
 	public List<Peca> getPecas() {
 		return pecas;
 	}
