@@ -72,6 +72,7 @@ export class ControleFuncionariosComponent implements OnInit, OnDestroy {
           console.log(error.error);
         });
       }
+      console.clear();
     });
 
   }

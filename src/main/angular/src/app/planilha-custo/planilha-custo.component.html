@@ -87,8 +87,8 @@
                  value="Cadastrar">
 
         </div>
-        <div class="alert alert-warning separa">
-
+        <div class="alert alert-warning" *ngIf="erro">
+          {{mensagemErro}}
         </div>
       </div>
     </form>

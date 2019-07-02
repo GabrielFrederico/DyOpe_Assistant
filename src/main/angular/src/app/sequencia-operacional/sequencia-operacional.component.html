@@ -1,6 +1,7 @@
 ﻿<base href="/src">
 <title>Operações</title>
-<nav class="espacamentosequenciaoperacional">
+<!-- *ngIf="gerente.gastosfixo > 0" *ngIf="gerente.gastosfixo > 0; else naocadastroucustofixo"-->
+<nav class="espacamentosequenciaoperacional" >
   <div class="nav nav-tabs" id="nav-tab" role="tablist">
     <a class="nav-item nav-link active" id="nav-operacoes-tab" data-toggle="tab"
        href="#nav-operacoes" role="tab" aria-controls="nav-operacoes" (click)="andamentoClosed()"
@@ -11,7 +12,7 @@
   </div>
 </nav>
 
-<div class="tab-content">
+<div class="tab-content" >
   <div class="tab-pane fade show active" id="nav-operacoes" role="tabpanel" aria-labelledby="nav-operacoes-tab">
 
     <div class="row espacamentosequenciaoperacional">
@@ -356,9 +357,13 @@
     <ng-template #naoescolheupeca class="separa">
       Escolha uma Peça!
     </ng-template>
+
   </div>
   <div class="tab-pane fade show" id="nav-andamento" role="tabpanel" aria-labelledby="nav-andamento-tab">
     <app-andamento-operacoes *ngIf="andamento"></app-andamento-operacoes>
   </div>
 
 </div>
+<ng-template #naocadastroucustofixo >
+  <h4 class="separa">Primeiro cadastre um custo fixo na planilha de custos..</h4>
+</ng-template>

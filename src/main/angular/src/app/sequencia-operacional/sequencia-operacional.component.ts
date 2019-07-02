@@ -244,7 +244,7 @@ export class SequenciaOperacionalComponent implements OnInit {
     } else {
       console.log('planilha cadastrada');
       this.novaplanilhacusto.operacao_id = this.operacaoEscolhida.id;
-      this.operacaoEscolhida.planilhacusto_id = this.novaplanilhacusto.id;
+      // this.operacaoEscolhida.planilhacusto_id = this.novaplanilhacusto.id;
       this.novaplanilhacusto.descricaoOpe = this.operacaoEscolhida.descricao;
       this.novaplanilhacusto.tempos = this.operacaoEscolhida.tempos;
       this.novaplanilhacusto.lote = this.operacaoEscolhida.loteProducao;
@@ -252,10 +252,10 @@ export class SequenciaOperacionalComponent implements OnInit {
       this.novaplanilhacusto.gerente_id = this.gerente.id;
       // this.novaplanilhacusto.gastos = this.gerente.gastosfixo;
       // teste:
-
       this.novaplanilhacusto.gastos = 30000;
       this.gerente.planilhascusto.push(this.novaplanilhacusto);
       this.gerenteService.cadastrarPlanilha(this.gerente).pipe(first()).subscribe(data => {
+        this.update();
         this.getdadosCustos();
         this.atualizarPlanilha = true;
       }, error => {
