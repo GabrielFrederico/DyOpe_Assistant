@@ -2,13 +2,11 @@ package com.projeto.repository;
 
 import java.io.Serializable;
 import java.util.Optional;
-
 import org.springframework.data.repository.CrudRepository;
-
-import com.projeto.models.PasswordResetToken;
 import com.projeto.models.Usuario;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UsuarioRepository extends CrudRepository<Usuario, Serializable> {
+public interface UsuarioRepository extends JpaRepository<Usuario, Serializable> {
 
     Usuario findById(long id);
 

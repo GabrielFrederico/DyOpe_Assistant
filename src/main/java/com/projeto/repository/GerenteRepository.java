@@ -5,8 +5,9 @@ import java.io.Serializable;
 import org.springframework.data.repository.CrudRepository;
 
 import com.projeto.models.Gerente;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface GerenteRepository extends CrudRepository<Gerente, Serializable> {
+public interface GerenteRepository extends JpaRepository<Gerente, Serializable> {
 
 	Gerente findById(long id);
 

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @Entity
 public class CustoFixo {
+    
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;

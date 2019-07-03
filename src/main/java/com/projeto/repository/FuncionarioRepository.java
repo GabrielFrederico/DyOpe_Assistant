@@ -5,8 +5,9 @@ import java.io.Serializable;
 import org.springframework.data.repository.CrudRepository;
 
 import com.projeto.models.Funcionario;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface FuncionarioRepository extends CrudRepository<Funcionario, Serializable> {
+public interface FuncionarioRepository extends JpaRepository<Funcionario, Serializable> {
 
     Funcionario findById(long id);
 

@@ -50,6 +50,8 @@ export class PlanilhaCustoComponent implements OnInit {
 
   newcustofixo: any = {};
 
+  custofixoEscolhido: any;
+
   ngOnInit() {
     this.info = {
       token: this.token.getToken(),
@@ -68,6 +70,22 @@ export class PlanilhaCustoComponent implements OnInit {
 
   descricaocusto(descricao: any) {
     this.newcustofixo.descricao = descricao;
+  }
+
+  atualizarCustoFixo() {
+    this.gerenteService.cadastrarCustoFixo(this.gerente).pipe(first()).subscribe(ger => {
+      this.datareload();
+      this.changeDetectorRefs.detectChanges();
+    }, error => {
+      this.erro = true;
+      this.mensagemErro = error.error;
+    });
+  }
+
+  deletarCustoFixo(custofixo: any) {
+    this.custofixoEscolhido = custofixo;
+    const index = this.gerente.custosfixo.indexOf(this.custofixoEscolhido);
+    this.gerente.custosfixo.splice(index, 1);
   }
 
   cadastrarCustoFixo() {

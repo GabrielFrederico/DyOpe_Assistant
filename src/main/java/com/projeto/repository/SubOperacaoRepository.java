@@ -6,8 +6,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import com.projeto.models.SubOperacao;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface SubOperacaoRepository extends CrudRepository<SubOperacao, Serializable> {
+public interface SubOperacaoRepository extends JpaRepository<SubOperacao, Serializable> {
 
 	SubOperacao findById(long id);
 

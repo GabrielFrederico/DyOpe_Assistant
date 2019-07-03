@@ -98,15 +98,19 @@ export class GerenteService {
   cadastrarAlgo(gerente: any) {
     return this.httpClient.put('http://localhost:8080/gerentes/cadastraralgo', gerente);
   }
+
   cadastrarCustoFixo(gerente: any) {
     return this.httpClient.put('http://localhost:8080/gerentes/cadastrarcustofixo', gerente);
   }
 
+  atualizarCustoFixo(custofixo: any) {
+    // fazer no backend
+    return this.httpClient.put('http://localhost:8080/custosfixo', custofixo);
+  }
 
   cadastrarOperacao(gerente: any) {
     return this.httpClient.put('http://localhost:8080/gerentes/cadastrarope', gerente);
   }
-
 
   chaveAcesso(gerente: any) {
     return this.httpClient.put('http://localhost:8080/gerentes/chaveAcesso', gerente);

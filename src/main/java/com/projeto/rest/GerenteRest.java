@@ -383,7 +383,7 @@ public class GerenteRest {
 				}
 			}
 		}
-        CustoFixo.somarCustos(gerente);
+        Gerente.somarCustos(gerente);
 		gerenteRepository.save(gerente);
 		return new ResponseEntity<>(new ResponseMessage("Dados Atualizados com sucesso!"), HttpStatus.OK);
 	}
