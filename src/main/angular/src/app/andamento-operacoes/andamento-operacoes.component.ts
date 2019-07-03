@@ -19,6 +19,7 @@ export class AndamentoOperacoesComponent implements OnInit {
               private operacaoService: CadastroOperacaoService, private token: TokenStorageService, private router: Router) {
   }
 
+  planilhacusto: any;
   hoje: Date;
   inicio: Date;
   prazo: Date;
@@ -82,6 +83,18 @@ export class AndamentoOperacoesComponent implements OnInit {
       this.resultadoOpe = data;
       this.ope3 = false;
       this.ope3 = true;
+      this.updatePlanilha();
+      this.operacaoService.updateOperacao(this.operacaoEscolhida).pipe(first()).subscribe(ope => {
+        this.resultadoOpe = data;
+        if (this.resultadoOpe.numFuncionariosDisponiveis >= this.resultadoOpe.numFuncionarios) {
+          this.numfumok = true;
+        }
+        this.editarOpe = false;
+      }, error => {
+        this.erro = true;
+        this.errorMessage = error.error;
+        console.log(error.error);
+      });
       if (this.resultadoOpe.numFuncionariosDisponiveis >= this.resultadoOpe.numFuncionarios) {
         this.numfumok = true;
       }
@@ -196,7 +209,7 @@ export class AndamentoOperacoesComponent implements OnInit {
       this.peca.operacoesAndamento.splice(i, 1);
       this.updateOpes();
       this.opeSelected = false;
-    } else if (this.hoje.getTime() === this.prazo.getTime() || this.prazo < this.hoje  ) {
+    } else if (this.hoje.getTime() === this.prazo.getTime() || this.prazo < this.hoje) {
       const i = this.peca.operacoesPrazo.indexOf(this.operacaoEscolhida);
       this.operacaoEscolhida.peca_id = null;
       this.peca.operacoesPrazo.splice(i, 1);
@@ -204,6 +217,13 @@ export class AndamentoOperacoesComponent implements OnInit {
       this.opeSelected = false;
     }
 
+  }
+
+  updatePlanilha() {
+    this.gerenteService.atualizarPlanilha(this.planilhacusto).pipe(first()).subscribe(data => {
+    }, error => {
+      this.errorMessage = error.error;
+    });
   }
 
   cadastrarSubOperacao() {
