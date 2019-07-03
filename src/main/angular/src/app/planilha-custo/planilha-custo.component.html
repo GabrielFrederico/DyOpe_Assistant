@@ -141,21 +141,38 @@
             <th>Descrição</th>
             <th>Custo</th>
             <th>Botões</th>
-            <th>Custo Total</th>
           </tr>
           </thead>
 
           <tbody>
           <tr *ngFor="let custos of gerente.custosfixo">
             <td>{{custos.id}}</td>
-            <td>{{custos.descricao}}</td>
+            <td><input type="text" value="{{custos.descricao}}"></td>
             <td>{{custos.custo}}</td>
+            <td>
+              <button class="btn btn-warning" (click)="cancelcusto()" [disabled]="!valido" *ngIf="editarcusto">
+                <i class="fas fa-fw fa-stop-circle">
+                </i>
+              </button>
+              <button class="btn btn-info" [disabled]="!valido" (click)="atualizarCustoFixo()" *ngIf="editarcusto">
+                <i class="fas fa-fw fa-check">
+                </i>
+              </button>
+              <button class="btn btn-primary"  (click)="editcusto(custos)" *ngIf="!editarcusto"
+                     [disabled]="!valido">
+                Editar
+              </button>
+              <button class="btn btn-danger btn-padding"  href="#" role="button" *ngIf="!editarcusto"
+                      (click)="custofixoEscolhido(custos)" type="button"
+                      data-toggle="modal"
+                      data-target=".deletar-custofixo">
+                <i class="fas fa-fw fa-trash-alt">
+                </i>
+              </button></td>
           </tr>
-
-          <!--          <tr>-->
-          <!--            <td colspan="2">ABC</td>-->
-          <!--          </tr>-->
-
+          <tr>
+            <td colspan="2">Custo Total: {{gerente.gastosfixo}}</td>
+          </tr>
           </tbody>
         </table>
       </div>
@@ -232,3 +249,32 @@
 <!--    </div>-->
 <!--  </div>-->
 <!--</div>-->
+
+<div class="modal  fade deletar-custofixo" tabindex="-1" role="dialog" aria-labelledby="modalDeletarCustoFixo"
+     aria-hidden="true">
+  <div class="modal-dialog modal-body">
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="modalDeletarCustoFixo">Deletar Custo Fixo</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="card-body">
+          <div class="text-center mb-4">
+            <h4>Deseja Deletar?</h4>
+          </div>
+          <div class="modal-footer col-md-12">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+            <input class="btn btn-primary" type="submit" (click)="deletarCustoFixo(custofixoEscolhido)"
+                   data-dismiss="modal"
+                   value="Confirmar">
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

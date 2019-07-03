@@ -254,6 +254,7 @@ export class SequenciaOperacionalComponent implements OnInit {
         this.planilhacusto.numFunOpe = this.operacaoEscolhida.numFuncionariosDisponiveis;
         this.planilhacusto.gerente_id = this.gerente.id;
         this.planilhacusto.gastos = this.gerente.gastosfixo;
+        this.planilhacusto.diasNeceOpe = this.operacaoEscolhida.diasUteisNecessarios;
         this.gerente.planilhascusto.push(this.planilhacusto);
         this.gerenteService.cadastrarPlanilha(this.gerente).pipe(first()).subscribe(item => {
           this.getdadosCustos();

@@ -47,9 +47,8 @@ export class PlanilhaCustoComponent implements OnInit {
   precocadastrado = false;
   listacustofixo = false;
   listacadcustofixo = false;
-
   newcustofixo: any = {};
-
+  editarcusto = false;
   custofixoEscolhido: any;
 
   ngOnInit() {
@@ -71,6 +70,16 @@ export class PlanilhaCustoComponent implements OnInit {
   descricaocusto(descricao: any) {
     this.newcustofixo.descricao = descricao;
   }
+
+  custoedit(custo: any) {
+    this.custofixoEscolhido.custo = custo;
+  }
+
+  descricaocustoedit(descricao: any) {
+    this.custofixoEscolhido.descricao = descricao;
+  }
+
+
 
   atualizarCustoFixo() {
     this.gerenteService.cadastrarCustoFixo(this.gerente).pipe(first()).subscribe(ger => {
@@ -184,6 +193,15 @@ export class PlanilhaCustoComponent implements OnInit {
     this.showPlanilha = false;
     this.datareload();
     this.acessovalido = true;
+  }
+
+  editcusto(custofixo: any) {
+    this.custofixoEscolhido = custofixo;
+    this.editarcusto = true;
+  }
+
+  cancelcusto() {
+    this.editarcusto = false;
   }
 
   cadastrar() {
