@@ -10,7 +10,9 @@
 .desc {
   padding: 0%;
 }
-
+.margintabela{
+  margin-bottom: 0;
+}
 .btn-padding {
   padding: 1%;
 }
@@ -151,8 +153,8 @@ div.menu_index span {
 
   text-align: -webkit-center;
   margin-top: 9%;
-  margin-left: 20%;
-  width: 49%;
+  margin-left: 15%;
+  width: 64%;
 }
 
 .espacamentosequenciaoperacional {

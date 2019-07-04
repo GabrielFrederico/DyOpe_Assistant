@@ -16,7 +16,8 @@
    </ol>
   </nav> -->
 
-  <form class="card  planilhateste1" [noValidate]="$any(false)" *ngIf="!acessovalido" (ngSubmit)="acessar()"
+  <div class="col-md-6 planilhateste1" *ngIf="!acessovalido">
+  <form class="card" [noValidate]="$any(false)"  (ngSubmit)="acessar()"
         #f="ngForm">
     <div class="card-header">Acessar Planilha de Custo</div>
     <div class="card-body border-info mb-3 ">
@@ -24,7 +25,7 @@
 
         <label for="chaveAcesso">Chave de Acesso
           <input type="password" id="chaveAcesso" [(ngModel)]="chaveAcesso" name="chaveAcesso"
-                 class="form-control text-center" [autofocus]="true" placeholder="Chave de Acesso" required="required">
+                 class="form-control" [autofocus]="true" placeholder="Chave de Acesso" required="required">
         </label>
       </div>
 
@@ -34,6 +35,7 @@
       </div>
     </div>
   </form>
+  </div>
   <div *ngIf="acessovalido">
     <!-- Page Content -->
     <h3>Planilha de custo</h3>
@@ -58,14 +60,17 @@
 
     <div class="espacamentoplanilhadecusto" *ngIf="listacustofixo">
       <input class="btn btn-info" type="button" (click)="sairCustosFixos()" value="Voltar para Planilha de Custo">
-      <input class="btn btn-success" type="button" (click)="openCadCustoFixo()" value="Cadastrar Custo Fixo">
     </div>
 
     <div class="espacamentoplanilhadecusto" *ngIf="listacadcustofixo">
       <input class="btn btn-info" type="button" (click)="openCustosFixos()" value="Voltar para Custos Fixos">
     </div>
-
-
+    <div class="espacamentoplanilhadecusto"  *ngIf="addPrecoPeca">
+    <button class="btn btn-info" href="javascript:void(0)"
+            (click)="voltarLista()" type="button">Voltar
+    </button>
+    </div>
+   <div class="col-md-4 formsequencia">
     <form #f="ngForm" class="card espacamentosequenciaoperacional" [noValidate]="$any(false)"
           (ngSubmit)="cadastrarPrecoOpePeca()" *ngIf="addPrecoPeca">
       <div class="card-header">Cadastrar Preço definitivo da Operação</div>
@@ -77,37 +82,34 @@
                    #precoPecaOpe (blur)="addPrecoPecaOpe(precoPecaOpe.value)" required="required">
           </div>
         </div>
-
-        <div class="card-footer bg-transparent border-info">
-          <button class="btn btn-secondary" href="javascript:void(0)"
-                  (click)="voltarLista()" type="button">Cancelar
-          </button>
+        <div class="card-footer bg-transparent border-info modal-footer">
           <input class="btn btn-primary" type="submit"
                  value="Cadastrar">
-
         </div>
         <div class="alert alert-warning" *ngIf="erro">
           {{mensagemErro}}
         </div>
       </div>
     </form>
+    </div>
 
     <div class="card border-info mb-3" *ngIf="listacustos">
       <div class="card-header border-info">Lista dos custos das operações</div>
       <div class="table-responsive">
-        <table class="table table-bordered dataTable">
+        <table class="margintabela table table-bordered dataTable">
           <thead>
           <tr>
             <th>#</th>
             <th>Descrição</th>
             <th>Custo Minuto</th>
-            <th>Custo</th>
+            <th>Custo (Unidade)</th>
             <th>Lucro</th>
+            <th *ngIf="colunapreco">Cadastre o preço</th>
           </tr>
           </thead>
           <tbody>
           <tr *ngFor="let planilhas of gerente.planilhascusto; let i = index;">
-            <td>{{i}}</td>
+            <td>{{planilhas.id}}</td>
             <td>{{planilhas.descricaoOpe}}</td>
 
             <td><input type="text" id="precominuto" name="precominuto" class="form-control-plaintext"
@@ -115,8 +117,8 @@
                        currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
                        value="{{planilhas.custoMinuto}}"></td>
             <td>{{planilhas.custoOpe}}</td>
-            <td *ngIf="planilhas.precoPecaOpe > 0">{{planilhas.lucro}}</td>
-            <td *ngIf="planilhas.precoPecaOpe == 0">Lucro não definido, cadastre o preço..</td>
+            <td *ngIf="planilhas.precoPecaOpe > 0; else showColunaPreco()">{{planilhas.lucro}}</td>
+            <td *ngIf="planilhas.precoPecaOpe == 0; else hiddenColunaPreco()">Lucro não definido, cadastre o preço..</td>
 
             <div class="card-footer bg-transparent align-self-center botaoexcluirplanilha border-info modal-footer">
               <button class="btn btn-secondary" href="javascript:void(0)" type="button"
@@ -133,7 +135,7 @@
     <div class="card border-info mb-3" *ngIf="listacustofixo">
       <div class="card-header border-info">Lista de Custos Fixos</div>
       <div class="table-responsive">
-        <table class="table table table-bordered dataTable">
+        <table class="margintabela table table table-bordered dataTable">
           <thead>
           <tr>
             <th>#</th>
@@ -145,10 +147,10 @@
 
           <tbody>
           <tr *ngFor="let custos of gerente.custosfixo; let i = index;">
-            <td>{{i}}</td>
-            <td><input class="form-control" [readonly]="!editarcusto" type="text" value="{{custos.descricao}}"></td>
-            <td><input class="form-control" [readonly]="!editarcusto" type="number" value="{{custos.custo}}"></td>
-            <td>
+            <td>{{custos.id}}</td>
+            <td><input class="form-control" #descricaocusto [readonly]="!editarcusto" (blur)="descricaocustoedit(descricaocusto.value)" type="text" value="{{custos.descricao}}"></td>
+            <td><input class="form-control" #custof [readonly]="!editarcusto" type="number" (blur)="custoedit(custof.value)" value="{{custos.custo}}"></td>
+            <td class=" d-flex justify-content-between">
               <button class="btn btn-warning" (click)="cancelcusto()" [disabled]="!valido" *ngIf="editarcusto">
                 <i class="fas fa-fw fa-ban">
                 </i>
@@ -161,7 +163,7 @@
                       [disabled]="!valido">
                 Editar
               </button>
-              <button class="btn btn-danger" href="#" role="button" *ngIf="!editarcusto"
+              <button class="btn btn-danger btn-padding" href="#" role="button" *ngIf="!editarcusto"
                       (click)="custofixoEscolhido(custos)" type="button"
                       data-toggle="modal"
                       data-target=".deletar-custofixo">
@@ -171,7 +173,8 @@
             </td>
           </tr>
           <tr>
-            <td *ngIf="gerente.gastosfixo > 0" colspan="2">Custo Total: {{gerente.gastosfixo}}</td>
+            <td colspan="2" class="text-center"><input class="btn btn-success" type="button" (click)="openCadCustoFixo()" value="Cadastrar Custo Fixo"></td>
+            <td *ngIf="gerente.gastosfixo > 0" class="text-center" colspan="2">Custo Total: &nbsp; R$ {{gerente.gastosfixo}}</td>
           </tr>
           </tbody>
         </table>

@@ -24,16 +24,19 @@ export class SidebarComponent implements OnInit {
 
   public info: any;
   gerenteobj: any;
-
+  etapasOpen = false;
   informacoes() {
-    this.gerenteService.getGerente(this.info.username).subscribe(data => {
-      this.gerenteobj = data;
-      if (this.gerente.etapas.length < this.gerenteobj.etapas.length || isUndefined(this.gerente.etapas)) {
-        this.gerente = this.gerenteobj;
-      }
-    }, error => {
-      console.log(error.error);
-    });
+    if(this.etapasOpen){
+      this.gerenteService.getGerente(this.info.username).subscribe(data => {
+        this.gerenteobj = data;
+        if (this.gerente.etapas.length < this.gerenteobj.etapas.length || isUndefined(this.gerente.etapas)) {
+          this.gerente = this.gerenteobj;
+        }
+      }, error => {
+        console.log(error.error);
+      });
+    }
+
   }
 
   ngOnInit() {
@@ -61,10 +64,11 @@ export class SidebarComponent implements OnInit {
               console.log(error.error);
             });
             this.router.navigateByUrl('/', {skipLocationChange: true}).then(() =>
-              this.router.navigate(['/gerenteindex/homegerente']));
+            this.router.navigate(['/gerenteindex/homegerente']));
 
           }
         });
+        this.etapasOpen = true;
       } catch (e) {
         console.log(e);
       }

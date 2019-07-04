@@ -49,8 +49,9 @@ export class PlanilhaCustoComponent implements OnInit {
   listacadcustofixo = false;
   newcustofixo: any = {};
   editarcusto = false;
+  colunapreco: boolean;
   custofixoEscolhido: any;
- custostring: string;
+  custostring: string;
   ngOnInit() {
     this.info = {
       token: this.token.getToken(),
@@ -66,7 +67,6 @@ export class PlanilhaCustoComponent implements OnInit {
   custo(custo: any) {
     this.custostring = custo;
     this.newcustofixo.custo = +this.custostring;
-    alert(this.custostring + ' number: ' + this.newcustofixo.custo);
   }
 
   descricaocusto(descricao: any) {
@@ -85,6 +85,7 @@ export class PlanilhaCustoComponent implements OnInit {
 
   atualizarCustoFixo() {
     this.gerenteService.cadastrarCustoFixo(this.gerente).pipe(first()).subscribe(ger => {
+      this.editarcusto = false;
       this.datareload();
       this.changeDetectorRefs.detectChanges();
     }, error => {
@@ -95,10 +96,17 @@ export class PlanilhaCustoComponent implements OnInit {
 
   deletarCustoFixo(custofixo: any) {
     this.custofixoEscolhido = custofixo;
-    const index = this.gerente.custosfixo.indexOf(this.custofixoEscolhido);
+    const index = this.gerente.custosfixo.indexOf(this.custofixoEscolhido ,0);
     this.gerente.custosfixo.splice(index, 1);
+    this.atualizarCustoFixo();
   }
 
+  showColunaPreco(){
+    this.colunapreco = true;
+  }
+  hiddenColunaPreco(){
+    this.colunapreco = false;
+  }
   cadastrarCustoFixo() {
     this.newcustofixo.gerente_id = this.gerente.id;
     this.gerente.custosfixo.push(this.newcustofixo);

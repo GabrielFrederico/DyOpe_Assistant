@@ -120,7 +120,7 @@ public class Operacao {
 
 		float segundos = 0;
 		float segundoscalc, calcseg, tempos;
-		int minutos = 0, diasNece = 0, diasNeceteste = 0, funcionariosNecessários = 0, prodHora = 0, producaoHora,
+		int minutos = 0, diasNece = 0, diasUteisNecessarios = 0, funcionariosNecessários = 0, prodHora = 0, producaoHora,
 				prodhoraresult, qtdPecasOpe = 0;
 		for (SubOperacao subope : operacao.getSuboperacoes()) {
 			minutos += subope.getTempoNesc();
@@ -139,7 +139,7 @@ public class Operacao {
 		diasNece = Math.round(result / tempoFun);
 
 		resultdias = result / operacao.getNumFuncionariosDisponiveis();
-		diasNeceteste = Math.round(resultdias / tempoFun);
+		diasUteisNecessarios = Math.round(resultdias / tempoFun);
 
 		inicio.add(Calendar.DAY_OF_MONTH, 1);
 		if (inicio.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY) {
@@ -155,7 +155,7 @@ public class Operacao {
 		Date iniciodata = new Date(dataini.getTime());
 		operacao.setDataInicio(iniciodata);
 
-		for (int i = 1; i <= diasNeceteste; i++) {
+		for (int i = 1; i <= diasUteisNecessarios; i++) {
 
 			inicio.add(Calendar.DAY_OF_MONTH, 1);
 			if (inicio.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY) {
@@ -176,8 +176,8 @@ public class Operacao {
 		if (funcionariosNecessários < 1) {
 			funcionariosNecessários = 1;
 		}
-		if (diasNeceteste < 1) {
-			diasNeceteste = 1;
+		if (diasUteisNecessarios < 1) {
+			diasUteisNecessarios = 1;
 		}
 
 		System.out.println("fundispo" + operacao.getNumFuncionariosDisponiveis());
@@ -190,7 +190,7 @@ public class Operacao {
 		Date prazo = new Date(fim.getTime());
 		operacao.setPrazo(prazo);
 
-		System.out.println("dias: " + diasNeceteste + "  " + tempoFun + ". " + resultdias + ".minutos " + tempos+ " "
+		System.out.println("dias: " + diasUteisNecessarios + "  " + tempoFun + ". " + resultdias + ".minutos " + tempos+ " "
 				+ qtdPecasOpe + " INICIO:" + operacao.getDataInicio());
 		if (qtdPecasOpe < 1) {
 			qtdPecasOpe = 1;
@@ -198,6 +198,7 @@ public class Operacao {
 		operacao.setQtdPecasOpe(qtdPecasOpe);
 		operacao.setProducaoHora(producaoHora);
 		operacao.setTempos(tempos);
+		operacao.setDiasUteisNecessarios(diasUteisNecessarios);
 		System.out.println(" Teste prod: " + operacao.getProducaoHora() + " e tempos: "+operacao.getTempos());
 		
 
