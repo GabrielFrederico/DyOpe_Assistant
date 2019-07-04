@@ -23,6 +23,8 @@ export class SequenciaOperacionalComponent implements OnInit {
   @ViewChild('closeModal') closeOpeModal: ElementRef;
   @ViewChild('modal') closeModalPeca: ElementRef;
   operacao: any = {};
+  descricaopeca: string;
+  descricaonewsubope: string;
   novaplanilhacusto: any = {};
   planilhacusto: any;
   newsuboperacao: any = {};
@@ -322,6 +324,7 @@ export class SequenciaOperacionalComponent implements OnInit {
   }
 
   cadastrarSubOperacao() {
+    this.newsuboperacao.descricao = this.descricaonewsubope;
     this.listasuboperacoes.push(this.newsuboperacao);
     this.cadastreSubOpe = false;
   }
@@ -351,9 +354,12 @@ export class SequenciaOperacionalComponent implements OnInit {
 
   cadastrarPeca() {
     // this.newpeca.etapa_producao_id = this.etapa.id;
+    this.newpeca.descricao = this.descricaopeca;
+
     this.newpeca.gerente_id = this.gerente.id;
     this.gerente.pecas.push(this.newpeca);
     this.gerenteService.cadastrarAlgo(this.gerente).pipe(first()).subscribe(data => {
+      this.descricaopeca = '';
       alert('Peça cadastrada com sucesso!');
       this.pecasrefresh();
       // this.router.navigateByUrl('/gerenteindex/homegerente', {skipLocationChange: true}).then(() =>
@@ -372,7 +378,7 @@ export class SequenciaOperacionalComponent implements OnInit {
 
   subopeEscolhida(subope: any) {
     this.suboperacaoEscolhida = subope;
-
+    this.descricaonewsubope = '';
   }
 
   selectsPeca(peca: any) {

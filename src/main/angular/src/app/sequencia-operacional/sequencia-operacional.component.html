@@ -257,8 +257,8 @@
                 <div class="col-md-auto">
                   <div class="form-group">
                     <label for="DescricaoOp">Descrição da operação:</label>
-                    <input type="text" required="required" name="descricao" #descricaoSubope (blur)="subopeDescricao(descricaoSubope.value)"
-                           placeholder="Descrição"
+                    <input type="text" required="required" name="descricao" #descricaoSubope
+                           placeholder="Descrição" [(ngModel)]="descricaonewsubope"
                            class="form-control" minlength="4" id="DescricaoOp">
 
                   </div>
@@ -300,8 +300,8 @@
                 <div class="col-md-auto">
                   <div class="form-group">
                     <label for="nomePeca">Nome da peça: </label>
-                    <input type="text" #descricaoPeca id="nomePeca" class="form-control" name="descricaop"
-                           placeholder="Nome da peça:" (blur)="pecaDescricao(descricaoPeca.value)" required="required">
+                    <input type="text" #descricaoPeca id="nomePeca" class="form-control" name="descricaop" minlength="3"
+                           placeholder="Nome da peça:" [(ngModel)]="descricaopeca" required="required">
                   </div>
                 </div>
 

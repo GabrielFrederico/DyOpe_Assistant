@@ -121,7 +121,7 @@
       <div class="table-responsive">
         <table class="margintabela table table-bordered dataTable">
           <thead>
-          <tr>
+          <tr *ngIf="gerente.planilhascusto.length > 0">
             <th>#</th>
             <th>Descrição</th>
             <th>Custo Minuto</th>
@@ -135,11 +135,8 @@
             <td>{{planilhas.id}}</td>
             <td>{{planilhas.descricaoOpe}}</td>
 
-            <td><input type="text" id="precominuto" name="precominuto" class="form-control-plaintext"
-                       [readonly]="isReadonly"
-                       currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
-                       value="{{planilhas.custoMinuto}}"></td>
-            <td>{{planilhas.custoOpe}}</td>
+            <td>R$ {{planilhas.custoMinuto}}</td>
+            <td>R$ {{planilhas.custoOpe}}</td>
             <td *ngIf="planilhas.precoPecaOpe > 0; else showColunaPreco()">R$ {{planilhas.lucro}}</td>
             <td *ngIf="planilhas.precoPecaOpe == 0; else hiddenColunaPreco()">Lucro não definido, cadastre o preço..</td>
 
@@ -170,7 +167,7 @@
       <div class="table-responsive">
         <table class="margintabela table table table-bordered dataTable">
           <thead>
-          <tr>
+          <tr *ngIf="gerente.custosfixo.length > 0">
             <th>#</th>
             <th>Descrição</th>
             <th>Custo</th>
@@ -208,9 +205,9 @@
           <tr *ngIf="gerente.custosfixo.length <=0">
             <td colspan="4">Cadastre um Custo Fixo...</td>
           </tr>
-          <tr>
+          <tr >
             <td colspan="2" class="text-center"><input class="btn btn-success" type="button" (click)="openCadCustoFixo()" value="Cadastrar Custo Fixo"></td>
-            <td *ngIf="gerente.gastosfixo > 0" class="text-center" colspan="2">Custo Total: &nbsp; R$ {{gerente.gastosfixo}}</td>
+            <td *ngIf="gerente.gastosfixo >0 && gerente.custosfixo.length >0" class="text-center" colspan="2">Custo Total: &nbsp; R$ {{gerente.gastosfixo}}</td>
           </tr>
           </tbody>
         </table>

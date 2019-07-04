@@ -1,10 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {TokenStorageService} from '../auth/token-storage.service';
-import {ActivatedRoute, Router} from '@angular/router';
-import {CadastroOperacaoService} from '../service/cadastro-operacao.service';
-import {GerenteService} from '../service/gerente.service';
-import {first} from 'rxjs/operators';
+import { Component, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { TokenStorageService } from '../auth/token-storage.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CadastroOperacaoService } from '../service/cadastro-operacao.service';
+import { GerenteService } from '../service/gerente.service';
+import { first } from 'rxjs/operators';
 
 
 @Component({
@@ -16,9 +16,9 @@ export class AndamentoOperacoesComponent implements OnInit {
 
   // tslint:disable-next-line:max-line-length
   constructor(private route: ActivatedRoute, private gerenteService: GerenteService, private modalService: NgbModal,
-              private operacaoService: CadastroOperacaoService, private token: TokenStorageService, private router: Router) {
+    private operacaoService: CadastroOperacaoService, private token: TokenStorageService, private router: Router) {
   }
-
+  descricaosubope: string;
   planilhacusto: any;
   hoje: Date;
   inicio: Date;
@@ -109,7 +109,7 @@ export class AndamentoOperacoesComponent implements OnInit {
 
   subopeEscolhida(subope: any) {
     this.suboperacaoEscolhida = subope;
-
+    this.descricaosubope = '';
   }
 
   loteOpe(lote: any) {
@@ -227,6 +227,7 @@ export class AndamentoOperacoesComponent implements OnInit {
   }
 
   cadastrarSubOperacao() {
+    this.newsuboperacao.descricao = this.descricaosubope;
     this.operacaoEscolhida.suboperacoes.push(this.newsuboperacao);
   }
 
