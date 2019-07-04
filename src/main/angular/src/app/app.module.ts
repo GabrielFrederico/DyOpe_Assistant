@@ -64,7 +64,8 @@ import {SharedModule} from './sidebar/shared.module';
     MatMenuModule,
     MatButtonToggleModule,
     ShowHidePasswordModule,
-    BrMaskerModule, SharedModule],
+    BrMaskerModule,
+    SharedModule],
   exports: [RouterModule],
   providers: [{
     provide: HTTP_INTERCEPTORS,

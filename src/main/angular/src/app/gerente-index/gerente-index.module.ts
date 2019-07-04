@@ -21,6 +21,8 @@ import {HomeGerenteComponent} from '../home-gerente/home-gerente.component';
 import {PlanilhaCustoComponent} from '../planilha-custo/planilha-custo.component';
 import {MatInputModule, MatOptionModule, MatSelectModule} from '@angular/material';
 import {NgxCurrencyModule} from 'ngx-currency';
+import {NgxMaskModule} from "ngx-mask";
+
 
 @NgModule({
   schemas: [
@@ -53,7 +55,7 @@ import {NgxCurrencyModule} from 'ngx-currency';
     MatOptionModule,
     MatSelectModule,
     MatInputModule,
-
+    NgxMaskModule.forRoot()
   ],
 })
 export class GerenteIndexModule {
