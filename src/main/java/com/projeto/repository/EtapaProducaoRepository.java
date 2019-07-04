@@ -7,7 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 import java.io.Serializable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface EtapaProducaoRepository extends JpaRepository<EtapaProducao, Serializable> {
+public interface EtapaProducaoRepository extends CrudRepository<EtapaProducao, Serializable> {
 
     EtapaProducao findById(long id);
 

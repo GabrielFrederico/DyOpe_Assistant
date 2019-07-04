@@ -5,6 +5,6 @@ import org.springframework.data.repository.CrudRepository;
 import com.projeto.models.PlanilhaCusto;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface PlanilhaCustoRepository extends JpaRepository<PlanilhaCusto, Serializable> {
+public interface PlanilhaCustoRepository extends CrudRepository<PlanilhaCusto, Serializable> {
 	PlanilhaCusto findById(long id);
 }

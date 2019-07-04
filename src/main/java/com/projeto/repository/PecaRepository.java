@@ -7,7 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 import com.projeto.models.Peca;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface PecaRepository extends JpaRepository<Peca, Serializable> {
+public interface PecaRepository extends CrudRepository<Peca, Serializable> {
 	
 	Peca findById (long id);
 	

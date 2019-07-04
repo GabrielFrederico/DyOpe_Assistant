@@ -56,7 +56,7 @@ export class SidebarComponent implements OnInit {
               this.gerente.etapas.push(item);
             });
             this.gerenteService.cadastrarAlgo(this.gerente).pipe(first()).subscribe(ger => {
-              this.gerenteobj = data;
+             // this.gerenteobj = data;
             }, error => {
               console.log(error.error);
             });
