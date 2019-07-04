@@ -109,12 +109,10 @@ public class Gerente extends Usuario {
     @JoinTable(name = "gerente_pecas", joinColumns = @JoinColumn(name = "gerente_id"), inverseJoinColumns = @JoinColumn(name = "peca_id"))
     private List<Peca> pecas = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "gerente_setores", joinColumns = @JoinColumn(name = "gerente_id"), inverseJoinColumns = @JoinColumn(name = "setor_id"))
-    private List<Setor> setores = new ArrayList<>();
 
     public static Gerente somarCustos(@RequestBody Gerente gerente) {
         float custototal = 0;
+        
         for (CustoFixo custofixo : gerente.getCustosfixo()) {
             custototal += custofixo.getCusto();
         }
@@ -145,13 +143,6 @@ public class Gerente extends Usuario {
         this.pecas = pecas;
     }
 
-    public List<Setor> getSetores() {
-        return setores;
-    }
-
-    public void setSetores(List<Setor> setores) {
-        this.setores = setores;
-    }
 
     public Gerente() {
         super();

@@ -139,18 +139,18 @@
             <td>R$ {{planilhas.custoOpe}}</td>
             <td *ngIf="planilhas.precoPecaOpe > 0; else showColunaPreco()">R$ {{planilhas.lucro}}</td>
             <td *ngIf="planilhas.precoPecaOpe == 0; else hiddenColunaPreco()">Lucro não definido, cadastre o preço..</td>
-
-            <div class="card-footer bg-transparent align-self-center botaoexcluirplanilha border-info modal-footer">
-              <button class="btn btn-secondary" href="javascript:void(0)" type="button"
-                      *ngIf="planilhas.precoPecaOpe == 0"
-                      (click)="addPreco(planilhas)">Cadastrar Preço
-              </button>
-              <button class="btn btn-secondary" href="javascript:void(0)" type="button"
-                      *ngIf="editPrecoPecaOpe || planilhas.precoPecaOpe > 0 "
-                      (click)="editPreco(planilhas)">Editar Preço
-              </button>
-            </div>
-
+          <td class="text-center">
+           <button class="btn btn-secondary" href="javascript:void(0)" type="button"
+           *ngIf="planilhas.precoPecaOpe == 0"
+           (click)="addPreco(planilhas)">Cadastrar Preço
+           </button>
+           <button class="btn btn-secondary" href="javascript:void(0)" type="button"
+            *ngIf="editPrecoPecaOpe || planilhas.precoPecaOpe > 0 "
+            (click)="editPreco(planilhas)">Editar Preço
+            </button>
+          </td>
+            <!-- <div class="card-footer bg-transparent align-self-center botaoexcluirplanilha border-info modal-footer">
+            </div> -->
           </tr>
           <tr *ngIf="gerente.planilhascusto.length <=0">
             <td colspan="5">
