@@ -246,15 +246,15 @@ export class SequenciaOperacionalComponent implements OnInit {
       console.log('planilha cadastrada');
       this.gerenteService.addPlanilha(this.novaplanilhacusto).subscribe(data => {
         this.planilhacusto = data;
-        this.planilhacusto.operacao_id = this.operacaoEscolhida.id;
+        this.planilhacusto.operacao_id = this.resultadoOpe.id;
         // this.operacaoEscolhida.planilhacusto_id = this.novaplanilhacusto.id;
-        this.planilhacusto.descricaoOpe = this.operacaoEscolhida.descricao;
-        this.planilhacusto.tempos = this.operacaoEscolhida.tempos;
-        this.planilhacusto.lote = this.operacaoEscolhida.loteProducao;
-        this.planilhacusto.numFunOpe = this.operacaoEscolhida.numFuncionariosDisponiveis;
+        this.planilhacusto.descricaoOpe = this.resultadoOpe.descricao;
+        this.planilhacusto.tempos = this.resultadoOpe.tempos;
+        this.planilhacusto.lote = this.resultadoOpe.loteProducao;
+        this.planilhacusto.numFunOpe = this.resultadoOpe.numFuncionariosDisponiveis;
         this.planilhacusto.gerente_id = this.gerente.id;
         this.planilhacusto.gastos = this.gerente.gastosfixo;
-        this.planilhacusto.diasNeceOpe = this.operacaoEscolhida.diasUteisNecessarios;
+        this.planilhacusto.diasNeceOpe = this.resultadoOpe.diasUteisNecessarios;
         this.gerente.planilhascusto.push(this.planilhacusto);
         this.gerenteService.cadastrarPlanilha(this.gerente).pipe(first()).subscribe(item => {
           this.getdadosCustos();
@@ -279,9 +279,10 @@ export class SequenciaOperacionalComponent implements OnInit {
   }
 
   getOpe() {
-    this.cadastrarPlanilha();
+
     this.operacaoService.getOperacaoId(this.operacaoEscolhida.id).subscribe(data => {
       this.resultadoOpe = data;
+      this.cadastrarPlanilha();
       this.ope3 = true;
       this.atualizarOpe = true;
       this.prazo = new Date(this.resultadoOpe.prazo);

@@ -139,7 +139,7 @@ public class PlanilhaCusto {
 	public static PlanilhaCusto calcularCusto(@RequestBody PlanilhaCusto planilha) {
 
 		float custoMinuto, custo, lucro, ganho, gastos, gasto;
-		// 20 é dias, mudar pra dias
+
 		custoMinuto = planilha.getGastos() / planilha.getNumFunOpe() / 20 / 450;
 		planilha.setCustoMinuto(custoMinuto);
 		custo = custoMinuto * planilha.getTempos();

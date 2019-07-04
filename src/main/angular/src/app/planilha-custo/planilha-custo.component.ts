@@ -50,7 +50,7 @@ export class PlanilhaCustoComponent implements OnInit {
   newcustofixo: any = {};
   editarcusto = false;
   custofixoEscolhido: any;
-
+ custostring: string;
   ngOnInit() {
     this.info = {
       token: this.token.getToken(),
@@ -64,7 +64,9 @@ export class PlanilhaCustoComponent implements OnInit {
   }
 
   custo(custo: any) {
-    this.newcustofixo.custo = custo;
+    this.custostring = custo;
+    this.newcustofixo.custo = +this.custostring;
+    alert(this.custostring + ' number: ' + this.newcustofixo.custo);
   }
 
   descricaocusto(descricao: any) {

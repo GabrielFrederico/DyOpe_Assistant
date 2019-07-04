@@ -98,7 +98,7 @@
         <table class="table table-bordered dataTable">
           <thead>
           <tr>
-            <th>ID</th>
+            <th>#</th>
             <th>Descrição</th>
             <th>Custo Minuto</th>
             <th>Custo</th>
@@ -106,8 +106,8 @@
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let planilhas of gerente.planilhascusto">
-            <td>{{planilhas.id}}</td>
+          <tr *ngFor="let planilhas of gerente.planilhascusto; let i = index;">
+            <td>{{i}}</td>
             <td>{{planilhas.descricaoOpe}}</td>
 
             <td><input type="text" id="precominuto" name="precominuto" class="form-control-plaintext"
@@ -136,7 +136,7 @@
         <table class="table table table-bordered dataTable">
           <thead>
           <tr>
-            <th>ID</th>
+            <th>#</th>
             <th>Descrição</th>
             <th>Custo</th>
             <th>Botões</th>
@@ -144,8 +144,8 @@
           </thead>
 
           <tbody>
-          <tr *ngFor="let custos of gerente.custosfixo">
-            <td>{{custos.id}}</td>
+          <tr *ngFor="let custos of gerente.custosfixo; let i = index;">
+            <td>{{i}}</td>
             <td><input class="form-control" [readonly]="!editarcusto" type="text" value="{{custos.descricao}}"></td>
             <td><input class="form-control" [readonly]="!editarcusto" type="number" value="{{custos.custo}}"></td>
             <td>
@@ -171,7 +171,7 @@
             </td>
           </tr>
           <tr>
-            <td colspan="2">Custo Total: {{gerente.gastosfixo}}</td>
+            <td *ngIf="gerente.gastosfixo > 0" colspan="2">Custo Total: {{gerente.gastosfixo}}</td>
           </tr>
           </tbody>
         </table>
@@ -195,7 +195,7 @@
             <div class="col-md-auto">
               <div class="form-group">
                 <label for="CustoFixo" class="fonterisco">Custo:
-                  <input type="number" id="custofixo" min="1" max="9999999" class="form-control" #custofixo
+                  <input type="text" id="custofixo" min="1" max="9999999" class="form-control" #custofixo
                          (blur)="custo(custofixo.value)"
                          placeholder="Custo:" name="custofixo" required="required">
                 </label>
