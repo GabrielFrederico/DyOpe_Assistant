@@ -147,8 +147,8 @@ public class PlanilhaCusto {
 		planilha.setCustoOpe(custo);
 		ganho = planilha.getPrecoPecaOpe() * planilha.getLote();
 
-		gastos = planilha.getGastos();
-		gasto = planilha.getCustoOpe() + planilha.getLote();
+		// gastos = planilha.getGastos();
+		gasto = planilha.getCustoOpe() * planilha.getLote();
 		// gasto = gastos/20*planilha.getDiasNeceOpe();
 		lucro = ganho - gasto;
 		planilha.setLucro(lucro);

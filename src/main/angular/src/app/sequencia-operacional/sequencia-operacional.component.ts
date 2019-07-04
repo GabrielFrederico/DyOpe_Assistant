@@ -1,12 +1,12 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {TokenStorageService} from '../auth/token-storage.service';
-import {ActivatedRoute, Router} from '@angular/router';
-import {CadastroOperacaoService} from '../service/cadastro-operacao.service';
-import {Subscription} from 'rxjs';
-import {GerenteService} from '../service/gerente.service';
-import {first} from 'rxjs/operators';
-import {isUndefined} from 'util';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { TokenStorageService } from '../auth/token-storage.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CadastroOperacaoService } from '../service/cadastro-operacao.service';
+import { Subscription } from 'rxjs';
+import { GerenteService } from '../service/gerente.service';
+import { first } from 'rxjs/operators';
+import { isUndefined } from 'util';
 
 
 @Component({
@@ -83,6 +83,12 @@ export class SequenciaOperacionalComponent implements OnInit {
     this.naoAutenticado();
   }
 
+  pecaDescricao(descricao: any) {
+    this.newpeca.descricao = descricao;
+  }
+  subopeDescricao(descricao: any) {
+    this.newsuboperacao.descricao = descricao;
+  }
   naoAutenticado() {
     if (this.info.authorities.toString() !== 'ROLE_GERENTE') {
       this.validado = false;
@@ -223,7 +229,7 @@ export class SequenciaOperacionalComponent implements OnInit {
 
   concluirOpe() {
     alert('Sequência Operacional concluída com sucesso!');
-    this.router.navigateByUrl('/gerenteindex/homegerente', {skipLocationChange: true}).then(() =>
+    this.router.navigateByUrl('/gerenteindex/homegerente', { skipLocationChange: true }).then(() =>
       this.router.navigate(['/gerenteindex/operacoes/']));
   }
 

@@ -1,9 +1,9 @@
-import {ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {GerenteService} from '../service/gerente.service';
-import {TokenStorageService} from '../auth/token-storage.service';
-import {CadastroOperacaoService} from '../service/cadastro-operacao.service';
-import {Router} from '@angular/router';
-import {first} from 'rxjs/operators';
+import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { GerenteService } from '../service/gerente.service';
+import { TokenStorageService } from '../auth/token-storage.service';
+import { CadastroOperacaoService } from '../service/cadastro-operacao.service';
+import { Router } from '@angular/router';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-planilha-custo',
@@ -13,8 +13,8 @@ export class PlanilhaCustoComponent implements OnInit {
 
   // tslint:disable-next-line:max-line-length
   constructor(private router: Router, private gerenteService: GerenteService,
-              private etapaService: CadastroOperacaoService, private token: TokenStorageService,
-              private changeDetectorRefs: ChangeDetectorRef) {
+    private etapaService: CadastroOperacaoService, private token: TokenStorageService,
+    private changeDetectorRefs: ChangeDetectorRef) {
 
   }
 
@@ -52,6 +52,8 @@ export class PlanilhaCustoComponent implements OnInit {
   colunapreco: boolean;
   custofixoEscolhido: any;
   custostring: string;
+  precoOpestring: string;
+  editPrecoPecaOpe = false;
   ngOnInit() {
     this.info = {
       token: this.token.getToken(),
@@ -63,7 +65,11 @@ export class PlanilhaCustoComponent implements OnInit {
     this.datareload();
 
   }
-
+  editPreco(planilha: any) {
+    this.planilhaEscolhida = planilha;
+    this.editPrecoPecaOpe = true;
+    this.listacustos = false;
+  }
   custo(custo: any) {
     this.custostring = custo;
     this.newcustofixo.custo = +this.custostring;
@@ -96,15 +102,15 @@ export class PlanilhaCustoComponent implements OnInit {
 
   deletarCustoFixo(custofixo: any) {
     this.custofixoEscolhido = custofixo;
-    const index = this.gerente.custosfixo.indexOf(this.custofixoEscolhido ,0);
+    const index = this.gerente.custosfixo.indexOf(this.custofixoEscolhido, 0);
     this.gerente.custosfixo.splice(index, 1);
     this.atualizarCustoFixo();
   }
 
-  showColunaPreco(){
+  showColunaPreco() {
     this.colunapreco = true;
   }
-  hiddenColunaPreco(){
+  hiddenColunaPreco() {
     this.colunapreco = false;
   }
   cadastrarCustoFixo() {
@@ -171,7 +177,8 @@ export class PlanilhaCustoComponent implements OnInit {
   }
 
   addPrecoPecaOpe(precoPeca: any) {
-    this.planilhaEscolhida.precoPecaOpe = precoPeca;
+    this.precoOpestring = precoPeca;
+    this.planilhaEscolhida.precoPecaOpe = +this.precoOpestring;
   }
 
   cadastrarPrecoOpePeca() {
