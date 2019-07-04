@@ -43,6 +43,7 @@
     "ng2-search-filter": "^0.5.1",
     "ngx-currency": "^2.0.0",
     "ngx-filter-pipe": "^2.1.2",
+    "ngx-mask": "^8.0.0",
     "ngx-show-hide-password": "^2.0.3",
     "prerender-node": "^3.2.4",
     "rxjs": "~6.3.3",
