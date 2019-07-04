@@ -117,7 +117,7 @@
                        currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
                        value="{{planilhas.custoMinuto}}"></td>
             <td>{{planilhas.custoOpe}}</td>
-            <td *ngIf="planilhas.precoPecaOpe > 0; else showColunaPreco()">{{planilhas.lucro}}</td>
+            <td *ngIf="planilhas.precoPecaOpe > 0; else showColunaPreco()">R$ {{planilhas.lucro}}</td>
             <td *ngIf="planilhas.precoPecaOpe == 0; else hiddenColunaPreco()">Lucro não definido, cadastre o preço..</td>
 
             <div class="card-footer bg-transparent align-self-center botaoexcluirplanilha border-info modal-footer">

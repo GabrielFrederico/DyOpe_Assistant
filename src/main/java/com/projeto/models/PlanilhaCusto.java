@@ -25,13 +25,13 @@ public class PlanilhaCusto {
 		this.precoPecaOpe = precoPecaOpe;
 	}
 
-    public int getDiasNeceOpe() {
-        return diasNeceOpe;
-    }
+	public int getDiasNeceOpe() {
+		return diasNeceOpe;
+	}
 
-    public void setDiasNeceOpe(int diasNeceOpe) {
-        this.diasNeceOpe = diasNeceOpe;
-    }
+	public void setDiasNeceOpe(int diasNeceOpe) {
+		this.diasNeceOpe = diasNeceOpe;
+	}
 
 	private int numFunOpe, diasNeceOpe;
 
@@ -143,12 +143,13 @@ public class PlanilhaCusto {
 		custoMinuto = planilha.getGastos() / planilha.getNumFunOpe() / 20 / 450;
 		planilha.setCustoMinuto(custoMinuto);
 		custo = custoMinuto * planilha.getTempos();
-		System.out.println("tempos"+planilha.getTempos()+"custo ope" + custo);
+		System.out.println("tempos" + planilha.getTempos() + "custo ope" + custo);
 		planilha.setCustoOpe(custo);
 		ganho = planilha.getPrecoPecaOpe() * planilha.getLote();
 
-		gastos = planilha.getGastos() + planilha.getGastosOpe();
-	        gasto = gastos/20*planilha.getDiasNeceOpe();
+		gastos = planilha.getGastos();
+		gasto = planilha.getCustoOpe() + planilha.getLote();
+		// gasto = gastos/20*planilha.getDiasNeceOpe();
 		lucro = ganho - gasto;
 		planilha.setLucro(lucro);
 

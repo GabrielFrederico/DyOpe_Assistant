@@ -140,7 +140,10 @@ public class Operacao {
 
 		resultdias = result / operacao.getNumFuncionariosDisponiveis();
 		diasUteisNecessarios = Math.round(resultdias / tempoFun);
-
+		if (diasUteisNecessarios < 1) {
+			diasUteisNecessarios = 1;
+		}
+		diasUteisNecessarios = diasUteisNecessarios + 1;
 		inicio.add(Calendar.DAY_OF_MONTH, 1);
 		if (inicio.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY) {
 			inicio.add(Calendar.DAY_OF_MONTH, 1);
@@ -154,7 +157,9 @@ public class Operacao {
 		dataini = inicio.getTime();
 		Date iniciodata = new Date(dataini.getTime());
 		operacao.setDataInicio(iniciodata);
-
+		
+		
+		
 		for (int i = 1; i <= diasUteisNecessarios; i++) {
 
 			inicio.add(Calendar.DAY_OF_MONTH, 1);
@@ -176,9 +181,7 @@ public class Operacao {
 		if (funcionariosNecessários < 1) {
 			funcionariosNecessários = 1;
 		}
-		if (diasUteisNecessarios < 1) {
-			diasUteisNecessarios = 1;
-		}
+		
 
 		System.out.println("fundispo" + operacao.getNumFuncionariosDisponiveis());
 		qtdPecasOpe = Math.round(operacao.getLoteProducao() / operacao.getNumFuncionariosDisponiveis());
