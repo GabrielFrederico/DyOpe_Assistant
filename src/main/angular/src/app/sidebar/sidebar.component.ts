@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ChangeDetectorRef} from '@angular/core';
 
 import {CadastroOperacaoService} from '../service/cadastro-operacao.service';
 import {CadastroSetorService} from '../service/cadastro-setor.service';
@@ -19,7 +19,7 @@ export class SidebarComponent implements OnInit {
   gerente: any;
 
   // tslint:disable-next-line:max-line-length
-  constructor(private router: Router, private gerenteService: GerenteService, private tipoOpeservice: CadastroOperacaoService, private token: TokenStorageService, private setorservice: CadastroSetorService) {
+  constructor(private router: Router, private gerenteService: GerenteService, private changeDetectorRefs: ChangeDetectorRef ,private tipoOpeservice: CadastroOperacaoService, private token: TokenStorageService, private setorservice: CadastroSetorService) {
   }
 
   public info: any;
@@ -48,7 +48,6 @@ export class SidebarComponent implements OnInit {
     };
     this.tipoOpeservice.getEtapasProducao().subscribe(data => {
       this.etapas = data;
-      try {
         this.gerenteService.getGerente(this.info.username).subscribe(gerente => {
           this.gerente = gerente;
           if (this.gerente.etapas.length <= 0) {
@@ -69,9 +68,7 @@ export class SidebarComponent implements OnInit {
           }
         });
         this.etapasOpen = true;
-      } catch (e) {
-        console.log(e);
-      }
+
     });
     console.clear();
   }

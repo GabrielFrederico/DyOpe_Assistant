@@ -87,8 +87,6 @@ export class PlanilhaCustoComponent implements OnInit {
     this.custofixoEscolhido.descricao = descricao;
   }
 
-
-
   atualizarCustoFixo() {
     this.gerenteService.cadastrarCustoFixo(this.gerente).pipe(first()).subscribe(ger => {
       this.editarcusto = false;
@@ -186,6 +184,7 @@ export class PlanilhaCustoComponent implements OnInit {
       this.precocadastrado = true;
       this.datareload();
       this.changeDetectorRefs.detectChanges();
+      this.editPrecoPecaOpe = true;
       this.voltarLista();
     }, error => {
       this.erro = true;
