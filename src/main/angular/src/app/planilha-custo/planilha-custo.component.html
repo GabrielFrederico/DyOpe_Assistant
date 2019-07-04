@@ -70,6 +70,7 @@
             (click)="voltarLista()" type="button">Voltar
     </button>
     </div>
+
    <div class="col-md-4 formsequencia *ngIf="addPrecoPeca">
     <form #f="ngForm" class="card espacamentosequenciaoperacional" [noValidate]="$any(false)"
           (ngSubmit)="cadastrarPrecoOpePeca()" >
@@ -311,8 +312,7 @@
                    data-dismiss="modal"
                    value="Confirmar">
           </div>
-
-        </div>
+      </div>
       </div>
     </div>
   </div>
