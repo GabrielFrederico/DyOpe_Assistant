@@ -65,7 +65,7 @@
     <div class="espacamentoplanilhadecusto" *ngIf="listacadcustofixo">
       <input class="btn btn-info" type="button" (click)="openCustosFixos()" value="Voltar para Custos Fixos">
     </div>
-    <div class="espacamentoplanilhadecusto"  *ngIf="addPrecoPeca || editPrecoPecaOpe">
+    <div class="espacamentoplanilhadecusto"  *ngIf="addPrecoPeca || editPrecoPecaOpeForm">
     <button class="btn btn-info" href="javascript:void(0)"
             (click)="voltarLista()" type="button">Voltar
     </button>
@@ -93,9 +93,9 @@
     </form>
     </div>
 
-    <div class="col-md-4 formsequencia" *ngIf="editPrecoPecaOpe">
+    <div class="col-md-4 formsequencia" *ngIf="editPrecoPecaOpeForm">
      <form #f="ngForm" class="card espacamentosequenciaoperacional" [noValidate]="$any(false)"
-           (ngSubmit)="cadastrarPrecoOpePeca()" >
+           (ngSubmit)="editarPrecoOpePeca()" >
        <div class="card-header">Editar Preço definitivo da Operação por peça</div>
        <div class="card-body border-info">
          <div class="col-md-auto">
@@ -107,7 +107,7 @@
          </div>
          <div class="card-footer bg-transparent border-info modal-footer">
            <input class="btn btn-primary" type="submit"
-                  value="Cadastrar">
+                  value="Atualizar">
          </div>
          <div class="alert alert-warning" *ngIf="erro">
            {{mensagemErro}}
@@ -149,7 +149,7 @@
                       (click)="addPreco(planilhas)">Cadastrar Preço
               </button>
               <button class="btn btn-secondary" href="javascript:void(0)" type="button"
-                      *ngIf="editPrecoPecaOpe"
+                      *ngIf="editPrecoPecaOpe || planilhas.precoPecaOpe > 0 "
                       (click)="editPreco(planilhas)">Editar Preço
               </button>
             </div>
@@ -311,8 +311,7 @@
                    data-dismiss="modal"
                    value="Confirmar">
           </div>
-
-        </div>
+      </div>
       </div>
     </div>
   </div>
