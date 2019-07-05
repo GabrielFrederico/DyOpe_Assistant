@@ -7,7 +7,8 @@ import {first} from 'rxjs/operators';
 
 @Component({
   selector: 'app-planilha-custo',
-  templateUrl: './planilha-custo.component.html'
+  templateUrl: './planilha-custo.component.html',
+  preserveWhitespaces: false
 })
 export class PlanilhaCustoComponent implements OnInit {
 
@@ -56,7 +57,7 @@ export class PlanilhaCustoComponent implements OnInit {
   precopecahtml: any;
   editPrecoPecaOpe = false;
   editPrecoPecaOpeForm = false;
-
+ descricaocustofixo : string;
   ngOnInit() {
     this.info = {
       token: this.token.getToken(),
@@ -119,6 +120,8 @@ export class PlanilhaCustoComponent implements OnInit {
   }
 
   cadastrarCustoFixo() {
+    this.newcustofixo.descricao = this.descricaocustofixo;
+    this.newcustofixo.custo = +this.custostring;
     this.newcustofixo.gerente_id = this.gerente.id;
     this.gerente.custosfixo.push(this.newcustofixo);
     this.gerenteService.cadastrarCustoFixo(this.gerente).pipe(first()).subscribe(ger => {
@@ -160,19 +163,6 @@ export class PlanilhaCustoComponent implements OnInit {
 
   cancelar() {
     this.editarPlanilha = false;
-  }
-
-  selectPeca() {
-    this.planilha.operacao_id = 0;
-    if (!this.showPlanilha) {
-      this.gerenteService.addPlanilha(this.planilha).subscribe(data => {
-        this.planilhaEscolhida = data;
-      }, error => {
-        this.mensagemErro = error.error;
-      });
-      this.showPlanilha = true;
-    }
-
   }
 
   addPreco(planilha: any) {

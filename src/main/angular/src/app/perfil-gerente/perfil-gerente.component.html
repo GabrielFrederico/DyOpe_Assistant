@@ -71,7 +71,7 @@
                (click)="openRedefinir()" *ngIf="isReadonly"
                value="Redefinir senha">
         <input class="btn btn-outline-info" href="#" data-toggle="modal" type="button" *ngIf="isReadonly"
-               data-target=".chave-acesso" value="Chave Acesso">
+               data-target=".chave-acesso" value="Chave de acesso">
         <input class="btn btn-primary" type="button" (click)="toggleReadonly()" *ngIf="isReadonly" value="Editar">
         <input class="btn btn-primary" type="button" (click)="toggleReadonly()" *ngIf="!isReadonly" value="Cancelar">
         <input class="btn btn-success" type="submit" *ngIf="!isReadonly"
@@ -282,10 +282,8 @@
 
             <div class="modal-footer col-md-12">
               <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-              <input class="btn btn-success" type="submit" *ngIf="!chaveCadastrada"
-                     (click)="cadastrarChaveAcesso()" [disabled]="!chaveValida" data-dismiss="modal" value="Cadastrar">
-              <input class="btn btn-primary" type="submit" *ngIf="chaveCadastrada"
-                     (click)="cadastrarChaveAcesso()" [disabled]="!chaveValida" data-dismiss="modal" value="Atualizar">
+              <input class="btn btn-primary" type="submit"
+                     (click)="cadastrarChaveAcesso()" [disabled]="!chaveValida" data-dismiss="modal" value="Confirmar">
 
             </div>
           </form>

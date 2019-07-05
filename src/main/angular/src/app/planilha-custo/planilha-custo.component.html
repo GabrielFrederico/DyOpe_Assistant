@@ -169,7 +169,7 @@
           <tr *ngIf="gerente.custosfixo.length > 0">
             <th>#</th>
             <th>Descrição</th>
-            <th>Custo</th>
+            <th>Custo em R$</th>
             <th>Botões</th>
           </tr>
           </thead>
@@ -221,17 +221,17 @@
             <div class="col-md-auto">
               <div class="form-group">
                 <label for="CustoFixo" class="fonterisco">Descrição:
-                  <input type="text" id="descricao_custofixo" min="1" max="999999" class="form-control" #descricao
-                         (blur)="descricaocusto(descricao.value)"
+                  <input type="text" id="descricao_custofixo" class="form-control" #descricao
+                         [(ngModel)]="descricaocustofixo"
                          placeholder="Descrição:" name="descricao_custofixo" required="required">
                 </label>
               </div>
             </div>
             <div class="col-md-auto">
               <div class="form-group">
-                <label for="CustoFixo" class="fonterisco">Custo:
+                <label for="CustoFixo" class="fonterisco">Custo em R$:
                   <input type="text" id="custofixo" min="1" max="9999999" class="form-control" #custofixo
-                         (blur)="custo(custofixo.value)"
+                         [(ngModel)]="custostring"
                          placeholder="Custo:" name="custofixo" required="required">
                 </label>
               </div>
