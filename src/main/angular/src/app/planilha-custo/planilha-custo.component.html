@@ -17,24 +17,24 @@
   </nav> -->
 
   <div class="col-md-6 planilhateste1" *ngIf="!acessovalido">
-  <form class="card" [noValidate]="$any(false)"  (ngSubmit)="acessar()"
-        #f="ngForm">
-    <div class="card-header">Acessar Planilha de Custo</div>
-    <div class="card-body border-info mb-3 ">
-      <div class="form-group">
+    <form class="card" [noValidate]="$any(false)" (ngSubmit)="acessar()"
+          #f="ngForm">
+      <div class="card-header">Acessar Planilha de Custo</div>
+      <div class="card-body border-info mb-3 ">
+        <div class="form-group">
 
-        <label for="chaveAcesso">Chave de Acesso
-          <input type="password" id="chaveAcesso" [(ngModel)]="chaveAcesso" name="chaveAcesso"
-                 class="form-control" [autofocus]="true" placeholder="Chave de Acesso" required="required">
-        </label>
-      </div>
+          <label for="chaveAcesso">Chave de Acesso
+            <input type="password" id="chaveAcesso" [(ngModel)]="chaveAcesso" name="chaveAcesso"
+                   class="form-control" [autofocus]="true" placeholder="Chave de Acesso" required="required">
+          </label>
+        </div>
 
-      <input class="btn btn-info btn-block col-sm-5" type="submit" value="Acessar">
-      <div class="alert alert-dismissible alert-danger separa" *ngIf="invalido">
-        Chave de acesso Inválida!
+        <input class="btn btn-info btn-block col-sm-5" type="submit" value="Acessar">
+        <div class="alert alert-dismissible alert-danger separa" *ngIf="invalido">
+          Chave de acesso Inválida!
+        </div>
       </div>
-    </div>
-  </form>
+    </form>
   </div>
   <div *ngIf="acessovalido">
     <!-- Page Content -->
@@ -65,56 +65,57 @@
     <div class="espacamentoplanilhadecusto" *ngIf="listacadcustofixo">
       <input class="btn btn-info" type="button" (click)="openCustosFixos()" value="Voltar para Custos Fixos">
     </div>
-    <div class="espacamentoplanilhadecusto"  *ngIf="addPrecoPeca || editPrecoPecaOpeForm">
-    <button class="btn btn-info" href="javascript:void(0)"
-            (click)="voltarLista()" type="button">Voltar
-    </button>
+    <div class="espacamentoplanilhadecusto" *ngIf="addPrecoPeca || editPrecoPecaOpeForm">
+      <button class="btn btn-info" href="javascript:void(0)"
+              (click)="voltarLista()" type="button">Voltar
+      </button>
     </div>
-   <div class="col-md-4 formsequencia" *ngIf="addPrecoPeca">
-    <form #f="ngForm" class="card espacamentosequenciaoperacional" [noValidate]="$any(false)"
-          (ngSubmit)="cadastrarPrecoOpePeca()" >
-      <div class="card-header">Cadastrar Preço definitivo da Operação</div>
-      <div class="card-body border-info">
-        <div class="col-md-auto">
-          <div class="form-group">
-            <label for="precoPecaOpe">Preço da Operação:</label>
-            <input type="text"  placeholder="R$:" id="precoPecaOpe" name="precoPecaOpe" class="form-control"
-                   #precoPecaOpe (blur)="addPrecoPecaOpe(precoPecaOpe.value)" required="required">
+    <div class="col-md-4 formsequencia" *ngIf="addPrecoPeca">
+      <form #f="ngForm" class="card espacamentosequenciaoperacional" [noValidate]="$any(false)"
+            (ngSubmit)="cadastrarPrecoOpePeca()">
+        <div class="card-header">Cadastrar Preço definitivo da Operação</div>
+        <div class="card-body border-info">
+          <div class="col-md-auto">
+            <div class="form-group">
+              <label for="precoPecaOpe">Preço da Operação:</label>
+              <input type="text" placeholder="R$:" id="precoPecaOpe" name="precoPecaOpe" class="form-control"
+                     #precoPecaOpe (blur)="addPrecoPecaOpe(precoPecaOpe.value)" required="required">
+            </div>
+          </div>
+          <div class="card-footer bg-transparent border-info modal-footer">
+            <input class="btn btn-primary" type="submit"
+                   value="Cadastrar">
+          </div>
+          <div class="alert alert-warning" *ngIf="erro">
+            {{mensagemErro}}
           </div>
         </div>
-        <div class="card-footer bg-transparent border-info modal-footer">
-          <input class="btn btn-primary" type="submit"
-                 value="Cadastrar">
-        </div>
-        <div class="alert alert-warning" *ngIf="erro">
-          {{mensagemErro}}
-        </div>
-      </div>
-    </form>
+      </form>
     </div>
 
     <div class="col-md-4 formsequencia" *ngIf="editPrecoPecaOpeForm">
-     <form #f="ngForm" class="card espacamentosequenciaoperacional" [noValidate]="$any(false)"
-           (ngSubmit)="editarPrecoOpePeca()" >
-       <div class="card-header">Editar Preço definitivo da Operação por peça</div>
-       <div class="card-body border-info">
-         <div class="col-md-auto">
-           <div class="form-group">
-             <label for="precoPecaOpeed">Preço:</label>
-             <input type="text" placeholder="R$:" id="precoPecaOpeed" name="precoPecaOpe" class="form-control" value="{{planilhaEscolhida.precoPecaOpe}}"
-                    #precoPecaOpe (blur)="addPrecoPecaOpe(precoPecaOpe.value)" required="required">
-           </div>
-         </div>
-         <div class="card-footer bg-transparent border-info modal-footer">
-           <input class="btn btn-primary" type="submit"
-                  value="Atualizar">
-         </div>
-         <div class="alert alert-warning" *ngIf="erro">
-           {{mensagemErro}}
-         </div>
-       </div>
-     </form>
-     </div>
+      <form #f="ngForm" class="card espacamentosequenciaoperacional" [noValidate]="$any(false)"
+            (ngSubmit)="editarPrecoOpePeca()">
+        <div class="card-header">Editar Preço definitivo da Operação por peça</div>
+        <div class="card-body border-info">
+          <div class="col-md-auto">
+            <div class="form-group">
+              <label for="precoPecaOpeed">Preço:</label>
+              <input type="text" placeholder="R$:" id="precoPecaOpeed" name="precoPecaOpe" class="form-control"
+                     value="{{planilhaEscolhida.precoPecaOpe}}"
+                     #precoPecaOpe (blur)="addPrecoPecaOpe(precoPecaOpe.value)" required="required">
+            </div>
+          </div>
+          <div class="card-footer bg-transparent border-info modal-footer">
+            <input class="btn btn-primary" type="submit"
+                   value="Atualizar">
+          </div>
+          <div class="alert alert-warning" *ngIf="erro">
+            {{mensagemErro}}
+          </div>
+        </div>
+      </form>
+    </div>
 
     <div class="card border-info mb-3" *ngIf="listacustos">
       <div class="card-header border-info">Lista dos custos das operações</div>
@@ -138,23 +139,24 @@
             <td>R$ {{planilhas.custoMinuto}}</td>
             <td>R$ {{planilhas.custoOpe}}</td>
             <td *ngIf="planilhas.precoPecaOpe > 0; else showColunaPreco()">R$ {{planilhas.lucro}}</td>
-            <td *ngIf="planilhas.precoPecaOpe == 0; else hiddenColunaPreco()">Lucro não definido, cadastre o preço..</td>
-          <td class="text-center">
-           <button class="btn btn-secondary" href="javascript:void(0)" type="button"
-           *ngIf="planilhas.precoPecaOpe == 0"
-           (click)="addPreco(planilhas)">Cadastrar Preço
-           </button>
-           <button class="btn btn-secondary" href="javascript:void(0)" type="button"
-            *ngIf="editPrecoPecaOpe || planilhas.precoPecaOpe > 0 "
-            (click)="editPreco(planilhas)">Editar Preço
-            </button>
-          </td>
+            <td *ngIf="planilhas.precoPecaOpe == 0; else hiddenColunaPreco()">Lucro não definido, cadastre o preço..
+            </td>
+            <td class="text-center">
+              <button class="btn btn-secondary" href="javascript:void(0)" type="button"
+                      *ngIf="planilhas.precoPecaOpe == 0"
+                      (click)="addPreco(planilhas)">Cadastrar Preço
+              </button>
+              <button class="btn btn-secondary" href="javascript:void(0)" type="button"
+                      *ngIf="editPrecoPecaOpe || planilhas.precoPecaOpe > 0 "
+                      (click)="editPreco(planilhas)">Editar Preço
+              </button>
+            </td>
             <!-- <div class="card-footer bg-transparent align-self-center botaoexcluirplanilha border-info modal-footer">
             </div> -->
           </tr>
           <tr *ngIf="gerente.planilhascusto.length <=0">
             <td colspan="5">
-            Nenhuma Planilha registrada, cadastre uma operação para gerar uma planilha de custos
+              Nenhuma planilha registrada, cadastre uma operação para gerar uma planilha de custos
             </td>
           </tr>
           </tbody>
@@ -178,8 +180,10 @@
           <tbody>
           <tr *ngFor="let custos of gerente.custosfixo; let i = index;">
             <td>{{custos.id}}</td>
-            <td><input class="form-control" #descricaocusto [readonly]="!editarcusto" (blur)="descricaocustoedit(descricaocusto.value)" type="text" value="{{custos.descricao}}"></td>
-            <td><input class="form-control" #custof [readonly]="!editarcusto" type="number" (blur)="custoedit(custof.value)" value="{{custos.custo}}"></td>
+            <td><input class="form-control" #descricaocusto [readonly]="!editarcusto"
+                       (blur)="descricaocustoedit(descricaocusto.value)" type="text" value="{{custos.descricao}}"></td>
+            <td><input class="form-control" #custof [readonly]="!editarcusto" type="number"
+                       (blur)="custoedit(custof.value)" value="{{custos.custo}}"></td>
             <td class=" d-flex justify-content-around">
               <button class="btn btn-warning" (click)="cancelcusto()" [disabled]="!valido" *ngIf="editarcusto">
                 <i class="fas fa-fw fa-ban">
@@ -205,9 +209,11 @@
           <tr *ngIf="gerente.custosfixo.length <=0">
             <td colspan="4">Cadastre um Custo Fixo...</td>
           </tr>
-          <tr >
-            <td colspan="2" class="text-center"><input class="btn btn-success" type="button" (click)="openCadCustoFixo()" value="Cadastrar Custo Fixo"></td>
-            <td *ngIf="gerente.gastosfixo >0 && gerente.custosfixo.length >0" class="text-center" colspan="2">Custo Total: &nbsp; R$ {{gerente.gastosfixo}}</td>
+          <tr>
+            <td colspan="2" class="text-center"><input class="btn btn-success" type="button"
+                                                       (click)="openCadCustoFixo()" value="Cadastrar Custo Fixo"></td>
+            <td *ngIf="gerente.gastosfixo >0 && gerente.custosfixo.length >0" class="text-center" colspan="2">Custo
+              Total: &nbsp; R$ {{gerente.gastosfixo}}</td>
           </tr>
           </tbody>
         </table>
@@ -221,7 +227,7 @@
           <div class="form-group">
             <div class="col-md-auto">
               <div class="form-group">
-                <label for="CustoFixo" class="fonterisco">Descrição:
+                <label for="CustoFixo" class="fonterisco col-md-10">Descrição:
                   <input type="text" id="descricao_custofixo" min="1" max="999999" class="form-control" #descricao
                          (blur)="descricaocusto(descricao.value)"
                          placeholder="Descrição:" name="descricao_custofixo" required="required">
@@ -230,10 +236,10 @@
             </div>
             <div class="col-md-auto">
               <div class="form-group">
-                <label for="CustoFixo" class="fonterisco">Custo:
-                  <input type="text" id="custofixo" min="1" max="9999999" class="form-control" #custofixo
+                <label for="CustoFixo" class="fonterisco col-md-10">Custo:
+                  <input type="number" id="custofixo" min="1" max="9999999" class="form-control" #custofixo
                          (blur)="custo(custofixo.value)"
-                         placeholder="Custo:" name="custofixo" required="required">
+                         placeholder="R$:" name="custofixo" required="required">
                 </label>
               </div>
             </div>
@@ -308,7 +314,7 @@
                    data-dismiss="modal"
                    value="Confirmar">
           </div>
-      </div>
+        </div>
       </div>
     </div>
   </div>
