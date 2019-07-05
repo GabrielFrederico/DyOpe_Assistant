@@ -78,7 +78,7 @@
         <div class="col-md-auto">
           <div class="form-group">
             <label for="precoPecaOpe">Preço da Operação:</label>
-            <input type="text" placeholder="R$:" id="precoPecaOpe" name="precoPecaOpe" class="form-control"
+            <input type="nuber" min="0,01" max="999" placeholder="R$:" id="precoPecaOpe" name="precoPecaOpe" class="form-control"
                    #precoPecaOpe (blur)="addPrecoPecaOpe(precoPecaOpe.value)" required="required">
           </div>
         </div>
@@ -101,7 +101,7 @@
          <div class="col-md-auto">
            <div class="form-group">
              <label for="precoPecaOpe">Preço:</label>
-             <input type="text" placeholder="R$:" id="precoPecaOpe" name="precoPecaOpe" class="form-control" value="{{planilhaEscolhida.precoPecaOpe}}"
+             <input type="number" placeholder="R$:" min="0,05" max="999" id="precoPecaOpe" name="precoPecaOpe" class="form-control" value="{{planilhaEscolhida.precoPecaOpe}}"
                     #precoPecaOpe (blur)="addPrecoPecaOpe(precoPecaOpe.value)" required="required">
            </div>
          </div>

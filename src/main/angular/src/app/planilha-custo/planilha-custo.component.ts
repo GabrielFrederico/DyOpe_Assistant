@@ -122,13 +122,13 @@ export class PlanilhaCustoComponent implements OnInit {
       this.erro = true;
       this.mensagemErro = error.error;
     });
-
     this.openCustosFixos();
   }
 
   datareload() {
     this.gerenteService.getGerenteLogado(this.info.username).subscribe(data => {
       this.gerente = data;
+
     }, error => {
       console.log(error.error);
     });
@@ -176,8 +176,9 @@ export class PlanilhaCustoComponent implements OnInit {
   }
 
   addPrecoPecaOpe(precoPeca: any) {
-    this.precoOpestring = precoPeca;
-    this.planilhaEscolhida.precoPecaOpe = +this.precoOpestring;
+    // this.precoOpestring = precoPeca;
+    // this.planilhaEscolhida.precoPecaOpe = +this.precoOpestring;
+    this.planilhaEscolhida.precoPecaOpe = precoPeca.toFixed(2);
   }
   editarPrecoOpePeca() {
     this.gerenteService.atualizarPlanilha(this.planilhaEscolhida).pipe(first()).subscribe(data => {
@@ -209,20 +210,6 @@ export class PlanilhaCustoComponent implements OnInit {
     this.editPrecoPecaOpeForm = false;
   }
 
-  concluirPla() {
-    alert('Planilha cadastrada com sucesso!');
-    this.atualizarPlanilha = false;
-    this.planilha = {};
-    this.peca = {};
-    this.operacaoEscolhida = {};
-    this.planilha2 = false;
-    this.resultadoPlanilha = {};
-    this.gerente = {};
-    this.showPlanilha = false;
-    this.datareload();
-    this.acessovalido = true;
-  }
-
   editcusto(custofixo: any) {
     this.custofixoEscolhido = custofixo;
     this.editarcusto = true;
@@ -230,37 +217,6 @@ export class PlanilhaCustoComponent implements OnInit {
 
   cancelcusto() {
     this.editarcusto = false;
-  }
-
-  cadastrar() {
-    if (this.atualizarPlanilha) {
-      this.atualizar();
-      console.log('planilha ATUALIZADA');
-    } else {
-      this.planilhaEscolhida.operacao_id = this.operacaoEscolhida.id;
-      this.planilhaEscolhida.descricaoOpe = this.operacaoEscolhida.descricao;
-      this.planilhaEscolhida.tempos = this.operacaoEscolhida.tempos;
-      this.planilhaEscolhida.lote = this.operacaoEscolhida.loteProducao;
-      this.planilhaEscolhida.numFunOpe = this.operacaoEscolhida.numFuncionariosDisponiveis;
-      this.planilhaEscolhida.gerente_id = this.gerente.id;
-      this.planilhaEscolhida.gastos = this.gerente.gastosfixo;
-      this.gerente.planilhascusto.push(this.planilhaEscolhida);
-      this.gerenteService.cadastrarPlanilha(this.gerente).pipe(first()).subscribe(data => {
-        this.getdadosCustos();
-        this.planilha2 = true;
-        this.atualizarPlanilha = true;
-      }, error => {
-        this.mensagemErro = error.error;
-      });
-    }
-  }
-
-  getdadosCustos() {
-    this.gerenteService.getPlanilhaId(this.planilhaEscolhida.id).subscribe(data => {
-      this.resultadoPlanilha = data;
-    }, error => {
-      this.mensagemErro = error.error;
-    });
   }
 
   listaClosed() {

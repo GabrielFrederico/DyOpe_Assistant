@@ -1,5 +1,7 @@
 package com.projeto.models;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -112,7 +114,6 @@ public class Gerente extends Usuario {
 
     public static Gerente somarCustos(@RequestBody Gerente gerente) {
         float custototal = 0;
-        
         for (CustoFixo custofixo : gerente.getCustosfixo()) {
             custototal += custofixo.getCusto();
         }

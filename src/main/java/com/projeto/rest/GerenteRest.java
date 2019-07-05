@@ -514,12 +514,7 @@ public class GerenteRest {
 				}
 			}
 		}
-		Setor setor = gerente.getSetores().get(gerente.getSetores().size() - 1);
-
-		if (gerente.getSetores().contains(setorRepository.findByNomeSetor(setor.getNomeSetor()))) {
-			return new ResponseEntity<>(new ResponseMessage("Erro -> Nome de setor já utilizado!"),
-					HttpStatus.BAD_REQUEST);
-		}
+		
 		gerenteRepository.save(gerente);
 		return new ResponseEntity<>(new ResponseMessage("Dados Atualizados com sucesso!"), HttpStatus.OK);
 	}

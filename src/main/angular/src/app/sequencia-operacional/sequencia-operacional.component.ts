@@ -240,6 +240,8 @@ export class SequenciaOperacionalComponent implements OnInit {
   }
 
   updatePlanilha() {
+    this.planilhacusto.custoMinuto = this.planilhacusto.custoMinuto.toFixed(2);
+    this.planilhacusto.custoOpe = this.planilhacusto.custoOpe.toFixed(2);
     this.gerenteService.atualizarPlanilha(this.planilhacusto).pipe(first()).subscribe(data => {
     }, error => {
       this.errorMessage = error.error;
