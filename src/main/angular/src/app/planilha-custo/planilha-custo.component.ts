@@ -176,9 +176,9 @@ export class PlanilhaCustoComponent implements OnInit {
   }
 
   addPrecoPecaOpe(precoPeca: any) {
-    // this.precoOpestring = precoPeca;
-    // this.planilhaEscolhida.precoPecaOpe = +this.precoOpestring;
-    this.planilhaEscolhida.precoPecaOpe = precoPeca.toFixed(2);
+     this.precoOpestring = precoPeca;
+     this.planilhaEscolhida.precoPecaOpe = +this.precoOpestring;
+    this.planilhaEscolhida.precoPecaOpe = this.planilhaEscolhida.precoPecaOpe.toFixed(2);
   }
   editarPrecoOpePeca() {
     this.gerenteService.atualizarPlanilha(this.planilhaEscolhida).pipe(first()).subscribe(data => {
