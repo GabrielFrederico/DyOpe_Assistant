@@ -182,7 +182,7 @@
             <td>{{custos.id}}</td>
             <td><input class="form-control" #descricaocusto [readonly]="!editarcusto"
                        (blur)="descricaocustoedit(descricaocusto.value)" type="text" value="{{custos.descricao}}"></td>
-            <td><input class="form-control" #custof [readonly]="!editarcusto" type="number"
+            <td><input class="form-control" #custof [readonly]="!editarcusto" type="number" placeholder="R$:"
                        (blur)="custoedit(custof.value)" value="{{custos.custo}}"></td>
             <td class=" d-flex justify-content-around">
               <button class="btn btn-warning" (click)="cancelcusto()" [disabled]="!valido" *ngIf="editarcusto">
