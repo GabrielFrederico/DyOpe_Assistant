@@ -14,10 +14,10 @@ export class CadastroGerenteComponent implements OnInit {
   isSignUpFailed = false;
   senhaerrada = false;
   errorMessage = '';
-  @ViewChild("inputPassword") senhainput: ElementRef;
-  @ViewChild("inputPasswordConfirm") confirmasenhainput: ElementRef;
-  @ViewChild("cpf") cpf: ElementRef;
-  @ViewChild("rg") rg: ElementRef;
+  @ViewChild('inputPassword') senhainput: ElementRef;
+  @ViewChild('inputPasswordConfirm') confirmasenhainput: ElementRef;
+  @ViewChild('cpf') cpf: ElementRef;
+  @ViewChild('rg') rg: ElementRef;
 
   constructor(private http: GerenteService, private router: Router, private authService: AuthService) {
   }
@@ -52,7 +52,6 @@ export class CadastroGerenteComponent implements OnInit {
     } else {
       this.authService.cadastrarGerenteAuth(this.gerenteInfo).subscribe(
         data => {
-          console.log(data);
           this.isSignedUp = true;
           this.isSignUpFailed = false;
           this.router.navigate(['/logingerente']);

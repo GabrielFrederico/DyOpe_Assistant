@@ -138,20 +138,22 @@ public class PlanilhaCusto {
 
 	public static PlanilhaCusto calcularCusto(@RequestBody PlanilhaCusto planilha) {
 
-		float custoMinuto, custo, lucro, ganho, gastos, gasto;
-
+		float custoMinuto, custo, custo2, lucro,lucro2, ganho, customin, gasto;
+     
 		custoMinuto = planilha.getGastos() / planilha.getNumFunOpe() / 20 / 450;
-		planilha.setCustoMinuto(custoMinuto);
-		custo = custoMinuto * planilha.getTempos();
-		System.out.println("tempos" + planilha.getTempos() + "custo ope" + custo);
-		planilha.setCustoOpe(custo);
+		 customin = (float) (Math.round(custoMinuto*100) / 100.0);
+		planilha.setCustoMinuto(customin);
+		custo = customin * planilha.getTempos();
+		custo2 = (float) (Math.round(custo*100) / 100.0);
+		planilha.setCustoOpe(custo2);
 		ganho = planilha.getPrecoPecaOpe() * planilha.getLote();
 
 		// gastos = planilha.getGastos();
 		gasto = planilha.getCustoOpe() * planilha.getLote();
 		// gasto = gastos/20*planilha.getDiasNeceOpe();
 		lucro = ganho - gasto;
-		planilha.setLucro(lucro);
+		lucro2 = (float) (Math.round(lucro*100) / 100.0);
+		planilha.setLucro(lucro2);
 
 		return planilha;
 

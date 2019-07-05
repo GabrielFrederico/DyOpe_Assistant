@@ -79,7 +79,7 @@
           <div class="form-group">
             <label for="precoPecaOpe">Preço da Operação:</label>
             <input type="text"  placeholder="R$:" id="precoPecaOpe" name="precoPecaOpe" class="form-control"
-                   #precoPecaOpe (blur)="addPrecoPecaOpe(precoPecaOpe.value)" required="required">
+                   #precoPecaOpe [(ngModel)]="precopecahtml" required="required">
           </div>
         </div>
         <div class="card-footer bg-transparent border-info modal-footer">
@@ -102,7 +102,7 @@
            <div class="form-group">
              <label for="precoPecaOpeed">Preço:</label>
              <input type="text" placeholder="R$:" id="precoPecaOpeed" name="precoPecaOpe" class="form-control" value="{{planilhaEscolhida.precoPecaOpe}}"
-                    #precoPecaOpe (blur)="addPrecoPecaOpe(precoPecaOpe.value)" required="required">
+                    #precoPecaOpe [(ngModel)]="planilhaEscolhida.precoPecaOpe" required="required">
            </div>
          </div>
          <div class="card-footer bg-transparent border-info modal-footer">
@@ -134,7 +134,6 @@
           <tr *ngFor="let planilhas of gerente.planilhascusto; let i = index;">
             <td>{{planilhas.id}}</td>
             <td>{{planilhas.descricaoOpe}}</td>
-
             <td>R$ {{planilhas.custoMinuto}}</td>
             <td>R$ {{planilhas.custoOpe}}</td>
             <td *ngIf="planilhas.precoPecaOpe > 0; else showColunaPreco()">R$ {{planilhas.lucro}}</td>
@@ -215,7 +214,7 @@
     </div>
 
     <div class="col-md-4 formsequencia" *ngIf="listacadcustofixo">
-      <div class="card border-info mb-3 operacoes lista">
+      <form class="card border-info mb-3 operacoes lista" [noValidate]="$any(false)" (ngSubmit)="cadastrarCustoFixo()">
         <div class="card-header border-info text-center">Cadastro de custo fixo:</div>
         <div class="card-body text-secondary">
           <div class="form-group">
@@ -240,10 +239,9 @@
           </div>
         </div>
         <div class="card-footer bg-transparent border-info modal-footer">
-          <input class="btn btn-success" type="submit" (click)="cadastrarCustoFixo()"
-                 data-dismiss="modal" value="Cadastrar">
+          <input class="btn btn-success" type="submit" value="Cadastrar">
         </div>
-      </div>
+      </form>
     </div>
 
 

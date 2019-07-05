@@ -99,7 +99,7 @@
               </div>
             </div>
           </div>
-          <input class="btn btn-info btn-block" type="submit" value="Cadastrar">
+          <input class="btn btn-info btn-block" type="submit" [disabled]="isSignedUp" value="Cadastrar">
           <div *ngIf="f.submitted && isSignUpFailed" class="alert alert-warning separa">
             Cadastro Falhou!<br/>{{errorMessage}}
           </div>

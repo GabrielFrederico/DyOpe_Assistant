@@ -313,7 +313,7 @@ export class SequenciaOperacionalComponent implements OnInit {
 
     this.operacaoService.updateOperacao(this.operacaoEscolhida).pipe(first()).subscribe(data => {
       this.resultadoOpe = data;
-      this.cadastrarPlanilha();
+      this.updatePlanilha();
     }, error => {
       this.erro = true;
       this.errorMessage = error.error;
